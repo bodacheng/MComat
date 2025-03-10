@@ -43,7 +43,7 @@ public class TeamSingleSelectLayer : UILayer
         if (!isTutorial)
             skillEditButton.onClick.AddListener(SkillEdit);
         
-        saveBtn.onClick.AddListener(()=> save());
+        saveBtn.SetListener(save);
     }
     
     public void SetTeamLegalCheck(Func<string, bool> teamLegal)
@@ -62,28 +62,20 @@ public class TeamSingleSelectLayer : UILayer
     {
         var unitsLayer = UILayerLoader.Get<UnitsLayer>();
         var unitInfo = dataAccess.Units.Get(instanceID);
-        if (unitInfo != null && Stones.GetEquippingStones(instanceID).Count != 9)
-        {
-            return;
-        }
+        if (unitInfo == null) return;
+        
+        PreScene.target.SetFocusingUnit(instanceID);
+        nineForShow.ShowStones_Acc(instanceID);
+        
+        ResizeCameraConnectorRefLeft(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
+        UniTask.WhenAll(
+            connector.ShowMyModel(instanceID), 
+            Set2DView(unitInfo.r_id, view2D, unitOutAnimator,
+                0, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(unitInfo.r_id))).Forget();
+        
+        unitsLayer.Selected.Value = instanceID;
         
         TeamSet.GetTargetSet(teamMode).SetPosUnitByInstanceID(targetPos, instanceID);
-        
-        if (unitInfo != null)
-        {
-            ResizeCameraConnectorRefLeft(connector.GetComponent<RectTransform>(), cameraConnectorRightSpace, cameraConnectorVerticalSpace);
-            UniTask.WhenAll(
-                connector.ShowMyModel(instanceID), 
-                Set2DView(unitInfo.r_id, view2D, unitOutAnimator,
-                    0, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(unitInfo.r_id))).Forget();
-        }
-        else
-        {
-            connector.ShowMyModel(instanceID).Forget();
-        }
-        
-        nineForShow.ShowStones_Acc(instanceID);
-        unitsLayer.Selected.Value = instanceID;
         SetConfirmBtnActive();
     }
     

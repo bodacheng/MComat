@@ -17,7 +17,7 @@ MonoBehaviour:
   storyKey: 
   unitsData:
   - id: 0
-    r_id: 11
+    r_id: 8
     level: 1.5
     set:
       a1: 9
@@ -30,7 +30,7 @@ MonoBehaviour:
       c2: 27
       c3: 125
   - id: 1
-    r_id: 11
+    r_id: 8
     level: 1.5
     set:
       a1: 167
@@ -43,7 +43,7 @@ MonoBehaviour:
       c2: 39
       c3: 58
   - id: 2
-    r_id: 11
+    r_id: 8
     level: 1.5
     set:
       a1: 99
@@ -56,18 +56,18 @@ MonoBehaviour:
       c2: 103
       c3: 159
   - id: 3
-    r_id: 15
+    r_id: 7
     level: 1.5
     set:
-      a1: 77
-      a2: 53
-      a3: 103
-      b1: 10
-      b2: 5
-      b3: 159
-      c1: 127
-      c2: 58
-      c3: 36
+      a1: 27
+      a2: 173
+      a3: 145
+      b1: 68
+      b2: 113
+      b3: 103
+      c1: 99
+      c2: 184
+      c3: 5
   fightMode: 4
   team1HpRate: 1
   team2HpRate: 1
