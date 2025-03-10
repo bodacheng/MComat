@@ -5048,6 +5048,7 @@ MonoBehaviour:
   TrackControl: {fileID: 1628108475295855164}
   DestructionDelay: 21
   stop_emission_delay: 20
+  boundaryFade: 0
   to_be_faded_renderers: []
   Attachments: []
   Counter: 0

@@ -12,7 +12,7 @@ public partial class Decomposition : MonoBehaviour {
     [SerializeField] float DestructionDelay = 1.1f;//上面的值必须要大于下面的值
     [Tooltip("武器实际失效时间，也是特效停止生成时间")]
     [SerializeField] float stop_emission_delay = 0.9f;
-    
+    [SerializeField] private bool boundaryFade = true;
     public List<MeshRenderer> to_be_faded_renderers;
 
     [Tooltip("附属物体。这个只能自己把握。")]
