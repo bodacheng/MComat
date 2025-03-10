@@ -6,6 +6,7 @@ using UnityEngine;
 public class CommonSetting : ScriptableObject
 {
     [SerializeField] bool devMode;
+    [SerializeField] bool pcMode;
     [SerializeField] int maxStoneCount = 30;
     [SerializeField] int gangbangModeMaxUnitPerTeam1 = 24;
     [SerializeField] int gangbangModeMaxUnitPerTeam2 = 72;
@@ -185,11 +186,8 @@ public class CommonSetting : ScriptableObject
     public void Initialise()
     {
         DevMode = devMode;
-#if UNITY_IOS || UNITY_ANDROID
-        PcMode = true;
-#else
-        PcMode = true;
-#endif
+        PcMode = pcMode;
+        
         MaxStoneCount = maxStoneCount;
         GangbangModeMaxUnitPerTeam1 = gangbangModeMaxUnitPerTeam1;
         GangbangModeMaxUnitPerTeam2 = gangbangModeMaxUnitPerTeam2;
