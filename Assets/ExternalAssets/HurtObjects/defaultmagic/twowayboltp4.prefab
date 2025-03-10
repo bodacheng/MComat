@@ -100,6 +100,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9048884033641102062, guid: 2c6e39e68e3cf404c8ce58519c6559ba,
         type: 3}
+      propertyPath: DestructionDelay
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9048884033641102062, guid: 2c6e39e68e3cf404c8ce58519c6559ba,
+        type: 3}
+      propertyPath: stop_emission_delay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9048884033641102062, guid: 2c6e39e68e3cf404c8ce58519c6559ba,
+        type: 3}
       propertyPath: Attachments.Array.size
       value: 0
       objectReference: {fileID: 0}

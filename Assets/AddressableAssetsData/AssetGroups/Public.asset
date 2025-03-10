@@ -83,12 +83,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 29bc3b9693100ff4391d51aa924bb282
-    m_Address: tornado1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2ac6e0bb814992b4f9cd0c6c2159bec0
     m_Address: storm_sharpswirl
     m_ReadOnly: 0
