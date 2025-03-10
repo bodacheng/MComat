@@ -56,8 +56,8 @@ public class FightingStepLayer : UILayer
     
     public void PreparingMode(bool preparingMode)
     {
-        team1UI.Refresh();
-        team2UI.Refresh();
+        team1UI.Refresh(RTFightManager.Target.team1.RMode_Unit?.Value);
+        team2UI.Refresh(RTFightManager.Target.team2.RMode_Unit?.Value);
         inputsManager.PreparingMode(preparingMode);
         pauseButton.gameObject.SetActive(!preparingMode);
     }
