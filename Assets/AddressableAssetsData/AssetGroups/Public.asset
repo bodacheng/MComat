@@ -17,8 +17,38 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 90d86ee747b974ade8c69a8f00d2c647
   m_SerializeEntries:
+  - m_GUID: 0140f0e8e47530b438adcf26e3b875e4
+    m_Address: Magic Explosion 1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0406db5a14f94604a8c57ccfbc9f3b46
+    m_Address: ParticlesUnlit
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 05f7e107e67fece469b382c40f118238
+    m_Address: Lightning Spell 02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 07660251047e8e54ea928f013ff7799e
+    m_Address: DirtBcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0a8a860975bcc4945be9a82edad7ebb3
     m_Address: frost_cloud
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0abe55a3158bb5f41925e4fddbfe9de2
+    m_Address: Gradient17cg2
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -31,6 +61,24 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0d1fb353c40bd6345af42a3b4f0bdb1a
     m_Address: Trail21
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e60c63a7a6bdba4896433dd90442d2a
+    m_Address: eff_shock_cone1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 130bdc6151982754a8f7b5197f716c4e
+    m_Address: StormSharpSwirl
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 13109e2a7b1b9f94681c9752518d5f65
+    m_Address: glowspiky
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -53,8 +101,38 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 16d625988a0b8954ba0fbb341eaa211b
+    m_Address: bullet_blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1a8eb290d9ffa53489d076ac4c51e73b
+    m_Address: trailblue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ae55ae61d1144248b1cbd80a738177c
+    m_Address: ArcaneGlow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1b3dc741307366f49963537f635ac1e5
     m_Address: StormCloud
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1b5f613319e0f324c9637cfac64149e4
+    m_Address: HPL2cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1d4b6cacc26bf2b4aa986690b73c9085
+    m_Address: S_spell01_1
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -65,8 +143,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1eb614596030841cbbdb034483a7b79c
+    m_Address: eff_par_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1fe1832970320174484977050bfb76f4
     m_Address: ground_lightning
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 263dce5d3c11b6f4fbc5ead0f080b8dc
+    m_Address: frost_spike
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -79,6 +169,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 28f5951beee0961438eade046ff70348
     m_Address: bigglow_purple
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29bc3b9693100ff4391d51aa924bb282
+    m_Address: tornado1
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -103,6 +199,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2dd400ab29834834cb5fa454e5b6b3c1
     m_Address: modular_aura06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e528703cfe94471da9b3d9d5e43e4ab
+    m_Address: UniqueProjectilesVol2_Add_10x10_2K
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -137,6 +239,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 35f5e6dc715494f44b17248eee5426bd
+    m_Address: Snow4bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 36e335017ad71d54fbb10842863188ae
     m_Address: FallbackShader
     m_ReadOnly: 0
@@ -149,8 +257,26 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b92e2c240ad18940bcd6b4e0114d2fd
+    m_Address: light_orb
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3d4f1128b9f2c504b9133b98aa46f9d3
+    m_Address: ice_core_len
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4000721759898ed438063ff5c2cfc889
     m_Address: light_particle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 441029f84b3a0b84f93db84572263d15
+    m_Address: ElectricLine01_Add_4x4
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -173,14 +299,56 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 46c699b0b4d0f334fb6cd711a731aebe
+    m_Address: Buff Defense 06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4814b9ddfaf3a4b41a4b38bc3d1d6589
+    m_Address: lightning1x3seq_blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49e8fa54d8b5d394d98a037964663ce5
+    m_Address: Flash1cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b963661ff30bb44cb43409db4141e79
+    m_Address: Smoke24bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4ba51bcdd8b1423449a7cc578297fd18
     m_Address: Dark_bllue
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4de1419ac14d16d44b9c82b76ea6d884
+    m_Address: Smoke24
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5239e3e287052cc41b0b2e78a0c7f73c
+    m_Address: lensflare
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 52b767eecc2845a429e0e9e2155a8ea5
     m_Address: Smoke3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 52e408040764e6849beee90052c77738
+    m_Address: Flare02
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -199,6 +367,30 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5c03bc4b80b50384a9904843f3769487
     m_Address: Trail6
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c1cf2dbdb638664bb74459f28170f62
+    m_Address: Flare23cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ccd241cba9e188478c5bed9feea9bb1
+    m_Address: arcane_spark_offcenter
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5cd2c2b5c00d4fb48839af0e5f84d407
+    m_Address: lightning_new_arcs_2x2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5dfed3dd686054146a53842d5f100ec2
+    m_Address: Smoke27bcg
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -245,6 +437,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6996a6f16f175d5458270f7d76002c88
+    m_Address: eff_shock1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6a8d78cb95270dd45b35a1cf85ada012
     m_Address: ground_light03
     m_ReadOnly: 0
@@ -253,6 +451,18 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6ab6673ffc36e0543bd310e5677e9031
     m_Address: Circle17
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b3ade2740748114b93a7c0310e7c324
+    m_Address: glowsmooth
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b745b80aad135d4cb2caf2f972a5400
+    m_Address: scifi_hexagon_tube
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -269,6 +479,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6dbe17a63da165546a56738435f24460
+    m_Address: Wind Spell 8
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6e84943fb8e1c4916b9d22588a543944
     m_Address: Circle
     m_ReadOnly: 0
@@ -281,8 +497,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f3d772710ae54a4f97e32af1dedf4f0
+    m_Address: Noise53bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 707c7399dea3873468f73f9fd0dcc3a0
     m_Address: Glow_Main
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7154a27ca4f209047bbd02657bbbc16c
+    m_Address: Trail22cg
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -323,8 +551,26 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 799a8dd38e212474bb42d2e832024f04
+    m_Address: smokedissolve
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b7977f141795c649899f18d2302645f
+    m_Address: eff_shock1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7c707bedfbf7942459e20471e6f8d740
     m_Address: FireRing
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d0601fd824ecca4e9245023dc099fe0
+    m_Address: glow_lines
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -395,8 +641,38 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 868801a1c2b417a4abb244e17a825086
+    m_Address: glow_smoke_dusty AB
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 87cb893449346e248954843aef223546
     m_Address: Circle102
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 889be8c6b8c67164085643289b68efad
+    m_Address: Trail1cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8bde78ee27fb6af4cb531c15af08aebd
+    m_Address: Arm Swing, Whoosh 9
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 910457dc152f8c341b02cf22c406c5c6
+    m_Address: m_fx_lightning4x2_blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 915af7e8e25dfdb47904b321b5c03a1b
+    m_Address: FrostSpike
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -425,8 +701,38 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 985fab18e1dd3c2488d651ce20cba67d
+    m_Address: Punch 31
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99af83f3b998ad84e908ec0e08652941
+    m_Address: hellifire
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b409b2e65af3cf44b3fc61491dce714
+    m_Address: Lightning Spell 03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d5b0897c7b3e5241878478c672f09e4
+    m_Address: GroundLight03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9ee27d8670d11a149a37ab74ca7d8b11
     m_Address: TC_kouqiang_D
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f36d24197196874ba276deaa7efccca
+    m_Address: FrostCloud
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -439,6 +745,24 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a7980b15d03d447b08d873db5a38b219
     m_Address: adam
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a8e6fb127999dd947b9c4f665fb6167b
+    m_Address: firering
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a912a573136439b4f8f3ff61d687d6eb
+    m_Address: Circle122bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9da3fe4943c9434385db152bf635fa4
+    m_Address: GroundLight01
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -457,6 +781,18 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ae879f5ee624349a4b6adc3591a232c6
     m_Address: rush
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: afead6c891d269240ab73569b16de21f
+    m_Address: bullet_blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b11db633c21b18541b727be34dd5628b
+    m_Address: Flare_Slash_Yellow
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -491,6 +827,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b72d05466331ce2458417edeab75c2c2
+    m_Address: LightOrb
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8aecfbdfe3d27a4a9919e9f60bc4600
+    m_Address: m_fx_glow_ice_core
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9a1b65604adb4a458f4cdd51d23ae90
+    m_Address: bigglow_blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b9e879cde921eb241bbc716410ae2b8e
     m_Address: modular_aura06
     m_ReadOnly: 0
@@ -503,8 +857,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb06d0b8aba546947ad43e2225752b6c
+    m_Address: m_fx_glow_yellow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: be9d5ac190c892843bfdb397f48ff9b2
     m_Address: S_Thunder_horn_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0a59984519a57249a48cb3247487c12
+    m_Address: eff_tornado_1
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -527,6 +893,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c89ba8ee725ace445b48f25f5531b730
+    m_Address: glow_smoke_dusty
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c9b3eaae0aa575c4db6feb3ae6fea5a7
     m_Address: QuadToCircle
     m_ReadOnly: 0
@@ -539,8 +911,32 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc312dfb05f20164eacc14fd327913d6
+    m_Address: Trail66cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cecf0fbb3d560cc4dae3dfd6d02f762c
+    m_Address: Shadow Punch 3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d752321c319e6e848822bd54f453c5bd
     m_Address: ElectricLine01_4x4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7ddbb9fb301eae4a92a2ff2360330ef
+    m_Address: m_fx_len_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d88a64f741e6d5d49b6f086ce70d1fa9
+    m_Address: ArcaneSparkRot
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -563,8 +959,38 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e15c425fc13c20a46b7985933309f0a6
+    m_Address: glowspiky_add
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e16a7ba5ced93f945a55354db0c485a0
+    m_Address: glowdarkring
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e17deef6b62052045b4bbd8c499f266b
+    m_Address: fire4x4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e1f5daa4611af4844a03ec5a45012456
     m_Address: HandPaintedLightning2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e27d68612bac8074ea19cb2a114ff5f9
+    m_Address: helix_spinner
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e545a56101174b44cae5fe18850eead2
+    m_Address: lightning_new_arc
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -605,8 +1031,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec194b84f7a17fd419c28602be23444f
+    m_Address: Trail21bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ef846046fd6066d44a9442581c99967b
     m_Address: glow_lines
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: efa8362802f88ef48b7bcf14ff42cccf
+    m_Address: m_fx_lightning1x3_blue
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -629,8 +1067,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f8b1a36af41214f079689857ae15f1ea
+    m_Address: eff_par_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f8d5c193cad8f5449a28999e5ca04652
     m_Address: Green
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe3b797ec81f61d4daf3032fd0980b1e
+    m_Address: FireExplosion3
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
