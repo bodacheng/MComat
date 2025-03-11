@@ -4892,7 +4892,7 @@ MonoBehaviour:
   effectSpreadOnBody: 0
   element: 0
   muzzle: 
-  hitEffect: 
+  hitEffect: slash_hit
   ExplosionEffect: slash_hit
   ContinuousDamage: 0
   ContinuousDamageInterval: 0.2
