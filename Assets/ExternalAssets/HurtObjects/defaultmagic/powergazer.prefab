@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2979839546835333876}
   - component: {fileID: 4853512216125709202}
   - component: {fileID: 4518472786346754687}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: center_crack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4928,7 +4928,7 @@ GameObject:
   m_Component:
   - component: {fileID: 487346665019829001}
   - component: {fileID: 8839016863874091311}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4980,7 +4980,7 @@ GameObject:
   - component: {fileID: 4410607816252416379}
   - component: {fileID: 1487572738274696293}
   - component: {fileID: 3624569186791453683}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: smoke_up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10005,7 +10005,7 @@ GameObject:
   - component: {fileID: 5527891822078594187}
   - component: {fileID: 1559990195227150540}
   - component: {fileID: 5474775130270707545}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: inner_sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14922,7 +14922,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8878988974488572244}
   - component: {fileID: 6915951900886366598}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14974,7 +14974,7 @@ GameObject:
   - component: {fileID: 7212891534007342180}
   - component: {fileID: 2088844032413775994}
   - component: {fileID: 2428921759513128478}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: smoke_spread
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20057,7 +20057,7 @@ GameObject:
   - component: {fileID: 4462546131489574561}
   - component: {fileID: 8917663188219616056}
   - component: {fileID: 5510756140591526763}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25235,7 +25235,7 @@ GameObject:
   - component: {fileID: 1208291523959129637}
   - component: {fileID: 1700402441377388857}
   - component: {fileID: 5820245467683953785}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: center_up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30135,7 +30135,7 @@ GameObject:
   - component: {fileID: 7715022765115382006}
   - component: {fileID: 8208136120772526713}
   - component: {fileID: 6008316061757958061}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: smoke_spread_inner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35218,7 +35218,7 @@ GameObject:
   - component: {fileID: 2942479015893482551}
   - component: {fileID: 2909969536046254924}
   - component: {fileID: 1235400172634582398}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: floor_circle_base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40145,7 +40145,7 @@ GameObject:
   - component: {fileID: 4573077830944829507}
   - component: {fileID: 4510586890973092433}
   - component: {fileID: 2140186628339363771}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: floor_circle_highlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45057,7 +45057,7 @@ GameObject:
   - component: {fileID: 8297735537850150410}
   - component: {fileID: 3191889745477935277}
   - component: {fileID: 2402428957723516790}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: powergazer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50006,7 +50006,7 @@ MonoBehaviour:
   AT_weight: 1
   weaponHP: -1
   heavyLevel: 1
-  onGroundMagic: 0
+  onGroundMagic: 1
   effectSpreadOnBody: 1
   element: 4
   muzzle: 
@@ -50120,7 +50120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7601641920295916603}
   - component: {fileID: 7201007076196657509}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: marker1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
