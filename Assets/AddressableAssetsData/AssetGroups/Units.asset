@@ -71,12 +71,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - unit
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 618e2dd7389644f5badf422362438832
-    m_Address: human/maggie
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - unit
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6ca3efb6cefae4338ba0c93e213760a3
     m_Address: human/adam
     m_ReadOnly: 0
@@ -114,7 +108,7 @@ MonoBehaviour:
     - unit
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f1732b694ef1b4ac9b896b55ce58d4fc
-    m_Address: human/maggie_t
+    m_Address: human/maggie
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit
