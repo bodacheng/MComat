@@ -68,6 +68,8 @@ public partial class FightPrepareLayer : UILayer
         
         countSet1.SetListener(() =>
         {
+            PlayerPrefs.SetInt("gangbangCountOption", 1);
+            PlayerPrefs.Save();
             UnitCountSetting(CommonSetting.GangbangModeMaxUnitPerTeam1);
             countSelectedFrame1.SetActive(true);
             countSelectedFrame2.SetActive(false);
@@ -75,6 +77,8 @@ public partial class FightPrepareLayer : UILayer
         });
         countSet2.SetListener(() =>
         {
+            PlayerPrefs.SetInt("gangbangCountOption", 2);
+            PlayerPrefs.Save();
             UnitCountSetting(CommonSetting.GangbangModeMaxUnitPerTeam2);
             countSelectedFrame1.SetActive(false);
             countSelectedFrame2.SetActive(true);
@@ -82,6 +86,8 @@ public partial class FightPrepareLayer : UILayer
         });
         countSet3.SetListener(() =>
         {
+            PlayerPrefs.SetInt("gangbangCountOption", 3);
+            PlayerPrefs.Save();
             UnitCountSetting(CommonSetting.GangbangModeMaxUnitPerTeam3);
             countSelectedFrame1.SetActive(false);
             countSelectedFrame2.SetActive(false);
@@ -141,8 +147,20 @@ public partial class FightPrepareLayer : UILayer
             enemyTeamShowT, false, 2);
         _gangbangHeroIconsE.FirstOrDefault()?.iconButton.onClick.Invoke();
         team1Name.text = "YOU";
+
+        switch (PlayerPrefs.GetInt("gangbangCountOption", 1))
+        {
+            case 1:
+                countSet1.onClick.Invoke();
+                break;
+            case 2:
+                countSet2.onClick.Invoke();
+                break;
+            case 3:
+                countSet3.onClick.Invoke();
+                break;
+        }
         
-        countSet1.onClick.Invoke();
     }
     
     List<GangbangHeroIcon> GangbangInfosShow(List<UnitInfo> unitSets, Action<string> iconBehaviour, RectTransform showT, bool withSkillCheck, int team, bool btnInteractive = true)

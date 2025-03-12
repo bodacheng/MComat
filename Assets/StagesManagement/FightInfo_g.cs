@@ -94,6 +94,15 @@ public partial class FightInfo : ScriptableObject
         return s;
     }
 
+    public void ClearWholeUnitCount(int team)
+    {
+        var sets = team == 1 ? team1GroupSet : team2GroupSet;
+        foreach (var set in sets)
+        {
+            set.Count = 0;
+        }
+    }
+    
     public int GetGroupWholeUnitCount(int team)
     {
         var sets = team == 1 ? team1GroupSet : team2GroupSet;
@@ -154,6 +163,7 @@ public partial class FightInfo : ScriptableObject
     
     public int GangbangAutoAdjustTeamUnitByMaxCount(int team, List<UnitInfo> unitSets, int selectedMaxTeamCount, bool adaptMode = false)
     {
+        ClearWholeUnitCount(team);
         int wholeTeamCount = 0;
         foreach(var unitInfo in unitSets)
         {

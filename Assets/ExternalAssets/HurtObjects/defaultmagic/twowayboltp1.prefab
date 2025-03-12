@@ -9789,6 +9789,7 @@ MonoBehaviour:
   TrackControl: {fileID: 4413288935260050745}
   DestructionDelay: 0.5
   stop_emission_delay: 0.4
+  boundaryFade: 1
   to_be_faded_renderers: []
   Attachments:
   - twowayboltp2
@@ -9901,9 +9902,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8c59cd70511d31747ad40e7e1c6b7964, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0155bcaefb385764299abfc5b1146e64, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
