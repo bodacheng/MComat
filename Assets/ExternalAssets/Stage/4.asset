@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf3bb8ad816a44358eca5831d97217e, type: 3}
   m_Name: 4
   m_EditorClassIdentifier: 
-  battleGroundID: 1
+  battleGroundID: 2
   fightBGM: 0
   storyKey: 
   unitsData:
@@ -80,10 +80,10 @@ MonoBehaviour:
   stageRefLevel: 0.5
   team2GroupSet:
   - id: 0
-    Count: 8
+    Count: 6
   - id: 1
-    Count: 8
+    Count: 4
   - id: 2
-    Count: 8
+    Count: 3
   - id: 3
-    Count: 8
+    Count: 11
