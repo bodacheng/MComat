@@ -198,6 +198,8 @@ namespace Soul
                         break;
                     case DamageType.draw:
                     case DamageType.stable_draw:
+                        if (target.from_weapon.CurrentHP == 0 && target.from_weapon.weaponHP > 0)
+                            return;
                         DrawDamageUpdate(target);
                         break;
                 }
