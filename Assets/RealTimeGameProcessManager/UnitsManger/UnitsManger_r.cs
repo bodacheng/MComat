@@ -310,11 +310,10 @@ namespace FightScene
                     }
                 }
             }
-
-            for (var index = 0; index < teamMembers.GetValues().Count; index++)
+            
+            foreach (var dataCenter in teamMembers.GetValues())
             {
-                var dataCenter = teamMembers.Get(0, index);
-                if (!dataCenter.FightDataRef.IsDead.Value)
+                if (dataCenter != null && !dataCenter.FightDataRef.IsDead.Value)
                 {
                     if (ChangeFightingUnit(dataCenter))
                     {
