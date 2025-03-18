@@ -112,6 +112,14 @@ public partial class FightPrepareLayer : UILayer
                 connector.SkillShowRunWithPrepare(skillConfig.REAL_NAME).Forget();
             }
         );
+        nineForShowE.AddOnClickToSlots(
+            (RECORD_ID) =>
+            {
+                var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(RECORD_ID);
+                connectorE.SkillShowRunWithPrepare(skillConfig.REAL_NAME).Forget();
+            }
+        );
+        
         _setTeamUnitCount = (i, s, arg3,maxCount) =>
         {
             var returnValue = setTeamUnitCount(i, s, arg3, maxCount);

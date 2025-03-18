@@ -13,8 +13,6 @@ public partial class FightPrepareLayer : UILayer
     [SerializeField] HeroIcon fighterIcon;
     [SerializeField] RectTransform myTeamShowT;
     [SerializeField] RectTransform enemyTeamShowT;
-    [SerializeField] private RectTransform myTeamShowTBg;
-    [SerializeField] private RectTransform enemyTeamShowTBg;
     [SerializeField] float unitIconSize = 200;
     [SerializeField] BOButton editTeamButton; // 根据进入战斗模式决定是否显示
     [SerializeField] GameObject teamEditIndicator;
@@ -119,6 +117,13 @@ public partial class FightPrepareLayer : UILayer
                 connector.SkillShowRunWithPrepare(skillConfig.REAL_NAME).Forget();
             }
         );
+        nineForShowE.AddOnClickToSlots(
+            (RECORD_ID) =>
+            {
+                var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(RECORD_ID);
+                connectorE.SkillShowRunWithPrepare(skillConfig.REAL_NAME).Forget();
+            }
+        );
     }
     
     public void SetEventFeature(string arcadeStageNo)
@@ -164,7 +169,7 @@ public partial class FightPrepareLayer : UILayer
             {
                 player1IconFeature(x).Forget();
             },
-            myTeamShowT, myTeamShowTBg, true, PlayerAccountInfo.Me.tutorialProgress == "Finished");
+            myTeamShowT, true, PlayerAccountInfo.Me.tutorialProgress == "Finished");
         var default1InstanceId = icons1.FirstOrDefault()?.InstanceID;
 
         string teamKey;
@@ -218,7 +223,7 @@ public partial class FightPrepareLayer : UILayer
             {
                 player2IconFeature(x).Forget();
             },
-            enemyTeamShowT, enemyTeamShowTBg,false);
+            enemyTeamShowT, false);
         var default2InstanceId = icons2.FirstOrDefault()?.InstanceID;
 
         await UniTask.WhenAll(player1IconFeature(default1InstanceId), player2IconFeature(default2InstanceId));
@@ -254,7 +259,7 @@ public partial class FightPrepareLayer : UILayer
         ProgressLayer.Close();
     }
     
-    List<HeroIcon> MemberInfosShow(List<UnitInfo> heroSets, Action<string> iconBehaviour, RectTransform _showT, RectTransform bgRect, bool withSkillCheck, bool btnInteractive = true)
+    List<HeroIcon> MemberInfosShow(List<UnitInfo> heroSets, Action<string> iconBehaviour, RectTransform _showT, bool withSkillCheck, bool btnInteractive = true)
     {
         foreach (Transform t in _showT)
         {
@@ -267,7 +272,6 @@ public partial class FightPrepareLayer : UILayer
             v.iconButton.interactable = btnInteractive;
             icons.Add(v);
         }
-        bgRect.sizeDelta = new Vector2(bgRect.rect.width, bgRect.rect.width * icons.Count);
         return icons;
     }
     
