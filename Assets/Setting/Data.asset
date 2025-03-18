@@ -160,7 +160,7 @@ MonoBehaviour:
   normalAttackPosFixingTime: 0.01
   knockOffExtent: 15
   MaxKnockoffLaidGroundTime: 1
-  CanGetUpAfterKnockoffToGround: 0.5
+  CanGetUpAfterKnockoffToGround: 0.2
   GetupTime: 0.5
   SureToPushForwardDis: 5
   defendHP: 0

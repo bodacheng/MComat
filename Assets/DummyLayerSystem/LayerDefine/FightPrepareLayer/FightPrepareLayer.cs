@@ -155,7 +155,7 @@ public partial class FightPrepareLayer : UILayer
     {
         async UniTask player1IconFeature(string x)
         {
-            PreScene.target.Focusing.id = x;
+            //PreScene.target.Focusing.id = x;
             //PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit);
             await FocusTeamUnit(x, stage.FightMembers.HeroSets.GetValues(), connector, nineForShow);
         }

@@ -180,12 +180,14 @@ public partial class SkillSet
         IDictionary<string, SkillEntity> seDic = new Dictionary<string, SkillEntity>();
         var StateTransitionSetList = new List<SkillEntity>();
         
+        List<string> startList = _h1List.Concat(new []{"Rush"}).ToList();
+        
         _empty = new SkillEntity("Empty", BehaviorType.NONE, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,  -1);
         _victory = new SkillEntity("Victory",BehaviorType.NONE, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1);
         _death = new SkillEntity("Death", BehaviorType.NONE, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1);
-        _hit = new SkillEntity("Hit", BehaviorType.Hit, new AIAttrs(), _h1List.ToArray(),null,InputKey.Null, InputKey.Null, -1);
-        _getUp = new SkillEntity("getUp",  BehaviorType.GetUp, new AIAttrs(), _h1List.ToArray(), null, InputKey.Any, InputKey.Null, -1);
-        _knockOff = new SkillEntity("KnockOff", BehaviorType.KnockOff, new AIAttrs(), R != null ? new string[] { R.REAL_NAME } : new string[] {}, null, InputKey.Null, InputKey.Null, -1);
+        _hit = new SkillEntity("Hit", BehaviorType.Hit, new AIAttrs(), startList.ToArray(),null,InputKey.Null, InputKey.Null, -1);
+        _getUp = new SkillEntity("getUp",  BehaviorType.GetUp, new AIAttrs(), startList.ToArray(), null, InputKey.Any, InputKey.Null, -1);
+        _knockOff = new SkillEntity("KnockOff", BehaviorType.KnockOff, new AIAttrs(), startList.ToArray(), null, InputKey.Null, InputKey.Null, -1);
         if (FightGlobalSetting.HasDefend)
         {
             D.CasualTo = _h1List.ToArray();
