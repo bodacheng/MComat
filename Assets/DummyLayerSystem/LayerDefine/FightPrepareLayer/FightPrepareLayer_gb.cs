@@ -142,7 +142,7 @@ public partial class FightPrepareLayer : UILayer
         _gangbangHeroIconsE = GangbangInfosShow(stage.FightMembers.EnemySets.GetValues(), 
             (x) =>
             {
-                FocusTeam2Unit(x, stage.FightMembers.EnemySets.GetValues());
+                FocusTeamUnit(x, stage.FightMembers.EnemySets.GetValues(), connectorE, nineForShowE).Forget();
             },
             enemyTeamShowT, false, 2);
         _gangbangHeroIconsE.FirstOrDefault()?.iconButton.onClick.Invoke();

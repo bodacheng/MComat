@@ -135,7 +135,7 @@ public class QuestInfoPage : MSceneProcess
         }
         else
         {
-            _layer.StageMembersInfoShow(stage);
+            await _layer.StageMembersInfoShow(stage);
             _layer.SetFightBeginFeature(()=> GoToFight(FightLoad.Fight));
         }
         

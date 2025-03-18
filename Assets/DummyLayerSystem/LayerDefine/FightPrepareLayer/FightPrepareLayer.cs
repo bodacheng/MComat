@@ -13,6 +13,8 @@ public partial class FightPrepareLayer : UILayer
     [SerializeField] HeroIcon fighterIcon;
     [SerializeField] RectTransform myTeamShowT;
     [SerializeField] RectTransform enemyTeamShowT;
+    [SerializeField] private RectTransform myTeamShowTBg;
+    [SerializeField] private RectTransform enemyTeamShowTBg;
     [SerializeField] float unitIconSize = 200;
     [SerializeField] BOButton editTeamButton; // 根据进入战斗模式决定是否显示
     [SerializeField] GameObject teamEditIndicator;
@@ -36,7 +38,9 @@ public partial class FightPrepareLayer : UILayer
     [SerializeField] Animator layerAnimator;
     [SerializeField] Animator unitOutAnimator;
     [SerializeField] NineForShow nineForShow;
+    [SerializeField] NineForShow nineForShowE;
     [SerializeField] DedicatedCameraConnector connector;
+    [SerializeField] DedicatedCameraConnector connectorE;
     [Header("战场选择")]
     [SerializeField] BattleGroundSwitch battleGroundSwitch;
 
@@ -147,15 +151,21 @@ public partial class FightPrepareLayer : UILayer
         );
     }
     
-    public void StageMembersInfoShow(FightInfo stage)
+    public async UniTask StageMembersInfoShow(FightInfo stage)
     {
-        MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), 
+        async UniTask player1IconFeature(string x)
+        {
+            PreScene.target.Focusing.id = x;
+            //PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit);
+            await FocusTeamUnit(x, stage.FightMembers.HeroSets.GetValues(), connector, nineForShow);
+        }
+        var icons1 = MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), 
             (x) =>
             {
-                PreScene.target.Focusing.id = x;
-                PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit);
+                player1IconFeature(x).Forget();
             },
-            myTeamShowT, true, PlayerAccountInfo.Me.tutorialProgress == "Finished");
+            myTeamShowT, myTeamShowTBg, true, PlayerAccountInfo.Me.tutorialProgress == "Finished");
+        var default1InstanceId = icons1.FirstOrDefault()?.InstanceID;
 
         string teamKey;
         switch (stage.EventType)
@@ -197,14 +207,21 @@ public partial class FightPrepareLayer : UILayer
             teamEditIndicatorText.text = string.Empty; // Translate.Get("MakeYourTeam");
             teamEditIndicator.SetActive(false);
         }
+        
+        async UniTask player2IconFeature(string x)
+        {
+            await FocusTeamUnit(x, stage.FightMembers.EnemySets.GetValues(), connectorE, nineForShowE);
+        }
 
-        var icons = MemberInfosShow(stage.FightMembers.EnemySets.GetValues(),
+        var icons2 = MemberInfosShow(stage.FightMembers.EnemySets.GetValues(),
             (x) =>
             {
-                FocusTeam2Unit(x, stage.FightMembers.EnemySets.GetValues());
+                player2IconFeature(x).Forget();
             },
-            enemyTeamShowT, false);
-        icons.FirstOrDefault()?.iconButton.onClick.Invoke();
+            enemyTeamShowT, enemyTeamShowTBg,false);
+        var default2InstanceId = icons2.FirstOrDefault()?.InstanceID;
+
+        await UniTask.WhenAll(player1IconFeature(default1InstanceId), player2IconFeature(default2InstanceId));
 
         if (stage.EventType == FightEventType.Arena)
         {
@@ -222,22 +239,22 @@ public partial class FightPrepareLayer : UILayer
         enemyInfiniteExModeFlg.SetActive(stage.team2CGMode == CriticalGaugeMode.Unlimited);
     }
     
-    async void FocusTeam2Unit(string instanceId, List<UnitInfo> team2Units)
+    async UniTask FocusTeamUnit(string instanceId, List<UnitInfo> teamUnits, DedicatedCameraConnector _connector, NineForShow _nineForShow)
     {
         ProgressLayer.Loading(String.Empty);
-        var info = team2Units.FirstOrDefault((x) => x.id == instanceId);
+        var info = teamUnits.FirstOrDefault((x) => x.id == instanceId);
         if (info != null)
         {
             await UniTask.WhenAll(
-                nineForShow.SkillSetInfoOfUnitOnArcadePage(info.set),
+                _nineForShow.SkillSetInfoOfUnitOnArcadePage(info.set),
                 //Set2DView(info.r_id, view2D, unitOutAnimator, 0, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(info.r_id)),
-                connector.ShowModel(info.r_id)
+                _connector.ShowModel(info.r_id)
             );
         }
         ProgressLayer.Close();
     }
     
-    List<HeroIcon> MemberInfosShow(List<UnitInfo> heroSets, Action<string> iconBehaviour, RectTransform _showT, bool withSkillCheck, bool btnInteractive = true)
+    List<HeroIcon> MemberInfosShow(List<UnitInfo> heroSets, Action<string> iconBehaviour, RectTransform _showT, RectTransform bgRect, bool withSkillCheck, bool btnInteractive = true)
     {
         foreach (Transform t in _showT)
         {
@@ -250,6 +267,7 @@ public partial class FightPrepareLayer : UILayer
             v.iconButton.interactable = btnInteractive;
             icons.Add(v);
         }
+        bgRect.sizeDelta = new Vector2(bgRect.rect.width, bgRect.rect.width * icons.Count);
         return icons;
     }
     

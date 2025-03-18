@@ -2733,7 +2733,9 @@ MonoBehaviour:
     type: 3}
   myTeamShowT: {fileID: 5614356700318546432}
   enemyTeamShowT: {fileID: 1805342110505306726}
-  unitIconSize: 200
+  myTeamShowTBg: {fileID: 4040145355637622830}
+  enemyTeamShowTBg: {fileID: 2833110899798571488}
+  unitIconSize: 150
   editTeamButton: {fileID: 3122314446051631056}
   teamEditIndicator: {fileID: 3467711598836792371}
   teamEditIndicatorText: {fileID: 4232837471516948791}
@@ -2756,7 +2758,9 @@ MonoBehaviour:
   layerAnimator: {fileID: 0}
   unitOutAnimator: {fileID: 0}
   nineForShow: {fileID: 8113849396619152475}
+  nineForShowE: {fileID: 0}
   connector: {fileID: 3751451669843701276}
+  connectorE: {fileID: 0}
   battleGroundSwitch: {fileID: 7898147395440984345}
   gangbangFighterIcon: {fileID: 7152094702800314639, guid: 16c574654c57a4c7f93e1d20cfc1fdab,
     type: 3}

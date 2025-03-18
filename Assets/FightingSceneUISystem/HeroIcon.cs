@@ -176,6 +176,7 @@ public class HeroIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         var icon = Instantiate(prefab);
         var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
         icon.unitConfig = unitConfig;
+        icon.InstanceID = unitInfo.id;
         icon.ChangeIcon(unitInfo, withSkillCheck);
         icon.GetComponent<RectTransform>().sizeDelta = new Vector2(iconSize,iconSize);
         icon.transform.SetParent(T);
