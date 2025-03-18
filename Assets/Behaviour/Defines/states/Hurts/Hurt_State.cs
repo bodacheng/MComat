@@ -66,6 +66,8 @@ namespace Soul
         {
             target = newValue;
             base.AI_State_enter();
+            _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
+            _BO_Ani_E.CloseOnProcessEnergyFromBodyWeapons();
             if (_AIStateRunner.GetLastState().StateKey == "KnockOff" && _BasicPhysicSupport.Weight == Weight.normal)
             {
                 //var knockOffState = (Knock_Off_State)_AIStateRunner.GetLastState();
@@ -78,7 +80,6 @@ namespace Soul
             PlayHurtAnim(newValue);
             FightParamsRef.GettingDamage = true;
             _Weapon_Animation_Events.ClearMarkerManagers();
-            _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
             TimeCounter = 0f;
             pEvents.CloseAllPersonalityEffects();
             

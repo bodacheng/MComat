@@ -291,11 +291,15 @@ public partial class BO_Ani_E : MonoBehaviour
 
         public void CloseEffectsOnBodyParts(bool clearParticles)
         {
-            foreach (KeyValuePair<Transform, Decomposition> keyValuePair in Ani_E.EffectsOnBodyParts)
+            foreach (var keyValuePair in Ani_E.EffectsOnBodyParts)
             {
                 if (keyValuePair.Value != null)
                 {
-                    keyValuePair.Value.StopEmissions(clearParticles);
+                    if (clearParticles)
+                    {
+                        keyValuePair.Value.StopEmissions(true);
+                    }
+                    keyValuePair.Value.Phase = -1;
                 }
             }
         }
