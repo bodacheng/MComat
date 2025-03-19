@@ -129,13 +129,25 @@ public partial class FightPrepareLayer : UILayer
         _getTeamUnitCount = getTeamUnitCount;
     }
     
-    public void GangbangStageUnitsDisplay(FightInfo stage)
+    public async UniTask GangbangStageUnitsDisplay(FightInfo stage)
     {
+        async UniTask player1IconFeature(string x)
+        {
+            //PreScene.target.Focusing.id = x;
+            //PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit);
+            await FocusTeamUnit(x, stage.FightMembers.HeroSets.GetValues(), connector, nineForShow);
+        }
+        
+        async UniTask player2IconFeature(string x)
+        {
+            await FocusTeamUnit(x, stage.FightMembers.EnemySets.GetValues(), connectorE, nineForShowE);
+        }
+        
         _gangbangHeroIconsM = GangbangInfosShow(stage.FightMembers.HeroSets.GetValues(), (x) =>
         {
-            PreScene.target.Focusing.id = x;
-            PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit);
+            player1IconFeature(x).Forget();
         }, myTeamShowT, true, 1, PlayerAccountInfo.Me.tutorialProgress == "Finished");
+        var default1InstanceId = _gangbangHeroIconsM.FirstOrDefault()?.InstanceID;
         
         if (stage.FightMembers.HeroSets.GetValues().Count < 1)
         {
@@ -150,9 +162,13 @@ public partial class FightPrepareLayer : UILayer
         _gangbangHeroIconsE = GangbangInfosShow(stage.FightMembers.EnemySets.GetValues(), 
             (x) =>
             {
-                FocusTeamUnit(x, stage.FightMembers.EnemySets.GetValues(), connectorE, nineForShowE).Forget();
+                player2IconFeature(x).Forget();
             },
             enemyTeamShowT, false, 2);
+        var default2InstanceId = _gangbangHeroIconsE.FirstOrDefault()?.InstanceID;
+        
+        await UniTask.WhenAll(player1IconFeature(default1InstanceId), player2IconFeature(default2InstanceId));
+        
         _gangbangHeroIconsE.FirstOrDefault()?.iconButton.onClick.Invoke();
         team1Name.text = "YOU";
 

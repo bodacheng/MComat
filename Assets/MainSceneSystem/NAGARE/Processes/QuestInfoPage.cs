@@ -130,7 +130,7 @@ public class QuestInfoPage : MSceneProcess
         
         if (stage.FightMode is FightMode.Group)
         {
-            _layer.GangbangStageUnitsDisplay(FightLoad.Fight);
+            await _layer.GangbangStageUnitsDisplay(FightLoad.Fight);
             _layer.SetFightBeginFeature(()=> GoToFight(FightLoad.Fight, _layer.SelectedMaxTeamCount));
         }
         else

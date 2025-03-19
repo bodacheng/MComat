@@ -64,6 +64,7 @@ public class GangbangHeroIcon : HeroIcon
         var icon = Instantiate(prefab);
         var unitConfig = Units.GetUnitConfig(unitInfo.r_id);
         icon.unitConfig = unitConfig;
+        icon.InstanceID = unitInfo.id;
         icon.ChangeIcon(unitInfo, withSkillCheck, teamCountGet);
         icon.GetComponent<RectTransform>().sizeDelta = new Vector2(iconSize,iconSize);
         icon.SetUp(teamCountSet, teamCountGet, enableCountSet);
