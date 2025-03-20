@@ -53,7 +53,21 @@ public partial class SkillSet
         D = _def ? SkillEntity.GetD_SE() : null;
         M = SkillEntity.GetM_SE(_moveType);
         M.CAN_BE_CANCELLED_TO = false;
-        R = SkillEntity.GetR_SE(_rushType);
+        R = new SkillEntity
+        {
+            REAL_NAME = "rush",
+            StateType = BehaviorType.AC,
+            AIAttrs = new AIAttrs
+            {
+                AI_MIN_DIS = -1,
+                AI_MAX_DIS = -1
+            },
+            CasualTo = null,
+            ForcedTransitions = null,
+            EnterInput = InputKey.Acc,
+            ExitInput = InputKey.Null,
+            SP_LEVEL = -1
+        };
         //////////////////////////////////////////////////////////////////////////
         
         _h1EList.Clear();
@@ -180,7 +194,7 @@ public partial class SkillSet
         IDictionary<string, SkillEntity> seDic = new Dictionary<string, SkillEntity>();
         var StateTransitionSetList = new List<SkillEntity>();
         
-        List<string> startList = _h1List.Concat(new []{"Rush"}).ToList();
+        List<string> startList = _h1List.Concat(new []{"rush"}).ToList();
         
         _empty = new SkillEntity("Empty", BehaviorType.NONE, new AIAttrs(), null, null, InputKey.Null, InputKey.Null,  -1);
         _victory = new SkillEntity("Victory",BehaviorType.NONE, new AIAttrs(), null, null, InputKey.Null, InputKey.Null, -1);

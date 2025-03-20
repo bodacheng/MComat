@@ -20,8 +20,7 @@ public partial class BehaviorRunnerGUI : Editor {
             "Move",
             "Victory",
             "Death",
-            "RushBack",
-            "Rush",
+            "rush",
             "Hit",
             "KnockOff",
             "getUp"

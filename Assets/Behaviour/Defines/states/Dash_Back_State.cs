@@ -8,9 +8,9 @@ namespace Soul
         readonly UnityEngine.Events.UnityAction breakFreeEnd;
         readonly CustomCoroutine breakFreeCoroutine;
 
-        public Dash_Back_State()
+        public Dash_Back_State(string dashClipName)
         {
-            clip_name = "rushback";
+            clip_name = dashClipName;
             breakFreeStart = () =>
             {
                 FightParamsRef.Resistance.Value += 10;

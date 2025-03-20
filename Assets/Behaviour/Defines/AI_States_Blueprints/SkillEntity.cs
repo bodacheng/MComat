@@ -122,52 +122,6 @@ namespace Skill
             AIAttrs.AI_MAX_DIS = AITriggerDistanceMax;
         }
         
-        public static SkillEntity GetR_SE(RushType RStyle)
-        {
-            SkillEntity R_SE = null;
-            switch (RStyle)
-            {
-                case RushType.Rush:
-                    R_SE = new SkillEntity
-                    {
-                        REAL_NAME = "Rush",
-                        StateType = BehaviorType.AC,
-                        AIAttrs = new AIAttrs
-                        {
-                            AI_MIN_DIS = -1,
-                            AI_MAX_DIS = -1
-                        },
-                        CasualTo = null,
-                        ForcedTransitions = null,
-                        EnterInput = InputKey.Acc,
-                        ExitInput = InputKey.Null,
-                        SP_LEVEL = -1
-                    };
-                    break;
-                case RushType.RushBack:
-                    R_SE = new SkillEntity
-                    {
-                        REAL_NAME = "RushBack",
-                        StateType = BehaviorType.AC,
-                        AIAttrs = new AIAttrs
-                        {
-                            AI_MIN_DIS = -1,
-                            AI_MAX_DIS = -1
-                        },
-                        CasualTo = null,
-                        ForcedTransitions = null,
-                        EnterInput = InputKey.Acc,
-                        ExitInput = InputKey.Null,
-                        SP_LEVEL = -1
-                    };
-                    break;
-                case RushType.None:
-                    R_SE = null;
-                    break;
-            }
-            return R_SE;
-        }
-
         public static SkillEntity GetD_SE()
         {
             return new SkillEntity
@@ -214,12 +168,5 @@ namespace Skill
         normal = 1,
         slow = 2,
         fast = 3
-    }
-    
-    public enum RushType
-    {
-        None = -1,
-        RushBack = 2,
-        Rush = 3
     }
 }

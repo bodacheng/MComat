@@ -84,25 +84,12 @@ namespace Soul
                     switch (_set.StateType)
                     {
                         case BehaviorType.AC:
-                            switch (_set.REAL_NAME)
+                            GMoveEscapeState rush = new GMoveEscapeState(_set.REAL_NAME)
                             {
-                                case "RushBack":
-                                    Dash_Back_State RushBack = new Dash_Back_State
-                                    {
-                                        nextAttackCanRushFirst = false,
-                                        StateType = BehaviorType.AC
-                                    };
-                                    BehaviorDic.Add("RushBack", RushBack);
-                                    break;
-                                case "Rush":
-                                    GMoveEscapeState Rush = new GMoveEscapeState("rush")
-                                    {
-                                        nextAttackCanRushFirst = true,
-                                        StateType = BehaviorType.AC
-                                    };
-                                    BehaviorDic.Add("Rush", Rush);
-                                    break;
-                            }
+                                nextAttackCanRushFirst = true,
+                                StateType = BehaviorType.AC
+                            };
+                            BehaviorDic.Add("rush", rush);
                             break;
                         case BehaviorType.GI:
                             G_Attack_State _GI_Attack = new G_Attack_State(null, 0f, 0f, 10f, _set.REAL_NAME)
@@ -142,6 +129,16 @@ namespace Soul
                                 SkillConfig = skillConfig
                             };
                             BehaviorDic.Add(_set.REAL_NAME, counter);
+                            if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
+                            break;
+                        case BehaviorType.RB:
+                            Dash_Back_State dashBackState = new Dash_Back_State(_set.REAL_NAME)
+                            {
+                                StateType = BehaviorType.RB,
+                                nextAttackCanRushFirst = false,
+                                SkillConfig = skillConfig
+                            };
+                            BehaviorDic.Add(_set.REAL_NAME, dashBackState);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
                         case BehaviorType.NONE:

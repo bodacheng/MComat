@@ -34,7 +34,7 @@ public partial class SkillConfigTable
 
     static readonly List<string> AttackTypes = new List<string>
     {
-        "GR","GM","GI","CT"
+        "GR","GM","GI","CT","RB"
     };
     
     static bool LegalStateType(string attackType)

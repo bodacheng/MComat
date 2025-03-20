@@ -8,6 +8,7 @@ namespace Skill
         NONE = 0,
         MV = 7,
         AC = 4,
+        RB = 11,
         GR = 1,
         GM = 2,
         GI = 3,

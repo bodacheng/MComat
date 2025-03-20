@@ -111,6 +111,9 @@ public partial class SkillConfigTable
                 case "CT":
                     skillConfig.STATE_TYPE = BehaviorType.CT;
                     break;
+                case "RB":
+                    skillConfig.STATE_TYPE = BehaviorType.RB;
+                    break;
                 case "NONE":
                     skillConfig.STATE_TYPE = BehaviorType.NONE;
                     break;

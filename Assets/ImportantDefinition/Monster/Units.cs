@@ -194,21 +194,7 @@ public static class Units
                         row.MOVE_TYPE = "Move1";
                         break;
                 }
-                switch (Config.RushType)
-                {
-                    case RushType.Rush:
-                        row.DODGE_SKILL = "Rush";
-                        break;
-                    case RushType.RushBack:
-                        row.DODGE_SKILL = "RushBack";
-                        break;
-                    case RushType.None:
-                        row.DODGE_SKILL = "None";
-                        break;
-                    default:
-                        row.DODGE_SKILL = "RushBack";
-                        break;
-                }
+                row.DODGE_SKILL = "rush";
                 row.DEFENDABLE_FLAG = Config.DEFENDABLE_FLAG ? "1" : "0";
 
                 row.RARITY_LEVEL = Config.RARITY_LEVEL.ToString();
@@ -301,18 +287,7 @@ public static class Units
                 row.MOVE_TYPE = "Move3";
                 break;
         }
-        switch(config.RushType)
-        {
-            case RushType.None:
-                row.DODGE_SKILL = "None";
-                break;
-            case RushType.Rush:
-                row.DODGE_SKILL = "Rush";
-                break;
-            case RushType.RushBack:
-                row.DODGE_SKILL = "RushBack";
-                break;
-        }
+        row.DODGE_SKILL = "rush";
 
         row.DEFENDABLE_FLAG = config.DEFENDABLE_FLAG ? "1" : "0";
         row.RARITY_LEVEL = config.RARITY_LEVEL.ToString();
@@ -366,23 +341,7 @@ public static class Units
                 _Config.MoveType = MoveType.normal;
                 break;
         }
-
-        switch (row.DODGE_SKILL)
-        {
-            case "Rush":
-                _Config.RushType = RushType.Rush;
-                break;
-            case "RushBack":
-                _Config.RushType = RushType.RushBack;
-                break;
-            case "None":
-                _Config.RushType = RushType.None;
-                break;
-            default:
-                _Config.RushType = RushType.RushBack;
-                break;
-        }
-
+        
         _Config.DEFENDABLE_FLAG = row.DEFENDABLE_FLAG == "1";
         _Config.RARITY_LEVEL = Int32.Parse(row.RARITY_LEVEL);
         return _Config;

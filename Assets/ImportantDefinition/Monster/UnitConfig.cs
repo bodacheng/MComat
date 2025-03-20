@@ -13,7 +13,6 @@ public class UnitConfig
     public Element element = Element.lightMagic;
     public string BASIC_MOVEMENT_PACK = "basic_anim";//monsterTable BasicMoveSet
     public MoveType MoveType = MoveType.normal;//monsterTable moveType
-    public RushType RushType = RushType.RushBack;//monsterTable accSKill
     public bool DEFENDABLE_FLAG = true;
     public string InstructionEN;
     public string InstructionCH;

@@ -31,8 +31,8 @@ namespace Soul
                     var fdsgfg = new KeyValuePair<string, string>("SpareOption", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(fdsgfg);
                     ConditionAndRespondPriority.Set(fdsgfg.Key, fdsgfg.Value, 10);
-                    
                     break;
+                case BehaviorType.RB:
                 case BehaviorType.AC:
                     //KeyValuePair<string, string> keyValuePair1 = new KeyValuePair<string, string>("LosingDefendStrength", behavior_define.REAL_NAME);
                     //RegisterConditionToRespond(keyValuePair1);
@@ -132,7 +132,6 @@ namespace Soul
                     s.Value.TriggerAttackHeight = SkillEntityDic[s.Key].AIAttrs.height;
                     AddAITriggerConditionToBehavior(SkillEntityDic[s.Key]);
                     BehaviourDic.Add(new KeyValuePair<string, Behavior>(s.Key, s.Value));
-
                 }
             }
             

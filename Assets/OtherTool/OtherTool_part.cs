@@ -97,7 +97,6 @@ public partial class OtherTool : EditorWindow
                 
                 unitConfig.BASIC_MOVEMENT_PACK = "warrior";//我感觉这个应该起名字叫做basic。每个type起码有一个叫这个的。
                 unitConfig.MoveType = MoveType.normal;
-                unitConfig.RushType = RushType.RushBack;
                 unitConfig.DEFENDABLE_FLAG = true;
                 unitConfig.InstructionCH = null;
                 unitConfig.InstructionEN = null;
