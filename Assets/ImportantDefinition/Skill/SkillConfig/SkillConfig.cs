@@ -11,6 +11,7 @@ namespace Skill
         RB = 11,
         GR = 1,
         GM = 2,
+        GMB = 12,
         GI = 3,
         CT = 9,
         Def = 8,

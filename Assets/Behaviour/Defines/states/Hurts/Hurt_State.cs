@@ -37,8 +37,6 @@ namespace Soul
             }
 
             var obj = AnimationManger.GetRandomHurtAnim(hurtAnimKey);
-            if (obj == null)
-                Debug.Log("here goes:"+ hurtAnimKey);
             AnimationManger.AnimationTrigger(obj, hurtAnimDuration);
             AnimationManger.TriggerExpression(Facial.hit);
             mySequence = DOTween.Sequence();

@@ -7,7 +7,7 @@ namespace Soul
         void _f_State_Update_SP()
         {
             _timeCounter += Time.fixedDeltaTime;
-            if (_BasicPhysicSupport.AtRing)
+            if (_BasicPhysicSupport.NearRing)
             {
                 DecideDirection();
             }

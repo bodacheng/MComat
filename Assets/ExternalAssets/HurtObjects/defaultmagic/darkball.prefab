@@ -23909,10 +23909,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActivateAfterTime: 0
   SpecificTarget: 0
-  damage_type: 14
+  damage_type: 8
   _WeaponMode: 3
   AT_weight: 0.5
-  weaponHP: 5
+  weaponHP: 1
   heavyLevel: -1
   onGroundMagic: 0
   effectSpreadOnBody: 1
@@ -23920,7 +23920,7 @@ MonoBehaviour:
   muzzle: 
   hitEffect: dark_boom
   ExplosionEffect: energy_resolve
-  ContinuousDamage: 1
+  ContinuousDamage: 0
   ContinuousDamageInterval: 0.5
 --- !u!114 &3829198492329961209
 MonoBehaviour:
@@ -23938,6 +23938,7 @@ MonoBehaviour:
   TrackControl: {fileID: 0}
   DestructionDelay: 5.5
   stop_emission_delay: 5
+  boundaryFade: 1
   to_be_faded_renderers: []
   Attachments: []
   Counter: 0

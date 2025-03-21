@@ -97,6 +97,7 @@ namespace Soul
                     BehaviourAndStrategicExitCondition.Add(behaviorDefine.REAL_NAME, null);
                     break;
                 case BehaviorType.GM:
+                case BehaviorType.GMB:
                     var keyValuePairqq = new KeyValuePair<string, string>("TimeToAttack", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(keyValuePairqq);
                     ConditionAndRespondPriority.Set(keyValuePairqq.Key, keyValuePairqq.Value, 2);

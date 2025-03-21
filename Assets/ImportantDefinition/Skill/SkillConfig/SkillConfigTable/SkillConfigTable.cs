@@ -31,16 +31,6 @@ public partial class SkillConfigTable
     {
     	return isLoaded;
     }
-
-    static readonly List<string> AttackTypes = new List<string>
-    {
-        "GR","GM","GI","CT","RB"
-    };
-    
-    static bool LegalStateType(string attackType)
-    {
-        return AttackTypes.Contains(attackType);
-    }
     
     public static async UniTask LoadAllSkillConfigs()
     {
@@ -131,10 +121,6 @@ public partial class SkillConfigTable
                 grid[i][5] = rowList[i - 1].HP_WEIGHT;
                 grid[i][6] = rowList[i - 1].ATTACK_TYPE;
                 grid[i][7] = rowList[i - 1].EVENT_CODE;
-                if (!LegalStateType(rowList[i - 1].ATTACK_TYPE))
-                {
-                    Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ rowList[i - 1].RECORD_ID);
-                }
             }
         }
         string delimiter = ",";
@@ -168,10 +154,6 @@ public partial class SkillConfigTable
                     ATTACK_TYPE = grid[i][6],
                     EVENT_CODE = grid[i][7]
                 };
-                if (!LegalStateType(grid[i][6]))
-                {
-                    Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ grid[i][0]);
-                }
                 rowList.Add(row);
             }
             isLoaded = true;

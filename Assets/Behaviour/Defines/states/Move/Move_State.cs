@@ -126,7 +126,7 @@ namespace Soul
         private GameObject closestEnemy;
         void DecideDirection()
         {
-            if (_BasicPhysicSupport.AtRing)
+            if (_BasicPhysicSupport.NearRing)
             {
                 _moveDirection = AIMoveDirection.RunToBattleGroundCenter;
                 _useDirection = Vector3.zero - gameObject.transform.position;

@@ -147,7 +147,7 @@ namespace mainMenu
             
             ShowSkillStoneExType(ex1Icon, ex2Icon, ex3Icon, config.SP_LEVEL);
             ShowSKillRanges(close, near, far, config.AIAttrs.AI_MIN_DIS, config.AIAttrs.AI_MAX_DIS);
-            atIcon.SetActive(config.STATE_TYPE is BehaviorType.GI or BehaviorType.GM or BehaviorType.GR);
+            atIcon.SetActive(config.STATE_TYPE is BehaviorType.GI or BehaviorType.GM or BehaviorType.GR or BehaviorType.GMB);
             defenceIcon.SetActive(config.STATE_TYPE is BehaviorType.CT or BehaviorType.Def);
             
             var intro = SkillNameTable.GetSkillIntro(config.RECORD_ID);

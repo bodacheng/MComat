@@ -116,7 +116,7 @@ namespace Soul
             {
                 BehaviourDic.TryGetValue(currentSKillEntity.CasualTo[index], out var state);
                 
-                if (state.StateType == BehaviorType.CT || state.StateType == BehaviorType.GM ||
+                if (state.StateType == BehaviorType.CT || state.StateType == BehaviorType.GM || state.StateType == BehaviorType.GMB ||
                     state.StateType == BehaviorType.GI || state.StateType == BehaviorType.GR)
                 {
                     if (min > state.triggerAttackRangeMin)

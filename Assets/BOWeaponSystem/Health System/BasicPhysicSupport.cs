@@ -16,18 +16,42 @@ public class BasicPhysicSupport : MonoBehaviour
 
     [SerializeField] private Weight weight = Weight.normal;
     public Weight Weight => weight;
-    
+
     public HiddenMethods hiddenMethods;
+
+    private Vector3 pos;
+    private float pushIntoRingSpeed = 1;
+    public bool AtRing;
+    public bool NearRing;
     
-    public bool AtRing
+    bool atRing
     {
         get
         {
             var maxLimbDisFromCenter = _DATA_CENTER.GetFarthestPositionFromZero();
-            return maxLimbDisFromCenter.magnitude > BoundaryControlByGod._BattleRingRadius;
+            var originY = _DATA_CENTER.WholeT.position.y;
+            pos = _DATA_CENTER.WholeT.position;
+            pos.y = 0;
+        
+            var atRing = maxLimbDisFromCenter.magnitude > BoundaryControlByGod._BattleRingRadius;
+            NearRing = maxLimbDisFromCenter.magnitude + 2 > BoundaryControlByGod._BattleRingRadius;
+            if (atRing)
+            {
+                var sa = maxLimbDisFromCenter - maxLimbDisFromCenter.normalized * BoundaryControlByGod._BattleRingRadius;
+                pos = pos - sa;
+                pos.y = originY;
+                _DATA_CENTER.WholeT.position = Vector3.Lerp(_DATA_CENTER.WholeT.position, pos, pushIntoRingSpeed * Time.deltaTime);
+            }
+            
+            if (originY < 0)
+            {
+                pos.y = 0f;
+                _DATA_CENTER.WholeT.position = pos;
+            }
+            return atRing;
         }
     }
-
+    
     public class HiddenMethods
     {
         readonly BasicPhysicSupport _BasicPhysicSupport;
@@ -154,7 +178,7 @@ public class BasicPhysicSupport : MonoBehaviour
         if (FightGlobalSetting.SceneStep == 1)
         {
             hiddenMethods.AutoSwitchGravity();
-            LimitTargetToRange();
+            AtRing = atRing;
         }
     }
 
@@ -173,29 +197,6 @@ public class BasicPhysicSupport : MonoBehaviour
         else
         {
             return Mathf.Infinity;
-        }
-    }
-    
-    private Vector3 pos;
-    private float pushIntoRingSpeed = 1;
-    void LimitTargetToRange()
-    {
-        var maxLimbDisFromCenter = _DATA_CENTER.GetFarthestPositionFromZero();
-        var originY = _DATA_CENTER.WholeT.position.y;
-        pos = _DATA_CENTER.WholeT.position;
-        pos.y = 0;
-        if (AtRing)
-        {
-            var sa = maxLimbDisFromCenter - maxLimbDisFromCenter.normalized * BoundaryControlByGod._BattleRingRadius;
-            pos = pos - sa;
-            pos.y = originY;
-            _DATA_CENTER.WholeT.position = Vector3.Lerp(_DATA_CENTER.WholeT.position, pos, pushIntoRingSpeed * Time.deltaTime);
-        }
-        
-        if (originY < 0)
-        {
-            pos.y = 0f;
-            _DATA_CENTER.WholeT.position = pos;
         }
     }
     

@@ -285,7 +285,10 @@ namespace FightScene
             {
                 return false;
             }
-            if (target._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GI || target._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GM || target._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GR)
+            if (target._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GI || 
+                target._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GM || 
+                target._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GMB || 
+                target._MyBehaviorRunner.GetNowState().StateType == Skill.BehaviorType.GR)
             {
                 if (!target._SkillCancelFlag.Cancel_Flag)
                     return true;

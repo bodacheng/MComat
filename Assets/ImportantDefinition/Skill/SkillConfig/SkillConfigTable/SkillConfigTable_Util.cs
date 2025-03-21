@@ -16,11 +16,6 @@ public partial class SkillConfigTable
             var newConfig = RowToSkillConfig(Rows[i], aiRow);
             if (newConfig != null)
                 skillConfigs.Add(newConfig);
-                
-            if (!LegalStateType(Rows[i].ATTACK_TYPE))
-            {
-                Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ Rows[i].RECORD_ID);
-            }
         }
         return skillConfigs;
     }
@@ -57,11 +52,6 @@ public partial class SkillConfigTable
                 break;
         }
         
-        if (!LegalStateType(row.ATTACK_TYPE))
-        {
-            Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ skillConfig.RECORD_ID);
-        }
-                        
         switch (skillConfig.SP_LEVEL)
         {
             case 0:
@@ -108,6 +98,9 @@ public partial class SkillConfigTable
                 case "GM":
                     skillConfig.STATE_TYPE = BehaviorType.GM;
                     break;
+                case "GMB":
+                    skillConfig.STATE_TYPE = BehaviorType.GMB;
+                    break;
                 case "CT":
                     skillConfig.STATE_TYPE = BehaviorType.CT;
                     break;
@@ -117,11 +110,6 @@ public partial class SkillConfigTable
                 case "NONE":
                     skillConfig.STATE_TYPE = BehaviorType.NONE;
                     break;
-            }
-            
-            if (!LegalStateType(row.ATTACK_TYPE))
-            {
-                Debug.Log("崩溃级错误，技能Type有错：RECORDID"+ skillConfig.RECORD_ID);
             }
             
             skillConfig.AIAttrs.AI_MIN_DIS = float.Parse(aiRow.TRIGGER_DIS_MIN);

@@ -111,6 +111,16 @@ namespace Soul
                             BehaviorDic.Add(_set.REAL_NAME, _GM_Attack);
                             if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
                             break;
+                        case BehaviorType.GMB:
+                            G_M_B_State _GMB_Attack = new G_M_B_State(_set.REAL_NAME)
+                            {
+                                StateType = BehaviorType.GMB,
+                                nextAttackCanRushFirst = false,
+                                SkillConfig = skillConfig
+                            };
+                            BehaviorDic.Add(_set.REAL_NAME, _GMB_Attack);
+                            if (!SkillTypeKeys.Contains(_set.REAL_NAME)) SkillTypeKeys.Add(_set.REAL_NAME);
+                            break;
                         case BehaviorType.GR:
                             G_Attack_State _GR_Attack = new G_Attack_State("dash", 40f, 1.4f, 10f, _set.REAL_NAME)
                             {
