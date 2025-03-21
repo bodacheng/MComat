@@ -66,7 +66,8 @@ namespace Soul
             base.AI_State_enter();
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
             _BO_Ani_E.CloseOnProcessEnergyFromBodyWeapons();
-            if (_AIStateRunner.GetLastState().StateKey == "KnockOff" && _BasicPhysicSupport.Weight == Weight.normal)
+            if ((newValue.from_weapon.damage_type == DamageType.stable_draw && _BasicPhysicSupport.AtRing) || 
+                (_AIStateRunner.GetLastState().StateKey == "KnockOff" && _BasicPhysicSupport.Weight == Weight.normal))
             {
                 //var knockOffState = (Knock_Off_State)_AIStateRunner.GetLastState();
                 //if (knockOffState.FlyingStep == 0 || knockOffState.FlyingStep == 1)

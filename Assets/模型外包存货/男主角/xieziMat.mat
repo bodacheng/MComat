@@ -22,10 +22,13 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: xieziMat
   m_Shader: {fileID: 4800000, guid: a2a06e22c08354d9699356710b69ca9c, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - AMBIENT
   - ANIME_SOFT
   - BASE_SATURATION
+  - DIFFUSE
   - FOG
   - MATCAP
   - MATCAP_PERSPECTIVE
@@ -52,6 +55,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - SRPDEFAULTUNLIT
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -197,11 +201,11 @@ Material:
     - _DetailNormalMapScale: 1
     - _DetailUV: 0
     - _DetailVertexColors: 0
-    - _Diffuse: 0
+    - _Diffuse: 1
     - _DiffuseBrightness: 1
     - _DiffuseContrast: 1
     - _DiffusePerPixel: 0
-    - _DiffuseWrap: 0
+    - _DiffuseWrap: 0.5
     - _DstBlend: 0
     - _Flat: 0
     - _Fog: 1

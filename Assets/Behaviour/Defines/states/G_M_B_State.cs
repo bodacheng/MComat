@@ -27,6 +27,7 @@ namespace Soul
                 if (damage > damageCount)
                 {
                     hasCausedDamege = true;
+                    _SkillCancelFlag.turn_on_flag();
                 }
                 damageCount = damage;
             }

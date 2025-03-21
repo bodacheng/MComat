@@ -821,12 +821,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b4a39e223b86cf24d82d7c34e6366131
-    m_Address: MatCap_Toon
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b68b99c2e57cef4419465c63c527201b
     m_Address: Blend_CenterGlow
     m_ReadOnly: 0
