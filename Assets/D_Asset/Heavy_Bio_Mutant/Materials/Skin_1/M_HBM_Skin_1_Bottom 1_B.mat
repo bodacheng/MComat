@@ -9,17 +9,16 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M_HBM_Skin_1_Bottom 1_B
   m_Shader: {fileID: 4800000, guid: a2a06e22c08354d9699356710b69ca9c, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - AMBIENT
   - ANIME_SOFT
   - DIFFUSE
   - FOG
-  - LIGHT_MAP
   - MATCAP_PERSPECTIVE
-  - NORMAL_MAP
   - OUTLINE_PASS_DISABLED
   - SHADOWS_ENABLED
-  - SPECULAR_MAP
   - _DETAILBLEND_MULTIPLY
   - _DETAILUV_UV1
   - _HEIGHTCOLORSBLEND_ALPHA_BLEND
@@ -43,6 +42,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - SRPDEFAULTUNLIT
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:

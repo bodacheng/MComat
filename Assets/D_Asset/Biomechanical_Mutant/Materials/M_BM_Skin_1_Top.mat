@@ -22,6 +22,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M_BM_Skin_1_Top
   m_Shader: {fileID: 4800000, guid: a2a06e22c08354d9699356710b69ca9c, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - AMBIENT
   - ANIME_SOFT
@@ -31,6 +33,7 @@ Material:
   - MATCAP_PERSPECTIVE
   - NORMAL_MAP
   - SHADOWS_ENABLED
+  - SPECULAR
   - SPECULAR_MAP
   - _DETAILBLEND_MULTIPLY
   - _DETAILUV_UV1
@@ -53,6 +56,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - SRPDEFAULTUNLIT
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -281,8 +285,8 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SourceBlend: 5
     - _SpecSource: 0
-    - _Specular: 0
-    - _SpecularBrightness: 1
+    - _Specular: 1
+    - _SpecularBrightness: 0.5
     - _SpecularHair: 0
     - _SpecularHighlights: 1
     - _SpecularSmoothness: 20

@@ -9,12 +9,13 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Golem_Fire
   m_Shader: {fileID: 4800000, guid: a2a06e22c08354d9699356710b69ca9c, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - AMBIENT
   - ANIME
   - ANIME_SOFT
   - BASE_CONTRAST
-  - BASE_SATURATION
   - DIFFUSE
   - FOG
   - MATCAP
@@ -47,6 +48,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - SRPDEFAULTUNLIT
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -172,11 +174,11 @@ Material:
     - _AnimeThreshold2: 1
     - _Blend: 0
     - _BlendOp: 0
-    - _Brightness: 1
+    - _Brightness: 5
     - _BumpScale: 1
     - _CameraFadeEnd: 0
     - _CameraFadeStart: 0
-    - _Contrast: 1.2
+    - _Contrast: 2
     - _Cull: 2
     - _Cutoff: 0.5
     - _Cutout: 0
@@ -254,7 +256,7 @@ Material:
     - _RimBlend: 1
     - _RimContrast: 5
     - _RimInverse: 0
-    - _Saturation: 1.5
+    - _Saturation: 1
     - _ShadowOverlayAnimation: 0
     - _ShadowOverlayBrightness: 1
     - _ShadowOverlaySpeedU: 0.1
@@ -268,7 +270,7 @@ Material:
     - _SourceBlend: 5
     - _SpecSource: 0
     - _Specular: 1
-    - _SpecularBrightness: 1
+    - _SpecularBrightness: 0.2
     - _SpecularHair: 0
     - _SpecularHighlights: 1
     - _SpecularSmoothness: 20

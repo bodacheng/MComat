@@ -9,12 +9,12 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M_BM_Skin_2_Bottom
   m_Shader: {fileID: 4800000, guid: a2a06e22c08354d9699356710b69ca9c, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - AMBIENT
-  - ANIME
   - ANIME_SOFT
   - BASE_SATURATION
-  - DIFFUSE
   - FOG
   - MATCAP
   - MATCAP_PERSPECTIVE
@@ -43,6 +43,7 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - SRPDEFAULTUNLIT
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -182,7 +183,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AmbientBrightness: 1
-    - _Anime: 1
+    - _Anime: 0
     - _AnimeSoftness: 0.05
     - _AnimeThreshold1: 0.2
     - _AnimeThreshold2: 0.4
@@ -208,7 +209,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DetailUV: 0
     - _DetailVertexColors: 0
-    - _Diffuse: 1
+    - _Diffuse: 0
     - _DiffuseBrightness: 1
     - _DiffuseContrast: 1
     - _DiffusePerPixel: 0
@@ -246,7 +247,7 @@ Material:
     - _LightmapBrightness: 1
     - _LightmapUV: 0
     - _MatCapBlend: 0
-    - _MatCapBrightness: 1.5
+    - _MatCapBrightness: 1
     - _MatCapContrast: 1
     - _MatCapPerspective: 1
     - _MatCapStatic: 0
