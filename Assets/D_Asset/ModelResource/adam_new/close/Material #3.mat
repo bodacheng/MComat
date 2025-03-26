@@ -33,7 +33,6 @@ Material:
   - NORMAL_MAP
   - OUTLINE_PASS_DISABLED
   - SHADOWS_ENABLED
-  - SPECULAR
   - _DETAILBLEND_MULTIPLY
   - _DETAILUV_UV1
   - _HEIGHTCOLORSBLEND_ALPHA_BLEND
@@ -247,7 +246,7 @@ Material:
     - _DetailVertexColors: 0
     - _Diffuse: 0
     - _DiffuseBrightness: 1
-    - _DiffuseContrast: 1
+    - _DiffuseContrast: 1.5
     - _DiffusePerPixel: 0
     - _DiffuseWrap: 0.5
     - _DstBlend: 0
@@ -342,11 +341,11 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SourceBlend: 5
     - _SpecSource: 0
-    - _Specular: 1
+    - _Specular: 0
     - _SpecularBrightness: 0.2
     - _SpecularHair: 0
     - _SpecularHighlights: 1
-    - _SpecularSmoothness: 20
+    - _SpecularSmoothness: 131
     - _SpecularUV: 0
     - _SrcBlend: 1
     - _StartFrequency: 4
