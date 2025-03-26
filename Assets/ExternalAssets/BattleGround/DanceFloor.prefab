@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4702862336928241645}
   - component: {fileID: 4261409622579021069}
   - component: {fileID: 1351009558668638476}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: crystal_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8322460592287290729}
   - component: {fileID: -8334091140794521415}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DanceFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
