@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e974cff1cb374675b589dba6b999185, type: 3}
+  m_Name: goodbye
+  m_EditorClassIdentifier: 
+  _storyScenes:
+  - Pic: {fileID: 21300000, guid: c2ed57c10deab41e9b768ab372dff65a, type: 3}
+    Lines:
+    - 2_1
+    - 2_2
+    - 2_3
+    - 2_4
+    - 2_5
+    - 2_6
+    - 2_7
+  - Pic: {fileID: 21300000, guid: 4cfbf508616364b4ea1738bfa55a918e, type: 3}
+    Lines:
+    - 2_8
+    - 2_9
+    - 2_10
+  - Pic: {fileID: 21300000, guid: 90cd908e75d8c46b5a783d84eedee1d2, type: 3}
+    Lines:
+    - 2_11
+    - 2_12
+    - 2_13
+    - 2_14
+    - 2_15
+  - Pic: {fileID: 21300000, guid: 0a541aa7e5ed34ce7821f03671e66faa, type: 3}
+    Lines:
+    - 2_16
+    - 2_17
+    - 2_18
+  - Pic: {fileID: 21300000, guid: 6ab2a231871f141b5b1661719b1286cb, type: 3}
+    Lines:
+    - 2_19
+  - Pic: {fileID: 21300000, guid: 65bf58d3eac72433ea3f3a0d32f086a4, type: 3}
+    Lines: []
