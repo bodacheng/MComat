@@ -29,6 +29,7 @@ namespace Soul
             
             FlyingStep = 0;
             _timeCounter = 0;
+            _canWakeUp = false;
             _touchedBoundary = false;
             FightParamsRef.GettingDamage = true;
             _BasicPhysicSupport.SetUsingGravity(false);
