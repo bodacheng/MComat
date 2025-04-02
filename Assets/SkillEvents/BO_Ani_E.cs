@@ -164,7 +164,8 @@ public partial class BO_Ani_E : MonoBehaviour
     Decomposition effect;
     ConstraintSource myConstraintSource;
     public async void EffectOnBodyPart(AnimationEvent e)
-	{
+    {
+        return;
         DecideTarget(e.stringParameter);
         effect = await EffectsManager.GenerateEffect("normal_effect", magic_path, target.position, target.rotation,target);
         

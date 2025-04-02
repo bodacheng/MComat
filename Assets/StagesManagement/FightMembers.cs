@@ -86,7 +86,7 @@ public class FightMembers
         return target;
     }
     
-    public static FightMembers RandomSkillTest()
+    public static FightMembers RandomSkillTest(CriticalGaugeMode mode = CriticalGaugeMode.Normal)
     {
         var unitIDsAndNames = Units.GetMonsterIDsAndNamesDic("human");
         var indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, 12);
@@ -98,18 +98,18 @@ public class FightMembers
         var recordIdsD = unitIDsAndNamesDragon.Keys.ToList();
         
         var target = new FightMembers();
-        var char1 = ArrangeUnitInfo(recordIds[indexes[0]]);
-        var char2 = ArrangeUnitInfo(recordIds[indexes[1]]);
-        var char3 = ArrangeUnitInfo(recordIds[indexes[2]]);
-        var char4 = ArrangeUnitInfo(recordIds[indexes[3]]);
-        var char5 = ArrangeUnitInfo(recordIds[indexes[4]]);
-        var char6 = ArrangeUnitInfo(recordIds[indexes[5]]);
-        var char7 = ArrangeUnitInfo(recordIds[indexes[6]]);
-        var char8 = ArrangeUnitInfo(recordIds[indexes[7]]);
-        var char9 = ArrangeUnitInfo(recordIdsD[indexesD[0]]);
-        var char10 = ArrangeUnitInfo(recordIds[indexes[9]]);
-        var char11 = ArrangeUnitInfo(recordIds[indexes[10]]);
-        var char12 = ArrangeUnitInfo(recordIdsD[indexesD[0]]);
+        var char1 = ArrangeUnitInfo(recordIds[indexes[0]],mode);
+        var char2 = ArrangeUnitInfo(recordIds[indexes[1]],mode);
+        var char3 = ArrangeUnitInfo(recordIds[indexes[2]],mode);
+        var char4 = ArrangeUnitInfo(recordIds[indexes[3]],mode);
+        var char5 = ArrangeUnitInfo(recordIds[indexes[4]],mode);
+        var char6 = ArrangeUnitInfo(recordIds[indexes[5]],mode);
+        var char7 = ArrangeUnitInfo(recordIds[indexes[6]],mode);
+        var char8 = ArrangeUnitInfo(recordIds[indexes[7]],mode);
+        var char9 = ArrangeUnitInfo(recordIdsD[indexesD[0]],mode);
+        var char10 = ArrangeUnitInfo(recordIds[indexes[9]],mode);
+        var char11 = ArrangeUnitInfo(recordIds[indexes[10]],mode);
+        var char12 = ArrangeUnitInfo(recordIdsD[indexesD[0]],mode);
         
         target.EnemySets.Set(0, 0, char1);
         target.EnemySets.Set(0, 1, char2);

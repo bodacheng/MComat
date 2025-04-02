@@ -80,8 +80,9 @@ public class FrontLayer : UILayer
         
         SkillTestRBtn.onClick.AddListener(pre.BeginSkillTest_Rotation);
         SkillTestMBtn.onClick.AddListener(pre.BeginSkillTest_Multi);
-        SkillTestRBtn.gameObject.SetActive(CommonSetting.DevMode); 
-        SkillTestMBtn.gameObject.SetActive(CommonSetting.DevMode);
+        
+        //SkillTestRBtn.gameObject.SetActive(CommonSetting.DevMode); 
+        //SkillTestMBtn.gameObject.SetActive(CommonSetting.DevMode);
         
         viewSwitchBtn.onClick.AddListener(ViewSwitch);
     }

@@ -358,15 +358,17 @@ public partial class FightInfo : ScriptableObject
         return stage;
     }
     
-    public static FightInfo RandomSkillTestStage(FightMode fightMode)
+    public static FightInfo RandomSkillTestStage(FightMode fightMode, CriticalGaugeMode criticalGaugeMode)
     {
         var stage = CreateInstance<FightInfo>();
-        stage.FightMembers = FightMembers.RandomSkillTest();
+        stage.FightMembers = FightMembers.RandomSkillTest(criticalGaugeMode);
         stage.battleGroundID = 0;
         stage.fightBGM = 0;
         stage.Team1Auto = true;
         stage.Team2Auto = true;
         stage.fightMode = fightMode;
+        stage.team1CGMode = criticalGaugeMode;
+        stage.team2CGMode = criticalGaugeMode;
         stage.EventType = FightEventType.SkillTest;
         return stage;
     }

@@ -279,8 +279,9 @@ namespace FightScene
         async void SkillTestReload()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(3));
-            FightLoad.Fight = FightInfo.RandomSkillTestStage(FightLoad.Fight.FightMode);
-            LocalGameRestart(0);
+            FightLoad.Fight = FightInfo.RandomSkillTestStage(FightLoad.Fight.FightMode, CriticalGaugeMode.Unlimited);
+            FightLoad.Fight.Team1ID = PlayerAccountInfo.Me.PlayFabId;
+            FightLoad.Go(FightLoad.Fight);
         }
     }
 }
