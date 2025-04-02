@@ -204,6 +204,20 @@ Audio,Volume,音量,音量
 Support,Help,ヘルプ,帮助
 Language,Language,言語,言語
 NickName,Nickname,ニックネーム,昵称
+Graphics,Graphics,グラフィックス,图像
+Control,Controls,コントロール,控制
+KeyBinding,"Battle keybindings
+ (although auto mode is recommended)","戦闘キー
+（自動モードの使用を推奨します）","战斗键位
+（虽然建议使用自动模式）"
+KeyBindingIntro,"Click to set battle keybindings
+ (although auto mode is recommended)","戦闘キー設定をクリックしてください
+（自動モードの使用を推奨します）","点击设置战斗键位
+（虽然建议使用自动模式）"
+Setting,Setting,設定,設定
+,,,
+fullScreen,Full Screen,全画面,全屏幕
+resolution,Resolution,解像度,分辨率
 ,,,
 MailAddress,Maill Address,メールアドレス,邮箱地址
 AccountPassword,Password,パスワード,密码

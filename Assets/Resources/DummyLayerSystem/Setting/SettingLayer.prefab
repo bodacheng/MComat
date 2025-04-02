@@ -2622,12 +2622,14 @@ MonoBehaviour:
   selectedFrame: {fileID: 8037371359591452807}
   accountBtn: {fileID: 6585297482523785019}
   volumeBtn: {fileID: 2554297807499263942}
+  graphicBtn: {fileID: 0}
   deviceBtn: {fileID: 7155581208357481312}
   supportBtn: {fileID: 2238577955492990808}
   languageBtn: {fileID: 5263354245877594930}
   nickNameBtn: {fileID: 3360735395586597346}
   controlBtn: {fileID: 3837991735247134618}
   volumePanel: {fileID: 3018817576391039065}
+  graphicPanel: {fileID: 0}
   accountPanel: {fileID: 2207023351839654112}
   devicePanel: {fileID: 3267894657208200578}
   supportPanel: {fileID: 3018817576761780930}
@@ -2655,6 +2657,8 @@ MonoBehaviour:
   selectedIndicator: {fileID: 4060776288177586987}
   nickName: {fileID: 5997890276428667857}
   resetNickNameBtn: {fileID: 6562510051653492438}
+  fullScreenToggle: {fileID: 0}
+  resolutionOptions: []
 --- !u!1 &3018817575485538479
 GameObject:
   m_ObjectHideFlags: 0
@@ -6483,7 +6487,7 @@ PrefabInstance:
     - target: {fileID: 6440029228510846066, guid: 8930a9117b630bf448af514934ff470e,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 6440029228510846066, guid: 8930a9117b630bf448af514934ff470e,
         type: 3}
@@ -6528,7 +6532,7 @@ PrefabInstance:
     - target: {fileID: 6440029228510846066, guid: 8930a9117b630bf448af514934ff470e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 6440029228510846066, guid: 8930a9117b630bf448af514934ff470e,
         type: 3}
