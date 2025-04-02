@@ -172,8 +172,9 @@ public class AppSetting
             int width = PlayerPrefs.GetInt("ResolutionWidth");
             int height = PlayerPrefs.GetInt("ResolutionHeight");
             bool isFullscreen = PlayerPrefs.GetInt("Fullscreen") == 1;
-
+#if !UNITY_IOS && !UNITY_ANDROID
             Screen.SetResolution(width, height, isFullscreen);
+#endif
         }
     }
     #endregion

@@ -85,9 +85,12 @@ public class SettingLayer : UILayer
 
         public void Toggle(bool isOn)
         {
+            
             if (isOn)
             {
+#if !UNITY_IOS && !UNITY_ANDROID
                 Screen.SetResolution(width, height, Screen.fullScreen);
+#endif
             }
         }
     }
@@ -221,6 +224,7 @@ public class SettingLayer : UILayer
             // 根据当前分辨率设置对应的 Toggle
             foreach (var option in resolutionOptions)
             {
+#if !UNITY_IOS && !UNITY_ANDROID
                 option.toggle.onValueChanged.AddListener((isOn) =>
                 {
                     if (isOn)
@@ -228,7 +232,7 @@ public class SettingLayer : UILayer
                         Screen.SetResolution(option.width, option.height, Screen.fullScreen);
                     }
                 });
-            
+#endif
                 if (option.width == currentWidth && option.height == currentHeight)
                 {
                     option.toggle.SetIsOnWithoutNotify(true);
