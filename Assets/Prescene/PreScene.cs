@@ -132,7 +132,6 @@ namespace mainMenu
             
             AppSetting.UiAudioSource = uiAudioSource;
             AppSetting.BGMSource = audioSource;
-            await AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey);
             
             UILayerLoader.SetEffectBg(effectBg.rectTransform);
             Time.timeScale = 1;

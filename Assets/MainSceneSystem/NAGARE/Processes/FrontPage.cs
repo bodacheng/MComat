@@ -15,6 +15,7 @@ public class FrontPage : MSceneProcess
     
     void EnterProcess()
     {
+        AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey).Forget();
         _frontLayer = UILayerLoader.Load<FrontLayer>();
         _frontLayer.Initialise(PreScene.target);
 

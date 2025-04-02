@@ -144,6 +144,7 @@ public partial class ArenaPage : MSceneProcess
     
     public override void ProcessEnter()
     {
+        AppSetting.PlayBGM(CommonSetting.StartThemeAddressKey).Forget();
         if (PlayerAccountInfo.Me.TitleDisplayName == null)
         {
             SettingPage.SetNickName((_) => Enter(), false);
