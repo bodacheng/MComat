@@ -13,6 +13,11 @@ using Cysharp.Threading.Tasks;
 
 public class PowerEstimateTable
 {
+    private static Dictionary<int, int> _powerRef = new Dictionary<int, int>()
+    {
+        { 0, 1 }, { 1, 3 },{ 2, 5 },{ 3, 7 },
+    };
+    
 	public class Row
 	{
 		public string RECORD_ID;
@@ -33,14 +38,14 @@ public class PowerEstimateTable
         var animDic = await SKillAnalyzer.AllSkillAnims(type);
         await Save(Application.dataPath + "/" +CommonSetting.SkillStaticAnalysis + ".csv", skillConfigs, animDic);
     }
-    
+
     static async UniTask Save(string filepath, List<SkillConfig> skillConfigs, IDictionary<string, AnimationClip> animDic)
     {
         rowList.Clear();
         string[][] grid = new string[skillConfigs.Count + 1][];
         for (int i = 0; i < grid.Length; i++)
         {
-            grid[i] = new string[6];
+            grid[i] = new string[7];
             if (i == 0)
             {
                 grid[i][0] = "RECORD_ID";
@@ -65,6 +70,17 @@ public class PowerEstimateTable
                 grid[i][3] = pair.Item1.ToString();
                 grid[i][4] = pair.Item2.ToString();
                 grid[i][5] = skillConfigs[i - 1].HP_WEIGHT.ToString();
+
+                var refPower = _powerRef[int.Parse(grid[i][2])];
+                var estimateDamage = pair.Item1;
+                if ((float)estimateDamage - refPower >= 1)
+                {
+                    grid[i][6] = "Maybe too strong";
+                }
+                else if ((float)estimateDamage - refPower <= -1)
+                {
+                    grid[i][6] = "Maybe too weak";
+                }
                 
                 var row = new Row
                 {

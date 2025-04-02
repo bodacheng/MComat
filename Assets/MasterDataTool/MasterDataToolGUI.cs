@@ -15,9 +15,12 @@ public class LocalMasterDataToolGUI : EditorWindow {
         {
             Initialized = true;
         }
-        
+
         GUILayout.TextArea(" 输出技能参考信息文件，这个本程序的技能石详细画面要参考的。\n" +
-                           "但输出的内容只是个大概。\n");
+                           "但输出的内容只是个大概。基准伤害是0:1,1:3,2:5,3:7 \n" +
+                           "技能表里的AT数决定了角色进入这个对应攻击状态时候的攻击力，这个攻击力会指定到这期间生成的HitBoxManager上的AT\n" +
+                           "HitBoxManager.AT_weight这个数值会成算到AT上去影响实际伤害，并且本伤害计算工具会考虑到AT_weight\n" +
+                           "AT_weight的存在是为了方便设置某个抓门用于推动角色等作用的hitbox不会造成伤害等，一般不应该设置成0或1之外的数值");
         
         if (GUILayout.Button("输出最新技能数值参考文件（技能详细画面用）目前需要play模式下执行"))
         {

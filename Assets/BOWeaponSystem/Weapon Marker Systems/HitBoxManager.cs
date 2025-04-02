@@ -17,7 +17,7 @@ namespace HittingDetection
         [Tooltip("damageTypeOfTheWeapon")]
         public WeaponMode _WeaponMode;
         [Tooltip("AT Weights")]
-        public float AT_weight = 1;
+        public float AT_weight = 1;//这个是计算到自动估算伤害工具里去的
         [Tooltip("weaponHP, when below 0, is not an energy")]
         public int weaponHP = -1;
         [Tooltip("heavyLevel 关系对其他武器形成的损耗力。详见WpHpCost")]
