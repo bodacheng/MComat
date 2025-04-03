@@ -59,12 +59,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - skill_icon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 162602a63736c4eacbd1d89ecc184487
-    m_Address: 99
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - skill_icon
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 174bdbb236f7741fca7848d31eb19c52
     m_Address: 53
     m_ReadOnly: 0
@@ -421,6 +415,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d64017e7e6d7e4fe3847b73d952c565d
     m_Address: 103
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - skill_icon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d6dea9e1e17a24c2b822c72f2a87f6a6
+    m_Address: 99
     m_ReadOnly: 0
     m_SerializedLabels:
     - skill_icon
