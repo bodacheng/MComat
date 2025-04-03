@@ -50,7 +50,7 @@ MonoBehaviour:
   SpecificTarget: 0
   damage_type: 7
   _WeaponMode: 3
-  AT_weight: 1
+  AT_weight: 0
   weaponHP: 1
   heavyLevel: 1
   onGroundMagic: 0
@@ -77,6 +77,7 @@ MonoBehaviour:
   TrackControl: {fileID: 0}
   DestructionDelay: 0.21
   stop_emission_delay: 0.2
+  boundaryFade: 1
   to_be_faded_renderers: []
   Attachments: []
   Counter: 0
