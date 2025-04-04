@@ -19220,7 +19220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActivateAfterTime: 0
   SpecificTarget: 0
-  damage_type: 14
+  damage_type: 2
   _WeaponMode: 3
   AT_weight: 1
   weaponHP: 5
@@ -19249,6 +19249,7 @@ MonoBehaviour:
   TrackControl: {fileID: 0}
   DestructionDelay: 5.5
   stop_emission_delay: 5
+  boundaryFade: 1
   to_be_faded_renderers: []
   Attachments: []
   Counter: 0
