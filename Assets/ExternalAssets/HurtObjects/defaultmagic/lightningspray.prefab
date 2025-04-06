@@ -4885,11 +4885,11 @@ MonoBehaviour:
   damage_type: 1
   _WeaponMode: 2
   AT_weight: 1
-  weaponHP: 2
+  weaponHP: 1
   heavyLevel: 1
   onGroundMagic: 0
   effectSpreadOnBody: 1
-  element: 0
+  element: 4
   muzzle: 
   hitEffect: 
   ExplosionEffect: electric_s_e

@@ -17,30 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: e937ec13c8ac84573b6ede0b131434e7
   m_SerializeEntries:
-  - m_GUID: d7db40fb5b64b403480905c9cb8899d6
-    m_Address: Config/mst_unit
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - config
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ba918278b8f5f41299cb4e7930b9b5b4
-    m_Address: Config/skill_name
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - config
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a68841c2c08ac4fefafe74c4812cbcd1
-    m_Address: Config/skill_ai_attrs
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - config
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fb73d0a5d0f8b483090a002c2d712a02
-    m_Address: Config/mst_skill
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - config
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0b7e9a68701b2457f8e322c57e0e682d
     m_Address: Config/LanguageCode
     m_ReadOnly: 0
@@ -53,26 +29,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - config
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f82352243f33a48c79e9de4316104397
-    m_Address: Config/stage_mode
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - config
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 51d4bf73a53b04fc0a3cf967d3ecd761
-    m_Address: Config/SkillStaticAnalysis
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - config
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 26bb3442a9a6b4908b2a162f148e49b0
     m_Address: Config/fight_params
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - config
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 51715071703f44a39b79e07457b5c0e7
-    m_Address: Config/short_story
     m_ReadOnly: 0
     m_SerializedLabels:
     - config
@@ -83,14 +41,56 @@ MonoBehaviour:
     m_SerializedLabels:
     - config
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cc8bc4431333a4b94b1f8148807004f0
-    m_Address: Config/commonSetting
+  - m_GUID: 51715071703f44a39b79e07457b5c0e7
+    m_Address: Config/short_story
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 738cb2c24699845fdb4a0732b557d724
+    m_Address: Config/SkillStaticAnalysis
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a68841c2c08ac4fefafe74c4812cbcd1
+    m_Address: Config/skill_ai_attrs
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba918278b8f5f41299cb4e7930b9b5b4
+    m_Address: Config/skill_name
     m_ReadOnly: 0
     m_SerializedLabels:
     - config
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: be5a474c0ad9644d5b635fd5a9f58fe6
     m_Address: Config/story
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc8bc4431333a4b94b1f8148807004f0
+    m_Address: Config/commonSetting
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7db40fb5b64b403480905c9cb8899d6
+    m_Address: Config/mst_unit
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f82352243f33a48c79e9de4316104397
+    m_Address: Config/stage_mode
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb73d0a5d0f8b483090a002c2d712a02
+    m_Address: Config/mst_skill
     m_ReadOnly: 0
     m_SerializedLabels:
     - config
