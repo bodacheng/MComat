@@ -10,7 +10,7 @@ public class ShaderManager : MonoBehaviour
 {
     [SerializeField] List<DummyMesh> meshes;
     private List<TweenerCore<Color, Color, ColorOptions>> _tweenerCores = new List<TweenerCore<Color, Color, ColorOptions>>();
-    
+    private List<Sequence> _sequences = new List<Sequence>();
     void Start()
     {
         #region outdated
@@ -113,10 +113,9 @@ public class ShaderManager : MonoBehaviour
 
     public bool HasDoing()
     {
-        return _tweenerCores.Count > 0;
+        return _tweenerCores.Count > 0 || _sequences.Count > 0;
     }
-
-    private Sequence _sequence;
+    
     void ClearDoing()
     {
         if (_tweenerCores.Count > 0)
@@ -128,10 +127,13 @@ public class ShaderManager : MonoBehaviour
             _tweenerCores.Clear();
         }
 
-        if (_sequence != null)
+        if (_sequences.Count > 0)
         {
-            _sequence.Kill();
-            _sequence = null;
+            foreach (var sequence in _sequences)
+            {
+                sequence?.Kill();
+            }
+            _sequences.Clear();
         }
     }
 
@@ -143,23 +145,25 @@ public class ShaderManager : MonoBehaviour
             if (mesh.CurrentMaterials != null)
             {
                 // 创建一个新的 Sequence
-                _sequence = DOTween.Sequence();
+                var sequence = DOTween.Sequence();
 
                 // 第一步：将 EmissionColor 从当前值渐变到 targetColor
-                _sequence.Append(
+                sequence.Append(
                     DOTween.To(() => mesh.EmissionColor, c => mesh.EmissionColor = c, targetColor, duration)
                 );
 
                 // 第二步：在第一步完成后，将 EmissionColor 从 targetColor 渐变回 Color.clear
-                _sequence.Append(
+                sequence.Append(
                     DOTween.To(() => mesh.EmissionColor, c => mesh.EmissionColor = c, Color.clear, duration)
                 );
                 
-                _sequence.OnComplete(() =>
+                sequence.OnComplete(() =>
                 {
-                    _sequence.Kill();
-                    _sequence = null;
+                    sequence.Kill();
+                    sequence = null;
                 });
+                
+                _sequences.Add(sequence);
             }
         }
     }
@@ -197,23 +201,25 @@ public class ShaderManager : MonoBehaviour
             if (mesh.CurrentMaterials != null)
             {
                 // 创建一个新的 Sequence
-                _sequence = DOTween.Sequence();
+                var sequence = DOTween.Sequence();
 
                 // 第一步：将 EmissionColor 从当前值渐变到 targetColor，持续 addTime
-                _sequence.Append(
+                sequence.Append(
                     DOTween.To(() => mesh.EmissionColor, c => mesh.EmissionColor = c, targetColor, addTime)
                 );
 
                 // 第二步：将 EmissionColor 从 targetColor 渐变回 Color.clear，持续 fadeTime
-                _sequence.Append(
+                sequence.Append(
                     DOTween.To(() => mesh.EmissionColor, c => mesh.EmissionColor = c, Color.clear, fadeTime)
                 );
 
-                _sequence.OnComplete(() =>
+                sequence.OnComplete(() =>
                 {
-                    _sequence.Kill();
-                    _sequence = null;
+                    sequence.Kill();
+                    sequence = null;
                 });
+                
+                _sequences.Add(sequence);
             }
         }
     }
