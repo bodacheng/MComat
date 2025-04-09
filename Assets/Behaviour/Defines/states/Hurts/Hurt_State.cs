@@ -204,6 +204,7 @@ namespace Soul
                         break;
                 }
             }
+            PreventUnitOverlap();
         }
         
         public override bool Capacity_Exit_Condition()

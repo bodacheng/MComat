@@ -259,7 +259,9 @@ namespace Soul
             {
                 _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             }
-            
+
+            PreventUnitOverlap();
+
             //if (isEventAttackLaunchState)
             //{
             //    this.DetectApprovedEventAttack();

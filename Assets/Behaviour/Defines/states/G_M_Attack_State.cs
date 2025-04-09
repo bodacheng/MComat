@@ -51,6 +51,7 @@ namespace Soul
         public override void _State_Update()
         {
             _BasicPhysicSupport.hiddenMethods.RecoverRootPosChange();
+            PreventUnitOverlap();
         }
     }
 }

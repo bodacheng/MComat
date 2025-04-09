@@ -19177,7 +19177,7 @@ MonoBehaviour:
   damage_type: 8
   _WeaponMode: 3
   AT_weight: 0.5
-  weaponHP: 1
+  weaponHP: 3
   heavyLevel: -1
   onGroundMagic: 0
   effectSpreadOnBody: 1
@@ -19185,8 +19185,8 @@ MonoBehaviour:
   muzzle: 
   hitEffect: dark_boom
   ExplosionEffect: energy_resolve
-  ContinuousDamage: 0
-  ContinuousDamageInterval: 0.5
+  ContinuousDamage: 1
+  ContinuousDamageInterval: 0.6
 --- !u!114 &3829198492329961209
 MonoBehaviour:
   m_ObjectHideFlags: 0

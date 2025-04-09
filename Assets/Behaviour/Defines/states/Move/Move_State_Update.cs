@@ -103,6 +103,8 @@ namespace Soul
                 _Animator.SetFloat("speed", 0f);
                 _Rigidbody.velocity = Vector3.zero;
             }
+            
+            PreventUnitOverlap();
         }
         
         public override void _State_FixedUpdate1()

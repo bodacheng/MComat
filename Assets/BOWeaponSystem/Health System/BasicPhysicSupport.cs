@@ -90,6 +90,21 @@ public class BasicPhysicSupport : MonoBehaviour
         {
             return _touchingEnemyCs.Count > 0;
         }
+
+        public Vector3 GetCenterOfTouchingEnemies()
+        {
+            if (_touchingEnemyCs.Count == 0)
+                return Vector3.zero;
+
+            Vector3 sum = Vector3.zero;
+            foreach (var col in _touchingEnemyCs)
+            {
+                sum += col.bounds.center;
+            }
+
+            sum.y = 0;
+            return sum / _touchingEnemyCs.Count;
+        }
         
         //弃用
         private Vector3 keptEnemyPoint;

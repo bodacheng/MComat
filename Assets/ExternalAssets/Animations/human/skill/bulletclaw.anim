@@ -42270,42 +42270,28 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.76666665
-    functionName: PrepareOneMagic
-    data: k_hitbox
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.78333336
+  - time: 0.5
     functionName: CloseOnProcessEnergyFromBodyWeapons
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.81666666
-    functionName: ReleasePreparedMagic
-    data: left_hand
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.9
+  - time: 0.53333336
     functionName: SetOverrideOnEnemyDrag
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: -1
     messageOptions: 0
-  - time: 0.9166667
+  - time: 0.55
     functionName: CloseOnProcessEnergyFromBodyWeapons
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.98333335
+  - time: 0.5833333
     functionName: turn_on_flag
     data: 
     objectReferenceParameter: {fileID: 0}

@@ -266,6 +266,18 @@ namespace Soul
         //    return gameObject.GetComponent<Rigidbody>().velocity.magnitude;
         //}
 
+        protected void PreventUnitOverlap()
+        {
+            if (_BasicPhysicSupport.hiddenMethods.TouchingEnemy() && !_BasicPhysicSupport.hiddenMethods.Grounded)
+            {
+                var touchingECenter = _BasicPhysicSupport.hiddenMethods.GetCenterOfTouchingEnemies();
+                if (touchingECenter != Vector3.zero)
+                {
+                    _Rigidbody.AddForce((_DATA_CENTER.WholeT.position - touchingECenter).normalized, ForceMode.Impulse);
+                }
+            }
+        }
+
         Vector3 _v;
         protected float Move(Vector3 relativePos, float acceleration, bool ignoreY)
         {
