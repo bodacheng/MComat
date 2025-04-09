@@ -24249,7 +24249,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 0, b: 0, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.5254902}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -33809,8 +33809,8 @@ MonoBehaviour:
   damage_type: 14
   _WeaponMode: 2
   AT_weight: 1
-  weaponHP: 3
-  heavyLevel: 1
+  weaponHP: 2
+  heavyLevel: -1
   onGroundMagic: 0
   effectSpreadOnBody: 1
   element: 1
@@ -34179,7 +34179,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.77317536, g: 0.4669811, b: 1, a: 1}
-      maxColor: {r: 0.73216146, g: 0.36320752, b: 1, a: 1}
+      maxColor: {r: 0.73216146, g: 0.36320752, b: 1, a: 0.56078434}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

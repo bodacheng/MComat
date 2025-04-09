@@ -5022,7 +5022,7 @@ MonoBehaviour:
   damage_type: 1
   _WeaponMode: 2
   AT_weight: 1
-  weaponHP: 3
+  weaponHP: 2
   heavyLevel: 1
   onGroundMagic: 0
   effectSpreadOnBody: 1
@@ -5046,8 +5046,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 6600870676189580505}
   TrackControl: {fileID: 1628108475295855164}
-  DestructionDelay: 21
-  stop_emission_delay: 20
+  DestructionDelay: 11
+  stop_emission_delay: 10
   boundaryFade: 0
   to_be_faded_renderers: []
   Attachments: []
@@ -6420,7 +6420,7 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0, b: 0.06774902, a: 1}
+        key0: {r: 1, g: 0.8919904, b: 0, a: 1}
         key1: {r: 0, g: 1, b: 1, a: 0}
         key2: {r: 1, g: 1, b: 1, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
@@ -10209,7 +10209,7 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0, g: 0.57421327, b: 1, a: 0.78431374}
+      minColor: {r: 1, g: 0.59399676, b: 0, a: 0.78431374}
       maxColor: {r: 1, g: 0.26006624, b: 0.18431371, a: 0.47058824}
       maxGradient:
         serializedVersion: 2
@@ -15051,7 +15051,7 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 0, b: 0.19160938, a: 1}
+      minColor: {r: 1, g: 0.9795611, b: 0, a: 1}
       maxColor: {r: 0.06997942, g: 0.03676468, b: 1, a: 0.78431374}
       maxGradient:
         serializedVersion: 2
@@ -19894,7 +19894,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 0.4174791, b: 0.125, a: 1}
-      maxColor: {r: 1, g: 0.11764705, b: 0.22752337, a: 0.98039216}
+      maxColor: {r: 0.7811136, g: 0.11764705, b: 1, a: 0.98039216}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -25789,8 +25789,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0, b: 0, a: 0}
-        key1: {r: 0, g: 0.39608598, b: 1, a: 1}
+        key0: {r: 0.98765564, g: 1, b: 0, a: 0}
+        key1: {r: 0, g: 0.6509434, b: 0.13420165, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -30595,8 +30595,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0, b: 0, a: 0}
-        key1: {r: 0, g: 0.61408234, b: 1, a: 1}
+        key0: {r: 1, g: 0.88550174, b: 0, a: 0}
+        key1: {r: 0, g: 1, b: 0.88305783, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 1}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}

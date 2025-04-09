@@ -273,7 +273,7 @@ namespace Soul
                 var touchingECenter = _BasicPhysicSupport.hiddenMethods.GetCenterOfTouchingEnemies();
                 if (touchingECenter != Vector3.zero)
                 {
-                    _Rigidbody.AddForce((_DATA_CENTER.WholeT.position - touchingECenter).normalized, ForceMode.Impulse);
+                    _Rigidbody.AddForce((_DATA_CENTER.WholeT.position - touchingECenter), ForceMode.Acceleration);
                 }
             }
         }
