@@ -14488,8 +14488,8 @@ MonoBehaviour:
   weaponHP: 3
   heavyLevel: 1
   onGroundMagic: 0
-  effectSpreadOnBody: 0
-  element: 0
+  effectSpreadOnBody: 1
+  element: 4
   muzzle: 
   hitEffect: 
   ExplosionEffect: energy_resolve
@@ -14509,9 +14509,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _HitBox: {fileID: 6373827379472328875}
   TrackControl: {fileID: 0}
-  DestructionDelay: 0.8
+  DestructionDelay: 2
   stop_emission_delay: 0.7
-  boundaryFade: 1
+  boundaryFade: 0
   to_be_faded_renderers: []
   Attachments: []
   Counter: 0
