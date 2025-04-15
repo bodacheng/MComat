@@ -33,7 +33,6 @@ Material:
   - MATCAP_PERSPECTIVE
   - NORMAL_MAP
   - SHADOWS_ENABLED
-  - SPECULAR
   - SPECULAR_MAP
   - _DETAILBLEND_MULTIPLY
   - _DETAILUV_UV1
@@ -272,7 +271,7 @@ Material:
     - _RimBlend: 1
     - _RimContrast: 5
     - _RimInverse: 0
-    - _Saturation: 1.5
+    - _Saturation: 2
     - _ShadowOverlayAnimation: 0
     - _ShadowOverlayBrightness: 1
     - _ShadowOverlaySpeedU: 0.1
@@ -285,7 +284,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SourceBlend: 5
     - _SpecSource: 0
-    - _Specular: 1
+    - _Specular: 0
     - _SpecularBrightness: 0.5
     - _SpecularHair: 0
     - _SpecularHighlights: 1

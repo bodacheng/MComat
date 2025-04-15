@@ -6677,9 +6677,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   center: {x: 0, y: 0, z: 0}
-  size: {x: 0.103, y: 0.001, z: 0.353}
+  size: {x: 0.08, y: 0.15, z: 0.35}
   direction: 0
-  radiusSeparation: 0
+  radiusSeparation: 1
 --- !u!1 &2092304372506950384
 GameObject:
   m_ObjectHideFlags: 0
@@ -13301,9 +13301,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   center: {x: 0, y: 0, z: 0}
-  size: {x: 0.105, y: 0.001, z: 0.371}
+  size: {x: 0.08, y: 0.15, z: 0.35}
   direction: 0
-  radiusSeparation: 0
+  radiusSeparation: 1
 --- !u!1 &4448311372963503364
 GameObject:
   m_ObjectHideFlags: 0
@@ -21497,6 +21497,9 @@ MonoBehaviour:
   _DATA_CENTER: {fileID: 3767136506963129980}
   animator: {fileID: 3072657811967243445}
   Rigidbody: {fileID: 2779457074087532718}
+  weight: 0
+  AtRing: 0
+  NearRing: 0
 --- !u!114 &553092051332711688
 MonoBehaviour:
   m_ObjectHideFlags: 0
