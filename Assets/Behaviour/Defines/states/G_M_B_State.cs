@@ -42,7 +42,6 @@ namespace Soul
             _SkillCancelFlag.turn_off_flag();
             _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
             pEvents.CloseAllPersonalityEffects();
-            Sensor.GetEnemiesByDistance(true);
             if (Sensor.GetEnemiesByDistance(false).Count > 0)
             {
                 if (Sensor.GetEnemiesByDistance(false)[0] != null)

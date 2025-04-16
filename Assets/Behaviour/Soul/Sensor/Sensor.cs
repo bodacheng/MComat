@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using Unity.Burst;
+using Unity.Collections;
+using Unity.Jobs;
 using UnityEngine;
 
 public partial class Sensor
@@ -112,15 +115,51 @@ public partial class Sensor
                 }
             }
         }
-        if (targetList.Count > 1)
+        
+        return SortByHorizontalDistance(targetList);
+    }
+    
+    List<GameObject> SortByHorizontalDistance(List<GameObject> targetList)
+    {
+        int count = targetList.Count;
+        if (count == 0) return　targetList;
+
+        // 原始位置数据
+        NativeArray<Vector3> positions = new NativeArray<Vector3>(count, Allocator.TempJob);
+        // 存储原始索引
+        NativeArray<int> indices = new NativeArray<int>(count, Allocator.TempJob);
+        Vector3 center = Center.position;
+
+        for (int i = 0; i < count; i++)
         {
-            targetList.Sort((a, b) => HorizontalDistanceCompare(a.transform.position, b.transform.position));
-            return targetList;
+            positions[i] = targetList[i].transform.position;
+            indices[i] = i;
         }
-        else
+
+        // 调用排序 Job
+        var sortJob = new SortByHorizontalDistanceJob
         {
-            return targetList;
+            Positions = positions,
+            Indices = indices,
+            Center = center
+        };
+
+        JobHandle handle = sortJob.Schedule();
+        handle.Complete();
+
+        // 根据排好序的索引重建 List
+        List<GameObject> sorted = new List<GameObject>(count);
+        for (int i = 0; i < count; i++)
+        {
+            sorted.Add(targetList[indices[i]]);
         }
+
+        // 替换原始 List（也可以直接用 sorted）
+        targetList = sorted;
+
+        positions.Dispose();
+        indices.Dispose();
+        return　targetList;
     }
     
     public void SensorDetectionResultSortProcess(Collider[] hits) //这个函数的调用必须要确保每次都在update函数之后
@@ -147,21 +186,38 @@ public partial class Sensor
         _nearestEnemyCollider = FindNearestCollider(_detectedEnemies);
         _nearestDamagingWeapon = FindNearestCollider(_damagingWeaponAround);
     }
-
-    private Vector3 _center;
-    private float _p1ToCenterSqr;
-    private float _p2ToCenterSqr;
-    int HorizontalDistanceCompare(Vector3 p1, Vector3 p2)
+    
+    [BurstCompile]
+    struct SortByHorizontalDistanceJob : IJob
     {
-        _center = Center.position;  // 只获取一次中心位置，提高效率
-        // 计算平方距离，避免使用开方
-        _p1ToCenterSqr = (p1.x - _center.x) * (p1.x - _center.x) + (p1.z - _center.z) * (p1.z - _center.z);
-        _p2ToCenterSqr = (p2.x - _center.x) * (p2.x - _center.x) + (p2.z - _center.z) * (p2.z - _center.z);
-        
-        // 简化比较逻辑，直接返回结果
-        if (_p1ToCenterSqr > _p2ToCenterSqr) return 1;
-        if (_p1ToCenterSqr < _p2ToCenterSqr) return -1;
-        return 0;
+        public NativeArray<Vector3> Positions;
+        public NativeArray<int> Indices;
+        public Vector3 Center;
+
+        public void Execute()
+        {
+            // 使用插入排序，对 Indices 按 Position 与 Center 的水平距离排序
+            for (int i = 1; i < Indices.Length; i++)
+            {
+                int currentIndex = Indices[i];
+                float currentDistance = HorizontalDistanceSqr(Positions[currentIndex], Center);
+                int j = i - 1;
+
+                while (j >= 0 && HorizontalDistanceSqr(Positions[Indices[j]], Center) > currentDistance)
+                {
+                    Indices[j + 1] = Indices[j];
+                    j--;
+                }
+                Indices[j + 1] = currentIndex;
+            }
+        }
+
+        private float HorizontalDistanceSqr(Vector3 p1, Vector3 center)
+        {
+            float dx = p1.x - center.x;
+            float dz = p1.z - center.z;
+            return dx * dx + dz * dz;
+        }
     }
     
     //void OnDrawGizmosSelected()

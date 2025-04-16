@@ -116,7 +116,6 @@ namespace Soul
             _Rigidbody.velocity = Vector3.zero;
             _rushTimeCounter = 0f;
             _Animator.applyRootMotion = true;
-            Sensor.GetEnemiesByDistance(true);
             if (Sensor.GetEnemiesByDistance(false).Count == 0)
             {
                 //一般来说下面这些情况不跑？
@@ -207,7 +206,6 @@ namespace Soul
                             AnimationManger.AnimationTrigger(clip_name, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
                             _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
                             _Rigidbody.velocity = Vector3.zero;
-                            Sensor.GetEnemiesByDistance(true);
                             _BuffsRunner.EndSubCoroutineOfState(_rushCoroutine);
                             if (Sensor.GetEnemiesByDistance(false).Count > 0)
                             {

@@ -1,26 +1,61 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Burst;
+using Unity.Collections;
+using Unity.Jobs;
 using UnityEngine;
 
 public partial class Sensor
 {
     public List<Collider> GetTargetRangeEnemyCollider(float min, float max)
     {
-        var returnValue = new List<Collider>();
-        float minSqr = min * min;
-        float maxSqr = max * max;
-        Vector3 centerPosition = Center.position;
+        if (_detectedEnemies == null || _detectedEnemies.Count == 0)
+            return new List<Collider>();
 
-        foreach (var enemy in _detectedEnemies)
+        int count = _detectedEnemies.Count;
+
+        // 准备 Native 数据
+        NativeArray<Vector3> positions = new NativeArray<Vector3>(count, Allocator.TempJob);
+        NativeArray<int> indices = new NativeArray<int>(count, Allocator.TempJob);
+        NativeList<int> matchedIndices = new NativeList<int>(Allocator.TempJob);
+
+        Vector3 center = Center.position;
+
+        for (int i = 0; i < count; i++)
         {
-            float sqrDistance = (enemy.transform.position - centerPosition).sqrMagnitude;
-            if (sqrDistance >= minSqr && sqrDistance <= maxSqr)
-            {
-                returnValue.Add(enemy);
-            }
+            positions[i] = _detectedEnemies[i].transform.position;
+            indices[i] = i;
         }
 
-        return returnValue;
+        float minSqr = min * min;
+        float maxSqr = max * max;
+
+        var job = new EnemyRangeFilterJob
+        {
+            Positions = positions,
+            Indices = indices,
+            MatchedIndices = matchedIndices.AsParallelWriter(),
+            Center = center,
+            MinSqr = minSqr,
+            MaxSqr = maxSqr
+        };
+
+        JobHandle handle = job.Schedule(count, 64);
+        handle.Complete();
+
+        // 收集筛选后的 Collider
+        List<Collider> result = new List<Collider>(matchedIndices.Length);
+        for (int i = 0; i < matchedIndices.Length; i++)
+        {
+            result.Add(_detectedEnemies[matchedIndices[i]]);
+        }
+
+        // 释放资源
+        positions.Dispose();
+        indices.Dispose();
+        matchedIndices.Dispose();
+
+        return result;
     }
     
     public Collider GetClosestEnemyColliderInSensorRange()
@@ -91,38 +126,130 @@ public partial class Sensor
         return _enemiesByDistance.LastOrDefault();
     }
     
-    Collider FindNearestCollider(List<Collider> list)
+    Collider FindNearestCollider(List<Collider> colliderList)
     {
-        if (list.Count == 0 || list[0] == null)
-        {
+        if (colliderList == null || colliderList.Count == 0)
             return null;
-        }
-        
-        Collider target = list[0];
-        Vector3 targetPosition = target.transform.position;
-        for (var i = 1; i < list.Count; i++)
+
+        int count = colliderList.Count;
+
+        // 准备 Position 数据
+        NativeArray<Vector3> positions = new NativeArray<Vector3>(count, Allocator.TempJob);
+        NativeArray<int> validFlags = new NativeArray<int>(count, Allocator.TempJob); // 标记是否为 null 的 Collider
+        Vector3 center = Center.position;
+
+        for (int i = 0; i < count; i++)
         {
-            if (list[i] == null)
-                continue;
-            if (HorizontalDistanceCompare(targetPosition, list[i].transform.position) == 1)
+            if (colliderList[i] != null)
             {
-                target = list[i];
+                positions[i] = colliderList[i].transform.position;
+                validFlags[i] = 1;
+            }
+            else
+            {
+                positions[i] = Vector3.zero;
+                validFlags[i] = 0;
             }
         }
-        return target;
+
+        NativeArray<float> distances = new NativeArray<float>(count, Allocator.TempJob);
+        NativeArray<int> minIndex = new NativeArray<int>(1, Allocator.TempJob);
+
+        var distanceJob = new ComputeDistanceJob
+        {
+            Positions = positions,
+            ValidFlags = validFlags,
+            Distances = distances,
+            Center = center
+        };
+
+        var findMinJob = new FindMinIndexJob
+        {
+            Distances = distances,
+            MinIndex = minIndex
+        };
+
+        JobHandle distanceHandle = distanceJob.Schedule(count, 64);
+        JobHandle minHandle = findMinJob.Schedule(distanceHandle);
+        minHandle.Complete();
+
+        int index = minIndex[0];
+
+        positions.Dispose();
+        validFlags.Dispose();
+        distances.Dispose();
+        minIndex.Dispose();
+
+        return (index >= 0 && index < count) ? colliderList[index] : null;
     }
     
-    public bool AllyBetweenSelfAndEnemy(float judgmentRange)
+    [BurstCompile]
+    struct ComputeDistanceJob : IJobParallelFor
     {
-        GetEnemiesByDistance(true);
-        GetAlliesAndSelfByDistance(true);
-        if (_enemiesByDistance.Count > 0 && _alliesByDistance.Count > 1)
+        [ReadOnly] public NativeArray<Vector3> Positions;
+        [ReadOnly] public NativeArray<int> ValidFlags;
+        public NativeArray<float> Distances;
+        public Vector3 Center;
+
+        public void Execute(int index)
         {
-            float disToNearestEnemy2j = HorizontalDistanceCompare(_enemiesByDistance[0].transform.position, Center.position);
-            float disToNearestAlly2j = HorizontalDistanceCompare(_alliesByDistance[1].transform.position, Center.position);
-            return disToNearestEnemy2j >= disToNearestAlly2j && disToNearestEnemy2j < Mathf.Pow(judgmentRange, 2) && 
-                   Vector3.Angle((_enemiesByDistance[0].transform.position - Center.position), (_alliesByDistance[1].transform.position - Center.position)) < 40;
+            if (ValidFlags[index] == 0)
+            {
+                Distances[index] = float.MaxValue;
+                return;
+            }
+
+            float dx = Positions[index].x - Center.x;
+            float dz = Positions[index].z - Center.z;
+            Distances[index] = dx * dx + dz * dz;
         }
-        return false;
+    }
+    
+    [BurstCompile]
+    struct FindMinIndexJob : IJob
+    {
+        [ReadOnly] public NativeArray<float> Distances;
+        public NativeArray<int> MinIndex;
+
+        public void Execute()
+        {
+            float minDist = float.MaxValue;
+            int best = -1;
+
+            for (int i = 0; i < Distances.Length; i++)
+            {
+                if (Distances[i] < minDist)
+                {
+                    minDist = Distances[i];
+                    best = i;
+                }
+            }
+
+            MinIndex[0] = best;
+        }
+    }
+    
+    [BurstCompile]
+    struct EnemyRangeFilterJob : IJobParallelFor
+    {
+        [ReadOnly] public NativeArray<Vector3> Positions;
+        [ReadOnly] public NativeArray<int> Indices;
+        public NativeList<int>.ParallelWriter MatchedIndices;
+        [ReadOnly] public Vector3 Center;
+        [ReadOnly] public float MinSqr;
+        [ReadOnly] public float MaxSqr;
+
+        public void Execute(int index)
+        {
+            Vector3 pos = Positions[index];
+            float dx = pos.x - Center.x;
+            float dz = pos.z - Center.z;
+            float sqr = dx * dx + dz * dz;
+
+            if (sqr >= MinSqr && sqr <= MaxSqr)
+            {
+                MatchedIndices.AddNoResize(Indices[index]);
+            }
+        }
     }
 }

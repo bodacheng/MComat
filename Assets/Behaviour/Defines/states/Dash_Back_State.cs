@@ -47,7 +47,7 @@ namespace Soul
             }
             else
             {
-                if (Sensor.GetEnemiesByDistance(true).Count > 0)
+                if (Sensor.GetEnemiesByDistance(false).Count > 0)
                     threatsComingPosition = Sensor.GetEnemiesByDistance(false)[0].transform.position;
 
                 Collider threat = Sensor.GetSuddenThreatInRange(0, 5);
