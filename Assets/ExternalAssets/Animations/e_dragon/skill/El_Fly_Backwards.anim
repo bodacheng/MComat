@@ -188452,21 +188452,14 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.26666668
+  - time: 0.033333335
     functionName: ResistanceUp
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 3
+    intParameter: 10
     messageOptions: 0
-  - time: 0.8
-    functionName: TurnRotationAdjustmentStartFlagWithoutstepfoward
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 1
-    messageOptions: 0
-  - time: 1.2666667
+  - time: 1.3666667
     functionName: ResistanceClear
     data: 
     objectReferenceParameter: {fileID: 0}
