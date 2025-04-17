@@ -7,6 +7,13 @@ using UnityEngine;
 
 public partial class Sensor
 {
+    private NativeArray<Vector3> positions;
+    private NativeArray<int> indices;
+    private NativeList<int> matchedIndices;
+    private NativeArray<int> validFlags;
+    private NativeArray<float> distances;
+    private NativeArray<int> minIndex;
+    
     public List<Collider> GetTargetRangeEnemyCollider(float min, float max)
     {
         if (_detectedEnemies == null || _detectedEnemies.Count == 0)
@@ -15,9 +22,9 @@ public partial class Sensor
         int count = _detectedEnemies.Count;
 
         // 准备 Native 数据
-        NativeArray<Vector3> positions = new NativeArray<Vector3>(count, Allocator.TempJob);
-        NativeArray<int> indices = new NativeArray<int>(count, Allocator.TempJob);
-        NativeList<int> matchedIndices = new NativeList<int>(Allocator.TempJob);
+        positions = new NativeArray<Vector3>(count, Allocator.TempJob);
+        indices = new NativeArray<int>(count, Allocator.TempJob);
+        matchedIndices = new NativeList<int>(count,Allocator.TempJob);
 
         Vector3 center = Center.position;
 
@@ -134,8 +141,8 @@ public partial class Sensor
         int count = colliderList.Count;
 
         // 准备 Position 数据
-        NativeArray<Vector3> positions = new NativeArray<Vector3>(count, Allocator.TempJob);
-        NativeArray<int> validFlags = new NativeArray<int>(count, Allocator.TempJob); // 标记是否为 null 的 Collider
+        positions = new NativeArray<Vector3>(count, Allocator.TempJob);
+        validFlags = new NativeArray<int>(count, Allocator.TempJob); // 标记是否为 null 的 Collider
         Vector3 center = Center.position;
 
         for (int i = 0; i < count; i++)
@@ -152,8 +159,8 @@ public partial class Sensor
             }
         }
 
-        NativeArray<float> distances = new NativeArray<float>(count, Allocator.TempJob);
-        NativeArray<int> minIndex = new NativeArray<int>(1, Allocator.TempJob);
+        distances = new NativeArray<float>(count, Allocator.TempJob);
+        minIndex = new NativeArray<int>(1, Allocator.TempJob);
 
         var distanceJob = new ComputeDistanceJob
         {

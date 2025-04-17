@@ -125,9 +125,9 @@ public partial class Sensor
         if (count == 0) return　targetList;
 
         // 原始位置数据
-        NativeArray<Vector3> positions = new NativeArray<Vector3>(count, Allocator.TempJob);
+        positions = new NativeArray<Vector3>(count, Allocator.TempJob);
         // 存储原始索引
-        NativeArray<int> indices = new NativeArray<int>(count, Allocator.TempJob);
+        indices = new NativeArray<int>(count, Allocator.TempJob);
         Vector3 center = Center.position;
 
         for (int i = 0; i < count; i++)

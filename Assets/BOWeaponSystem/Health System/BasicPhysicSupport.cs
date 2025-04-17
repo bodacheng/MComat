@@ -194,6 +194,16 @@ public class BasicPhysicSupport : MonoBehaviour
         {
             hiddenMethods.AutoSwitchGravity();
             AtRing = atRing;
+            
+            float fps = 1.0f / Time.deltaTime;
+            if (fps < 45f && Rigidbody.collisionDetectionMode != CollisionDetectionMode.Discrete)
+            {
+                Rigidbody.collisionDetectionMode = CollisionDetectionMode.Discrete;
+            }
+            else if (fps > 55f && Rigidbody.collisionDetectionMode != CollisionDetectionMode.Continuous)
+            {
+                Rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            }
         }
     }
 

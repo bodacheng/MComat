@@ -37,7 +37,7 @@ public static class EffectsManager
     {
         if (string.IsNullOrEmpty(resourceName))
             return default;
-        var effectPool = await IniEffectsPool(resourceName, effectPath, 3);
+        var effectPool = await IniEffectsPool(resourceName, effectPath, 1);
         if (effectPool == null)
             return default;
         var processingEffectObj = effectPool.Rent();
