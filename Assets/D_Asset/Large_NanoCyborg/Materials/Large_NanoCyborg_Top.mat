@@ -15,8 +15,7 @@ Material:
   - AMBIENT
   - ANIME_SOFT
   - BASE_CONTRAST
-  - BASE_SATURATION
-  - EMISSIVE_MAP
+  - DIFFUSE
   - FOG
   - LIGHT_MAP
   - MATCAP
@@ -80,7 +79,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissiveTex:
-        m_Texture: {fileID: 2800000, guid: 0af84ab18c525bc42af2a9640806992b, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _HeightColorsTex:
@@ -155,7 +154,7 @@ Material:
     - _AnimeThreshold1: 0.2
     - _AnimeThreshold2: 0.4
     - _BlendOp: 0
-    - _Brightness: 1.5
+    - _Brightness: 1
     - _BumpScale: 1
     - _CameraFadeEnd: 0
     - _CameraFadeStart: 0
@@ -171,9 +170,9 @@ Material:
     - _DetailNormalMapScale: 1
     - _DetailUV: 0
     - _DetailVertexColors: 0
-    - _Diffuse: 0
+    - _Diffuse: 1
     - _DiffuseBrightness: 1
-    - _DiffuseContrast: 3
+    - _DiffuseContrast: 1
     - _DiffusePerPixel: 0
     - _DiffuseWrap: 1
     - _DstBlend: 0
@@ -205,7 +204,7 @@ Material:
     - _LightmapBrightness: 0
     - _LightmapUV: 0
     - _MatCapBlend: 0
-    - _MatCapBrightness: 0.5
+    - _MatCapBrightness: 1
     - _MatCapContrast: 1
     - _MatCapPerspective: 1
     - _MatCapStatic: 0
@@ -230,11 +229,11 @@ Material:
     - _ReflectionRim: 0
     - _ReflectionSpecular: 0
     - _Rim: 1
-    - _RimAmount: 1
+    - _RimAmount: 0.5
     - _RimBlend: 1
-    - _RimContrast: 5
+    - _RimContrast: 2
     - _RimInverse: 0
-    - _Saturation: 2
+    - _Saturation: 1
     - _ShadowOverlayAnimation: 0
     - _ShadowOverlayBrightness: 1
     - _ShadowOverlaySpeedU: 0.1
@@ -244,7 +243,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SourceBlend: 5
     - _Specular: 1
-    - _SpecularBrightness: 0.2
+    - _SpecularBrightness: 1
     - _SpecularHair: 0
     - _SpecularHighlights: 1
     - _SpecularSmoothness: 10
@@ -266,7 +265,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Emissive: {r: 1, g: 1, b: 1, a: 1}
+    - _Emissive: {r: 0, g: 0, b: 0, a: 1}
     - _HeightColorsColor: {r: 1, g: 1, b: 1, a: 1}
     - _Layer1Color: {r: 1, g: 1, b: 1, a: 1}
     - _Layer2Color: {r: 1, g: 1, b: 1, a: 1}

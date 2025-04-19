@@ -13,18 +13,15 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - AMBIENT
-  - ANIME
   - ANIME_SOFT
   - BASE_CONTRAST
   - BASE_SATURATION
   - DIFFUSE
   - FOG
   - MATCAP
-  - MATCAP_CONTRAST
   - MATCAP_PERSPECTIVE
   - NORMAL_MAP
   - OUTLINE_PASS_DISABLED
-  - RIM
   - SHADOWS_ENABLED
   - SPECULAR
   - _DETAILBLEND_MULTIPLY
@@ -149,17 +146,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AmbientBrightness: 4
-    - _Anime: 1
+    - _AmbientBrightness: 1
+    - _Anime: 0
     - _AnimeSoftness: 0.25
     - _AnimeThreshold1: 0.2
     - _AnimeThreshold2: 1
     - _BlendOp: 0
-    - _Brightness: 5
+    - _Brightness: 1.5
     - _BumpScale: 1
     - _CameraFadeEnd: 0
     - _CameraFadeStart: 0
-    - _Contrast: 3.5
+    - _Contrast: 1.3
     - _Cull: 2
     - _Cutoff: 0.5
     - _Cutout: 0
@@ -172,10 +169,10 @@ Material:
     - _DetailUV: 0
     - _DetailVertexColors: 0
     - _Diffuse: 1
-    - _DiffuseBrightness: 20
+    - _DiffuseBrightness: 1
     - _DiffuseContrast: 1
     - _DiffusePerPixel: 0
-    - _DiffuseWrap: 1
+    - _DiffuseWrap: 0.5
     - _DstBlend: 0
     - _Flat: 0
     - _Fog: 1
@@ -205,8 +202,8 @@ Material:
     - _LightmapBrightness: 1
     - _LightmapUV: 0
     - _MatCapBlend: 0
-    - _MatCapBrightness: 3
-    - _MatCapContrast: 3
+    - _MatCapBrightness: 1
+    - _MatCapContrast: 1
     - _MatCapPerspective: 1
     - _MatCapStatic: 0
     - _Metallic: 0
@@ -229,12 +226,12 @@ Material:
     - _ReflectionAmount: 1
     - _ReflectionRim: 0
     - _ReflectionSpecular: 0
-    - _Rim: 1
+    - _Rim: 0
     - _RimAmount: 2
     - _RimBlend: 1
     - _RimContrast: 2
     - _RimInverse: 0
-    - _Saturation: 2
+    - _Saturation: 1.5
     - _ShadowOverlayAnimation: 0
     - _ShadowOverlayBrightness: 1
     - _ShadowOverlaySpeedU: 0.1
@@ -244,10 +241,10 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SourceBlend: 5
     - _Specular: 1
-    - _SpecularBrightness: 0.5
+    - _SpecularBrightness: 1
     - _SpecularHair: 0
     - _SpecularHighlights: 1
-    - _SpecularSmoothness: 20
+    - _SpecularSmoothness: 5
     - _SpecularUV: 0
     - _SrcBlend: 1
     - _TransparencyMaskAmount: 1

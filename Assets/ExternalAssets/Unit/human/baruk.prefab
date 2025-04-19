@@ -2818,6 +2818,9 @@ MonoBehaviour:
   _DATA_CENTER: {fileID: 8409282926785253213}
   animator: {fileID: 276599709161815562}
   Rigidbody: {fileID: 8659209890115840553}
+  weight: 0
+  AtRing: 0
+  NearRing: 0
 --- !u!114 &7959112470944843834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48675,7 +48678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7506564169047701560
 Transform:
   m_ObjectHideFlags: 0
@@ -54604,11 +54607,7 @@ MonoBehaviour:
   meshes:
   - {fileID: 8555321873587459885}
   - {fileID: 823516423912389607}
-  - {fileID: 5261191700553684783}
-  - {fileID: 6956279133426668721}
   - {fileID: 5116805309404522929}
-  - {fileID: 1053815111747978364}
-  - {fileID: 1271712170441611999}
 --- !u!114 &5572042198795424445
 MonoBehaviour:
   m_ObjectHideFlags: 0

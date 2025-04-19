@@ -15,6 +15,7 @@ Material:
   - AMBIENT
   - ANIME_SOFT
   - BASE_SATURATION
+  - DIFFUSE
   - FOG
   - MATCAP
   - MATCAP_PERSPECTIVE
@@ -187,11 +188,11 @@ Material:
     - _DetailNormalMapScale: 1
     - _DetailUV: 0
     - _DetailVertexColors: 0
-    - _Diffuse: 0
+    - _Diffuse: 1
     - _DiffuseBrightness: 1
     - _DiffuseContrast: 1
     - _DiffusePerPixel: 0
-    - _DiffuseWrap: 0
+    - _DiffuseWrap: 1
     - _DstBlend: 0
     - _Flat: 0
     - _Fog: 1
@@ -222,7 +223,7 @@ Material:
     - _LightmapBrightness: 1
     - _LightmapUV: 0
     - _MatCapBlend: 0
-    - _MatCapBrightness: 1.5
+    - _MatCapBrightness: 1
     - _MatCapContrast: 1
     - _MatCapPerspective: 1
     - _MatCapStatic: 0
