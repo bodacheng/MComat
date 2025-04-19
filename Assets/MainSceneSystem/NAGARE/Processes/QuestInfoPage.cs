@@ -294,6 +294,7 @@ public class QuestInfoPage : MSceneProcess
                         fightInfo.ConvertTeamToGangbang();
                         FightScene.FightScene.team1GroupSet = fightInfo.Team1GroupSet;
                         fightInfo.Team1ID = PlayerAccountInfo.Me.PlayFabId;
+                        ReturnLayer.ReturnMissionList.Clear();
                         FightLoad.Go(fightInfo);
                     }
                 
@@ -309,6 +310,7 @@ public class QuestInfoPage : MSceneProcess
                 }
                 else
                 {
+                    ReturnLayer.ReturnMissionList.Clear();
                     fightInfo.LoadMyTeam();
                     FightLoad.Go(fightInfo);
                 }
