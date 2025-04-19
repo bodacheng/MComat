@@ -81,11 +81,6 @@ public class HeroIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         ChangeIcon(pic, unitConfig.element);
     }
     
-    public void Clear()
-    {
-        ChangeIcon(null, Element.Null);
-    }
-    
     void AdjustSize(Image icon)
     {
         var sprite = icon.sprite;
@@ -150,6 +145,10 @@ public class HeroIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         iconBg.color = color;
         icon.sprite = sprite;
         await UniTask.DelayFrame(1);
+        if (icon == null)
+        {
+            return;
+        }
         AdjustSize(icon);
         icon.gameObject.SetActive(sprite != null);
     }

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using dataAccess;
 using mainMenu;
@@ -156,82 +157,77 @@ public partial class FightPrepareLayer : UILayer
         );
     }
     
-    public async UniTask StageMembersInfoShow(FightInfo stage)
+    public async UniTask StageMembersInfoShow(FightInfo stage, CancellationToken token)
     {
-        async UniTask player1IconFeature(string x)
-        {
-            //PreScene.target.Focusing.id = x;
-            //PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit);
-            await FocusTeamUnit(x, stage.FightMembers.HeroSets.GetValues(), connector, nineForShow);
-        }
-        var icons1 = MemberInfosShow(stage.FightMembers.HeroSets.GetValues(), 
-            (x) =>
-            {
-                player1IconFeature(x).Forget();
-            },
-            myTeamShowT, true, PlayerAccountInfo.Me.tutorialProgress == "Finished");
-        var default1InstanceId = icons1.FirstOrDefault()?.InstanceID;
+        // ----------------- 本地帮助函数 -----------------
+        UniTask FocusHero(string id) =>
+            FocusTeamUnit(id,
+                          stage.FightMembers.HeroSets.GetValues(),
+                          connector,
+                          nineForShow);
 
-        string teamKey;
-        switch (stage.EventType)
+        UniTask FocusEnemy(string id) =>
+            FocusTeamUnit(id,
+                          stage.FightMembers.EnemySets.GetValues(),
+                          connectorE,
+                          nineForShowE);
+
+        // 用于收集所有要等待的异步任务
+        var focusTasks = new List<UniTask>();
+
+        // ----------------- 我方成员 -----------------
+        var icons1 = MemberInfosShow(
+            stage.FightMembers.HeroSets.GetValues(),
+            id => FocusHero(id).Forget(),
+            myTeamShowT,
+            true,
+            PlayerAccountInfo.Me.tutorialProgress == "Finished");
+
+        var defaultHeroId = icons1.FirstOrDefault()?.InstanceID;
+        if (!string.IsNullOrEmpty(defaultHeroId))
+            focusTasks.Add(FocusHero(defaultHeroId));
+
+        // ----------------- 队伍空位提示 -----------------
+        string teamKey = stage.EventType switch
         {
-            case FightEventType.Arena:
-                teamKey = "arena";
-                break;
-            case FightEventType.Quest:
-                if (FightLoad.Fight.FightMode == FightMode.Group)
-                {
-                    teamKey = "gangbang";
-                }
-                else
-                {
-                    switch (FightLoad.Fight.FightMode)
-                    {
-                        case FightMode.Evolve:
-                            teamKey = "arcade";
-                            break;
-                        default:
-                            teamKey = "origin";
-                            break;
-                    }
-                }
-                break;
-            default:
-                teamKey = "origin";
-                break;
-        }
-        
+            FightEventType.Arena => "arena",
+            FightEventType.Quest => FightLoad.Fight.FightMode switch
+            {
+                FightMode.Group   => "gangbang",
+                FightMode.Evolve  => "arcade",
+                _                 => "origin"
+            },
+            _ => "origin"
+        };
+
         bool hasExtraSeat = !TeamSet.Legal(teamKey);
-        if (hasExtraSeat)
+        teamEditIndicatorText.text = hasExtraSeat ? Translate.Get("HasExtraSeat") : string.Empty;
+        teamEditIndicator.SetActive(hasExtraSeat);
+
+        // ----------------- 敌方成员 -----------------
+        var icons2 = MemberInfosShow(
+            stage.FightMembers.EnemySets.GetValues(),
+            id => FocusEnemy(id).Forget(),
+            enemyTeamShowT,
+            false);
+
+        var defaultEnemyId = icons2.FirstOrDefault()?.InstanceID;
+        if (!string.IsNullOrEmpty(defaultEnemyId))
+            focusTasks.Add(FocusEnemy(defaultEnemyId));
+
+        // ----------------- 并行等待所有 Focus 操作 -----------------
+        await UniTask.WhenAll(focusTasks);
+
+        if (token.IsCancellationRequested)
         {
-            teamEditIndicatorText.text = Translate.Get("HasExtraSeat");
-            teamEditIndicator.SetActive(true);
-        }
-        else //if (dataAccess.Units.Dic.Count > 0 && stage.FightMembers.HeroSets.GetValues().Count == 0)
-        {
-            teamEditIndicatorText.text = string.Empty; // Translate.Get("MakeYourTeam");
-            teamEditIndicator.SetActive(false);
+            return;
         }
         
-        async UniTask player2IconFeature(string x)
-        {
-            await FocusTeamUnit(x, stage.FightMembers.EnemySets.GetValues(), connectorE, nineForShowE);
-        }
-
-        var icons2 = MemberInfosShow(stage.FightMembers.EnemySets.GetValues(),
-            (x) =>
-            {
-                player2IconFeature(x).Forget();
-            },
-            enemyTeamShowT, false);
-        var default2InstanceId = icons2.FirstOrDefault()?.InstanceID;
-
-        await UniTask.WhenAll(player1IconFeature(default1InstanceId), player2IconFeature(default2InstanceId));
-
+        // ----------------- UI 收尾 -----------------
         if (stage.EventType == FightEventType.Arena)
         {
-            team1Name.text = stage.Team1LeaderboardEntry?.DisplayName;
-            team2Name.text = stage.Team2LeaderboardEntry?.DisplayName;
+            team1Name.text   = stage.Team1LeaderboardEntry?.DisplayName;
+            team2Name.text   = stage.Team2LeaderboardEntry?.DisplayName;
             team1OneWord.text = stage.Team1OneWord;
             team2OneWord.text = stage.Team2OneWord;
         }
@@ -239,7 +235,7 @@ public partial class FightPrepareLayer : UILayer
         {
             team1Name.text = "YOU";
         }
-        
+
         enemyDoubleExModeFlg.SetActive(stage.team2CGMode == CriticalGaugeMode.DoubleGain);
         enemyInfiniteExModeFlg.SetActive(stage.team2CGMode == CriticalGaugeMode.Unlimited);
     }

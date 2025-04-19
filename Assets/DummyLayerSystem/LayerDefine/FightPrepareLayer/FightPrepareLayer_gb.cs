@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using mainMenu;
 
@@ -129,26 +130,36 @@ public partial class FightPrepareLayer : UILayer
         _getTeamUnitCount = getTeamUnitCount;
     }
     
-    public async UniTask GangbangStageUnitsDisplay(FightInfo stage)
+    public async UniTask GangbangStageUnitsDisplay(FightInfo stage, CancellationToken token)
     {
-        async UniTask player1IconFeature(string x)
-        {
-            //PreScene.target.Focusing.id = x;
-            //PreScene.target.trySwitchToStep(MainSceneStep.UnitSkillEdit);
-            await FocusTeamUnit(x, stage.FightMembers.HeroSets.GetValues(), connector, nineForShow);
-        }
-        
-        async UniTask player2IconFeature(string x)
-        {
-            await FocusTeamUnit(x, stage.FightMembers.EnemySets.GetValues(), connectorE, nineForShowE);
-        }
-        
-        _gangbangHeroIconsM = GangbangInfosShow(stage.FightMembers.HeroSets.GetValues(), (x) =>
-        {
-            player1IconFeature(x).Forget();
-        }, myTeamShowT, true, 1, PlayerAccountInfo.Me.tutorialProgress == "Finished");
-        var default1InstanceId = _gangbangHeroIconsM.FirstOrDefault()?.InstanceID;
-        
+        // ---------- 本地工具函数 ----------
+        UniTask FocusHero(string instanceId) =>
+            FocusTeamUnit(instanceId,
+                          stage.FightMembers.HeroSets.GetValues(),
+                          connector,
+                          nineForShow);
+
+        UniTask FocusEnemy(string instanceId) =>
+            FocusTeamUnit(instanceId,
+                          stage.FightMembers.EnemySets.GetValues(),
+                          connectorE,
+                          nineForShowE);
+
+        // 用于收集所有需要等待的任务
+        var focusTasks = new List<UniTask>();
+
+        // ---------- 我方图标 ----------
+        _gangbangHeroIconsM = GangbangInfosShow(
+            stage.FightMembers.HeroSets.GetValues(),
+            id => FocusHero(id).Forget(),
+            myTeamShowT,
+            true,
+            1,
+            PlayerAccountInfo.Me.tutorialProgress == "Finished");
+
+        var defaultHeroId = _gangbangHeroIconsM.FirstOrDefault()?.InstanceID;
+
+        // ---------- 队伍空位提示 ----------
         if (stage.FightMembers.HeroSets.GetValues().Count < 1)
         {
             teamEditIndicatorText.text = Translate.Get("HasExtraSeat");
@@ -156,35 +167,45 @@ public partial class FightPrepareLayer : UILayer
         }
         else
         {
-            teamEditIndicatorText.text = string.Empty; // Translate.Get("MakeYourTeam");
+            teamEditIndicatorText.text = string.Empty;
             teamEditIndicator.SetActive(false);
         }
-        _gangbangHeroIconsE = GangbangInfosShow(stage.FightMembers.EnemySets.GetValues(), 
-            (x) =>
-            {
-                player2IconFeature(x).Forget();
-            },
-            enemyTeamShowT, false, 2);
-        var default2InstanceId = _gangbangHeroIconsE.FirstOrDefault()?.InstanceID;
-        
-        await UniTask.WhenAll(player1IconFeature(default1InstanceId), player2IconFeature(default2InstanceId));
-        
+
+        // ---------- 敌方图标 ----------
+        _gangbangHeroIconsE = GangbangInfosShow(
+            stage.FightMembers.EnemySets.GetValues(),
+            id => FocusEnemy(id).Forget(),          // 同样收集
+            enemyTeamShowT,
+            false,
+            2);
+
+        var defaultEnemyId = _gangbangHeroIconsE.FirstOrDefault()?.InstanceID;
+
+        // ---------- 默认焦点 ----------
+        if (!string.IsNullOrEmpty(defaultHeroId))
+            focusTasks.Add(FocusHero(defaultHeroId));
+
+        if (!string.IsNullOrEmpty(defaultEnemyId))
+            focusTasks.Add(FocusEnemy(defaultEnemyId));
+
+        // ---------- 并行等待 ----------
+        await UniTask.WhenAll(focusTasks);
+
+        if (token.IsCancellationRequested)
+        {
+            return;
+        }
+
+        // ---------- UI 收尾 ----------
         _gangbangHeroIconsE.FirstOrDefault()?.iconButton.onClick.Invoke();
         team1Name.text = "YOU";
 
         switch (PlayerPrefs.GetInt("gangbangCountOption", 1))
         {
-            case 1:
-                countSet1.onClick.Invoke();
-                break;
-            case 2:
-                countSet2.onClick.Invoke();
-                break;
-            case 3:
-                countSet3.onClick.Invoke();
-                break;
+            case 1: countSet1.onClick.Invoke(); break;
+            case 2: countSet2.onClick.Invoke(); break;
+            case 3: countSet3.onClick.Invoke(); break;
         }
-        
     }
     
     List<GangbangHeroIcon> GangbangInfosShow(List<UnitInfo> unitSets, Action<string> iconBehaviour, RectTransform showT, bool withSkillCheck, int team, bool btnInteractive = true)

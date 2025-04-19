@@ -130,12 +130,12 @@ public class QuestInfoPage : MSceneProcess
         
         if (stage.FightMode is FightMode.Group)
         {
-            await _layer.GangbangStageUnitsDisplay(FightLoad.Fight);
+            await _layer.GangbangStageUnitsDisplay(FightLoad.Fight, _layer.gameObject.GetCancellationTokenOnDestroy());
             _layer.SetFightBeginFeature(()=> GoToFight(FightLoad.Fight, _layer.SelectedMaxTeamCount));
         }
         else
         {
-            await _layer.StageMembersInfoShow(stage);
+            await _layer.StageMembersInfoShow(stage, _layer.gameObject.GetCancellationTokenOnDestroy());
             _layer.SetFightBeginFeature(()=> GoToFight(FightLoad.Fight));
         }
         
