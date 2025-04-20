@@ -16,3 +16,4 @@ recordId,realName,monsterType,zokusei,rarityLevel,basicMovementPack,moveType,mot
 15,baruk,human,2,1,baruk,normal,Rush,1
 16,ice_golem,human,4,1,adam,normal,Rush,1
 17,g_e_dragon,e_dragon,1,1,e_dragon,slow,Rush,1
+18,clown_r,human,3,1,clown,normal,Rush,1

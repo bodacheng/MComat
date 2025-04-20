@@ -420,6 +420,7 @@ handlers.grantBasicItems = function (args, context) {
 
 // 将被动技能给予角色
 // 是控制台内grantitem的附属执行函数
+// 注意，添加新被动技能的时候再initStoneData这个函数里有十分重要的设置要做。
 handlers.givePassiveSkill= function (args, context) {
 
     var request = {
@@ -1318,7 +1319,7 @@ handlers.initStoneData = function (args, context) {
     var playstreamEvent = context.playStreamEvent;
     let itemInstanceId = playstreamEvent.InstanceId;
     let itemId = playstreamEvent.ItemId;
-    if (itemId === "176" || itemId === "183" || itemId === "90" || itemId === "184" || itemId === "179") // 被动获得被动技能石有其他函数帮助更新数据
+    if (itemId === "176" || itemId === "183" || itemId === "90" || itemId === "184" || itemId === "179" || itemId === "165") // 被动获得被动技能石有其他函数帮助更新数据
     {
         return { };
     }

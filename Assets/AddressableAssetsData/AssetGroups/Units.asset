@@ -78,7 +78,7 @@ MonoBehaviour:
     - unit
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6fc10c9acafe91c47b6414bcde9e68be
-    m_Address: human/mutant_b
+    m_Address: human/mutant_b_t
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit
@@ -115,6 +115,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f17d85e625c6d314aa50d3d3de82bbcf
     m_Address: human/NanoCyborg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f418cc00a4cc04db486b90d984b373c7
+    m_Address: human/clown_r
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit
