@@ -224,7 +224,7 @@ Material:
     - _LightmapBrightness: 1
     - _LightmapUV: 0
     - _MatCapBlend: 0
-    - _MatCapBrightness: 1
+    - _MatCapBrightness: 0.9
     - _MatCapContrast: 1
     - _MatCapPerspective: 1
     - _MatCapStatic: 0

@@ -78,7 +78,7 @@ MonoBehaviour:
     - unit
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6fc10c9acafe91c47b6414bcde9e68be
-    m_Address: human/mutant_b_t
+    m_Address: human/mutant_b
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit

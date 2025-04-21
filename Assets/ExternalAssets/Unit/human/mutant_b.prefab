@@ -46632,7 +46632,7 @@ GameObject:
   - component: {fileID: 8146099110855823840}
   - component: {fileID: 2938244739950109087}
   m_Layer: 0
-  m_Name: mutant_b_t
+  m_Name: mutant_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
