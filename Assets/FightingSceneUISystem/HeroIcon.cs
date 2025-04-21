@@ -144,7 +144,7 @@ public class HeroIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         frame.color = frameColor;
         iconBg.color = color;
         icon.sprite = sprite;
-        await UniTask.DelayFrame(1);
+        await UniTask.NextFrame();
         if (icon == null)
         {
             return;
@@ -152,7 +152,12 @@ public class HeroIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         AdjustSize(icon);
         icon.gameObject.SetActive(sprite != null);
     }
-    
+
+    public void AdjustSize()
+    {
+        AdjustSize(icon);
+    }
+
     public static void SelectedFeature(Transform unitIcon, GameObject selectedFrame, float localScale)
     {
         if (unitIcon == null)

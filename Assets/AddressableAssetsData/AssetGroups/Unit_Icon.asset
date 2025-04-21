@@ -29,14 +29,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - unit_icon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1fd1c8770a21b4f69b748f71d972e54c
-    m_Address: unit/16
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - unit_icon
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 214a619a948544ac2adcc317fb5895bb
-    m_Address: unit/15
+  - m_GUID: 2e3b3eb1c780a4c0daaf23b8a5c33055
+    m_Address: unit/17
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
@@ -47,8 +41,14 @@ MonoBehaviour:
     m_SerializedLabels:
     - unit_icon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3c5f0faa1d994475c93835332b6e1ade
-    m_Address: unit/10
+  - m_GUID: 3a4e2bfb4d3a14c27be1d68251235f42
+    m_Address: unit/9
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit_icon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3be9fe793cf8e4c588ea9e77dd63cfda
+    m_Address: unit/11
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
@@ -71,32 +71,32 @@ MonoBehaviour:
     m_SerializedLabels:
     - unit_icon
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61af9b615be7a48e7b13147b446a01e8
+    m_Address: unit/8
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit_icon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 74f641aaa21f74c87a59773fe6b217d3
+    m_Address: unit/10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit_icon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e63e801148bb48829f263cbada38828
+    m_Address: unit/16
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit_icon
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 85b9bad740f2f4764b5c5f3dbe6575d6
     m_Address: unit/14
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8cc89ae161b884c5ba6cbe8693aa9eff
-    m_Address: unit/9
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - unit_icon
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 92883c7f87cfe4b5e8085358e5b71560
-    m_Address: unit/11
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - unit_icon
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a56749097064249ada77c54a98458bfb
-    m_Address: unit/8
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - unit_icon
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: afaa7d301f07d46df9d5150782e0108d
-    m_Address: unit/17
+  - m_GUID: b3a63fa2c6ed54ae8b57cf7a8c06c562
+    m_Address: unit/15
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon

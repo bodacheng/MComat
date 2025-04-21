@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UniRx;
 
@@ -57,7 +58,7 @@ namespace mainMenu
             DisplayIcons();
         }
 
-        public void DisplayIcons()
+        public async void DisplayIcons()
         {
             foreach (var keyValuePair in heroIcons)
             {
@@ -76,6 +77,12 @@ namespace mainMenu
             
             row = 1 + icons.Count / 7;
             unitBoxContainer.sizeDelta = new Vector2(unitBoxContainer.rect.width, noMagic.GetComponent<RectTransform>().rect.height * row);
+            await UniTask.NextFrame();
+            for (var i = 0; i < icons.Count; i++)
+            {
+                var targetingIcon = icons[i];
+                targetingIcon.AdjustSize();
+            }
             displayUnitIconsAfterAction?.Invoke();
         }
 
