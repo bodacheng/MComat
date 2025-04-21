@@ -825,8 +825,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a4c526a8688384357bf70b3207c18fe2, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 5299ddfe130b948349974a41570794ed, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -894,6 +894,7 @@ MonoBehaviour:
   frame: {fileID: 4940444812960889203}
   cooldownCurtain: {fileID: 4143785288517154586}
   warnFlag: {fileID: 0}
+  canDrag: 1
   unitConfig:
     RECORD_ID: 
     TYPE: 
@@ -904,7 +905,6 @@ MonoBehaviour:
     element: 2
     BASIC_MOVEMENT_PACK: basic_anim
     MoveType: 1
-    RushType: 2
     DEFENDABLE_FLAG: 1
     InstructionEN: 
     InstructionCH: 
@@ -1119,8 +1119,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ba98c956c834b4b86babd28dae6dc1ca, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 0dddc40d61888423fa9131333cf18ab8, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
