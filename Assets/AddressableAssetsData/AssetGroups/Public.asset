@@ -71,6 +71,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1225d44fbe405b54bb08ffc3ec704d62
+    m_Address: Base_Mesh
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 130bdc6151982754a8f7b5197f716c4e
     m_Address: StormSharpSwirl
     m_ReadOnly: 0
@@ -103,6 +109,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 16d625988a0b8954ba0fbb341eaa211b
     m_Address: bullet_blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 16d9635229482504385be63ec2cbf5e3
+    m_Address: funnel_purple
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -155,8 +167,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23af959d4a53f4a04b8ce4368101aeac
+    m_Address: rush
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 263dce5d3c11b6f4fbc5ead0f080b8dc
     m_Address: frost_spike
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 270254f57b56970418579b7d49429c03
+    m_Address: portal2
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -413,6 +437,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 60f3a3909173f714ba34d0d07abda54d
+    m_Address: lightning_green
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 61335d4325278ea4eb3f59c13a217fa2
     m_Address: magicslash_glow_spritesheet
     m_ReadOnly: 0
@@ -617,6 +647,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8118ac5675a7f49cf959886eb2bb37e2
+    m_Address: Shield_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8222466244f58594c8105d7023742bcd
     m_Address: bigglow_modular
     m_ReadOnly: 0
@@ -695,6 +731,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 921925958e5357a44ab7d552d0ff7568
+    m_Address: Red
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 933532a4fcc9baf4fa0491de14d08ed7
     m_Address: Lit
     m_ReadOnly: 0
@@ -731,6 +773,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c363cac801b76e459dcb51994de0382
+    m_Address: funnel_green
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9d5b0897c7b3e5241878478c672f09e4
     m_Address: GroundLight03
     m_ReadOnly: 0
@@ -751,6 +799,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a2a06e22c08354d9699356710b69ca9c
     m_Address: OmniShade URP
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a334254c09c85294d8ffe9ec69b11665
+    m_Address: lightning_purple
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -817,6 +871,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b416258e44600d54e87cf544fefa3ed5
     m_Address: Pink
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4909f0efbf214573962836e9d2b0e79
+    m_Address: clown
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -935,6 +995,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf3e3119ad6254c4fae0fe38c98835da
+    m_Address: Smoke32
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d752321c319e6e848822bd54f453c5bd
     m_Address: ElectricLine01_4x4
     m_ReadOnly: 0
@@ -961,6 +1027,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d97cbb4fc7bccdf4db4770ebb71d7d44
     m_Address: Gem_for_URP
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: daa6a0ce484bc1147ba58a37cd90b5da
+    m_Address: MatCap_Toon3
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -1061,6 +1133,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f1c850a81945bd740ac024c4b76a4603
+    m_Address: bigglow_red
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f4205f7c8c8f91244b7d43f68308744a
     m_Address: CircleRainbow10cg
     m_ReadOnly: 0
@@ -1087,6 +1165,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f8d5c193cad8f5449a28999e5ca04652
     m_Address: Green
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fda9d0d6dd696074d8c9635bfa5dab95
+    m_Address: lightning_yellow
     m_ReadOnly: 0
     m_SerializedLabels:
     - public

@@ -7,13 +7,6 @@
       "dependencies": {},
       "hash": "8042b29ff87dd5506d7aad72bd6d8d7405985f27"
     },
-    "com.google.external-dependency-manager": {
-      "version": "https://github.com/googlesamples/unity-jar-resolver.git?path=upm",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "ced86f2c4c7aef139f8bff7578b64fdd0624107e"
-    },
     "com.heurekagames.assethunterpro": {
       "version": "file:com.heurekagames.assethunterpro",
       "depth": 0,
