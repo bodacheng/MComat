@@ -6,6 +6,7 @@ NotAuthorizedByTitle,Server under maintenance,サーバーメンテナンス中,
 ReturnToLobbyForConnectionError,Connection error. Return to title.,通信エラー。タイトルに戻る,通信错误。返回标题
 ConnectionError,Connection error,通信エラー,通信错误
 Updating,Data updating,データ更新中,数据更新中
+GettingData,Retrieving user data,ユーザーデータを取得中です,正在获取玩家数据
 ,,,
 Adventure,Adventure,アドベンチャー,探险
 Arena,Arena,アリーナ,竞技场
@@ -91,6 +92,9 @@ Once the account is deleted, it cannot be recovered.","現在のアカウント�
 アカウントを削除すると、アカウントは復旧できません。","确定要删除当前账户吗？
 一旦删除账户，账号将无法恢复"
 AccountDeleted,The account has been deleted.,アカウントは削除されました,账户已经删除
+CanLinkLater,"You can link your account to the device in the settings page.
+
+",設定ページでアカウントをデバイスに連携することができます,你可以在设置页面将账户与设备绑定
 ,,,
 DeleteAllReadMail,Delete all read messages,既読メッセージをすべて削除,删除所有已读
 ClaimAllMailGift,Retrieve all,一括取得,获取全部

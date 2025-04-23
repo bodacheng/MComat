@@ -49,7 +49,7 @@ public class FrontPage : MSceneProcess
                 },
                 () =>
                 {
-                    PopupLayer.ArrangeWarnWindow("U can link your account to this device later in setting.");
+                    PopupLayer.ArrangeWarnWindow(Translate.Get("CanLinkLater"));
                     UILayerLoader.Remove<AskIfLinkDeviceLayer>();
                 }
             );
