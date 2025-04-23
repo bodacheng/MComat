@@ -196,15 +196,17 @@ class ChatGptFix : CameraMode
             frontWPos = enemiesCenter;
             backWPos = mePos;
         }
-        
-        lookPoint = (backWPos - frontWPos) * 0.5f + frontWPos;
+
         cameraTargetPos = lookPoint + xzOff.normalized * XZDistance;
         cameraTargetPos.y = YDis;
-        lookPoint.y = _lookPointHeight;
         
         if (hasTargets || meCenter != null || h != 0)
         {
             camera.transform.position = Vector3.Lerp(camera.transform.position, cameraTargetPos, _changeSpeed);
+            
+            lookPoint = (backWPos - frontWPos) * 0.5f + frontWPos;
+            lookPoint.y = _lookPointHeight;
+            
             rotateToDirection = lookPoint - cameraTargetPos;
             ToRotation = Quaternion.LookRotation(rotateToDirection.normalized);
             camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, ToRotation, _changeSpeed);

@@ -178,6 +178,8 @@ public class StartUpPresentation : MonoBehaviour
     async UniTask Go()
     {
         HighLightLayer.Close();
+        Application.targetFrameRate = 70;
+        FightGlobalSetting.SceneStep = 1;
         await starter.Initialise();
         
         if (frontSceneFight && PlayFabReadClient.DontShowFrontFight == "False")

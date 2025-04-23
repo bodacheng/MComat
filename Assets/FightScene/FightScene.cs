@@ -89,7 +89,8 @@ namespace FightScene
             
             AppSetting.BGMSource = audioSource;
             AppSetting.UiAudioSource = uiAudioSource;
-            Application.targetFrameRate = 60;
+            QualitySettings.vSyncCount = 0; // 关闭 VSync
+            Application.targetFrameRate = 70;
             FightGlobalSetting.SceneStep = 1;
             
             //Position_Set_Executor.Instance.P_sets.Clear();
