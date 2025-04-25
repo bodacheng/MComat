@@ -77,7 +77,7 @@ public partial class BO_Ani_E : MonoBehaviour
                     Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool("blast", Ani_E.magic_path);
                     break;
                 case 1:
-                    Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool("blast", Ani_E.magic_path);
+                    Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool("mid_blast", Ani_E.magic_path);
                     break;
                 case 2:
                     Ani_E.target_pool = HurtObjectManager.GetHurtObjectPool("big_blast", Ani_E.magic_path);
