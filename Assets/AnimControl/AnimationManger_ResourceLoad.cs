@@ -251,7 +251,7 @@ public partial class AnimationManger
                                 tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element, 1));
                                 break;
                             case 1:
-                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("blast", element, 1));
+                                tasks.Add(HurtObjectManager.ConstructHurtObjectPool("mid_blast", element, 1));
                                 break;
                             case 2:
                                 tasks.Add(HurtObjectManager.ConstructHurtObjectPool("big_blast", element, 1));

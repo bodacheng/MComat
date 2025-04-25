@@ -41,11 +41,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - btn_effect
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8bdfe02a7e8014fd78fa7641c0604fd1
-    m_Address: Assets/ExternalAssets/buttonEffects
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c6cea7af536274cddae52879a621fc88
     m_Address: ButtonEffects/lightmagic
     m_ReadOnly: 0

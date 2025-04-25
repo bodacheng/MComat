@@ -91,7 +91,7 @@ id,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,E
 85,p_up,human,1,1,5,GR,
 91,punchheavy,human,2,1,5,GR,
 50,push,human,1,1,5,GR,
-16,rollfoward,human,3,8,5,GM,
+16,rollfoward,human,3,8,5,GMB,
 86,powersmash,human,0,1.2,5,GR,
 141,xuanfeng_s,human,1,4.5,5,GI,
 114,spiralimpact2,human,3,4,5,GI,
