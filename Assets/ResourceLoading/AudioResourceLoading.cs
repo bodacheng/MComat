@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class AudioResourceLoading
@@ -16,7 +17,7 @@ public class AudioResourceLoading
             return instance;
         }
     }
-    public IDictionary<string, AudioClip> soundClipsDic = new Dictionary<string, AudioClip>();
+    public readonly IDictionary<string, AudioClip> SoundClipsDic = new Dictionary<string, AudioClip>();
     
     public IEnumerator LoadAudioClipFromCachAndPutItIntoDic(string bundleURL,string additionalPath, string clip_name)
     {
@@ -52,13 +53,10 @@ public class AudioResourceLoading
         yield break;
     }
     
-    public void LoadAudioClipFromResourceAndPutItIntoDic(string additionalPath, string clip_name)
+    public async UniTask LoadAudioClipFromResourceAndPutItIntoDic(string additionalPath, string clipName)
     {
-        string clipkey = "Audios/" + additionalPath + "/" + clip_name;
-        AudioClip audioClip = Resources.Load(clipkey, typeof(AudioClip)) as AudioClip;
-        if (soundClipsDic.ContainsKey(clipkey))
-            soundClipsDic[clipkey] = audioClip;
-        else
-            soundClipsDic.Add(clipkey, audioClip);
+        string path = additionalPath + "/" + clipName;
+        var audioClip = await AddressablesLogic.LoadT<AudioClip>(path);
+        SoundClipsDic[path] = audioClip;
     }
 }

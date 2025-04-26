@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5d17a21594effb4e9591490b009e7aa, type: 3}
-  m_Name: BasicAnim_BundledAssetGroupSchema
+  m_Name: Audio_BundledAssetGroupSchema
   m_EditorClassIdentifier: 
-  m_Group: {fileID: 11400000, guid: d436bb1e2211446af9e56651dbff5829, type: 2}
+  m_Group: {fileID: 11400000, guid: a2fd7463394334e908dd7a09606656c8, type: 2}
   m_InternalBundleIdMode: 1
   m_Compression: 1
   m_IncludeAddressInCatalog: 1
@@ -34,9 +34,9 @@ MonoBehaviour:
   m_RedirectLimit: -1
   m_RetryCount: 0
   m_BuildPath:
-    m_Id: 8b470904cb666498391e21708d37dff3
+    m_Id: cd58eb709aef248a0a61cfcf5029d3c5
   m_LoadPath:
-    m_Id: eda21008cba8e428482d4e8f9aadebdf
+    m_Id: b06b7dac454e04a1b8447caade86f7fc
   m_BundleMode: 1
   m_AssetBundleProviderType:
     m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null

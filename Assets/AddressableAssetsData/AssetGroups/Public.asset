@@ -707,12 +707,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8bde78ee27fb6af4cb531c15af08aebd
-    m_Address: Arm Swing, Whoosh 9
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 910457dc152f8c341b02cf22c406c5c6
     m_Address: m_fx_lightning4x2_blue
     m_ReadOnly: 0
@@ -757,12 +751,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 985fab18e1dd3c2488d651ce20cba67d
     m_Address: Punch 31
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 99af83f3b998ad84e908ec0e08652941
-    m_Address: hellifire
     m_ReadOnly: 0
     m_SerializedLabels:
     - public

@@ -63,6 +63,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dd076f9729c324d72af36d69ca39375c, type: 2}
   - {fileID: 11400000, guid: 057dbc99136274d2e9711e39ad9f24d7, type: 2}
   - {fileID: 11400000, guid: c4227ddaf9fe444baac86a56bf502883, type: 2}
+  - {fileID: 11400000, guid: a2fd7463394334e908dd7a09606656c8, type: 2}
   - {fileID: 11400000, guid: d436bb1e2211446af9e56651dbff5829, type: 2}
   - {fileID: 11400000, guid: 98b69fa6dfb014349a2189b3d4899098, type: 2}
   - {fileID: 11400000, guid: 52ac939f0ebd544bbaf6a42c5c7c5cec, type: 2}
@@ -170,6 +171,7 @@ MonoBehaviour:
     - event_stage
     - story
     - public
+    - audio
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 7ed3c4f91e15949209e5cda4294e805b, type: 2}

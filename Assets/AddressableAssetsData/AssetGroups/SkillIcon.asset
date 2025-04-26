@@ -71,6 +71,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - skill_icon
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1c57b81b227be41e3b253f42b1f1504e
+    m_Address: 91
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - skill_icon
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1cfea11aa2809476ba7e1f4aed5c4ecf
     m_Address: 190
     m_ReadOnly: 0
@@ -79,6 +85,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1f3fb07b3b78f4eec8537b0981fe3b6a
     m_Address: 192
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - skill_icon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29fe117fa4bac4f6a9438e6cbcb517fc
+    m_Address: 50
     m_ReadOnly: 0
     m_SerializedLabels:
     - skill_icon
@@ -155,6 +167,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - skill_icon
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f8604107ab674a50aa1e556bb53cc75
+    m_Address: 114
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - skill_icon
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4fd300e8b0a9c4715a5071a24f3ce2ca
     m_Address: 63
     m_ReadOnly: 0
@@ -185,8 +203,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - skill_icon
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 57673e01c71a541ffad4b9be79a24e41
+    m_Address: 85
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - skill_icon
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5bf6bb90dfe7d447c812200d2909a20e
     m_Address: 108
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - skill_icon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c613bdba1b1549afa892cefa7781750
+    m_Address: 86
     m_ReadOnly: 0
     m_SerializedLabels:
     - skill_icon
@@ -265,6 +295,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 77f47a7a1a3a84ae88ee0a72cc5c6c34
     m_Address: 42
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - skill_icon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 78ac569bb740c4cc9b63bcbcc0fca76f
+    m_Address: 141
     m_ReadOnly: 0
     m_SerializedLabels:
     - skill_icon
@@ -415,6 +451,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bdc7836493e9f455ea01c84303a7c757
     m_Address: 161
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - skill_icon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c1ebcf92624be43bf867303e14aded0c
+    m_Address: 16
     m_ReadOnly: 0
     m_SerializedLabels:
     - skill_icon

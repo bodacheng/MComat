@@ -263,7 +263,7 @@ public partial class AnimationManger
                     }
                     if (e.functionName == "PlaySoundOnce")
                     {
-                        AudioResourceLoading.Instance.LoadAudioClipFromResourceAndPutItIntoDic("effects", e.stringParameter);
+                        tasks.Add(AudioResourceLoading.Instance.LoadAudioClipFromResourceAndPutItIntoDic("effect", e.stringParameter));
                     }
                 }
                 await UniTask.WhenAll(tasks);
