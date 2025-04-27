@@ -98,6 +98,7 @@ public partial class Data_Center : MonoBehaviour
             FightDataRef.Center = this;
             _BasicPhysicSupport.Rigidbody.useGravity = false;
             _BasicPhysicSupport.Rigidbody.mass = 500f;
+            _AudioSource.volume = AppSetting.Value.EffectsVolume;
             BodyElementTagAndLayerSet(TeamConfig.DefaultSet);
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(FightDataRef,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
             await AnimationManger.PreloadBasicPersonalAnims(type, basicPackName, _facialAnimManager);

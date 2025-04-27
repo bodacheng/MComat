@@ -110,10 +110,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActivateAfterTime: 0
   SpecificTarget: 0
-  damage_type: 2
+  damage_type: 5
   _WeaponMode: 2
   AT_weight: 1
-  weaponHP: 3
+  weaponHP: 4
   heavyLevel: 2
   onGroundMagic: 0
   effectSpreadOnBody: 1
@@ -4977,15 +4977,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.009429932
       value: 0.025115967
-      inSlope: 0.8615089
-      outSlope: 0.8615089
+      inSlope: 3.0921683
+      outSlope: 3.0921683
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.071225114
+      outWeight: 0.05784668
     - serializedVersion: 3
       time: 2
-      value: 1
+      value: 2
       inSlope: 0
       outSlope: 0
       tangentMode: 0

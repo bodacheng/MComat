@@ -63,5 +63,13 @@ public class FightScenePauseSupport : UILayer
     public void OnEffectChange()
     {
         AppSetting.Value.EffectsVolume = effectsSoundsSlider.value;
+        foreach (var dataCenter in RTFightManager.Target.team1.teamMembers.GetValues())
+        {
+            dataCenter._AudioSource.volume = AppSetting.Value.EffectsVolume;
+        }
+        foreach (var dataCenter in RTFightManager.Target.team2.teamMembers.GetValues())
+        {
+            dataCenter._AudioSource.volume = AppSetting.Value.EffectsVolume;
+        }
     }
 }

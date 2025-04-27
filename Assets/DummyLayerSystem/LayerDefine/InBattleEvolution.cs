@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using DummyLayerSystem;
@@ -47,7 +48,7 @@ public class InBattleEvolution : UILayer
                 set.b1, set.b2, set.b3,
                 set.c1, set.c2, set.c3
             ),
-            ShowSkillsToChoose(focusUnit, onFinishedSkillEvolution, cellSize)
+            ShowSkillsToChoose(focusUnit, onFinishedSkillEvolution, cellSize, gameObject.GetCancellationTokenOnDestroy())
         );
         
         nineForShow.AddOnClickToSlots(
@@ -74,21 +75,29 @@ public class InBattleEvolution : UILayer
         this.bottomText.text = bottomText;
     }
     
-    async UniTask ShowSkillsToChoose(Data_Center focusUnit, Action onFinishedSkillEvolution, float stoneSize)
+    async UniTask ShowSkillsToChoose(Data_Center focusUnit, Action onFinishedSkillEvolution, float stoneSize, CancellationToken cancellationToken = default)
     {
         nineForShow.EvolutionModeSlotInteractiveRefresh(focusUnit.UnitInfo.set, RTFightManager.Target.EvolutionManager.EvolutionCount >= 3);
-        await nineForShow.RefreshEffects(FightScene.FightScene.target.fxCamera, stoneSize / 150f);
+        await nineForShow.RefreshEffects(FightScene.FightScene.target.fxCamera, stoneSize / 150f).AttachExternalCancellation(cancellationToken);
         var skills = RTFightManager.Target.EvolutionManager.RandomSkillList("human", focusUnit.UnitInfo.set);
+        
         for (var i = 0; i < skillOptions.Length; i++)
         {
+            // 1) 先移除旧的所有监听，防止重复注册
+            skillOptions[i].Btn.onClick.RemoveAllListeners();
+            skillOptions[i].ShowIcon(skills[i], stoneSize);
+            
             var index = i;
             skillOptions[i].Btn.SetListener(
                 async () =>
                 {
-                    await RTFightManager.Target.EvolutionManager.ChangeSkill(focusUnit, nineForShow.ClickedSlot, skills[index]);
+                    // 可取消检查
+                    if (cancellationToken.IsCancellationRequested) return;
+                    
+                    await RTFightManager.Target.EvolutionManager.ChangeSkill(focusUnit, nineForShow.ClickedSlot, skills[index]).AttachExternalCancellation(cancellationToken);
                     var t = skillOptions[index].Btn.transform.GetComponentInChildren<SKStoneItem>();
                     var clickedSlot = nineForShow.GetClickedSlot();
-                    t.transform.DOMove(clickedSlot.transform.position, animEndInSeconds).SetEase(Ease.InBack).OnComplete(
+                    var moveTween = t.transform.DOMove(clickedSlot.transform.position, animEndInSeconds).SetEase(Ease.InBack).OnComplete(
                         () =>
                         {
                             var stone = clickedSlot.transform.GetComponentInChildren<SKStoneItem>();
@@ -102,21 +111,19 @@ public class InBattleEvolution : UILayer
                             skillOptions[a].Animator.SetTrigger("fade");
                         }
                     }
-                    await UniTask.Delay(TimeSpan.FromSeconds(animEndInSeconds));
+                    await moveTween.AsyncWaitForCompletion();
                     var targetPos = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, clickedSlot.transform.GetComponent<RectTransform>(), 7);
-                    
                     var _layer = UILayerLoader.Get<FightingStepLayer>();
                     var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(skills[index]);
-                    var explosion = _layer.InputsManager.GetCurrentElementEffectsGroup()
-                        .GetExplosionEffect(skillConfig.SP_LEVEL);
+                    var explosion = _layer.InputsManager.GetCurrentElementEffectsGroup().GetExplosionEffect(skillConfig.SP_LEVEL);
                     explosion.transform.position = targetPos;
                     explosion.transform.localScale *= 3;
                     explosion.Play();
-                    await UniTask.Delay(TimeSpan.FromSeconds(animEndOutSeconds));
+                    await UniTask.Delay(TimeSpan.FromSeconds(animEndOutSeconds), cancellationToken: cancellationToken);
                     explosion.transform.localScale /= 3;
                     onFinishedSkillEvolution.Invoke();
-                });
-            skillOptions[i].ShowIcon(skills[i], stoneSize);
+                }
+            );
         }
     }
 }
