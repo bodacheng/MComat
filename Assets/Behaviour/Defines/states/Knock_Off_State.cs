@@ -15,11 +15,12 @@ namespace Soul
         AnimationCurve _usedYCurve;
         AnimationCurve _usedZCurve;
         float _temp;
-        private Tweener rotateTween;
-
+        Tweener rotateTween;
+        float curveEndTime;
         public Knock_Off_State()
         {
             StateType = BehaviorType.KnockOff;
+            
         }
         
         public override void AI_State_enter(V_Damage value)
@@ -49,6 +50,7 @@ namespace Soul
             EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(value.from_weapon.element), value.DamageEffectPoint, value.CutRotation, null).Forget();
             _usedYCurve = value.from_weapon.damage_type == DamageType.high ? FightGlobalSetting.HDamageYAnimationCurve : FightGlobalSetting.KnockOffYAnimationCurve;
             _usedZCurve = value.from_weapon.damage_type == DamageType.high ? FightGlobalSetting.HDamageZAnimationCurve : FightGlobalSetting.KnockOffZAnimationCurve;
+            curveEndTime = _usedZCurve.keys[_usedZCurve.length - 1].time;
         }
 
         public override bool Capacity_Exit_Condition()
@@ -95,7 +97,7 @@ namespace Soul
                     var yDiffer = _usedYCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedYCurve.Evaluate(_timeCounter);
                     gameObject.transform.position +=
                         _xz * (_usedZCurve.Evaluate(_timeCounter + Time.deltaTime) - _usedZCurve.Evaluate(_timeCounter)) + Vector3.up * yDiffer;
-                    if (_BasicPhysicSupport.hiddenMethods.Grounded && yDiffer < 0)
+                    if ((_BasicPhysicSupport.hiddenMethods.Grounded && yDiffer < 0) || _timeCounter >= curveEndTime)
                     {
                         FlyingStep = 1;
                     }
