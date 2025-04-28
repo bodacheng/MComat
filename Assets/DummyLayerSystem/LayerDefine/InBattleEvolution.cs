@@ -22,6 +22,9 @@ public class InBattleEvolution : UILayer
     
     public async void Setup(Data_Center focusUnit, Action onFinishedSkillEvolution, string upperText, string bottomText)
     {
+        this.upperText.text = upperText;
+        this.bottomText.text = bottomText;
+        
         var set = focusUnit.UnitInfo.set;
         // 取原本的 y，不改它
         float currentY = skillOptionsT.anchoredPosition.y;
@@ -42,15 +45,6 @@ public class InBattleEvolution : UILayer
         var gridLayoutGroup = nineForShow.transform.GetComponent<GridLayoutGroup>();
         gridLayoutGroup.cellSize = new Vector2(cellSize, cellSize); 
         
-        await UniTask.WhenAll(
-            nineForShow.ShowStones(
-                set.a1, set.a2, set.a3,
-                set.b1, set.b2, set.b3,
-                set.c1, set.c2, set.c3
-            ),
-            ShowSkillsToChoose(focusUnit, onFinishedSkillEvolution, cellSize, gameObject.GetCancellationTokenOnDestroy())
-        );
-        
         nineForShow.AddOnClickToSlots(
             (BOButton btn) =>
             {
@@ -68,18 +62,25 @@ public class InBattleEvolution : UILayer
         var recommendedTargetReplaceSlot = 
             focusUnit.UnitInfo.set.RecommendedTargetReplaceSlot
                 (RTFightManager.Target.EvolutionManager.EvolutionCount >= 3);
-        
         nineForShow.ClickTargetSlot(recommendedTargetReplaceSlot);
         
-        this.upperText.text = upperText;
-        this.bottomText.text = bottomText;
+        await UniTask.WhenAll(
+            nineForShow.ShowStones(
+                set.a1, set.a2, set.a3,
+                set.b1, set.b2, set.b3,
+                set.c1, set.c2, set.c3
+            ),
+            ShowSkillsToChoose(focusUnit, onFinishedSkillEvolution, cellSize)
+        );
     }
     
-    async UniTask ShowSkillsToChoose(Data_Center focusUnit, Action onFinishedSkillEvolution, float stoneSize, CancellationToken cancellationToken = default)
+    async UniTask ShowSkillsToChoose(Data_Center focusUnit, Action onFinishedSkillEvolution, float stoneSize)
     {
         nineForShow.EvolutionModeSlotInteractiveRefresh(focusUnit.UnitInfo.set, RTFightManager.Target.EvolutionManager.EvolutionCount >= 3);
-        await nineForShow.RefreshEffects(FightScene.FightScene.target.fxCamera, stoneSize / 150f).AttachExternalCancellation(cancellationToken);
+        await nineForShow.RefreshEffects(FightScene.FightScene.target.fxCamera, stoneSize / 150f);
         var skills = RTFightManager.Target.EvolutionManager.RandomSkillList("human", focusUnit.UnitInfo.set);
+
+        await UniTask.Delay(TimeSpan.FromMilliseconds(400), ignoreTimeScale: true);//这个的目的不是演出，是因为一个技能选择画面出现后急速选择一个技能的情况下可能导致程序崩溃的bug。我们没能查到bug原因。
         
         for (var i = 0; i < skillOptions.Length; i++)
         {
@@ -91,37 +92,37 @@ public class InBattleEvolution : UILayer
             skillOptions[i].Btn.SetListener(
                 async () =>
                 {
-                    // 可取消检查
-                    if (cancellationToken.IsCancellationRequested) return;
-                    
-                    await RTFightManager.Target.EvolutionManager.ChangeSkill(focusUnit, nineForShow.ClickedSlot, skills[index]).AttachExternalCancellation(cancellationToken);
-                    var t = skillOptions[index].Btn.transform.GetComponentInChildren<SKStoneItem>();
-                    var clickedSlot = nineForShow.GetClickedSlot();
-                    var moveTween = t.transform.DOMove(clickedSlot.transform.position, animEndInSeconds).SetEase(Ease.InBack).OnComplete(
-                        () =>
-                        {
-                            var stone = clickedSlot.transform.GetComponentInChildren<SKStoneItem>();
-                            if (stone != null)
-                                Destroy(stone.gameObject);
-                        });
                     for (var a = 0; a < skillOptions.Length; a++)
                     {
+                        skillOptions[a].Btn.onClick.RemoveAllListeners();
                         if (a != index)
                         {
                             skillOptions[a].Animator.SetTrigger("fade");
                         }
                     }
-                    await moveTween.AsyncWaitForCompletion();
-                    var targetPos = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, clickedSlot.transform.GetComponent<RectTransform>(), 7);
-                    var _layer = UILayerLoader.Get<FightingStepLayer>();
-                    var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(skills[index]);
-                    var explosion = _layer.InputsManager.GetCurrentElementEffectsGroup().GetExplosionEffect(skillConfig.SP_LEVEL);
-                    explosion.transform.position = targetPos;
-                    explosion.transform.localScale *= 3;
-                    explosion.Play();
-                    await UniTask.Delay(TimeSpan.FromSeconds(animEndOutSeconds), cancellationToken: cancellationToken);
-                    explosion.transform.localScale /= 3;
-                    onFinishedSkillEvolution.Invoke();
+                    
+                    await RTFightManager.Target.EvolutionManager.ChangeSkill(focusUnit, nineForShow.ClickedSlot, skills[index]);
+                    var t = skillOptions[index].Btn.transform.GetComponentInChildren<SKStoneItem>();
+                    var clickedSlot = nineForShow.GetClickedSlot();
+                    var moveTween = t.transform.DOMove(clickedSlot.transform.position, animEndInSeconds).SetEase(Ease.InBack).OnComplete(
+                        async () =>
+                        {
+                            var stone = clickedSlot.transform.GetComponentInChildren<SKStoneItem>();
+                            if (stone != null)
+                                stone.gameObject.SetActive(false);
+                            
+                            var targetPos = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, clickedSlot.transform.GetComponent<RectTransform>(), 7);
+                            var _layer = UILayerLoader.Get<FightingStepLayer>();
+                            var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(skills[index]);
+                            var explosion = _layer.InputsManager.GetCurrentElementEffectsGroup().GetExplosionEffect(skillConfig.SP_LEVEL);
+                            explosion.transform.position = targetPos;
+                            explosion.transform.localScale *= 3;
+                            explosion.Play();
+                            await UniTask.Delay(TimeSpan.FromSeconds(animEndOutSeconds));
+                            explosion.transform.localScale /= 3;
+                            onFinishedSkillEvolution.Invoke();
+                        }
+                    );
                 }
             );
         }
