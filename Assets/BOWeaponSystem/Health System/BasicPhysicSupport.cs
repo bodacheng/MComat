@@ -124,8 +124,8 @@ public class BasicPhysicSupport : MonoBehaviour
                 _touchingEnemyCs.Add(c);
             if (_touchingEnemyCs.Count > 0)
             {
-                _BasicPhysicSupport.Rigidbody.drag = overrideOnEnemyDrag >= 0 ?
-                    overrideOnEnemyDrag : FightGlobalSetting.OnTouchEnemyBodyRigidDrag;
+                _BasicPhysicSupport.Rigidbody.drag = OverrideOnEnemyDrag >= 0 ?
+                    OverrideOnEnemyDrag : FightGlobalSetting.OnTouchEnemyBodyRigidDrag;
             }
         }
         public void RemoveTouchedEnemyBody(Collider c)
@@ -144,7 +144,7 @@ public class BasicPhysicSupport : MonoBehaviour
             _BasicPhysicSupport.Rigidbody.drag = 0f;
         }
         
-        public int overrideOnEnemyDrag = -1;
+        public int OverrideOnEnemyDrag = -1;
         
         public bool Grounded => _BasicPhysicSupport._DATA_CENTER.WholeT.position.y <= floorY;
 
@@ -247,13 +247,13 @@ public class BasicPhysicSupport : MonoBehaviour
 
         if (open == 0)
         {
-            hiddenMethods.overrideOnEnemyDrag = -1;
+            hiddenMethods.OverrideOnEnemyDrag = -1;
         }
     }
     
     public void SetOverrideOnEnemyDrag(AnimationEvent e)
     {
-        hiddenMethods.overrideOnEnemyDrag = e.intParameter;
+        hiddenMethods.OverrideOnEnemyDrag = e.intParameter;
     }
     
     void OnCollisionEnter(Collision collision)

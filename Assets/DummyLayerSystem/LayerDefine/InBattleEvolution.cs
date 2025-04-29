@@ -87,8 +87,6 @@ public class InBattleEvolution : UILayer
             skillOptions[i].ShowIcon(skills[i], stoneSize);
         }
         
-        await UniTask.Delay(TimeSpan.FromMilliseconds(350), ignoreTimeScale: true);//这个的目的不是演出，是因为一个技能选择画面出现后急速选择一个技能的情况下可能导致程序崩溃的bug。我们没能查到bug原因。
-        
         for (var i = 0; i < skillOptions.Length; i++)
         {
             var index = i;

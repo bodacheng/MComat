@@ -268,7 +268,7 @@ namespace Soul
 
         protected void PreventUnitOverlap()
         {
-            if (_BasicPhysicSupport.hiddenMethods.TouchingEnemy() && !_BasicPhysicSupport.hiddenMethods.Grounded)
+            if (_BasicPhysicSupport.hiddenMethods.TouchingEnemy() && !_BasicPhysicSupport.hiddenMethods.Grounded && _BasicPhysicSupport.hiddenMethods.OverrideOnEnemyDrag < 0)
             {
                 var touchingECenter = _BasicPhysicSupport.hiddenMethods.GetCenterOfTouchingEnemies();
                 if (touchingECenter != Vector3.zero)
