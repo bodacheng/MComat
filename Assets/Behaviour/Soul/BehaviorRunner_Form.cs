@@ -52,7 +52,7 @@ namespace Soul
                     
                     var keyValuePairE = new KeyValuePair<string, string>("EnemyClose", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(keyValuePairE);
-                    ConditionAndRespondPriority.Set(keyValuePairE.Key, keyValuePairE.Value, 3);
+                    ConditionAndRespondPriority.Set(keyValuePairE.Key, keyValuePairE.Value, 4);
                     
                     BehaviourAndStrategicExitCondition.Add(behaviorDefine.REAL_NAME, null);
                     break;

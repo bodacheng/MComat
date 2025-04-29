@@ -50,6 +50,10 @@ namespace Soul
         public override void _State_Update()
         {
             _BasicPhysicSupport.hiddenMethods.RecoverRootPosChange();
+        }
+
+        public override void _State_FixedUpdate1()
+        {
             PreventUnitOverlap();
         }
     }
