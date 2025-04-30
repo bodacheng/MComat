@@ -178,6 +178,8 @@ public partial class Data_Center : MonoBehaviour
         await AnimationManger.PreloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, element, preloadCount);
     }
 
+    IDisposable _reIDisposable = null;
+    
     /// <summary>
     /// 
     /// </summary>
@@ -202,8 +204,8 @@ public partial class Data_Center : MonoBehaviour
         FightDataRef._comboHitCount.HitCount.Value = 0;
         FightDataRef.CriticalGaugeMode = criticalGaugeMode;
 
-        
-        FightDataRef.Resistance.Subscribe(x =>
+        _reIDisposable?.Dispose();
+        _reIDisposable = FightDataRef.Resistance.Subscribe(x =>
         {
             FightDataRef.Resistance.Value = Mathf.Clamp(x, 0, FightGlobalSetting._ResistanceMax);
         }).AddTo(gameObject);
@@ -236,27 +238,30 @@ public partial class Data_Center : MonoBehaviour
             });
     }
 
+    private IDisposable _hpSubscription;
     public void SetAT()
     {
         _MyBehaviorRunner.SetAt(unitInfo.level);
         var hp = SkillSet.INI_Hp(unitInfo.set.SkillIDList(), unitInfo.level) * teamHpRate;
         FightDataRef.CurrentHp.Value = hp;
-        FightDataRef.CurrentHp.Subscribe(x =>
+        _hpSubscription?.Dispose();
+        _hpSubscription = FightDataRef.CurrentHp.Subscribe(x =>
         {
-            FightDataRef.CurrentHp.Value = Mathf.Clamp(x, 0, hp);
+            FightDataRef.CurrentHp.Value = Mathf.Clamp(x, 0, hp);///
         }).AddTo(gameObject);
     }
     
     // for tutorial
+    IDisposable _disposeTask = null;
     public void StartAutoModeWhenGetHurt()
     {
         var fullHp = FightDataRef.CurrentHp.Value;
-        IDisposable disposeTask = null;
-        disposeTask = FightDataRef.CurrentHp.Subscribe(x =>
+        
+        _disposeTask = FightDataRef.CurrentHp.Subscribe(x =>
         {
             if (x < fullHp)
             {
-                disposeTask.Dispose();
+                _disposeTask.Dispose();
                 _MyBehaviorRunner.AI = true;
             }
         }).AddTo(gameObject);

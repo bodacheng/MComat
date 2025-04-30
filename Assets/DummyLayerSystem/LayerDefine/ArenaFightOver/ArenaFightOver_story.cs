@@ -17,6 +17,7 @@ public partial class ArenaFightOver : UILayer
     [SerializeField] private float storyBgColorChangeDuration;
     [SerializeField] private AudioSource storyLayerAudio;
 
+    [SerializeField] private GameObject storyLayerBg;
     [SerializeField] private BOButton storyPicOnClickBtn;
     [SerializeField] private Image storyPicBgImage;
     [SerializeField] private SizeAdjustBySpriteSize sizeAdjustBySpriteSize;
@@ -31,7 +32,7 @@ public partial class ArenaFightOver : UILayer
     bool picStoryEnded = false;
     public async UniTask LoadStory()
     {
-        if (!String.IsNullOrEmpty(FightLoad.Fight.StoryKey))
+        if (CommonSetting.PcMode && !String.IsNullOrEmpty(FightLoad.Fight.StoryKey))
         {
             var story = await StoryManager.Instance.LoadStory(FightLoad.Fight.StoryKey);
             if (story == null)
@@ -45,7 +46,7 @@ public partial class ArenaFightOver : UILayer
                 float currentWidth = rectTransform.sizeDelta.x;
                 // 设置新的大小，宽度保持不变，高度设置为目标值
                 rectTransform.sizeDelta = new Vector2(currentWidth, PosCal.CanvasHeight);
-            
+                storyLayerBg.SetActive(true);
                 storyBgColorChangeTween = storyPicBgImage.DOColor(Color.white, storyBgColorChangeDuration);
                 storyPicBgImage.gameObject.SetActive(true);
                 storyPicOnClickBtn.SetListener(() => { OnClick(story); });
@@ -80,6 +81,7 @@ public partial class ArenaFightOver : UILayer
             else
             {
                 // 剧情播放完毕，可以在这里实现一些游戏逻辑，比如回到主菜单或进入下一关
+                storyLayerBg.gameObject.SetActive(false);
                 storyPicBgImage.gameObject.SetActive(false);
                 picStoryEnded = true;
             }

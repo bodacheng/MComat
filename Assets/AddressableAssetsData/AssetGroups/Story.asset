@@ -17,8 +17,38 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 792c0441972c44ce2841ac760b0944b0
   m_SerializeEntries:
+  - m_GUID: 25e7e00353d704a59b1bab102fc8ea07
+    m_Address: adam
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - story
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3cc0f65bcced44d91a9edbdefbf89c53
+    m_Address: predict
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - story
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ea2a906258604336ad09a30dffce50c
+    m_Address: goodbye
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - story
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a1ca3216406e543479e4eb20487aaba5
+    m_Address: threelegs
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - story
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bad8e1607bdfd4de2a5312ce8ce097bc
     m_Address: run
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - story
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca88bc33bd2454c66a7a9cd8e2e54b3e
+    m_Address: final
     m_ReadOnly: 0
     m_SerializedLabels:
     - story

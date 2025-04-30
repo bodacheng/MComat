@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using System;
+using UniRx;
 using UnityEngine;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
@@ -13,9 +14,11 @@ public class ResistanceManager : MonoBehaviour
         OpenResistRender();
     }
     
+    private IDisposable _reSubscription;
     void OpenResistRender()
     {
-        data_Center.FightDataRef.Resistance.Subscribe(
+        _reSubscription?.Dispose();
+        _reSubscription = data_Center.FightDataRef.Resistance.Subscribe(
             x => 
             {
                 if (x > 0 && data_Center._ShaderManager.HasDoing()) // 其他染色任务优先
