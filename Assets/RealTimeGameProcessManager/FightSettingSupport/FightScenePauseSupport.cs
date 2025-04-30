@@ -22,7 +22,8 @@ public class FightScenePauseSupport : UILayer
     
     public void Setup(Action runNow, Action returnToFront, Action resumeAction)
     {
-        keyBindingUpdater.INI();
+        if (keyBindingUpdater != null)
+            keyBindingUpdater.INI();
         
         this.resumeAction = resumeAction;
         this.returnAction = returnToFront;

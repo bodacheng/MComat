@@ -18,6 +18,7 @@ class ChatGptFix : CameraMode
     float _transitionSpeedPara = 10f;
     readonly float _lookPointHeight = 1.5f;
     readonly float _minXZ;
+    readonly float _minY;
     float fieldOfView;
     private float screenDifferForRotate = 150;
     
@@ -40,6 +41,7 @@ class ChatGptFix : CameraMode
     public ChatGptFix(float XZDis, float YDis, float fieldOfView)
     {
         _minXZ = XZDis;
+        _minY = YDis;
         this.XZDis = XZDis;
         this.YDis = YDis;
         this.fieldOfView = fieldOfView;
@@ -49,6 +51,12 @@ class ChatGptFix : CameraMode
     {
         get => XZDis;
         set => XZDis = Mathf.Clamp(value, _minXZ , _minXZ + 20f);
+    }
+    
+    private float UsedHeight
+    {
+        get => YDis;
+        set => YDis = Mathf.Clamp(value, _minY , _minY + 20f);
     }
 
     public override void Enter(Camera _camera)
@@ -176,6 +184,7 @@ class ChatGptFix : CameraMode
             mPosY >= 0.3 && mPosY <= 0.7)
         {
             XZDistance -= _changeSpeed;
+            UsedHeight -= _changeSpeed;
         }
         else if (ePosX <= 0.2 || ePosX >= 0.8 || 
                  mPosX <= 0.2 || mPosX >= 0.8 || 
@@ -183,6 +192,7 @@ class ChatGptFix : CameraMode
                  mPosY <= 0.2 || mPosY >= 0.8)
         {
             XZDistance += _changeSpeed;
+            UsedHeight += _changeSpeed;
         }
         
         // 判断我与敌人哪个更接近相机位置
@@ -198,7 +208,7 @@ class ChatGptFix : CameraMode
         }
 
         cameraTargetPos = lookPoint + xzOff.normalized * XZDistance;
-        cameraTargetPos.y = YDis;
+        cameraTargetPos.y = UsedHeight;
         
         if (hasTargets || meCenter != null || h != 0)
         {

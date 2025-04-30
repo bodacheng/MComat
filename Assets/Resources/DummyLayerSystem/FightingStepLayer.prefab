@@ -782,7 +782,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -227, y: 621}
+  m_AnchoredPosition: {x: -227, y: 540}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &306264421713372559
@@ -3108,7 +3108,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -230, y: 412}
+  m_AnchoredPosition: {x: -230, y: 320}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5714480300668427162
@@ -3520,7 +3520,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -445, y: 275}
+  m_AnchoredPosition: {x: -445, y: 230}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5714480301408580933
@@ -3845,7 +3845,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -660, y: 138}
+  m_AnchoredPosition: {x: -660, y: 140}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5714480301642041409
@@ -4024,7 +4024,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -237, y: 124}
+  m_AnchoredPosition: {x: -237, y: 120}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5714480301703364044
@@ -4770,6 +4770,7 @@ MonoBehaviour:
   effectsParent: {fileID: 5788849479198898695}
   radialSegmentedHealthBar: {fileID: 5981827868086586559}
   buttonStretchEdgeDis: 5
+  keyBindingUpdater: {fileID: 0}
   defendButtonHover: 0
   attack: 0
   fire1: 0
@@ -4860,6 +4861,7 @@ MonoBehaviour:
   clickTriggerDreamCombo: {fileID: 2389958440708511477}
   forceClickAutoBtnBlackMask: {fileID: 2984390701738761425}
   fps: {fileID: 7479497211164954626}
+  animator: {fileID: 0}
 --- !u!1 &6340430885188941563
 GameObject:
   m_ObjectHideFlags: 0
