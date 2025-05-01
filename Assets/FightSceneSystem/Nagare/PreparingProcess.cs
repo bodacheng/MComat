@@ -29,6 +29,7 @@ public class PreparingProcess : FSceneProcess
 #endif
         }
         
+        RTFightManager.Target.Disposables?.Dispose();
         RTFightManager.Target.Disposables = new CompositeDisposable();
         
         Sensor.ClearFightingMember();

@@ -118,20 +118,17 @@ namespace FightScene
                                 ToNewUnit(2);
                             }
                         }
-
-                        var disposable = new SerialDisposable();
-
-// 假设你有一个 Observable<bool> 的布尔值监控（例如：boolObservable），这个值在变化时会发出事件。
+                        
+                        var disposableUnit = new SerialDisposable();
                         var boolObservable = Observable.EveryUpdate()
-                            .Where(_ => center._BasicPhysicSupport.AtRing)  // 当 bool 值为 true 时触发
-                            .Take(1)  // 只获取第一次触发的事件
-                            .Select(_ => Unit.Default);  // 转换为 Unit 类型
+                            .Where(_ => center._BasicPhysicSupport.AtRing)
+                            .Take(1)
+                            .Select(_ => Unit.Default);
 
                         var timerObservable = Observable.Timer(TimeSpan.FromSeconds(1))
                             .Select(_ => Unit.Default);  // Timer 也转换为 Unit 类型
-
-// 使用 Observable.Amb<Unit>，谁先触发就执行哪个
-                        disposable.Disposable = Observable.Amb<Unit>(boolObservable, timerObservable)
+                        
+                        disposableUnit.Disposable = Observable.Amb<Unit>(boolObservable, timerObservable)
                             .Subscribe(async (_) =>
                             {
                                 if (center != null)
@@ -140,11 +137,11 @@ namespace FightScene
                                         center.geometryCenter.position, Quaternion.identity, null);
                                     center.WholeT.gameObject.SetActive(false);
                                 }
-
-                                disposable.Dispose();
+                                
+                                disposableUnit.Dispose();
                             }).AddTo(center);
                     }
-                }).AddTo(gameObject);
+                }).AddTo(center);
             }
         }
 

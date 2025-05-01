@@ -84,12 +84,12 @@ namespace FightScene
                 center.FightDataRef.CurrentHp.Subscribe(x =>
                 {
                     RefreshHPBar(center, x, maxHp);
-                }).AddTo(gameObject);
+                }).AddTo(sideIcon.gameObject);
                 
                 center.FightDataRef.CriticalGauge.Subscribe(x =>
                 {
                     RefreshExBar(center, x);
-                }).AddTo(gameObject);
+                }).AddTo(sideIcon.gameObject);
                 
                 center.FightDataRef.DreamComboGauge.Subscribe(x =>
                 {
@@ -100,7 +100,7 @@ namespace FightScene
                     {
                         RefreshResistanceBar(center, x);
                     }
-                ).AddTo(gameObject);
+                ).AddTo(sideIcon.gameObject);
                 
                 center.FightDataRef.IsDead.Subscribe(x =>
                     {

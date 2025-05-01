@@ -41,12 +41,12 @@ namespace FightScene
                 center.FightDataRef.CurrentHp.Subscribe(x =>
                 {
                     RefreshHPBar(center, x, maxHp);
-                }).AddTo(RTFightManager.Target.Disposables);
+                }).AddTo(sideIcon.gameObject);
                 
                 center.FightDataRef.CriticalGauge.Subscribe(x =>
                 {
                     RefreshExBar(center, x);
-                }).AddTo(RTFightManager.Target.Disposables);
+                }).AddTo(sideIcon.gameObject);
                 
                 center.FightDataRef.DreamComboGauge.Subscribe(x =>
                 {
@@ -56,7 +56,7 @@ namespace FightScene
                 center.FightDataRef.Resistance.Subscribe(x =>
                 {
                     RefreshResistanceBar(center, x);
-                }).AddTo(RTFightManager.Target.Disposables);
+                }).AddTo(sideIcon.gameObject);
                 
                 center.FightDataRef.IsDead.Subscribe(x => {
                     if (x)

@@ -6,8 +6,8 @@ using UnityEngine.UI;
 // 战斗暂停相关。从暂停界面可以跳转至Setting界面，因此两个模块靠OptionsButton连接在一起
 public class FightScenePauseSupport : UILayer
 {
-    private Action resumeAction;
-    private Action returnAction;
+    private Action _resumeAction;
+    private Action _returnAction;
 
     [SerializeField] Toggle autoRotateCamera;
     
@@ -25,8 +25,8 @@ public class FightScenePauseSupport : UILayer
         if (keyBindingUpdater != null)
             keyBindingUpdater.INI();
         
-        this.resumeAction = resumeAction;
-        this.returnAction = returnToFront;
+        this._resumeAction = resumeAction;
+        this._returnAction = returnToFront;
         runNow.Invoke();
         ResetSliders();
         
@@ -42,12 +42,12 @@ public class FightScenePauseSupport : UILayer
 
     public void Resume()
     {
-        resumeAction.Invoke();
+        _resumeAction.Invoke();
     }
 
     public void Return()
     {
-        returnAction.Invoke();
+        _returnAction.Invoke();
     }
     
     void ResetSliders()

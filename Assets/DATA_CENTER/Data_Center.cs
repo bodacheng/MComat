@@ -252,19 +252,19 @@ public partial class Data_Center : MonoBehaviour
     }
     
     // for tutorial
-    IDisposable _disposeTask = null;
+    IDisposable _currentHpDisposeTask = null;
     public void StartAutoModeWhenGetHurt()
     {
         var fullHp = FightDataRef.CurrentHp.Value;
-        
-        _disposeTask = FightDataRef.CurrentHp.Subscribe(x =>
+        _currentHpDisposeTask?.Dispose();
+        _currentHpDisposeTask = FightDataRef.CurrentHp.Subscribe(x =>
         {
             if (x < fullHp)
             {
-                _disposeTask.Dispose();
+                _currentHpDisposeTask.Dispose();
                 _MyBehaviorRunner.AI = true;
             }
-        }).AddTo(gameObject);
+        }).AddTo(this);
     }
 
     //我们希望datacenter是整个角色初始化的出发点，那么这个地方应该也可以做到根据情况决定一些组件加载还是不加载。

@@ -42,48 +42,48 @@ namespace FightScene
             }
         }
 
-        public void InitializeMulti(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode aiMode, int aiDelayFrame,
-            Func<bool> AITriggerDreamComboRateCondition)
+        public void InitializeMulti(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode aiMode, int aiDelayFrame, Func<bool> aiTriggerDreamComboRateCondition)
         {
             foreach (var center in teamMembers.GetValues())
             {
-                center.Step3Initialize(teamConfig, teamCGMode, aiMode, aiDelayFrame, AITriggerDreamComboRateCondition,
+                center.Step3Initialize(teamConfig, teamCGMode, aiMode, aiDelayFrame, aiTriggerDreamComboRateCondition,
                     teamHpRate, RTFightManager.Target.UnitInfoRef[center]);
                 center.FightDataRef.IsDead.Subscribe(x =>
-                {
-                    if (x)
                     {
-                        Sensor.AddOrRemoveSharedDeadUnitInfo(center, teamConfig.myTeam, true);
-                        Sensor.AddOrRemoveSharedUnitInfo(center, teamConfig.myTeam, false);
+                        if (x)
+                        {
+                            Sensor.AddOrRemoveSharedDeadUnitInfo(center, teamConfig.myTeam, true);
+                            Sensor.AddOrRemoveSharedUnitInfo(center, teamConfig.myTeam, false);
 
-                        var disposable = new SerialDisposable();
+                            var disposable = new SerialDisposable();
 
-                        // 这里假设你有一个 Observable<bool> 的布尔值监控（例如：boolObservable），这个值在变化时会发出事件。
-                        var boolObservable = Observable.EveryUpdate()
-                            .Where(_ => center._BasicPhysicSupport.AtRing)
-                            .Take(1)
-                            .Select(_ => Unit.Default); // 将布尔值转为 Unit 类型
+                            // 这里假设你有一个 Observable<bool> 的布尔值监控（例如：boolObservable），这个值在变化时会发出事件。
+                            var boolObservable = Observable.EveryUpdate()
+                                .Where(_ => center._BasicPhysicSupport.AtRing)
+                                .Take(1)
+                                .Select(_ => Unit.Default); // 将布尔值转为 Unit 类型
 
-                        var timerObservable =
-                            Observable.Timer(TimeSpan.FromSeconds(1)).Select(_ => Unit.Default); // Timer 也转换为 Unit 类型
-                        // 使用 Observable.Amb<Unit>，谁先触发就执行哪个
-                        disposable.Disposable = Observable.Amb<Unit>(boolObservable, timerObservable)
-                            .Subscribe(async (_) =>
-                            {
-                                if (center != null)
+                            var timerObservable =
+                                Observable.Timer(TimeSpan.FromSeconds(1)).Select(_ => Unit.Default); // Timer 也转换为 Unit 类型
+                            // 使用 Observable.Amb<Unit>，谁先触发就执行哪个
+                            disposable.Disposable = Observable.Amb<Unit>(boolObservable, timerObservable)
+                                .Subscribe(async (_) =>
                                 {
-                                    await EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null,
-                                        center.geometryCenter.position, Quaternion.identity, null);
-                                    center.WholeT.gameObject.SetActive(false);
-                                    if (InputsManager.CurrentFocus.Value == center)
+                                    if (center != null)
                                     {
-                                        InputsManager.FocusUnit(null);
+                                        await EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null,
+                                            center.geometryCenter.position, Quaternion.identity, null);
+                                        center.WholeT.gameObject.SetActive(false);
+                                        if (InputsManager.CurrentFocus.Value == center)
+                                        {
+                                            InputsManager.FocusUnit(null);
+                                        }
                                     }
-                                }
-                                disposable.Dispose();
-                            }).AddTo(center);
+                                    disposable.Dispose();
+                                }).AddTo(center);
+                        }
                     }
-                });
+                ).AddTo(center);
             }
         }
     }

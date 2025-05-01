@@ -24,10 +24,11 @@ namespace FightScene
         public FightMode FightMode { get; set; }
         public TeamConfig TeamConfig { get; set; }
         public readonly IDictionary<Data_Center, SideUnitIcon> UnitIconDic = new Dictionary<Data_Center, SideUnitIcon>();
-        private IDisposable _barPosUpdate;
-        private IDisposable _teamIndicatorCloseDisposable;
         private TweenTextScaleManager _textScaleManager = new TweenTextScaleManager();
         
+        private IDisposable _barPosUpdate;
+        private IDisposable _teamIndicatorCloseDisposable;
+
         
         MultiDic<int, int, Data_Center> _teamMembers;
         public MultiDic<int, int, Data_Center> TeamMembers
@@ -40,6 +41,7 @@ namespace FightScene
         {
             _barPosUpdate?.Dispose();
             _teamIndicatorCloseDisposable?.Dispose();
+            
             switch (FightMode)
             {
                 case FightMode.Multi:
