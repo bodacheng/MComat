@@ -114,7 +114,16 @@ public partial class ArenaFightOver : UILayer
     {
         fight.Team1Auto = FightLoad.Fight.Team1Auto;
         fight.Team2Auto = true;
-        fight.LoadMyTeam();
+
+        switch (fight.FightMode)
+        {
+            case FightMode.Group:
+                break;
+            default:
+                fight.LoadMyTeam();
+                break;
+        }
+        
         FightLoad.Fight = fight;
         FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
         UILayerLoader.Remove<ArenaFightOver>();
@@ -189,15 +198,9 @@ public partial class ArenaFightOver : UILayer
         }
         
         againTab.SetUpAction(
-            () =>
-            {
-                NextFight(FightLoad.Fight);
-            },
             ()=> NextFight(FightLoad.Fight),
-            () =>
-            {
-                NextFight(FightLoad.Fight);
-            }
+            ()=> NextFight(FightLoad.Fight),
+            ()=> NextFight(FightLoad.Fight)
         );
         
         returnBtn.onClick.AddListener(()=>
