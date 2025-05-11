@@ -225,13 +225,13 @@ public partial class Data_Center : MonoBehaviour
                 return AITriggerDreamComboRateCondition();
             };
         
-        BoundaryControlByGod.target.SensorUnity.SensorDetectionResultClearProcesses.Add(
+        FightScene.FightScene.target.SensorUnity.SensorDetectionResultClearProcesses.Add(
             () =>
             {
                 this.Sensor.SensorDetectionResultClearProcess();
             });
         
-        BoundaryControlByGod.target.SensorUnity.SensorDetectionResultSortProcesses.Add(
+        FightScene.FightScene.target.SensorUnity.SensorDetectionResultSortProcesses.Add(
             (x) =>
             {
                 this.Sensor.SensorDetectionResultSortProcess(x);

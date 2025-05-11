@@ -10271,6 +10271,7 @@ MonoBehaviour:
   audioSource: {fileID: 3000649885118306805}
   uiAudioSource: {fileID: 1664172698}
   fxCamera: {fileID: 1050871294}
+  sensorUnity: {fileID: 3000649884765589352}
   watchAdBtnPrefab: {fileID: 5862124372405645925, guid: 6c21cee395a034edd99300ad3c2f261f,
     type: 3}
 --- !u!1 &3000649884765589351
@@ -10283,6 +10284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3000649884765589345}
   - component: {fileID: 3000649884765589350}
+  - component: {fileID: 3000649884765589352}
   m_Layer: 0
   m_Name: Scene_manager
   m_TagString: Untagged
@@ -10290,6 +10292,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3000649884765589352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3000649884765589351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5866cf2f84574940b99fdc1c78912ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layers:
+    serializedVersion: 2
+    m_Bits: 7680
 --- !u!64 &3000649885034771331
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -11106,7 +11123,6 @@ MonoBehaviour:
   BattleRingPSs:
   - {fileID: 5869328030720998988}
   BattleRingRadius: 8.5
-  sensorUnity: {fileID: 3000649885939633403}
 --- !u!1 &3000649885939633402
 GameObject:
   m_ObjectHideFlags: 0
@@ -11117,7 +11133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3000649885939633396}
   - component: {fileID: 3000649885939633397}
-  - component: {fileID: 3000649885939633403}
   m_Layer: 0
   m_Name: BoundaryControllByGod
   m_TagString: Untagged
@@ -11125,21 +11140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &3000649885939633403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3000649885939633402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5866cf2f84574940b99fdc1c78912ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _layers:
-    serializedVersion: 2
-    m_Bits: 7680
 --- !u!4 &3000649886621752040
 Transform:
   m_ObjectHideFlags: 0

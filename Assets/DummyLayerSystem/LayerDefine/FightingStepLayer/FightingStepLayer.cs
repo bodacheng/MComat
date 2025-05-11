@@ -36,6 +36,17 @@ public class FightingStepLayer : UILayer
     public TeamUIManager Team1UI => team1UI;
     public TeamUIManager Team2UI => team2UI;
     
+    private int _wholeLiveUnitCountNum = -1;
+    public void SetSensor()
+    {
+        int count = Team1UI.LiveUnitCountNum + Team2UI.LiveUnitCountNum;
+        if (count != _wholeLiveUnitCountNum)
+        {
+            FightScene.FightScene.target.SensorUnity.SensorSetting(BoundaryControlByGod._BattleRingRadius, count);
+        }
+        _wholeLiveUnitCountNum = count;
+    }
+    
     public MobileInputsManager InputsManager => inputsManager;
     
     public static FightingStepLayer Open()
@@ -215,6 +226,7 @@ public class FightingStepLayer : UILayer
         var c = RTFightManager.Target._CameraManager.GetMode(C_Mode.CertainYAntiVibration);
         var mode = ((ChatGptFix)c);
         mode.CanSetH = false;
+        _wholeLiveUnitCountNum = -1;
         base.OnDestroy();
     }
 }

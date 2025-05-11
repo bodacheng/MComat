@@ -18,6 +18,9 @@ namespace FightScene
         [Header("FX")]
         public Camera fxCamera;
         
+        [SerializeField] SensorUnity sensorUnity;
+        public SensorUnity SensorUnity => sensorUnity;
+        
         [SerializeField] AdmobAdsButton watchAdBtnPrefab;
 
         public static FightScene target;

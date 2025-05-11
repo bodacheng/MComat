@@ -48,13 +48,27 @@ namespace FightScene
             {
                 center.Step3Initialize(teamConfig, teamCGMode, aiMode, aiDelayFrame, aiTriggerDreamComboRateCondition,
                     teamHpRate, RTFightManager.Target.UnitInfoRef[center]);
+
+                if (FightLoad.Fight.FightMode == FightMode.Group)
+                {
+                    center.FightDataRef.IsDead.Subscribe(x =>
+                        {
+                            if (x)
+                            {
+                                var fightingLayer = FightingStepLayer.Open();
+                                fightingLayer.SetSensor();
+                            }
+                        }
+                    ).AddTo(center);;
+                }
+                
                 center.FightDataRef.IsDead.Subscribe(x =>
                     {
                         if (x)
                         {
                             Sensor.AddOrRemoveSharedDeadUnitInfo(center, teamConfig.myTeam, true);
                             Sensor.AddOrRemoveSharedUnitInfo(center, teamConfig.myTeam, false);
-
+                            
                             var disposable = new SerialDisposable();
 
                             // 这里假设你有一个 Observable<bool> 的布尔值监控（例如：boolObservable），这个值在变化时会发出事件。

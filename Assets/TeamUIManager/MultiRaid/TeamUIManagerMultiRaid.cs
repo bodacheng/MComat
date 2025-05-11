@@ -10,6 +10,9 @@ namespace FightScene
     {
         [SerializeField] Text liveUnitCount;
         public Text LiveUnitCount => liveUnitCount;
+
+        private int _liveUnitCountNum;
+        public int LiveUnitCountNum => _liveUnitCountNum;
         
         void SetLiveUnitCount()
         {
@@ -23,6 +26,8 @@ namespace FightScene
             }
             liveUnitCount.text = (TeamConfig.myTeam == RTFightManager.playerTeam ? "Player:":"Enemy:") +
                 liveCount +  "/" + _teamMembers.GetValues().Count;
+            
+            _liveUnitCountNum = liveCount;
         }
         
         void MultiClear()

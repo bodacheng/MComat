@@ -39,8 +39,8 @@ namespace FightScene
             if (FightLoad.Fight.RunTutorial)
                 _layer.OpenTutorial();
             RTFightManager.Target.ModeStart();
-            
-            BoundaryControlByGod.target.SensorUnity.DetectionStart(CommonSetting.AIDetectInterval, true);
+            _layer.SetSensor();
+            FightScene.target.SensorUnity.DetectionStart(CommonSetting.AIDetectInterval, true);
         }
         
         public override void ProcessEnd()
@@ -64,7 +64,7 @@ namespace FightScene
             HitBoxesProcesser.Instance.AllProcessingFade();
             RTFightManager.Target.EvolutionManager.EvolutionCount = 0;
             FightLogger.value.WatchMissionsAbandon();
-            BoundaryControlByGod.target.SensorUnity.Stop();
+            FightScene.target.SensorUnity.Stop();
         }
 
         public override void LocalUpdate()
@@ -78,7 +78,7 @@ namespace FightScene
         
         public override void LocalFixedUpdate()
         {
-            BoundaryControlByGod.target.SensorUnity.SensorFixedUpdate();
+            FightScene.target.SensorUnity.SensorFixedUpdate();
         }
     }
 }

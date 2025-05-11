@@ -7,13 +7,11 @@ public class BoundaryControlByGod : MonoBehaviour {
     [SerializeField] List<ParticleSystem> BattleRingPSs;
     [SerializeField] float BattleRingRadius = 20f;
     
-    [SerializeField] SensorUnity sensorUnity;
-    
     ParticleSystem BattleRingPS;
     GameObject battleGround;
     public static float _BattleRingRadius;
     public static BoundaryControlByGod target;
-    public SensorUnity SensorUnity => sensorUnity;
+    
     void Awake()
     {
         target = this;
@@ -33,35 +31,6 @@ public class BoundaryControlByGod : MonoBehaviour {
                 BattleRingPSs[i].gameObject.SetActive(false);
             }
         }
-        
-        var detectColliderCount = 0;
-        // 我们这里是大致的认为每个角色的所有hit box加上可能放出来的武器collider一共10个
-
-        if (FightLoad.Fight.FightMode == FightMode.Group)
-        {
-            foreach (var set in FightLoad.Fight.Team2GroupSet)
-            {
-                detectColliderCount += set.Count * 5;
-            }
-            foreach (var set in FightLoad.Fight.Team1GroupSet)
-            {
-                detectColliderCount += set.Count * 5;
-            }
-        }
-        else
-        {
-            if (FightLoad.Fight.FightMode == FightMode.Multi)
-            {
-                detectColliderCount = (FightLoad.Fight.FightMembers.HeroSets.GetValues().Count +
-                                       FightLoad.Fight.FightMembers.EnemySets.GetValues().Count) * 10;
-            }
-            else
-            {
-                detectColliderCount = 20;
-            }
-        }
-        
-        SensorUnity.Setup(BattleRingRadius, Vector3.zero, detectColliderCount);
     }
     
     private readonly int _currentBackGroundNum = -1;
