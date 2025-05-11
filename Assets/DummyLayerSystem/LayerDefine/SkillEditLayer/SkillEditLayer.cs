@@ -135,7 +135,10 @@ public partial class SkillEditLayer : UILayer
     public void OpenTip()
     {
         if (PlayerAccountInfo.Me.tutorialProgress == "Finished")
-            UILayerLoader.Load<SkillEditTipLayer>();
+        {
+            UILayerLoader.Load<SkillEditTipLayer>(true);
+            ReturnLayer.MoveBack();
+        }
     }
     
     public async UniTask Setup(Action<SkillEditLayer> toDo = null)

@@ -1,10 +1,10 @@
-﻿using System;
-using DummyLayerSystem;
+﻿using DummyLayerSystem;
 using UnityEngine;
 
 public class ExBarBurn : MonoBehaviour
 {
-    public ParticleSystem explosionFigure;
+    ParticleSystem explosionFigure;
+    
     void Awake()
     {
         OnLoad();
