@@ -100,6 +100,12 @@ public class ReturnLayer : UILayer
         ToTop();
     }
 
+    public static void ForceClear()
+    {
+        ReturnMissionList.Clear();
+        UILayerLoader.Remove<ReturnLayer>();
+    }
+
     public static void AddUniTaskCancel(CancellationTokenSource cts)
     {
         var layer = UILayerLoader.Get<ReturnLayer>();

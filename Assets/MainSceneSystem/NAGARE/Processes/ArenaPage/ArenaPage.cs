@@ -145,31 +145,17 @@ public partial class ArenaPage : MSceneProcess
     public override void ProcessEnter()
     {
         AppSetting.PlayBGM(CommonSetting.StartThemeAddressKey).Forget();
-        if (PlayerAccountInfo.Me.TitleDisplayName == null)
-        {
-            SettingPage.SetNickName((_) => Enter(), false);
-            SetLoaded(true);
-        }
-        else
-        {
-            Enter();
-        }
-
-        void Enter()
-        {
-            var settlementDay = DayOfWeek.Sunday;
-            var settlementTime = new TimeSpan(15, 0, 0); // 设置竞技场结算时间为UTC时间每周日的 15:00:00，即日本时间每周日晚上12点
+        var settlementDay = DayOfWeek.Sunday;
+        var settlementTime = new TimeSpan(15, 0, 0); // 设置竞技场结算时间为UTC时间每周日的 15:00:00，即日本时间每周日晚上12点
         
-            //DayOfWeek settlementDay = DayOfWeek.Monday;
-            //TimeSpan settlementTime = new TimeSpan(7, 10, 0); // 设置竞技场结算时间为UTC时间每周日的 15:00:00，即日本时间每周日晚上12点
-            GetServerTime(settlementDay, settlementTime);
-        }
+        //DayOfWeek settlementDay = DayOfWeek.Monday;
+        //TimeSpan settlementTime = new TimeSpan(7, 10, 0); // 设置竞技场结算时间为UTC时间每周日的 15:00:00，即日本时间每周日晚上12点
+        GetServerTime(settlementDay, settlementTime);
     }
     
     public override void ProcessEnd()
     {
         UILayerLoader.Remove<ArenaNewSeason>();
         UILayerLoader.Remove<ArenaLayer>();
-        UILayerLoader.Remove<NickNameLayer>();
     }
 }

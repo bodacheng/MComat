@@ -25,6 +25,7 @@
     {
         None = 0,
         Setting = -1,
+        Rename = 13,
         MailBox = 10,
         MailDetail = 11,
         FrontPage = 1,

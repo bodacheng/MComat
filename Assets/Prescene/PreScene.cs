@@ -187,6 +187,7 @@ namespace mainMenu
             var arenaPage = new ArenaPage();
             var rankingPage = new RankingPage();
             var arenaAwardPage = new ArenaAwardPage();
+            var renameProcess = new RenameProcess();
             
             // mail
             var mailBox = new MailBoxProcess();
@@ -213,6 +214,7 @@ namespace mainMenu
             ProcessesRunner.Main.Add(MainSceneStep.GotchaFront, gotchaFront);
             ProcessesRunner.Main.Add(MainSceneStep.GotchaResult, gotchaResult);
             ProcessesRunner.Main.Add(MainSceneStep.DropTableInfo, dropTableInfo);
+            ProcessesRunner.Main.Add(MainSceneStep.Rename, renameProcess);
             #endregion
         }
         

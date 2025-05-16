@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using dataAccess;
-using DummyLayerSystem;
 using UnityEngine;
 using UnityEngine.UI;
 using mainMenu;
@@ -56,7 +55,16 @@ public class FrontLayer : UILayer
         ArenaBtn.onClick.AddListener(() =>
         {
             if (PlayerAccountInfo.Me.arcadeProcess >= 5)
-                pre.trySwitchToStep(MainSceneStep.Arena);
+            {
+                if (PlayerAccountInfo.Me.TitleDisplayName != null)
+                {
+                    pre.trySwitchToStep(MainSceneStep.Arena);
+                }
+                else
+                {
+                    PreScene.target.trySwitchToStep(MainSceneStep.Rename, true, true);
+                }
+            }
             else
             {
                 PopupLayer.ArrangeWarnWindow(Translate.Get("PlsClearStage5"));

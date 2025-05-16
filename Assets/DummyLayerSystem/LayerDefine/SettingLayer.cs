@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DummyLayerSystem;
+using mainMenu;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -286,30 +287,19 @@ public class SettingLayer : UILayer
         
         LanguageIndicator();
         
-        nickNameBtn.onClick.AddListener(
+        nickNameBtn.SetListener(
             () =>
             {
                 CloseAllPanels();
                 nickNamePanel.gameObject.SetActive(true);
                 SetSelectedFrame(nickNameBtn.GetComponent<RectTransform>());
-                resetNickNameBtn.onClick.AddListener(
-                    () =>
-                    {
-                        this.gameObject.SetActive(false);
-                        SettingPage.SetNickName((x) =>
-                        {
-                            PopupLayer.ArrangeWarnWindow(Translate.Get("NicknameSet"));
-                            nickName.text = x;
-                            this.gameObject.SetActive(true);
-                        }, 
-                        true, () =>
-                        {
-                            this.gameObject.SetActive(true);
-                        });
-                    }
-                );
             }
         );
+
+        resetNickNameBtn.SetListener(() =>
+        {
+            PreScene.target.trySwitchToStep(MainSceneStep.Rename);
+        });
         
         controlBtn.onClick.AddListener(
             () =>

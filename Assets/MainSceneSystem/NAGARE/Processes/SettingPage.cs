@@ -42,38 +42,4 @@ public class SettingPage : MSceneProcess
     {
         SettingLayer.Close();
     }
-
-    public static void SetNickName(Action<string> success, bool closeBtnOn, Action extraOnClose = null)
-    {
-        var nickNameLayer = UILayerLoader.Load<NickNameLayer>();
-        nickNameLayer.Setup(
-            (x) =>
-            {
-                PopupLayer.ArrangeConfirmWindow(
-                    () =>
-                    {
-                        ProgressLayer.Loading("");
-                        nickNameLayer.LoadingRender(true);
-                        PlayFabReadClient.UpdateUserTitleDisplayName(
-                            x,
-                            (result) =>
-                            {
-                                PlayerAccountInfo.Me.TitleDisplayName = result.DisplayName;
-                                UILayerLoader.Remove<NickNameLayer>();
-                                ProgressLayer.Close();
-                                success?.Invoke(result.DisplayName);
-                            },
-                            (playFabError) =>
-                            {
-                                nickNameLayer.LoadingRender(false);
-                                ProgressLayer.Close();
-                            }
-                        );
-                    }, 
-                    Translate.Get("IfSetNickName"));
-            },
-            closeBtnOn,
-            extraOnClose
-        );
-    }
 }
