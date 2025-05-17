@@ -246,7 +246,10 @@ AttackBtn3Intro,third row of skills in the skill set,スキルセットの三行
 AutoBtnIntro,Click to switch between auto and manual mode,クリックして、自動または手動に切り替えます,点击可切换自动或手动
 DreamComboIntro,Click to trigger Dream Combo!,クリックしてドリームコンボを発動！,点击发动梦幻连招！
 HpBarAndExBar,"Health and energy. If the energy is insufficient, EX Skills cannot be unleashed.",体力とエネルギー値。エネルギー値が不足している場合、必殺技を発動できません,体力与能量值，必杀技在能量值不够的情况下无法释放
-JustUseAI,We recommend using auto mode!,自動戦闘を推奨します！,干脆就用AI战斗吧！
+JustUseAI,"We recommend using auto mode!
+The enemy won't act first this time!","自動戦闘を推奨します！
+今回は敵が先手を打ってこないようだ。","干脆就用AI战斗吧！
+本次战斗敌人不会先出手攻击"
 ,,,
 Player,Player,味方,我方
 Enemy,Enemy,敵,敌方
