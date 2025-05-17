@@ -547,6 +547,10 @@ MonoBehaviour:
   explosionSp1: gachaResultEffect1
   explosionSp2: gachaResultEffect2
   explosionSp3: gachaResultEffect3
+  screenMoveSp0: gachaScreenMove0
+  screenMoveSp1: gachaScreenMove1
+  screenMoveSp2: gachaScreenMove2
+  screenMoveSp3: gachaScreenMove3
   stoneDetailT: {fileID: 6606331544069485303}
   _stoneDetail: {fileID: 3598465911558610903}
   GDGotchaBtn: {fileID: 4313183100122602244}

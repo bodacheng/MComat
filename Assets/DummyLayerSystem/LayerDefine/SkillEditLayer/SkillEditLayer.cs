@@ -110,7 +110,7 @@ public partial class SkillEditLayer : UILayer
         var endPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera,
             end._cell.GetComponent<RectTransform>(), 3);
                     
-        var transitionEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>("gachastar0");
+        var transitionEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>("skillTransitionEffect");
         _transitionEffects.Add(transitionEffect.gameObject);
         if (this == null)
         {

@@ -33,15 +33,20 @@ public partial class GotchaResultLayer : UILayer
     [SerializeField] string explosionSp1 = "ButtonEffects/redmagic/explosion1.prefab";
     [SerializeField] string explosionSp2 = "ButtonEffects/redmagic/explosion2.prefab";
     [SerializeField] string explosionSp3 = "ButtonEffects/redmagic/explosion3.prefab";
+    [SerializeField] string screenMoveSp0 = "gachaScreenMove0";
+    [SerializeField] string screenMoveSp1 = "gachaScreenMove1";
+    [SerializeField] string screenMoveSp2 = "gachaScreenMove2";
+    [SerializeField] string screenMoveSp3 = "gachaScreenMove3";
     #endregion
     
     private readonly Dictionary<StoneOfPlayerInfo, StoneFallEffectSet> _effectDic = new Dictionary<StoneOfPlayerInfo, StoneFallEffectSet>();
 
-    (string, string, string) GetEffectName(int spLevel)
+    (string, string, string, string) GetEffectName(int spLevel)
     {
         string stoneFigureName = string.Empty;
         string flashName = string.Empty;
         string explosionName = string.Empty;
+        string screenMoveName = string.Empty;
         
         switch(spLevel)
         {
@@ -49,24 +54,28 @@ public partial class GotchaResultLayer : UILayer
                 stoneFigureName = stoneFigureSp0;
                 flashName = flashSp0;
                 explosionName = explosionSp0;
+                screenMoveName = screenMoveSp0;
                 break;
             case 1:
                 stoneFigureName = stoneFigureSp1;
                 flashName = flashSp1;
                 explosionName = explosionSp1;
+                screenMoveName = screenMoveSp1;
                 break;
             case 2:
                 stoneFigureName = stoneFigureSp2;
                 flashName = flashSp2;
                 explosionName = explosionSp2;
+                screenMoveName = screenMoveSp2;
                 break;
             case 3:
                 stoneFigureName = stoneFigureSp3;
                 flashName = flashSp3;
                 explosionName = explosionSp3;
+                screenMoveName = screenMoveSp3;
                 break;
         }
-        return (stoneFigureName, flashName, explosionName);
+        return (stoneFigureName, flashName, explosionName, screenMoveName);
     }
 
     private string gotchaId;
@@ -76,11 +85,12 @@ public partial class GotchaResultLayer : UILayer
         public UIObject StoneFigure;
         public UIObject StoneFlashFigure;
         public UIObject ScreenExplosionFigure;
+        public UIObject ScreenMoveFigure;//注意这个是靠rendertexture渲染
         Sequence _currentSequence;
         
-        private Func<int, (string, string, string)> _getEffectName;
+        private Func<int, (string, string, string, string)> _getEffectName;
         
-        public void Setup(Func<int, (string, string, string)> getEffectName)
+        public void Setup(Func<int, (string, string, string, string)> getEffectName)
         {
             this._getEffectName = getEffectName;
         }
@@ -91,14 +101,17 @@ public partial class GotchaResultLayer : UILayer
             var stoneFigureName = effectName.Item1;
             var flashName = effectName.Item2;
             var explosionName = effectName.Item3;
+            var screenMoveName = effectName.Item4;
             
             StoneFigure = await AddressablesLogic.LoadTOnObject<UIObject>(stoneFigureName);
             StoneFlashFigure = await AddressablesLogic.LoadTOnObject<UIObject>(flashName);
             ScreenExplosionFigure = await AddressablesLogic.LoadTOnObject<UIObject>(explosionName);
+            ScreenMoveFigure = await AddressablesLogic.LoadTOnObject<UIObject>(screenMoveName);
             
             StoneFigure.ParticleSystem.Stop(true);
             StoneFlashFigure.ParticleSystem.Stop(true);
             ScreenExplosionFigure.ParticleSystem.Stop(true);
+            ScreenMoveFigure.ParticleSystem.Stop(true);
         }
 
         public void Clear()
@@ -109,7 +122,8 @@ public partial class GotchaResultLayer : UILayer
                 Destroy(StoneFlashFigure.gameObject);
             if (ScreenExplosionFigure != null)
                 Destroy(ScreenExplosionFigure.gameObject);
-
+            if (ScreenMoveFigure != null)
+                Destroy(ScreenMoveFigure.gameObject);
             KillSequence();
         }
 

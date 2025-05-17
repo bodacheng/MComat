@@ -46,7 +46,7 @@ public partial class GotchaResultLayer : UILayer
     void StarScreenMoveAnim(StoneOfPlayerInfo info, Vector3 waitPos, Vector3 endPos)
     {
         var effectSet = _effectDic[info];
-        var screenStar = effectSet.StoneFigure;
+        var screenStar = effectSet.ScreenMoveFigure;
         screenStar.ParticleSystem.Play();
         screenStar.transform.position = waitPos;
         effectSet.RunSequence(
