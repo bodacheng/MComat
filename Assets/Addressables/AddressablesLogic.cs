@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -7,6 +8,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
 using Newtonsoft.Json.Linq;
+using UnityEngine.SceneManagement;
 
 public static class AddressablesLogic
 {
@@ -103,7 +105,6 @@ public static class AddressablesLogic
     public static async UniTask DownLoadConfig()
     {
         await DownLoadMission("config", (x)=>{});
-
     }
 
     public static async UniTask<CommonSetting> GetCommonSetting()
@@ -131,62 +132,100 @@ public static class AddressablesLogic
         });
     }
     
-    static async UniTask<long> DownLoadSize(string label, Action exceptionProcess)
+    static async UniTask<long> DownLoadSize(string label, Action<string> exceptionProcess)
     {
-        var handle = Addressables.GetDownloadSizeAsync(label);
-        await handle.Task;
-        if (handle.Status == AsyncOperationStatus.Succeeded)
+        AsyncOperationHandle<long> handle = default;
+        try
         {
-            var result = handle.Result;
-            if (result > 0)
+            handle = Addressables.GetDownloadSizeAsync(label);
+            await handle.Task;
+
+            if (handle.Status == AsyncOperationStatus.Succeeded)
             {
-                DicAdd<string,long>.Add(Sizes, label, result);
+                long result = handle.Result;
+                if (result > 0)
+                {
+                    DicAdd<string, long>.Add(Sizes, label, result);
+                }
+                return result;
             }
-            Addressables.Release(handle);
-            return result;
+            else
+            {
+                Debug.LogError($"[Addressables] Failed to get download size for label: {label}");
+                exceptionProcess?.Invoke(label);
+                return 0;
+            }
         }
-        else
+        catch (Exception ex)
         {
-            Debug.Log($"Failed to get size : {label}");
-            Addressables.Release(handle);
-            exceptionProcess.Invoke();
-            return default;
+            Debug.LogError($"[Addressables] Exception during GetDownloadSizeAsync for label: {label}, Exception: {ex}");
+            exceptionProcess?.Invoke(label);
+            return 0;
+        }
+        finally
+        {
+            if (handle.IsValid())
+                Addressables.Release(handle);
         }
     }
     
-    static async UniTask DownLoadMission(string label, Action<string> progressUIRefresh)
+    static async UniTask<bool> DownLoadMission(string label, Action<string> progressUIRefresh)
     {
-        var handle = Addressables.DownloadDependenciesAsync(label);
-        while (!handle.IsDone)
+        AsyncOperationHandle downloadHandle = default;
+        try
         {
-            if (downloadedBytes.ContainsKey(label))
+            // 第一步：强制校验远程资源状态（可选，如果想跳过本地缓存）
+            var checkHandle = Addressables.CheckForCatalogUpdates();
+            await checkHandle.Task;
+            if (checkHandle.Status == AsyncOperationStatus.Succeeded && checkHandle.Result.Count > 0)
             {
-                downloadedBytes[label] = handle.GetDownloadStatus().DownloadedBytes;
+                var updateHandle = Addressables.UpdateCatalogs(checkHandle.Result);
+                await updateHandle.Task;
+                Addressables.Release(updateHandle);
+            }
+            Addressables.Release(checkHandle);
+
+            // 第二步：开始下载
+            downloadHandle = Addressables.DownloadDependenciesAsync(label, true); // 强制校验CRC
+            while (!downloadHandle.IsDone)
+            {
+                if (downloadedBytes.ContainsKey(label))
+                {
+                    downloadedBytes[label] = downloadHandle.GetDownloadStatus().DownloadedBytes;
+                }
+
+                var text = AppSetting.Value.Language switch
+                {
+                    SystemLanguage.English => "Downloading Assets",
+                    SystemLanguage.Japanese => "リソースをダウンロード中です",
+                    SystemLanguage.Chinese => "正在下载资源",
+                    _ => "リソースをダウンロード中です"
+                };
+                progressUIRefresh(text);
+                await UniTask.DelayFrame(0);
             }
 
-            var text = string.Empty;
-            switch (AppSetting.Value.Language)
+            if (downloadHandle.Status != AsyncOperationStatus.Succeeded)
             {
-                case SystemLanguage.English:
-                    text = "Downloading Assets";
-                    break;
-                case SystemLanguage.Japanese:
-                    text = "リソースをダウンロード中です";
-                    break;
-                case SystemLanguage.Chinese:
-                    text = "正在下载资源";
-                    break;
-                default:
-                    text = "リソースをダウンロード中です";
-                    break;
+                Debug.LogError($"Download failed: {downloadHandle.OperationException?.Message}");
+                return false;
             }
-            progressUIRefresh(text);
-            await UniTask.DelayFrame(0);
+
+            return true;
         }
-        Addressables.Release(handle);
+        catch (Exception ex)
+        {
+            Debug.LogError($"DownloadMission Exception: {ex}");
+            return false;
+        }
+        finally
+        {
+            if (downloadHandle.IsValid())
+                Addressables.Release(downloadHandle);
+        }
     }
     
-    public static async UniTask<long> GetWholeDownLoadSize(Action exception, List<string> downLoadLabel)
+    public static async UniTask<long> GetWholeDownLoadSize(Action<string> exception, List<string> downLoadLabel)
     {
         //Caching.ClearCache();
         
@@ -197,7 +236,7 @@ public static class AddressablesLogic
             downLoadSizeCal.Add(DownLoadSize(label, exception));
         }
         await UniTask.WhenAll(downLoadSizeCal);
-
+        
         foreach (var kv in Sizes)
         {
             wholeSize += kv.Value;
@@ -227,17 +266,26 @@ public static class AddressablesLogic
         //unitInstructionLayer.LoadUnitImage();
         foreach (var label in downLoadLabel)
         {
-            if (!downloadedBytes.ContainsKey(label))
-                downloadedBytes.Add(label, 0);
+            downloadedBytes.TryAdd(label, 0);
         }
         
-        var downLoadTasks = new List<UniTask>();
+        var downLoadTasks = new List<UniTask<bool>>();
         foreach (var label in downLoadLabel)
         {
             if (Sizes.ContainsKey(label))
                 downLoadTasks.Add(DownLoadMission(label, progressUIRefresh));
         }
-        await UniTask.WhenAll(downLoadTasks);
+        var results = await UniTask.WhenAll(downLoadTasks);
+        if (results.Any(r => r == false))
+        {
+            ProgressLayer.Loading("download error");
+            await UniTask.Delay(TimeSpan.FromSeconds(3));
+            if (SceneManager.GetActiveScene().buildIndex != 0)
+            {
+                SceneManager.LoadScene(0);
+            }
+            return;
+        }
         complete.Invoke();
     }
     

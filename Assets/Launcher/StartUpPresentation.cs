@@ -120,7 +120,7 @@ public class StartUpPresentation : MonoBehaviour
         commonSetting.Initialise();
         
         var bytes = await AddressablesLogic.GetWholeDownLoadSize(
-            () =>
+            (x) =>
             {
                 PopupLayer.ArrangeConfirmWindow(
                     (
@@ -129,7 +129,7 @@ public class StartUpPresentation : MonoBehaviour
                             SceneManager.LoadScene(0);
                         }
                     ),
-                "Download Failed"
+                "Download Failed:" + x
                 );
             },
             commonSetting.DownLoadLabels
@@ -157,12 +157,7 @@ public class StartUpPresentation : MonoBehaviour
                 imageBg.Setup();
                 UILayerLoader.Load<ProgressLayer>();
                 await AddressablesLogic.ResourcePrepareProcess(
-                    () =>
-                    {
-                        UILayerLoader.Remove<ProgressLayer>();
-                        UILayerLoader.Remove<ImageBg>();
-                        Go();
-                    },
+                    Complete,
                     (x) =>
                     {
                         ProgressLayer.LoadingPercent(x, AddressablesLogic.DownloadedBytes / wholeBytes);
@@ -173,6 +168,13 @@ public class StartUpPresentation : MonoBehaviour
             Application.Quit,
             msg
         );
+    }
+
+    private async void Complete()
+    {
+        UILayerLoader.Remove<ProgressLayer>();
+        UILayerLoader.Remove<ImageBg>();
+        await Go();
     }
 
     async UniTask Go()
