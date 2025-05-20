@@ -260,12 +260,7 @@ public static class AddressablesLogic
         var results = await UniTask.WhenAll(downLoadTasks);
         if (results.Any(r => r == false))
         {
-            ProgressLayer.Loading("download error");
-            await UniTask.Delay(TimeSpan.FromSeconds(3));
-            if (SceneManager.GetActiveScene().buildIndex != 0)
-            {
-                SceneManager.LoadScene(0);
-            }
+            await LoadErrorThenBackToStart();
             return;
         }
         complete.Invoke();
@@ -279,6 +274,7 @@ public static class AddressablesLogic
         {
             Debug.Log($"Failed to load : {prefabPathName}");
             Addressables.ReleaseInstance(handle);
+            await LoadErrorThenBackToStart();
             return default;
         }
         else
@@ -300,6 +296,7 @@ public static class AddressablesLogic
         {
             Debug.Log($"Failed to load : {prefabPathName}");
             Addressables.ReleaseInstance(handle);
+            await LoadErrorThenBackToStart();
             return default;
         }
         else
@@ -336,6 +333,7 @@ public static class AddressablesLogic
             {
                 Debug.Log($"Failed to load : {prefabPathName}");
                 Addressables.ReleaseInstance(handle);
+                await LoadErrorThenBackToStart();
                 return default;
             }
             else
@@ -362,6 +360,7 @@ public static class AddressablesLogic
         catch (Exception e)
         {
             Debug.Log(e.Message);
+            await LoadErrorThenBackToStart();
         }
         return default;
     }
@@ -376,6 +375,7 @@ public static class AddressablesLogic
         {
             Debug.Log($"Failed to load : {prefabPathName}");
             Addressables.Release(handle);
+            await LoadErrorThenBackToStart();
             return default;
         }
         else
@@ -403,6 +403,7 @@ public static class AddressablesLogic
         {
             Debug.Log($"Failed to load : {location}");
             Addressables.Release(handle);
+            await LoadErrorThenBackToStart();
             return default;
         }
         else
@@ -430,5 +431,15 @@ public static class AddressablesLogic
                 Addressables.Release(handle);
         }
         LoadingHandlerList.Clear();
+    }
+
+    static async UniTask LoadErrorThenBackToStart()
+    {
+        ProgressLayer.Loading("download error");
+        await UniTask.Delay(TimeSpan.FromSeconds(2));
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }
