@@ -174,18 +174,6 @@ public static class AddressablesLogic
         AsyncOperationHandle downloadHandle = default;
         try
         {
-            // 第一步：强制校验远程资源状态（可选，如果想跳过本地缓存）
-            var checkHandle = Addressables.CheckForCatalogUpdates();
-            await checkHandle.Task;
-            if (checkHandle.Status == AsyncOperationStatus.Succeeded && checkHandle.Result.Count > 0)
-            {
-                var updateHandle = Addressables.UpdateCatalogs(checkHandle.Result);
-                await updateHandle.Task;
-                Addressables.Release(updateHandle);
-            }
-            Addressables.Release(checkHandle);
-
-            // 第二步：开始下载
             downloadHandle = Addressables.DownloadDependenciesAsync(label, true); // 强制校验CRC
             while (!downloadHandle.IsDone)
             {
@@ -204,13 +192,7 @@ public static class AddressablesLogic
                 progressUIRefresh(text);
                 await UniTask.DelayFrame(0);
             }
-
-            if (downloadHandle.Status != AsyncOperationStatus.Succeeded)
-            {
-                Debug.LogError($"Download failed: {downloadHandle.OperationException?.Message}");
-                return false;
-            }
-
+            
             return true;
         }
         catch (Exception ex)
