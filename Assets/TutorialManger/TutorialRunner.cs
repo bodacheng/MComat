@@ -28,6 +28,8 @@ public class TutorialRunner
     
     void GenerateStep1Tutorial()
     {
+        var _focusUnitInfo = dataAccess.Units.GetByRId("3");
+        PreScene.target.SetFocusingUnit(_focusUnitInfo.id);
         var skillEditTry = new SkillEditTry("openInstruction1");
         _tutorialProcesses.Clear();
         _tutorialProcesses.Add(skillEditTry);
