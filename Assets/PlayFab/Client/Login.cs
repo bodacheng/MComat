@@ -2,7 +2,6 @@ using PlayFab;
 using PlayFab.ClientModels;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Cysharp.Threading.Tasks;
 using mainMenu;
 using UnityEngine;
@@ -19,12 +18,28 @@ public partial class PlayFabReadClient
     {
         get
         {
+#if UNITY_IOS
+            if (PlayerPrefs.HasKey(PLAYFAB_CUSTOM_ID))
+            {
+                return PlayerPrefs.GetString(PLAYFAB_CUSTOM_ID);
+            }
+            else
+            {
+                string newId = Guid.NewGuid().ToString();
+                PlayerPrefs.SetString(PLAYFAB_CUSTOM_ID, newId);
+                PlayerPrefs.Save();
+                return newId;
+            }
+#endif
+            
+#if UNITY_ANDROID
             // customId的默认值存在诸多疑问，1。29 我们试着把它先从 Guid.NewGuid()改成SystemInfo.deviceUniqueIdentifier
             //var customId = PlayerPrefs.GetString(PLAYFAB_CUSTOM_ID, Guid.NewGuid().ToString());
             var customId = PlayerPrefs.GetString(PLAYFAB_CUSTOM_ID, SystemInfo.deviceUniqueIdentifier);
             PlayerPrefs.SetString(PLAYFAB_CUSTOM_ID, customId);
             PlayerPrefs.Save();
             return customId;
+#endif
         }
     }
     

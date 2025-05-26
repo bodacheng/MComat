@@ -338,6 +338,7 @@ public class SettingLayer : UILayer
         {
             PlayFabReadClient.DeleteAccountPopup(() =>
             {
+                ReturnLayer.ReturnMissionList.Clear();
                 PopupLayer.ArrangeWarnWindow(
                     () =>
                     {

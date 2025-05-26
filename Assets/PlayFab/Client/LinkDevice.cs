@@ -82,6 +82,7 @@ public partial class PlayFabReadClient
     
     static void DeletePlayer()
     {
+        return;//暂时放弃
         CloudScript.ExecuteCloudScriptMainSceneCommon(
             new ExecuteCloudScriptRequest()
             {
