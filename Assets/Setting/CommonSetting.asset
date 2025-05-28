@@ -47,6 +47,7 @@ MonoBehaviour:
   btnTapSound: {fileID: 8300000, guid: a6473f5264a14804e992a7a4a29cd744, type: 3}
   btnConfirmSound: {fileID: 8300000, guid: 468f662ba85278c419ef967f7c33907b, type: 3}
   exTabSound: {fileID: 8300000, guid: bfc5803fa8fa8924bbeaa34f4f689bb1, type: 3}
+  cameraSpeed: 10
   aiDetectInterval: 20
   characterAnimDurationList:
   - type: human

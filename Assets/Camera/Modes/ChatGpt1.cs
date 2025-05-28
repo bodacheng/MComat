@@ -15,12 +15,12 @@ class ChatGptFix : CameraMode
     float autoChangeAngleLimit = 30f;
     float autoRotateSpeed = 10;
     float _changeSpeed;
-    float _transitionSpeedPara = 10f;
     readonly float _lookPointHeight = 1.5f;
     readonly float _minXZ;
     readonly float _minY;
     float fieldOfView;
     private float screenDifferForRotate = 150;
+    private float _transitionSpeedPara;
     
     public bool AutoRotateCamera
     {
@@ -30,12 +30,6 @@ class ChatGptFix : CameraMode
             PlayerPrefs.SetInt("AutoRotateCamera", value ? 1 : 0);
             PlayerPrefs.Save();
         }
-    }
-
-    float TransitionSpeedPara
-    {
-        get => _transitionSpeedPara;
-        set => _transitionSpeedPara = Mathf.Clamp(value, 0.2f, 5f);
     }
     
     public ChatGptFix(float XZDis, float YDis, float fieldOfView)
@@ -67,8 +61,8 @@ class ChatGptFix : CameraMode
         LocalUpdate(_camera);
         xzOff = _camera.transform.position - lookPoint;
         xzOff.y = 0;
-        TransitionSpeedPara = 5f;
-        DOTween.To(()=> TransitionSpeedPara, (x) => TransitionSpeedPara = x, 0.001f, 1f);
+        _transitionSpeedPara = 0f;
+        DOTween.To(()=> _transitionSpeedPara, (x) => _transitionSpeedPara = x, CommonSetting.CameraSpeed, 1f);
     }
 
     float h;
@@ -98,8 +92,9 @@ class ChatGptFix : CameraMode
         {
             mePos = meCenter.position;
         }
-        
-        _changeSpeed = Time.deltaTime / (TransitionSpeedPara + Time.deltaTime); //分母里那个附加值越大，变得越慢。
+
+        _changeSpeed = _transitionSpeedPara * Time.deltaTime;
+            //Time.deltaTime / (TransitionSpeedPara + Time.deltaTime); //分母里那个附加值越大，变得越慢。
         var hasTargets = targets != null && targets.Count > 0;
         if (hasTargets)
         {

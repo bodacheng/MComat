@@ -1,5 +1,5 @@
 recordId,realName,monsterType,zokusei,rarityLevel,basicMovementPack,moveType,motilitySkillPack,defendableFlag
-1,adam,human,3,1,adam,normal,Rush,1
+1,adam,human,5,1,adam,normal,Rush,1
 2,tetsuya,human,4,1,tetsuya,normal,Rush,1
 3,haruka,human,1,1,haruka,normal,Rush,1
 4,maggie,human,2,1,maggie,normal,Rush,1
@@ -12,7 +12,7 @@ recordId,realName,monsterType,zokusei,rarityLevel,basicMovementPack,moveType,mot
 11,fire_golem,human,3,1,tetsuya,normal,Rush,1
 12,robot3,human,3,1,robot3,normal,Rush,1
 13,NanoCyborg,human,3,1,yuta,normal,Rush,1
-14,adam_naked,human,5,1,adam,normal,Rush,1
+14,adam_naked,human,3,1,adam,normal,Rush,1
 15,baruk,human,2,1,baruk,normal,Rush,1
 16,ice_golem,human,4,1,adam,normal,Rush,1
 17,g_e_dragon,e_dragon,1,1,e_dragon,slow,Rush,1

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -16,7 +17,7 @@ public class CameraManager : MonoBehaviour
 
     readonly IDictionary<C_Mode, CameraMode> CModeDic = new Dictionary<C_Mode, CameraMode>()
     {
-        {C_Mode.CertainYAntiVibration, new ChatGptFix(12f, 9f, 40f)},
+        {C_Mode.CertainYAntiVibration, new ChatGptFix(8f, 5f, 40f)},
         //{C_Mode.CertainYAntiVibration, new New2023(8.8f, 5f)},
         {C_Mode.ApproachToCertainDis,  new LerpToCertainDistance(5f, 1f)},
         {C_Mode.keepTargetLeft, new keepTargetLeftCamera()},
@@ -50,8 +51,8 @@ public class CameraManager : MonoBehaviour
             kv.Value.cameraManager = this;
         }
     }
-    
-    void Update()
+
+    private void LateUpdate()
     {
         if (CurrentMode != null)
         {
