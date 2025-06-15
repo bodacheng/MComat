@@ -66,7 +66,7 @@ MonoBehaviour:
     - unit
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6ca3efb6cefae4338ba0c93e213760a3
-    m_Address: human/adam_naked
+    m_Address: human/adam
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit
@@ -96,7 +96,7 @@ MonoBehaviour:
     - unit
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c6d41cd21953f4e55b15fe370a64f040
-    m_Address: human/adam
+    m_Address: human/adam_naked
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit

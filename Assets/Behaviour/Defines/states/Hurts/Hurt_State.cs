@@ -14,6 +14,7 @@ namespace Soul
         SingleAssignmentDisposable _physicMissionDisposable;
         private float hurtAnimDuration = 0.05f;
         private Sequence mySequence;
+        private bool changedToSubUnit;
         
         void PlayHurtAnim(V_Damage newValue)
         {
@@ -62,6 +63,12 @@ namespace Soul
 
         public override void AI_State_enter(V_Damage newValue)
         {
+            if (this._DATA_CENTER.ChangeToSub != null && !changedToSubUnit)
+            {
+                changedToSubUnit = this._DATA_CENTER.ChangeToSub != null && this._DATA_CENTER.ChangeToSub.Invoke(this.StateKey, newValue);
+                if (changedToSubUnit)
+                    return;
+            }
             target = newValue;
             base.AI_State_enter();
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);

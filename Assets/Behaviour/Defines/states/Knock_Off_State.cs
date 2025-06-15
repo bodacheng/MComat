@@ -17,17 +17,24 @@ namespace Soul
         float _temp;
         Tweener rotateTween;
         float curveEndTime;
+        private bool changedToSubUnit;
+        
         public Knock_Off_State()
         {
             StateType = BehaviorType.KnockOff;
-            
+            changedToSubUnit = false;
         }
         
         public override void AI_State_enter(V_Damage value)
         {
-            base.AI_State_enter();
-            //FightParamsRef.ChangeLayerForLimbs(14);
+            if (this._DATA_CENTER.ChangeToSub != null && !changedToSubUnit)
+            {
+                changedToSubUnit = this._DATA_CENTER.ChangeToSub != null && this._DATA_CENTER.ChangeToSub.Invoke(this.StateKey, value);
+                if (changedToSubUnit)
+                    return;
+            }
             
+            base.AI_State_enter();
             FlyingStep = 0;
             _timeCounter = 0;
             _canWakeUp = false;

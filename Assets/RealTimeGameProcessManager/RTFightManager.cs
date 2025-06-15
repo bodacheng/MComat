@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using UniRx;
@@ -31,14 +32,53 @@ namespace FightScene
         FightInfo _loadFight;
 
         public CompositeDisposable Disposables = new CompositeDisposable();
+
+        public readonly IDictionary<string, string> SubUnitDic = new Dictionary<string, string>()
+        {
+            { "1", "14" },
+        };
         
         void Awake()
         {
             Target = this;
         }
+
+        public Data_Center FindSubUnit(Data_Center center)
+        {
+            var subUnit= UnitInfoRef.FirstOrDefault(x => (x.Value.id == "sub_" + center.UnitInfo.id) &&
+                                            (x.Key._TeamConfig.myTeam == center._TeamConfig.myTeam)
+            );
+            return subUnit.Key;
+        }
         
         public async UniTask LoadUnits(FightInfo info)
         {
+            if (info.FightMode == FightMode.Rotate)
+            {
+                void AddSubUnit(UnitInfo unitInfo, Team team)
+                {
+                    if (SubUnitDic.TryGetValue(unitInfo.r_id, out var subUnitRid))
+                    {
+                        var subAdam = unitInfo.Clone();
+                        subAdam.id = "sub_" + unitInfo.id;
+                        subAdam.r_id = subUnitRid;
+                        if (team == Team.player1)
+                            info.FightMembers.HeroSets.Set(0, info.FightMembers.HeroSets.GetValues().Count, subAdam);
+                        else
+                            info.FightMembers.EnemySets.Set(0, info.FightMembers.EnemySets.GetValues().Count, subAdam);
+                    }
+                }
+                
+                foreach (var unitInfo in info.FightMembers.HeroSets.GetValues())
+                {
+                    AddSubUnit(unitInfo, Team.player1);
+                }
+                foreach (var unitInfo in info.FightMembers.EnemySets.GetValues())
+                {
+                    AddSubUnit(unitInfo, Team.player2);
+                }
+            }
+            
             await UniTask.WhenAll(
                 team1._UnitsLoad(info.FightMembers.HeroSets, UnitInfoRef), 
                 team2._UnitsLoad(info.FightMembers.EnemySets, UnitInfoRef)

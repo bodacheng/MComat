@@ -117,6 +117,9 @@ public class CommonSetting : ScriptableObject
     [SerializeField] private Color greenBgColor;
     [SerializeField] private Color greenFrameColor;
     
+    [Tooltip("变身角色受击变身所剩hp百分比")]
+    [SerializeField] private float changeToSubHpPercent = 0.3f;
+    
     public List<string> DownLoadLabels => downLoadLabels;
     
     public static bool DevMode;
@@ -188,6 +191,8 @@ public class CommonSetting : ScriptableObject
     public static Color ResistColor;
     public static Color DreamColor;
     public static Color SpeedColor;
+
+    public static float ChangeToSubHpPercent;
     
     public void Initialise()
     {
@@ -256,5 +261,7 @@ public class CommonSetting : ScriptableObject
         ResistColor = resistColor;
         DreamColor = dreamColor;
         SpeedColor = speedColor;
+
+        ChangeToSubHpPercent = changeToSubHpPercent;
     }
 }

@@ -7,17 +7,17 @@ namespace FightScene
 {
     public partial class TeamUIManager : MonoBehaviour
     {
-        void IniTeamUI_Rotate(Action<Data_Center> ChangeUnit)
+        void IniTeamUI_Rotate(Action<Data_Center> changeUnit)
         {
             foreach (var center in _teamMembers.GetValues())
             {
                 var sideIcon = Instantiate(unitIconPrefab);
                 sideIcon.name = center.name + " ICon";
                 sideIcon.Icon.iconButton.onClick.RemoveAllListeners();
-                sideIcon.Icon.iconButton.onClick.AddListener(() => { ChangeUnit(center); });
+                sideIcon.Icon.iconButton.onClick.AddListener(() => { changeUnit(center); });
                 var info = RTFightManager.Target.UnitInfoRef[center];
                 sideIcon.Icon.ChangeIcon(info);
-                sideIcon.gameObject.SetActive(true);
+                sideIcon.gameObject.SetActive(!center.IsSub);
                 sideIcon.Icon.CooldownCurtainUpdate(0);
                 
                 if (TeamConfig.myTeam == RTFightManager.playerTeam)

@@ -3,6 +3,8 @@ using UnityEngine;
 using UniRx;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
+using HittingDetection;
+using Soul;
 
 namespace FightScene
 {
@@ -17,12 +19,15 @@ namespace FightScene
             for (int i = 0; i < 3; i++)
             {
                 var dataCenter = teamMembers.Get(0,i);
-                if (dataCenter == null)
+                if (dataCenter == null || dataCenter.UnitInfo.id.Contains("sub"))
                 {
                     continue;
                 }
+                
                 if (unit == null)
+                {
                     unit = dataCenter;
+                }
                 dataCenter.WholeT.parent = null;
                 dataCenter.WholeT.gameObject.SetActive(true);
             }
@@ -142,6 +147,17 @@ namespace FightScene
                             }).AddTo(center);
                     }
                 }).AddTo(center);
+
+                if (RTFightManager.Target.SubUnitDic.TryGetValue(center.UnitInfo.r_id, out var subUnitInfo))
+                {
+                    var maxHp = center.FightDataRef.CurrentHp.Value;
+                    center.ChangeToSub = (x, y) =>
+                    {
+                        if (center.FightDataRef.CurrentHp.Value < maxHp * CommonSetting.ChangeToSubHpPercent)
+                            return ChangeFightingUnitToHerSub(center, x, y);
+                        return false;
+                    };
+                }
             }
         }
 
@@ -151,6 +167,72 @@ namespace FightScene
             {
                 center.StartAutoModeWhenGetHurt();
             }
+        }
+
+        private bool ChangeFightingUnitToHerSub(Data_Center main, string stateKey, V_Damage damage)
+        {
+            Data_Center changeTo = null;
+            foreach (var dataCenter in teamMembers.GetValues())
+            {
+                if ("sub_" + main.UnitInfo.id == dataCenter.UnitInfo.id)
+                {
+                    changeTo = dataCenter;
+                    break;
+                }
+            }
+            
+            if (changeTo == null)
+            {
+                return false;
+            }
+            
+            var fightingStepLayer = FightingStepLayer.Open();
+            TeamUIManager teamUI;
+            if (main._TeamConfig.myTeam == Team.player1)
+            {
+                teamUI = fightingStepLayer.Team1UI;
+            }
+            else
+            {
+                teamUI = fightingStepLayer.Team2UI;
+            }
+            
+            var sideIcon = teamUI.UnitIconDic[changeTo];
+            var formalSideIcon = teamUI.UnitIconDic[main];
+            sideIcon.gameObject.SetActive(true);
+            formalSideIcon.gameObject.SetActive(false);
+            
+            var targetPos = main.WholeT.transform.position;
+            var targetRot = main.WholeT.transform.rotation;
+            
+            if (RMode_Unit.Value != null) // 继承hit数
+            {
+                Sensor.AddOrRemoveSharedUnitInfo(RMode_Unit.Value, teamConfig.myTeam, false);
+                changeTo.FightDataRef._comboHitCount.HitCount.Value = RMode_Unit.Value.FightDataRef._comboHitCount.HitCount.Value;
+            }
+            Sensor.AddOrRemoveSharedUnitInfo(changeTo, teamConfig.myTeam, true);
+            RMode_Unit.Value = changeTo;
+            RMode_Unit.Value._MyBehaviorRunner.ChangeState(stateKey, damage);
+            
+            RMode_Unit.Value.WholeT.transform.position = targetPos;
+            RMode_Unit.Value.WholeT.transform.rotation = targetRot;
+            
+            RMode_Unit.Value.FightDataRef.CurrentHp.Value = main.FightDataRef.CurrentHp.Value;
+            RMode_Unit.Value.FightDataRef.Resistance.Value = main.FightDataRef.Resistance.Value;
+            RMode_Unit.Value.FightDataRef.CriticalGaugeMode = main.FightDataRef.CriticalGaugeMode;
+            main.FightDataRef.IsDead.Value = true;
+            
+            main.WholeT.gameObject.SetActive(false);
+            RMode_Unit.Value.WholeT.gameObject.SetActive(true);
+            
+            EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null, RMode_Unit.Value.WholeT.transform.position, Quaternion.identity, RMode_Unit.Value.geometryCenter).Forget();
+            
+            if (teamConfig.myTeam == RTFightManager.playerTeam && InputsManager != null)
+            {
+                InputsManager.FocusUnit(RMode_Unit.Value, true);
+            }
+            
+            return true;
         }
         
         // 切换队员
@@ -312,7 +394,7 @@ namespace FightScene
             
             foreach (var dataCenter in teamMembers.GetValues())
             {
-                if (dataCenter != null && !dataCenter.FightDataRef.IsDead.Value)
+                if (dataCenter != null && !dataCenter.FightDataRef.IsDead.Value && !dataCenter.IsSub)
                 {
                     if (ChangeFightingUnit(dataCenter))
                     {
@@ -323,5 +405,7 @@ namespace FightScene
             
             return false;
         }
+        
+        
     }
 }

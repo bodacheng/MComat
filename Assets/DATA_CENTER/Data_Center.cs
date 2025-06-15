@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using FightScene;
+using HittingDetection;
 using UnityEngine;
 using UniRx;
 using Soul;
@@ -46,6 +47,9 @@ public partial class Data_Center : MonoBehaviour
     
     private UnitInfo unitInfo;
     public UnitInfo UnitInfo => unitInfo;
+    
+    public bool IsSub => unitInfo != null && unitInfo.id.Contains("sub_");
+    public Func<string, V_Damage, bool> ChangeToSub;
 
     public UnitConfig UnitConfig()
     {
