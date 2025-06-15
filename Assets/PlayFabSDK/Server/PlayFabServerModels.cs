@@ -2110,6 +2110,7 @@ namespace PlayFab.ServerModels
         DataNotAvailable,
         InvalidReportName,
         ResourceNotModified,
+        StudioCreationLimitExceeded,
         MatchmakingEntityInvalid,
         MatchmakingPlayerAttributesInvalid,
         MatchmakingQueueNotFound,
@@ -2414,6 +2415,12 @@ namespace PlayFab.ServerModels
         GameSaveManifestDescriptionUpdateNotAllowed,
         GameSaveTitleConfigNotFound,
         GameSaveTitleAlreadyOnboarded,
+        GameSaveServiceNotEnabledForTitle,
+        GameSaveServiceOnboardingPending,
+        GameSaveManifestNotEligibleAsConflictingVersion,
+        GameSaveServiceUnavailable,
+        GameSaveConflict,
+        GameSaveManifestNotEligibleForRollback,
         StateShareForbidden,
         StateShareTitleNotInFlight,
         StateShareStateNotFound,
@@ -2423,7 +2430,16 @@ namespace PlayFab.ServerModels
         StateShareCreatedStatesLimitExceeded,
         StateShareIdMissingOrMalformed,
         PlayerCreationDisabled,
-        AccountAlreadyExists
+        AccountAlreadyExists,
+        TagInvalid,
+        TagTooLong,
+        StatisticColumnAggregationMismatch,
+        StatisticResetIntervalMismatch,
+        VersionConfigurationCannotBeSpecifiedForLinkedStat,
+        VersionConfigurationIsRequired,
+        InvalidEntityTypeForAggregation,
+        MultiLevelAggregationNotAllowed,
+        AggregationTypeNotAllowedForLinkedStat
     }
 
     [Serializable]
@@ -4320,6 +4336,27 @@ namespace PlayFab.ServerModels
     }
 
     [Serializable]
+    public class LinkBattleNetAccountRequest : PlayFabRequestCommon
+    {
+        /// <summary>
+        /// The optional custom tags associated with the request (e.g. build number, external trace identifiers, etc.).
+        /// </summary>
+        public Dictionary<string,string> CustomTags;
+        /// <summary>
+        /// If another user is already linked to a specific Battle.net account, unlink the other user and re-link.
+        /// </summary>
+        public bool? ForceLink;
+        /// <summary>
+        /// The JSON Web Token (JWT) returned by Battle.net after login
+        /// </summary>
+        public string IdentityToken;
+        /// <summary>
+        /// Unique PlayFab assigned ID of the user on whom the operation will be performed.
+        /// </summary>
+        public string PlayFabId;
+    }
+
+    [Serializable]
     public class LinkedPlatformAccountModel : PlayFabBaseModel
     {
         /// <summary>
@@ -4708,6 +4745,27 @@ namespace PlayFab.ServerModels
         /// Specific Operating System version for the user's device.
         /// </summary>
         public string OS;
+    }
+
+    [Serializable]
+    public class LoginWithBattleNetRequest : PlayFabRequestCommon
+    {
+        /// <summary>
+        /// Automatically create a PlayFab account if one is not currently linked to this ID.
+        /// </summary>
+        public bool? CreateAccount;
+        /// <summary>
+        /// The optional custom tags associated with the request (e.g. build number, external trace identifiers, etc.).
+        /// </summary>
+        public Dictionary<string,string> CustomTags;
+        /// <summary>
+        /// The JSON Web Token (JWT) returned by Battle.net after login
+        /// </summary>
+        public string IdentityToken;
+        /// <summary>
+        /// Flags for which pieces of info to return for the user.
+        /// </summary>
+        public GetPlayerCombinedInfoRequestParams InfoRequestParameters;
     }
 
     /// <summary>
@@ -6575,6 +6633,19 @@ namespace PlayFab.ServerModels
     }
 
     [Serializable]
+    public class UnlinkBattleNetAccountRequest : PlayFabRequestCommon
+    {
+        /// <summary>
+        /// The optional custom tags associated with the request (e.g. build number, external trace identifiers, etc.).
+        /// </summary>
+        public Dictionary<string,string> CustomTags;
+        /// <summary>
+        /// Unique PlayFab assigned ID of the user on whom the operation will be performed.
+        /// </summary>
+        public string PlayFabId;
+    }
+
+    [Serializable]
     public class UnlinkNintendoServiceAccountRequest : PlayFabRequestCommon
     {
         /// <summary>
@@ -7162,6 +7233,10 @@ namespace PlayFab.ServerModels
         /// </summary>
         public UserAppleIdInfo AppleAccountInfo;
         /// <summary>
+        /// Battle.net account information, if a Battle.net account has been linked
+        /// </summary>
+        public UserBattleNetInfo BattleNetAccountInfo;
+        /// <summary>
         /// Timestamp indicating when the user account was created
         /// </summary>
         public DateTime Created;
@@ -7263,6 +7338,19 @@ namespace PlayFab.ServerModels
         /// Apple subject ID
         /// </summary>
         public string AppleSubjectId;
+    }
+
+    [Serializable]
+    public class UserBattleNetInfo : PlayFabBaseModel
+    {
+        /// <summary>
+        /// Battle.net identifier
+        /// </summary>
+        public string BattleNetAccountId;
+        /// <summary>
+        /// Battle.net display name
+        /// </summary>
+        public string BattleNetBattleTag;
     }
 
     [Serializable]
