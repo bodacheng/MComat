@@ -182,7 +182,6 @@ public partial class FightParamsReference
     public void ApplyDamage(V_Damage dmg)
 	{
         HitEffect(dmg);
-
         if (_getHitTriggerEvent.Count > 0)
         {
             foreach (var kv in _getHitTriggerEvent)

@@ -96,7 +96,7 @@ Material:
     m_Ints: []
     m_Floats:
     - PixelSnap: 0
-    - _Animation_Factor: 0.81185174
+    - _Animation_Factor: 0.8963209
     - _AutoManualAnimation: 1
     - _ColorMask: 15
     - _DetailsMaskDistortionMult: 1
@@ -125,3 +125,4 @@ Material:
     - _MainColor: {r: 1, g: 0, b: 0.15225315, a: 1}
     - _OutlineColor: {r: 10.714309, g: 0, b: 90.584694, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

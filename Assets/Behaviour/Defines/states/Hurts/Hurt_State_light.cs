@@ -15,7 +15,7 @@ namespace Soul
             }
             else
             {
-                _Rigidbody.velocity = Vector3.zero;
+                _Rigidbody.linearVelocity = Vector3.zero;
             }
         }
     }

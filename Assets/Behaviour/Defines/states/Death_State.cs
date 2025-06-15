@@ -21,8 +21,8 @@ namespace Soul
         {
             StateType = BehaviorType.KnockOff;
         }
-        
-        public override void AI_State_enter(V_Damage newValue)
+
+        public override void AI_State_enter()
         {
             base.AI_State_enter();
             _DATA_CENTER.FightDataRef.IsDead.Value = true;
@@ -38,9 +38,14 @@ namespace Soul
             _Animator.applyRootMotion = false;
             _Weapon_Animation_Events.ClearMarkerManagers();
             pEvents.CloseAllPersonalityEffects();
-            _Rigidbody.velocity = Vector3.zero;
+            _Rigidbody.linearVelocity = Vector3.zero;
             AnimationManger.AnimationTrigger(AnimationManger.GetRandomKnockOffAnim(),0.05f);
-            //_xz = newValue.attacker._Center.WholeT.forward;
+            FightParamsRef.EnableAllLimbs(false);
+        }
+        
+        public override void AI_State_enter(V_Damage newValue)
+        {
+            AI_State_enter();
             _xz = CalFixPushVector(newValue.impactComingPoint,  newValue.attacker.Center.WholeT.position, gameObject.transform.position, 
                 newValue.from_weapon.damage_type, newValue.from_weapon._WeaponMode);
             rotateTween = RotateToTargetTween(gameObject.transform.position - _xz, 0f);
@@ -49,7 +54,6 @@ namespace Soul
             EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.element), newValue.DamageEffectPoint, newValue.CutRotation, null).Forget();
             _usedYCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting.HDamageYAnimationCurve : FightGlobalSetting.KnockOffYAnimationCurve;
             _usedZCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting.HDamageZAnimationCurve : FightGlobalSetting.KnockOffZAnimationCurve;
-            FightParamsRef.EnableAllLimbs(false);
         }
 
         public override bool Capacity_Exit_Condition()

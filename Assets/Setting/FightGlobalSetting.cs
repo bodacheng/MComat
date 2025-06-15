@@ -47,7 +47,7 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] int arenaEnemyDreamComboAIRate;
     [SerializeField] int energyResolveAfterExtendBoundary = 5;
     [SerializeField] float evolutionModeEnemyHpIncreaseRate = 0.5f;
-    [SerializeField] PhysicMaterial _physicMaterial;
+    [SerializeField] PhysicsMaterial _physicMaterial;
 
     static string fightParamKey = "Config/fight_params";
     public static int SceneStep;//0 :mainmenu 1: fightscene
@@ -93,7 +93,7 @@ public class FightGlobalSetting : ScriptableObject
     public static int _defendHP;
     public static float EvolutionModeEnemyHpIncreaseRate;
     public static int EnergyResolveAfterExtendBoundary;
-    public static PhysicMaterial PhysicMaterial;
+    public static PhysicsMaterial PhysicMaterial;
     
     public void Initialise()
     {

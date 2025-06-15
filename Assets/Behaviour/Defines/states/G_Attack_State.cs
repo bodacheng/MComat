@@ -113,7 +113,7 @@ namespace Soul
                 _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
             if (StateType == BehaviorType.GI)
                 _SkillCancelFlag.TurnRotationAdjustmentStartFlagWithoutstepfoward(1);
-            _Rigidbody.velocity = Vector3.zero;
+            _Rigidbody.linearVelocity = Vector3.zero;
             _rushTimeCounter = 0f;
             _Animator.applyRootMotion = true;
             if (Sensor.GetEnemiesByDistance(false).Count == 0)
@@ -191,7 +191,7 @@ namespace Soul
                 case Phase.needToRush://也就是说冲刺中。
                     if (collider == null)
                     {
-                        _Rigidbody.velocity = Vector3.zero;
+                        _Rigidbody.linearVelocity = Vector3.zero;
                         _phase = Phase.reached;
                     }
                     else
@@ -205,7 +205,7 @@ namespace Soul
                         {
                             AnimationManger.AnimationTrigger(clip_name, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
                             _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
-                            _Rigidbody.velocity = Vector3.zero;
+                            _Rigidbody.linearVelocity = Vector3.zero;
                             _BuffsRunner.EndSubCoroutineOfState(_rushCoroutine);
                             if (Sensor.GetEnemiesByDistance(false).Count > 0)
                             {
@@ -224,7 +224,7 @@ namespace Soul
                     {
                         AnimationManger.AnimationTrigger(clip_name, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
                         _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
-                        _Rigidbody.velocity = Vector3.zero;
+                        _Rigidbody.linearVelocity = Vector3.zero;
                         _BuffsRunner.EndSubCoroutineOfState(_rushCoroutine);
                     }
                     break;

@@ -276,9 +276,9 @@ namespace HeurekaGames.AssetHunterPRO
                         break;
                     }
                 case BuildTargetGroup.Switch:
-                    {
-                        return PlayerSettings.Switch.icons.ToList();
-                    }
+                {
+                    return null; //PlayerSettings.Switch.icons.ToList();
+                }
                 case BuildTargetGroup.tvOS:
                     {
                         break;

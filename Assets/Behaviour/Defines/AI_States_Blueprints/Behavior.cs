@@ -289,8 +289,8 @@ namespace Soul
             }
             _v = relativePos.normalized * acceleration;
             //_Rigidbody.AddForce(v, ForceMode.VelocityChange);
-            _Rigidbody.velocity = _v;
-            return _Rigidbody.velocity.magnitude;
+            _Rigidbody.linearVelocity = _v;
+            return _Rigidbody.linearVelocity.magnitude;
         }
 
         float use_acc;
@@ -301,9 +301,9 @@ namespace Soul
             if (ignoreY)
                 forcedirection.y = 0;
 
-            use_acc += (acceleration - _Rigidbody.velocity.magnitude) * 2;
+            use_acc += (acceleration - _Rigidbody.linearVelocity.magnitude) * 2;
             _Rigidbody.AddForce(use_acc * forcedirection.normalized);
-            return _Rigidbody.velocity.magnitude;
+            return _Rigidbody.linearVelocity.magnitude;
         }
 
         void MoveByChangePosition(Vector3 relativePos, float acceleration, bool ignoreY)
@@ -323,7 +323,7 @@ namespace Soul
         {
             if (rigidbody == null)
                 return;
-            Vector3 currentSpeed = rigidbody.velocity;
+            Vector3 currentSpeed = rigidbody.linearVelocity;
             if (ignoreY)
             {
                 currentSpeed.y = 0;
@@ -337,11 +337,11 @@ namespace Soul
         float current_speed;
         void ClampVelocity(float max_speed)
         {
-            current_speed = _Rigidbody.velocity.magnitude;
+            current_speed = _Rigidbody.linearVelocity.magnitude;
             if (current_speed > max_speed)
             {
-                _v = (max_speed / current_speed) * _Rigidbody.velocity;
-                _Rigidbody.velocity = _v;
+                _v = (max_speed / current_speed) * _Rigidbody.linearVelocity;
+                _Rigidbody.linearVelocity = _v;
             }
         }
 
@@ -349,7 +349,7 @@ namespace Soul
         Quaternion slerp;
         void RotateToVelocity(float turnSpeed, bool ignoreY)
         {
-            dir = _Rigidbody.velocity;
+            dir = _Rigidbody.linearVelocity;
             if (ignoreY)
                 dir.y = 0;
             _dirQ = Quaternion.LookRotation(dir);
@@ -360,7 +360,7 @@ namespace Soul
         // RotateToVelocity in reverse
         void RotateToVelocityNegative(float turnSpeed, bool ignoreY)
         {
-            dir = ignoreY ? -new Vector3(this._Rigidbody.velocity.x, 0f, this._Rigidbody.velocity.z) : -this._Rigidbody.velocity;
+            dir = ignoreY ? -new Vector3(this._Rigidbody.linearVelocity.x, 0f, this._Rigidbody.linearVelocity.z) : -this._Rigidbody.linearVelocity;
 
             if (dir.magnitude > 0.1)
             {
