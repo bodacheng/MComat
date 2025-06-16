@@ -63,12 +63,16 @@ namespace Soul
 
         public override void AI_State_enter(V_Damage newValue)
         {
-            if (this._DATA_CENTER.ChangeToSub != null && !changedToSubUnit)
+            if (_DATA_CENTER.FightDataRef.CurrentHp.Value < _DATA_CENTER.FightDataRef.MaxHp * CommonSetting.ChangeToSubHpPercent)
             {
-                changedToSubUnit = this._DATA_CENTER.ChangeToSub != null && this._DATA_CENTER.ChangeToSub.Invoke(this.StateKey, newValue);
-                if (changedToSubUnit)
-                    return;
+                if (this._DATA_CENTER.ChangeToSub != null && !changedToSubUnit)
+                {
+                    changedToSubUnit = this._DATA_CENTER.ChangeToSub != null && this._DATA_CENTER.ChangeToSub.Invoke(this.StateKey, newValue);
+                    if (changedToSubUnit)
+                        return;
+                }
             }
+
             target = newValue;
             base.AI_State_enter();
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);

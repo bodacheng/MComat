@@ -86,6 +86,7 @@ namespace FightScene
                 DicAdd<Data_Center, SideUnitIcon>.Add(UnitIconDic, center, sideIcon);
                 
                 var maxHp = center.FightDataRef.CurrentHp.Value;
+                center.FightDataRef.MaxHp = maxHp;
                 center.FightDataRef.CurrentHp.Subscribe(x =>
                 {
                     RefreshHPBar(center, x, maxHp);

@@ -150,13 +150,7 @@ namespace FightScene
 
                 if (RTFightManager.Target.SubUnitDic.TryGetValue(center.UnitInfo.r_id, out var subUnitInfo))
                 {
-                    var maxHp = center.FightDataRef.CurrentHp.Value;
-                    center.ChangeToSub = (x, y) =>
-                    {
-                        if (center.FightDataRef.CurrentHp.Value < maxHp * CommonSetting.ChangeToSubHpPercent)
-                            return ChangeFightingUnitToHerSub(center, x, y);
-                        return false;
-                    };
+                    center.ChangeToSub = (x, y) => ChangeFightingUnitToHerSub(center, x, y);
                 }
             }
         }

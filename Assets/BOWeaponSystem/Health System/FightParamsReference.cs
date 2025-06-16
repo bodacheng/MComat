@@ -24,6 +24,7 @@ public partial class FightParamsReference
     
     public ReactiveProperty<bool> IsDead { get; set; } = new ReactiveProperty<bool>(false);
     public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
+    public float MaxHp { get; set; }
     private readonly ReactiveProperty<int> _resistance = new ReactiveProperty<int>(0);
 
     public ReactiveProperty<int> Resistance

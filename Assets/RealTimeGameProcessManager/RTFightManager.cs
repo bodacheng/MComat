@@ -53,7 +53,7 @@ namespace FightScene
         
         public async UniTask LoadUnits(FightInfo info)
         {
-            if (info.FightMode == FightMode.Rotate)
+            if (info.FightMode is FightMode.Rotate or FightMode.Evolve)
             {
                 void AddSubUnit(UnitInfo unitInfo, Team team)
                 {
