@@ -136,7 +136,7 @@ namespace FightScene
                         disposableUnit.Disposable = Observable.Amb<Unit>(boolObservable, timerObservable)
                             .Subscribe(async (_) =>
                             {
-                                if (center != null)
+                                if (center != null && !center.ChangedToSubUnit)
                                 {
                                     await EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null,
                                         center.geometryCenter.position, Quaternion.identity, null);

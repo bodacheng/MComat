@@ -14,7 +14,6 @@ namespace Soul
         SingleAssignmentDisposable _physicMissionDisposable;
         private float hurtAnimDuration = 0.05f;
         private Sequence mySequence;
-        private bool changedToSubUnit;
         
         void PlayHurtAnim(V_Damage newValue)
         {
@@ -65,10 +64,10 @@ namespace Soul
         {
             if (_DATA_CENTER.FightDataRef.CurrentHp.Value < _DATA_CENTER.FightDataRef.MaxHp * CommonSetting.ChangeToSubHpPercent)
             {
-                if (this._DATA_CENTER.ChangeToSub != null && !changedToSubUnit)
+                if (this._DATA_CENTER.ChangeToSub != null && !_DATA_CENTER.ChangedToSubUnit)
                 {
-                    changedToSubUnit = this._DATA_CENTER.ChangeToSub != null && this._DATA_CENTER.ChangeToSub.Invoke(this.StateKey, newValue);
-                    if (changedToSubUnit)
+                    _DATA_CENTER.ChangedToSubUnit = this._DATA_CENTER.ChangeToSub != null && this._DATA_CENTER.ChangeToSub.Invoke(this.StateKey, newValue);
+                    if (_DATA_CENTER.ChangedToSubUnit)
                         return;
                 }
             }

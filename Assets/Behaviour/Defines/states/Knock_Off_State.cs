@@ -17,12 +17,10 @@ namespace Soul
         float _temp;
         Tweener rotateTween;
         float curveEndTime;
-        private bool changedToSubUnit;
         
         public Knock_Off_State()
         {
             StateType = BehaviorType.KnockOff;
-            changedToSubUnit = false;
         }
         
         public override void AI_State_enter(V_Damage value)
@@ -30,10 +28,10 @@ namespace Soul
             if (_DATA_CENTER.FightDataRef.CurrentHp.Value <
                 _DATA_CENTER.FightDataRef.MaxHp * CommonSetting.ChangeToSubHpPercent)
             {
-                if (this._DATA_CENTER.ChangeToSub != null && !changedToSubUnit)
+                if (this._DATA_CENTER.ChangeToSub != null && !_DATA_CENTER.ChangedToSubUnit)
                 {
-                    changedToSubUnit = this._DATA_CENTER.ChangeToSub != null && this._DATA_CENTER.ChangeToSub.Invoke(this.StateKey, value);
-                    if (changedToSubUnit)
+                    _DATA_CENTER.ChangedToSubUnit = this._DATA_CENTER.ChangeToSub != null && this._DATA_CENTER.ChangeToSub.Invoke(this.StateKey, value);
+                    if (_DATA_CENTER.ChangedToSubUnit)
                         return;
                 }
             }

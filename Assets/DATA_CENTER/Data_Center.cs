@@ -49,6 +49,8 @@ public partial class Data_Center : MonoBehaviour
     public UnitInfo UnitInfo => unitInfo;
     
     public bool IsSub => unitInfo != null && unitInfo.id.Contains("sub_");
+    public bool ChangedToSubUnit { get; set; }
+    
     public Func<string, V_Damage, bool> ChangeToSub;
 
     public UnitConfig UnitConfig()
@@ -148,7 +150,7 @@ public partial class Data_Center : MonoBehaviour
             Phase2Initialized = true;
         }
         
-        WholeT.gameObject.SetActive(true);// 动画模块的一些处理要求active状态下运行
+        //WholeT.gameObject.SetActive(true);// 2025 6月：之前号称？动画模块的一些处理要求active状态下运行，但这给进化模式的爆衣切换形成一些障碍。。。试着关闭。。
         
         _MyBehaviorRunner.FormFightingSetsByNineAndTwo(skillSet);
         _MyBehaviorRunner.INIStates(this);
@@ -240,6 +242,8 @@ public partial class Data_Center : MonoBehaviour
             {
                 this.Sensor.SensorDetectionResultSortProcess(x);
             });
+
+        ChangedToSubUnit = false;
     }
 
     private IDisposable _hpSubscription;
