@@ -15,6 +15,20 @@ namespace Soul
         private float hurtAnimDuration = 0.05f;
         private Sequence mySequence;
         
+        #region Shake
+        private Tweener _shakeTweener;
+        private readonly float duration   = 0.3f;
+        private readonly float magnitude  = 0.6f;   // 位移幅度（米）
+        private readonly int   vibrato    = 100;       // 抖动次数
+        private readonly float randomness = 20f;     // 抖动方向离散度
+        #endregion
+
+        void Shake()
+        {
+            _shakeTweener = _DATA_CENTER.WholeT.DOPunchPosition(-_DATA_CENTER.WholeT.forward * magnitude, duration,
+                vibrato, randomness);
+        }
+        
         void PlayHurtAnim(V_Damage newValue)
         {
             if (_AIStateRunner.GetLastState().StateKey == "KnockOff" && _BasicPhysicSupport.hiddenMethods.Grounded)
@@ -46,6 +60,7 @@ namespace Soul
         public override void AI_State_exit()
         {
             base.AI_State_exit();
+            _shakeTweener?.Kill();
             _Rigidbody.mass = FightGlobalSetting.FighterRigidMass;
             _BasicPhysicSupport.OpenEnemyTouchingDrag(0);
             FightParamsRef.GettingDamage = false;
@@ -62,6 +77,8 @@ namespace Soul
 
         public override void AI_State_enter(V_Damage newValue)
         {
+            _shakeTweener?.Kill();
+            
             if (_DATA_CENTER.FightDataRef.CurrentHp.Value < _DATA_CENTER.FightDataRef.MaxHp * CommonSetting.ChangeToSubHpPercent)
             {
                 if (this._DATA_CENTER.ChangeToSub != null && !_DATA_CENTER.ChangedToSubUnit)
@@ -71,7 +88,7 @@ namespace Soul
                         return;
                 }
             }
-
+            
             target = newValue;
             base.AI_State_enter();
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
@@ -120,11 +137,13 @@ namespace Soul
                     case DamageType.supper_damage_forward:
                         _usedDizzyTime = FightGlobalSetting.SuperHitLastingTime;
                         HeavyStart(target);
+                        Shake();
                         EffectsManager.GenerateEffect("electric_s_e", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.element), newValue.DamageEffectPoint, newValue.CutRotation, _DATA_CENTER.geometryCenter).Forget();
                         break;
                     default:
                         _usedDizzyTime = FightGlobalSetting.LightHitLastingTime;
                         NormalStart(target);
+                        Shake();
                         break;
                 }
             }
@@ -135,10 +154,12 @@ namespace Soul
                     case DamageType.slight_damage_forward:
                         _usedDizzyTime = FightGlobalSetting.SlightHitLastingTime;
                         NormalStart(target);
+                        Shake();
                         break;
                     case DamageType.light_damage_forward:
                         _usedDizzyTime = FightGlobalSetting.LightHitLastingTime;
                         NormalStart(target);
+                        Shake();
                         break;
                     case DamageType.pull_slight:
                         _usedDizzyTime = FightGlobalSetting.LightHitLastingTime;
@@ -147,18 +168,22 @@ namespace Soul
                     case DamageType.stable_damage:
                         _usedDizzyTime = FightGlobalSetting.LightHitLastingTime;
                         NormalStart(target);
+                        Shake();
                         break;
                     case DamageType.stable_damage_forward:
                         _usedDizzyTime = FightGlobalSetting.LightHitLastingTime;
                         HeavyStart(target);
+                        Shake();
                         break;
                     case DamageType.heavy_damage_forward:
                         _usedDizzyTime = FightGlobalSetting.HeavyHitLastingTime;
                         HeavyStart(target);
+                        Shake();
                         break;
                     case DamageType.supper_damage_forward:
                         _usedDizzyTime = FightGlobalSetting.SuperHitLastingTime;
                         HeavyStart(target);
+                        Shake();
                         EffectsManager.GenerateEffect("electric_s_e", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.element), newValue.DamageEffectPoint, newValue.CutRotation, _DATA_CENTER.geometryCenter).Forget();
                         break;
                     case DamageType.draw:
@@ -167,6 +192,7 @@ namespace Soul
                         break;
                     case DamageType.explosion:
                         ExplosionDamageStart(target);
+                        Shake();
                         break;
                     case DamageType.push_to_mid:
                         _usedDizzyTime = FightGlobalSetting.HeavyHitLastingTime;
@@ -182,9 +208,11 @@ namespace Soul
                         break;
                     case DamageType.sekka:
                         SekkaStart(target.from_weapon.element);
+                        Shake();
                         break;
                     case DamageType.time_pause:
                         TimePauseStart();
+                        Shake();
                         return;
                     case DamageType.high:
                         // 20201008 修改。high攻击不外乎是直接让对手被击飞，那么击飞状态里确实有相应的一切。
