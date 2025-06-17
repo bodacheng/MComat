@@ -16,7 +16,7 @@ namespace FightScene
         public void ToStartPosRotate()
         {
             Data_Center unit = null;
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 5; i++)
             {
                 var dataCenter = teamMembers.Get(0,i);
                 if (dataCenter == null || dataCenter.UnitInfo.id.Contains("sub"))
@@ -24,13 +24,12 @@ namespace FightScene
                     continue;
                 }
                 
-                if (unit == null)
-                {
-                    unit = dataCenter;
-                }
+                unit = dataCenter;
                 dataCenter.WholeT.parent = null;
                 dataCenter.WholeT.gameObject.SetActive(true);
+                break;
             }
+            
             ChangeFightingUnit(unit, true, TeamStandPoints[0]);
         }
         
