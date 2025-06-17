@@ -49,7 +49,7 @@ namespace Soul
             {
                 hurtAnimKey = newValue.DamageEffectPoint.y > _DATA_CENTER.geometryCenter.position.y ? "high" : "low";
             }
-
+            
             var obj = AnimationManger.GetRandomHurtAnim(hurtAnimKey);
             AnimationManger.AnimationTrigger(obj, hurtAnimDuration);
             AnimationManger.TriggerExpression(Facial.hit);

@@ -63,9 +63,17 @@ namespace FightScene
                         subAdam.id = "sub_" + unitInfo.id;
                         subAdam.r_id = subUnitRid;
                         if (team == Team.player1)
-                            info.FightMembers.HeroSets.Set(0, info.FightMembers.HeroSets.GetValues().Count, subAdam);
+                        {
+                            var alreadyThere = info.FightMembers.HeroSets.GetValues().FirstOrDefault(x => x.id == subAdam.id);
+                            if (alreadyThere == null)
+                                info.FightMembers.HeroSets.Set(0, info.FightMembers.HeroSets.GetValues().Count, subAdam);
+                        }
                         else
-                            info.FightMembers.EnemySets.Set(0, info.FightMembers.EnemySets.GetValues().Count, subAdam);
+                        {
+                            var alreadyThere = info.FightMembers.EnemySets.GetValues().FirstOrDefault(x => x.id == subAdam.id);
+                            if (alreadyThere == null)
+                                info.FightMembers.EnemySets.Set(0, info.FightMembers.EnemySets.GetValues().Count, subAdam);
+                        }
                     }
                 }
                 
