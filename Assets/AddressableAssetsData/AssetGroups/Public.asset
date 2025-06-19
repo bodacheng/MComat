@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Public
   m_EditorClassIdentifier: 
   m_GroupName: Public
-  m_Data:
-    m_SerializedData: []
   m_GUID: 90d86ee747b974ade8c69a8f00d2c647
   m_SerializeEntries:
   - m_GUID: 0140f0e8e47530b438adcf26e3b875e4
@@ -781,12 +779,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9f36d24197196874ba276deaa7efccca
     m_Address: FrostCloud
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a2a06e22c08354d9699356710b69ca9c
-    m_Address: OmniShade URP
     m_ReadOnly: 0
     m_SerializedLabels:
     - public

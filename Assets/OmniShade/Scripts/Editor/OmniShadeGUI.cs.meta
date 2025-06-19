@@ -9,3 +9,10 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 215111
+  packageName: OmniShade - Mobile Optimized Shader
+  packageVersion: 1.9.2
+  assetPath: Assets/OmniShade/Scripts/Editor/OmniShadeGUI.cs
+  uploadId: 761921

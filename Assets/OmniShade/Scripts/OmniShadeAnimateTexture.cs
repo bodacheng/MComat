@@ -1,6 +1,6 @@
 //------------------------------------
 //             OmniShade
-//     Copyright© 2023 OmniShade     
+//     Copyright© 2025 OmniShade     
 //------------------------------------
 
 using UnityEngine;
@@ -15,7 +15,7 @@ public class OmniShadeAnimateTexture : MonoBehaviour {
 	public enum OmniShadeTexture {
 		// DO NOT CHANGE THIS ORDER
 		MainTexture, SpecularMap, EmissiveMap, DetailMap, LightmapTex, MatCapTexture, NormalMap, 
-		Layer1Texture, Layer2Texture, Layer3Texture, TransparencyMaskText, HeightColorsTex,
+		Layer1Texture, Layer2Texture, Layer3Texture, TransparencyMaskTex, HeightColorsTex,
 		ShadowOverlayTex, TopTex, NormalTopTex, NormalMap2,
 	}
 

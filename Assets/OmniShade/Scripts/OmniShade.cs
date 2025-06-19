@@ -1,6 +1,6 @@
 //------------------------------------
 //             OmniShade
-//     Copyright© 2023 OmniShade     
+//     Copyright© 2025 OmniShade     
 //------------------------------------
 
 using UnityEngine;

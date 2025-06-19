@@ -9,8 +9,8 @@ and hopefully give you some inspiration for your next project.
 Here are also some handy links so you don't get lost:
 
 Getting Started Guide: https://www.omnishade.io/documentation/getting-started
-Discord: https://discord.gg/skf4SR7aRf
-Unity Forum: https://forum.unity.com/threads/released-omnishade-mobile-optimized-shader.1240633
+Discord: https://discord.gg/kJtqCW44s5
+Unity Forum: https://discussions.unity.com/t/released-omnishade-mobile-optimized-shader/872001
 YouTube: https://www.youtube.com/channel/UC9zwQIusdd2nU9A6jm2Z3Zw
 
 If you have any questions, don't hesitate to drop us a line.

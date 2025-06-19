@@ -1,9 +1,7 @@
 fileFormatVersion: 2
-guid: 48eacffeb81a245539e6a2a897e7ab2d
-ShaderImporter:
+guid: a5e550829f8084fb6a2ed5cb130e43e0
+AssemblyDefinitionImporter:
   externalObjects: {}
-  defaultTextures: []
-  nonModifiableTextures: []
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -12,5 +10,5 @@ AssetOrigin:
   productId: 215111
   packageName: OmniShade - Mobile Optimized Shader
   packageVersion: 1.9.2
-  assetPath: Assets/OmniShade/Shaders/OmniShadeURP.cginc
+  assetPath: Assets/OmniShade/Scripts/Editor/OmniShade.Editor.asmdef
   uploadId: 761921
