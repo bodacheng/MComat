@@ -16,7 +16,6 @@ Material:
   - ANIME_SOFT
   - BASE_SATURATION
   - DIFFUSE
-  - FOG
   - MATCAP
   - MATCAP_PERSPECTIVE
   - NORMAL_MAP
@@ -202,7 +201,7 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _Flat: 0
-    - _Fog: 1
+    - _Fog: 0
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossinessSource: 0

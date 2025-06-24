@@ -244,7 +244,7 @@ Material:
     - _DestBlend: 10
     - _DetailAlbedoMapScale: 1
     - _DetailBlend: 2
-    - _DetailBrightness: 8.42
+    - _DetailBrightness: 1
     - _DetailContrast: 1
     - _DetailLighting: 0
     - _DetailNormalMapScale: 1
@@ -305,7 +305,7 @@ Material:
     - _Mode: 0
     - _Normal: 0
     - _Normal2Strength: 1
-    - _NormalStrength: 0
+    - _NormalStrength: 1
     - _NormalUV: 0
     - _NormalUV2: 0
     - _OcclusionStrength: 0
@@ -420,7 +420,7 @@ Material:
     - _Layer3Color: {r: 1, g: 1, b: 1, a: 1}
     - _LightmapColor: {r: 1, g: 1, b: 1, a: 1}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MatCapRot: {r: 0, g: 0, b: 180, a: 180}
+    - _MatCapRot: {r: 0, g: 0, b: 0, a: 0}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}

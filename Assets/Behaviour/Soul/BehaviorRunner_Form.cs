@@ -48,7 +48,7 @@ namespace Soul
 
                     var keyValuePair4 = new KeyValuePair<string, string>("DangerousVeryClose", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(keyValuePair4);
-                    ConditionAndRespondPriority.Set(keyValuePair4.Key, keyValuePair4.Value, 2);
+                    ConditionAndRespondPriority.Set(keyValuePair4.Key, keyValuePair4.Value, 3);
                     
                     var keyValuePairE = new KeyValuePair<string, string>("EnemyClose", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(keyValuePairE);
