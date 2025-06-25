@@ -4,7 +4,6 @@ using UniRx;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using HittingDetection;
-using Soul;
 
 namespace FightScene
 {
@@ -19,11 +18,10 @@ namespace FightScene
             for (int i = 0; i < 5; i++)
             {
                 var dataCenter = teamMembers.Get(0,i);
-                if (dataCenter == null || dataCenter.UnitInfo.id.Contains("sub"))
+                if (dataCenter == null || dataCenter.IsSub)
                 {
                     continue;
                 }
-                
                 unit = dataCenter;
                 dataCenter.WholeT.parent = null;
                 dataCenter.WholeT.gameObject.SetActive(true);
@@ -119,7 +117,8 @@ namespace FightScene
                             }
                             else
                             {
-                                ToNewUnit(2);
+                                if (!center.ChangedToSubUnit)
+                                    ToNewUnit(2);
                             }
                         }
                         
@@ -167,7 +166,7 @@ namespace FightScene
             Data_Center changeTo = null;
             foreach (var dataCenter in teamMembers.GetValues())
             {
-                if ("sub_" + main.UnitInfo.id == dataCenter.UnitInfo.id)
+                if ("sub_" + main.UnitInfo.Guid == dataCenter.UnitInfo.id)
                 {
                     changeTo = dataCenter;
                     break;
@@ -193,6 +192,7 @@ namespace FightScene
             var sideIcon = teamUI.UnitIconDic[changeTo];
             var formalSideIcon = teamUI.UnitIconDic[main];
             sideIcon.gameObject.SetActive(true);
+            sideIcon.Icon.gameObject.SetActive(true);
             formalSideIcon.gameObject.SetActive(false);
             
             var targetPos = main.WholeT.transform.position;
@@ -213,6 +213,7 @@ namespace FightScene
             RMode_Unit.Value.FightDataRef.CurrentHp.Value = main.FightDataRef.CurrentHp.Value;
             RMode_Unit.Value.FightDataRef.Resistance.Value = main.FightDataRef.Resistance.Value;
             RMode_Unit.Value.FightDataRef.CriticalGaugeMode = main.FightDataRef.CriticalGaugeMode;
+            main.ChangedToSubUnit = true;
             main.FightDataRef.IsDead.Value = true;
             
             main.WholeT.gameObject.SetActive(false);
@@ -369,7 +370,8 @@ namespace FightScene
         
         public void ReadyForNextMember(Data_Center next)
         {
-            waitingMember = next;
+            if (!next.IsSub)
+                waitingMember = next;
         }
         
         bool RandomToAliveUnit()

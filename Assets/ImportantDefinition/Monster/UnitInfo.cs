@@ -22,9 +22,16 @@ public class UnitInfo
         copy.set = copy.set.DeepCopy();
         return copy;
     }
+    
+    private string guid;
+    /// <summary>返回此对象的全局唯一 ID。</summary>
+    public string Guid => guid;
 
     public UnitInfo()
     {
+        this.guid = string.IsNullOrEmpty(guid)
+            ? System.Guid.NewGuid().ToString("N")   // 32 位无连字符
+            : guid;
     }
     
     public UnitInfo(string instanceID, string r_id, SkillSet skillSet)
@@ -32,6 +39,9 @@ public class UnitInfo
         id = instanceID;
         this.r_id = r_id;
         set = skillSet;
+        this.guid = string.IsNullOrEmpty(guid)
+            ? System.Guid.NewGuid().ToString("N")   // 32 位无连字符
+            : guid;
     }
     
     public static UnitInfo GetUnitInfo(UnitInfo info)

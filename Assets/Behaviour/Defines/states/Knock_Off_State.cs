@@ -30,8 +30,8 @@ namespace Soul
             {
                 if (this._DATA_CENTER.ChangeToSub != null && !_DATA_CENTER.ChangedToSubUnit)
                 {
-                    _DATA_CENTER.ChangedToSubUnit = this._DATA_CENTER.ChangeToSub != null && this._DATA_CENTER.ChangeToSub.Invoke(this.StateKey, value);
-                    if (_DATA_CENTER.ChangedToSubUnit)
+                    var changedToSub = this._DATA_CENTER.ChangeToSub != null && this._DATA_CENTER.ChangeToSub.Invoke(this.StateKey, value);
+                    if (changedToSub)
                         return;
                 }
             }
