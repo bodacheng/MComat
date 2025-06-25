@@ -19,7 +19,7 @@ namespace Soul
         private Tweener _shakeTweener;
         private readonly float duration   = 0.3f;
         private readonly float magnitude  = 0.6f;   // 位移幅度（米）
-        private readonly int   vibrato    = 100;       // 抖动次数
+        private readonly int   vibrato    = 80;       // 抖动次数
         private readonly float randomness = 20f;     // 抖动方向离散度
         #endregion
 

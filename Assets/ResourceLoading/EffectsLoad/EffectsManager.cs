@@ -1,15 +1,12 @@
-﻿using UniRx;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Animations;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 public static class EffectsManager
 {
     // 以下的重点是主界面和战斗界面通用问题
     static readonly IDictionary<string, DecompositionPool> EffectPoolsDic = new Dictionary<string, DecompositionPool>();
-    static AsyncOperationHandle<GameObject> _handle;
     
     static UniTask<GameObject> TryLoadEffectPrefab(string key)
     {
@@ -62,7 +59,7 @@ public static class EffectsManager
     static DecompositionPool ConstructEffectPoolWithPrefabAndKey(GameObject prefab, string key, int iniCount)
     {
         var poolToConstruct = new DecompositionPool(prefab);
-        poolToConstruct.PreloadAsync(iniCount, 1).Subscribe(_ => {});//Debug.Log("已经为对象池:"+key+"预留"+ini_count+"个物件")
+        poolToConstruct.PreloadAsync(iniCount, 1);
         if (EffectPoolsDic.ContainsKey(key))
             EffectPoolsDic[key] = poolToConstruct;
         else

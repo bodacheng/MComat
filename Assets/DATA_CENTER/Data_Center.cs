@@ -63,12 +63,6 @@ public partial class Data_Center : MonoBehaviour
         return Phase1Initialized && Phase2Initialized;
     }
     
-    void Awake()
-    {
-        if (geometryCenter == null)
-            geometryCenter = gameObject.transform; 
-    }
-
     private void OnDestroy()
     {
         AnimationManger.AnimFreezeSequence?.Kill();

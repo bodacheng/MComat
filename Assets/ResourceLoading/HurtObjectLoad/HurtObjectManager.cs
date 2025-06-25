@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UniRx;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 public static class HurtObjectManager
 {
     static DecompositionPool _defaultHitBoxPool;
     static readonly IDictionary<string, DecompositionPool> HurtPoolDic = new Dictionary<string, DecompositionPool>();
-    static AsyncOperationHandle<GameObject> _handle;
     
     static UniTask<GameObject> TryLoadWeaponPrefab(string key)
     {
@@ -155,10 +152,7 @@ public static class HurtObjectManager
         if (prefab != null)
         {
             var poolToConstruct = new DecompositionPool(prefab);
-            poolToConstruct.PreloadAsync(iniCount, 1).Subscribe(_ =>
-            {
-                //Debug.Log(key+ " count："+ poolToConstruct.Count);
-            });
+            poolToConstruct.PreloadAsync(iniCount, 1);
             DicAdd<string, DecompositionPool>.Add(HurtPoolDic, key, poolToConstruct);
             return poolToConstruct;
         }
