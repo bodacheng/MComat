@@ -1,4 +1,4 @@
-// EnableGpuInstancingForFx_Unity6_Fallback.cs
+// EnableGpuInstancingForFx_Unity6_WithPSR.cs
 // 放到 Assets/Editor/ 下
 using System;
 using System.Collections.Generic;
@@ -8,97 +8,106 @@ using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEngine;
 
-public static class EnableGpuInstancingForFx_Unity6_Fallback
+public static class EnableGpuInstancingForFx_Unity6_WithPSR
 {
-    // ☆ 可按需修改：只处理这些组，留空 = 全部组
-    private static readonly string[] GroupNameFilters = { "Effects" };
-    // ☆ 可按需修改：只处理带这些标签的 Addressables 条目，留空 = 不筛标签
-    private static readonly string[] LabelFilters     = { /* "weapon" */ };
+    private static readonly string[] GroupNameFilters = { "HurtObjects" }; // 只处理这些组，留空=全部
+    private static readonly string[] LabelFilters     = { /* "weapon" */ }; // 只处理带这些标签的条目，留空=全部
 
-    [MenuItem("Tools/Addressables/批量开启 GPU Instancing (Unity6-Fallback)")]
+    [MenuItem("Tools/Addressables/批量开启 GPU Instancing (Unity6 + PSR)")]
     private static void Run()
     {
         var settings = AddressableAssetSettingsDefaultObject.Settings;
         if (settings == null)
         {
-            Debug.LogError("找不到 AddressableAssetSettings，请先初始化 Addressables。");
+            Debug.LogError("Addressables 未初始化，请先启用 Addressables。");
             return;
         }
 
-        // 先筛组
         var groups = settings.groups
             .Where(g => !g.ReadOnly && !g.IsDefaultGroup())
             .Where(g => GroupNameFilters.Length == 0 || GroupNameFilters.Any(f => g.Name.Contains(f)));
 
-        int processed = 0, updated = 0;
+        int processedMat = 0, updatedMat = 0;
+        int processedPSR = 0, updatedPSR = 0;
 
         AssetDatabase.StartAssetEditing();
         try
         {
             foreach (var group in groups)
             {
-                // 用来去重
+                // 收集所有 Prefab 路径（包含文件夹内递归）
                 var prefabPaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-                // 遍历条目，把文件夹里的 Prefab + 直接的 Prefab 都捞出来
                 foreach (var entry in group.entries)
                 {
                     var path = entry.AssetPath;
-                    if (string.IsNullOrEmpty(path))
-                        continue;
+                    if (string.IsNullOrEmpty(path)) continue;
 
-                    // 1) 如果这是个文件夹
                     if (AssetDatabase.IsValidFolder(path))
                     {
-                        // 在该文件夹下查找所有 Prefab
-                        var guids = AssetDatabase.FindAssets("t:Prefab", new[]{ path });
-                        foreach (var guid in guids)
+                        // 递归找出该文件夹下的所有 Prefab
+                        foreach (var guid in AssetDatabase.FindAssets("t:Prefab", new[]{ path }))
                         {
                             var p = AssetDatabase.GUIDToAssetPath(guid);
                             if (string.IsNullOrEmpty(p)) continue;
-                            // （可选）按 Label 过滤：如果你需要只对带标签的 Prefab 生效：
                             if (LabelFilters.Length > 0)
                             {
-                                var assetEntry = settings.FindAssetEntry(AssetDatabase.AssetPathToGUID(p));
-                                if (assetEntry == null || !LabelFilters.Any(lb => assetEntry.labels.Contains(lb)))
-                                    continue;
+                                var e = settings.FindAssetEntry(AssetDatabase.AssetPathToGUID(p));
+                                if (e == null || !LabelFilters.Any(lb => e.labels.Contains(lb))) continue;
                             }
                             prefabPaths.Add(p);
                         }
                     }
-                    // 2) 如果这是个 Prefab 文件
                     else if (path.EndsWith(".prefab", StringComparison.OrdinalIgnoreCase))
                     {
-                        // （同上，可以加 Label 过滤）
+                        if (LabelFilters.Length > 0)
+                        {
+                            var e = settings.FindAssetEntry(AssetDatabase.AssetPathToGUID(path));
+                            if (e == null || !LabelFilters.Any(lb => e.labels.Contains(lb))) continue;
+                        }
                         prefabPaths.Add(path);
                     }
                 }
 
-                // 真正处理每个 Prefab
+                // 处理每个 Prefab
                 foreach (var prefabPath in prefabPaths)
                 {
                     var root = PrefabUtility.LoadPrefabContents(prefabPath);
                     bool anyChange = false;
 
+                    // 遍历所有 Renderer（包含 ParticleSystemRenderer）
                     foreach (var rdr in root.GetComponentsInChildren<Renderer>(true))
                     {
+                        // —— 1) 材质层面的 GPU Instancing —— 
                         foreach (var mat in rdr.sharedMaterials)
                         {
                             if (mat == null) continue;
-                            processed++;
-
+                            processedMat++;
                             if (!mat.enableInstancing)
                             {
-                                Undo.RecordObject(mat, "Enable Instancing");
+                                Undo.RecordObject(mat, "Enable GPU Instancing on Material");
                                 mat.enableInstancing = true;
                                 EditorUtility.SetDirty(mat);
-
-                                // 确认是不是生效了
                                 if (mat.enableInstancing)
                                 {
-                                    updated++;
+                                    updatedMat++;
                                     anyChange = true;
                                 }
+                            }
+                        }
+
+                        // —— 2) ParticleSystemRenderer 专属的 GPU Instancing —— 
+                        if (rdr is ParticleSystemRenderer psr)
+                        {
+                            processedPSR++;
+                            // 只有 Mesh 模式下才有这个选项
+                            if (psr.renderMode == ParticleSystemRenderMode.Mesh && !psr.enableGPUInstancing)
+                            {
+                                Undo.RecordObject(psr, "Enable GPU Instancing on ParticleSystemRenderer");
+                                psr.enableGPUInstancing = true;
+                                EditorUtility.SetDirty(psr);
+                                updatedPSR++;
+                                anyChange = true;
+                                Debug.Log("记录 GPU Instancing on ParticleSystemRenderer："+ prefabPath);
                             }
                         }
                     }
@@ -117,6 +126,6 @@ public static class EnableGpuInstancingForFx_Unity6_Fallback
             AssetDatabase.Refresh();
         }
 
-        Debug.Log($"【完成】共扫描 {processed} 个材质，成功开启 {updated} 个 GPU Instancing。");
+        Debug.Log($"完成：材质检查 {processedMat} 张，开启 {updatedMat} 张；ParticleSystemRenderer 检查 {processedPSR} 个，开启 {updatedPSR} 个。");
     }
 }
