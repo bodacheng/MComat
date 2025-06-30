@@ -10,7 +10,7 @@ using UnityEngine;
 
 public static class EnableGpuInstancingForFx_Unity6_WithPSR
 {
-    private static readonly string[] GroupNameFilters = { "HurtObjects" }; // 只处理这些组，留空=全部
+    private static readonly string[] GroupNameFilters = { "Effects" }; // 只处理这些组，留空=全部
     private static readonly string[] LabelFilters     = { /* "weapon" */ }; // 只处理带这些标签的条目，留空=全部
 
     [MenuItem("Tools/Addressables/批量开启 GPU Instancing (Unity6 + PSR)")]

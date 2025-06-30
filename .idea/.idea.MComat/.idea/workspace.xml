@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d35965f-97cc-4db1-bf97-1dc49bab43ba" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MComat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MComat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Asset/Fantasy Demon Caves/Material/Fantasy_Demon _Caves_V3.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Asset/Fantasy Demon Caves/Material/Fantasy_Demon _Caves_V3.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Asset/Fantasy Demon Caves/Material/Fantasy_Demon _Caves_V3_alpha.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Asset/Fantasy Demon Caves/Material/Fantasy_Demon _Caves_V3_alpha.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Asset/Fantasy Demon Caves/Material/bush.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Asset/Fantasy Demon Caves/Material/bush.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Asset/Fantasy Demon Caves/Material/leaf_alpha.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Asset/Fantasy Demon Caves/Material/leaf_alpha.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Asset/OrangedKeys/TitleFX/Materials/VA/R.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Asset/OrangedKeys/TitleFX/Materials/VA/R.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Asset/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Asset/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Editor/EnableGpuInstancingForFx.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Editor/EnableGpuInstancingForFx.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +14,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b859bf87249b46cb889259d09a2a7a199bde00/d4/a5024006/ShaderUtil.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c707bc8d6a0a472481677953c6a96a081df400/68/c49acdda/Material.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -93,6 +90,7 @@
       <workItem from="1745062580412" duration="8642000" />
       <workItem from="1749448706212" duration="2956000" />
       <workItem from="1749988908796" duration="4811000" />
+      <workItem from="1751282470866" duration="90000" />
     </task>
     <servers />
   </component>

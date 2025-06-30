@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 6652498500231589900, guid: 2fef001ac308a4b5fbbc6c2a29da3604,
         type: 3}
       propertyPath: m_Name
-      value: dreamCombo Variant
+      value: dreamCombo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
