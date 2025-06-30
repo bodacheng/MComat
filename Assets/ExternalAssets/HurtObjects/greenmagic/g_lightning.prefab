@@ -8,9 +8,19 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7400680744655913485, guid: af62d47628916d548ac265fc28dec73a,
+        type: 3}
+      propertyPath: m_EnableGPUInstancing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7400680744655954429, guid: af62d47628916d548ac265fc28dec73a,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: m_EnableGPUInstancing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400680744655954429, guid: af62d47628916d548ac265fc28dec73a,
+        type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: fd6ad0c171256434f93155e214f27f12, type: 2}
     - target: {fileID: 7400680744656583693, guid: af62d47628916d548ac265fc28dec73a,
@@ -110,12 +120,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7400680744656667187, guid: af62d47628916d548ac265fc28dec73a,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: cfa5589c3f27cd94dae6b9bf54fafafb, type: 2}
     - target: {fileID: 7400680744656669385, guid: af62d47628916d548ac265fc28dec73a,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 8222466244f58594c8105d7023742bcd, type: 2}
     - target: {fileID: 8060952551503919237, guid: af62d47628916d548ac265fc28dec73a,

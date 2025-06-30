@@ -20,7 +20,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4138090803653834625, guid: 2c6e39e68e3cf404c8ce58519c6559ba,
         type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: c4bf96d4fa16b5142a23e6a99fce4f98, type: 2}
     - target: {fileID: 6711146646375049536, guid: 2c6e39e68e3cf404c8ce58519c6559ba,
@@ -120,7 +120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9048884033641102062, guid: 2c6e39e68e3cf404c8ce58519c6559ba,
         type: 3}
-      propertyPath: Attachments.Array.data[0]
+      propertyPath: 'Attachments.Array.data[0]'
       value: twowayboltp3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
