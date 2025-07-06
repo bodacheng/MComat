@@ -29,11 +29,10 @@ public class FightBeginBtn : MonoBehaviour
         btn.onClick.AddListener(action.Invoke);
     }
     
-    public void Enable(bool on, bool guide = false)
+    public void Enable(bool on)
     {
         btn.interactable = on;
-        //animator.SetBool("On", on);
-
+        
         float endValue;
         if (on)
         {
@@ -51,7 +50,10 @@ public class FightBeginBtn : MonoBehaviour
                 {
                     SetTexts(titleAnimFactor);
                 }
-            );
+            ).OnComplete(() =>
+            {
+                animator.SetBool("On", on);
+            });
     }
 
     void SetTexts(float value)

@@ -65,9 +65,9 @@ public partial class FightPrepareLayer : UILayer
         beginFight.SetAction(fightBegin);
     }
     
-    public void SetFightBeginEnableRender(bool canFight, bool guide = false)
+    public void SetFightBeginEnableRender(bool canFight)
     {
-        beginFight.Enable(canFight, guide);
+        beginFight.Enable(canFight);
     }
     
     

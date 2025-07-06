@@ -141,7 +141,7 @@ public class QuestInfoPage : MSceneProcess
         
         var canFight = CanFightCheck(FightLoad.Fight);
         //_layer.TeamEditIndicator.gameObject.SetActive(!canFight);
-        _layer.SetFightBeginEnableRender(canFight, PlayerAccountInfo.Me.tutorialProgress != "Finished");
+        _layer.SetFightBeginEnableRender(canFight);
         SetLoaded(true);
     }
     
