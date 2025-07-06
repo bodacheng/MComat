@@ -66,7 +66,7 @@ namespace FightScene
                         Sensor.AddOrRemoveSharedUnitInfo(center, teamConfig.myTeam, false);
                         if (FightLogger.value.GetWinnerTeam() == Team.none)
                         {
-                            if (teamConfig.myTeam == Team.player2 && FightLoad.Fight.FightMode == FightMode.Evolve)
+                            if (teamConfig.myTeam == Team.player2 && FightLoad.Fight.FightMode == FightMode.Evolve && center.IsSub)
                             {
                                 HitBoxesProcesser.Instance.AllProcessingFade();
                                 RTFightManager.Target.team1.RMode_Unit.Value._MyBehaviorRunner.ChangeToWaitingState();
