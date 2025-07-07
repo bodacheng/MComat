@@ -242,9 +242,27 @@ DropTable,Skill Gem Drop List,スキルジェムドロップリスト,掉落技�
 ,,,
 FightIntroBegin,Let's go through a simple combat operation guide,簡単な戦闘操作の説明をさせていただきます,让我们进行一个简单的战斗操作说明
 JoystickIntro,Control direction using a joystick,ジョイスティックを使って方向を制御する,通过遥控杆控制方向
-AttackBtn1Intro,first row of skills in the skill set,スキルセットの一行目のスキル,技能组第一行技能
-AttackBtn2Intro,second row of skills in the skill set,スキルセットの二行目のスキル,技能组第二行技能
-AttackBtn3Intro,third row of skills in the skill set,スキルセットの三行目のスキル,技能组第三行技能
+AttackBtn1Intro,"First row skill of the skill group:
+Hold to activate sequentially from left to right.
+(If there is not enough energy to activate a skill, the sequence will be interrupted, but it can continue with another skill in the same column from a different row.)","スキルグループの最初の横一列のスキル：
+長押しすると、左から右へ順番に発動します。
+（エネルギーが不足してスキルを発動できない場合、途中で中断されますが、他の行の同じ列にあるスキルで継続可能です。）","技能组第一横行技能，
+按住可从左到右循序发动
+( 能量不足以发动技能时会中断，但可以以其他行同列技能接续 )"
+AttackBtn2Intro,"Second row skill of the skill group:
+Hold to activate sequentially from left to right.
+(If there is not enough energy to activate a skill, the sequence will be interrupted, but it can continue with another skill in the same column from a different row.)","スキルグループの2行目のスキル：
+長押しすると、左から右へ順番に発動します。
+（エネルギーが不足してスキルを発動できない場合は中断されますが、他の行の同じ列にあるスキルで継続できます。）","技能组第二横行技能，
+按住可从左到右循序发动
+( 能量不足以发动技能时会中断，但可以以其他行同列技能接续 )"
+AttackBtn3Intro,"Third row skill of the skill group:
+Hold to activate sequentially from left to right.
+(If there is not enough energy to activate a skill, the sequence will be interrupted, but it can continue with another skill in the same column from a different row.)","スキルグループの3行目のスキル：
+長押しすると、左から右へ順番に発動します。
+（エネルギーが不足してスキルを発動できない場合は中断されますが、他の行の同じ列にあるスキルで継続可能です。）","技能组第三横行技能，
+按住可从左到右循序发动
+( 能量不足以发动技能时会中断，但可以以其他行同列技能接续 )"
 AutoBtnIntro,Click to switch between auto and manual mode,クリックして、自動または手動に切り替えます,点击可切换自动或手动
 DreamComboIntro,Click to trigger Dream Combo!,クリックしてドリームコンボを発動！,点击发动梦幻连招！
 HpBarAndExBar,"Health and energy. If the energy is insufficient, EX Skills cannot be unleashed.",体力とエネルギー値。エネルギー値が不足している場合、必殺技を発動できません,体力与能量值，必杀技在能量值不够的情况下无法释放
