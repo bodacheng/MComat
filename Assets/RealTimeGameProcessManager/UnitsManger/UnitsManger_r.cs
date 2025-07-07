@@ -66,7 +66,7 @@ namespace FightScene
                         Sensor.AddOrRemoveSharedUnitInfo(center, teamConfig.myTeam, false);
                         if (FightLogger.value.GetWinnerTeam() == Team.none)
                         {
-                            if (teamConfig.myTeam == Team.player2 && FightLoad.Fight.FightMode == FightMode.Evolve && center.IsSub)
+                            if (teamConfig.myTeam == Team.player2 && FightLoad.Fight.FightMode == FightMode.Evolve && !center.IsSub && !center.ChangedToSubUnit)
                             {
                                 HitBoxesProcesser.Instance.AllProcessingFade();
                                 RTFightManager.Target.team1.RMode_Unit.Value._MyBehaviorRunner.ChangeToWaitingState();
@@ -88,7 +88,7 @@ namespace FightScene
                                         bottomText = Translate.Get("InBattleEvolutionInfo3");
                                         break;
                                 }
-
+                                
                                 inBattleEvolution.Setup(RTFightManager.Target.team1.RMode_Unit.Value, () =>
                                     {
                                         UILayerLoader.Remove<InBattleEvolution>();
@@ -108,10 +108,9 @@ namespace FightScene
                                                     .CriticalGaugeMode = CriticalGaugeMode.Unlimited;
                                                 break;
                                         }
-
+                                        
                                         fightingLayer.gameObject.SetActive(true);
-                                        RTFightManager.Target.team1.InputsManager.FocusUnit(RTFightManager.Target.team1
-                                            .RMode_Unit.Value);
+                                        RTFightManager.Target.team1.InputsManager.FocusUnit(RTFightManager.Target.team1.RMode_Unit.Value);
                                     },
                                     Translate.Get("ChooseYourEvolution"), bottomText);
                             }
@@ -387,8 +386,9 @@ namespace FightScene
                 }
             }
             
-            foreach (var dataCenter in teamMembers.GetValues())
+            for (var index = 0; index < 5; index++)
             {
+                var dataCenter = teamMembers.Get(0, index);
                 if (dataCenter != null && !dataCenter.FightDataRef.IsDead.Value && !dataCenter.IsSub)
                 {
                     if (ChangeFightingUnit(dataCenter))

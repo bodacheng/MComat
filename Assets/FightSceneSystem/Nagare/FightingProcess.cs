@@ -21,6 +21,7 @@ namespace FightScene
         
         public override void ProcessEnter()
         {
+            UILayerLoader.Remove<InBattleEvolution>();
             _layer = UILayerLoader.Get<FightingStepLayer>();
             if (_layer.InputsManager.KeyBindingUpdater != null)
                 _layer.InputsManager.KeyBindingUpdater.INI();
