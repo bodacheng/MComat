@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: BattleGround
   m_EditorClassIdentifier: 
   m_GroupName: BattleGround
-  m_Data:
-    m_SerializedData: []
   m_GUID: fd6831a11a135a5489045b0287f11aa6
   m_SerializeEntries:
   - m_GUID: 1e54e564692fd44a7b7a5d9877f8bf99
@@ -37,6 +35,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d640edb1e5b754d758335fc9cf47e7e6
     m_Address: battleGround/1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - battle_ground
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec8f70da295244f00940e2d2ac0b100d
+    m_Address: battleGround/4
     m_ReadOnly: 0
     m_SerializedLabels:
     - battle_ground
