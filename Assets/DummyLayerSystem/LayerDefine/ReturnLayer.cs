@@ -41,8 +41,11 @@ public class ReturnLayer : UILayer
     public static void POP()
     {
         if (ReturnMissionList.Count == 0)
-            return;
-
+        {
+            // 这个做法是有本质逻辑问题的，你自己有数就行
+            Stack(MainSceneStep.FrontPage, (x)=> PreScene.target.trySwitchToStep(x, false));
+        }
+        
         var targetMission = ReturnMissionList[^1];
         ReturnMissionList.RemoveAt(ReturnMissionList.Count - 1);
         var success = targetMission.returnAction.Invoke();
