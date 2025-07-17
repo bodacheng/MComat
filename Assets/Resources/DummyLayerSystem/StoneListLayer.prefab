@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0.8901961, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -499,7 +499,7 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
 --- !u!95 &1435270436974296198
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -513,6 +513,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -4810,7 +4811,6 @@ MonoBehaviour:
   HP: {fileID: 3424812506623486448}
   stoneTargetLevel: {fileID: 2564457415675642663}
   skillIntro: {fileID: 4504917024341403157}
-  line3T: {fileID: 2579208834690628930}
   tempT: {fileID: 1102668300763384593}
 --- !u!1 &5206352636048624673
 GameObject:
@@ -5512,6 +5512,7 @@ MonoBehaviour:
   closeCheckBox: {fileID: 6007867260253646155}
   nearCheckBox: {fileID: 2012323267730553595}
   farCheckBox: {fileID: 6219039724186404503}
+  showAllMyStoneLevel: {fileID: 0}
   cellPrefab: {fileID: 9087381990746991603, guid: b3795898c2a1b4eeaa126e66fe7de953,
     type: 3}
   selectedFrame: {fileID: 5056399119111226684}

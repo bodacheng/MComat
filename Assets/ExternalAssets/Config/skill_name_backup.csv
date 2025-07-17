@@ -1,0 +1,93 @@
+RECORD_ID,EN_NAME,JP_NAME,CN_NAME,EN_INTRO,JP_INTRO,CN_INTRO
+4,Spinning Kick,回転キック,回旋踢,,,身体如同螺旋桨攻击敌人
+5,Dual Punches,ダブルパンチ,双拳,,,连续拳击
+9,Low Kick,ローキック,下回踢,,,攻击敌人下方
+10,Twist Kick,ツイストキック,转身踢,,,有力的回身一脚
+27,Head Strike,ヘッドストライク,头击,,,用头猛的将对方顶出一定距离
+36,Super Knee Strike,超能力ニーストライク,超能膝击,,,"如火箭一般向前冲刺，
+以膝盖攻击敌人"
+39,Leg Slash,脚斬り,腿斩,,,"猛的挥脚，
+宛如刀锋"
+45,Photon Impact Fist,光エネルギー衝撃拳,光能冲击拳,,,"爆发潜藏于自身体内的超能力，
+由拳头释放"
+53,Flying Stomp,フライングストンプ,飞蹬,,,将敌人踢出一段距离
+55,Low Spin Hook,ロースピンフック,下回环,,,高超的体操动作
+58,High Kick,ハイキック,高位踢,,,猛烈的划出一道扇面
+63,Blink Slash,瞬間斬り,闪现斩,"Instantly teleport in the direction of the enemy, followed by executing a blade attack on the enemy.",敵の方向に一瞬で移動し、その後敵に対して刃物の攻撃を実行する,向敌人方向瞬间移动一段距离后对敌人实施刀锋攻击
+68,Front Kick,フロントキック,前踢,,,直白的脚击
+80,Front Dual Punches,フロントダブルパンチ,前双拳,,,向前连续拳击
+89,Punch,パンチ,拳,,,直白的拳击
+90,Maggie Triple Punch,マギー三連パンチ,玛吉三连拳,Maggie's chain boxing technique,マギーの連鎖拳術,玛吉的连环拳术
+95,Twist Strike,ツイストストライク,扭击,,,扭动全身攻击对方
+98,Spinning Fist,回転拳,回旋拳,,,转身甩臂攻击敌人
+99,Somersault Kick,宙返りキック,筋斗踢,,,后空翻攻击敌人
+102,Arc Wave,弧線波,弧线波,,,用能量刃制造一道致命冲击波
+113,Energy Wave,エネルギー波,能量波,,,发射自身超能力
+115,Dual Energy Wave,デュアルエネルギー波,能量双波,,,双倍释放自身超能力
+116,Spiral Impact,螺旋衝撃,螺旋冲击,,,制造一个螺旋冲击波将敌人卷入其中
+118,Black Hole Curse,ブラックホールカース,黑洞魔咒,Offensive magic that can track the enemy within 1 second after activation,発動後1秒以内に敵を追跡できる攻撃的な魔法,在释放后1秒内能够追踪敌人的攻击性魔法
+125,Counter Guard,カウンターガード,防御反击,"After activation, if attacked by an enemy, a counterattack can be launched immediately",発動後、敵の攻撃を受けた場合、すぐに反撃を行うことができる,在释放后如果受到敌人攻击，可立刻发动反攻
+137,Thunderbolt,落雷,落雷,Summon lightning to attack,稲妻を召喚して攻撃する,召唤闪电攻击敌人
+144,Explosive Palm,爆破掌,爆破掌,,,"将能量释放在双手上，
+直接推到敌人身上"
+148,Spiral Flying Kick,螺旋飛び蹴り,螺旋飞踢,,,"向前超速冲击，
+以脚攻击对方"
+150,Spiral Kick,螺旋キック,螺旋脚,,,如钻子般攻击敌人
+156,Spiral Flying Claw,螺旋飛爪,螺旋飞爪,,,化作将敌人送向地狱的飞箭
+159,Demon Fire,魔炎,魔炎,,,魔法火焰攻击
+161,Psychic Blast,超能力爆破,超能爆破,Trigger a magical explosion at the enemy's feet after channeling for 1 second,敵の足元に1秒後に魔法爆発を引き起こす,引导一秒后在敌人脚下施展魔法爆破
+162,Stardust Splash,星屑飛沫,星尘溅射,,,将能量化作闪烁的星尘释放
+166,Divine Demon Fire,鬼神火,鬼神烧,,,巨大的魔法火焰
+167,Flying Kick,フライングキック,飞踢,,,纵身一跃踢飞敌人
+169,Triple Energy Wave,三方向エネルギー波,三向平行波,,,释放一道由三个能量球构成的冲击波
+171,S Curse,Sカース,S魔咒,Release an energy ball that flies in an S-shaped trajectory,S字軌道で飛行するエネルギー球を放つ,释放以S轨道飞行的能量球
+172,Energy Bomb,エネルギーボム,能量炸弹,"Release an energy-condensed bomb that, upon hitting the ground, explodes and causes area of effect damage",エネルギーが凝縮された爆弾を放つ。地面に落ちた後に爆発し、範囲攻撃を与える,释放一个能量凝聚成的炸弹，如果落地后爆炸则造成范围攻击
+175,Arcane Explosion,アーケインエクスプロージョン,奥术爆破,,,在释放后1秒内能够在敌人脚下爆发的究极魔法攻击
+176,Thomas Combo,トーマスコンボ,托马斯连环,An attack technique evolved from Adam's gymnastic abilities,アダムの体操能力から進化した攻撃術,亚当的体操能力所演变成的攻击术
+179,Spell Counter,呪術反撃,咒术反击,"Release a magical shield that, upon taking damage, transforms into energy to counterattack",魔法の盾を放ち、攻撃を受けた後、エネルギーとなって反撃する,释放一个魔盾，受到攻击后化作能量反击
+180,Blade Kick,刃蹴り,刀锋踢,,,以脚在前方划出一道风刃
+182,Defense,防御,防御,"After activation, quickly resist the enemy's attack and launch a counterattack",発動後、敵の攻撃に迅速に抵抗し、反撃を行うことができる,在释放后可迅速抵抗敌人的攻击，并发动反攻
+183,Thunder Punch,雷拳,闪电拳,Tetsuya's electric shock superpower,鉄也の電撃の超能力,铁也的电击超能力
+184,Counter Break Fist,反撃破壊拳,反击破坏拳,"After activation, resist the enemy's attack and subsequently deliver a punch imbued with psychic powers",発動後、敵の攻撃に抵抗し、超能力を伴ったパンチを繰り出す,在释放后能抵抗敌人的攻击，随即施展附带超能力的拳击
+143,Elemental Impact,エレメントインパクト,元素冲击,,,爆发自身能量化身钻子冲击前方
+170,Tri-directional Light,三方向光波,三向光波,,,向三个方向发射能量波
+140,Tornado,竜巻,龙卷风,,,以自身能量制造一道龙卷风
+127,High-Speed Counter,超高速反撃,超速反击,"If nemy attacks withstood,will get accelerated buff for one second",敵の攻撃に耐えることができれば、1秒間加速状態が維持されます,在释放后可如果抵抗住敌人的攻击，将维持一秒加速状态
+145,Heavenly Spiral Drill,天降螺旋ドリル,天降螺旋脚,,,化作闪电从天而降
+17,Vector Blade,ベクトル刃,矢量刀刃,,,"向后退一步，
+然后猛的向前以刀刃冲击"
+59,Heavenly Shock Strike,天降震撃,地震山摇,,,纵身飞跃，落地时形成强烈震撼
+3,Arm Swing,振り腕,甩臂,,,甩臂攻击
+42,Somersault Crush,筋斗圧潰,筋斗碾压,,,化身车轮碾压敌人
+173,Five-direction Light Wave,五方光波,五向光波,,,向五个方向发射能量波
+37,Gliding Shovel,滑翔鏟,滑翔铲,,,滑翔攻击敌人下方
+103,Stab,刺す,捅,,,以能量刃捅击敌人
+12,Advance Mixed Strike,進行混合撃,前进混合击,,,拳脚连续攻击
+154,Ice Quake,寒氷地震,寒冰地震,,,释放一股强烈冰霜
+44,Ascension Kick,アセンションキック,送天脚,,,直接踢飞敌人
+107,Dark Binding Kick,ダーク束縛キック,暗能束缚踢,,,"凌空一跃，
+落地时造成敌人产生一个吸引住敌人的漩涡"
+117,Earth Curse,土の呪術,土之咒术,,,造成前方地面喷涌土之咒术
+77,Spirit Bomb,元気玉,元气弹,,,向前放射超强能量
+136,Gravitational Satellite,重力衛星,引力卫星,,,"释放一个以圆形轨道超速移动的能量球，
+并拖拽敌人随之移动"
+197,Power Split,パワー分裂,能量分裂,,,释放一个能不停分裂为二的魔法球
+198,Tracking curse,追跡呪文,能量纠缠,,,释放一个能追踪并多次攻击敌人的法术球
+199,flashback,フラッシュバック,后向闪现,,,向后瞬间移动
+38,Wild slashes,乱れ斬り,乱斩,,,向前方连续挥舞三刀
+100,Spell Eruption,呪術噴出,咒术喷涌,,,造成地面升起一股向前方喷涌的能量波
+181,Jump Kick,ジャンプキック,跳跃踢,,,纵身踢飞敌人
+108,blade,刃,刀刃,,,以能量刀攻击前方
+66,low kick,ローキック,下踢,,,迅速踢向下前方
+130,Flaming Hammer,火炎ハンマー,火焰震锤,,,在脚下地面制造一个能量波
+158,Shadow Sword,紫影の剣,紫影剑,,,从半空施以敌人致命一剑
+163,Reflective Resistance,抵抗反射,阻力反射,,,对敌人发起的攻击施加反弹
+164,Psychic Blast ,サイキックショット,超能弹击,,,释放极强超能力将敌人推出一段距离
+165,Fallen Sword,堕落の剣,堕落剑,,,通向地狱之剑
+85,Launching Punch,吹き飛ばし拳（,击飞拳,,,一拳击飞敌人
+91,Energy Fist,エナジーフィスト,能量拳,,,以拳头释放超强能量
+50,Dual Sphere Impact,双球震撃,双球震击,,,双手各释放冲击波撞击敌人
+16,Ruby Impact,紅玉衝撃,红宝石撞击,,,以魔法包围全身滚动攻击敌人
+86,Force-Blocking Punch,レジスタンスフィスト,阻力拳,,,格挡敌人的攻击后出拳
+141,Energy Spring,エナジースプリング,能量弹簧,,,制造能量喷泉将敌人弹起
+114,Super Spiral Impact,超螺旋衝撃,超级螺旋冲击,,,制造一个强烈的螺旋冲击波将敌人卷入其中
