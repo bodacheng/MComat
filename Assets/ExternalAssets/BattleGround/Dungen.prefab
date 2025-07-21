@@ -93822,6 +93822,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: StarrySkyOuterSpace
       objectReference: {fileID: 0}
+    - target: {fileID: 1845478205206852, guid: f8bf5553288e80d438ff8371c9dcac30, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1900600716587570, guid: f8bf5553288e80d438ff8371c9dcac30, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376267012119590, guid: f8bf5553288e80d438ff8371c9dcac30, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376267012119590, guid: f8bf5553288e80d438ff8371c9dcac30, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4376267012119590, guid: f8bf5553288e80d438ff8371c9dcac30, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 4981916108639288, guid: f8bf5553288e80d438ff8371c9dcac30, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
