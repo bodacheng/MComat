@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Effects
   m_EditorClassIdentifier: 
   m_GroupName: Effects
-  m_Data:
-    m_SerializedData: []
   m_GUID: 64e13291244ba4a7081263bae4da9fd5
   m_SerializeEntries:
   - m_GUID: 14ca550a50cfd4b5991f49b5d73a60f4

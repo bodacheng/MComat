@@ -110,10 +110,10 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Debug: 1
+    - _Debug: 0
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Distortion: 0.3
+    - _Distortion: 0.5
     - _DistortionDepthFade: 0.5
     - _DistortionDepthFadePower: 1
     - _DistortionNormalStrength: 0.2
