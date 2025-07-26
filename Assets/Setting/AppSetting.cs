@@ -149,6 +149,7 @@ public class AppSetting
                 }
                 if (UiAudioSource != null)
                 {
+                    UiAudioSource.volume = AppSetting.Value.EffectsVolume;
                     UiAudioSource.PlayOneShot(clip);
                 }
             }
