@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: UnitBackGround
   m_GUID: 2185b192fc0364d0385d4e61d7cef4d9
   m_SerializeEntries:
+  - m_GUID: 41cdd54a06e19484a8dc11e0c65fe41b
+    m_Address: unit_bg/3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit_bg
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 90b90365221d7498d88f16026a65fea8
     m_Address: unit_bg/1
     m_ReadOnly: 0
