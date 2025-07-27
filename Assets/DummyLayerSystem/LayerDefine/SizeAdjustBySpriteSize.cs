@@ -9,6 +9,8 @@ public class SizeAdjustBySpriteSize : MonoBehaviour
     [SerializeField] Image image;
     [SerializeField] bool fixedHeight = true;
     
+    public Image Image=> image;
+    
     public void AdjustSize()
     {
         var sprite = image.sprite;
