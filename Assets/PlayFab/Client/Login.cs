@@ -7,6 +7,7 @@ using mainMenu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 #if UNITY_STANDALONE_WIN
+using System.Text;
 using Steamworks;
 #endif
 
@@ -32,7 +33,7 @@ public partial class PlayFabReadClient
             }
 #endif
             
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_STANDALONE_WIN
             // customId的默认值存在诸多疑问，1。29 我们试着把它先从 Guid.NewGuid()改成SystemInfo.deviceUniqueIdentifier
             //var customId = PlayerPrefs.GetString(PLAYFAB_CUSTOM_ID, Guid.NewGuid().ToString());
             var customId = PlayerPrefs.GetString(PLAYFAB_CUSTOM_ID, SystemInfo.deviceUniqueIdentifier);
