@@ -57,6 +57,7 @@ namespace mainMenu
             PosCal.SafeAreaRect = safeAreaRect;
             PosCal.TestIni();
             SetBgRenderTexture();
+            Application.targetFrameRate = 60;
         }
         
         void SetBgRenderTexture()
@@ -162,8 +163,6 @@ namespace mainMenu
         
         void BasicPhase()
         {
-            Application.targetFrameRate = 60;
-            
             #region 主界面各大画面
             var settingPage = new SettingPage();
             var frontPage = new FrontPage();

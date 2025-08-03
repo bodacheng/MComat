@@ -40,6 +40,7 @@ public class Starter : MonoBehaviour
     
     public async UniTask Initialise()
     {
+        Application.targetFrameRate = 60;
         if (CommonSetting.PcMode)
         {
             SteamManager.gameObject.SetActive(true);

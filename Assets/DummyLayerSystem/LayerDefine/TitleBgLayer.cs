@@ -16,7 +16,7 @@ public class TitleBgLayer : UILayer
     [SerializeField] Scrollbar vScrollbar;
     [SerializeField] List<string> subtitleCodes;
     [SerializeField] float scrollDelayFromSeconds = 1;
-    [SerializeField] float scrollDelayInMilliSecond = 0.001f;
+    [SerializeField] float scrollSpeedPerSecond = 0.2f;
     [SerializeField] float ScrollbarMinValue = 0;
     [SerializeField] float ScrollbarMaxValue = 1;
     float milliSecondCounter = 0;
@@ -53,28 +53,46 @@ public class TitleBgLayer : UILayer
             if (subtitleCodes.Count > codeIndex)
                 languageConverter.ChangeAtOnce(subtitleCodes[codeIndex]);
         }
-        _disposable = Observable.Timer(TimeSpan.FromSeconds(storyMode? scrollDelayFromSeconds : 0), TimeSpan.FromMilliseconds(0.1)).Subscribe(
-            (_) =>
+        
+        float delay = storyMode ? scrollDelayFromSeconds : 0f;
+        float elapsed = 0f;
+
+        _disposable = Observable.EveryUpdate()
+            .TakeUntilDisable(this)
+            .Subscribe(_ =>
             {
-                milliSecondCounter += scrollDelayInMilliSecond;
-                vScrollbar.value = Mathf.Clamp(vScrollbar.value - scrollDelayInMilliSecond, ScrollbarMinValue, ScrollbarMaxValue);
+                float dt = Time.unscaledDeltaTime; // 真实Δt
+                elapsed += dt;
+
+                if (elapsed < delay) return;
+
+                vScrollbar.value = Mathf.Clamp(
+                    vScrollbar.value - scrollSpeedPerSecond * dt,
+                    ScrollbarMinValue, ScrollbarMaxValue
+                );
+
                 if (storyMode)
                 {
-                    languageConverter.gameObject.SetActive(storyMode);
-                    var indexOfSubtitleCodes = (int)((1 - vScrollbar.value) / (1f / subtitleCodes.Count));
-                    ChangeSubtitle(indexOfSubtitleCodes);
-                    if (milliSecondCounter >= 1.2)
+                    languageConverter.gameObject.SetActive(true);
+                    int idx = Mathf.Clamp(
+                        (int)((1f - vScrollbar.value) * subtitleCodes.Count),
+                        0, subtitleCodes.Count - 1
+                    );
+                    ChangeSubtitle(idx);
+
+                    if (elapsed - delay >= 1.2f)
                     {
                         languageConverter.gameObject.SetActive(false);
                         touchScreenBtn.gameObject.SetActive(true);
-                        _disposable.Dispose();
+                        _disposable?.Dispose();
                     }
                 }
                 else
                 {
                     if (vScrollbar.value <= ScrollbarMinValue)
-                        _disposable.Dispose();
+                        _disposable?.Dispose();
                 }
-            }).AddTo(gameObject);
+            })
+            .AddTo(gameObject);
     }
 }
