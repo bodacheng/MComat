@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CommonSetting
   m_EditorClassIdentifier: 
   devMode: 0
-  pcMode: 0
+  pcMode: 1
   maxStoneCount: 1000
   gangbangModeMaxUnitPerTeam1: 24
   gangbangModeMaxUnitPerTeam2: 36
@@ -79,3 +79,4 @@ MonoBehaviour:
   blueFrameColor: {r: 0, g: 0.8039216, b: 1, a: 1}
   greenBgColor: {r: 0.02745098, g: 0.4509804, b: 0.019607844, a: 1}
   greenFrameColor: {r: 0.15686275, g: 0.6784314, b: 0.18039216, a: 1}
+  changeToSubHpPercent: 0.3
