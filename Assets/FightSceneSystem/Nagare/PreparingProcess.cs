@@ -19,6 +19,9 @@ public class PreparingProcess : FSceneProcess
     
     async UniTask EnterProcess()
     {
+        var unitInstructionLayer = UILayerLoader.Load<UnitInstructionLayer>(true, null, true);
+        unitInstructionLayer.LoadUnitImage();
+        
         RTFightManager.Target.team1.Clear();
         RTFightManager.Target.team2.Clear();
         
@@ -36,7 +39,7 @@ public class PreparingProcess : FSceneProcess
         UILayerLoader.Remove<ArenaFightOver>();
         RTFightManager.Target._CameraManager.Assign_Camera(C_Mode.NULL, null,null);
         RTFightManager.Target._CameraManager.SetPosToStart();
-        UILayerLoader.Load<ProgressLayer>();
+        UILayerLoader.Load<ProgressLayer>(true, null, true);
         ProgressLayer.LoadingPercent(Translate.Get("LoadingBattle"), 0.5f);
         
         var effectPreloadCount = FightLoad.Fight.FightMode is (FightMode.Rotate or FightMode.Evolve) ? 
@@ -214,9 +217,6 @@ public class PreparingProcess : FSceneProcess
     
     public override void ProcessEnter()
     {
-        //HighLightLayer.DarkOff(Color.white, 0, true);
-        var unitInstructionLayer = UILayerLoader.Load<UnitInstructionLayer>(false, null, true);
-        unitInstructionLayer.LoadUnitImage();
         EnterProcess().Forget();
     }
     
