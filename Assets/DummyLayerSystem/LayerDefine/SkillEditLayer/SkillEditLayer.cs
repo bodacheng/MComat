@@ -88,7 +88,7 @@ public partial class SkillEditLayer : UILayer
         }
         //nineSlot.ShowTransition(slot, TransitionEffect);
         stonesBox._tabEffects.SkillButtonExplosion(stone._SkillConfig.SP_LEVEL, 
-            PosCal.GetWorldPos(PreScene.target.postProcessCamera, stone.GetComponent<RectTransform>(), 3), 
+            PosCal.GetWorldPos(PreScene.target.noPostProcessCamera, stone.GetComponent<RectTransform>(), 3), 
             stonesBox._tabEffects.transform);
         await connector.SkillShowRunWithPrepare(stone._SkillConfig.REAL_NAME, false);
     }
@@ -105,9 +105,9 @@ public partial class SkillEditLayer : UILayer
     
     async void TransitionEffect(SkillStoneSlot start, SkillStoneSlot end)
     {
-        var startPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera,
+        var startPos = PosCal.GetWorldPos(PreScene.target.noPostProcessCamera,
             start._cell.GetComponent<RectTransform>(), 3);
-        var endPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera,
+        var endPos = PosCal.GetWorldPos(PreScene.target.noPostProcessCamera,
             end._cell.GetComponent<RectTransform>(), 3);
                     
         var transitionEffect = await AddressablesLogic.LoadTOnObject<ParticleSystem>("skillTransitionEffect");
@@ -168,7 +168,7 @@ public partial class SkillEditLayer : UILayer
         }
         
         await stonesBox._tabEffects.SwitchElement(unitConfig != null? unitConfig.element : Element.lightMagic, cts.Token);
-        await stonesBox.IniExTabsEffects(PreScene.target.postProcessCamera);
+        await stonesBox.IniExTabsEffects(PreScene.target.noPostProcessCamera);
         stonesBox.FilterFeatureRefresh(true);
         skillStoneDetail.Clear();
         SkillEditButtonFeature(PreScene.target.Focusing);

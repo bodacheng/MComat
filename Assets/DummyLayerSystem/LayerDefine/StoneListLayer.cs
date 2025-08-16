@@ -42,7 +42,7 @@ public class StoneListLayer : UILayer
         box.IniExTabs();
         box.GenerateCells();
         await box._tabEffects.SwitchElement(Element.blueMagic, cts.Token);
-        await box.IniExTabsEffects(PreScene.target.postProcessCamera);
+        await box.IniExTabsEffects(PreScene.target.noPostProcessCamera);
         box.AddFeatureToCells(CellFeature_StoneShow);
         box.FilterFeatureRefresh(true);
         box.RestFilter();

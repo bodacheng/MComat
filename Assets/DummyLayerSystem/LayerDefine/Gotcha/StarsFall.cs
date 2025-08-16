@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using DG.Tweening;
+using PixelCameraEffect;
 using UnityEngine;
 
 public class StarsFall : MonoBehaviour
@@ -16,20 +18,35 @@ public class StarsFall : MonoBehaviour
     [SerializeField] GameObject gdGotchaBackground;
 
     [SerializeField] private float starShinePointFromDoom = 5;
+
+    [SerializeField] private PixelCamera gachaPixelCamera;
+    [SerializeField] private PixelCamera mainPixelCamera;
     
     public static StarsFall target;
-
+    
     public Camera Camera => _camera;
     public Camera ECamera => _eCamera;
     
     void Awake()
     {
         target = this;
-        Turn(false);
+        //Turn(false);
     }
 
     public void Turn(bool on)
     {
+        if (on)
+        {
+            mainPixelCamera.IsOn = !on;
+            gachaPixelCamera.IsOn = on;
+        }
+
+        if (!on)
+        {
+            gachaPixelCamera.IsOn = on;
+            mainPixelCamera.IsOn = !on;
+        }
+        
         target.gameObject.SetActive(on);
         _camera.gameObject.SetActive(on);
     }

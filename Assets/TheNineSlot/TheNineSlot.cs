@@ -330,7 +330,7 @@ namespace mainMenu
                 var item = slot._cell.GetItem();
                 if (slot._cell != null)
                 {
-                    var worldPos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, slot._cell.GetComponent<RectTransform>(), 5f);
+                    var worldPos = PosCal.GetWorldPos(PreScene.target.noPostProcessCamera, slot._cell.GetComponent<RectTransform>(), 5f);
                     tasks.Add(NineForShow.RefreshSlotEffects(slot.num, item != null ? item._SkillConfig.SP_LEVEL : -1, worldPos, slot._cell.transform, _slotEffects));
                 }
             }

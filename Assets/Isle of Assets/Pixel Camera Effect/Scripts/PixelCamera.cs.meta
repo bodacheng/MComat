@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 9f0e9d7faa02aa54d8ff417a9395f416
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 231188
+  packageName: Pixel Camera Effect
+  packageVersion: 1.0.3
+  assetPath: Assets/Isle of Assets/Pixel Camera Effect/Scripts/PixelCamera.cs
+  uploadId: 621274

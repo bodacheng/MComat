@@ -69,7 +69,7 @@ public partial class SkillEditLayer : UILayer
         
         var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(skillID);
         stonesBox._tabEffects.SkillButtonExplosion(skillConfig.SP_LEVEL,
-            PosCal.GetWorldPos(PreScene.target.postProcessCamera, 
+            PosCal.GetWorldPos(PreScene.target.noPostProcessCamera, 
                 nineSlot.AllSlot[targetSlot - 1]._cell.GetComponent<RectTransform>(), 
                 3),
             stonesBox._tabEffects.transform);

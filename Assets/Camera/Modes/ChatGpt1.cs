@@ -58,6 +58,7 @@ class ChatGptFix : CameraMode
         CanSetH = true;
         _camera.fieldOfView = this.fieldOfView;
         CameraManager._subCamera.fieldOfView = this.fieldOfView;
+        CameraManager._centerCamera.fieldOfView = this.fieldOfView;
         LocalUpdate(_camera);
         xzOff = _camera.transform.position - lookPoint;
         xzOff.y = 0;

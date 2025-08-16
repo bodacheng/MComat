@@ -68,7 +68,7 @@ public partial class GotchaResultLayer : UILayer
         // 星星落入格子
         void Process(RectTransform t)
         {
-            var pos = PosCal.GetWorldPos(PreScene.target.postProcessCamera, t, 5f);
+            var pos = PosCal.GetWorldPos(StarsFall.target.ECamera, t, 5f);
             slotScreenPos.Add(pos);
         }
         

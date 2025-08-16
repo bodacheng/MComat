@@ -6,8 +6,10 @@ public class CameraManager : MonoBehaviour
 {
     public static Camera _camera;
     public static Camera _subCamera;
+    public static Camera _centerCamera;
     [SerializeField] Camera mainCamera;
     [SerializeField] Camera subCamera; // unit camera
+    [SerializeField] Camera centerCamera;//原先的主相机，为了马赛克模式成了中间相机，很难解释
     [SerializeField] Transform StartPosRef;
     [SerializeField] Transform topDownModeEndRef;
     [SerializeField] VisibilityControl visibilityControl;
@@ -44,6 +46,7 @@ public class CameraManager : MonoBehaviour
     {
         _camera = mainCamera;
         _subCamera = subCamera;
+        _centerCamera = centerCamera;
         _camera.depthTextureMode = DepthTextureMode.Depth;
 
         foreach (var kv in CModeDic)

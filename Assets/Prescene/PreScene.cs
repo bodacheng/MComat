@@ -5,6 +5,7 @@ using dataAccess;
 using UnityEngine;
 using DummyLayerSystem;
 using ModelView;
+using PixelCameraEffect;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
@@ -16,6 +17,9 @@ namespace mainMenu
 
         public Camera postProcessCamera;
         public Camera noPostProcessCamera;
+        
+        [Header("PixelCamera")]
+        [SerializeField] PixelCamera pixelCamera;
         
         [Header("AudioSource")]
         [SerializeField] AudioSource audioSource;
