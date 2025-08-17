@@ -36,7 +36,7 @@ namespace PixelCameraEffect
             set
             {
                 isOn = value;
-                
+                screenScale = CommonSetting.MosaikCameraScreenScale;
                 if (value)
                 {
                     DrawEffect();

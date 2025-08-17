@@ -7,6 +7,7 @@ public class CommonSetting : ScriptableObject
 {
     [SerializeField] bool devMode;
     [SerializeField] bool pcMode;
+    [SerializeField] int mosaikCameraScreenScale = 7;
     [SerializeField] int maxStoneCount = 30;
     [SerializeField] int gangbangModeMaxUnitPerTeam1 = 24;
     [SerializeField] int gangbangModeMaxUnitPerTeam2 = 72;
@@ -124,6 +125,7 @@ public class CommonSetting : ScriptableObject
     
     public static bool DevMode;
     public static bool PcMode;
+    public static int MosaikCameraScreenScale;
     public static int GangbangModeMaxUnitPerTeam1;
     public static int GangbangModeMaxUnitPerTeam2;
     public static int GangbangModeMaxUnitPerTeam3;
@@ -198,6 +200,8 @@ public class CommonSetting : ScriptableObject
     {
         DevMode = devMode;
         PcMode = pcMode;
+
+        MosaikCameraScreenScale = mosaikCameraScreenScale;
         
         MaxStoneCount = maxStoneCount;
         GangbangModeMaxUnitPerTeam1 = gangbangModeMaxUnitPerTeam1;
