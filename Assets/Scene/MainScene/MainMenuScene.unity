@@ -3798,7 +3798,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 6335852425241370751}
   displayRawImage: {fileID: 967939728}
-  screenScale: 10
+  screenScale: 8
   initOnAwake: 1
   dontDestroyOnLoad: 0
 --- !u!114 &7268310500307343440
@@ -4081,7 +4081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 8663558840509552357}
   displayRawImage: {fileID: 967939728}
-  screenScale: 5
+  screenScale: 8
   initOnAwake: 1
   dontDestroyOnLoad: 0
 --- !u!64 &8777760864766619467
