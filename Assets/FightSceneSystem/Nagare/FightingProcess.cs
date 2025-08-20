@@ -75,6 +75,9 @@ namespace FightScene
                 RTFightManager.Target.team1.LocalUpdate();
                 RTFightManager.Target.team2.LocalUpdate();
             }
+            
+            if (FightLoad.Fight.FightMode != FightMode.Group && FightLoad.Fight.FightMode != FightMode.Multi)
+                RTFightManager.Target._CameraManager.VisibilityControl.LocalUpdate();
         }
         
         public override void LocalFixedUpdate()

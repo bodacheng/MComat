@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using dataAccess;
 using mainMenu;
 using UnityEngine;
@@ -144,7 +145,7 @@ public partial class SSLevelUpManager : MonoBehaviour
                         LevelUpAllStonesBtn.interactable = HasStoneToBeUpdate();
                         LevelUpAllStonesBtnAnimator.SetBool("on", HasStoneToBeUpdate());
                         // 具体待定。但不应该是RefreshSkillLevelUpModule，这个在CloseLevelUpPage会跑一次才对
-                    });
+                    }).Forget();
             }, 
             Translate.Get("IfStoneLevelUp"));
     }

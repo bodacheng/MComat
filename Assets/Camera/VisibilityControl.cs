@@ -39,7 +39,7 @@ public class VisibilityControl : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
         
         // 获取实际检测到的collider数量
-        int numColliders = Physics.SphereCastNonAlloc(ray, radius, _hitColliders, detectDis, layerMask);
+        int numColliders = Physics.SphereCastNonAlloc(ray, radius, _hitColliders, detectDis, layerMask, QueryTriggerInteraction.Collide);
         // 雅典城场景1对1模式下加上角色大概能检测到不到30个对象
         
         if (numColliders > 0)
@@ -65,6 +65,15 @@ public class VisibilityControl : MonoBehaviour
                         {
                             renderer.enabled = false; // 禁用Renderer组件
                             thisFrameDetected.Add(renderer); // 将对象添加到隐藏对象集合中
+                        }
+                        var renderers = wall.transform.GetComponentsInChildren<Renderer>();
+                        if (renderers.Length > 0)
+                        {
+                            foreach (var r in renderers)
+                            {
+                                r.enabled = false; // 禁用Renderer组件
+                                thisFrameDetected.Add(r); // 将对象添加到隐藏对象集合中
+                            }
                         }
                     }
                 }

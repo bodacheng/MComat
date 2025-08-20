@@ -134,7 +134,7 @@ public class ReturnLayer : UILayer
         var layer = UILayerLoader.Get<ReturnLayer>();
         if (layer != null)
         {
-            layer.transform.SetSiblingIndex(1);
+            layer.transform.SetSiblingIndex(1);//马赛克层前面
         }
     }
     

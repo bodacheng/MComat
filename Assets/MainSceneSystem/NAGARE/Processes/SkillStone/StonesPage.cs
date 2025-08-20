@@ -25,6 +25,7 @@ public class StonesPage : MSceneProcess
         layer = UILayerLoader.Load<StoneListLayer>();
         layer.Setup();
         ReturnLayer.MoveFront();
+        SSLevelUpManager.CalUpdateAllForms();
         layer.levelManager.LevelUpAllStonesBtn.interactable = SSLevelUpManager.HasStoneToBeUpdate();
         layer.levelManager.LevelUpAllStonesBtnAnimator.SetBool("on", SSLevelUpManager.HasStoneToBeUpdate());
         SetLoaded(true);

@@ -8,7 +8,7 @@ using UnityEngine;
 // 执行
 public partial class SSLevelUpManager : MonoBehaviour
 {
-    void LevelUpStone(string InstanceId, List<string> mInstanceIds, Action<string> refreshStoneData)
+    async UniTask LevelUpStone(string InstanceId, List<string> mInstanceIds, Action<string> refreshStoneData)
     {
         var target = Stones.Get(InstanceId);
         if (target.Born == "true")
@@ -61,6 +61,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         form.addLevel = addLevel.ToString();
         form.needGD = 10 * (materialInstanceIds.Count / 4);
         
+        bool finished = false;
         CloudScript.UpdateStone(
             form,
             async (targetInstanceId,x) =>
@@ -82,11 +83,13 @@ public partial class SSLevelUpManager : MonoBehaviour
                 _stoneListLayer.box.RestFilter();
                 CloseLevelUpPage();
                 var renderModel = Stones.GetRenderModel(targetInstanceId);
-                renderModel.Shine(PreScene.target.postProcessCamera);
+                renderModel.Shine(PreScene.target.noPostProcessCamera);
                 refreshStoneData.Invoke(targetInstanceId);
                 _stoneListLayer.TargetStoneID = targetInstanceId;
                 Stones.ShowAllStonesLevel();
+                finished = true;
             }
         );
+        await UniTask.WaitUntil(() => finished);
     }
 }

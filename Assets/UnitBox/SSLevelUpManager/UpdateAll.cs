@@ -103,10 +103,10 @@ public partial class SSLevelUpManager : MonoBehaviour
         _stoneListLayer.box._tabEffects.TurnShowingTagEffects(false);
         var stoneUpdatesConfirm = UILayerLoader.Load<StoneUpdatesConfirm>();
         stoneUpdatesConfirm.ShowInfo(
-            ()=>
+            async ()=>
             {
                 UILayerLoader.Remove<StoneUpdatesConfirm>();
-                ExecuteUpdateAll(refreshStoneData);
+                await ExecuteUpdateAll(refreshStoneData);
                 _stoneListLayer.box._tabEffects.TurnShowingTagEffects(true);
             },
             ()=>
@@ -119,7 +119,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         );
     }
 
-    async void ExecuteUpdateAll(Action<string> refreshStoneData)
+    async UniTask ExecuteUpdateAll(Action<string> refreshStoneData)
     {
         if (Currencies.CoinCount.Value < needGoldWhole)
         {
@@ -140,7 +140,7 @@ public partial class SSLevelUpManager : MonoBehaviour
         {
             await UniTask.WaitUntil(()=> canNext);
             canNext = false;
-            LevelUpStone(updateAllStoneForm.targetStoneID, updateAllStoneForm.stoneInstances, Next);
+            await LevelUpStone(updateAllStoneForm.targetStoneID, updateAllStoneForm.stoneInstances, Next);
         }
         
         PopupLayer.ArrangeWarnWindow(Translate.Get("AutoMergeFinished"));
