@@ -83,6 +83,10 @@ public class VisibilityControl : MonoBehaviour
         // 检查被隐藏的物体是否已经移出了半径范围
         foreach (var renderer in _hiddenObjects)
         {
+            if (renderer == null || renderer.gameObject == null)
+            {
+                continue;
+            }
             if (!thisFrameDetected.Contains(renderer))
                 renderer.enabled = true; // 启用Renderer组件
         }
