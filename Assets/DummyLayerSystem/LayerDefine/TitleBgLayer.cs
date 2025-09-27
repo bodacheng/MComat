@@ -16,7 +16,8 @@ public class TitleBgLayer : UILayer
     [SerializeField] Scrollbar vScrollbar;
     [SerializeField] List<string> subtitleCodes;
     [SerializeField] float scrollDelayFromSeconds = 1;
-    [SerializeField] float scrollSpeedPerSecond = 0.2f;
+    [SerializeField] float scrollSpeedPerSecondTitle = 0.2f;
+    [SerializeField] float scrollSpeedPerSecondStory = 0.1f;
     [SerializeField] float ScrollbarMinValue = 0;
     [SerializeField] float ScrollbarMaxValue = 1;
     float milliSecondCounter = 0;
@@ -35,6 +36,7 @@ public class TitleBgLayer : UILayer
     {
         if (storyMode)
         {
+            touchScreenBtn.gameObject.SetActive(false); // 开始时隐藏，故事结束后显示
             touchScreenBtn.onClick.AddListener(() =>
             {
                 UILayerLoader.Remove<TitleBgLayer>();
@@ -67,7 +69,7 @@ public class TitleBgLayer : UILayer
                 if (elapsed < delay) return;
 
                 vScrollbar.value = Mathf.Clamp(
-                    vScrollbar.value - scrollSpeedPerSecond * dt,
+                    vScrollbar.value - (storyMode ? scrollSpeedPerSecondStory : scrollSpeedPerSecondTitle) * dt,
                     ScrollbarMinValue, ScrollbarMaxValue
                 );
 
@@ -80,7 +82,8 @@ public class TitleBgLayer : UILayer
                     );
                     ChangeSubtitle(idx);
 
-                    if (elapsed - delay >= 1.2f)
+                    // 当滚动到底部时结束故事
+                    if (vScrollbar.value <= ScrollbarMinValue)
                     {
                         languageConverter.gameObject.SetActive(false);
                         touchScreenBtn.gameObject.SetActive(true);
