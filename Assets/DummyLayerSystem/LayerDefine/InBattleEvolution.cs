@@ -19,6 +19,7 @@ public class InBattleEvolution : UILayer
     [SerializeField] private float animEndOutSeconds = 0.2f;
 
     [SerializeField] private float atLeastTwoSideSizeInterval = 10;
+    [SerializeField] private float atLeastIntervalBetweenSkillOptionsTAndNineForShow = 5;
     
     public async void Setup(Data_Center focusUnit, Action onFinishedSkillEvolution, string upperText, string bottomText)
     {
@@ -44,6 +45,10 @@ public class InBattleEvolution : UILayer
         float cellSize = nineSlotWidth / 3;
         var gridLayoutGroup = nineForShow.transform.GetComponent<GridLayoutGroup>();
         gridLayoutGroup.cellSize = new Vector2(cellSize, cellSize); 
+        
+        var newLeftInteral = PosCal.CanvasWidth + rightInteral - nineSlotWidth - skillOptionsT.rect.width - atLeastIntervalBetweenSkillOptionsTAndNineForShow;
+        leftInteral = Mathf.Max(leftInteral, newLeftInteral);
+        skillOptionsT.anchoredPosition = new Vector2(leftInteral, currentY);
         
         nineForShow.AddOnClickToSlots(
             (BOButton btn) =>
