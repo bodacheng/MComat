@@ -95,6 +95,12 @@ namespace DummyLayerSystem
                 if (layer != null && layer.gameObject != null)
                     Remove(layer.Index);
             }
+            
+            // 清理后确保mosak在最底层
+            if (_hanger != null)
+                EnsureMosakAtBottom(_hanger);
+            if (_fullScreenHanger != null)
+                EnsureMosakAtBottom(_fullScreenHanger);
         }
     
         static UILayer _Get(string key)
@@ -143,6 +149,9 @@ namespace DummyLayerSystem
                         target?.transform.SetAsLastSibling();
                     }
                 }
+                
+                // 确保mosak始终在最底层
+                EnsureMosakAtBottom(targetHanger);
                 return existed;
             }
             
@@ -188,6 +197,9 @@ namespace DummyLayerSystem
                 effectBg.transform.SetAsLastSibling();
             }
             
+            // 确保mosak始终在最底层
+            EnsureMosakAtBottom(targetHanger);
+            
             return returnValue;
         }
         
@@ -202,6 +214,12 @@ namespace DummyLayerSystem
                     GameObject.Destroy(uiLayer);
                 }
                 Queues.RemoveAt(Queues.Count - 1);
+                
+                // 弹出后确保mosak在最底层
+                if (_hanger != null)
+                    EnsureMosakAtBottom(_hanger);
+                if (_fullScreenHanger != null)
+                    EnsureMosakAtBottom(_fullScreenHanger);
             }
         }
 
@@ -229,6 +247,29 @@ namespace DummyLayerSystem
                 if (layer != null)
                     GameObject.Destroy(layer.gameObject);
                 Queues.RemoveAt(toRemoveIndex);
+                
+                // 移除后确保mosak在最底层
+                if (_hanger != null)
+                    EnsureMosakAtBottom(_hanger);
+                if (_fullScreenHanger != null)
+                    EnsureMosakAtBottom(_fullScreenHanger);
+            }
+        }
+        
+        /// <summary>
+        /// 确保mosak马赛克效果始终在Canvas的最底层
+        /// </summary>
+        /// <param name="targetHanger">目标Canvas的Transform</param>
+        private static void EnsureMosakAtBottom(Transform targetHanger)
+        {
+            if (targetHanger == null) return;
+            
+            // 查找mosak GameObject
+            Transform mosakTransform = targetHanger.Find("mosak");
+            if (mosakTransform != null)
+            {
+                // 将mosak移动到最底层（第一个子对象位置）
+                mosakTransform.SetAsFirstSibling();
             }
         }
     }
