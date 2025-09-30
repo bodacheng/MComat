@@ -46,9 +46,8 @@ public class InBattleEvolution : UILayer
         var gridLayoutGroup = nineForShow.transform.GetComponent<GridLayoutGroup>();
         gridLayoutGroup.cellSize = new Vector2(cellSize, cellSize); 
         
-        var newLeftInteral = PosCal.CanvasWidth + rightInteral - nineSlotWidth - skillOptionsT.rect.width - atLeastIntervalBetweenSkillOptionsTAndNineForShow;
-        leftInteral = Mathf.Max(leftInteral, newLeftInteral);
-        skillOptionsT.anchoredPosition = new Vector2(leftInteral, currentY);
+        var newLeftInteral = PosCal.CanvasWidth + rightInteral - nineSlotWidth - skillOptionsT.rect.width - atLeastIntervalBetweenSkillOptionsTAndNineForShow ;
+        skillOptionsT.anchoredPosition = new Vector2(newLeftInteral, currentY);
         
         nineForShow.AddOnClickToSlots(
             (BOButton btn) =>
