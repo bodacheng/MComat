@@ -39,14 +39,16 @@ public class InBattleEvolution : UILayer
         nineSlotRect.anchoredPosition = new Vector2(rightInteral, currentY);
         
         var leftMaxWidthForNineSlots = PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1 -
-                                       skillOptionsT.rect.width - leftInteral + rightInteral;
+                                       skillOptionsT.rect.width + rightInteral;
         float nineSlotWidth = MathF.Min(leftMaxWidthForNineSlots, nineSlotRect.rect.height);
         nineSlotRect.sizeDelta = new Vector2(nineSlotWidth, nineSlotWidth);
         float cellSize = nineSlotWidth / 3;
         var gridLayoutGroup = nineForShow.transform.GetComponent<GridLayoutGroup>();
         gridLayoutGroup.cellSize = new Vector2(cellSize, cellSize); 
         
-        var newLeftInteral = PosCal.CanvasWidth + rightInteral - nineSlotWidth - skillOptionsT.rect.width - atLeastIntervalBetweenSkillOptionsTAndNineForShow ;
+        var newLeftInteral = PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1 + rightInteral - nineSlotWidth - skillOptionsT.rect.width - atLeastIntervalBetweenSkillOptionsTAndNineForShow 
+            +
+            PosCal.CanvasWidth - PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1;
         skillOptionsT.anchoredPosition = new Vector2(newLeftInteral, currentY);
         
         nineForShow.AddOnClickToSlots(
