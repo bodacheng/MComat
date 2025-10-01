@@ -30,27 +30,30 @@ public class InBattleEvolution : UILayer
         // 取原本的 y，不改它
         float currentY = skillOptionsT.anchoredPosition.y;
         // 新的 X 值
-        //这个leftInteral和rightInteral的计算本身其实是没多大正确道理的，它没有考虑不同设备下atLeastTwoSideSizeInterval在实际画面中所占比例的问题
-        float leftInteral = Mathf.Max(PosCal.CanvasWidth - PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1, atLeastTwoSideSizeInterval);
-        skillOptionsT.anchoredPosition = new Vector2(leftInteral, currentY);
-
-        float rightInteral = Mathf.Min((PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1 - PosCal.CanvasWidth)/2, - atLeastTwoSideSizeInterval);
+        
         var nineSlotRect = nineForShow.transform.GetComponent<RectTransform>();
-        nineSlotRect.anchoredPosition = new Vector2(rightInteral, currentY);
+        var rightInteral = 0f;
+        if (PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1 < PosCal.CanvasWidth) // 手机
+        {
+            rightInteral = 0;
+        }
+        else
+        {
+            rightInteral = atLeastTwoSideSizeInterval;
+        }
+        nineSlotRect.anchoredPosition = new Vector2(-rightInteral, currentY);
         
         var leftMaxWidthForNineSlots = PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1 -
-                                       skillOptionsT.rect.width + rightInteral;
+                                       skillOptionsT.rect.width - atLeastIntervalBetweenSkillOptionsTAndNineForShow - rightInteral;
         float nineSlotWidth = MathF.Min(leftMaxWidthForNineSlots, nineSlotRect.rect.height);
         nineSlotRect.sizeDelta = new Vector2(nineSlotWidth, nineSlotWidth);
         float cellSize = nineSlotWidth / 3;
         var gridLayoutGroup = nineForShow.transform.GetComponent<GridLayoutGroup>();
         gridLayoutGroup.cellSize = new Vector2(cellSize, cellSize); 
         
-        var newLeftInteral = PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1 + rightInteral - nineSlotWidth - skillOptionsT.rect.width - atLeastIntervalBetweenSkillOptionsTAndNineForShow 
-            +
-            PosCal.CanvasWidth - PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1;
+        var newLeftInteral =  PosCal.GetSafeAreaWidthAndHeightInCanvas().Item1 
+                              - skillOptionsT.rect.width -  atLeastIntervalBetweenSkillOptionsTAndNineForShow - nineSlotWidth - rightInteral;
         skillOptionsT.anchoredPosition = new Vector2(newLeftInteral, currentY);
-        
         nineForShow.AddOnClickToSlots(
             (BOButton btn) =>
             {
