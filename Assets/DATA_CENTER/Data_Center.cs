@@ -254,17 +254,17 @@ public partial class Data_Center : MonoBehaviour
     }
     
     // for tutorial
-    IDisposable _currentHpDisposeTask = null;
     public void StartAutoModeWhenGetHurt()
     {
         var fullHp = FightDataRef.CurrentHp.Value;
-        _currentHpDisposeTask?.Dispose();
-        _currentHpDisposeTask = FightDataRef.CurrentHp.Subscribe(x =>
+        IDisposable currentHpDisposeTask = null;
+        currentHpDisposeTask = FightDataRef.CurrentHp.Subscribe(x =>
         {
             if (x < fullHp)
             {
-                _currentHpDisposeTask.Dispose();
+                currentHpDisposeTask.Dispose();
                 _MyBehaviorRunner.AI = true;
+                RTFightManager.Target.team2.Auto = true;
             }
         }).AddTo(this);
     }

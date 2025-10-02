@@ -27,7 +27,8 @@ namespace FightScene
                 dataCenter.WholeT.gameObject.SetActive(true);
                 break;
             }
-            
+            if (FightLoad.Fight.RunTutorial)
+                unit.StartAutoModeWhenGetHurt();
             ChangeFightingUnit(unit, true, TeamStandPoints[0]);
         }
         
@@ -151,15 +152,7 @@ namespace FightScene
                 }
             }
         }
-
-        public void TutorialSpecial()
-        {
-            foreach (var center in teamMembers.GetValues())
-            {
-                center.StartAutoModeWhenGetHurt();
-            }
-        }
-
+        
         private bool ChangeFightingUnitToHerSub(Data_Center main, string stateKey, V_Damage damage)
         {
             Data_Center changeTo = null;

@@ -177,9 +177,6 @@ public class PreparingProcess : FSceneProcess
                 break;
         }
         
-        if (FightLoad.Fight.RunTutorial)
-            RTFightManager.Target.team2.TutorialSpecial();
-        
         RTFightManager.Target.SetGame(FightLoad.Fight);
         ProgressLayer.LoadingPercent(Translate.Get("LoadingBattleAboutToEnd"), 0.8f);
         fightingStepLayer = FightingStepLayer.Open();
