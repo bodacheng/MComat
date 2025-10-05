@@ -1,85 +1,62 @@
-Code,EN,JP,CH,
-1_1,"I keep running.
-",私は走り続けています,我不停的奔跑,
-1_2,What drives me is countless anger,私を突き動かしているのは数え切れないほどの怒りです,给我动力的是无数的愤怒,
-1_3,I think of the people and things that fill me with resentment.,私を憤らせる人や出来事を思い出します,我想起那些让我愤恨的人和事,
-1_4,"In my fantasies, I have the power to hold all of them beneath my applause",私の幻想の中では、彼ら全員を掌握するほどの力が私にあります,在我的幻想中，我有力量将他们所有人凌驾于鼓掌之中,
-1_5,I even have the power to decide the survival or destruction of the world,世界の存亡を決める力さえも、私の手にあります,甚至拥有力量决定世界的生存与毁灭,
-1_6,"When I came back to my senses, I had crossed the finish line first and become the champion",気がついた時には、私は最初にゴールラインを越えてチャンピオンになっていました。,回过神来的时候我竟第一个跑过终点线成了冠军,
-1_7,The people I don't really like lifted me up.,あまり好きではない人たちが私を持ち上げました,那些我不怎么喜欢的人将我捧了起来,
-,,,,
-2_1,I can't believe we're graduating from elementary school so soon!,信じられない！もう小学校を卒業しちゃうんだね！,小强：真不敢相信我们这么快就小学毕业了!,
-2_2,It's just changing places to study.,ただ勉強する場所が変わるだけだよ。,小华：只是换个地方读书而已啦。,
-2_3,But you'll have to say bye bye to us.,でも俺たちとバイバイしなきゃいけないんだね。,小刚：可是你要和我们说bye bye啦。,
-2_4,We'll meet again in the future.,またいつか会えるよ。,小华：以后会再见的。,
-2_5,"Xiaohua, are you planning to go pro in basketball?",小华、バスケットボールでプロになるつもり？,小亮：小华要打算专业打篮球吗。,
-2_6,"Don't be ridiculous, I'm not that good.",冗談だよ、そんなに上手じゃない。,小华：开什么玩笑，我不大行的。,
-2_7,"I think you're pretty amazing, haha.",君は十分すごいと思うよ、はは。,小明：我觉得你够厉害的了哈哈。,
-2_8,.....,.....,.....,
-2_9,We're going this way. See you later!,俺たちはこっちに行くよ。また今度ね！,小强：我们往这走了。改日再见啦！,
-2_10,"Xiaohua, Xiaogang: Yeah! See you later!",小华、小刚：うん！また今度ね！,"小华,小刚：嗯！改日再见啦！",
-2_11,.....,.....,.....,
-2_12,I'm so anxious about middle school. I plan to just study hard and not make any friends.,中学が不安だな。友達なんて作らずに、真面目に勉強しよう。,小刚：好不安啊，初中。我打算什么朋友也不交，老实读书好了。,
-2_13,"Don't be ridiculous, how can you not make any friends? You'll have new brothers soon.",冗談だよ、友達を作らないなんてありえない。すぐに新しい仲間ができるよ。,小华：开什么玩笑，怎么可能什么朋友也不交。很快就会有新的弟兄的。,
-2_14,......,......,小刚：......,
-2_15,"Alright, I'm going this way! See you later!",よし、俺はこっちに行くよ！またね！,小华：好了，我要往这边走了!再会!,
-2_16,Xiaohua...,小华...,小刚：小华...,
-2_17,Xiaohua: ?,小华: ?,小华: ?,
-2_18,It's nothing. See you later!,何でもない。またね！,小刚：没事。再见啦！,
-2_19,Yeah! We'll definitely meet again! Bye bye!,うん！きっとまた会えるよ！バイバイ！,小华：嗯！以后一定再会！byebye！,
-,,,,
-3_1,What's going on outside? It's been sounding like a fight since a little while ago...,外で何があったんだろう。さっきからずっと喧嘩みたいな音が聞こえてくる…,外面这是怎么了，从刚才开始就传来打架一样的声音...,
-3_2,Ah!,あ！,啊！,
-3_3,"What's going on? Somebody, come here!",どうしたんだ？誰か来てくれ！,怎么回事？来人啊！,
-3_4,Why… I feel some kind of power...,なぜだろう、力を感じる…,为什么，感觉有股力量...,
-3_5,"What's going on? Am I back to the state I was in before I got injured a month ago? No, more than that...",これはどういうことだ？　俺は一ヶ月前に怪我をする前の状態に戻っている？　いや、それよりも…,这是怎么回事，我变回了一个月前受伤之前的状态？不对，比那时候...,
-3_6,? ：Hand over the magic stone.,?：「魔石を渡せ」,怪物：交出魔石,
-3_7,Adam: ?,アダム：？,亚当：？,
-,,,,
-4_1,A: ...It's finally coming.,A：……ついに来るんだね。,A：……终于要来了。,
-4_2,B: Yeah... We can't avoid it anymore.,B：うん……もう逃げられないね。,B：嗯……我们躲不过去了。,
-4_3,"A: Speaking of which, being able to see this scenery is an incredibly great fortune for us.",A：そういえば、こんな景色が見られるなんて、本当に大きな幸運だね。,A：说起来，我们能看到这种风景也算是无比大的幸运呢。,
-4_4,"B: More than the scenery, having you by my side until the end is the greatest fortune.",B：景色よりも、最後まで君がいてくれることが一番の幸運だよ。,B：比起风景，能有你陪我到最后才是无比大的幸运。,
-4_5,A: I love you baby.,A：愛してる、ベイビー。,A：我爱你宝贝。,
-4_6,B: I love you too.,B：僕も愛してる。,B：我也爱你。,
-,,,,
-5_1,"Sybil: As I said, human civilization is destined to end soon. As long as we work together,  
-we can survive in the new world that follows and possess enormous wealth.","シビル：私が言ったように、人類文明は間もなく終焉を迎える運命にある。
-私たちが手を組めば、その後の新世界で生き延び、巨大な富を手にすることができる。","西比尔：如我所说，人类文明注定要在不久后终结，只要我们联手，
-就能在之后的新世界中生存并且拥有巨大的财富。",
-5_2,"Yao: Big sis,  if human civilization is ending, what's the point of talking about wealth?",遥：お姉さん、人類文明が終わるなら、富なんて何の意味があるの？,遥：大姐，人类文明都终结了，那还扯什么财富呢？,
-5_3,"Yao: Besides  since humans are about to be finished
-,the creatures on this Earth afterwards will be completely different. 
-How did you have the mood to get a facelift last week?","遥：それに、人類がもうすぐ終わるなら、
-その後のこの地球の生物は全く違う姿になるのに、先週なんでフェイスリフトする気になったの？","遥：而且既然人类不久就要完蛋，
-之后这个地球上的生物都是另外一副模样，你上星期还有心情去做拉皮手术？",
-5_4,Sybil: Wealth is just a way of simplifying understanding. You can also think of it as power.,シビル：富は理解を簡略化するための表現に過ぎない。権力と理解してもいい。,西比尔：财富只是一种为了简化理解的说法。你也可以理解成是种权力。,
-5_5,"Sybil: As long as we survive the final catastrophe,  we can become the rulers of the new world.",シビル：最終的な大災害を乗り越えさえすれば、私たちは新世界の支配者になれる。,西比尔：只要我们挺过最终浩劫，我们就能成为新世界的主宰。,
-5_6,"Sybil: Besides since that's months away, 
-it doesn't prevent me from pursuing quality of life during these months.",シビル：それに、それは何ヶ月も先のことだから、この数ヶ月間の生活の質を追求するのを妨げない。,西比尔：另外既然那是几个月之后，那不妨碍我追求这几个月的生活质量。,
-,,,,
-6_1,Tetsuya: It should have reached its limit. Get ready to give it the final blow!,鉄也：もう限界まで来てるはずだ。最後の一撃の準備をしろ！,铁也：它应该已经撑到极限了，准备好给他最后一击！,
-6_2,Yao: Be careful, I feel like it's...,瑶：気をつけて、なんか感じが...,瑶：小心，怎么感觉它正在....
-6_3,!!,!!,!!,
-,,,,
-7_1,Once upon a time  there was a little girl who developed atomic bombs.,昔々、原子爆弾を開発した小さな女の子がいました。,很久很久以前，有个开发原子弹的小女孩。,
-7_2,"She brought the atomic bomb to the Prince of Dubai.
-The prince stroked his beard and pondered for a long time, then shook his head and said: ""This thing is too dangerous, I wouldn't be able to sleep well if I bought it.""","彼女は原子爆弾をドバイの王子の前に持って行きました。
-王子はひげを撫でながら長い間考え込んだ後、首を振って言いました：「これは危険すぎる、買ったらよく眠れない。」","她把原子弹带到迪拜王子面前。
-王子摸着胡子沉思良久，还是摇了摇头，说：""这东西太危险，我买了也睡不好觉。""",
-7_3,"She came to the White House to sell atomic bombs to the President of the United States.
-The president looked grave and rejected her proposal.","彼女はホワイトハウスに来て、アメリカ大統領に原子爆弾を売ろうとしました。
-大統領は深刻な表情で、彼女の提案を断りました。","她来到白宫，向美国总统兜售原子弹。
-总统神色凝重，拒绝了她的提议。",
-7_4,"She ran to a military organization general in the Arabian Peninsula to promote her product.
-The general said, we already have many atomic bombs.","彼女はアラビア半島の軍事組織の将軍のところに走って行って、商品を宣伝しました。
-将軍は言いました、私たちはすでにたくさんの原子爆弾を持っています。","她又跑到阿拉伯半岛一个军事组织将军面前推销。
-将军说，我们已经有很多原子弹了。",
-7_5,"The little girl sat in her private secret island villa, 
-feeling cold and hungry. Why was no one willing to buy her atomic bombs?","小さな女の子は彼女のプライベートな秘密の島の別荘に座って、寒くてお腹が空いていると感じました。
-なぜ誰も彼女の原子爆弾を買おうとしないのでしょうか？","小女孩坐在她私人秘密海岛的别墅里，
-感觉又冷又饿，为什么就没人愿意购买她的原子弹呢？",
-7_6,"After pondering for a long time  the little girl felt that she had been too gentle with this world.
- She opened her computer and entered the atomic bomb activation command.","長い間考え込んだ後、小さな女の子は自分がこの世界に対してあまりにも優しすぎたと感じました。
-彼女はコンピューターを開いて、原子爆弾起動コマンドを入力しました。",沉思良久，小女孩感觉她对这个世界还是太过温柔了。她打开电脑，输入了原子弹启动命令。,
-7_7,As mushroom clouds rose in the distance  the little girl finally felt a trace of long-lost warmth.,遠くにキノコ雲が浮かび上がる中、小さな女の子はついに久しぶりの温かさを感じました。,随着远处浮起蘑菇云，小女孩终于感受到一丝久违的温暖。,
+Code,EN,JP,CH
+1_1,I keep running.,私は走り続けています,我不停的奔跑
+1_2,What drives me is countless anger,私を突き動かしているのは数え切れないほどの怒りです,给我动力的是无数的愤怒
+1_3,I think of the people and things that fill me with resentment.,私を憤らせる人や出来事を思い出します,我想起那些让我愤恨的人和事
+1_4,"In my fantasies, I have the power to hold all of them beneath my applause",私の幻想の中では、彼ら全員を掌握するほどの力が私にあります,在我的幻想中，我有力量将他们所有人凌驾于鼓掌之中
+1_5,I even have the power to decide the survival or destruction of the world,世界の存亡を決める力さえも、私の手にあります,甚至拥有力量决定世界的生存与毁灭
+1_6,"When I came back to my senses, I had crossed the finish line first and become the champion",気がついた時には、私は最初にゴールラインを越えてチャンピオンになっていました。,回过神来的时候我竟第一个跑过终点线成了冠军
+1_7,The people I don't really like lifted me up.,あまり好きではない人たちが私を持ち上げました,那些我不怎么喜欢的人将我捧了起来
+,,,
+2_1,I can't believe we're graduating from elementary school so soon!,信じられない！もう小学校を卒業しちゃうんだね！,小强：真不敢相信我们这么快就小学毕业了!
+2_2,It's just changing places to study.,ただ勉強する場所が変わるだけだよ。,小华：只是换个地方读书而已啦。
+2_3,But you'll have to say bye bye to us.,でも俺たちとバイバイしなきゃいけないんだね。,小刚：可是你要和我们说bye bye啦。
+2_4,We'll meet again in the future.,またいつか会えるよ。,小华：以后会再见的。
+2_5,"Xiaohua, are you planning to go pro in basketball?",小华、バスケットボールでプロになるつもり？,小亮：小华要打算专业打篮球吗。
+2_6,"Don't be ridiculous, I'm not that good.",冗談だよ、そんなに上手じゃない。,小华：开什么玩笑，我不大行的。
+2_7,"I think you're pretty amazing, haha.",君は十分すごいと思うよ、はは。,小明：我觉得你够厉害的了哈哈。
+2_8,.....,.....,.....
+2_9,We're going this way. See you later!,俺たちはこっちに行くよ。また今度ね！,小强：我们往这走了。改日再见啦！
+2_10,"Xiaohua, Xiaogang: Yeah! See you later!",小华、小刚：うん！また今度ね！,"小华,小刚：嗯！改日再见啦！"
+2_11,.....,.....,.....
+2_12,I'm so anxious about middle school. I plan to just study hard and not make any friends.,中学が不安だな。友達なんて作らずに、真面目に勉強しよう。,小刚：好不安啊，初中。我打算什么朋友也不交，老实读书好了。
+2_13,"Don't be ridiculous, how can you not make any friends? You'll have new brothers soon.",冗談だよ、友達を作らないなんてありえない。すぐに新しい仲間ができるよ。,小华：开什么玩笑，怎么可能什么朋友也不交。很快就会有新的弟兄的。
+2_14,......,......,小刚：......
+2_15,"Alright, I'm going this way! See you later!",よし、俺はこっちに行くよ！またね！,小华：好了，我要往这边走了!再会!
+2_16,Xiaohua...,小华...,小刚：小华...
+2_17,Xiaohua: ?,小华: ?,小华: ?
+2_18,It's nothing. See you later!,何でもない。またね！,小刚：没事。再见啦！
+2_19,Yeah! We'll definitely meet again! Bye bye!,うん！きっとまた会えるよ！バイバイ！,小华：嗯！以后一定再会！byebye！
+,,,
+3_1,What's going on outside? It's been sounding like a fight since a little while ago...,外で何があったんだろう。さっきからずっと喧嘩みたいな音が聞こえてくる…,外面这是怎么了，从刚才开始就传来打架一样的声音...
+3_2,Ah!,あ！,啊！
+3_3,"What's going on? Somebody, come here!",どうしたんだ？誰か来てくれ！,怎么回事？来人啊！
+3_4,Why… I feel some kind of power...,なぜだろう、力を感じる…,为什么，感觉有股力量...
+3_5,"What's going on? Am I back to the state I was in before I got injured a month ago? No, more than that...",これはどういうことだ？　俺は一ヶ月前に怪我をする前の状態に戻っている？　いや、それよりも…,这是怎么回事，我变回了一个月前受伤之前的状态？不对，比那时候...
+3_6,? ：Hand over the magic stone.,?：「魔石を渡せ」,怪物：交出魔石
+3_7,Adam: ?,アダム：？,亚当：？
+,,,
+4_1,A: ...It's finally coming.,A：……ついに来るんだね。,A：……终于要来了。
+4_2,B: Yeah... We can't avoid it anymore.,B：うん……もう逃げられないね。,B：嗯……我们躲不过去了。
+4_3,"A: Speaking of which, being able to see this scenery is an incredibly great fortune for us.",A：そういえば、こんな景色が見られるなんて、本当に大きな幸運だね。,A：说起来，我们能看到这种风景也算是无比大的幸运呢。
+4_4,"B: More than the scenery, having you by my side until the end is the greatest fortune.",B：景色よりも、最後まで君がいてくれることが一番の幸運だよ。,B：比起风景，能有你陪我到最后才是无比大的幸运。
+4_5,"A: I love you, baby.",A：愛してる、ベイビー。,A：我爱你宝贝。
+4_6,B: I love you too.,B：僕も愛してる。,B：我也爱你。
+,,,
+5_1,"Sybil: As I said, human civilization is destined to end soon. As long as we work together, we can survive in the new world that follows and possess enormous wealth.",シビル：私が言ったように、人類文明は間もなく終焉を迎える運命にある。私たちが手を組めば、その後の新世界で生き延び、巨大な富を手にすることができる。,西比尔：如我所说，人类文明注定要在不久后终结，只要我们联手，就能在之后的新世界中生存并且拥有巨大的财富。
+5_2,"Yao: Big sis, if human civilization is ending, what's the point of talking about wealth?",遥：お姉さん、人類文明が終わるなら、富なんて何の意味があるの？,遥：大姐，人类文明都终结了，那还扯什么财富呢？
+5_3,"Yao: Besides, since humans are about to be finished, the creatures on this Earth afterwards will be completely different. How did you have the mood to get a facelift last week?",遥：それに、人類がもうすぐ終わるなら、その後のこの地球の生物は全く違う姿になるのに、先週なんでフェイスリフトする気になったの？,遥：而且既然人类不久就要完蛋，之后这个地球上的生物都是另外一副模样，你上星期还有心情去做拉皮手术？
+5_4,Sybil: Wealth is just a way of simplifying understanding. You can also think of it as power.,シビル：富は理解を簡略化するための表現に過ぎない。権力と理解してもいい。,西比尔：财富只是一种为了简化理解的说法。你也可以理解成是种权力。
+5_5,"Sybil: As long as we survive the final catastrophe, we can become the rulers of the new world.",シビル：最終的な大災害を乗り越えさえすれば、私たちは新世界の支配者になれる。,西比尔：只要我们挺过最终浩劫，我们就能成为新世界的主宰。
+5_6,"Sybil: Besides, since that's months away, it doesn't prevent me from pursuing quality of life during these months.",シビル：それに、それは何ヶ月も先のことだから、この数ヶ月間の生活の質を追求するのを妨げない。,西比尔：另外既然那是几个月之后，那不妨碍我追求这几个月的生活质量。
+,,,
+6_1,Tetsuya: It should have reached its limit. Get ready to give it the final blow!,鉄也：もう限界まで来てるはずだ。最後の一撃の準備をしろ！,铁也：它应该已经撑到极限了，准备好给他最后一击！
+6_2,"Yao: Be careful, I feel like it's...",瑶：気をつけて、なんか感じが...,瑶：小心，怎么感觉它正在....
+6_3,!!,!!,!!
+,,,
+7_1,"Once upon a time, there was a little girl who developed atomic bombs.",昔々、原子爆弾を開発した小さな女の子がいました。,很久很久以前，有个开发原子弹的小女孩。
+7_2,"She brought the atomic bomb to the Prince of Dubai. The prince stroked his beard and pondered for a long time, then shook his head and said: ""This thing is too dangerous, I wouldn't be able to sleep well if I bought it.""",彼女は原子爆弾をドバイの王子の前に持って行きました。王子はひげを撫でながら長い間考え込んだ後、首を振って言いました：「これは危険すぎる、買ったらよく眠れない。」,她把原子弹带到迪拜王子面前。王子摸着胡子沉思良久，还是摇了摇头，说："这东西太危险，我买了也睡不好觉。"
+7_3,She came to the White House to sell atomic bombs to the President of the United States. The president looked grave and rejected her proposal.,彼女はホワイトハウスに来て、アメリカ大統領に原子爆弾を売ろうとしました。大統領は深刻な表情で、彼女の提案を断りました。,她来到白宫，向美国总统兜售原子弹。总统神色凝重，拒绝了她的提议。
+7_4,"She ran to a military organization general in the Arabian Peninsula to promote her product. The general said, we already have many atomic bombs.",彼女はアラビア半島の軍事組織の将軍のところに走って行って、商品を宣伝しました。将軍は言いました、私たちはすでにたくさんの原子爆弾を持っています。,她又跑到阿拉伯半岛一个军事组织将军面前推销。将军说，我们已经有很多原子弹了。
+7_5,"The little girl sat in her private secret island villa, feeling cold and hungry. Why was no one willing to buy her atomic bombs?",小さな女の子は彼女のプライベートな秘密の島の別荘に座って、寒くてお腹が空いていると感じました。なぜ誰も彼女の原子爆弾を買おうとしないのでしょうか？,小女孩坐在她私人秘密海岛的别墅里，感觉又冷又饿，为什么就没人愿意购买她的原子弹呢？
+7_6,"After pondering for a long time, the little girl felt that she had been too gentle with this world. She opened her computer and entered the atomic bomb activation command.",長い間考え込んだ後、小さな女の子は自分がこの世界に対してあまりにも優しすぎたと感じました。彼女はコンピューターを開いて、原子爆弾起動コマンドを入力しました。,沉思良久，小女孩感觉她对这个世界还是太过温柔了。她打开电脑，输入了原子弹启动命令。
+7_7,"As mushroom clouds rose in the distance, the little girl finally felt a trace of long-lost warmth.",遠くにキノコ雲が浮かび上がる中、小さな女の子はついに久しぶりの温かさを感じました。,随着远处浮起蘑菇云，小女孩终于感受到一丝久违的温暖。

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e974cff1cb374675b589dba6b999185, type: 3}
+  m_Name: fire
+  m_EditorClassIdentifier: 
+  _storyScenes:
+  - Pic: {fileID: 21300000, guid: 282dd871d9f0d4815b222b18c43c2ba5, type: 3}
+    Lines:
+    - 7_1
+    - 7_2
+  - Pic: {fileID: 21300000, guid: bceeeab5c0e864c83bcb12fd857aef21, type: 3}
+    Lines:
+    - 7_3
+  - Pic: {fileID: 21300000, guid: e8881773934ce4519bddb051df6f515d, type: 3}
+    Lines:
+    - 7_4
+  - Pic: {fileID: 21300000, guid: 4f2a3d81fc71647a9bf29752e014ee2f, type: 3}
+    Lines:
+    - 7_5
+  - Pic: {fileID: 21300000, guid: e897a5eb1587244cea8c5f1910d97a53, type: 3}
+    Lines:
+    - 7_6
+  - Pic: {fileID: 21300000, guid: d6a8e53bf526347d3b4929eaee04b054, type: 3}
+    Lines:
+    - 7_7
