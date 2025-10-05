@@ -30,7 +30,7 @@ namespace Soul
                 case BehaviorType.MV: //移动状态的触发条件。不添加的话移动状态不触发的。
                     var fdsgfg = new KeyValuePair<string, string>("SpareOption", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(fdsgfg);
-                    ConditionAndRespondPriority.Set(fdsgfg.Key, fdsgfg.Value, 10);
+                    ConditionAndRespondPriority.Set(fdsgfg.Key, fdsgfg.Value, 5);
                     break;
                 case BehaviorType.RB:
                 case BehaviorType.AC:
@@ -48,11 +48,11 @@ namespace Soul
 
                     var keyValuePair4 = new KeyValuePair<string, string>("DangerousVeryClose", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(keyValuePair4);
-                    ConditionAndRespondPriority.Set(keyValuePair4.Key, keyValuePair4.Value, 3);
+                    ConditionAndRespondPriority.Set(keyValuePair4.Key, keyValuePair4.Value, 4);
                     
                     var keyValuePairE = new KeyValuePair<string, string>("EnemyClose", behaviorDefine.REAL_NAME);
                     RegisterConditionToRespond(keyValuePairE);
-                    ConditionAndRespondPriority.Set(keyValuePairE.Key, keyValuePairE.Value, 4);
+                    ConditionAndRespondPriority.Set(keyValuePairE.Key, keyValuePairE.Value, 5);
                     
                     BehaviourAndStrategicExitCondition.Add(behaviorDefine.REAL_NAME, null);
                     break;
