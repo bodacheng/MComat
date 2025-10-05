@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Story
   m_EditorClassIdentifier: 
   m_GroupName: Story
-  m_Data:
-    m_SerializedData: []
   m_GUID: 792c0441972c44ce2841ac760b0944b0
   m_SerializeEntries:
   - m_GUID: 25e7e00353d704a59b1bab102fc8ea07
@@ -49,6 +47,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ca88bc33bd2454c66a7a9cd8e2e54b3e
     m_Address: final
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - story
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f85c8f1490f874276b09b7e31ab74a25
+    m_Address: fire
     m_ReadOnly: 0
     m_SerializedLabels:
     - story

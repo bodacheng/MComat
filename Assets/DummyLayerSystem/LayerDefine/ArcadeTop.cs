@@ -163,16 +163,16 @@ public class ArcadeTop : UILayer
                 case 5:
                     unitAward = "2";
                     break;
-                case 20:
+                case 10:
                     unitAward = "4";
                     break;
-                case 35:
+                case 15:
                     unitAward = "7";
                     break;
-                case 50:
+                case 20:
                     unitAward = "6";
                     break;
-                case 100:
+                case 50:
                     unitAward = "5";
                     break;
                 default:

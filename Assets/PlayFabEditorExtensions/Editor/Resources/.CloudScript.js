@@ -480,16 +480,16 @@ handlers.completedLevel = function (args, context) {
             case 5:
                 unit_award = "2";
                 break;
-            case 20:
+            case 10:
                 unit_award = "4";
                 break;
-            case 35:
+            case 15:
                 unit_award = "7";
                 break;
-            case 50:
+            case 20:
                 unit_award = "6";
                 break;
-            case 100:
+            case 50:
                 unit_award = "5";
                 break;
             default:

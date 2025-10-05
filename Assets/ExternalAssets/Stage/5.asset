@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleGroundID: 1
   fightBGM: 0
-  storyKey: run
+  storyKey: goodbye
   unitsData:
   - id: 0
     r_id: 9
