@@ -8,8 +8,12 @@ public class StoryInfo : ScriptableObject
 {
     [SerializeField] private List<StoryScene> _storyScenes;
     
-    public List<StoryScene> StoryScenes => _storyScenes;
-    
+    public List<StoryScene> StoryScenes
+    {
+        get => _storyScenes;
+        set => _storyScenes = value;
+    }
+
     [Serializable]
     public class StoryScene
     {

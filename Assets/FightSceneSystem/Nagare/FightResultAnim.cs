@@ -75,6 +75,13 @@ namespace FightScene
                     arenaFightOver.Setup();
                     await EndPart();
                     break;
+                case FightEventType.Event:
+                    if (FightLogger.value.GetWinnerTeam() == Team.player1)
+                    {
+                        await arenaFightOver.LoadStory();
+                    }
+                    await EndPart();
+                    break;
                 default:
                     await EndPart();
                     break;

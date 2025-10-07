@@ -5,6 +5,9 @@ using UnityEngine;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using FightScene;
 
 public partial class ArenaFightOver : UILayer
 {
@@ -32,9 +35,18 @@ public partial class ArenaFightOver : UILayer
     bool picStoryEnded = false;
     public async UniTask LoadStory()
     {
-        if (CommonSetting.PcMode && !String.IsNullOrEmpty(FightLoad.Fight.StoryKey))
+        if (CommonSetting.PcMode && 
+            (!String.IsNullOrEmpty(FightLoad.Fight.StoryKey) || FightScene.FightScene.target.AIStoryInfo != null))
         {
-            var story = await StoryManager.Instance.LoadStory(FightLoad.Fight.StoryKey);
+            StoryInfo story = null;
+            if (!String.IsNullOrEmpty(FightLoad.Fight.StoryKey))
+                story = await StoryManager.Instance.LoadStory(FightLoad.Fight.StoryKey);
+            
+            if (story == null)
+            {
+                story = FightScene.FightScene.target.AIStoryInfo;
+            }
+            
             if (story == null)
             {
                 picStoryEnded = true;
@@ -68,6 +80,7 @@ public partial class ArenaFightOver : UILayer
         {
             _currentLineIndex++;
             DisplayCurrentLine(storyInfo);
+            Debug.Log(storyInfo.StoryScenes[_currentSceneIndex].Lines.Count  + " : "+ _currentLineIndex);
         }
         else
         {
@@ -97,7 +110,12 @@ public partial class ArenaFightOver : UILayer
 
     private void DisplayCurrentLine(StoryInfo _storyInfo)
     {
-        storyLineText.text =  Story.Get(_storyInfo.StoryScenes[_currentSceneIndex].Lines[_currentLineIndex]);
+        if (_storyInfo.StoryScenes[_currentSceneIndex].Lines.Count > _currentLineIndex)
+            storyLineText.text =  Story.Get(_storyInfo.StoryScenes[_currentSceneIndex].Lines[_currentLineIndex]);
+        else
+        {
+            storyLineText.text = "";
+        }
     }
     
     bool clickedOnShortStory = false;

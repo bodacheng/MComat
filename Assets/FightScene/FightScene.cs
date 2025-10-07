@@ -2,6 +2,7 @@
 using UnityEngine;
 using UniRx;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using mainMenu;
 using UnityEngine.SceneManagement;
@@ -22,7 +23,13 @@ namespace FightScene
         public SensorUnity SensorUnity => sensorUnity;
         
         [SerializeField] AdmobAdsButton watchAdBtnPrefab;
-
+        
+        [SerializeField] private AIServiceManager aiServiceManager;
+        
+        public AIServiceManager AIServiceManager => aiServiceManager;
+        private StoryInfo aiStoryInfo;
+        public StoryInfo AIStoryInfo => aiStoryInfo;
+        
         public static FightScene target;
         
         public ReactiveProperty<bool> LoadStageFinished { get; set; } = new ReactiveProperty<bool>(false);
@@ -129,6 +136,15 @@ namespace FightScene
             }
             FSceneProcessesRunner.Main.ArrangeProcessOrder();
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
+            
+            aiServiceManager.InitializeClients();
+            if (FightLoad.Fight.EventType == FightEventType.Event)
+                LoadAIStory().Forget();
+        }
+
+        private async UniTask LoadAIStory()
+        {
+            aiStoryInfo = await aiServiceManager.LoadAIStory();
         }
 
         public void LoadAds()

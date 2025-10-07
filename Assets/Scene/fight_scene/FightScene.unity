@@ -10432,6 +10432,7 @@ MonoBehaviour:
   sensorUnity: {fileID: 3000649884765589352}
   watchAdBtnPrefab: {fileID: 5862124372405645925, guid: 6c21cee395a034edd99300ad3c2f261f,
     type: 3}
+  aiServiceManager: {fileID: 3000649884765589353}
 --- !u!1 &3000649884765589351
 GameObject:
   m_ObjectHideFlags: 0
@@ -10443,6 +10444,7 @@ GameObject:
   - component: {fileID: 3000649884765589345}
   - component: {fileID: 3000649884765589350}
   - component: {fileID: 3000649884765589352}
+  - component: {fileID: 3000649884765589353}
   m_Layer: 0
   m_Name: Scene_manager
   m_TagString: Untagged
@@ -10465,6 +10467,19 @@ MonoBehaviour:
   _layers:
     serializedVersion: 2
     m_Bits: 7680
+--- !u!114 &3000649884765589353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3000649884765589351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12345678901234567890123456789022, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serviceConfig: {fileID: 11400000, guid: 7e93d46d7776a4359979391a802b2e82, type: 2}
 --- !u!64 &3000649885034771331
 MeshCollider:
   m_ObjectHideFlags: 0
