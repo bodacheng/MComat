@@ -267,7 +267,7 @@ public class QuestInfoPage : MSceneProcess
             case FightEventType.Arena:
                 if (fightInfo.FightMembers.HeroSets.GetValues().Count != 3)
                 {
-                    PopupLayer.ArrangeWarnWindow(Translate.Get("TeamNotFull"));
+                    PopupLayer.ArrangeWarnWindow(Translate.Get("TeamNotFullForArena"));
                     return;
                 }
                 CloudScript.SubtractVirtualCurrency(
@@ -308,11 +308,24 @@ public class QuestInfoPage : MSceneProcess
 
                     RealFight();
                 }
-                else
+                else if (fightInfo.FightMode == FightMode.Rotate)
                 {
-                    ReturnLayer.ReturnMissionList.Clear();
                     fightInfo.LoadMyTeam();
-                    FightLoad.Go(fightInfo);
+                    
+                    void Go()
+                    {
+                        ReturnLayer.ReturnMissionList.Clear();
+                        FightLoad.Go(fightInfo);
+                    }
+                    
+                    if (dataAccess.Units.Dic.Count > fightInfo.FightMembers.HeroSets.GetValues().Count && 
+                        fightInfo.FightMembers.HeroSets.GetValues().Count < 3)
+                    {
+                        PopupLayer.ArrangeConfirmWindow(Go, ()=>{},
+                            Translate.Get("HasExtraSeatButFight"));
+                        return;
+                    }
+                    Go();
                 }
                 break;
             default:
@@ -322,7 +335,8 @@ public class QuestInfoPage : MSceneProcess
                     PopupLayer.ArrangeWarnWindow(Translate.Get("TeamNotFull"));
                     return;
                 }
-                if (dataAccess.Units.Dic.Count >= 3 && fightInfo.FightMembers.HeroSets.GetValues().Count < 3)
+                if (dataAccess.Units.Dic.Count > fightInfo.FightMembers.HeroSets.GetValues().Count && 
+                    fightInfo.FightMembers.HeroSets.GetValues().Count < 3)
                 {
                     PopupLayer.ArrangeConfirmWindow(
                         () => { FightLoad.Go(fightInfo);},

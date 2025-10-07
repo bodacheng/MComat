@@ -1191,7 +1191,7 @@ MonoBehaviour:
   countSelectedFrame3: {fileID: 0}
 --- !u!95 &7092534826198370714
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1205,6 +1205,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -3548,17 +3549,17 @@ PrefabInstance:
     - target: {fileID: 201907735416529248, guid: 52b964cdb371f45b1bff917216a4914c,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 201907735416529248, guid: 52b964cdb371f45b1bff917216a4914c,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 150
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 201907735416529248, guid: 52b964cdb371f45b1bff917216a4914c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -69.535034
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1259643082885048316, guid: 52b964cdb371f45b1bff917216a4914c,
         type: 3}

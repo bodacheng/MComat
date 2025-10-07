@@ -201,7 +201,8 @@ GemsThatCanBeMerged,Mergeable Gems,融合可能なジェム,可融合技能石
 ExecuteAutoMerge,Execute Merge,融合実行,进行融合
 ShowLevel,Show Level,レベル表示,显示等级
 ,,,
-TeamNotFull,You need three warriors with complete skill sets to participate in the arena,アリーナに参加するには、3人のスキルセットが完全な戦士が必要です,必须有三名技能组完整的战士才能参与竞技场
+TeamNotFullForArena,You need three warriors with complete skill sets to participate in the arena,アリーナに参加するには、3人のスキルセットが完全な戦士が必要です,必须有三名技能组完整的战士才能参与竞技场
+TeamNotFull,No enough fighters,戦闘員が足りません,战斗人员不够
 ,,,
 Account,Account,アカウント,账户
 LinkEmail,Email binding,メールアドレスのバインド,邮箱绑定
