@@ -57,6 +57,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - config
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7e93d46d7776a4359979391a802b2e82
+    m_Address: Config/AIServiceConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a68841c2c08ac4fefafe74c4812cbcd1
     m_Address: Config/skill_ai_attrs
     m_ReadOnly: 0

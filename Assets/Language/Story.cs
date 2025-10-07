@@ -75,7 +75,7 @@ public static class Story
 		if (String.IsNullOrEmpty(languageCode))
 			return null;
 		var row = Find_RECORD_ID(languageCode);
-		string text = default;
+		string text = null;
 		if (row != null)
 		{
 			switch (AppSetting.Value.Language)

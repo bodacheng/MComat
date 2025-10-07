@@ -111,7 +111,17 @@ public partial class ArenaFightOver : UILayer
     private void DisplayCurrentLine(StoryInfo _storyInfo)
     {
         if (_storyInfo.StoryScenes[_currentSceneIndex].Lines.Count > _currentLineIndex)
-            storyLineText.text =  Story.Get(_storyInfo.StoryScenes[_currentSceneIndex].Lines[_currentLineIndex]);
+        {
+            var line = Story.Get(_storyInfo.StoryScenes[_currentSceneIndex].Lines[_currentLineIndex]);
+            if (!String.IsNullOrEmpty(line))
+            {
+                storyLineText.text =  line;
+            }
+            else
+            {
+                storyLineText.text = _storyInfo.StoryScenes[_currentSceneIndex].Lines[_currentLineIndex];
+            }
+        }
         else
         {
             storyLineText.text = "";

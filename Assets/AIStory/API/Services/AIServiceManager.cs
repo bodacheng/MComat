@@ -3,28 +3,16 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 /// <summary>
 /// Manages AI service switching between different providers (Gemini, OpenAI, etc.)
 /// </summary>
 public class AIServiceManager : MonoBehaviour
 {
-    [Header("Configuration")]
-    [SerializeField] private AIServiceConfig serviceConfig;
-    
-    public AIServiceConfig ServiceConfig 
-    {
-        get => serviceConfig; 
-        set 
-        { 
-            serviceConfig = value;
-            if (serviceConfig != null)
-            {
-                InitializeClients();
-            }
-        } 
-    }
-    
+    [SerializeField] private string configAddress = "Config/AIServiceConfig";
+    private AIServiceConfig serviceConfig;
     private IAIClient currentClient;
     private GeminiClient geminiClient;
     private OpenAIClient openAIClient;
@@ -185,14 +173,40 @@ public class AIServiceManager : MonoBehaviour
     
     public async UniTask<StoryInfo> LoadAIStory()
     {
+        // 从Addressable加载AIServiceConfig
+        Debug.Log("[AIServiceManager] Loading AIServiceConfig from Addressables...");
+        
+        var handle = Addressables.LoadAssetAsync<AIServiceConfig>(configAddress);
+        await handle.Task;
+        
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            serviceConfig = handle.Result;
+            Debug.Log("[AIServiceManager] AIServiceConfig loaded successfully");
+            
+            // 初始化AI客户端
+            if (serviceConfig != null)
+            {
+                InitializeClients();
+                Debug.Log($"[AIServiceManager] Clients initialized, Current Model: {CurrentModel}, IsConfigured: {IsConfigured}");
+            }
+        }
+        else
+        {
+            Debug.LogError($"[AIServiceManager] Failed to load AIServiceConfig from Addressables. Status: {handle.Status}");
+            if (handle.IsValid())
+                Addressables.Release(handle);
+            return null;
+        }
+        
         // 示例：生成劳动场景的故事
         var context = new BattleContext {
             BattleId = "labor_scene_001",
             SceneType = "Labor",
             SceneDescription = "亚洲小伙子们在户外辛勤劳动的场景",
-            SceneCount = 1,  // 生成4页连环画
+            SceneCount = 1,  // 生成1页连环画
             MinLinesPerScene = 2,  // 每页至少2行文字
-            MaxLinesPerScene = 2   // 每页最多4行文字
+            MaxLinesPerScene = 2   // 每页最多2行文字
         };
         var story = await GenerateAIStoryAsync(context);
         return story;
