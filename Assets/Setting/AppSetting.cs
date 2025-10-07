@@ -134,6 +134,8 @@ public class AppSetting
                 AudioClip clip = null;
                 switch (x)
                 {
+                    case SeType.None:
+                        return;
                     case SeType.Tap:
                         clip = CommonSetting.BtnTapSound;
                         break;

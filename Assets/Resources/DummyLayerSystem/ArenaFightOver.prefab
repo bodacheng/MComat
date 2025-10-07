@@ -419,7 +419,7 @@ MonoBehaviour:
   activateDoubleClick: 0
   activateHold: 0
   repeatHold: 0
-  sound: 0
+  sound: 3
   disableSprite: {fileID: 0}
   text: {fileID: 0}
 --- !u!1 &967648055824300236

@@ -15,7 +15,8 @@ using UnityEditor.UI;
     {
         Tap,
         Confirm,
-        ExTab
+        ExTab,
+        None,
     }
 
 /// <summary>
