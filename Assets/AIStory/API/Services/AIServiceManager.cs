@@ -329,23 +329,73 @@ public class AIServiceManager : MonoBehaviour
             return customPrompt;
         }
         
-        // 随机劳动场景类型
-        string[] laborTypes = new string[]
+        // 古代劳动场景类型
+        string[] ancientLaborTypes = new string[]
         {
-            "建筑工地搬运砖块",
+            "古代建筑工地搬运巨石",
             "农田里收割稻谷",
             "码头装卸货物",
-            "山区修建道路",
+            "山区修建石阶",
+            "铁匠铺打制农具",
+            "果园采摘水果",
+            "仓库整理粮食",
+            "街道铺设青石板",
+            "菜地浇水除草",
+            "搭建竹制脚手架",
+            "修建城墙搬运砖石",
+            "开凿水渠挖掘泥土",
+            "制作陶器搬运黏土",
+            "修建桥梁搬运木材",
+            "开垦荒地清理石块",
+            "制作竹器编织材料",
+            "修建寺庙搬运石料",
+            "开凿山洞搬运碎石",
+            "制作木器搬运木材",
+            "修建水车搬运零件"
+        };
+        
+        // 现代劳动场景类型
+        string[] modernLaborTypes = new string[]
+        {
+            "现代建筑工地搬运建材",
+            "农田里收割稻谷",
+            "码头装卸集装箱",
+            "山区修建公路",
             "工厂车间组装机械",
             "果园采摘水果",
             "仓库整理货物",
-            "街道铺设石板",
+            "街道铺设沥青",
             "菜地浇水除草",
-            "搭建竹制脚手架"
+            "搭建钢制脚手架",
+            "修建地铁搬运钢筋",
+            "开凿隧道搬运混凝土",
+            "制作家具搬运木材",
+            "修建桥梁搬运钢材",
+            "开垦荒地清理杂物",
+            "制作工艺品搬运材料",
+            "修建商场搬运建材",
+            "开凿矿井搬运设备",
+            "制作机械搬运零件",
+            "修建水坝搬运水泥"
         };
         
-        // 随机选择劳动类型
+        // 文化背景
+        string[] culturalBackgrounds = new string[]
+        {
+            "古代中国",
+            "现代中国",
+            "古代日本",
+            "现代日本",
+            "古代韩国",
+            "现代韩国",
+            "古代东南亚",
+            "现代东南亚"
+        };
+        
+        // 随机选择文化背景和劳动类型
         var random = new System.Random();
+        string selectedBackground = culturalBackgrounds[random.Next(culturalBackgrounds.Length)];
+        string[] laborTypes = selectedBackground.Contains("古代") ? ancientLaborTypes : modernLaborTypes;
         string selectedLabor = laborTypes[random.Next(laborTypes.Length)];
         
         // 获取场景数量设置
@@ -362,8 +412,10 @@ public class AIServiceManager : MonoBehaviour
         prompt += $"- 场景编号：按照故事发展顺序，从场景1到场景{sceneCount}\n\n";
         
         prompt += $"【故事设定】\n";
+        prompt += $"- 文化背景：{selectedBackground}\n";
         prompt += $"- 劳动类型：{selectedLabor}\n";
         prompt += $"- 主角：一位或多位身材健壮的亚洲年轻男性，光着上身\n";
+        prompt += $"- 时代特征：{(selectedBackground.Contains("古代") ? "古代建筑风格、传统工具、古典服饰元素" : "现代建筑风格、现代工具、现代服饰元素")}\n";
         prompt += $"- 氛围：展现劳动的艰辛与美感，汗水挥洒，肌肉线条在阳光下闪耀\n";
         prompt += $"- 场景ID：{battleContext.BattleId}\n\n";
         
@@ -372,6 +424,7 @@ public class AIServiceManager : MonoBehaviour
         prompt += $"- 体现劳动者的坚韧与努力\n";
         prompt += $"- 可以加入同伴间的对话或内心独白\n";
         prompt += $"- 展现健康向上的劳动美学\n";
+        prompt += $"- 体现{selectedBackground}的文化特色和时代背景\n";
         prompt += $"- 确保故事从开始到结束有完整的情节发展\n\n";
         
         prompt += $"【重要】请严格按照以下JSON格式返回，必须包含正好{sceneCount}个场景：\n\n";
@@ -622,34 +675,102 @@ public class AIServiceManager : MonoBehaviour
     /// </summary>
     private string BuildImagePrompt(StoryInfo.StoryScene scene, BattleContext battleContext, int sceneIndex)
     {
-        // 随机劳动场景元素
-        string[] environments = new string[]
+        // 古代环境
+        string[] ancientEnvironments = new string[]
         {
-            "烈日下的建筑工地",
-            "金色阳光洒落的农田",
-            "繁忙的码头",
-            "崎岖山路旁的工程现场",
-            "明亮的工厂车间",
-            "翠绿的果园",
-            "宽敞的仓库",
-            "古朴的街道",
-            "生机勃勃的菜园",
-            "高处的施工平台"
+            "古代建筑工地，石砌建筑",
+            "金色阳光洒落的古代农田",
+            "繁忙的古代码头，木制建筑",
+            "崎岖山路旁的古代工程现场",
+            "传统的铁匠铺，炉火熊熊",
+            "翠绿的古代果园",
+            "古代粮仓，木质结构",
+            "古朴的石板街道",
+            "生机勃勃的古代菜园",
+            "高处的古代施工平台",
+            "古代城墙修建现场",
+            "传统水渠开凿工地",
+            "古代陶器制作工坊",
+            "传统桥梁修建现场",
+            "古代寺庙建筑工地",
+            "传统竹器制作工坊",
+            "古代水车修建现场"
         };
         
-        string[] poses = new string[]
+        // 现代环境
+        string[] modernEnvironments = new string[]
         {
-            "弯腰搬运重物",
-            "挥动工具劳作",
+            "金色阳光洒落的现代农田",
+            "繁忙的现代码头，集装箱",
+            "崎岖山路旁的现代工程现场",
+            "翠绿的现代果园",
+            "生机勃勃的现代菜园",
+            "高处的现代施工平台",
+            "现代隧道开凿工地",
+            "现代家具制作工坊",
+            "现代桥梁修建现场",
+            "现代商场建筑工地",
+            "现代机械制造车间",
+            "古代水坝修建现场"
+        };
+        
+        // 古代姿势
+        string[] ancientPoses = new string[]
+        {
+            "弯腰搬运巨石",
+            "挥动传统工具劳作",
             "擦拭额头汗水",
-            "用力抬举物品",
-            "专注工作中",
+            "用力抬举重物",
+            "专注打制农具",
             "休息喝水",
             "与同伴协作",
-            "眺望远方片刻休息"
+            "眺望远方片刻休息",
+            "开凿石料",
+            "搬运木材",
+            "挖掘泥土",
+            "制作陶器"
+        };
+        
+        // 现代姿势
+        string[] modernPoses = new string[]
+        {
+            "弯腰搬运建材",
+            "操作现代工具劳作",
+            "擦拭额头汗水",
+            "用力抬举重物",
+            "专注组装机械",
+            "休息喝水",
+            "与同伴协作",
+            "眺望远方片刻休息",
+            "操作重型机械",
+            "搬运钢材",
+            "浇筑混凝土",
+            "操作电焊设备"
+        };
+        
+        // 文化背景
+        string[] culturalStyles = new string[]
+        {
+            "Chinese traditional style",
+            "Modern Chinese style", 
+            "Japanese traditional style",
+            "Modern Japanese style",
+            "Korean traditional style",
+            "Modern Korean style",
+            "Southeast Asian traditional style",
+            "Modern Southeast Asian style"
         };
         
         var random = new System.Random(sceneIndex + battleContext.BattleId.GetHashCode());
+        
+        // 随机选择文化背景
+        string selectedStyle = culturalStyles[random.Next(culturalStyles.Length)];
+        bool isAncient = selectedStyle.Contains("traditional");
+        
+        // 根据文化背景选择环境和姿势
+        string[] environments = isAncient ? ancientEnvironments : modernEnvironments;
+        string[] poses = isAncient ? ancientPoses : modernPoses;
+        
         string selectedEnv = environments[random.Next(environments.Length)];
         string selectedPose = poses[random.Next(poses.Length)];
         
@@ -657,6 +778,7 @@ public class AIServiceManager : MonoBehaviour
         prompt += "muscular and fit bodies glistening with sweat under natural lighting, ";
         prompt += "showing the beauty of physical labor, ";
         prompt += "detailed muscle definition, healthy tanned skin, ";
+        prompt += $"{selectedStyle}, ";
         prompt += "photorealistic style, high quality, natural colors, ";
         prompt += "cinematic composition, golden hour lighting, ";
         prompt += "capturing the dignity and strength of laborers, ";
