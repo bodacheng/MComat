@@ -75,7 +75,8 @@ public class FightLogger
                     if (x)
                     {
                         WatchDeath();
-                        deathWatchers[dataCenter].Dispose();
+                        if (deathWatchers.TryGetValue(dataCenter, out var watcher))
+                            watcher.Dispose();
                     }
                 });
                 deathWatchers.Add(dataCenter, disposable);
