@@ -327,6 +327,34 @@ public class QuestInfoPage : MSceneProcess
                     }
                     Go();
                 }
+                else if (fightInfo.FightMode == FightMode.Multi)
+                {
+                    fightInfo.LoadMyTeam();
+                    if (fightInfo.FightMembers.HeroSets.GetValues().Count < 1 || fightInfo.FightMembers.EnemySets.GetValues().Count < 1)
+                    {
+                        PopupLayer.ArrangeWarnWindow(Translate.Get("TeamNotFull"));
+                        return;
+                    }
+                    if (dataAccess.Units.Dic.Count > fightInfo.FightMembers.HeroSets.GetValues().Count && 
+                        fightInfo.FightMembers.HeroSets.GetValues().Count < 3)
+                    {
+                        PopupLayer.ArrangeConfirmWindow(
+                            () => { FightLoad.Go(fightInfo);},
+                            Translate.Get("HasExtraSeatButFight"));
+                        return;
+                    }
+                    FightLoad.Go(fightInfo);
+                }
+                else if (fightInfo.FightMode == FightMode.Evolve)
+                {
+                    fightInfo.LoadMyTeam();
+                    if (fightInfo.FightMembers.HeroSets.GetValues().Count < 1 || fightInfo.FightMembers.EnemySets.GetValues().Count < 1)
+                    {
+                        PopupLayer.ArrangeWarnWindow(Translate.Get("TeamNotFull"));
+                        return;
+                    }
+                    FightLoad.Go(fightInfo);
+                }
                 break;
             default:
                 fightInfo.LoadMyTeam();
