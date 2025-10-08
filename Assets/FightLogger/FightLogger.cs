@@ -61,12 +61,12 @@ public class FightLogger
                         if (!deadTeam.Contains(pair.Key.myTeam))
                             deadTeam.Add(pair.Key.myTeam);
                     }
-                    if (wholeTeamCount == deadTeam.Count + 1) // 胜负已决
+                    if (wholeTeamCount <= deadTeam.Count + 1) // 胜负已决
                     {
                         GameOver.Value = true;
                         var teams = teamMembers.Keys.ToList().Select(x => x.myTeam).ToList();
                         var _winner = teams.Except(deadTeam).ToList();
-                        winnerTeam = _winner[0];
+                        winnerTeam = _winner.Count > 0 ? _winner[0]: Team.none;
                     }
                 }
                 
