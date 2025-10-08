@@ -1,5 +1,16 @@
 using UnityEngine;
 
+public enum ImageStyle
+{
+    Photorealistic,     // 真实摄影风格
+    Anime,              // 动漫风格
+    Watercolor,         // 水彩画风格
+    OilPainting,        // 油画风格
+    PencilSketch,       // 铅笔素描风格
+    DigitalArt,         // 数字艺术风格
+    Cinematic           // 电影风格
+}
+
 [CreateAssetMenu(fileName = "AIServiceConfig", menuName = "StoryBook/API/AI Service Config")]
 public class AIServiceConfig : ScriptableObject
 {
@@ -14,12 +25,28 @@ public class AIServiceConfig : ScriptableObject
     [SerializeField] private bool allowModelSwitching = true;
     [SerializeField] private bool showModelInUI = true;
     
+    [Header("Story Generation Settings")]
+    [Tooltip("故事主旨列表，每次生成时会随机选择一个。可以自由添加任意数量的主题描述")]
+    [SerializeField] [TextArea(2, 5)] private string[] storyThemes = new string[]
+    {
+        "关于亚洲小伙子光着膀子劳动的"
+    };
+    
+    [Tooltip("图片风格")]
+    [SerializeField] private ImageStyle imageStyle = ImageStyle.Photorealistic;
+    
+    [Tooltip("图片生成额外要求，在风格基础上补充说明")]
+    [SerializeField] [TextArea(2, 5)] private string additionalImageRequirements = "";
+    
     // Public properties
     public AIModelType CurrentModel => currentModel;
     public GeminiConfig GeminiConfig => geminiConfig;
     public OpenAIConfig OpenAIConfig => openAIConfig;
     public bool AllowModelSwitching => allowModelSwitching;
     public bool ShowModelInUI => showModelInUI;
+    public string[] StoryThemes => storyThemes;
+    public ImageStyle ImageStyle => imageStyle;
+    public string AdditionalImageRequirements => additionalImageRequirements;
     
     /// <summary>
     /// Switch to a different AI model

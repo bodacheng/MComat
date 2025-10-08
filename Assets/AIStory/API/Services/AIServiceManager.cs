@@ -329,103 +329,21 @@ public class AIServiceManager : MonoBehaviour
             return customPrompt;
         }
         
-        // 古代劳动场景类型
-        string[] ancientLaborTypes = new string[]
-        {
-            "古代建筑工地搬运巨石",
-            "农田里收割稻谷",
-            "码头装卸货物",
-            "山区修建石阶",
-            "铁匠铺打制农具",
-            "果园采摘水果",
-            "仓库整理粮食",
-            "街道铺设青石板",
-            "菜地浇水除草",
-            "搭建竹制脚手架",
-            "修建城墙搬运砖石",
-            "开凿水渠挖掘泥土",
-            "制作陶器搬运黏土",
-            "修建桥梁搬运木材",
-            "开垦荒地清理石块",
-            "制作竹器编织材料",
-            "修建寺庙搬运石料",
-            "开凿山洞搬运碎石",
-            "制作木器搬运木材",
-            "修建水车搬运零件"
-        };
-        
-        // 现代劳动场景类型
-        string[] modernLaborTypes = new string[]
-        {
-            "现代建筑工地搬运建材",
-            "农田里收割稻谷",
-            "码头装卸集装箱",
-            "山区修建公路",
-            "工厂车间组装机械",
-            "果园采摘水果",
-            "仓库整理货物",
-            "街道铺设沥青",
-            "菜地浇水除草",
-            "搭建钢制脚手架",
-            "修建地铁搬运钢筋",
-            "开凿隧道搬运混凝土",
-            "制作家具搬运木材",
-            "修建桥梁搬运钢材",
-            "开垦荒地清理杂物",
-            "制作工艺品搬运材料",
-            "修建商场搬运建材",
-            "开凿矿井搬运设备",
-            "制作机械搬运零件",
-            "修建水坝搬运水泥"
-        };
-        
-        // 文化背景
-        string[] culturalBackgrounds = new string[]
-        {
-            "古代中国",
-            "现代中国",
-            "古代日本",
-            "现代日本",
-            "古代韩国",
-            "现代韩国",
-            "古代东南亚",
-            "现代东南亚"
-        };
-        
-        // 随机选择文化背景和劳动类型
-        var random = new System.Random();
-        string selectedBackground = culturalBackgrounds[random.Next(culturalBackgrounds.Length)];
-        string[] laborTypes = selectedBackground.Contains("古代") ? ancientLaborTypes : modernLaborTypes;
-        string selectedLabor = laborTypes[random.Next(laborTypes.Length)];
-        
         // 获取场景数量设置
         int sceneCount = battleContext.SceneCount > 0 ? battleContext.SceneCount : 3;
         int minLines = battleContext.MinLinesPerScene > 0 ? battleContext.MinLinesPerScene : 2;
         int maxLines = battleContext.MaxLinesPerScene > 0 ? battleContext.MaxLinesPerScene : 4;
         
-        var prompt = $"请生成一个关于亚洲小伙子光着膀子劳动的连环画故事。\n\n";
+        // 根据配置生成故事主题
+        string storyTheme = GetStoryThemeFromConfig();
+        
+        var prompt = $"请生成一个{storyTheme}连环画故事。\n\n";
         
         prompt += $"【连环画要求】\n";
         prompt += $"- 总页数：必须正好生成 {sceneCount} 个场景（每个场景对应一页/一张图）\n";
         prompt += $"- 每页文字：每个场景包含 {minLines}-{maxLines} 行文字（对话、独白或叙述）\n";
         prompt += $"- 故事连贯性：{sceneCount}个场景必须构成一个完整、连续的故事，有起承转合\n";
         prompt += $"- 场景编号：按照故事发展顺序，从场景1到场景{sceneCount}\n\n";
-        
-        prompt += $"【故事设定】\n";
-        prompt += $"- 文化背景：{selectedBackground}\n";
-        prompt += $"- 劳动类型：{selectedLabor}\n";
-        prompt += $"- 主角：一位或多位身材健壮的亚洲年轻男性，光着上身\n";
-        prompt += $"- 时代特征：{(selectedBackground.Contains("古代") ? "古代建筑风格、传统工具、古典服饰元素" : "现代建筑风格、现代工具、现代服饰元素")}\n";
-        prompt += $"- 氛围：展现劳动的艰辛与美感，汗水挥洒，肌肉线条在阳光下闪耀\n";
-        prompt += $"- 场景ID：{battleContext.BattleId}\n\n";
-        
-        prompt += $"【故事内容要求】\n";
-        prompt += $"- 描写劳动过程中的动作细节和身体状态\n";
-        prompt += $"- 体现劳动者的坚韧与努力\n";
-        prompt += $"- 可以加入同伴间的对话或内心独白\n";
-        prompt += $"- 展现健康向上的劳动美学\n";
-        prompt += $"- 体现{selectedBackground}的文化特色和时代背景\n";
-        prompt += $"- 确保故事从开始到结束有完整的情节发展\n\n";
         
         prompt += $"【重要】请严格按照以下JSON格式返回，必须包含正好{sceneCount}个场景：\n\n";
         prompt += $"{{\n";
@@ -774,12 +692,15 @@ public class AIServiceManager : MonoBehaviour
         string selectedEnv = environments[random.Next(environments.Length)];
         string selectedPose = poses[random.Next(poses.Length)];
         
+        // 获取配置的图片风格
+        string imageStyle = GetImageStyleFromConfig();
+        
         var prompt = $"A realistic photograph of young Asian men working shirtless, {selectedEnv}, {selectedPose}, ";
         prompt += "muscular and fit bodies glistening with sweat under natural lighting, ";
         prompt += "showing the beauty of physical labor, ";
         prompt += "detailed muscle definition, healthy tanned skin, ";
         prompt += $"{selectedStyle}, ";
-        prompt += "photorealistic style, high quality, natural colors, ";
+        prompt += $"{imageStyle}, ";
         prompt += "cinematic composition, golden hour lighting, ";
         prompt += "capturing the dignity and strength of laborers, ";
         prompt += "professional photography, 8k resolution";
@@ -839,5 +760,55 @@ public class AIServiceManager : MonoBehaviour
     {
         public string description;
         public string[] lines;
+    }
+    
+    /// <summary>
+    /// 根据配置获取故事主题描述（从主题列表中随机选择）
+    /// </summary>
+    private string GetStoryThemeFromConfig()
+    {
+        if (serviceConfig == null || serviceConfig.StoryThemes == null || serviceConfig.StoryThemes.Length == 0)
+        {
+            return "关于亚洲小伙子光着膀子劳动";
+        }
+        
+        // 从主题列表中随机选择一个
+        var random = new System.Random();
+        string selectedTheme = serviceConfig.StoryThemes[random.Next(serviceConfig.StoryThemes.Length)];
+        
+        Debug.Log($"[AIServiceManager] Selected story theme: {selectedTheme}");
+        return selectedTheme;
+    }
+    
+    /// <summary>
+    /// 根据配置获取图片风格描述
+    /// </summary>
+    private string GetImageStyleFromConfig()
+    {
+        if (serviceConfig == null)
+        {
+            return "photorealistic style, high quality, natural colors";
+        }
+        
+        string baseStyle = serviceConfig.ImageStyle switch
+        {
+            ImageStyle.Photorealistic => "photorealistic style, high quality, natural colors",
+            ImageStyle.Anime => "anime style, cel-shaded, vibrant colors",
+            ImageStyle.Watercolor => "watercolor painting style, soft brushstrokes, artistic",
+            ImageStyle.OilPainting => "oil painting style, rich textures, classical art",
+            ImageStyle.PencilSketch => "pencil sketch style, detailed linework, monochrome",
+            ImageStyle.DigitalArt => "digital art style, clean lines, modern illustration",
+            ImageStyle.Cinematic => "cinematic style, dramatic lighting, movie quality",
+            _ => "photorealistic style, high quality, natural colors"
+        };
+        
+        // 添加额外要求
+        if (!string.IsNullOrWhiteSpace(serviceConfig.AdditionalImageRequirements))
+        {
+            baseStyle += $", {serviceConfig.AdditionalImageRequirements}";
+            Debug.Log($"[AIServiceManager] Image style with additional requirements: {baseStyle}");
+        }
+        
+        return baseStyle;
     }
 }
