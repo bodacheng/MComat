@@ -32,6 +32,9 @@ public class AIServiceConfig : ScriptableObject
         "关于亚洲小伙子光着膀子劳动的"
     };
     
+    [Tooltip("连环画总页数")]
+    [SerializeField] private int pageCount = 6;
+    
     [Tooltip("图片风格")]
     [SerializeField] private ImageStyle imageStyle = ImageStyle.Photorealistic;
     
@@ -43,8 +46,8 @@ public class AIServiceConfig : ScriptableObject
     public GeminiConfig GeminiConfig => geminiConfig;
     public OpenAIConfig OpenAIConfig => openAIConfig;
     public bool AllowModelSwitching => allowModelSwitching;
-    public bool ShowModelInUI => showModelInUI;
     public string[] StoryThemes => storyThemes;
+    public int PageCount => pageCount;
     public ImageStyle ImageStyle => imageStyle;
     public string AdditionalImageRequirements => additionalImageRequirements;
     

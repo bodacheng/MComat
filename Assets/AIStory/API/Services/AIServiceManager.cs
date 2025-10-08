@@ -199,16 +199,7 @@ public class AIServiceManager : MonoBehaviour
             return null;
         }
         
-        // 示例：生成劳动场景的故事
-        var context = new BattleContext {
-            BattleId = "labor_scene_001",
-            SceneType = "Labor",
-            SceneDescription = "亚洲小伙子们在户外辛勤劳动的场景",
-            SceneCount = 1,  // 生成1页连环画
-            MinLinesPerScene = 2,  // 每页至少2行文字
-            MaxLinesPerScene = 2   // 每页最多2行文字
-        };
-        var story = await GenerateAIStoryAsync(context);
+        var story = await GenerateAIStoryAsync(null);
         return story;
     }
     
@@ -218,31 +209,18 @@ public class AIServiceManager : MonoBehaviour
     /// 此方法集成了AIStory系统的文本生成和图片生成功能，创建一个完整的StoryInfo对象。
     /// 生成的StoryInfo对象可以用于任何需要故事内容的场景，UI显示由调用方自行处理。
     /// 
-    /// 使用示例（劳动场景）：
+    /// 使用示例：
     /// <code>
-    /// var context = new BattleContext {
-    ///     BattleId = "labor_scene_001",
-    ///     SceneType = "Labor",
-    ///     SceneDescription = "工地劳动场景"
-    /// };
-    /// var storyInfo = await GenerateAIStoryAsync(context);
-    /// // 之后可以自行处理storyInfo的显示逻辑
-    /// </code>
+    /// // 使用默认配置生成
+    /// var storyInfo = await aiService.GenerateAIStoryAsync(null);
     /// 
-    /// 也支持战斗场景（向后兼容）：
-    /// <code>
-    /// var context = new BattleContext {
-    ///     EventType = FightEventType.Arena,
-    ///     IsPlayerWin = true,
-    ///     BattleId = "battle_001",
-    ///     SceneType = "Battle"
-    /// };
+    /// // 使用自定义提示词
+    /// var storyInfo = await aiService.GenerateAIStoryAsync("请生成一个关于...的故事");
     /// </code>
     /// </summary>
-    /// <param name="battleContext">场景上下文信息，用于生成相关的故事内容（支持劳动、战斗等多种场景类型）</param>
-    /// <param name="storyPrompt">可选的自定义故事提示词，如果提供则使用自定义提示词而非默认提示词</param>
+    /// <param name="storyPrompt">可选的自定义故事提示词，如果为null则使用配置中的主题自动生成</param>
     /// <returns>生成的StoryInfo对象，如果生成失败则返回null</returns>
-    public async UniTask<StoryInfo> GenerateAIStoryAsync(BattleContext battleContext, string storyPrompt = null)
+    public async UniTask<StoryInfo> GenerateAIStoryAsync(string storyPrompt)
     {
         try
         {
@@ -255,7 +233,7 @@ public class AIServiceManager : MonoBehaviour
             }
 
             // 构建故事生成提示词
-            string prompt = BuildStoryPrompt(battleContext, storyPrompt);
+            string prompt = BuildStoryPrompt(storyPrompt);
             
             // 使用AI生成故事文本
             string storyText = await aiService.AskAsync(prompt);
@@ -269,8 +247,11 @@ public class AIServiceManager : MonoBehaviour
             // 输出AI返回的原始文本用于调试
             Debug.Log($"[AI Story] Raw response from AI:\n{storyText}");
 
-            // 解析AI生成的故事文本，提取场景和对话
-            var storyScenes = ParseStoryText(storyText);
+            // 获取期望的页数
+            int expectedPageCount = serviceConfig?.PageCount ?? 6;
+            
+            // 解析AI生成的故事文本，提取场景和对话，并确保返回正确数量
+            var storyScenes = ParseStoryText(storyText, expectedPageCount);
             
             // 验证解析结果
             if (storyScenes == null || storyScenes.Count == 0)
@@ -279,31 +260,10 @@ public class AIServiceManager : MonoBehaviour
                 return null;
             }
             
-            Debug.Log($"[AI Story] Successfully parsed {storyScenes.Count} scenes");
-            
-            // 验证场景数量是否符合要求
-            int expectedCount = battleContext.SceneCount > 0 ? battleContext.SceneCount : 3;
-            if (storyScenes.Count != expectedCount)
-            {
-                Debug.LogWarning($"[AI Story] Expected {expectedCount} scenes but got {storyScenes.Count} scenes. " +
-                                $"The story may not match the requested page count.");
-            }
-            
-            // 验证每个场景的文字行数
-            int minLines = battleContext.MinLinesPerScene > 0 ? battleContext.MinLinesPerScene : 2;
-            int maxLines = battleContext.MaxLinesPerScene > 0 ? battleContext.MaxLinesPerScene : 4;
-            for (int i = 0; i < storyScenes.Count; i++)
-            {
-                int lineCount = storyScenes[i].Lines?.Count ?? 0;
-                if (lineCount < minLines || lineCount > maxLines)
-                {
-                    Debug.LogWarning($"[AI Story] Scene {i + 1} has {lineCount} lines, " +
-                                    $"expected between {minLines} and {maxLines} lines.");
-                }
-            }
+            Debug.Log($"[AI Story] Successfully parsed {storyScenes.Count} scenes (expected: {expectedPageCount})");
             
             // 为每个场景生成对应的图片
-            await GenerateStoryImagesAsync(storyScenes, battleContext);
+            await GenerateStoryImagesAsync(storyScenes);
             
             // 创建StoryInfo对象
             var storyInfo = ScriptableObject.CreateInstance<StoryInfo>();
@@ -322,17 +282,22 @@ public class AIServiceManager : MonoBehaviour
     /// <summary>
     /// 构建故事生成的提示词
     /// </summary>
-    private string BuildStoryPrompt(BattleContext battleContext, string customPrompt)
+    private string BuildStoryPrompt(string customPrompt)
     {
+        // 如果提供了自定义提示词，直接使用
         if (!string.IsNullOrEmpty(customPrompt))
         {
             return customPrompt;
         }
         
-        // 获取场景数量设置
-        int sceneCount = battleContext.SceneCount > 0 ? battleContext.SceneCount : 3;
-        int minLines = battleContext.MinLinesPerScene > 0 ? battleContext.MinLinesPerScene : 2;
-        int maxLines = battleContext.MaxLinesPerScene > 0 ? battleContext.MaxLinesPerScene : 4;
+        // 从配置获取参数
+        if (serviceConfig == null)
+        {
+            Debug.LogError("[BuildStoryPrompt] serviceConfig is null");
+            return "";
+        }
+        
+        int pageCount = serviceConfig.PageCount;
         
         // 根据配置生成故事主题
         string storyTheme = GetStoryThemeFromConfig();
@@ -340,12 +305,12 @@ public class AIServiceManager : MonoBehaviour
         var prompt = $"请生成一个{storyTheme}连环画故事。\n\n";
         
         prompt += $"【连环画要求】\n";
-        prompt += $"- 总页数：必须正好生成 {sceneCount} 个场景（每个场景对应一页/一张图）\n";
-        prompt += $"- 每页文字：每个场景包含 {minLines}-{maxLines} 行文字（对话、独白或叙述）\n";
-        prompt += $"- 故事连贯性：{sceneCount}个场景必须构成一个完整、连续的故事，有起承转合\n";
-        prompt += $"- 场景编号：按照故事发展顺序，从场景1到场景{sceneCount}\n\n";
+        prompt += $"- 总页数：必须正好生成 {pageCount} 个场景（每个场景对应一页/一张图）\n";
+        prompt += $"- 每页文字：每个场景包含 1-3 行文字（对话、独白或叙述）\n";
+        prompt += $"- 故事连贯性：{pageCount}个场景必须构成一个完整、连续的故事，有起承转合\n";
+        prompt += $"- 场景编号：按照故事发展顺序，从场景1到场景{pageCount}\n\n";
         
-        prompt += $"【重要】请严格按照以下JSON格式返回，必须包含正好{sceneCount}个场景：\n\n";
+        prompt += $"【重要】请严格按照以下JSON格式返回，必须包含正好{pageCount}个场景：\n\n";
         prompt += $"{{\n";
         prompt += $"  \"scenes\": [\n";
         prompt += $"    {{\n";
@@ -360,13 +325,13 @@ public class AIServiceManager : MonoBehaviour
         prompt += $"      \"description\": \"场景2的描述\",\n";
         prompt += $"      \"lines\": [\"第2页的文字...\"]\n";
         prompt += $"    }}\n";
-        prompt += $"    // ... 继续到场景{sceneCount}\n";
+        prompt += $"    // ... 继续到场景{pageCount}\n";
         prompt += $"  ]\n";
         prompt += $"}}\n\n";
         
         prompt += $"注意：\n";
-        prompt += $"1. 必须返回{sceneCount}个场景，不能多也不能少\n";
-        prompt += $"2. 每个场景的lines数组包含{minLines}到{maxLines}个元素\n";
+        prompt += $"1. 必须返回{pageCount}个场景，不能多也不能少\n";
+        prompt += $"2. 每个场景的lines数组包含1到3个元素\n";
         prompt += $"3. 场景之间要有连贯的故事发展关系\n";
         prompt += $"4. description描述这一页的画面内容，lines是这一页配的文字\n";
         
@@ -374,9 +339,12 @@ public class AIServiceManager : MonoBehaviour
     }
     
     /// <summary>
-    /// 解析AI生成的故事文本
+    /// 解析AI生成的故事文本，并确保返回指定数量的场景
     /// </summary>
-    private List<StoryInfo.StoryScene> ParseStoryText(string storyText)
+    /// <param name="storyText">AI返回的故事文本</param>
+    /// <param name="expectedSceneCount">期望的场景数量（图片数量）</param>
+    /// <returns>保证返回expectedSceneCount个场景的列表</returns>
+    private List<StoryInfo.StoryScene> ParseStoryText(string storyText, int expectedSceneCount)
     {
         var scenes = new List<StoryInfo.StoryScene>();
         
@@ -459,7 +427,27 @@ public class AIServiceManager : MonoBehaviour
             scenes = FallbackParseStoryText(cleanedText);
         }
         
-        Debug.Log($"[AI Story Parse] Final result: {scenes.Count} scenes");
+        Debug.Log($"[AI Story Parse] Parsed {scenes.Count} scenes, expected {expectedSceneCount}");
+        
+        // 确保场景数量等于expectedSceneCount
+        if (scenes.Count > expectedSceneCount)
+        {
+            Debug.LogWarning($"[AI Story Parse] AI returned {scenes.Count} scenes, trimming to {expectedSceneCount}");
+            scenes = scenes.GetRange(0, expectedSceneCount);
+        }
+        else if (scenes.Count < expectedSceneCount)
+        {
+            Debug.LogWarning($"[AI Story Parse] AI returned {scenes.Count} scenes, adding {expectedSceneCount - scenes.Count} placeholder scenes");
+            while (scenes.Count < expectedSceneCount)
+            {
+                scenes.Add(new StoryInfo.StoryScene
+                {
+                    Lines = new List<string> { $"[场景 {scenes.Count + 1}]" }
+                });
+            }
+        }
+        
+        Debug.Log($"[AI Story Parse] Final result: {scenes.Count} scenes (guaranteed = {expectedSceneCount})");
         return scenes;
     }
     
@@ -557,14 +545,14 @@ public class AIServiceManager : MonoBehaviour
     /// <summary>
     /// 为故事场景生成图片
     /// </summary>
-    private async Task GenerateStoryImagesAsync(List<StoryInfo.StoryScene> scenes, BattleContext battleContext)
+    private async Task GenerateStoryImagesAsync(List<StoryInfo.StoryScene> scenes)
     {
         for (int i = 0; i < scenes.Count; i++)
         {
             try
             {
                 var scene = scenes[i];
-                var imagePrompt = BuildImagePrompt(scene, battleContext, i);
+                var imagePrompt = BuildImagePrompt(scene, i, scenes.Count);
                 
                 // 使用AI生成图片
                 var textures = await FightScene.FightScene.target.AIServiceManager.GeneratePic(imagePrompt, 1, "16:9");
@@ -589,161 +577,38 @@ public class AIServiceManager : MonoBehaviour
     }
     
     /// <summary>
+    /// 构建场景的描述内容，用于图片生成
+    /// </summary>
+    private string BuildStoryOverview(StoryInfo.StoryScene scene)
+    {
+        if (scene?.Lines == null || scene.Lines.Count == 0)
+            return "";
+        
+        // 将场景的所有文字行合并为图片描述
+        return string.Join(" ", scene.Lines);
+    }
+    
+    /// <summary>
     /// 构建图片生成的提示词
     /// </summary>
-    private string BuildImagePrompt(StoryInfo.StoryScene scene, BattleContext battleContext, int sceneIndex)
+    private string BuildImagePrompt(StoryInfo.StoryScene scene, int sceneIndex, int totalScenes)
     {
-        // 古代环境
-        string[] ancientEnvironments = new string[]
-        {
-            "古代建筑工地，石砌建筑",
-            "金色阳光洒落的古代农田",
-            "繁忙的古代码头，木制建筑",
-            "崎岖山路旁的古代工程现场",
-            "传统的铁匠铺，炉火熊熊",
-            "翠绿的古代果园",
-            "古代粮仓，木质结构",
-            "古朴的石板街道",
-            "生机勃勃的古代菜园",
-            "高处的古代施工平台",
-            "古代城墙修建现场",
-            "传统水渠开凿工地",
-            "古代陶器制作工坊",
-            "传统桥梁修建现场",
-            "古代寺庙建筑工地",
-            "传统竹器制作工坊",
-            "古代水车修建现场"
-        };
-        
-        // 现代环境
-        string[] modernEnvironments = new string[]
-        {
-            "金色阳光洒落的现代农田",
-            "繁忙的现代码头，集装箱",
-            "崎岖山路旁的现代工程现场",
-            "翠绿的现代果园",
-            "生机勃勃的现代菜园",
-            "高处的现代施工平台",
-            "现代隧道开凿工地",
-            "现代家具制作工坊",
-            "现代桥梁修建现场",
-            "现代商场建筑工地",
-            "现代机械制造车间",
-            "古代水坝修建现场"
-        };
-        
-        // 古代姿势
-        string[] ancientPoses = new string[]
-        {
-            "弯腰搬运巨石",
-            "挥动传统工具劳作",
-            "擦拭额头汗水",
-            "用力抬举重物",
-            "专注打制农具",
-            "休息喝水",
-            "与同伴协作",
-            "眺望远方片刻休息",
-            "开凿石料",
-            "搬运木材",
-            "挖掘泥土",
-            "制作陶器"
-        };
-        
-        // 现代姿势
-        string[] modernPoses = new string[]
-        {
-            "弯腰搬运建材",
-            "操作现代工具劳作",
-            "擦拭额头汗水",
-            "用力抬举重物",
-            "专注组装机械",
-            "休息喝水",
-            "与同伴协作",
-            "眺望远方片刻休息",
-            "操作重型机械",
-            "搬运钢材",
-            "浇筑混凝土",
-            "操作电焊设备"
-        };
-        
-        // 文化背景
-        string[] culturalStyles = new string[]
-        {
-            "Chinese traditional style",
-            "Modern Chinese style", 
-            "Japanese traditional style",
-            "Modern Japanese style",
-            "Korean traditional style",
-            "Modern Korean style",
-            "Southeast Asian traditional style",
-            "Modern Southeast Asian style"
-        };
-        
-        var random = new System.Random(sceneIndex + battleContext.BattleId.GetHashCode());
-        
-        // 随机选择文化背景
-        string selectedStyle = culturalStyles[random.Next(culturalStyles.Length)];
-        bool isAncient = selectedStyle.Contains("traditional");
-        
-        // 根据文化背景选择环境和姿势
-        string[] environments = isAncient ? ancientEnvironments : modernEnvironments;
-        string[] poses = isAncient ? ancientPoses : modernPoses;
-        
-        string selectedEnv = environments[random.Next(environments.Length)];
-        string selectedPose = poses[random.Next(poses.Length)];
+        // 从当前场景提取内容作为图片描述
+        string sceneContent = BuildStoryOverview(scene);
         
         // 获取配置的图片风格
         string imageStyle = GetImageStyleFromConfig();
         
-        var prompt = $"A realistic photograph of young Asian men working shirtless, {selectedEnv}, {selectedPose}, ";
-        prompt += "muscular and fit bodies glistening with sweat under natural lighting, ";
-        prompt += "showing the beauty of physical labor, ";
-        prompt += "detailed muscle definition, healthy tanned skin, ";
-        prompt += $"{selectedStyle}, ";
-        prompt += $"{imageStyle}, ";
-        prompt += "cinematic composition, golden hour lighting, ";
-        prompt += "capturing the dignity and strength of laborers, ";
-        prompt += "professional photography, 8k resolution";
+        // 基于当前场景的文字内容构建图片提示词
+        var prompt = $"Create an image for this scene (page {sceneIndex + 1} of {totalScenes}):\n\n";
+        prompt += $"\"{sceneContent}\"\n\n";
+        prompt += $"Style: {imageStyle}\n";
+        prompt += "Requirements: 8k resolution, highly detailed, professional quality, ";
+        prompt += "accurately visualize the scene description above";
+        
+        Debug.Log($"[AIServiceManager] Image prompt for scene {sceneIndex + 1}/{totalScenes}:\n{prompt}");
         
         return prompt;
-    }
-    
-    /// <summary>
-    /// 故事场景上下文信息类
-    /// 注意：虽然类名为BattleContext，但现在已扩展为通用故事上下文，
-    /// 不仅限于战斗场景，也可用于劳动、生活等各种场景的故事生成。
-    /// 原有字段（EventType, IsPlayerWin等）保留以保持向后兼容性，但在非战斗场景下可忽略这些字段。
-    /// </summary>
-    [System.Serializable]
-    public class BattleContext
-    {
-        // 原有战斗相关字段（保持向后兼容）
-        public FightEventType EventType;
-        public bool IsPlayerWin;
-        public string BattleId;  // 在劳动场景下，可作为场景唯一ID使用
-        public List<string> PlayerTeam;
-        public List<string> EnemyTeam;
-        public int PlayerScore;
-        public int EnemyScore;
-        
-        // 扩展字段：通用场景类型（可选）
-        public string SceneType;  // 例如："Labor", "Battle", "Daily" 等
-        public string SceneDescription;  // 自定义场景描述
-        
-        // 连环画设置
-        public int SceneCount;  // 总场景数（总页数/总图片数），默认为3
-        public int MinLinesPerScene;  // 每个场景最少文字行数，默认为2
-        public int MaxLinesPerScene;  // 每个场景最多文字行数，默认为4
-        
-        public BattleContext()
-        {
-            PlayerTeam = new List<string>();
-            EnemyTeam = new List<string>();
-            SceneType = "Labor";  // 默认为劳动场景
-            SceneCount = 3;  // 默认3个场景
-            MinLinesPerScene = 2;  // 每个场景至少2行文字
-            MaxLinesPerScene = 4;  // 每个场景最多4行文字
-        }
     }
     
     /// <summary>
