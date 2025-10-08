@@ -67,12 +67,6 @@ public class AIServiceManager : MonoBehaviour
             return false;
         }
         
-        if (!serviceConfig.AllowModelSwitching)
-        {
-            OnError?.Invoke("Model switching is disabled");
-            return false;
-        }
-        
         IAIClient newClient = modelType switch
         {
             AIModelType.Gemini => geminiClient,
@@ -341,113 +335,124 @@ public class AIServiceManager : MonoBehaviour
     /// <summary>
     /// 解析AI生成的故事文本，并确保返回指定数量的场景
     /// </summary>
-    /// <param name="storyText">AI返回的故事文本</param>
-    /// <param name="expectedSceneCount">期望的场景数量（图片数量）</param>
-    /// <returns>保证返回expectedSceneCount个场景的列表</returns>
     private List<StoryInfo.StoryScene> ParseStoryText(string storyText, int expectedSceneCount)
     {
-        var scenes = new List<StoryInfo.StoryScene>();
-        
         if (string.IsNullOrEmpty(storyText))
         {
             Debug.LogError("[AI Story Parse] Story text is null or empty");
-            return scenes;
+            return CreatePlaceholderScenes(expectedSceneCount);
         }
         
-        // 清理AI返回的文本，移除可能的markdown代码块标记
+        // 清理并解析JSON
         string cleanedText = CleanJsonFromMarkdown(storyText);
-        Debug.Log($"[AI Story Parse] Cleaned JSON:\n{cleanedText}");
+        var scenes = TryParseJsonScenes(cleanedText);
+        
+        // 调整场景数量
+        scenes = EnsureSceneCount(scenes, expectedSceneCount);
+        
+        Debug.Log($"[AI Story Parse] Final: {scenes.Count} scenes");
+        return scenes;
+    }
+    
+    /// <summary>
+    /// 尝试解析JSON格式的场景数据
+    /// </summary>
+    private List<StoryInfo.StoryScene> TryParseJsonScenes(string jsonText)
+    {
+        var scenes = new List<StoryInfo.StoryScene>();
         
         try
         {
-            // 尝试解析JSON格式的故事内容
-            var storyData = JsonUtility.FromJson<AIStoryData>(cleanedText);
+            var storyData = JsonUtility.FromJson<AIStoryData>(jsonText);
             
-            if (storyData?.scenes != null && storyData.scenes.Length > 0)
+            if (storyData?.scenes != null)
             {
-                Debug.Log($"[AI Story Parse] JSON parsed successfully, found {storyData.scenes.Length} scenes");
-                
-                for (int i = 0; i < storyData.scenes.Length; i++)
+                foreach (var sceneData in storyData.scenes)
                 {
-                    var sceneData = storyData.scenes[i];
+                    if (sceneData == null) continue;
                     
-                    if (sceneData == null)
-                    {
-                        Debug.LogWarning($"[AI Story Parse] Scene {i} is null, skipping");
-                        continue;
-                    }
-                    
-                    var scene = new StoryInfo.StoryScene
-                    {
-                        Lines = new List<string>()
-                    };
-                    
-                    // 添加场景描述（如果有）
-                    if (!string.IsNullOrEmpty(sceneData.description))
-                    {
-                        scene.Lines.Add(sceneData.description);
-                        Debug.Log($"[AI Story Parse] Scene {i} description: {sceneData.description}");
-                    }
-                    
-                    // 添加对话行
-                    if (sceneData.lines != null && sceneData.lines.Length > 0)
-                    {
-                        foreach (var line in sceneData.lines)
-                        {
-                            if (!string.IsNullOrEmpty(line))
-                            {
-                                scene.Lines.Add(line);
-                                Debug.Log($"[AI Story Parse] Scene {i} line: {line}");
-                            }
-                        }
-                    }
-                    
+                    var scene = ConvertToStoryScene(sceneData);
                     if (scene.Lines.Count > 0)
                     {
                         scenes.Add(scene);
-                        Debug.Log($"[AI Story Parse] Scene {i} added with {scene.Lines.Count} lines");
-                    }
-                    else
-                    {
-                        Debug.LogWarning($"[AI Story Parse] Scene {i} has no content, skipping");
                     }
                 }
-            }
-            else
-            {
-                Debug.LogWarning("[AI Story Parse] JSON parsed but no scenes found");
+                
+                Debug.Log($"[AI Story Parse] Parsed {scenes.Count} scenes from JSON");
             }
         }
         catch (Exception ex)
         {
-            Debug.LogError($"[AI Story Parse] JSON parsing failed: {ex.Message}\n{ex.StackTrace}");
-            Debug.LogError($"[AI Story Parse] Attempting fallback parsing...");
-            
-            // 如果JSON解析失败，使用简单的文本分割作为后备方案
-            scenes = FallbackParseStoryText(cleanedText);
+            Debug.LogError($"[AI Story Parse] JSON parsing failed: {ex.Message}");
+            scenes = FallbackParseStoryText(jsonText);
         }
         
-        Debug.Log($"[AI Story Parse] Parsed {scenes.Count} scenes, expected {expectedSceneCount}");
+        return scenes;
+    }
+    
+    /// <summary>
+    /// 将AI场景数据转换为StoryScene
+    /// </summary>
+    private StoryInfo.StoryScene ConvertToStoryScene(AISceneData sceneData)
+    {
+        var scene = new StoryInfo.StoryScene { Lines = new List<string>() };
         
-        // 确保场景数量等于expectedSceneCount
-        if (scenes.Count > expectedSceneCount)
+        // 添加description
+        if (!string.IsNullOrEmpty(sceneData.description))
+            scene.Lines.Add(sceneData.description);
+        
+        // 添加lines
+        if (sceneData.lines != null)
         {
-            Debug.LogWarning($"[AI Story Parse] AI returned {scenes.Count} scenes, trimming to {expectedSceneCount}");
-            scenes = scenes.GetRange(0, expectedSceneCount);
-        }
-        else if (scenes.Count < expectedSceneCount)
-        {
-            Debug.LogWarning($"[AI Story Parse] AI returned {scenes.Count} scenes, adding {expectedSceneCount - scenes.Count} placeholder scenes");
-            while (scenes.Count < expectedSceneCount)
+            foreach (var line in sceneData.lines)
             {
-                scenes.Add(new StoryInfo.StoryScene
-                {
-                    Lines = new List<string> { $"[场景 {scenes.Count + 1}]" }
-                });
+                if (!string.IsNullOrEmpty(line))
+                    scene.Lines.Add(line);
             }
         }
         
-        Debug.Log($"[AI Story Parse] Final result: {scenes.Count} scenes (guaranteed = {expectedSceneCount})");
+        return scene;
+    }
+    
+    /// <summary>
+    /// 确保场景数量等于期望值
+    /// </summary>
+    private List<StoryInfo.StoryScene> EnsureSceneCount(List<StoryInfo.StoryScene> scenes, int expectedCount)
+    {
+        if (scenes.Count == expectedCount)
+            return scenes;
+        
+        if (scenes.Count > expectedCount)
+        {
+            Debug.LogWarning($"[AI Story Parse] Trimming {scenes.Count} → {expectedCount}");
+            return scenes.GetRange(0, expectedCount);
+        }
+        
+        Debug.LogWarning($"[AI Story Parse] Padding {scenes.Count} → {expectedCount}");
+        while (scenes.Count < expectedCount)
+        {
+            scenes.Add(new StoryInfo.StoryScene
+            {
+                Lines = new List<string> { $"[场景 {scenes.Count + 1}]" }
+            });
+        }
+        
+        return scenes;
+    }
+    
+    /// <summary>
+    /// 创建占位场景
+    /// </summary>
+    private List<StoryInfo.StoryScene> CreatePlaceholderScenes(int count)
+    {
+        var scenes = new List<StoryInfo.StoryScene>();
+        for (int i = 0; i < count; i++)
+        {
+            scenes.Add(new StoryInfo.StoryScene
+            {
+                Lines = new List<string> { $"[场景 {i + 1}]" }
+            });
+        }
         return scenes;
     }
     
@@ -547,31 +552,44 @@ public class AIServiceManager : MonoBehaviour
     /// </summary>
     private async Task GenerateStoryImagesAsync(List<StoryInfo.StoryScene> scenes)
     {
+        // 获取配置的图片宽高比
+        string aspectRatio = serviceConfig?.ImageAspectRatio ?? "16:9";
+        
         for (int i = 0; i < scenes.Count; i++)
         {
             try
             {
                 var scene = scenes[i];
+                Debug.Log($"[AI Story Image] Generating image for scene {i + 1}/{scenes.Count}...");
+                
                 var imagePrompt = BuildImagePrompt(scene, i, scenes.Count);
                 
                 // 使用AI生成图片
-                var textures = await FightScene.FightScene.target.AIServiceManager.GeneratePic(imagePrompt, 1, "16:9");
+                var textures = await FightScene.FightScene.target.AIServiceManager.GeneratePic(imagePrompt, 1, aspectRatio);
                 
                 if (textures != null && textures.Length > 0 && textures[0] != null)
                 {
-                    // 将Texture2D转换为Sprite
                     var texture = textures[0];
-                    var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-                    scene.Pic = sprite;
+                    if (texture.width > 0 && texture.height > 0)
+                    {
+                        // 将Texture2D转换为Sprite
+                        var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+                        scene.Pic = sprite;
+                        Debug.Log($"[AI Story Image] ✓ Scene {i + 1} image generated successfully ({texture.width}x{texture.height})");
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[AI Story Image] Scene {i + 1} image has invalid dimensions");
+                    }
                 }
                 else
                 {
-                    Debug.LogWarning($"Failed to generate image for scene {i}");
+                    Debug.LogWarning($"[AI Story Image] Failed to generate image for scene {i + 1}");
                 }
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Error generating image for scene {i}: {ex.Message}");
+                Debug.LogError($"[AI Story Image] Error generating image for scene {i + 1}: {ex.Message}");
             }
         }
     }
@@ -596,17 +614,23 @@ public class AIServiceManager : MonoBehaviour
         // 从当前场景提取内容作为图片描述
         string sceneContent = BuildStoryOverview(scene);
         
+        // 限制提示词长度，避免过长影响生成质量
+        const int maxPromptLength = 500;
+        if (sceneContent.Length > maxPromptLength)
+        {
+            sceneContent = sceneContent.Substring(0, maxPromptLength) + "...";
+            Debug.Log($"[AI Story Image] Scene content truncated to {maxPromptLength} characters");
+        }
+        
         // 获取配置的图片风格
         string imageStyle = GetImageStyleFromConfig();
         
-        // 基于当前场景的文字内容构建图片提示词
-        var prompt = $"Create an image for this scene (page {sceneIndex + 1} of {totalScenes}):\n\n";
-        prompt += $"\"{sceneContent}\"\n\n";
-        prompt += $"Style: {imageStyle}\n";
-        prompt += "Requirements: 8k resolution, highly detailed, professional quality, ";
-        prompt += "accurately visualize the scene description above";
+        // 构建简洁有效的图片提示词
+        var prompt = $"Scene {sceneIndex + 1}/{totalScenes}: {sceneContent}. ";
+        prompt += $"Style: {imageStyle}. ";
+        prompt += "High quality, detailed, professional";
         
-        Debug.Log($"[AIServiceManager] Image prompt for scene {sceneIndex + 1}/{totalScenes}:\n{prompt}");
+        Debug.Log($"[AI Story Image] Prompt for scene {sceneIndex + 1}: {prompt}");
         
         return prompt;
     }

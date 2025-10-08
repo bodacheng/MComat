@@ -21,10 +21,6 @@ public class AIServiceConfig : ScriptableObject
     [SerializeField] private GeminiConfig geminiConfig;
     [SerializeField] private OpenAIConfig openAIConfig;
     
-    [Header("Settings")]
-    [SerializeField] private bool allowModelSwitching = true;
-    [SerializeField] private bool showModelInUI = true;
-    
     [Header("Story Generation Settings")]
     [Tooltip("故事主旨列表，每次生成时会随机选择一个。可以自由添加任意数量的主题描述")]
     [SerializeField] [TextArea(2, 5)] private string[] storyThemes = new string[]
@@ -41,27 +37,24 @@ public class AIServiceConfig : ScriptableObject
     [Tooltip("图片生成额外要求，在风格基础上补充说明")]
     [SerializeField] [TextArea(2, 5)] private string additionalImageRequirements = "";
     
+    [Tooltip("图片宽高比，例如：16:9, 1:1, 4:3")]
+    [SerializeField] private string imageAspectRatio = "16:9";
+    
     // Public properties
     public AIModelType CurrentModel => currentModel;
     public GeminiConfig GeminiConfig => geminiConfig;
     public OpenAIConfig OpenAIConfig => openAIConfig;
-    public bool AllowModelSwitching => allowModelSwitching;
     public string[] StoryThemes => storyThemes;
     public int PageCount => pageCount;
     public ImageStyle ImageStyle => imageStyle;
     public string AdditionalImageRequirements => additionalImageRequirements;
+    public string ImageAspectRatio => imageAspectRatio;
     
     /// <summary>
     /// Switch to a different AI model
     /// </summary>
     public void SetModel(AIModelType model)
     {
-        if (!allowModelSwitching)
-        {
-            Debug.LogWarning("Model switching is disabled in configuration");
-            return;
-        }
-        
         currentModel = model;
         Debug.Log($"AI Model switched to: {model}");
     }
