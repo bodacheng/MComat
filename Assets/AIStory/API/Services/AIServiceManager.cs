@@ -17,10 +17,6 @@ public class AIServiceManager : MonoBehaviour
     private GeminiClient geminiClient;
     private OpenAIClient openAIClient;
     
-    // Events
-    public event Action<AIModelType> OnModelChanged;
-    public event Action<string> OnError;
-    
     // Properties
     public IAIClient CurrentClient => currentClient;
     public AIModelType CurrentModel => serviceConfig?.CurrentModel ?? AIModelType.Gemini;
@@ -63,7 +59,6 @@ public class AIServiceManager : MonoBehaviour
     {
         if (serviceConfig == null)
         {
-            OnError?.Invoke("Service configuration is not available");
             return false;
         }
         
@@ -76,13 +71,11 @@ public class AIServiceManager : MonoBehaviour
         
         if (newClient == null)
         {
-            OnError?.Invoke($"Client for {modelType} is not available");
             return false;
         }
         
         if (!newClient.IsConfigured)
         {
-            OnError?.Invoke($"{modelType} client is not properly configured");
             return false;
         }
         
@@ -90,7 +83,6 @@ public class AIServiceManager : MonoBehaviour
         serviceConfig.SetModel(modelType);
         
         Debug.Log($"Switched to {modelType} provider: {newClient.ProviderName}");
-        OnModelChanged?.Invoke(modelType);
         
         return true;
     }
@@ -144,7 +136,6 @@ public class AIServiceManager : MonoBehaviour
     {
         if (currentClient == null)
         {
-            OnError?.Invoke("No AI client is currently active");
             return System.Threading.Tasks.Task.FromResult<string>(null);
         }
         
@@ -158,7 +149,6 @@ public class AIServiceManager : MonoBehaviour
     {
         if (currentClient == null)
         {
-            OnError?.Invoke("No AI client is currently active");
             return System.Threading.Tasks.Task.FromResult<Texture2D[]>(null);
         }
         

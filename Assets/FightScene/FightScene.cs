@@ -137,7 +137,6 @@ namespace FightScene
             FSceneProcessesRunner.Main.ArrangeProcessOrder();
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
             
-            aiServiceManager.InitializeClients();
             if (FightLoad.Fight.EventType == FightEventType.Event)
                 LoadAIStory().Forget();
         }
