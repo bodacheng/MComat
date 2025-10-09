@@ -260,7 +260,9 @@ Shader "OmniShade/Standard URP" {
             // #pragma multi_compile _ _LIGHT_LAYERS  
             // #pragma multi_compile _ _LIGHT_COOKIES
             // #pragma multi_compile _ _SCREEN_SPACE_OCCLUSION
-            #if UNITY_VERSION > 202203
+            #if UNITY_VERSION > 60001000
+                #pragma multi_compile _ _CLUSTER_LIGHT_LOOP
+            #elif UNITY_VERSION > 202203
                 #pragma multi_compile _ _FORWARD_PLUS
             #endif
             #pragma shader_feature BASE_CONTRAST

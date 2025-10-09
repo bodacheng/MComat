@@ -1,3 +1,11 @@
+1.9.4
+July 23, 2025
+・Normal map: Fix strength setting
+
+1.9.3
+June 26, 2025
+・Fix for Forward+ in Unity 6.1
+
 1.9.2
 June 3, 2025
 ・Fix bug with Saturation affecting fog color

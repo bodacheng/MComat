@@ -5,7 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d35965f-97cc-4db1-bf97-1dc49bab43ba" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/FightLogger/FightLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightLogger/FightLogger.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MComat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MComat/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/IAP/IAPManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/IAP/IAPManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/CHANGELOG.md.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/CHANGELOG.md.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/How to create MatCaps.md.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/How to create MatCaps.md.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/ReadMe.md.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/ReadMe.md.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/Scripts/Editor/OmniShade.Editor.asmdef.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/Scripts/Editor/OmniShade.Editor.asmdef.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/Scripts/Editor/OmniShadeGUI.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/Scripts/Editor/OmniShadeGUI.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/Scripts/OmniShade.asmdef.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/Scripts/OmniShade.asmdef.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/Scripts/OmniShade.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/Scripts/OmniShade.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/Scripts/OmniShadeAnimateTexture.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/Scripts/OmniShadeAnimateTexture.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/Shaders/OmniShade URP.shader" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/Shaders/OmniShade URP.shader" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/Shaders/OmniShade URP.shader.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/Shaders/OmniShade URP.shader.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/Shaders/OmniShade.shader.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/Shaders/OmniShade.shader.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/Shaders/OmniShadeCore.cginc" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/Shaders/OmniShadeCore.cginc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/Shaders/OmniShadeCore.cginc.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/Shaders/OmniShadeCore.cginc.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/Shaders/OmniShadeURP.cginc" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/Shaders/OmniShadeURP.cginc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/Shaders/OmniShadeURP.cginc.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/Shaders/OmniShadeURP.cginc.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OmniShade/Shaders/ShaderLibrary/FoveatedRenderingKeywords.hlsl.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OmniShade/Shaders/ShaderLibrary/FoveatedRenderingKeywords.hlsl.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +76,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/TheNineSlot/MiniNineSlots/NineForShow_Util.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/UI/BOButton.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/UnitBox/SSLevelUpManager/UpdateAll.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../daiseiRudel/pjsh_unity/PjshinUnity/Assets/Pjshin/Runtime/Scripts/Modals/NewsModal/NewsScrollItem.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -65,22 +87,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "revertshader",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;revertshader&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/6000.0.46f1/Unity.app/Contents/MacOS/Unity" />
+      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/6000.0.58f2/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath $PROJECT_DIR$ -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -92,7 +114,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/6000.0.46f1/Unity.app/Contents/MacOS/Unity" />
+      <option name="EXE_PATH" value="/Applications/Unity/Hub/Editor/6000.0.58f2/Unity.app/Contents/MacOS/Unity" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath $PROJECT_DIR$ -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -148,7 +170,8 @@
       <workItem from="1749448706212" duration="2956000" />
       <workItem from="1749988908796" duration="4811000" />
       <workItem from="1751282470866" duration="90000" />
-      <workItem from="1759912577461" duration="3982000" />
+      <workItem from="1759912577461" duration="7573000" />
+      <workItem from="1759976798640" duration="53000" />
     </task>
     <servers />
   </component>

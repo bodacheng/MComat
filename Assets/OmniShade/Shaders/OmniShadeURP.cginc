@@ -137,7 +137,7 @@ float4 GetShadowPositionClip(float3 vertex, float3 normal) {
 #if _ADDITIONAL_LIGHTS
 half AdditionalLightsShadow(uint lightIndex, half3 pos_world, Light light) {
 	#if SHADOWS_ENABLED
-		#if USE_FORWARD_PLUS
+		#if (USE_FORWARD_PLUS || USE_CLUSTER_LIGHT_LOOP)
 			int perObjectLightIndex = lightIndex;
 		#else
 			int perObjectLightIndex = GetPerObjectLightIndex(lightIndex);
@@ -159,7 +159,7 @@ half3 AdditionalLightsFrag(half3 pos_world, half3 nor_world, half4 pos_clip, hal
 	half3 col_diffuse = 0;
 	#if _ADDITIONAL_LIGHTS
 		uint lightsCount = GetAdditionalLightsCount();
-		#if USE_FORWARD_PLUS
+		#if (USE_FORWARD_PLUS || USE_CLUSTER_LIGHT_LOOP)
 			InputData inputData = (InputData)0;
 			inputData.normalizedScreenSpaceUV = GetNormalizedScreenSpaceUV(pos_clip);
 			inputData.positionWS = pos_world;
@@ -193,7 +193,7 @@ half3 AdditionalLightsVert(half3 pos_world, half3 nor_world, half _DiffuseWrap, 
 	half3 col_diffuse = 0;
 	#if _ADDITIONAL_LIGHTS
 		uint lightsCount = GetAdditionalLightsCount();
-		#if USE_FORWARD_PLUS
+		#if (USE_FORWARD_PLUS || USE_CLUSTER_LIGHT_LOOP)
 			InputData inputData = (InputData)0;
 		#endif
 		LIGHT_LOOP_BEGIN(lightsCount)

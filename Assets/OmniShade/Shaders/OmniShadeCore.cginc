@@ -196,8 +196,7 @@ CBUFFER_END
 		#if REFLECTION && !(NORMAL_MAP || NORMAL_MAP2) && !FLAT
 			float3 viewReflectDir : TEXCOORD6;
 		#endif
-		#if (NORMAL_MAP || NORMAL_MAP2) && ((DIFFUSE && (!LIGHTMAP_ON || MIXED_LIGHTING)) || RIM || SPECULAR || MATCAP || (DIRLIGHTMAP_COMBINED && LIGHTMAP_ON) || REFLECTION) \
-			|| SPECULAR_HAIR
+		#if (NORMAL_MAP || NORMAL_MAP2) && ((DIFFUSE && (!LIGHTMAP_ON || MIXED_LIGHTING)) || RIM || SPECULAR || MATCAP || (DIRLIGHTMAP_COMBINED && LIGHTMAP_ON) || REFLECTION) || SPECULAR_HAIR
 			float4 tan_world : TEXCOORD7;
 		#endif
 		#if HEIGHT_COLORS
@@ -213,7 +212,7 @@ CBUFFER_END
 				float fogCoord : TEXCOORD10;
 			#endif
 		#endif
-		#if DIFFUSE && (!DIFFUSE_PER_PIXEL && !USE_FORWARD_PLUS) && !FLAT && !(NORMAL_MAP || NORMAL_MAP2) && (!LIGHTMAP_ON || MIXED_LIGHTING) && (VERTEXLIGHT_ON || _ADDITIONAL_LIGHTS || MIXED_LIGHTING)
+		#if DIFFUSE && (!DIFFUSE_PER_PIXEL && !(USE_FORWARD_PLUS || USE_CLUSTER_LIGHT_LOOP)) && !FLAT && !(NORMAL_MAP || NORMAL_MAP2) && (!LIGHTMAP_ON || MIXED_LIGHTING) && (VERTEXLIGHT_ON || _ADDITIONAL_LIGHTS || MIXED_LIGHTING)
 			half3 col_diffuse_add : TEXCOORD11;
 		#endif
 		#if CAMERA_FADE
@@ -305,7 +304,7 @@ float3 TangentSpaceNormalToWorldSpaceNormal(float3 nor_world, float4 tan_world, 
 
 bool IsLitMainLight(float3 unityLightData, uint meshRenderingLayers, bool isSpecular) {
 	// Hack to prevent flickering in Forward+
-	#if USE_FORWARD_PLUS
+	#if (USE_FORWARD_PLUS || USE_CLUSTER_LIGHT_LOOP)
 		return true;
 	#endif
 
@@ -595,7 +594,7 @@ v2f vert (appdata_full v) {
 		|| SPECULAR_HAIR
 			o.tan_world = float4(UnityObjectToWorldDir(v.tangent.xyz), v.tangent.w);
 	#endif
-	#if DIFFUSE && (!DIFFUSE_PER_PIXEL && !USE_FORWARD_PLUS)  && !_LIGHT_COOKIES && !FLAT && !(NORMAL_MAP || NORMAL_MAP2 || NORMAL_MAP_TOP) && (!LIGHTMAP_ON || MIXED_LIGHTING) && (VERTEXLIGHT_ON || _ADDITIONAL_LIGHTS || MIXED_LIGHTING)
+	#if DIFFUSE && (!DIFFUSE_PER_PIXEL && !(USE_FORWARD_PLUS || USE_CLUSTER_LIGHT_LOOP))  && !_LIGHT_COOKIES && !FLAT && !(NORMAL_MAP || NORMAL_MAP2 || NORMAL_MAP_TOP) && (!LIGHTMAP_ON || MIXED_LIGHTING) && (VERTEXLIGHT_ON || _ADDITIONAL_LIGHTS || MIXED_LIGHTING)
 		uint meshRenderingLayers = GetMeshRenderingLightLayerCustom();
 		o.col_diffuse_add = AdditionalLightsVert(o.pos_world, o.nor_world, _DiffuseWrap, _DiffuseBrightness, _DiffuseContrast, meshRenderingLayers, _ShadowColor.rgb);
 	#endif
@@ -711,9 +710,7 @@ half4 frag (v2f i) : COLOR {
 		#endif
 	#endif
 	i.nor_world = normalize(i.nor_world);
-	#if (!TRIPLANAR && \
-			(NORMAL_MAP || NORMAL_MAP2) && ((DIFFUSE && (!LIGHTMAP_ON || MIXED_LIGHTING)) || RIM || SPECULAR || MATCAP || (DIRLIGHTMAP_COMBINED && LIGHTMAP_ON) || REFLECTION)) \
-		|| SPECULAR_HAIR
+	#if (!TRIPLANAR && (NORMAL_MAP || NORMAL_MAP2) && ((DIFFUSE && (!LIGHTMAP_ON || MIXED_LIGHTING)) || RIM || SPECULAR || MATCAP || (DIRLIGHTMAP_COMBINED && LIGHTMAP_ON) || REFLECTION)) || SPECULAR_HAIR
 		i.tan_world.xyz = normalize(i.tan_world.xyz);
 	#endif
 	#if SPECULAR && !(NORMAL_MAP || NORMAL_MAP2 || NORMAL_MAP_TOP) && !(DIRLIGHTMAP_COMBINED && LIGHTMAP_ON) && !FLAT && !SPECULAR_HAIR
@@ -771,10 +768,12 @@ half4 frag (v2f i) : COLOR {
 			#endif
 			float3 nor_tan = 0;
 			#if NORMAL_MAP
-				nor_tan = UnpackNormal(tex2D(_NormalTex, TRANSFORM_TEX(normalUV, _NormalTex))) * _NormalStrength;
-				#endif
+				nor_tan = UnpackNormal(tex2D(_NormalTex, TRANSFORM_TEX(normalUV, _NormalTex)));
+				nor_tan.xy *= _NormalStrength;
+			#endif
 			#if NORMAL_MAP2
-				nor_tan += UnpackNormal(tex2D(_NormalTex2, TRANSFORM_TEX(normalUV2, _NormalTex2))) * _Normal2Strength;
+				nor_tan += UnpackNormal(tex2D(_NormalTex2, TRANSFORM_TEX(normalUV2, _NormalTex2)));
+				nor_tan.xy *= _Normal2Strength;
 			#endif
 			nor_tan = normalize(nor_tan);
 		#else
@@ -1003,7 +1002,7 @@ half4 frag (v2f i) : COLOR {
 			}
 		#endif
 		#if (VERTEXLIGHT_ON || _ADDITIONAL_LIGHTS || MIXED_LIGHTING)
-			#if (!DIFFUSE_PER_PIXEL && !USE_FORWARD_PLUS) && !FLAT && !_LIGHT_COOKIES && !(NORMAL_MAP || NORMAL_MAP2 || NORMAL_MAP_TOP)
+			#if (!DIFFUSE_PER_PIXEL && !(USE_FORWARD_PLUS || USE_CLUSTER_LIGHT_LOOP)) && !FLAT && !_LIGHT_COOKIES && !(NORMAL_MAP || NORMAL_MAP2 || NORMAL_MAP_TOP)
 				col_diffuse += i.col_diffuse_add;
 			#else
 				col_diffuse += AdditionalLightsFrag(i.pos_world, adjNor_world, i.pos, _DiffuseWrap, _DiffuseBrightness, _DiffuseContrast, meshRenderingLayers, _ShadowColor.rgb);
@@ -1098,8 +1097,7 @@ half4 frag (v2f i) : COLOR {
 	#endif
 
 	// Shadows
-	#if (SHADOWS_SCREEN || SHADOWS_SHADOWMASK || LIGHTMAP_SHADOW_MIXING || \
-		_MAIN_LIGHT_SHADOWS || _MAIN_LIGHT_SHADOWS_CASCADE || _MAIN_LIGHT_SHADOWS_SCREEN) && SHADOWS_ENABLED
+	#if (SHADOWS_SCREEN || SHADOWS_SHADOWMASK || LIGHTMAP_SHADOW_MIXING || _MAIN_LIGHT_SHADOWS || _MAIN_LIGHT_SHADOWS_CASCADE || _MAIN_LIGHT_SHADOWS_SCREEN) && SHADOWS_ENABLED
 		UNITY_LIGHT_ATTENUATION(atten, i, i.pos_world)
 		atten = FadeShadows(i.pos_world, i.nor_world, atten);
 		#if LIGHTMAP_ON

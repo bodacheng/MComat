@@ -200,7 +200,7 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
 
     public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
     {
-        Debug.Log("failureDescription " + failureDescription.productId + " : " + failureDescription.reason);
+        Debug.Log("failureDescription " + failureDescription.message + " : " + failureDescription.reason);
         ProgressLayer.Close();
     }
 
