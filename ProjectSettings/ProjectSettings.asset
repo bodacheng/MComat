@@ -89,6 +89,7 @@ PlayerSettings:
   muteOtherAudioSources: 0
   Prepare IOS For Recording: 0
   Force IOS Speakers When Recording: 0
+  audioSpatialExperience: 0
   deferSystemGesturesMode: 0
   hideHomeButton: 1
   submitAnalytics: 1
@@ -277,6 +278,9 @@ PlayerSettings:
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
+  androidAppCategory: 3
+  useAndroidAppCategory: 1
+  androidAppCategoryOther: 
   AndroidEnableTango: 0
   androidEnableBanner: 1
   androidUseLowAccuracyLocation: 0
@@ -583,6 +587,7 @@ PlayerSettings:
     iPhone: 1
     tvOS: 1
   m_BuildTargetGroupLightmapEncodingQuality: []
+  m_BuildTargetGroupHDRCubemapEncodingQuality: []
   m_BuildTargetGroupLightmapSettings: []
   m_BuildTargetGroupLoadStoreDebugModeSettings: []
   m_BuildTargetNormalMapEncoding: []
@@ -860,11 +865,13 @@ PlayerSettings:
     Android: CT_BWF;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;DOTWEEN
     CloudRendering: CT_BWF
     EmbeddedLinux: CT_BWF;DOTWEEN
-    GameCoreScarlett: DOTWEEN
+    GameCoreScarlett: DOTWEEN;CT_BWF
     GameCoreXboxOne: CT_BWF;DOTWEEN
-    LinuxHeadlessSimulation: DOTWEEN
+    Kepler: CT_BWF
+    LinuxHeadlessSimulation: DOTWEEN;CT_BWF
     Lumin: CT_BWF
     Nintendo Switch: CT_BWF;DOTWEEN
+    Nintendo Switch 2: CT_BWF
     PS4: CT_BWF;DOTWEEN
     PS5: CT_BWF;DOTWEEN
     QNX: CT_BWF;DOTWEEN

@@ -5,23 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d35965f-97cc-4db1-bf97-1dc49bab43ba" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MComat/.idea/projectSettingsUpdater.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MComat/.idea/projectSettingsUpdater.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.MComat/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MComat/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AIStory/AIServiceConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AIStory/AIServiceConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AIStory/API/Services/AIServiceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AIStory/API/Services/AIServiceManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Asset/Clown Jester/Materials/M_Clown_Jester_Aketon Skin3.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Asset/Clown Jester/Materials/M_Clown_Jester_Aketon Skin3.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Asset/Clown Jester/Materials/M_Clown_Jester_Body Skin3.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Asset/Clown Jester/Materials/M_Clown_Jester_Body Skin3.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Asset/Clown Jester/Materials/M_Clown_Jester_Collar Skin3.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Asset/Clown Jester/Materials/M_Clown_Jester_Collar Skin3.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Asset/Clown Jester/Materials/M_Clown_Jester_Hat Skin3.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Asset/Clown Jester/Materials/M_Clown_Jester_Hat Skin3.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Asset/Clown Jester/Materials/M_Clown_Jester_Pants Skin3.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Asset/Clown Jester/Materials/M_Clown_Jester_Pants Skin3.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Asset/Large_NanoCyborg/Materials/Large_NanoCyborg_Bottom.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Asset/Large_NanoCyborg/Materials/Large_NanoCyborg_Bottom.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Asset/Large_NanoCyborg/Materials/Large_NanoCyborg_Top.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Asset/Large_NanoCyborg/Materials/Large_NanoCyborg_Top.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Asset/OrangedKeys/TitleFX/Materials/VA/R.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Asset/OrangedKeys/TitleFX/Materials/VA/R.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/D_Asset/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/D_Asset/OrangedKeys/TitleFX/Materials/VA/TitleFX_V2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/FightScene/FightScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightScene/FightScene.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-6000.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/FightLogger/FightLogger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/FightLogger/FightLogger.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +148,7 @@
       <workItem from="1749448706212" duration="2956000" />
       <workItem from="1749988908796" duration="4811000" />
       <workItem from="1751282470866" duration="90000" />
-      <workItem from="1759912577461" duration="1814000" />
+      <workItem from="1759912577461" duration="3982000" />
     </task>
     <servers />
   </component>
