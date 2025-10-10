@@ -34,7 +34,7 @@ public class FrontPage : MSceneProcess
         if (PlayerAccountInfo.Me.currentLinkedDeviceId != PlayFabReadClient.CustomId && !_askedIfLinkDevice)
         {
             _askedIfLinkDevice = true;
-            var askIfLinkDeviceLayer = UILayerLoader.Load<AskIfLinkDeviceLayer>();
+            var askIfLinkDeviceLayer = UILayerLoader.Load<AskIfLinkDeviceLayer>(true, null, true);
             askIfLinkDeviceLayer.Initialise(
                 () =>
                 {
