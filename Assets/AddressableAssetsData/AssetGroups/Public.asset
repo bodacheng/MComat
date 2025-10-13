@@ -87,6 +87,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1351222f920b3ca49bc1347a65ad436d
+    m_Address: storm_dust
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 136398b09ad2c4d7f857703d5f87c9e3
     m_Address: Glow
     m_ReadOnly: 0
@@ -155,6 +161,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1eb614596030841cbbdb034483a7b79c
     m_Address: eff_par_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1fdceabf78fb3ff4fb99322c5e89962c
+    m_Address: FireLine01_3x3
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -303,8 +315,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 445ad0260dea2c643a02eb2a2acb826a
+    m_Address: LightSprinkles
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 44a6f271d8af00945aa1879221ab56da
     m_Address: drop
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44e32f16ae6df4f49ab59a36bda6ca9f
+    m_Address: StormDustBright
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -359,6 +383,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4de1419ac14d16d44b9c82b76ea6d884
     m_Address: Smoke24
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4fa14b346873f4061ad776f8e7e73586
+    m_Address: Circle
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -549,6 +579,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70b6e007003158e4fa167f9b0a084a77
+    m_Address: Hand2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7154a27ca4f209047bbd02657bbbc16c
     m_Address: Trail22cg
     m_ReadOnly: 0
@@ -705,6 +741,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b84072a0493d984a9316fb847145f01
+    m_Address: StarrySkyOuterSpace
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 910457dc152f8c341b02cf22c406c5c6
     m_Address: m_fx_lightning4x2_blue
     m_ReadOnly: 0
@@ -779,6 +821,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9f36d24197196874ba276deaa7efccca
     m_Address: FrostCloud
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a2a06e22c08354d9699356710b69ca9c
+    m_Address: OmniShade URP
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
@@ -863,6 +911,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b4a39e223b86cf24d82d7c34e6366131
     m_Address: MatCap_Toon
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4a3cd532f543a4448281dc9c13d9aec
+    m_Address: FireSmokeEmbers
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
