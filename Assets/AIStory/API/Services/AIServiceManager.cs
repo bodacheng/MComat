@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -16,6 +18,9 @@ public class AIServiceManager : MonoBehaviour
     private IAIClient currentClient;
     private GeminiClient geminiClient;
     private OpenAIClient openAIClient;
+    private List<StoryInfo.CharacterProfile> currentStoryCharacters = new List<StoryInfo.CharacterProfile>();
+    private List<StoryInfo.LocationProfile> currentStoryLocations = new List<StoryInfo.LocationProfile>();
+    private StoryInfo.StoryStyleGuide currentStoryStyleGuide;
     
     // Properties
     public IAIClient CurrentClient => currentClient;
@@ -234,26 +239,33 @@ public class AIServiceManager : MonoBehaviour
             // 获取期望的页数
             int expectedPageCount = serviceConfig?.PageCount ?? 6;
             
-            // 解析AI生成的故事文本，提取场景和对话，并确保返回正确数量
-            var storyScenes = ParseStoryText(storyText, expectedPageCount);
+            // 解析AI生成的故事文本，提取场景、角色和风格设定
+            var parsedStory = ParseStoryText(storyText, expectedPageCount);
             
             // 验证解析结果
-            if (storyScenes == null || storyScenes.Count == 0)
+            if (parsedStory == null || parsedStory.Scenes == null || parsedStory.Scenes.Count == 0)
             {
                 Debug.LogError("[AI Story] Failed to parse story scenes from AI response");
                 return null;
             }
             
-            Debug.Log($"[AI Story] Successfully parsed {storyScenes.Count} scenes (expected: {expectedPageCount})");
+            Debug.Log($"[AI Story] Successfully parsed {parsedStory.Scenes.Count} scenes (expected: {expectedPageCount})");
+            
+            currentStoryCharacters = parsedStory.Characters ?? new List<StoryInfo.CharacterProfile>();
+            currentStoryLocations = parsedStory.Locations ?? new List<StoryInfo.LocationProfile>();
+            currentStoryStyleGuide = parsedStory.StyleGuide ?? new StoryInfo.StoryStyleGuide();
             
             // 为每个场景生成对应的图片
-            await GenerateStoryImagesAsync(storyScenes);
+            await GenerateStoryImagesAsync(parsedStory.Scenes);
             
             // 创建StoryInfo对象
             var storyInfo = ScriptableObject.CreateInstance<StoryInfo>();
-            storyInfo.StoryScenes = storyScenes;
+            storyInfo.Characters = currentStoryCharacters;
+            storyInfo.Locations = currentStoryLocations;
+            storyInfo.StyleGuide = currentStoryStyleGuide;
+            storyInfo.StoryScenes = parsedStory.Scenes;
             
-            Debug.Log($"Successfully generated AI story with {storyScenes.Count} scenes");
+            Debug.Log($"Successfully generated AI story with {parsedStory.Scenes.Count} scenes");
             return storyInfo;
         }
         catch (Exception ex)
@@ -268,13 +280,11 @@ public class AIServiceManager : MonoBehaviour
     /// </summary>
     private string BuildStoryPrompt(string customPrompt)
     {
-        // 如果提供了自定义提示词，直接使用
         if (!string.IsNullOrEmpty(customPrompt))
         {
             return customPrompt;
         }
         
-        // 从配置获取参数
         if (serviceConfig == null)
         {
             Debug.LogError("[BuildStoryPrompt] serviceConfig is null");
@@ -282,135 +292,303 @@ public class AIServiceManager : MonoBehaviour
         }
         
         int pageCount = serviceConfig.PageCount;
-        
-        // 根据配置生成故事主题
         string storyTheme = GetStoryThemeFromConfig();
+        string imageStyle = GetImageStyleFromConfig();
+        string additionalRequirements = serviceConfig.AdditionalImageRequirements;
         
-        var prompt = $"请生成一个{storyTheme}连环画故事。\n\n";
+        var promptBuilder = new StringBuilder();
+        promptBuilder.AppendLine("你是一名专业的多页连环画编剧与美术总监。");
+        promptBuilder.AppendLine($"围绕主题“{storyTheme}”创作一个由 {pageCount} 个连续场景组成的故事。");
+        promptBuilder.AppendLine("请输出严格的 JSON 数据，禁止添加注释、额外说明或 markdown。");
+        promptBuilder.AppendLine();
+        promptBuilder.AppendLine("请确保：");
+        promptBuilder.AppendLine($"- 场景数量必须正好为 {pageCount}，index 从 1 开始，按顺序排列。");
+        promptBuilder.AppendLine("- 对所有会重复出现的角色提供一致的角色卡片，在文中和 scenes.characters 列表中复用相同的 id。");
+        promptBuilder.AppendLine("- 对关键场景地点提供地点卡片，在每个场景中引用 locations 的 id 以保持背景一致。");
+        promptBuilder.AppendLine("- 角色描述需包含发型、五官、体态、肤色、服装和可辨识的随身物品。");
+        promptBuilder.AppendLine("- 地点描述需包含时间、氛围、色调、重要道具。");
+        promptBuilder.AppendLine("- 为整部作品给出统一的 style（artDirection、palette、camera、lighting、keywords、negativeKeywords）以保证画风统一。");
+        promptBuilder.AppendLine("- 每个场景给出 title、description（描述画面）、setting（引用地点并解释时间/情境）、locationId（引用 locations.id）、characters（角色 id 列表）、mood、importantObjects、camera、lighting、visualPrompt、negativePrompt。");
+        promptBuilder.AppendLine("- dialogues 是数组，包含 speaker 与 text，用于剧情对话。若无对话可返回空数组。");
+        promptBuilder.AppendLine("- visualPrompt 用简洁英文或中英文混合描述画面要素，便于直接用于图像生成。");
+        promptBuilder.AppendLine("- negativePrompt 描述应避免的视觉内容和错误。");
+        promptBuilder.AppendLine("- 全文除 JSON 以外不输出任何内容。");
+        promptBuilder.AppendLine();
+        promptBuilder.AppendLine("请按照以下 JSON 模板返回：");
+        promptBuilder.AppendLine("{");
+        promptBuilder.AppendLine("  \"characters\": [");
+        promptBuilder.AppendLine("    {");
+        promptBuilder.AppendLine("      \"id\": \"hero\",");
+        promptBuilder.AppendLine("      \"name\": \"角色姓名\",");
+        promptBuilder.AppendLine("      \"appearance\": \"身材、发型、肤色等\",");
+        promptBuilder.AppendLine("      \"outfit\": \"服装、配饰\",");
+        promptBuilder.AppendLine("      \"personality\": \"性格或当前情绪\",");
+        promptBuilder.AppendLine("      \"visualTags\": \"关键视觉要素\"");
+        promptBuilder.AppendLine("    }");
+        promptBuilder.AppendLine("  ],");
+        promptBuilder.AppendLine("  \"locations\": [");
+        promptBuilder.AppendLine("    {");
+        promptBuilder.AppendLine("      \"id\": \"warehouse\",");
+        promptBuilder.AppendLine("      \"name\": \"地点名称\",");
+        promptBuilder.AppendLine("      \"description\": \"背景细节\",");
+        promptBuilder.AppendLine("      \"palette\": \"主色调\",");
+        promptBuilder.AppendLine("      \"timeOfDay\": \"时间\",");
+        promptBuilder.AppendLine("      \"atmosphere\": \"氛围\"");
+        promptBuilder.AppendLine("    }");
+        promptBuilder.AppendLine("  ],");
+        promptBuilder.AppendLine("  \"style\": {");
+        promptBuilder.AppendLine("    \"artDirection\": \"整体绘画风格\",");
+        promptBuilder.AppendLine("    \"palette\": \"整体配色\",");
+        promptBuilder.AppendLine("    \"camera\": \"常用镜头语言\",");
+        promptBuilder.AppendLine("    \"lighting\": \"整体光影\",");
+        promptBuilder.AppendLine("    \"keywords\": \"需要强化的视觉关键词\",");
+        promptBuilder.AppendLine("    \"negativeKeywords\": \"需要避免的元素\"");
+        promptBuilder.AppendLine("  },");
+        promptBuilder.AppendLine("  \"scenes\": [");
+        promptBuilder.AppendLine("    {");
+        promptBuilder.AppendLine("      \"index\": 1,");
+        promptBuilder.AppendLine("      \"title\": \"场景标题\",");
+        promptBuilder.AppendLine("      \"description\": \"画面描述\",");
+        promptBuilder.AppendLine("      \"setting\": \"引用地点 id 并补充细节\",");
+        promptBuilder.AppendLine("      \"locationId\": \"warehouse\",");
+        promptBuilder.AppendLine("      \"characters\": [\"hero\"],");
+        promptBuilder.AppendLine("      \"mood\": \"情绪\",");
+        promptBuilder.AppendLine("      \"importantObjects\": \"关键物件\",");
+        promptBuilder.AppendLine("      \"camera\": \"镜头语言\",");
+        promptBuilder.AppendLine("      \"lighting\": \"光影\",");
+        promptBuilder.AppendLine("      \"visualPrompt\": \"图像生成提示\",");
+        promptBuilder.AppendLine("      \"negativePrompt\": \"需避免的元素\",");
+        promptBuilder.AppendLine("      \"dialogues\": [");
+        promptBuilder.AppendLine("        { \"speaker\": \"角色姓名\", \"text\": \"具体台词\" }");
+        promptBuilder.AppendLine("      ]");
+        promptBuilder.AppendLine("    }");
+        promptBuilder.AppendLine("  ]");
+        promptBuilder.AppendLine("}");
+        promptBuilder.AppendLine();
+        promptBuilder.AppendLine($"艺术风格需要贴合：{imageStyle}。");
+        if (!string.IsNullOrWhiteSpace(additionalRequirements))
+        {
+            promptBuilder.AppendLine($"额外风格要求：{additionalRequirements}。");
+        }
+        promptBuilder.AppendLine("请注意保持角色造型、服饰、背景在所有场景中的一致性，并确保 JSON 可被解析。");
         
-        prompt += $"【连环画要求】\n";
-        prompt += $"- 总页数：必须正好生成 {pageCount} 个场景（每个场景对应一页/一张图）\n";
-        prompt += $"- 每页文字：每个场景包含 1-3 行文字（对话、独白或叙述）\n";
-        prompt += $"- 故事连贯性：{pageCount}个场景必须构成一个完整、连续的故事，有起承转合\n";
-        prompt += $"- 场景编号：按照故事发展顺序，从场景1到场景{pageCount}\n\n";
-        
-        prompt += $"【重要】请严格按照以下JSON格式返回，必须包含正好{pageCount}个场景：\n\n";
-        prompt += $"{{\n";
-        prompt += $"  \"scenes\": [\n";
-        prompt += $"    {{\n";
-        prompt += $"      \"description\": \"场景1的描述，说明这一页画面的内容\",\n";
-        prompt += $"      \"lines\": [\n";
-        prompt += $"        \"这一页的第1行文字（对话、独白或叙述）\",\n";
-        prompt += $"        \"这一页的第2行文字\",\n";
-        prompt += $"        \"这一页的第3行文字（如果需要）\"\n";
-        prompt += $"      ]\n";
-        prompt += $"    }},\n";
-        prompt += $"    {{\n";
-        prompt += $"      \"description\": \"场景2的描述\",\n";
-        prompt += $"      \"lines\": [\"第2页的文字...\"]\n";
-        prompt += $"    }}\n";
-        prompt += $"    // ... 继续到场景{pageCount}\n";
-        prompt += $"  ]\n";
-        prompt += $"}}\n\n";
-        
-        prompt += $"注意：\n";
-        prompt += $"1. 必须返回{pageCount}个场景，不能多也不能少\n";
-        prompt += $"2. 每个场景的lines数组包含1到3个元素\n";
-        prompt += $"3. 场景之间要有连贯的故事发展关系\n";
-        prompt += $"4. description描述这一页的画面内容，lines是这一页配的文字\n";
-        
-        return prompt;
+        return promptBuilder.ToString();
     }
     
     /// <summary>
     /// 解析AI生成的故事文本，并确保返回指定数量的场景
     /// </summary>
-    private List<StoryInfo.StoryScene> ParseStoryText(string storyText, int expectedSceneCount)
+    private ParsedStoryResult ParseStoryText(string storyText, int expectedSceneCount)
     {
         if (string.IsNullOrEmpty(storyText))
         {
             Debug.LogError("[AI Story Parse] Story text is null or empty");
-            return CreatePlaceholderScenes(expectedSceneCount);
+            return new ParsedStoryResult
+            {
+                Scenes = EnsureSceneCount(CreatePlaceholderScenes(expectedSceneCount), expectedSceneCount),
+                Characters = new List<StoryInfo.CharacterProfile>(),
+                Locations = new List<StoryInfo.LocationProfile>(),
+                StyleGuide = new StoryInfo.StoryStyleGuide()
+            };
         }
         
-        // 清理并解析JSON
         string cleanedText = CleanJsonFromMarkdown(storyText);
-        var scenes = TryParseJsonScenes(cleanedText);
+        var parsedStory = TryParseJsonStory(cleanedText);
         
-        // 调整场景数量
-        scenes = EnsureSceneCount(scenes, expectedSceneCount);
+        if (parsedStory == null || parsedStory.Scenes == null || parsedStory.Scenes.Count == 0)
+        {
+            Debug.LogWarning("[AI Story Parse] Falling back to simple text parsing");
+            var fallbackScenes = EnsureSceneCount(FallbackParseStoryText(cleanedText), expectedSceneCount);
+            return new ParsedStoryResult
+            {
+                Scenes = fallbackScenes,
+                Characters = new List<StoryInfo.CharacterProfile>(),
+                Locations = new List<StoryInfo.LocationProfile>(),
+                StyleGuide = new StoryInfo.StoryStyleGuide()
+            };
+        }
         
-        Debug.Log($"[AI Story Parse] Final: {scenes.Count} scenes");
-        return scenes;
+        parsedStory.Scenes = EnsureSceneCount(parsedStory.Scenes, expectedSceneCount);
+        parsedStory.Characters ??= new List<StoryInfo.CharacterProfile>();
+        parsedStory.Locations ??= new List<StoryInfo.LocationProfile>();
+        parsedStory.StyleGuide ??= new StoryInfo.StoryStyleGuide();
+        
+        Debug.Log($"[AI Story Parse] Final: {parsedStory.Scenes.Count} scenes");
+        return parsedStory;
     }
     
-    /// <summary>
-    /// 尝试解析JSON格式的场景数据
-    /// </summary>
-    private List<StoryInfo.StoryScene> TryParseJsonScenes(string jsonText)
+    private ParsedStoryResult TryParseJsonStory(string jsonText)
     {
-        var scenes = new List<StoryInfo.StoryScene>();
-        
         try
         {
             var storyData = JsonUtility.FromJson<AIStoryData>(jsonText);
+            if (storyData == null)
+            {
+                return null;
+            }
             
-            if (storyData?.scenes != null)
+            var result = new ParsedStoryResult
+            {
+                Characters = storyData.characters?.Select(ConvertToCharacterProfile).Where(c => c != null).ToList(),
+                Locations = storyData.locations?.Select(ConvertToLocationProfile).Where(l => l != null).ToList(),
+                StyleGuide = ConvertToStyleGuide(storyData.style),
+                Scenes = new List<StoryInfo.StoryScene>()
+            };
+            
+            if (storyData.scenes != null)
             {
                 foreach (var sceneData in storyData.scenes)
                 {
-                    if (sceneData == null) continue;
-                    
                     var scene = ConvertToStoryScene(sceneData);
-                    if (scene.Lines.Count > 0)
+                    if (scene != null)
                     {
-                        scenes.Add(scene);
+                        result.Scenes.Add(scene);
                     }
                 }
                 
-                Debug.Log($"[AI Story Parse] Parsed {scenes.Count} scenes from JSON");
+                Debug.Log($"[AI Story Parse] Parsed {result.Scenes.Count} scenes from JSON");
             }
+            
+            return result;
         }
         catch (Exception ex)
         {
             Debug.LogError($"[AI Story Parse] JSON parsing failed: {ex.Message}");
-            scenes = FallbackParseStoryText(jsonText);
+            return null;
         }
-        
-        return scenes;
     }
     
-    /// <summary>
-    /// 将AI场景数据转换为StoryScene
-    /// </summary>
+    private StoryInfo.CharacterProfile ConvertToCharacterProfile(AICharacterData data)
+    {
+        if (data == null)
+        {
+            return null;
+        }
+        
+        return new StoryInfo.CharacterProfile
+        {
+            Id = data.id,
+            DisplayName = data.name,
+            Description = data.appearance,
+            Outfit = data.outfit,
+            Personality = data.personality,
+            VisualTags = data.visualTags
+        };
+    }
+    
+    private StoryInfo.LocationProfile ConvertToLocationProfile(AILocationData data)
+    {
+        if (data == null)
+        {
+            return null;
+        }
+        
+        return new StoryInfo.LocationProfile
+        {
+            Id = data.id,
+            DisplayName = data.name,
+            Description = data.description,
+            Palette = data.palette,
+            TimeOfDay = data.timeOfDay,
+            Atmosphere = data.atmosphere
+        };
+    }
+    
+    private StoryInfo.StoryStyleGuide ConvertToStyleGuide(AIStyleData data)
+    {
+        if (data == null)
+        {
+            return null;
+        }
+        
+        return new StoryInfo.StoryStyleGuide
+        {
+            ArtDirection = data.artDirection,
+            Palette = data.palette,
+            CameraPreferences = data.camera,
+            Lighting = data.lighting,
+            Keywords = data.keywords,
+            NegativeKeywords = data.negativeKeywords
+        };
+    }
+    
     private StoryInfo.StoryScene ConvertToStoryScene(AISceneData sceneData)
     {
-        var scene = new StoryInfo.StoryScene { Lines = new List<string>() };
-        
-        // 添加description
-        if (!string.IsNullOrEmpty(sceneData.description))
-            scene.Lines.Add(sceneData.description);
-        
-        // 添加lines
-        if (sceneData.lines != null)
+        if (sceneData == null)
         {
-            foreach (var line in sceneData.lines)
+            return null;
+        }
+        
+        var scene = new StoryInfo.StoryScene
+        {
+            Title = sceneData.title,
+            Description = sceneData.description,
+            Setting = sceneData.setting,
+            LocationId = sceneData.locationId,
+            Camera = sceneData.camera,
+            Lighting = sceneData.lighting,
+            Mood = sceneData.mood,
+            ImportantObjects = sceneData.importantObjects,
+            VisualPromptNotes = sceneData.visualPrompt,
+            NegativePromptNotes = sceneData.negativePrompt,
+            Lines = new List<string>()
+        };
+        
+        if (sceneData.characters != null)
+        {
+            scene.CharactersInScene.AddRange(sceneData.characters.Where(id => !string.IsNullOrWhiteSpace(id)));
+        }
+        
+        if (sceneData.additionalLocations != null)
+        {
+            scene.AdditionalLocationIds.AddRange(sceneData.additionalLocations.Where(id => !string.IsNullOrWhiteSpace(id)));
+        }
+        
+        if (!string.IsNullOrEmpty(scene.Description))
+        {
+            scene.Lines.Add(scene.Description);
+        }
+        
+        if (sceneData.dialogues != null && sceneData.dialogues.Length > 0)
+        {
+            foreach (var dialogue in sceneData.dialogues)
             {
-                if (!string.IsNullOrEmpty(line))
-                    scene.Lines.Add(line);
+                if (dialogue == null || string.IsNullOrWhiteSpace(dialogue.text))
+                {
+                    continue;
+                }
+                
+                var dialogueLine = new StoryInfo.StoryDialogueLine
+                {
+                    Speaker = dialogue.speaker,
+                    Text = dialogue.text
+                };
+                scene.Dialogues.Add(dialogueLine);
+                
+                string text = string.IsNullOrWhiteSpace(dialogue.speaker) ? dialogue.text : $"{dialogue.speaker}: {dialogue.text}";
+                scene.Lines.Add(text);
             }
+        }
+        
+        if (scene.Lines.Count == 0)
+        {
+            scene.Lines.Add($"[场景 {sceneData.index}]");
         }
         
         return scene;
     }
     
-    /// <summary>
-    /// 确保场景数量等于期望值
-    /// </summary>
     private List<StoryInfo.StoryScene> EnsureSceneCount(List<StoryInfo.StoryScene> scenes, int expectedCount)
     {
+        if (scenes == null)
+        {
+            scenes = new List<StoryInfo.StoryScene>();
+        }
+        
         if (scenes.Count == expectedCount)
+        {
             return scenes;
+        }
         
         if (scenes.Count > expectedCount)
         {
@@ -421,28 +599,70 @@ public class AIServiceManager : MonoBehaviour
         Debug.LogWarning($"[AI Story Parse] Padding {scenes.Count} → {expectedCount}");
         while (scenes.Count < expectedCount)
         {
-            scenes.Add(new StoryInfo.StoryScene
-            {
-                Lines = new List<string> { $"[场景 {scenes.Count + 1}]" }
-            });
+            scenes.Add(CreatePlaceholderScene(scenes.Count + 1));
         }
         
         return scenes;
     }
     
-    /// <summary>
-    /// 创建占位场景
-    /// </summary>
     private List<StoryInfo.StoryScene> CreatePlaceholderScenes(int count)
     {
-        var scenes = new List<StoryInfo.StoryScene>();
-        for (int i = 0; i < count; i++)
+        var result = new List<StoryInfo.StoryScene>();
+        for (int i = 1; i <= count; i++)
         {
-            scenes.Add(new StoryInfo.StoryScene
-            {
-                Lines = new List<string> { $"[场景 {i + 1}]" }
-            });
+            result.Add(CreatePlaceholderScene(i));
         }
+        return result;
+    }
+    
+    private StoryInfo.StoryScene CreatePlaceholderScene(int index)
+    {
+        return new StoryInfo.StoryScene
+        {
+            Title = $"场景 {index}",
+            Description = $"[自动填充场景 {index}]",
+            Lines = new List<string> { $"[场景 {index}]" }
+        };
+    }
+    
+    private List<StoryInfo.StoryScene> FallbackParseStoryText(string storyText)
+    {
+        var scenes = new List<StoryInfo.StoryScene>();
+        var lines = storyText.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        var currentScene = new StoryInfo.StoryScene
+        {
+            Title = "Fallback Scene",
+            Lines = new List<string>()
+        };
+        
+        foreach (var line in lines)
+        {
+            var trimmedLine = line.Trim();
+            
+            if (string.IsNullOrEmpty(trimmedLine) ||
+                trimmedLine.StartsWith("{") ||
+                trimmedLine.StartsWith("}") ||
+                trimmedLine.StartsWith("[") ||
+                trimmedLine.StartsWith("]") ||
+                trimmedLine.Contains("\"scenes\""))
+            {
+                continue;
+            }
+            
+            trimmedLine = trimmedLine.Trim('"', ',', ' ');
+            
+            if (!string.IsNullOrEmpty(trimmedLine))
+            {
+                currentScene.Lines.Add(trimmedLine);
+            }
+        }
+        
+        if (currentScene.Lines.Count > 0)
+        {
+            currentScene.Description = currentScene.Lines[0];
+            scenes.Add(currentScene);
+        }
+        
         return scenes;
     }
     
@@ -454,10 +674,8 @@ public class AIServiceManager : MonoBehaviour
         if (string.IsNullOrEmpty(text))
             return text;
             
-        // 移除markdown JSON代码块标记
         text = text.Trim();
         
-        // 移除 ```json 和 ``` 标记
         if (text.StartsWith("```json"))
         {
             text = text.Substring(7);
@@ -474,7 +692,6 @@ public class AIServiceManager : MonoBehaviour
         
         text = text.Trim();
         
-        // 尝试找到实际的JSON内容（从第一个 { 到最后一个 }）
         int firstBrace = text.IndexOf('{');
         int lastBrace = text.LastIndexOf('}');
         
@@ -484,57 +701,6 @@ public class AIServiceManager : MonoBehaviour
         }
         
         return text;
-    }
-    
-    /// <summary>
-    /// 后备解析方法：当JSON解析失败时使用简单的文本分割
-    /// </summary>
-    private List<StoryInfo.StoryScene> FallbackParseStoryText(string storyText)
-    {
-        var scenes = new List<StoryInfo.StoryScene>();
-        
-        Debug.Log("[AI Story Parse] Using fallback text parsing");
-        
-        var lines = storyText.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-        var currentScene = new StoryInfo.StoryScene
-        {
-            Lines = new List<string>()
-        };
-        
-        foreach (var line in lines)
-        {
-            var trimmedLine = line.Trim();
-            
-            // 跳过JSON标记和空行
-            if (string.IsNullOrEmpty(trimmedLine) || 
-                trimmedLine.StartsWith("{") || 
-                trimmedLine.StartsWith("}") ||
-                trimmedLine.StartsWith("[") ||
-                trimmedLine.StartsWith("]") ||
-                trimmedLine.Contains("\"scenes\"") ||
-                trimmedLine.Contains("\"description\"") ||
-                trimmedLine.Contains("\"lines\""))
-            {
-                continue;
-            }
-            
-            // 移除引号和逗号
-            trimmedLine = trimmedLine.Trim('"', ',', ' ');
-            
-            if (!string.IsNullOrEmpty(trimmedLine))
-            {
-                currentScene.Lines.Add(trimmedLine);
-                Debug.Log($"[AI Story Parse Fallback] Added line: {trimmedLine}");
-            }
-        }
-        
-        if (currentScene.Lines.Count > 0)
-        {
-            scenes.Add(currentScene);
-            Debug.Log($"[AI Story Parse Fallback] Created scene with {currentScene.Lines.Count} lines");
-        }
-        
-        return scenes;
     }
     
     /// <summary>
@@ -589,11 +755,56 @@ public class AIServiceManager : MonoBehaviour
     /// </summary>
     private string BuildStoryOverview(StoryInfo.StoryScene scene)
     {
-        if (scene?.Lines == null || scene.Lines.Count == 0)
-            return "";
+        if (scene == null)
+        {
+            return string.Empty;
+        }
         
-        // 将场景的所有文字行合并为图片描述
-        return string.Join(" ", scene.Lines);
+        var builder = new StringBuilder();
+        
+        if (!string.IsNullOrEmpty(scene.Description))
+        {
+            builder.Append(scene.Description);
+        }
+        else if (scene.Lines != null && scene.Lines.Count > 0)
+        {
+            builder.Append(scene.Lines[0]);
+        }
+        
+        if (scene.Dialogues != null && scene.Dialogues.Count > 0)
+        {
+            foreach (var dialogue in scene.Dialogues)
+            {
+                if (dialogue == null || string.IsNullOrWhiteSpace(dialogue.Text))
+                {
+                    continue;
+                }
+                
+                if (builder.Length > 0)
+                {
+                    builder.Append(' ');
+                }
+                
+                if (!string.IsNullOrWhiteSpace(dialogue.Speaker))
+                {
+                    builder.Append($"{dialogue.Speaker}: ");
+                }
+                
+                builder.Append(dialogue.Text);
+            }
+        }
+        else if (scene.Lines != null && scene.Lines.Count > 1)
+        {
+            for (int i = 1; i < scene.Lines.Count; i++)
+            {
+                if (!string.IsNullOrWhiteSpace(scene.Lines[i]))
+                {
+                    builder.Append(' ').Append(scene.Lines[i]);
+                }
+            }
+        }
+        
+        return builder.ToString().Trim();
     }
     
     /// <summary>
@@ -601,10 +812,8 @@ public class AIServiceManager : MonoBehaviour
     /// </summary>
     private string BuildImagePrompt(StoryInfo.StoryScene scene, int sceneIndex, int totalScenes)
     {
-        // 从当前场景提取内容作为图片描述
         string sceneContent = BuildStoryOverview(scene);
         
-        // 限制提示词长度，避免过长影响生成质量
         const int maxPromptLength = 500;
         if (sceneContent.Length > maxPromptLength)
         {
@@ -612,33 +821,333 @@ public class AIServiceManager : MonoBehaviour
             Debug.Log($"[AI Story Image] Scene content truncated to {maxPromptLength} characters");
         }
         
-        // 获取配置的图片风格
-        string imageStyle = GetImageStyleFromConfig();
+        var builder = new StringBuilder();
+        builder.Append($"Scene {sceneIndex + 1}/{totalScenes}. ");
         
-        // 构建简洁有效的图片提示词
-        var prompt = $"Scene {sceneIndex + 1}/{totalScenes}: {sceneContent}. ";
-        prompt += $"Style: {imageStyle}. ";
-        prompt += "High quality, detailed, professional";
+        if (!string.IsNullOrEmpty(scene?.Title))
+        {
+            builder.Append($"{scene.Title}. ");
+        }
         
+        if (!string.IsNullOrEmpty(sceneContent))
+        {
+            builder.Append(sceneContent).Append(' ');
+        }
+        
+        var characterPrompt = BuildCharacterPrompt(scene?.CharactersInScene);
+        if (!string.IsNullOrEmpty(characterPrompt))
+        {
+            builder.Append(characterPrompt).Append(' ');
+        }
+        
+        var locationPrompt = BuildLocationPrompt(scene);
+        if (!string.IsNullOrEmpty(locationPrompt))
+        {
+            builder.Append(locationPrompt).Append(' ');
+        }
+        
+        if (!string.IsNullOrEmpty(scene?.ImportantObjects))
+        {
+            builder.Append($"Key props: {scene.ImportantObjects}. ");
+        }
+        
+        if (!string.IsNullOrEmpty(scene?.VisualPromptNotes))
+        {
+            builder.Append(scene.VisualPromptNotes).Append(". ");
+        }
+        
+        var stylePrompt = BuildStylePrompt(scene);
+        if (!string.IsNullOrEmpty(stylePrompt))
+        {
+            builder.Append(stylePrompt).Append(' ');
+        }
+        
+        var prompt = builder.ToString().Trim();
+        
+        var negativeTokens = new List<string>();
+        if (!string.IsNullOrWhiteSpace(scene?.NegativePromptNotes))
+        {
+            negativeTokens.Add(scene.NegativePromptNotes);
+        }
+        if (!string.IsNullOrWhiteSpace(currentStoryStyleGuide?.NegativeKeywords))
+        {
+            negativeTokens.Add(currentStoryStyleGuide.NegativeKeywords);
+        }
+        if (negativeTokens.Count > 0)
+        {
+            prompt += $" Avoid: {string.Join(", ", negativeTokens)}.";
+        }
+        
+        scene.BuiltPrompt = prompt;
         Debug.Log($"[AI Story Image] Prompt for scene {sceneIndex + 1}: {prompt}");
         
         return prompt;
     }
     
+    private string BuildCharacterPrompt(IEnumerable<string> characterIds)
+    {
+        if (characterIds == null || currentStoryCharacters == null || currentStoryCharacters.Count == 0)
+        {
+            return string.Empty;
+        }
+        
+        var entries = new List<string>();
+        foreach (var id in characterIds)
+        {
+            var profile = FindCharacterProfile(id);
+            if (profile == null)
+            {
+                continue;
+            }
+            
+            var parts = new List<string>();
+            if (!string.IsNullOrWhiteSpace(profile.Description))
+            {
+                parts.Add(profile.Description);
+            }
+            if (!string.IsNullOrWhiteSpace(profile.Outfit))
+            {
+                parts.Add(profile.Outfit);
+            }
+            if (!string.IsNullOrWhiteSpace(profile.VisualTags))
+            {
+                parts.Add(profile.VisualTags);
+            }
+            if (!string.IsNullOrWhiteSpace(profile.Personality))
+            {
+                parts.Add($"personality {profile.Personality}");
+            }
+            
+            var name = string.IsNullOrWhiteSpace(profile.DisplayName) ? profile.Id : profile.DisplayName;
+            entries.Add(parts.Count > 0 ? $"{name}: {string.Join(", ", parts)}" : name);
+        }
+        
+        return entries.Count > 0 ? $"Characters: {string.Join("; ", entries)}." : string.Empty;
+    }
+    
+    private StoryInfo.CharacterProfile FindCharacterProfile(string reference)
+    {
+        if (string.IsNullOrWhiteSpace(reference) || currentStoryCharacters == null)
+        {
+            return null;
+        }
+        
+        return currentStoryCharacters.FirstOrDefault(profile =>
+            string.Equals(profile.Id, reference, StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(profile.DisplayName, reference, StringComparison.OrdinalIgnoreCase));
+    }
+    
+    private string BuildLocationPrompt(StoryInfo.StoryScene scene)
+    {
+        if (scene == null)
+        {
+            return string.Empty;
+        }
+        
+        var descriptions = new List<string>();
+        var handledIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        
+        if (!string.IsNullOrWhiteSpace(scene.LocationId))
+        {
+            handledIds.Add(scene.LocationId);
+            var profile = FindLocationProfile(scene.LocationId);
+            if (profile != null)
+            {
+                descriptions.Add(DescribeLocationProfile(profile));
+            }
+        }
+        
+        if (scene.AdditionalLocationIds != null)
+        {
+            foreach (var locationId in scene.AdditionalLocationIds)
+            {
+                if (string.IsNullOrWhiteSpace(locationId) || !handledIds.Add(locationId))
+                {
+                    continue;
+                }
+                
+                var profile = FindLocationProfile(locationId);
+                if (profile != null)
+                {
+                    descriptions.Add(DescribeLocationProfile(profile));
+                }
+            }
+        }
+        
+        if (!string.IsNullOrWhiteSpace(scene.Setting))
+        {
+            descriptions.Add(scene.Setting);
+        }
+        
+        return descriptions.Count > 0 ? $"Environment: {string.Join(". ", descriptions)}." : string.Empty;
+    }
+    
+    private StoryInfo.LocationProfile FindLocationProfile(string reference)
+    {
+        if (string.IsNullOrWhiteSpace(reference) || currentStoryLocations == null)
+        {
+            return null;
+        }
+        
+        return currentStoryLocations.FirstOrDefault(profile =>
+            string.Equals(profile.Id, reference, StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(profile.DisplayName, reference, StringComparison.OrdinalIgnoreCase));
+    }
+    
+    private string DescribeLocationProfile(StoryInfo.LocationProfile profile)
+    {
+        if (profile == null)
+        {
+            return string.Empty;
+        }
+        
+        var parts = new List<string>();
+        if (!string.IsNullOrWhiteSpace(profile.DisplayName))
+        {
+            parts.Add(profile.DisplayName);
+        }
+        if (!string.IsNullOrWhiteSpace(profile.Description))
+        {
+            parts.Add(profile.Description);
+        }
+        if (!string.IsNullOrWhiteSpace(profile.Palette))
+        {
+            parts.Add($"palette {profile.Palette}");
+        }
+        if (!string.IsNullOrWhiteSpace(profile.TimeOfDay))
+        {
+            parts.Add(profile.TimeOfDay);
+        }
+        if (!string.IsNullOrWhiteSpace(profile.Atmosphere))
+        {
+            parts.Add(profile.Atmosphere);
+        }
+        
+        return string.Join(", ", parts);
+    }
+    
+    private string BuildStylePrompt(StoryInfo.StoryScene scene)
+    {
+        var segments = new List<string>();
+        
+        if (!string.IsNullOrWhiteSpace(currentStoryStyleGuide?.ArtDirection))
+        {
+            segments.Add(currentStoryStyleGuide.ArtDirection);
+        }
+        
+        if (!string.IsNullOrWhiteSpace(currentStoryStyleGuide?.Palette))
+        {
+            segments.Add($"Palette {currentStoryStyleGuide.Palette}");
+        }
+        
+        if (!string.IsNullOrWhiteSpace(scene?.Camera))
+        {
+            segments.Add($"Shot: {scene.Camera}");
+        }
+        else if (!string.IsNullOrWhiteSpace(currentStoryStyleGuide?.CameraPreferences))
+        {
+            segments.Add($"Camera: {currentStoryStyleGuide.CameraPreferences}");
+        }
+        
+        if (!string.IsNullOrWhiteSpace(scene?.Lighting))
+        {
+            segments.Add($"Lighting: {scene.Lighting}");
+        }
+        else if (!string.IsNullOrWhiteSpace(currentStoryStyleGuide?.Lighting))
+        {
+            segments.Add($"Lighting: {currentStoryStyleGuide.Lighting}");
+        }
+        
+        if (!string.IsNullOrWhiteSpace(scene?.Mood))
+        {
+            segments.Add($"Mood: {scene.Mood}");
+        }
+        
+        if (!string.IsNullOrWhiteSpace(currentStoryStyleGuide?.Keywords))
+        {
+            segments.Add(currentStoryStyleGuide.Keywords);
+        }
+        
+        return segments.Count > 0 ? string.Join(" ", segments) : string.Empty;
+    }
+    
+    private class ParsedStoryResult
+    {
+        public List<StoryInfo.StoryScene> Scenes;
+        public List<StoryInfo.CharacterProfile> Characters;
+        public List<StoryInfo.LocationProfile> Locations;
+        public StoryInfo.StoryStyleGuide StyleGuide;
+    }
+    
     /// <summary>
     /// AI故事数据解析类
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     private class AIStoryData
     {
+        public AICharacterData[] characters;
+        public AILocationData[] locations;
+        public AIStyleData style;
         public AISceneData[] scenes;
     }
     
-    [System.Serializable]
+    [Serializable]
+    private class AICharacterData
+    {
+        public string id;
+        public string name;
+        public string appearance;
+        public string outfit;
+        public string personality;
+        public string visualTags;
+    }
+    
+    [Serializable]
+    private class AILocationData
+    {
+        public string id;
+        public string name;
+        public string description;
+        public string palette;
+        public string timeOfDay;
+        public string atmosphere;
+    }
+    
+    [Serializable]
+    private class AIStyleData
+    {
+        public string artDirection;
+        public string palette;
+        public string camera;
+        public string lighting;
+        public string keywords;
+        public string negativeKeywords;
+    }
+    
+    [Serializable]
     private class AISceneData
     {
+        public int index;
+        public string title;
         public string description;
-        public string[] lines;
+        public string setting;
+        public string locationId;
+        public string[] additionalLocations;
+        public string[] characters;
+        public string mood;
+        public string importantObjects;
+        public string camera;
+        public string lighting;
+        public string visualPrompt;
+        public string negativePrompt;
+        public AISceneDialogue[] dialogues;
+    }
+    
+    [Serializable]
+    private class AISceneDialogue
+    {
+        public string speaker;
+        public string text;
     }
     
     /// <summary>

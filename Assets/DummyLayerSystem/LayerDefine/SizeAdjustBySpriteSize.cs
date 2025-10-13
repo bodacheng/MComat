@@ -14,6 +14,10 @@ public class SizeAdjustBySpriteSize : MonoBehaviour
     public void AdjustSize()
     {
         var sprite = image.sprite;
+        if (sprite == null)
+        {
+            return;
+        }
         var rectTransform = transform.GetComponent<RectTransform>();
         if (fixedHeight)
         {
