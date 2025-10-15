@@ -16,6 +16,17 @@ public partial class AnimationManger
     Animator Animator;
     public AnimationClip _toUse;
 
+    public struct AnimatorStateSnapshot
+    {
+        public bool IsValid;
+        public string ClipName;
+        public string AnimatorStateName;
+        public string OverrideKey;
+        public float NormalizedTime;
+        public bool InTransition;
+        public float Speed;
+    }
+
     List<string> parameters = new List<string>();
     IDictionary<string, AnimationClip> toLoadAnims;
     string to_be_override_anim_name;
@@ -104,6 +115,130 @@ public partial class AnimationManger
     public AnimatorStateInfo GetCurrentAnimatorStateInfo(int layerIndex)
     {
         return Animator.GetCurrentAnimatorStateInfo(layerIndex);
+    }
+
+    AnimationClip ResolveAnimationClip(string clipName)
+    {
+        if (string.IsNullOrEmpty(clipName))
+            return null;
+        if (toLoadAnims != null && toLoadAnims.TryGetValue(clipName, out var clip) && clip != null)
+        {
+            return clip;
+        }
+        if (toLoadAnims != null)
+        {
+            foreach (var pair in toLoadAnims)
+            {
+                if (pair.Value != null && pair.Value.name == clipName)
+                {
+                    return pair.Value;
+                }
+            }
+        }
+        return null;
+    }
+
+    public AnimatorStateSnapshot CaptureAnimatorState()
+    {
+        var snapshot = new AnimatorStateSnapshot
+        {
+            IsValid = false,
+            ClipName = null,
+            AnimatorStateName = null,
+            OverrideKey = null,
+            NormalizedTime = 0f,
+            InTransition = false,
+            Speed = Animator != null ? Animator.speed : 1f
+        };
+
+        if (Animator == null)
+            return snapshot;
+
+        var clipInfos = Animator.GetCurrentAnimatorClipInfo(1);
+        if (clipInfos == null || clipInfos.Length == 0)
+        {
+            snapshot.InTransition = Animator.GetBool("in_transition");
+            return snapshot;
+        }
+
+        var stateInfo = Animator.GetCurrentAnimatorStateInfo(1);
+        snapshot.ClipName = clipInfos[0].clip != null ? clipInfos[0].clip.name : null;
+        if (stateInfo.IsName("Full Body.full_body_state1"))
+        {
+            snapshot.AnimatorStateName = "Full Body.full_body_state1";
+            snapshot.OverrideKey = "fullbody_empty1";
+        }
+        else if (stateInfo.IsName("Full Body.full_body_state2"))
+        {
+            snapshot.AnimatorStateName = "Full Body.full_body_state2";
+            snapshot.OverrideKey = "fullbody_empty2";
+        }
+        else if (stateInfo.IsName("Full Body.null"))
+        {
+            snapshot.AnimatorStateName = "Full Body.null";
+            snapshot.OverrideKey = null;
+        }
+        else
+        {
+            snapshot.AnimatorStateName = null;
+            snapshot.OverrideKey = null;
+        }
+
+        snapshot.InTransition = Animator.GetBool("in_transition");
+        snapshot.NormalizedTime = stateInfo.normalizedTime;
+        snapshot.IsValid = !string.IsNullOrEmpty(snapshot.ClipName) && !string.IsNullOrEmpty(snapshot.AnimatorStateName) && snapshot.OverrideKey != null;
+        return snapshot;
+    }
+
+    public void RestoreAnimatorState(AnimatorStateSnapshot snapshot)
+    {
+        if (Animator == null)
+            return;
+
+        if (snapshot.Speed <= 0f)
+            Speed = 1f;
+        else
+            Speed = snapshot.Speed;
+
+        if (!snapshot.IsValid)
+        {
+            Animator.SetBool("in_transition", false);
+            Animator.Play("Full Body.null", 1, 0f);
+            Animator.Update(0f);
+            return;
+        }
+
+        var clip = ResolveAnimationClip(snapshot.ClipName);
+        if (clip == null)
+        {
+            return;
+        }
+
+        if (!string.IsNullOrEmpty(snapshot.OverrideKey) && animatorOverride != null)
+        {
+            var current = animatorOverride[snapshot.OverrideKey];
+            if (current != null)
+            {
+                animatorOverride[snapshot.OverrideKey] = clip;
+            }
+        }
+
+        _toUse = clip;
+
+        var normalizedTime = snapshot.NormalizedTime;
+        if (float.IsNaN(normalizedTime) || float.IsInfinity(normalizedTime))
+        {
+            normalizedTime = 0f;
+        }
+        else
+        {
+            normalizedTime = Mathf.Repeat(normalizedTime, 1f);
+        }
+
+        Animator.Update(0f);
+        Animator.Play(snapshot.AnimatorStateName, 1, normalizedTime);
+        Animator.Update(0f);
+        Animator.SetBool("in_transition", snapshot.InTransition);
     }
     
     public void AnimationTrigger(string clip, float returnDuration)

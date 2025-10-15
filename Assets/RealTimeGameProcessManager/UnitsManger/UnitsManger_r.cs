@@ -186,6 +186,8 @@ namespace FightScene
             sideIcon.gameObject.SetActive(true);
             sideIcon.Icon.gameObject.SetActive(true);
             formalSideIcon.gameObject.SetActive(false);
+
+            var animationSnapshot = main.AnimationManger.CaptureAnimatorState();
             
             var targetPos = main.WholeT.transform.position;
             var targetRot = main.WholeT.transform.rotation;
@@ -210,6 +212,8 @@ namespace FightScene
             
             main.WholeT.gameObject.SetActive(false);
             RMode_Unit.Value.WholeT.gameObject.SetActive(true);
+
+            RMode_Unit.Value.AnimationManger.RestoreAnimatorState(animationSnapshot);
             
             EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null, RMode_Unit.Value.WholeT.transform.position, Quaternion.identity, RMode_Unit.Value.geometryCenter).Forget();
             
