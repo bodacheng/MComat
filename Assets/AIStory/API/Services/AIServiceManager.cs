@@ -21,6 +21,10 @@ public class AIServiceManager : MonoBehaviour
     private List<StoryInfo.CharacterProfile> currentStoryCharacters = new List<StoryInfo.CharacterProfile>();
     private List<StoryInfo.LocationProfile> currentStoryLocations = new List<StoryInfo.LocationProfile>();
     private StoryInfo.StoryStyleGuide currentStoryStyleGuide;
+    private static readonly object _eventStoryLock = new object();
+    private static StoryInfo _cachedEventStory;
+    private static bool _cachedEventStoryShown;
+    private static UniTaskCompletionSource<StoryInfo> _eventStoryGenerationSource;
     
     // Properties
     public IAIClient CurrentClient => currentClient;
@@ -162,34 +166,125 @@ public class AIServiceManager : MonoBehaviour
     
     public async UniTask<StoryInfo> LoadAIStory()
     {
-        // 从Addressable加载AIServiceConfig
-        Debug.Log("[AIServiceManager] Loading AIServiceConfig from Addressables...");
+        await EnsureServiceInitializedAsync();
         
-        var handle = Addressables.LoadAssetAsync<AIServiceConfig>(configAddress);
-        await handle.Task;
-        
-        if (handle.Status == AsyncOperationStatus.Succeeded)
+        // 如果没有配置成功，尽量复用已有的缓存故事
+        if (!IsConfigured)
         {
-            serviceConfig = handle.Result;
-            Debug.Log("[AIServiceManager] AIServiceConfig loaded successfully");
-            
-            // 初始化AI客户端
-            if (serviceConfig != null)
+            lock (_eventStoryLock)
             {
-                InitializeClients();
-                Debug.Log($"[AIServiceManager] Clients initialized, Current Model: {CurrentModel}, IsConfigured: {IsConfigured}");
+                return _cachedEventStory;
             }
+        }
+        
+        return await GetOrCreateEventStoryAsync();
+    }
+
+    private async UniTask EnsureServiceInitializedAsync()
+    {
+        if (serviceConfig == null)
+        {
+            Debug.Log("[AIServiceManager] Loading AIServiceConfig from Addressables...");
+            var handle = Addressables.LoadAssetAsync<AIServiceConfig>(configAddress);
+            await handle.Task;
+            
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                serviceConfig = handle.Result;
+                Debug.Log("[AIServiceManager] AIServiceConfig loaded successfully");
+            }
+            else
+            {
+                Debug.LogError($"[AIServiceManager] Failed to load AIServiceConfig from Addressables. Status: {handle.Status}");
+                if (handle.IsValid())
+                    Addressables.Release(handle);
+                return;
+            }
+        }
+        
+        if ((currentClient == null || !IsConfigured) && serviceConfig != null)
+        {
+            InitializeClients();
+            Debug.Log($"[AIServiceManager] Clients initialized, Current Model: {CurrentModel}, IsConfigured: {IsConfigured}");
+        }
+    }
+
+    private UniTask<StoryInfo> GetOrCreateEventStoryAsync()
+    {
+        UniTaskCompletionSource<StoryInfo> generationSource = null;
+        lock (_eventStoryLock)
+        {
+            if (_cachedEventStory != null && !_cachedEventStoryShown)
+            {
+                return UniTask.FromResult(_cachedEventStory);
+            }
+            
+            if (_cachedEventStory != null && _cachedEventStoryShown)
+            {
+                _cachedEventStory = null;
+                _cachedEventStoryShown = false;
+            }
+            
+            if (_eventStoryGenerationSource != null)
+            {
+                return _eventStoryGenerationSource.Task;
+            }
+            
+            _eventStoryGenerationSource = new UniTaskCompletionSource<StoryInfo>();
+            generationSource = _eventStoryGenerationSource;
+        }
+        
+        GenerateEventStoryInternalAsync(generationSource).Forget();
+        return generationSource.Task;
+    }
+
+    private async UniTaskVoid GenerateEventStoryInternalAsync(UniTaskCompletionSource<StoryInfo> generationSource)
+    {
+        StoryInfo story = null;
+        Exception exception = null;
+        
+        try
+        {
+            story = await GenerateAIStoryAsync(null);
+        }
+        catch (Exception ex)
+        {
+            exception = ex;
+        }
+        
+        lock (_eventStoryLock)
+        {
+            if (_eventStoryGenerationSource == generationSource)
+            {
+                _eventStoryGenerationSource = null;
+            }
+            
+            if (exception == null && story != null)
+            {
+                _cachedEventStory = story;
+                _cachedEventStoryShown = false;
+            }
+        }
+        
+        if (exception != null)
+        {
+            generationSource.TrySetException(exception);
         }
         else
         {
-            Debug.LogError($"[AIServiceManager] Failed to load AIServiceConfig from Addressables. Status: {handle.Status}");
-            if (handle.IsValid())
-                Addressables.Release(handle);
-            return null;
+            generationSource.TrySetResult(story);
         }
-        
-        var story = await GenerateAIStoryAsync(null);
-        return story;
+    }
+
+    public void MarkEventStoryAsShown()
+    {
+        lock (_eventStoryLock)
+        {
+            if (_cachedEventStory != null)
+            {
+                _cachedEventStoryShown = true;
+            }
+        }
     }
     
     /// <summary>
@@ -214,8 +309,7 @@ public class AIServiceManager : MonoBehaviour
         try
         {
             // 检查AI服务是否可用
-            var aiService = FightScene.FightScene.target.AIServiceManager;
-            if (aiService == null || !aiService)
+            if (serviceConfig == null || currentClient == null || !IsConfigured)
             {
                 Debug.LogWarning("AI Service is not available or not configured");
                 return null;
@@ -225,7 +319,7 @@ public class AIServiceManager : MonoBehaviour
             string prompt = BuildStoryPrompt(storyPrompt);
             
             // 使用AI生成故事文本
-            string storyText = await aiService.AskAsync(prompt);
+            string storyText = await AskAsync(prompt);
             
             if (string.IsNullOrEmpty(storyText))
             {
@@ -721,7 +815,7 @@ public class AIServiceManager : MonoBehaviour
                 var imagePrompt = BuildImagePrompt(scene, i, scenes.Count);
                 
                 // 使用AI生成图片
-                var textures = await FightScene.FightScene.target.AIServiceManager.GeneratePic(imagePrompt, 1, aspectRatio);
+                var textures = await GeneratePic(imagePrompt, 1, aspectRatio);
                 
                 if (textures != null && textures.Length > 0 && textures[0] != null)
                 {

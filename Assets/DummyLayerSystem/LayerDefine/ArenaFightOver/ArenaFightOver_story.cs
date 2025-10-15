@@ -35,6 +35,7 @@ public partial class ArenaFightOver : UILayer
     bool picStoryEnded = false;
     public async UniTask LoadStory()
     {
+        bool storyFromAI = false;
         if (CommonSetting.PcMode && 
             (!String.IsNullOrEmpty(FightLoad.Fight.StoryKey) || FightScene.FightScene.target.AIStoryInfo != null))
         {
@@ -45,6 +46,7 @@ public partial class ArenaFightOver : UILayer
             if (story == null)
             {
                 story = FightScene.FightScene.target.AIStoryInfo;
+                storyFromAI = story != null;
             }
             
             if (story == null)
@@ -71,6 +73,12 @@ public partial class ArenaFightOver : UILayer
             picStoryEnded = true;
         }
         await UniTask.WaitUntil(()=> picStoryEnded);
+        
+        if (storyFromAI)
+        {
+            var manager = FightScene.FightScene.target?.AIServiceManager;
+            manager?.MarkEventStoryAsShown();
+        }
     }
     
     private void OnClick(StoryInfo storyInfo)
