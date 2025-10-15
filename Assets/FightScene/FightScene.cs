@@ -168,6 +168,12 @@ namespace FightScene
         public void ReturnToFront(MainSceneStep mainSceneStep = MainSceneStep.FrontPage)
         {
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.None);
+            var cameraManager = RTFightManager.Target?._CameraManager;
+            if (cameraManager != null)
+            {
+                // 防止切回主场景过程中继续执行战斗相机逻辑
+                cameraManager.Assign_Camera(C_Mode.NULL, null, null);
+            }
             RTFightManager.Target.ClearUnitData();
             RTFightManager.Target.team1.Clear();
             RTFightManager.Target.team2.Clear();

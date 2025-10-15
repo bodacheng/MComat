@@ -2,6 +2,7 @@
 using UniRx;
 using System.Collections.Generic;
 using System.Linq;
+using FightScene;
 
 // 用于在每一局游戏里起记录数据的作用，包括胜利判断，都应该是由本模块来执行。
 public class FightLogger
@@ -55,8 +56,27 @@ public class FightLogger
 
                 void WatchDeath()
                 {
-                    TeamDeadMemberDic[pair.Key.myTeam].Add(dataCenter);
-                    if (pair.Value.Count == TeamDeadMemberDic[pair.Key.myTeam].Count)
+                    var deadList = TeamDeadMemberDic[pair.Key.myTeam];
+                    if (!deadList.Contains(dataCenter))
+                        deadList.Add(dataCenter);
+
+                    if (!dataCenter.IsSub && !dataCenter.ChangedToSubUnit && RTFightManager.Target != null)
+                    {
+                        var subUnit = RTFightManager.Target.FindSubUnit(dataCenter);
+                        if (subUnit != null)
+                        {
+                            if (!deadList.Contains(subUnit))
+                                deadList.Add(subUnit);
+                            if (deathWatchers.TryGetValue(subUnit, out var subWatcher))
+                            {
+                                subWatcher.Dispose();
+                                deathWatchers.Remove(subUnit);
+                            }
+                            if (!subUnit.FightDataRef.IsDead.Value)
+                                subUnit.FightDataRef.IsDead.Value = true;
+                        }
+                    }
+                    if (pair.Value.Count == deadList.Count)
                     {
                         if (!deadTeam.Contains(pair.Key.myTeam))
                             deadTeam.Add(pair.Key.myTeam);

@@ -69,7 +69,6 @@ namespace FightScene
                             var alreadyThere = info.FightMembers.HeroSets.GetValues().FirstOrDefault(x => x.id == subAdam.id);
                             if (alreadyThere == null)
                             {
-                                
                                 info.FightMembers.HeroSets.Set(0, (supportIndex + 1) * 10 + 1, subAdam);
                             }
                         }
@@ -78,7 +77,6 @@ namespace FightScene
                             var alreadyThere = info.FightMembers.EnemySets.GetValues().FirstOrDefault(x => x.id == subAdam.id);
                             if (alreadyThere == null)
                             {
-                                
                                 info.FightMembers.EnemySets.Set(0, (supportIndex + 1) * 10 + 1, subAdam);
                             }
                         }
