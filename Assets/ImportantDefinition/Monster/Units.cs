@@ -24,6 +24,7 @@ public static class Units
 		public string MOVE_TYPE;
 		public string DODGE_SKILL;
 		public string DEFENDABLE_FLAG;
+        public string SUB_UNIT_RECORD_ID;
 	}
             
     public static UnitConfig GetUnitConfig(string RECORD_ID)
@@ -91,7 +92,8 @@ public static class Units
                     BASIC_MOVEMENT_PACK = grid[i][5],
                     MOVE_TYPE = grid[i][6],
                     DODGE_SKILL = grid[i][7],
-                    DEFENDABLE_FLAG = grid[i][8]
+                    DEFENDABLE_FLAG = grid[i][8],
+                    SUB_UNIT_RECORD_ID = grid[i].Length > 9 ? grid[i][9] : null
                 };
                 rowList.Add(row);
             }
@@ -132,6 +134,7 @@ public static class Units
                 grid[i][6] = "MOVE_TYPE";
                 grid[i][7] = "MOTILITY_SKILL_PACK";
                 grid[i][8] = "DEFENDABLE_FLAG";
+                grid[i][9] = "SUB_UNIT_RECORD_ID";
             }
             else
             {
@@ -144,6 +147,7 @@ public static class Units
                 grid[i][6] = rowList[i - 1].MOVE_TYPE;
                 grid[i][7] = rowList[i - 1].DODGE_SKILL;
                 grid[i][8] = rowList[i - 1].DEFENDABLE_FLAG;
+                grid[i][9] = rowList[i - 1].SUB_UNIT_RECORD_ID;
             }
         }
         string delimiter = ",";
@@ -291,6 +295,7 @@ public static class Units
 
         row.DEFENDABLE_FLAG = config.DEFENDABLE_FLAG ? "1" : "0";
         row.RARITY_LEVEL = config.RARITY_LEVEL.ToString();
+        row.SUB_UNIT_RECORD_ID = config.SubUnitRecordId;
         return row;
     }
 
@@ -344,6 +349,7 @@ public static class Units
         
         _Config.DEFENDABLE_FLAG = row.DEFENDABLE_FLAG == "1";
         _Config.RARITY_LEVEL = Int32.Parse(row.RARITY_LEVEL);
+        _Config.SubUnitRecordId = row.SUB_UNIT_RECORD_ID;
         return _Config;
     }
 
@@ -449,4 +455,3 @@ public static class Units
         return typeList;
     }
 }
-

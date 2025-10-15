@@ -33,14 +33,28 @@ namespace FightScene
 
         public CompositeDisposable Disposables = new CompositeDisposable();
 
-        public readonly IDictionary<string, string> SubUnitDic = new Dictionary<string, string>()
-        {
-            { "1", "14" },
-        };
+        public readonly IDictionary<string, string> SubUnitDic = new Dictionary<string, string>();
         
         void Awake()
         {
             Target = this;
+            RefreshSubUnitDictionary();
+        }
+
+        void RefreshSubUnitDictionary()
+        {
+            SubUnitDic.Clear();
+            if (!Units.IsLoaded())
+                return;
+
+            foreach (var pair in Units.Dic)
+            {
+                var config = pair.Value;
+                if (!string.IsNullOrEmpty(config.SubUnitRecordId))
+                {
+                    SubUnitDic[pair.Key] = config.SubUnitRecordId;
+                }
+            }
         }
 
         public Data_Center FindSubUnit(Data_Center center)
@@ -53,6 +67,11 @@ namespace FightScene
         
         public async UniTask LoadUnits(FightInfo info)
         {
+            if (SubUnitDic.Count == 0)
+            {
+                RefreshSubUnitDictionary();
+            }
+
             if (info.FightMode is FightMode.Rotate or FightMode.Evolve)
             {
                 // 那个supportIndex是防止两个同样角色都有变身体的时候在HeroSets或者EnemySets里重位置

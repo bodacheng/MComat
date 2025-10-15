@@ -18,6 +18,7 @@ public class UnitConfig
     public string InstructionCH;
     public string InstructionJP;
     public int RARITY_LEVEL = 3;
+    public string SubUnitRecordId;
 
     public UnitInfo GetTestCharConfig(string localID)
     {
