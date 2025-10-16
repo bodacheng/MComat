@@ -4,9 +4,12 @@ using UnityEngine;
 public class ExBarBurn : MonoBehaviour
 {
     ParticleSystem explosionFigure;
+    RectTransform rectTransform;
+    Camera cachedFxCamera;
     
     void Awake()
     {
+        rectTransform = transform as RectTransform;
         OnLoad();
     }
     
@@ -35,9 +38,41 @@ public class ExBarBurn : MonoBehaviour
     {
         if (explosionFigure != null)
         {
-            explosionFigure.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera,
-                transform.GetComponent<RectTransform>(), 3);
+            if (!TryResolveFxCamera(out var fxCamera))
+            {
+                Debug.LogWarning("[ExBarBurn] Skip burn because no FX camera is available.");
+                return;
+            }
+
+            explosionFigure.transform.position = PosCal.GetWorldPos(fxCamera,
+                rectTransform != null ? rectTransform : transform.GetComponent<RectTransform>(), 3);
             explosionFigure.Play();
         }
+    }
+
+    bool TryResolveFxCamera(out Camera camera)
+    {
+        if (cachedFxCamera != null)
+        {
+            camera = cachedFxCamera;
+            return true;
+        }
+        cachedFxCamera = null;
+
+        if (FightScene.FightScene.target != null && FightScene.FightScene.target.fxCamera != null)
+        {
+            cachedFxCamera = FightScene.FightScene.target.fxCamera;
+            camera = cachedFxCamera;
+            return true;
+        }
+
+        if (Camera.main != null)
+        {
+            camera = Camera.main;
+            return true;
+        }
+
+        camera = null;
+        return false;
     }
 }
