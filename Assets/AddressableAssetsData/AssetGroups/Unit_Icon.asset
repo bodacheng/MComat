@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Unit_Icon
   m_EditorClassIdentifier: 
   m_GroupName: Unit_Icon
-  m_Data:
-    m_SerializedData: []
   m_GUID: c845bb3d9f08e4184a1f183d5238c432
   m_SerializeEntries:
   - m_GUID: 08082ca55dedf466fa4314268703afc2
@@ -65,6 +63,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - unit_icon
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4f5e3891892ec4aaaaf7caff829a1bac
+    m_Address: unit/19
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit_icon
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5c8aa8932148d4dee9e6ca7db5c6b2f4
     m_Address: unit/1
     m_ReadOnly: 0
@@ -91,6 +95,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 85b9bad740f2f4764b5c5f3dbe6575d6
     m_Address: unit/14
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit_icon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 903ce603d24f0440a88accb3520250f5
+    m_Address: unit/20
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit_icon

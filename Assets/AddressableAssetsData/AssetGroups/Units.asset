@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Units
   m_EditorClassIdentifier: 
   m_GroupName: Units
-  m_Data:
-    m_SerializedData: []
   m_GUID: f0dd6dc67cdb345bfa012551500cd672
   m_SerializeEntries:
   - m_GUID: 03f2228b049054295ac8a84dcde92a44
@@ -65,6 +63,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - unit
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 618e2dd7389644f5badf422362438832
+    m_Address: human/maggie_n
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6ca3efb6cefae4338ba0c93e213760a3
     m_Address: human/adam
     m_ReadOnly: 0
@@ -85,6 +89,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 89e67c8010a50499ab9059beb0b5033d
     m_Address: human/HeavyBioMutant
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - unit
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9bfec60d1add84c2d9c8660308007c75
+    m_Address: human/yuta_n
     m_ReadOnly: 0
     m_SerializedLabels:
     - unit
