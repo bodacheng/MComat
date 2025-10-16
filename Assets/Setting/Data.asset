@@ -141,7 +141,7 @@ MonoBehaviour:
   onTouchEnemyBodyRigidDrag: 99999
   fighterMoveSpeed: 10
   closeDis: 2
-  AT_coefficient: 2
+  AT_coefficient: 1
   HP_coefficient: 0.5
   levelPowerAverager: 0.2
   Team1Invincible: 0
