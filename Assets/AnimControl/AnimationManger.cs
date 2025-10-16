@@ -190,28 +190,30 @@ public partial class AnimationManger
         return snapshot;
     }
 
-    public void RestoreAnimatorState(AnimatorStateSnapshot snapshot)
+    public bool RestoreAnimatorState(AnimatorStateSnapshot snapshot)
     {
         if (Animator == null)
-            return;
+            return false;
 
-        if (snapshot.Speed <= 0f)
+        if (snapshot.Speed <= 0.05f)
+        {
             Speed = 1f;
+        }
         else
+        {
             Speed = snapshot.Speed;
+        }
 
         if (!snapshot.IsValid)
         {
             Animator.SetBool("in_transition", false);
-            Animator.Play("Full Body.null", 1, 0f);
-            Animator.Update(0f);
-            return;
+            return false;
         }
 
         var clip = ResolveAnimationClip(snapshot.ClipName);
         if (clip == null)
         {
-            return;
+            return false;
         }
 
         if (!string.IsNullOrEmpty(snapshot.OverrideKey) && animatorOverride != null)
@@ -239,6 +241,7 @@ public partial class AnimationManger
         Animator.Play(snapshot.AnimatorStateName, 1, normalizedTime);
         Animator.Update(0f);
         Animator.SetBool("in_transition", snapshot.InTransition);
+        return true;
     }
     
     public void AnimationTrigger(string clip, float returnDuration)

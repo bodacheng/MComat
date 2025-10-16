@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using UniRx;
 using Cysharp.Threading.Tasks;
@@ -15,9 +16,11 @@ namespace FightScene
         public void ToStartPosRotate()
         {
             Data_Center unit = null;
-            for (int i = 0; i < 5; i++)
+            foreach (var dataCenter in teamMembers.mDict
+                         .OrderBy(kv => kv.Key.Item1)
+                         .ThenBy(kv => kv.Key.Item2)
+                         .Select(kv => kv.Value))
             {
-                var dataCenter = teamMembers.Get(0,i);
                 if (dataCenter == null || dataCenter.IsSub)
                 {
                     continue;
@@ -26,6 +29,11 @@ namespace FightScene
                 dataCenter.WholeT.parent = null;
                 dataCenter.WholeT.gameObject.SetActive(true);
                 break;
+            }
+            if (unit == null)
+            {
+                ChangeFightingUnit(null, true, TeamStandPoints[0]);
+                return;
             }
             if (FightLoad.Fight.RunTutorial)
                 unit.StartAutoModeWhenGetHurt();
@@ -213,7 +221,10 @@ namespace FightScene
             main.WholeT.gameObject.SetActive(false);
             RMode_Unit.Value.WholeT.gameObject.SetActive(true);
 
-            RMode_Unit.Value.AnimationManger.RestoreAnimatorState(animationSnapshot);
+            if (animationSnapshot.IsValid)
+            {
+                RMode_Unit.Value.AnimationManger.RestoreAnimatorState(animationSnapshot);
+            }
             
             EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null, RMode_Unit.Value.WholeT.transform.position, Quaternion.identity, RMode_Unit.Value.geometryCenter).Forget();
             
@@ -383,9 +394,11 @@ namespace FightScene
                 }
             }
             
-            for (var index = 0; index < 5; index++)
+            foreach (var dataCenter in teamMembers.mDict
+                         .OrderBy(kv => kv.Key.Item1)
+                         .ThenBy(kv => kv.Key.Item2)
+                         .Select(kv => kv.Value))
             {
-                var dataCenter = teamMembers.Get(0, index);
                 if (dataCenter != null && !dataCenter.FightDataRef.IsDead.Value && !dataCenter.IsSub)
                 {
                     if (ChangeFightingUnit(dataCenter))
