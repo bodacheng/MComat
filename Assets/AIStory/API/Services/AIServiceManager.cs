@@ -22,6 +22,21 @@ public class AIServiceManager : MonoBehaviour
     private List<StoryInfo.LocationProfile> currentStoryLocations = new List<StoryInfo.LocationProfile>();
     private StoryInfo.StoryStyleGuide currentStoryStyleGuide;
     private static readonly object _eventStoryLock = new object();
+    private static readonly string[] DefaultImageNegativeTokens = new[]
+    {
+        "speech bubble",
+        "speech bubbles",
+        "dialogue bubble",
+        "text bubble",
+        "text bubbles",
+        "onscreen text",
+        "text overlay",
+        "text overlays",
+        "caption text",
+        "subtitles",
+        "comic lettering",
+        "watermark"
+    };
     private static StoryInfo _cachedEventStory;
     private static bool _cachedEventStoryShown;
     private static UniTaskCompletionSource<StoryInfo> _eventStoryGenerationSource;
@@ -391,9 +406,15 @@ public class AIServiceManager : MonoBehaviour
         string additionalRequirements = serviceConfig.AdditionalImageRequirements;
         
         var promptBuilder = new StringBuilder();
+        string languageInstruction = BuildLanguageInstruction();
+        
         promptBuilder.AppendLine("你是一名专业的多页连环画编剧与美术总监。");
         promptBuilder.AppendLine($"围绕主题“{storyTheme}”创作一个由 {pageCount} 个连续场景组成的故事。");
         promptBuilder.AppendLine("请输出严格的 JSON 数据，禁止添加注释、额外说明或 markdown。");
+        if (!string.IsNullOrEmpty(languageInstruction))
+        {
+            promptBuilder.AppendLine(languageInstruction);
+        }
         promptBuilder.AppendLine();
         promptBuilder.AppendLine("请确保：");
         promptBuilder.AppendLine($"- 场景数量必须正好为 {pageCount}，index 从 1 开始，按顺序排列。");
@@ -756,6 +777,12 @@ public class AIServiceManager : MonoBehaviour
             currentScene.Description = currentScene.Lines[0];
             scenes.Add(currentScene);
         }
+        else
+        {
+            currentScene.Lines.Add("[场景 1]");
+            currentScene.Description = currentScene.Lines[0];
+            scenes.Add(currentScene);
+        }
         
         return scenes;
     }
@@ -958,7 +985,7 @@ public class AIServiceManager : MonoBehaviour
         
         var prompt = builder.ToString().Trim();
         
-        var negativeTokens = new List<string>();
+        var negativeTokens = new List<string>(DefaultImageNegativeTokens);
         if (!string.IsNullOrWhiteSpace(scene?.NegativePromptNotes))
         {
             negativeTokens.Add(scene.NegativePromptNotes);
@@ -967,9 +994,16 @@ public class AIServiceManager : MonoBehaviour
         {
             negativeTokens.Add(currentStoryStyleGuide.NegativeKeywords);
         }
-        if (negativeTokens.Count > 0)
+
+        var filteredNegativeTokens = negativeTokens
+            .Where(token => !string.IsNullOrWhiteSpace(token))
+            .Select(token => token.Trim())
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToList();
+
+        if (filteredNegativeTokens.Count > 0)
         {
-            prompt += $" Avoid: {string.Join(", ", negativeTokens)}.";
+            prompt += $" Avoid: {string.Join(", ", filteredNegativeTokens)}.";
         }
         
         scene.BuiltPrompt = prompt;
@@ -1163,6 +1197,37 @@ public class AIServiceManager : MonoBehaviour
         }
         
         return segments.Count > 0 ? string.Join(" ", segments) : string.Empty;
+    }
+    
+    private string BuildLanguageInstruction()
+    {
+        var language = GetConfiguredLanguage();
+        switch (language)
+        {
+            case SystemLanguage.Chinese:
+                return "请使用中文编写所有标题、描述、对话和故事文本。";
+            case SystemLanguage.Japanese:
+                return "すべてのタイトル・説明・セリフ・本文は日本語で出力してください。";
+            case SystemLanguage.English:
+                return "Please write all titles, descriptions, dialogue, and narrative text in English.";
+            default:
+                return $"Please write all titles, descriptions, dialogue, and narrative text in {language}.";
+        }
+    }
+    
+    private SystemLanguage GetConfiguredLanguage()
+    {
+        var language = AppSetting.Value != null ? AppSetting.Value.Language : Application.systemLanguage;
+        switch (language)
+        {
+            case SystemLanguage.ChineseSimplified:
+            case SystemLanguage.ChineseTraditional:
+                return SystemLanguage.Chinese;
+            case SystemLanguage.Unknown:
+                return SystemLanguage.English;
+            default:
+                return language;
+        }
     }
     
     private class ParsedStoryResult
