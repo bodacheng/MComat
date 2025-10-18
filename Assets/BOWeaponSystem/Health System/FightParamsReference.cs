@@ -18,6 +18,7 @@ public partial class FightParamsReference
     readonly List<Collider> _myColliders = new List<Collider>();
     readonly List<E_Damage> _eventDamageList = new List<E_Damage>();
     readonly List<E_Damage> _eventAttackSuccessList = new List<E_Damage>();
+    readonly HashSet<Decomposition> _ownedDecompositions = new HashSet<Decomposition>();
     
     // [Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
@@ -105,6 +106,30 @@ public partial class FightParamsReference
             {
                 Physics.IgnoreCollision(_myColliders[i], _myColliders[y]);
             }
+        }
+    }
+
+    public void RegisterDecomposition(Decomposition decomposition)
+    {
+        if (decomposition == null)
+            return;
+        _ownedDecompositions.Add(decomposition);
+    }
+
+    public void UnregisterDecomposition(Decomposition decomposition)
+    {
+        if (decomposition == null)
+            return;
+        _ownedDecompositions.Remove(decomposition);
+    }
+    
+    public void ResolveAllDecompositions()
+    {
+        if (_ownedDecompositions.Count == 0)
+            return;
+        foreach (var decomposition in _ownedDecompositions)
+        {
+            decomposition.Phase = -1;
         }
     }
     

@@ -45,6 +45,7 @@ namespace HittingDetection
         public bool Enabled => _enabled;
         public float CurrentHP { get; set; }
         FightParamsReference _attackerRef;
+        Decomposition _decomposition;
         TeamConfig teamConfig = TeamConfig.DefaultSet;
         Transform _WeaponHolderCenter;//角色几何中心，如果是能量道具则为能量道具的几何中心，用于防御判断。
         bool HitFlesh;
@@ -103,6 +104,7 @@ namespace HittingDetection
                 }
             }
             _markers = bms;
+            TryGetComponent(out _decomposition);
         }
         
         Coroutine _delayEnableMarkers;
@@ -140,8 +142,22 @@ namespace HittingDetection
 
         public void SetOwnerFACR(FightParamsReference value)
         {
-            _attackerRef = value;
-            AT = _attackerRef == null ? 0 : _attackerRef.AT * AT_weight;
+            if (_decomposition == null)
+            {
+                _attackerRef = value;
+                AT = _attackerRef == null ? 0 : _attackerRef.AT * AT_weight;
+                return;
+            }
+
+            if (_attackerRef != value)
+            {
+                _attackerRef?.UnregisterDecomposition(_decomposition);
+                value?.RegisterDecomposition(_decomposition);
+                _attackerRef = value;
+            }
+
+            var owner = _attackerRef;
+            AT = owner == null ? 0 : owner.AT * AT_weight;
         }
         public FightParamsReference GetOwnerFACR()
         {

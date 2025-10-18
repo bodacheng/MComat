@@ -37,6 +37,8 @@ namespace Soul
             _Animator.SetFloat(Speed, 0f);
             _Animator.applyRootMotion = false;
             _Weapon_Animation_Events.ClearMarkerManagers();
+            _BO_Ani_E.CloseOnProcessEnergyFromBodyWeapons();
+            FightParamsRef.ResolveAllDecompositions();
             pEvents.CloseAllPersonalityEffects();
             _Rigidbody.linearVelocity = Vector3.zero;
             AnimationManger.AnimationTrigger(AnimationManger.GetRandomKnockOffAnim(),0.05f);
