@@ -13,17 +13,19 @@ class ChatGptFix : CameraMode
     Vector3 frontWPos, backWPos;
     Quaternion ToRotation;
     float autoChangeAngleLimit = 15f;
-    float autoRotateSpeed = 160f;
+    float autoRotateSpeed = 360f;
     float _changeSpeed;
     readonly float _lookPointHeight = 1.5f;
     readonly float _minXZ;
     readonly float _minY;
     float fieldOfView;
-    private float screenDifferForRotate = 100f;
     private float _transitionSpeedPara;
-    private const float VerticalAlignmentAngleThreshold = 15f;
+    private const float ScreenDiffThresholdSqr = 100f * 100f;
     private const float VerticalAlignmentMinYDiff = 0.03f;
     private const float VerticalAlignmentMaxXDiff = 0.25f;
+    private const float AutoRotateMinSmoothTime = 0.05f;
+    private const float AutoRotateMaxSmoothTime = 0.18f;
+    private float _autoRotateVelocity;
     
     public bool AutoRotateCamera
     {
@@ -70,11 +72,6 @@ class ChatGptFix : CameraMode
     }
 
     float h;
-    float ePosX;
-    float ePosY;
-    float mPosX;
-    float mPosY;
-
     private bool _canSetH;
     public bool CanSetH
     {
@@ -96,7 +93,6 @@ class ChatGptFix : CameraMode
         }
 
         _changeSpeed = _transitionSpeedPara * Time.deltaTime;
-            //Time.deltaTime / (TransitionSpeedPara + Time.deltaTime); //分母里那个附加值越大，变得越慢。
         var hasTargets = targets != null && targets.Count > 0;
         if (hasTargets)
         {
@@ -120,7 +116,6 @@ class ChatGptFix : CameraMode
         float normalizedXDiff = Mathf.Abs(enemyScreenPos.x - meScreenPos.x) / Screen.width;
         float normalizedYDiff = Mathf.Abs(enemyScreenPos.y - meScreenPos.y) / Screen.height;
         Vector2 screenDiff = enemyScreenPos - meScreenPos;
-        float screenDiffSqr = screenDiff.sqrMagnitude;
         float angleToHorizontal = Mathf.Abs(Vector2.SignedAngle(screenDiff, Vector2.right));
         if (angleToHorizontal > 90f)
         {
@@ -138,10 +133,11 @@ class ChatGptFix : CameraMode
         {
             xzOff = Quaternion.AngleAxis(h * 1.5f, Vector3.up) * xzOff;
             xzOff.y = 0;
+            _autoRotateVelocity = 0f;
         }
         else
         {
-            if (AutoRotateCamera && hasTargets && meCenter != null && screenDiffSqr > screenDifferForRotate * screenDifferForRotate)
+            if (AutoRotateCamera && hasTargets && meCenter != null && screenDiff.sqrMagnitude > ScreenDiffThresholdSqr)
             {
                 if (ShouldRotateForVerticalAlignment(normalizedXDiff, normalizedYDiff, angleToHorizontal))
                 {
@@ -171,24 +167,16 @@ class ChatGptFix : CameraMode
                             }
                         }
 
-                        float angleToTarget = Vector3.SignedAngle(currentForward, desiredForward, Vector3.up);
-                        float rotationStep = dynamicAutoRotateSpeed * Time.deltaTime;
-                        if (!Mathf.Approximately(rotationStep, 0f))
+                        float currentYaw = Mathf.Atan2(currentForward.x, currentForward.z) * Mathf.Rad2Deg;
+                        float desiredYaw = Mathf.Atan2(desiredForward.x, desiredForward.z) * Mathf.Rad2Deg;
+                        float smoothTime = Mathf.Lerp(AutoRotateMaxSmoothTime, AutoRotateMinSmoothTime, verticalityRatio);
+                        float maxSpeed = Mathf.Max(dynamicAutoRotateSpeed, 0.01f);
+                        float newYaw = Mathf.SmoothDampAngle(currentYaw, desiredYaw, ref _autoRotateVelocity, smoothTime, maxSpeed, Time.deltaTime);
+                        Vector3 smoothedForward = new Vector3(Mathf.Sin(newYaw * Mathf.Deg2Rad), 0f, Mathf.Cos(newYaw * Mathf.Deg2Rad));
+                        if (smoothedForward.sqrMagnitude > 0.0001f)
                         {
-                            if (Mathf.Abs(angleToTarget) <= rotationStep)
-                            {
-                                currentForward = desiredForward;
-                            }
-                            else
-                            {
-                                currentForward = Quaternion.AngleAxis(rotationStep * Mathf.Sign(angleToTarget), Vector3.up) * currentForward;
-                            }
-                        }
-                        currentForward.y = 0f;
-                        if (currentForward.sqrMagnitude > 0.0001f)
-                        {
-                            currentForward.Normalize();
-                            var newXZ = -currentForward;
+                            smoothedForward.Normalize();
+                            var newXZ = -smoothedForward;
                             newXZ.y = 0f;
                             if (newXZ.sqrMagnitude > 0.0001f)
                             {
@@ -196,27 +184,39 @@ class ChatGptFix : CameraMode
                             }
                         }
                     }
+                    else
+                    {
+                        _autoRotateVelocity = 0f;
+                    }
                 }
+                else
+                {
+                    _autoRotateVelocity = 0f;
+                }
+            }
+            else
+            {
+                _autoRotateVelocity = 0f;
             }
         }
         
-        ePosX = enemyScreenPos.x / Screen.width;
-        ePosY = enemyScreenPos.y / Screen.height;
-        mPosX = meScreenPos.x / Screen.width;
-        mPosY = meScreenPos.y / Screen.height;
+        float ePosX = enemyScreenPos.x / Screen.width;
+        float ePosY = enemyScreenPos.y / Screen.height;
+        float mPosX = meScreenPos.x / Screen.width;
+        float mPosY = meScreenPos.y / Screen.height;
         
-        if (ePosX >= 0.3 && ePosX <= 0.7 &&
-            mPosX >= 0.3 && mPosX <= 0.7 &&
-            ePosY >= 0.3 && ePosY <= 0.7 &&
-            mPosY >= 0.3 && mPosY <= 0.7)
+        if (ePosX >= 0.3f && ePosX <= 0.7f &&
+            mPosX >= 0.3f && mPosX <= 0.7f &&
+            ePosY >= 0.3f && ePosY <= 0.7f &&
+            mPosY >= 0.3f && mPosY <= 0.7f)
         {
             XZDistance -= _changeSpeed;
             UsedHeight -= _changeSpeed;
         }
-        else if (ePosX <= 0.2 || ePosX >= 0.8 || 
-                 mPosX <= 0.2 || mPosX >= 0.8 || 
-                 ePosY <= 0.2 || ePosY >= 0.8 || 
-                 mPosY <= 0.2 || mPosY >= 0.8)
+        else if (ePosX <= 0.2f || ePosX >= 0.8f || 
+                 mPosX <= 0.2f || mPosX >= 0.8f || 
+                 ePosY <= 0.2f || ePosY >= 0.8f || 
+                 mPosY <= 0.2f || mPosY >= 0.8f)
         {
             XZDistance += _changeSpeed;
             UsedHeight += _changeSpeed;
@@ -262,7 +262,6 @@ class ChatGptFix : CameraMode
             return false;
         }
 
-        float threshold = Mathf.Min(autoChangeAngleLimit, VerticalAlignmentAngleThreshold);
-        return angleToHorizontal >= threshold;
+        return angleToHorizontal >= autoChangeAngleLimit;
     }
 }
