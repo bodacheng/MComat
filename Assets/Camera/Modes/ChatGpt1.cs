@@ -12,15 +12,18 @@ class ChatGptFix : CameraMode
     Vector3 lookPoint;
     Vector3 frontWPos, backWPos;
     Quaternion ToRotation;
-    float autoChangeAngleLimit = 30f;
-    float autoRotateSpeed = 10;
+    float autoChangeAngleLimit = 15f;
+    float autoRotateSpeed = 160f;
     float _changeSpeed;
     readonly float _lookPointHeight = 1.5f;
     readonly float _minXZ;
     readonly float _minY;
     float fieldOfView;
-    private float screenDifferForRotate = 150;
+    private float screenDifferForRotate = 100f;
     private float _transitionSpeedPara;
+    private const float VerticalAlignmentAngleThreshold = 15f;
+    private const float VerticalAlignmentMinYDiff = 0.03f;
+    private const float VerticalAlignmentMaxXDiff = 0.25f;
     
     public bool AutoRotateCamera
     {
@@ -84,8 +87,6 @@ class ChatGptFix : CameraMode
     }
 
     private Vector3 mePos;
-    private float _autoRotateTimer;
-    private bool _currentRotateClockWiseDirection;
     
     public override void LocalUpdate(Camera camera)
     {
@@ -116,6 +117,17 @@ class ChatGptFix : CameraMode
         
         enemyScreenPos = camera.WorldToScreenPoint(enemiesCenter);
         meScreenPos = camera.WorldToScreenPoint(mePos);
+        float normalizedXDiff = Mathf.Abs(enemyScreenPos.x - meScreenPos.x) / Screen.width;
+        float normalizedYDiff = Mathf.Abs(enemyScreenPos.y - meScreenPos.y) / Screen.height;
+        Vector2 screenDiff = enemyScreenPos - meScreenPos;
+        float screenDiffSqr = screenDiff.sqrMagnitude;
+        float angleToHorizontal = Mathf.Abs(Vector2.SignedAngle(screenDiff, Vector2.right));
+        if (angleToHorizontal > 90f)
+        {
+            angleToHorizontal = 180f - angleToHorizontal;
+        }
+        float verticalityRatio = Mathf.Sqrt(Mathf.Clamp01(angleToHorizontal / 90f));
+        float dynamicAutoRotateSpeed = autoRotateSpeed * verticalityRatio;
         
         if (CanSetH)
         {
@@ -129,42 +141,61 @@ class ChatGptFix : CameraMode
         }
         else
         {
-            if (AutoRotateCamera && hasTargets && meCenter != null && Vector2.Distance(meScreenPos, enemyScreenPos) > screenDifferForRotate)
+            if (AutoRotateCamera && hasTargets && meCenter != null && screenDiffSqr > screenDifferForRotate * screenDifferForRotate)
             {
-                //float angleToHorizontal = 0;
-                float CheckNeedForAutoRotate()
+                if (ShouldRotateForVerticalAlignment(normalizedXDiff, normalizedYDiff, angleToHorizontal))
                 {
-                    if (meScreenPos.x < enemyScreenPos.x)
+                    Vector3 planarDiff = enemiesCenter - mePos;
+                    planarDiff.y = 0f;
+                    if (planarDiff.sqrMagnitude > 0.0001f)
                     {
-                        return Mathf.Abs(Vector2.Angle(enemyScreenPos - meScreenPos, Vector2.right));
-                    }
-                    else
-                    {
-                        return Mathf.Abs(Vector2.Angle(enemyScreenPos - meScreenPos, -Vector2.right));
-                    }
-                }
-                
-                //angleToHorizontal = CheckNeedForAutoRotate();
-                if (//angleToHorizontal > autoChangeAngleLimit &&
-                    Mathf.Abs(enemyScreenPos.y - meScreenPos.y) > ((float)Screen.height / 10) &&
-                    Mathf.Abs(enemyScreenPos.x - meScreenPos.x) < ((float)Screen.width / 3) &&
-                    Mathf.Abs(enemyScreenPos.x - meScreenPos.x) >  ((float)Screen.width / 10))
-                {
-                    bool Clock()
-                    {
-                        if (meScreenPos.y < enemyScreenPos.y)
+                        Vector3 currentForward = camera.transform.forward;
+                        currentForward.y = 0f;
+                        if (currentForward.sqrMagnitude < 0.0001f)
                         {
-                            return meScreenPos.x > enemyScreenPos.x;
+                            currentForward = -(xzOff.sqrMagnitude > 0.0001f ? xzOff : planarDiff.normalized);
+                        }
+                        currentForward.Normalize();
+
+                        Vector3 desiredForward = Vector3.Cross(Vector3.up, planarDiff).normalized;
+                        if (desiredForward.sqrMagnitude < 0.0001f)
+                        {
+                            desiredForward = currentForward;
                         }
                         else
                         {
-                            return meScreenPos.x < enemyScreenPos.x;
+                            var alternativeForward = -desiredForward;
+                            if (Vector3.Angle(currentForward, alternativeForward) < Vector3.Angle(currentForward, desiredForward))
+                            {
+                                desiredForward = alternativeForward;
+                            }
+                        }
+
+                        float angleToTarget = Vector3.SignedAngle(currentForward, desiredForward, Vector3.up);
+                        float rotationStep = dynamicAutoRotateSpeed * Time.deltaTime;
+                        if (!Mathf.Approximately(rotationStep, 0f))
+                        {
+                            if (Mathf.Abs(angleToTarget) <= rotationStep)
+                            {
+                                currentForward = desiredForward;
+                            }
+                            else
+                            {
+                                currentForward = Quaternion.AngleAxis(rotationStep * Mathf.Sign(angleToTarget), Vector3.up) * currentForward;
+                            }
+                        }
+                        currentForward.y = 0f;
+                        if (currentForward.sqrMagnitude > 0.0001f)
+                        {
+                            currentForward.Normalize();
+                            var newXZ = -currentForward;
+                            newXZ.y = 0f;
+                            if (newXZ.sqrMagnitude > 0.0001f)
+                            {
+                                xzOff = newXZ.normalized;
+                            }
                         }
                     }
-                    
-                    _currentRotateClockWiseDirection = Clock();
-                    // 如果夹角大于限制，则缓慢调整相机角度
-                    xzOff = Quaternion.Euler(0f, autoRotateSpeed * Time.deltaTime * (_currentRotateClockWiseDirection ? 1f : -1f), 0f) * xzOff;
                 }
             }
         }
@@ -217,5 +248,21 @@ class ChatGptFix : CameraMode
             ToRotation = Quaternion.LookRotation(rotateToDirection.normalized);
             camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, ToRotation, _changeSpeed);
         }
+    }
+
+    private bool ShouldRotateForVerticalAlignment(float normalizedXDiff, float normalizedYDiff, float angleToHorizontal)
+    {
+        if (normalizedYDiff < VerticalAlignmentMinYDiff)
+        {
+            return false;
+        }
+
+        if (normalizedXDiff > VerticalAlignmentMaxXDiff)
+        {
+            return false;
+        }
+
+        float threshold = Mathf.Min(autoChangeAngleLimit, VerticalAlignmentAngleThreshold);
+        return angleToHorizontal >= threshold;
     }
 }
