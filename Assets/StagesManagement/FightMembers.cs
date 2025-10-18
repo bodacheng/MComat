@@ -72,11 +72,35 @@ public class FightMembers
         return unitInfo;
     }
     
-    public static FightMembers RandomFight(CriticalGaugeMode mode = CriticalGaugeMode.Normal, int unitCount = 3)
+    public static FightMembers RandomFight(CriticalGaugeMode mode = CriticalGaugeMode.Normal, int unitCount = 3, bool excludeSubUnits = false)
     {
         var unitIDsAndNames = Units.GetMonsterIDsAndNamesDic("human");
-        var indexes = RandomSelect.Get(0, unitIDsAndNames.Count - 1, unitCount);
         var recordIds = unitIDsAndNames.Keys.ToList();
+
+        if (excludeSubUnits)
+        {
+            // Remove sub characters that belong to other units so they are not selected as standalone enemies.
+            var subUnitIds = new HashSet<string>(
+                Units.GetRowList()
+                    .Where(row => !string.IsNullOrEmpty(row.SUB_UNIT_RECORD_ID))
+                    .Select(row => row.SUB_UNIT_RECORD_ID)
+            );
+
+            var filteredRecordIds = recordIds.Where(id => !subUnitIds.Contains(id)).ToList();
+            if (filteredRecordIds.Count >= unitCount)
+            {
+                recordIds = filteredRecordIds;
+            }
+        }
+
+        if (recordIds.Count == 0)
+        {
+            Debug.LogWarning("RandomFight: No available units found for random selection.");
+            return new FightMembers();
+        }
+
+        unitCount = Mathf.Clamp(unitCount, 1, recordIds.Count);
+        var indexes = RandomSelect.Get(0, recordIds.Count - 1, unitCount);
         var target = new FightMembers();
         for (int i = 0; i < unitCount; i++)
         {

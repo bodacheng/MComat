@@ -388,7 +388,7 @@ public partial class FightInfo : ScriptableObject
     public static FightInfo RandomStage(CriticalGaugeMode mode = CriticalGaugeMode.Normal, int unitCount = 3)
     {
         var stage = CreateInstance<FightInfo>();
-        stage.FightMembers = FightMembers.RandomFight(mode, unitCount);
+        stage.FightMembers = FightMembers.RandomFight(mode, unitCount, true);
         stage.battleGroundID = 0;
         stage.fightBGM = 0;
         stage.EventType = FightEventType.Arena;
