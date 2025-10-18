@@ -24,6 +24,16 @@ public class BasicPhysicSupport : MonoBehaviour
     public bool AtRing;
     public bool NearRing;
     
+    [Header("Contact Stabilizer")]
+    [SerializeField] private float contactStabilizeSmoothTime = 0.08f;
+    [SerializeField] private float contactJitterThreshold = 0.15f;
+    [SerializeField] private float contactStabilizeMaxSpeed = 10f;
+    [SerializeField] private float contactVelocityThreshold = 2f;
+
+    private Vector3 contactStabilizedXZ;
+    private Vector3 contactStabilizeVelocity;
+    private bool contactStabilizerInitialized;
+    
     bool atRing
     {
         get
@@ -207,6 +217,16 @@ public class BasicPhysicSupport : MonoBehaviour
         }
     }
 
+    void LateUpdate()
+    {
+        if (FightGlobalSetting.SceneStep != 1)
+        {
+            ResetContactStabilizer();
+            return;
+        }
+        ApplyContactStabilizer();
+    }
+
     public float ToNearestEnemyXZ()
     {
         var enemies = _DATA_CENTER.Sensor.GetEnemiesByDistance(false);
@@ -256,6 +276,64 @@ public class BasicPhysicSupport : MonoBehaviour
         hiddenMethods.OverrideOnEnemyDrag = e.intParameter;
     }
     
+    // Smooth out small root jitter when rubbing against other fighters.
+    void ApplyContactStabilizer()
+    {
+        if (!hiddenMethods.TouchingEnemy())
+        {
+            ResetContactStabilizer();
+            return;
+        }
+        
+        if (Rigidbody.linearVelocity.sqrMagnitude > contactVelocityThreshold * contactVelocityThreshold)
+        {
+            ResetContactStabilizer();
+            return;
+        }
+
+        var currentPos = _DATA_CENTER.WholeT.position;
+        var currentXZ = new Vector3(currentPos.x, 0f, currentPos.z);
+
+        if (!contactStabilizerInitialized)
+        {
+            contactStabilizerInitialized = true;
+            contactStabilizedXZ = currentXZ;
+            contactStabilizeVelocity = Vector3.zero;
+        }
+
+        float displacement = Vector3.Distance(currentXZ, contactStabilizedXZ);
+        if (displacement > contactJitterThreshold)
+        {
+            contactStabilizedXZ = currentXZ;
+            contactStabilizeVelocity = Vector3.zero;
+            return;
+        }
+
+        float deltaTime = Time.deltaTime;
+        if (deltaTime <= 0f)
+            return;
+
+        contactStabilizedXZ = Vector3.SmoothDamp(
+            contactStabilizedXZ,
+            currentXZ,
+            ref contactStabilizeVelocity,
+            contactStabilizeSmoothTime,
+            contactStabilizeMaxSpeed,
+            deltaTime
+        );
+
+        var stabilisedPos = currentPos;
+        stabilisedPos.x = contactStabilizedXZ.x;
+        stabilisedPos.z = contactStabilizedXZ.z;
+        _DATA_CENTER.WholeT.position = stabilisedPos;
+    }
+
+    void ResetContactStabilizer()
+    {
+        contactStabilizerInitialized = false;
+        contactStabilizeVelocity = Vector3.zero;
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (!hiddenMethods.EnemyTouchingDrag) return;
