@@ -10,6 +10,10 @@ using Random = System.Random;
 public class PreparingProcess : FSceneProcess
 {
     private FightingStepLayer fightingStepLayer;
+
+    static readonly Dictionary<Element, int> elementCountBuffer = new Dictionary<Element, int>(8);
+    static readonly List<UniTask> taskBuffer = new List<UniTask>(16);
+    static readonly string[] elementEffectKeys = { "light_hit", "heavy_hit", "super_hit", "electric_s_e" };
     
     public PreparingProcess()
     {
@@ -49,18 +53,18 @@ public class PreparingProcess : FSceneProcess
             ? 1
             : Mathf.Max(heroUnits.Count, enemyUnits.Count);
         
-        var tasks = new List<UniTask>
-        {
-            AppSetting.PlayBGM(FightLoad.Fight.GetBGMKey()),
-            HurtObjectManager.ConstructDPool(),
-            AddressablesLogic.Essentials(),
-            BoundaryControlByGod.target.ChangeBackGround(FightLoad.Fight.battleGroundID),
-            RTFightManager.Target.LoadUnits(FightLoad.Fight),
-            EffectsManager.IniEffectsPool(CommonSetting.HitGroundEffectCode, null, effectPreloadCount),
-            EffectsManager.IniEffectsPool(CommonSetting.WallCrackEffectCode, null, effectPreloadCount)
-        };
+        var tasks = taskBuffer;
+        tasks.Clear();
+        tasks.Add(AppSetting.PlayBGM(FightLoad.Fight.GetBGMKey()));
+        tasks.Add(HurtObjectManager.ConstructDPool());
+        tasks.Add(AddressablesLogic.Essentials());
+        tasks.Add(BoundaryControlByGod.target.ChangeBackGround(FightLoad.Fight.battleGroundID));
+        tasks.Add(RTFightManager.Target.LoadUnits(FightLoad.Fight));
+        tasks.Add(EffectsManager.IniEffectsPool(CommonSetting.HitGroundEffectCode, null, effectPreloadCount));
+        tasks.Add(EffectsManager.IniEffectsPool(CommonSetting.WallCrackEffectCode, null, effectPreloadCount));
         
-        var elementCounts = new Dictionary<Element, int>();
+        var elementCounts = elementCountBuffer;
+        elementCounts.Clear();
         var totalUnitCount = 0;
         void AccumulateElementCounts(List<UnitInfo> units)
         {
@@ -95,11 +99,12 @@ public class PreparingProcess : FSceneProcess
         foreach (var kv in elementCounts)
         {
             var effectPath = FightGlobalSetting.EffectPathDefine(kv.Key);
-            tasks.Add(EffectsManager.IniEffectsPool("light_hit", effectPath, kv.Value));
-            tasks.Add(EffectsManager.IniEffectsPool("heavy_hit", effectPath, kv.Value));
-            tasks.Add(EffectsManager.IniEffectsPool("super_hit", effectPath, kv.Value));
-            tasks.Add(EffectsManager.IniEffectsPool("electric_s_e", effectPath, kv.Value));
+            for (int i = 0; i < elementEffectKeys.Length; i++)
+            {
+                tasks.Add(EffectsManager.IniEffectsPool(elementEffectKeys[i], effectPath, kv.Value));
+            }
         }
+        elementCounts.Clear();
 
         var sharedEffectCount = Mathf.Max(effectPreloadCount, totalUnitCount);
         tasks.Add(EffectsManager.IniEffectsPool("super_combo_explosion", null, sharedEffectCount));
@@ -111,6 +116,7 @@ public class PreparingProcess : FSceneProcess
         }
         ProgressLayer.LoadingPercent(Translate.Get("LoadingBattle"), 0.7f);
         await UniTask.WhenAll(tasks);
+        tasks.Clear();
         
         var teamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
         RTFightManager.Target.heroTeamConfig.playID = FightLoad.Fight.Team1ID;
