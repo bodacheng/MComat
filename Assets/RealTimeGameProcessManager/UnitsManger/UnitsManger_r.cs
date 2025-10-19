@@ -232,6 +232,8 @@ namespace FightScene
             {
                 InputsManager.FocusUnit(RMode_Unit.Value, true);
             }
+
+            global::FightScene.FightScene.target?.SensorUnity.ForceImmediateDetection();
             
             return true;
         }
@@ -307,6 +309,8 @@ namespace FightScene
             {
                 InputsManager.FocusUnit(RMode_Unit.Value, true);
             }
+
+            global::FightScene.FightScene.target?.SensorUnity.ForceImmediateDetection();
             
             //Refresh(TeamMembers);
             return unitChanged;

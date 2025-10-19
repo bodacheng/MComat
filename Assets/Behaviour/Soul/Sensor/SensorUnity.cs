@@ -85,6 +85,31 @@ public class SensorUnity : MonoBehaviour
         SensorDetectionResultClearProcesses.Clear();
         SensorDetectionResultSortProcesses.Clear();
     }
+
+    public void ForceImmediateDetection()
+    {
+        if (_hits == null)
+        {
+            return;
+        }
+
+        foreach (var clearProcess in SensorDetectionResultClearProcesses)
+        {
+            clearProcess?.Invoke();
+        }
+
+        SensorDetectProcess();
+
+        foreach (var sortProcess in SensorDetectionResultSortProcesses)
+        {
+            sortProcess?.Invoke(_hits);
+        }
+
+        if (_detectionInterval != -1)
+        {
+            _detectionInterval = 0;
+        }
+    }
     
     public void SensorSetting(float battleRingRadius, int groupFightRemainUnitCount)
     {
