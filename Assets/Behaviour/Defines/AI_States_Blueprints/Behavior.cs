@@ -322,10 +322,15 @@ namespace Soul
             var normalizedDirection = direction.normalized;
             var targetRotation = Quaternion.LookRotation(normalizedDirection, Vector3.up);
             var currentRotation = gameObject.transform.rotation;
-            var maxDegreesDelta = Mathf.Max(turnSpeed, 0f) * Time.fixedDeltaTime;
-            var nextRotation = Quaternion.RotateTowards(currentRotation, targetRotation, maxDegreesDelta);
+            var angle = Quaternion.Angle(currentRotation, targetRotation);
+            if (angle < 0.1f)
+                return true;
+
+            var speed = Mathf.Max(turnSpeed, 0f);
+            var step = Mathf.Clamp01((speed + angle) * Time.fixedDeltaTime);
+            var nextRotation = Quaternion.Slerp(currentRotation, targetRotation, step);
             _Rigidbody.MoveRotation(nextRotation);
-            return Mathf.Approximately(Quaternion.Angle(nextRotation, targetRotation), 0f);
+            return Quaternion.Angle(nextRotation, targetRotation) < 0.1f;
         }
 
         // Move to direction

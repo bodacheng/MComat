@@ -334,6 +334,45 @@ public class BasicPhysicSupport : MonoBehaviour
         contactStabilizeVelocity = Vector3.zero;
     }
 
+    void ResolveContactPenetration(Collision collision)
+    {
+        if (_DATA_CENTER == null || _DATA_CENTER.WholeT == null)
+            return;
+        if (!hiddenMethods.IfStepOnEnemy(collision.collider))
+            return;
+        if (Rigidbody.linearVelocity.sqrMagnitude > contactVelocityThreshold * contactVelocityThreshold)
+            return;
+
+        var correction = Vector3.zero;
+        var contacts = collision.contacts;
+        for (int i = 0; i < contacts.Length; i++)
+        {
+            var contact = contacts[i];
+            float penetration = Mathf.Max(0f, -contact.separation);
+            if (penetration <= Mathf.Epsilon)
+                continue;
+
+            var normal = contact.normal;
+            normal.y = 0f;
+            if (normal.sqrMagnitude < 1e-6f)
+                continue;
+
+            correction += normal.normalized * penetration;
+        }
+
+        if (correction == Vector3.zero)
+            return;
+
+        correction = Vector3.ClampMagnitude(correction, contactJitterThreshold);
+
+        var pos = _DATA_CENTER.WholeT.position;
+        pos += correction;
+        _DATA_CENTER.WholeT.position = pos;
+        contactStabilizedXZ = new Vector3(pos.x, 0f, pos.z);
+        contactStabilizerInitialized = true;
+        contactStabilizeVelocity = Vector3.zero;
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (!hiddenMethods.EnemyTouchingDrag) return;
@@ -343,6 +382,14 @@ public class BasicPhysicSupport : MonoBehaviour
             {
                 hiddenMethods.AddTouchedEnemyBody(collision.collider);
             }
+        }
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        if (_DATA_CENTER != null && _DATA_CENTER._MyBehaviorRunner.IfRunning())
+        {
+            ResolveContactPenetration(collision);
         }
     }
 
