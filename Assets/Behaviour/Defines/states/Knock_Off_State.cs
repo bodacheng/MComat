@@ -44,11 +44,10 @@ namespace Soul
             FightParamsRef.GettingDamage = true;
             _BasicPhysicSupport.SetUsingGravity(false);
             _BasicPhysicSupport.OpenEnemyTouchingDrag(0);
-            _Animator.SetFloat("speed", 0f);
+            HaltMotion();
             _Animator.applyRootMotion = false;
             _Weapon_Animation_Events.ClearMarkerManagers();
             pEvents.CloseAllPersonalityEffects();
-            _Rigidbody.linearVelocity = Vector3.zero;
             AnimationManger.AnimationTrigger(AnimationManger.GetRandomKnockOffAnim(), 0.05f);
             //_xz = newValue.attacker._Center.WholeT.forward;
             var position = gameObject.transform.position;

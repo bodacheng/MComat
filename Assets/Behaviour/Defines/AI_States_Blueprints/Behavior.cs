@@ -36,6 +36,7 @@ namespace Soul
         public bool nextAttackCanRushFirst;
         bool AbsorbEnergyFinished;
         int temp;
+        const float MovementEpsilon = 0.0001f;
 
         public void EnergyAbsorb(CriticalGaugeMode gaugeMode, FightParamsReference victim)
         {
@@ -210,6 +211,68 @@ namespace Soul
             }
             BO_Health.SetManagingEventDamage(null);
         }
+
+        protected bool TryGetPlanarDirection(ref Vector3 direction, bool ignoreY, out Vector3 planarDirection)
+        {
+            if (ignoreY)
+            {
+                direction.y = 0f;
+            }
+
+            var sqrMagnitude = direction.sqrMagnitude;
+            if (sqrMagnitude < MovementEpsilon)
+            {
+                planarDirection = Vector3.zero;
+                return false;
+            }
+
+            var magnitude = Mathf.Sqrt(sqrMagnitude);
+            planarDirection = direction / magnitude;
+            return true;
+        }
+
+        protected void HaltMotion(bool resetAnimatorSpeed = true)
+        {
+            if (resetAnimatorSpeed && _Animator != null)
+            {
+                _Animator.SetFloat("speed", 0f);
+            }
+
+            if (_Rigidbody != null)
+            {
+                _Rigidbody.linearVelocity = Vector3.zero;
+            }
+        }
+
+        protected void ApplyMovementIntent(
+            Vector3 direction,
+            float moveSpeed,
+            float rotateSpeed,
+            float animatorSpeed = 10f,
+            bool ignoreY = true,
+            bool keepAnimatorOnIdle = false)
+        {
+            if (!TryGetPlanarDirection(ref direction, ignoreY, out var planarDirection))
+            {
+                if (keepAnimatorOnIdle)
+                {
+                    HaltMotion(false);
+                }
+                else
+                {
+                    HaltMotion();
+                }
+                return;
+            }
+
+            if (_Animator != null)
+            {
+                _Animator.SetFloat("speed", animatorSpeed);
+            }
+
+            Move(planarDirection, moveSpeed, false);
+            RotateToDirection(planarDirection, rotateSpeed, false);
+        }
         
         // Rotate to a target
         Vector3 _lookDir;
@@ -243,19 +306,26 @@ namespace Soul
         //    _DATA_CENTER.WholeT.DORotate(direction, duration, RotateMode.Fast);
         //}
 
-        float _angle;
         // Rotate to a direction
         protected bool RotateToDirection(Vector3 direction, float turnSpeed, bool ignoreY)
         {
             if (ignoreY)
             {
-                direction.y = 0;
+                direction.y = 0f;
             }
-            _dirQ = Quaternion.LookRotation(direction);
-            _angle = Quaternion.Angle(_dirQ, gameObject.transform.rotation);
-            _dirQ = Quaternion.Slerp(gameObject.transform.rotation, _dirQ, _angle*(360-_angle)/(180*180/turnSpeed) * Time.fixedDeltaTime);
-            _Rigidbody.MoveRotation(_dirQ);
-            return Mathf.Approximately(Quaternion.Angle(_dirQ, gameObject.transform.rotation), 0f);
+
+            if (direction.sqrMagnitude < MovementEpsilon)
+            {
+                return false;
+            }
+
+            var normalizedDirection = direction.normalized;
+            var targetRotation = Quaternion.LookRotation(normalizedDirection, Vector3.up);
+            var currentRotation = gameObject.transform.rotation;
+            var maxDegreesDelta = Mathf.Max(turnSpeed, 0f) * Time.fixedDeltaTime;
+            var nextRotation = Quaternion.RotateTowards(currentRotation, targetRotation, maxDegreesDelta);
+            _Rigidbody.MoveRotation(nextRotation);
+            return Mathf.Approximately(Quaternion.Angle(nextRotation, targetRotation), 0f);
         }
 
         // Move to direction
@@ -323,15 +393,27 @@ namespace Soul
         {
             if (rigidbody == null)
                 return;
-            Vector3 currentSpeed = rigidbody.linearVelocity;
+            if (maxSpeed <= 0f)
+                return;
+
+            var velocity = rigidbody.linearVelocity;
+            var planarVelocity = ignoreY ? new Vector3(velocity.x, 0f, velocity.z) : velocity;
+            var clampedPlanar = Vector3.ClampMagnitude(planarVelocity, maxSpeed);
+
+            if ((planarVelocity - clampedPlanar).sqrMagnitude < MovementEpsilon)
+                return;
+
             if (ignoreY)
             {
-                currentSpeed.y = 0;
+                velocity.x = clampedPlanar.x;
+                velocity.z = clampedPlanar.z;
             }
-            if (currentSpeed.magnitude > maxSpeed)
+            else
             {
-                rigidbody.AddForce((currentSpeed.magnitude / maxSpeed * -1) * currentSpeed.normalized * maxSpeed * Time.deltaTime, ForceMode.VelocityChange);
+                velocity = clampedPlanar;
             }
+
+            rigidbody.linearVelocity = velocity;
         }
 
         float current_speed;

@@ -92,17 +92,7 @@ namespace Soul
             {
                 _useDirection = Vector3.zero;
             }
-            if (_useDirection.magnitude > 0f)
-            {
-                _Animator.SetFloat("speed", 10f);
-                Move(_useDirection, speed, true);
-                RotateToDirection(_useDirection, 20f, true);
-            }
-            else
-            {
-                _Animator.SetFloat("speed", 0f);
-                _Rigidbody.linearVelocity = Vector3.zero;
-            }
+            ApplyMovementIntent(_useDirection, speed, 20f);
             
             PreventUnitOverlap();
         }
@@ -110,17 +100,7 @@ namespace Soul
         public override void _State_FixedUpdate1()
         {
             _f_State_Update_SP();
-            if (_useDirection.magnitude > 0f)
-            {
-                _Animator.SetFloat("speed", 10f);
-                Move(_useDirection, speed, true);
-                RotateToDirection(_useDirection, 20f, true);
-            }
-            else
-            {
-                _Animator.SetFloat("speed", 0f);
-                _Rigidbody.linearVelocity = Vector3.zero;
-            }
+            ApplyMovementIntent(_useDirection, speed, 20f);
         }
     }
 }

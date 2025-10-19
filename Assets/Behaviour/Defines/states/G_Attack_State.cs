@@ -106,14 +106,13 @@ namespace Soul
             base.AI_State_enter();
             collider = null;
             AnimationManger.TriggerExpression(Facial.aggressive);
-            _Animator.SetFloat("speed", 0f);
             _BasicPhysicSupport.OpenEnemyTouchingDrag(1);
+            HaltMotion();
             _SkillCancelFlag.turn_off_flag();
             if (StateType == BehaviorType.GR)
                 _SkillCancelFlag.TurnRotationAdjustmentStartFlag(1);
             if (StateType == BehaviorType.GI)
                 _SkillCancelFlag.TurnRotationAdjustmentStartFlagWithoutstepfoward(1);
-            _Rigidbody.linearVelocity = Vector3.zero;
             _rushTimeCounter = 0f;
             _Animator.applyRootMotion = true;
             if (Sensor.GetEnemiesByDistance(false).Count == 0)

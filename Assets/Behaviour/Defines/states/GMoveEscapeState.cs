@@ -46,9 +46,8 @@ namespace Soul
         void CommonEnter()
         {
             base.AI_State_enter();
-            _Animator.SetFloat("speed", 0f);
+            HaltMotion();
             _SkillCancelFlag.turn_off_flag();
-            _Rigidbody.linearVelocity = Vector3.zero;
             pEvents.CloseAllPersonalityEffects();
             _Animator.applyRootMotion = true;
             AnimationManger.AnimationTrigger(clip_name, CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);

@@ -20,12 +20,11 @@ namespace Soul
         {
             base.AI_State_enter();
             _SkillCancelFlag.turn_off_flag();
-            _Animator.SetFloat("speed", 0f);
+            HaltMotion();
             _SkillCancelFlag.TurnRotationAdjustmentStartFlagWithoutstepfoward(1);
             pEvents.CloseAllPersonalityEffects();
             _Animator.applyRootMotion = true;
             AnimationManger.AnimationTrigger(clip_name,  CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
-            _Rigidbody.linearVelocity = Vector3.zero;
             if (threat != null)
             {
                 RotateToTargetTween(threat.transform.position, 0.02f);

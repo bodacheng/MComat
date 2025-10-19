@@ -16,9 +16,8 @@ namespace Soul
         {
             base.AI_State_enter();
             motionReset = false;
-            this._Animator.SetFloat("speed", 0f);
+            HaltMotion();
             AnimationManger.AnimationTrigger(clip_name,  CommonSetting.CharacterAnimDuration[this._DATA_CENTER.UnitConfig().TYPE]);
-            this._Rigidbody.linearVelocity = Vector3.zero;
             this._Rigidbody.linearDamping = FightGlobalSetting.OnTouchEnemyBodyRigidDrag;
             
             if (clip_name == "victory")
