@@ -105,21 +105,25 @@ public class MobileInputsManager : MonoBehaviour {
     private readonly ReactiveProperty<Data_Center> focus = new ReactiveProperty<Data_Center>();
     public ReactiveProperty<Data_Center> CurrentFocus => focus;
 
-    private IDisposable watchDreamComboGauge;
+    private CompositeDisposable currentFocusDisposables;
     public void FocusUnit(Data_Center center, bool force = false)
     {
         if (focus.Value != null)
         {
             focus.Value._MyBehaviorRunner.InputsManager = null;
         }
+
+        currentFocusDisposables?.Dispose();
+        currentFocusDisposables = null;
+
         if (center != null)
         {
+            currentFocusDisposables = new CompositeDisposable().AddTo(this);
             center._MyBehaviorRunner.InputsManager = this;
             focus.Value = center;
             SwitchElementEffects(center.element);
             SuddenRefreshButtons(focus.Value._MyBehaviorRunner, force);
-            watchDreamComboGauge?.Dispose();
-            watchDreamComboGauge = center.FightDataRef.DreamComboGauge.Subscribe(
+            center.FightDataRef.DreamComboGauge.Subscribe(
                 (x) =>
                 {
                     var percent = (float)x / FightGlobalSetting.DreamComboGaugeMax;
@@ -136,15 +140,29 @@ public class MobileInputsManager : MonoBehaviour {
                     
                     radialSegmentedHealthBar.SetPercent(percent);
                 }
-            ).AddTo(this.gameObject);
+            ).AddTo(currentFocusDisposables);
+
+            center.FightDataRef.IsDead
+                .Where(x => x)
+                .Take(1)
+                .Subscribe(_ => ResetDreamComboGaugeUI())
+                .AddTo(currentFocusDisposables);
             
             TurnOnButtons();
         }
         else
         {
             focus.Value = null;
+            ResetDreamComboGaugeUI();
             TurnOffButtons();
         }
+    }
+
+    void ResetDreamComboGaugeUI()
+    {
+        DreamComboEffectOff();
+        radialSegmentedHealthBar.SetPercent(0f);
+        RefreshPattern(dreamComboBtn, string.Empty);
     }
     
     public void Clear()
