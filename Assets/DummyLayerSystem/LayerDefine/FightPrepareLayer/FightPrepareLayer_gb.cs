@@ -132,16 +132,24 @@ public partial class FightPrepareLayer : UILayer
     
     public async UniTask GangbangStageUnitsDisplay(FightInfo stage, CancellationToken token)
     {
+        var heroUnits = stage.FightMembers.HeroSets.GetValues();
+        var enemyUnits = stage.FightMembers.EnemySets.GetValues();
+        var heroLookup = BuildUnitLookup(heroUnits);
+        var enemyLookup = BuildUnitLookup(enemyUnits);
+
+        WarmupUnitIcons(heroUnits);
+        WarmupUnitIcons(enemyUnits);
+
         // ---------- 本地工具函数 ----------
         UniTask FocusHero(string instanceId) =>
             FocusTeamUnit(instanceId,
-                          stage.FightMembers.HeroSets.GetValues(),
+                          heroLookup,
                           connector,
                           nineForShow);
 
         UniTask FocusEnemy(string instanceId) =>
             FocusTeamUnit(instanceId,
-                          stage.FightMembers.EnemySets.GetValues(),
+                          enemyLookup,
                           connectorE,
                           nineForShowE);
 
@@ -150,7 +158,7 @@ public partial class FightPrepareLayer : UILayer
 
         // ---------- 我方图标 ----------
         _gangbangHeroIconsM = GangbangInfosShow(
-            stage.FightMembers.HeroSets.GetValues(),
+            heroUnits,
             id => FocusHero(id).Forget(),
             myTeamShowT,
             true,
@@ -159,8 +167,10 @@ public partial class FightPrepareLayer : UILayer
 
         var defaultHeroId = _gangbangHeroIconsM.FirstOrDefault()?.InstanceID;
 
+        WarmupUnitModels(heroUnits, defaultHeroId, connector, _preparedHeroModelIds, token);
+
         // ---------- 队伍空位提示 ----------
-        if (stage.FightMembers.HeroSets.GetValues().Count < 1)
+        if (heroUnits.Count < 1)
         {
             teamEditIndicatorText.text = Translate.Get("HasExtraSeat");
             teamEditIndicator.SetActive(true);
@@ -173,13 +183,15 @@ public partial class FightPrepareLayer : UILayer
 
         // ---------- 敌方图标 ----------
         _gangbangHeroIconsE = GangbangInfosShow(
-            stage.FightMembers.EnemySets.GetValues(),
+            enemyUnits,
             id => FocusEnemy(id).Forget(),          // 同样收集
             enemyTeamShowT,
             false,
             2);
 
         var defaultEnemyId = _gangbangHeroIconsE.FirstOrDefault()?.InstanceID;
+
+        WarmupUnitModels(enemyUnits, defaultEnemyId, connectorE, _preparedEnemyModelIds, token);
 
         // ---------- 默认焦点 ----------
         if (!string.IsNullOrEmpty(defaultHeroId))

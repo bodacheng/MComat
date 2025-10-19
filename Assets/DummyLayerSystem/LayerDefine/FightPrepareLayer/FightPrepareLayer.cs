@@ -8,6 +8,7 @@ using Cysharp.Threading.Tasks;
 using dataAccess;
 using mainMenu;
 using ModelView;
+using Singleton;
 
 public partial class FightPrepareLayer : UILayer
 {
@@ -44,6 +45,10 @@ public partial class FightPrepareLayer : UILayer
     [SerializeField] BattleGroundSwitch battleGroundSwitch;
 
     public BattleGroundSwitch BattleGroundSwitch => battleGroundSwitch;
+
+    readonly HashSet<string> _preparedHeroModelIds = new HashSet<string>(StringComparer.Ordinal);
+    readonly HashSet<string> _preparedEnemyModelIds = new HashSet<string>(StringComparer.Ordinal);
+    readonly HashSet<string> _warmedIconRecordIds = new HashSet<string>(StringComparer.Ordinal);
 
     public void SetLayerAnimatorTrigger(string code)
     {
@@ -159,16 +164,25 @@ public partial class FightPrepareLayer : UILayer
     
     public async UniTask StageMembersInfoShow(FightInfo stage, CancellationToken token)
     {
+        // ----------------- 准备数据缓存 -----------------
+        var heroUnits = stage.FightMembers.HeroSets.GetValues();
+        var enemyUnits = stage.FightMembers.EnemySets.GetValues();
+        var heroLookup = BuildUnitLookup(heroUnits);
+        var enemyLookup = BuildUnitLookup(enemyUnits);
+
+        WarmupUnitIcons(heroUnits);
+        WarmupUnitIcons(enemyUnits);
+
         // ----------------- 本地帮助函数 -----------------
         UniTask FocusHero(string id) =>
             FocusTeamUnit(id,
-                          stage.FightMembers.HeroSets.GetValues(),
+                          heroLookup,
                           connector,
                           nineForShow);
 
         UniTask FocusEnemy(string id) =>
             FocusTeamUnit(id,
-                          stage.FightMembers.EnemySets.GetValues(),
+                          enemyLookup,
                           connectorE,
                           nineForShowE);
 
@@ -177,7 +191,7 @@ public partial class FightPrepareLayer : UILayer
 
         // ----------------- 我方成员 -----------------
         var icons1 = MemberInfosShow(
-            stage.FightMembers.HeroSets.GetValues(),
+            heroUnits,
             id => FocusHero(id).Forget(),
             myTeamShowT,
             true,
@@ -186,6 +200,8 @@ public partial class FightPrepareLayer : UILayer
         var defaultHeroId = icons1.FirstOrDefault()?.InstanceID;
         if (!string.IsNullOrEmpty(defaultHeroId))
             focusTasks.Add(FocusHero(defaultHeroId));
+        
+        WarmupUnitModels(heroUnits, defaultHeroId, connector, _preparedHeroModelIds, token);
 
         // ----------------- 队伍空位提示 -----------------
         string teamKey = stage.EventType switch
@@ -206,7 +222,7 @@ public partial class FightPrepareLayer : UILayer
 
         // ----------------- 敌方成员 -----------------
         var icons2 = MemberInfosShow(
-            stage.FightMembers.EnemySets.GetValues(),
+            enemyUnits,
             id => FocusEnemy(id).Forget(),
             enemyTeamShowT,
             false);
@@ -214,6 +230,8 @@ public partial class FightPrepareLayer : UILayer
         var defaultEnemyId = icons2.FirstOrDefault()?.InstanceID;
         if (!string.IsNullOrEmpty(defaultEnemyId))
             focusTasks.Add(FocusEnemy(defaultEnemyId));
+
+        WarmupUnitModels(enemyUnits, defaultEnemyId, connectorE, _preparedEnemyModelIds, token);
 
         // ----------------- 并行等待所有 Focus 操作 -----------------
         await UniTask.WhenAll(focusTasks);
@@ -240,11 +258,15 @@ public partial class FightPrepareLayer : UILayer
         enemyInfiniteExModeFlg.SetActive(stage.team2CGMode == CriticalGaugeMode.Unlimited);
     }
     
-    async UniTask FocusTeamUnit(string instanceId, List<UnitInfo> teamUnits, DedicatedCameraConnector _connector, NineForShow _nineForShow)
+    async UniTask FocusTeamUnit(string instanceId, IReadOnlyDictionary<string, UnitInfo> teamUnits, DedicatedCameraConnector _connector, NineForShow _nineForShow)
     {
+        if (string.IsNullOrEmpty(instanceId) || teamUnits == null || !teamUnits.TryGetValue(instanceId, out var info))
+        {
+            return;
+        }
+
         ProgressLayer.Loading(String.Empty);
-        var info = teamUnits.FirstOrDefault((x) => x.id == instanceId);
-        if (info != null)
+        try
         {
             await UniTask.WhenAll(
                 _nineForShow.SkillSetInfoOfUnitOnArcadePage(info.set),
@@ -252,7 +274,10 @@ public partial class FightPrepareLayer : UILayer
                 _connector.ShowModel(info.r_id)
             );
         }
-        ProgressLayer.Close();
+        finally
+        {
+            ProgressLayer.Close();
+        }
     }
     
     List<HeroIcon> MemberInfosShow(List<UnitInfo> heroSets, Action<string> iconBehaviour, RectTransform _showT, bool withSkillCheck, bool btnInteractive = true)
@@ -269,6 +294,108 @@ public partial class FightPrepareLayer : UILayer
             icons.Add(v);
         }
         return icons;
+    }
+    
+    static Dictionary<string, UnitInfo> BuildUnitLookup(List<UnitInfo> units)
+    {
+        var lookup = new Dictionary<string, UnitInfo>(units?.Count ?? 0, StringComparer.Ordinal);
+        if (units == null)
+        {
+            return lookup;
+        }
+
+        foreach (var unit in units)
+        {
+            if (!string.IsNullOrEmpty(unit?.id))
+            {
+                lookup[unit.id] = unit;
+            }
+        }
+
+        return lookup;
+    }
+
+    void WarmupUnitIcons(IEnumerable<UnitInfo> units)
+    {
+        if (units == null)
+        {
+            return;
+        }
+
+        foreach (var unit in units)
+        {
+            var recordId = unit?.r_id;
+            if (string.IsNullOrEmpty(recordId) || !_warmedIconRecordIds.Add(recordId))
+            {
+                continue;
+            }
+
+            UniTask.Void(async () =>
+            {
+                try
+                {
+                    await UnitIconDic.Load(recordId);
+                }
+                catch (OperationCanceledException)
+                {
+                    // ignore cancellation during warmup
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning($"[FightPrepareLayer] Icon warmup failed for {recordId}: {ex.Message}");
+                }
+            });
+        }
+    }
+
+    void WarmupUnitModels(List<UnitInfo> units, string skipInstanceId, DedicatedCameraConnector targetConnector, HashSet<string> preparedIds, CancellationToken token)
+    {
+        if (targetConnector == null || units == null || preparedIds == null)
+        {
+            return;
+        }
+
+        var preloadTasks = new List<UniTask>();
+        foreach (var unit in units)
+        {
+            if (token.IsCancellationRequested)
+            {
+                break;
+            }
+            if (unit == null || unit.id == skipInstanceId)
+            {
+                continue;
+            }
+
+            var recordId = unit.r_id;
+            if (string.IsNullOrEmpty(recordId) || !preparedIds.Add(recordId))
+            {
+                continue;
+            }
+
+            preloadTasks.Add(targetConnector.PrepareModel(recordId));
+        }
+
+        if (preloadTasks.Count == 0)
+        {
+            return;
+        }
+
+        UniTask.Void(async () =>
+        {
+            try
+            {
+                await UniTask.WhenAll(preloadTasks).AttachExternalCancellation(token);
+            }
+            catch (OperationCanceledException)
+            {
+                // cancellation is expected when layer is closed early
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"[FightPrepareLayer] Model warmup failed: {ex.Message}");
+            }
+        });
     }
     
     public void TutorialForceFightBegin()
