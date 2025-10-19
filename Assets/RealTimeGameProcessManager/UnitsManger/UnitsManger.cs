@@ -134,6 +134,24 @@ namespace FightScene
             }
             return null;
         }
+
+        public Transform GetPrimaryStandPoint()
+        {
+            if (TeamStandPoints == null || TeamStandPoints.Length == 0)
+            {
+                return null;
+            }
+
+            foreach (var point in TeamStandPoints)
+            {
+                if (point != null)
+                {
+                    return point;
+                }
+            }
+
+            return null;
+        }
         
         // 全队无敌
         public void TurnAllUnitsInvincible(bool _Invincible)

@@ -155,8 +155,11 @@ namespace FightScene
             {
                 cMode = fightMode == FightMode.Group ? C_Mode.TopDown : C_Mode.WatchOver;
             }
+
+            var myUnitsManager = myTeam == Team.player1 ? team1 : team2;
+            var opponentManager = myTeam == Team.player1 ? team2 : team1;
             
-            var ts = myTeam == Team.player1 ? team1.GetFightingUnitTs() : team2.GetFightingUnitTs();
+            var ts = myUnitsManager.GetFightingUnitTs();
             var tsOpponents = GetOpponents();
             
             List<Transform> GetOpponents()
@@ -164,17 +167,42 @@ namespace FightScene
                 List<Transform> returnValue;
                 if (fightMode is FightMode.Rotate or FightMode.Evolve)
                 {
-                    returnValue = myTeam == Team.player1
-                        ? new List<Transform>() { team2.GetRModeUnitT() }
-                        : new List<Transform>() { team1.GetRModeUnitT() };
+                    returnValue = new List<Transform> { opponentManager.GetRModeUnitT() };
                 }
                 else
                 {
-                    returnValue = myTeam == Team.player1
-                        ? team2.GetFightingUnitTs()
-                        : team1.GetFightingUnitTs();
+                    returnValue = opponentManager.GetFightingUnitTs();
                 }
                 return returnValue;
+            }
+
+            if (fightMode is FightMode.Rotate or FightMode.Evolve)
+            {
+                var myStandPoint = myUnitsManager.GetPrimaryStandPoint();
+                var opponentStandPoint = opponentManager.GetPrimaryStandPoint();
+
+                if (ts == null)
+                {
+                    ts = new List<Transform>();
+                }
+                if (!ts.Any(x => x != null) && myStandPoint != null)
+                {
+                    ts.Add(myStandPoint);
+                }
+
+                if (tsOpponents == null)
+                {
+                    tsOpponents = new List<Transform>();
+                }
+                if (!tsOpponents.Any(x => x != null) && opponentStandPoint != null)
+                {
+                    tsOpponents.Add(opponentStandPoint);
+                }
+
+                if (me == null)
+                {
+                    me = ts.FirstOrDefault(x => x != null) ?? myStandPoint;
+                }
             }
             
             if (fightMode == FightMode.Group)
@@ -185,12 +213,12 @@ namespace FightScene
             {
                 if (cMode == C_Mode.WatchOver)
                 {
-                    var center = (me != null ? me : null);
+                    var center = me;
                     _CameraManager.Assign_Camera(cMode, center, tsOpponents, ts);
                 }
                 else
                 {
-                    var center = (me != null ? me : ( ts.Count > 0 ? ts[0]: null ));
+                    var center = me ?? ts?.FirstOrDefault(x => x != null);
                     _CameraManager.Assign_Camera(
                         cMode,
                         center,
