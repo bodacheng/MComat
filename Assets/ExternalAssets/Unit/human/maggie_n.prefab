@@ -10907,9 +10907,21 @@ MonoBehaviour:
       movingWind: 0
   serializeData2:
     selectionData:
-      positions: []
-      attributes: []
-      maxConnectionDistance: 0
+      positions:
+      - x: 0
+        y: -0.00000023841858
+        z: 0.0000038146973
+      - x: -0.045783997
+        y: 0.0000052452087
+        z: 0.0000038146973
+      - x: -0.09263611
+        y: 0.0011453629
+        z: 0.0000038146973
+      attributes:
+      - Value: 1
+      - Value: 2
+      - Value: 2
+      maxConnectionDistance: 0.04686598
       userEdit: 0
   gizmoSerializeData:
     always: 0
@@ -11296,9 +11308,21 @@ MonoBehaviour:
       movingWind: 0
   serializeData2:
     selectionData:
-      positions: []
-      attributes: []
-      maxConnectionDistance: 0
+      positions:
+      - x: 0
+        y: -0.00000047683716
+        z: -0.0000038146973
+      - x: -0.045768738
+        y: -0.0000059604645
+        z: -0.000002861023
+      - x: -0.09262085
+        y: -0.0011458397
+        z: -0.0000019073486
+      attributes:
+      - Value: 1
+      - Value: 2
+      - Value: 2
+      maxConnectionDistance: 0.046865977
       userEdit: 0
   gizmoSerializeData:
     always: 0
@@ -11590,6 +11614,10 @@ MonoBehaviour:
   weight: 0
   AtRing: 0
   NearRing: 0
+  contactStabilizeSmoothTime: 0.08
+  contactJitterThreshold: 0.15
+  contactStabilizeMaxSpeed: 10
+  contactVelocityThreshold: 2
 --- !u!114 &9128141593530573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12266,8 +12294,8 @@ MonoBehaviour:
     - {fileID: 1333849297116938648}
     - {fileID: 4077964650363340399}
     connectionMode: 0
-    rotationalInterpolation: 0.5
-    rootRotation: 0.5
+    rotationalInterpolation: 0.2
+    rootRotation: 0.2
     updateMode: 0
     animationPoseRatio: 0
     reductionSetting:
@@ -12280,7 +12308,7 @@ MonoBehaviour:
       alignmentMode: 0
       adjustmentTransform: {fileID: 0}
     normalAxis: 1
-    gravity: 0.85
+    gravity: 0.6
     gravityDirection:
       x: 0
       y: -1
