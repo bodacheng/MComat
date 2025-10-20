@@ -91,8 +91,20 @@ public partial class Data_Center : MonoBehaviour
     {
         if (!Phase1Initialized)
         {
+            if (WholeT == null)
+            {
+                Debug.LogError($"{name} is missing WholeT reference. Step1Initialize aborted.");
+                return;
+            }
+            if (_BasicPhysicSupport == null || _BasicPhysicSupport.Rigidbody == null)
+            {
+                Debug.LogError($"{name} is missing BasicPhysicSupport or Rigidbody. Step1Initialize aborted.");
+                return;
+            }
+
             AnimationManger.AnimatorRef =  WholeT.GetComponent<Animator>();
             _facialAnimManager = WholeT.GetComponent<FacialAnimManager>();
+            geometryCenter ??= transform;
             Sensor.Center = this.geometryCenter;
             Sensor.SensorRadius = 15f;
             FightDataRef.Center = this;
