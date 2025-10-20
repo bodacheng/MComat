@@ -30,7 +30,10 @@ public class Imagen4Service
             parameters = new ImagenParams { sampleCount = actualCount, aspectRatio = aspect }
         };
         var json = JsonUtility.ToJson(body);
-        var url = $"https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-generate-preview-06-06:predict?key={config.ApiKey}";
+        var imageModel = string.IsNullOrEmpty(config.ImageModel) 
+            ? "imagen-4.0-generate-preview-06-06" 
+            : config.ImageModel;
+        var url = $"https://generativelanguage.googleapis.com/v1beta/models/{imageModel}:predict?key={config.ApiKey}";
 
         var req = new UnityWebRequest(url, "POST");
         req.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));

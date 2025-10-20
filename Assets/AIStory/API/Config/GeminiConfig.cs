@@ -6,6 +6,7 @@ public class GeminiConfig : ScriptableObject
     [Header("API Configuration")]
     [SerializeField] private string apiKey = "YOUR_API_KEY";
     [SerializeField] private string model = "gemini-2.5-flash";
+    [SerializeField] private string imageModel = "imagen-4.0-generate-preview-06-06";
     
     [Header("Request Settings")]
     [SerializeField] private int defaultTimeoutMs = 20000;
@@ -22,12 +23,13 @@ public class GeminiConfig : ScriptableObject
     public int ImageTimeoutMs => imageTimeoutMs;
     public int DefaultImageCount => defaultImageCount;
     public string DefaultAspectRatio => defaultAspectRatio;
+    public string ImageModel => imageModel;
     
     // Validate configuration
     public bool IsValid()
     {
         return !string.IsNullOrEmpty(apiKey) && apiKey != "YOUR_API_KEY" && 
-               !string.IsNullOrEmpty(model);
+               !string.IsNullOrEmpty(model) && !string.IsNullOrEmpty(imageModel);
     }
     
     // Validate in editor
@@ -41,6 +43,11 @@ public class GeminiConfig : ScriptableObject
         if (string.IsNullOrEmpty(model))
         {
             Debug.LogWarning($"[{name}] Please set model name");
+        }
+        
+        if (string.IsNullOrEmpty(imageModel))
+        {
+            Debug.LogWarning($"[{name}] Please set image model name");
         }
     }
 }
