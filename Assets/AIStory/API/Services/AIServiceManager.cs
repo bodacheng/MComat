@@ -1314,17 +1314,107 @@ public class AIServiceManager : MonoBehaviour
     /// </summary>
     private string GetStoryThemeFromConfig()
     {
-        if (serviceConfig == null || serviceConfig.StoryThemes == null || serviceConfig.StoryThemes.Length == 0)
+        var availableThemes = serviceConfig?.StoryThemes?
+            .Where(theme => !string.IsNullOrWhiteSpace(theme))
+            .ToArray();
+        
+        if (availableThemes == null || availableThemes.Length == 0)
         {
-            return "关于亚洲小伙子光着膀子劳动";
+            string fallbackTheme = BuildFallbackFairyTaleTheme();
+            Debug.Log($"[AIServiceManager] Selected fallback fairy tale theme: {fallbackTheme}");
+            return fallbackTheme;
         }
         
         // 从主题列表中随机选择一个
         var random = new System.Random();
-        string selectedTheme = serviceConfig.StoryThemes[random.Next(serviceConfig.StoryThemes.Length)];
+        string selectedTheme = availableThemes[random.Next(availableThemes.Length)];
         
         Debug.Log($"[AIServiceManager] Selected story theme: {selectedTheme}");
         return selectedTheme;
+    }
+    
+    private string BuildFallbackFairyTaleTheme()
+    {
+        var random = new System.Random();
+        int pageCount = Math.Max(serviceConfig?.PageCount ?? 6, 1);
+        
+        string[] settings =
+        {
+            "漂浮在云海之上的星光森林",
+            "藏在深海珊瑚里的琉璃王国",
+            "由千纸鹤搭建的空中集市",
+            "永不落日的琥珀山谷",
+            "会歌唱的花瓣铺成的小镇",
+            "月光织成的悬空瀑布",
+            "云鲸守护的彩虹湖泊"
+        };
+        
+        string[] heroes =
+        {
+            "年轻的织梦学徒",
+            "胆大的小小药师",
+            "爱发明的孤儿木匠",
+            "风筝节的守护者",
+            "善良的海螺收集者",
+            "能与星星交谈的航海少女",
+            "勇敢的洞穴探灯手"
+        };
+        
+        string[] companions =
+        {
+            "，与会说话的石雕猫作伙伴",
+            "，和调皮的风元素精灵同行",
+            "，带着会发光的蒲公英灯",
+            "，在神秘纸鹤的指引下前行",
+            "，与守护森林的鹿角少年同行",
+            "，与擅长歌唱的潮汐姐妹合作",
+            "，携手沉睡千年的星尘狐狸"
+        };
+        
+        string[] goals =
+        {
+            "找回被遗忘的季节钟表",
+            "修复破碎的月亮吊桥",
+            "守护村子的星光果实",
+            "解救被困在梦境里的朋友",
+            "唤醒沉睡的守护神树",
+            "完成古老乐章的最后一节",
+            "让迷路的晨曦再次升起"
+        };
+        
+        string[] conflicts =
+        {
+            "必须跨越会改变记忆的河流",
+            "要与迷惑旅人的是非风对话",
+            "面临由影子编织的迷宫考验",
+            "要安抚被惊醒的巨石守卫",
+            "必须解开倒影里藏起的谜题",
+            "需要穿越会冻结时间的月光雾",
+            "要领悟会自我改写的预言卷轴"
+        };
+        
+        string[] resolutions =
+        {
+            "在分享勇气与善意后化解危机",
+            "以真诚的倾听战胜恐惧",
+            "发现答案一直藏在心底",
+            "用友谊的光芒驱散阴霾",
+            "学会相信彼此的承诺",
+            "让所有人懂得互相守望",
+            "将希望传递给更需要的人"
+        };
+        
+        string setting = settings[random.Next(settings.Length)];
+        string hero = heroes[random.Next(heroes.Length)];
+        string companion = companions[random.Next(companions.Length)];
+        string goal = goals[random.Next(goals.Length)];
+        string conflict = conflicts[random.Next(conflicts.Length)];
+        string resolution = resolutions[random.Next(resolutions.Length)];
+        
+        return
+            $"在{setting}展开的童话冒险，讲述一位{hero}{companion}，他们需要{goal}，途中{conflict}，最终{resolution}。" +
+            $"请将故事编排为{pageCount}个连续场景的童话绘本。所有出现的人物都保持亚洲面容，男角色呈现古雅典竞技士风格（光膀子、披短斗篷或披肩、赤脚），" +
+            "女角色穿着古雅典短裙与古代饰物，可赤脚或系带凉鞋，整体气质温柔而奇幻。";
     }
     
     /// <summary>
