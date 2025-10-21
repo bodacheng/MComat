@@ -141,6 +141,7 @@ half _AnimeSoftness;
 
 half _CameraFadeStart;
 half _CameraFadeEnd;
+half _CameraFadeInvert;
 
 half _UVTileDiscardUV;
 half _UVTileV3U0;
@@ -580,6 +581,8 @@ v2f vert (appdata_full v) {
 	#endif
 	#if CAMERA_FADE
 		o.fade = saturate((-pos_view.z - _CameraFadeStart) / (_CameraFadeEnd - _CameraFadeStart));
+		if (_CameraFadeInvert)
+			o.fade = 1 - o.fade;
 	#endif
 
 	// Fragment data

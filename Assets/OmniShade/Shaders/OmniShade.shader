@@ -170,6 +170,7 @@ Shader "OmniShade/Standard" {
 		[HeaderGroup(Camera Fade)]
 		_CameraFadeStart ("Fade Start Distance", range(0, 25)) = 0
 		_CameraFadeEnd ("Fade End Distance", range(0, 25)) = 0
+		[Toggle] _CameraFadeInvert ("Invert", Float) = 0
 
         [HeaderGroup(UV Tile Discard)]
 		[Toggle(UVTILE)] _UVTile ("Enable UV Tile Discard", Float) = 0

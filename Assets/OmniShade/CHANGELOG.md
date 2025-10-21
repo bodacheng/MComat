@@ -1,3 +1,7 @@
+1.9.5
+October 15, 2025
+・Camera Fade: Support invert option
+
 1.9.4
 July 23, 2025
 ・Normal map: Fix strength setting
