@@ -1,4 +1,5 @@
-﻿using mainMenu;
+﻿using System;
+using mainMenu;
 using dataAccess;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
@@ -24,10 +25,11 @@ public class FrontPage : MSceneProcess
         _frontLayer.ShowMyModel(focusInstanceID).Forget();
         
         var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
+        var openShopAction = CommonSetting.PcMode ? null : (Action)(() => PreScene.target.trySwitchToStep(MainSceneStep.ShopTop));
         upperInfoBar.Setup(PlayerAccountInfo.Me.TitleDisplayName,
             () => PreScene.target.trySwitchToStep(MainSceneStep.Setting), 
             () => PreScene.target.trySwitchToStep(MainSceneStep.MailBox),
-            () => PreScene.target.trySwitchToStep(MainSceneStep.ShopTop),
+            openShopAction,
             PlayerAccountInfo.Me.noAdsState);
         
         // If account isn't linked to device, ask if link. Only ask once
