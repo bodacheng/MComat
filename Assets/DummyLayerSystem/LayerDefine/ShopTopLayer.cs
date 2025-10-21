@@ -14,11 +14,19 @@ namespace mainMenu
         
         public void Initialize()
         {
-            #if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
+            if (!AdsInitializer.ShouldEnableAds())
+            {
+                if (adsBtnRender != null)
+                    adsBtnRender.gameObject.SetActive(false);
+                if (noAdsCell != null)
+                    noAdsCell.gameObject.SetActive(false);
+                RefreshSize();
+                return;
+            }
+
             ShowNoAdsProduct();
             adsBtnRender.SetupForMainScene();
             RefreshSize();
-            #endif 
         }
 
         public void ShowTimeLimitedBundle()
@@ -29,6 +37,12 @@ namespace mainMenu
 
         public void ShowNoAdsProduct()
         {
+            if (!AdsInitializer.ShouldEnableAds())
+            {
+                noAdsCell.gameObject.SetActive(false);
+                return;
+            }
+
             noAdsCell.gameObject.SetActive(!PlayerAccountInfo.Me.noAdsState);
         }
 

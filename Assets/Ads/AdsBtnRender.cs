@@ -18,6 +18,12 @@ public class AdsBtnRender : MonoBehaviour
     
     public void SetupForMainScene()
     {
+        if (!AdsInitializer.ShouldEnableAds())
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         // unity
         admobAdsButton.LoadAd();
         admobAdsButton.SetWatchedAdExtraProcess(

@@ -66,6 +66,13 @@ public class AdmobAdsButton : MonoBehaviour
     
     void Awake()
     {
+        if (!AdsInitializer.ShouldEnableAds())
+        {
+            _showAdButton.interactable = false;
+            SetColor();
+            return;
+        }
+
         IniUnitId();
     }
 
@@ -98,6 +105,12 @@ public class AdmobAdsButton : MonoBehaviour
     // Implement a method to execute when the user clicks the button:
     public void ShowAd()
     {
+        if (!AdsInitializer.ShouldEnableAds())
+        {
+            Debug.LogWarning("Ad playback is disabled on this platform.");
+            return;
+        }
+        
         switch (adType)
         {
             case AdType.Interstitial:
@@ -214,6 +227,19 @@ public class AdmobAdsButton : MonoBehaviour
 
     public void LoadAd()
     {
+        if (!AdsInitializer.ShouldEnableAds())
+        {
+            AdIsReady = false;
+            return;
+        }
+
+        if (string.IsNullOrEmpty(_adUnitId))
+        {
+            Debug.LogWarning("Ad Unit ID is missing for this platform.");
+            AdIsReady = false;
+            return;
+        }
+
         switch (adType)
         {
             case AdType.Interstitial:

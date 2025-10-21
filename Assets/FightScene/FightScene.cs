@@ -148,6 +148,11 @@ namespace FightScene
 
         public void LoadAds()
         {
+            if (!AdsInitializer.ShouldEnableAds())
+            {
+                return;
+            }
+
             watchBtn = Instantiate(watchAdBtnPrefab);
             watchBtn.HasTicket = true;
             watchBtn.LoadAd();
