@@ -24,6 +24,7 @@ public partial class ArenaFightOver : UILayer
     [SerializeField] private BOButton storyPicOnClickBtn;
     [SerializeField] private Image storyPicBgImage;
     [SerializeField] private SizeAdjustBySpriteSize sizeAdjustBySpriteSize;
+    [SerializeField] private GameObject storyLineBg;
     [SerializeField] private Text storyLineText;
     
     private TweenerCore<Color, Color, ColorOptions> storyBgColorChangeTween;
@@ -64,6 +65,7 @@ public partial class ArenaFightOver : UILayer
                 storyBgColorChangeTween = storyPicBgImage.DOColor(Color.white, storyBgColorChangeDuration);
                 storyPicBgImage.gameObject.SetActive(true);
                 storyPicOnClickBtn.SetListener(() => { OnClick(story); });
+                _currentSceneIndex = 0;
                 DisplayCurrentScene(story);
                 storyPicBgImage.gameObject.SetActive(true);
             }
@@ -96,7 +98,6 @@ public partial class ArenaFightOver : UILayer
             if (_currentSceneIndex < storyInfo.StoryScenes.Count - 1)
             {
                 _currentSceneIndex++;
-                _currentLineIndex = 0;
                 DisplayCurrentScene(storyInfo);
             }
             else
@@ -111,28 +112,50 @@ public partial class ArenaFightOver : UILayer
     
     private void DisplayCurrentScene(StoryInfo _storyInfo)
     {
+        _currentLineIndex = -1;
         storyPicBgImage.sprite = _storyInfo.StoryScenes[_currentSceneIndex].Pic;
         sizeAdjustBySpriteSize.AdjustSize();
-        DisplayCurrentLine(_storyInfo);
+        storyLineText.text = string.Empty;
+        if (storyLineBg != null)
+        {
+            storyLineBg.SetActive(false);
+        }
     }
 
     private void DisplayCurrentLine(StoryInfo _storyInfo)
     {
+        if (_currentLineIndex < 0)
+        {
+            if (storyLineBg != null)
+            {
+                storyLineBg.SetActive(false);
+            }
+            return;
+        }
+
+        string displayLine = string.Empty;
+
         if (_storyInfo.StoryScenes[_currentSceneIndex].Lines.Count > _currentLineIndex)
         {
             var line = Story.Get(_storyInfo.StoryScenes[_currentSceneIndex].Lines[_currentLineIndex]);
             if (!String.IsNullOrEmpty(line))
             {
-                storyLineText.text =  line;
+                displayLine = line;
             }
             else
             {
-                storyLineText.text = _storyInfo.StoryScenes[_currentSceneIndex].Lines[_currentLineIndex];
+                displayLine = _storyInfo.StoryScenes[_currentSceneIndex].Lines[_currentLineIndex];
             }
         }
         else
         {
-            storyLineText.text = "";
+            displayLine = string.Empty;
+        }
+
+        storyLineText.text = displayLine;
+        if (storyLineBg != null)
+        {
+            storyLineBg.SetActive(!string.IsNullOrEmpty(displayLine));
         }
     }
     

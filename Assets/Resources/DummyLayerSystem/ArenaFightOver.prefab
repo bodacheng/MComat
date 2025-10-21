@@ -127,13 +127,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 239587552366510478}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1333324215236232976}
-  m_Father: {fileID: 5996416521223685005}
+  m_Father: {fileID: 4060389198648567567}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -292,7 +292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5996416521223685005
 RectTransform:
   m_ObjectHideFlags: 0
@@ -304,8 +304,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4177069025936768582}
+  m_Children: []
   m_Father: {fileID: 4060389198648567567}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -714,6 +713,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5996416521223685005}
+  - {fileID: 4177069025936768582}
   m_Father: {fileID: 3394279360188732437}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1218,6 +1218,7 @@ MonoBehaviour:
   storyPicOnClickBtn: {fileID: 55758665777148207}
   storyPicBgImage: {fileID: 3820961998134983607}
   sizeAdjustBySpriteSize: {fileID: 3547098452706863693}
+  storyLineBg: {fileID: 239587552366510478}
   storyLineText: {fileID: 1363895778595290934}
 --- !u!95 &7760643232347634469
 Animator:
