@@ -59,15 +59,15 @@ MonoBehaviour:
     r_id: 2
     level: 2
     set:
-      a1: 89
-      a2: 3
-      a3: 167
-      b1: 117
-      b2: 183
-      b3: 95
-      c1: 103
-      c2: 68
-      c3: 159
+      a1: 199
+      a2: 44
+      a3: 39
+      b1: 183
+      b2: 161
+      b3: 36
+      c1: 12
+      c2: 197
+      c3: 107
   fightMode: 3
   team1HpRate: 1
   team2HpRate: 1

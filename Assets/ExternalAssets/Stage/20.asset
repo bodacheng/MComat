@@ -56,18 +56,18 @@ MonoBehaviour:
       c2: 127
       c3: 102
   - id: 3
-    r_id: 4
+    r_id: 6
     level: 0.6
     set:
-      a1: 36
-      a2: 12
-      a3: 45
-      b1: 63
-      b2: 118
-      b3: 107
-      c1: 166
-      c2: 144
-      c3: 90
+      a1: 136
+      a2: 179
+      a3: 114
+      b1: 175
+      b2: 85
+      b3: 108
+      c1: 102
+      c2: 161
+      c3: 16
   fightMode: 3
   team1HpRate: 1
   team2HpRate: 1
