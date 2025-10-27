@@ -13,6 +13,7 @@ public class UnitInfo
     
     public UnitInfo Clone()
     {
+        _ = Guid; // ensure GUID is generated before cloning so clones share the same id
         return (UnitInfo)MemberwiseClone();
     }
 
@@ -25,7 +26,17 @@ public class UnitInfo
     
     private string guid;
     /// <summary>返回此对象的全局唯一 ID。</summary>
-    public string Guid => guid;
+    public string Guid
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(guid))
+            {
+                guid = System.Guid.NewGuid().ToString("N");
+            }
+            return guid;
+        }
+    }
 
     public UnitInfo()
     {
