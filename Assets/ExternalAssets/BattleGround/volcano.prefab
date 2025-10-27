@@ -4244,7 +4244,7 @@ GameObject:
   - component: {fileID: 534585171591210733}
   - component: {fileID: 3897594300817601107}
   m_Layer: 6
-  m_Name: Demo_Scene_V3
+  m_Name: volcano
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

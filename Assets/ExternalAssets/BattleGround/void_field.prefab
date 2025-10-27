@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 8322460592287290729}
   - component: {fileID: -8334091140794521415}
   m_Layer: 6
-  m_Name: DanceFloor
+  m_Name: void_field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

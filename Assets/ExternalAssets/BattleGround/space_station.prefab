@@ -601,7 +601,7 @@ GameObject:
   - component: {fileID: 687839628288274258}
   - component: {fileID: 7191572081734664956}
   m_Layer: 6
-  m_Name: Sci_Dungen
+  m_Name: space_station
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
