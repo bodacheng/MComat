@@ -7,6 +7,20 @@ public class ScreenCaptureExample : MonoBehaviour
     public KeyCode captureKey = KeyCode.Space;
     // 保存图片的路径
     public string screenshotFolderPath = "Screenshots";
+    static ScreenCaptureExample _instance;
+
+    void Awake()
+    {
+        // Ensure a single persistent instance survives scene changes.
+        if (_instance != null && _instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        _instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
 #if UNITY_EDITOR
     void Update()
