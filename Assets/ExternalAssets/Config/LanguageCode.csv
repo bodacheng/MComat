@@ -72,10 +72,10 @@ FightResume,Resume,再開,战斗继续
 FightQuit,Quit,停止,退出战斗
 AutoCamera,Automatic camera adapter,自動カメラ調整,自动相机适配
 ,,,
-story_part1,"Mysterious phenomena resembling whirlpools appeared in the skies all over the world, followed by countless colorful stones falling from the heavens.",渦巻きのような奇妙な現象が世界中の空に現れ、無数の色とりどりの石が空から降ってきました。,形如漩涡的诡异现象出现在世界各地上空，随即无数彩色石块从天而降。
-story_part2,"Upon touching these stones, known as ""Magic Crystals,"" one can absorb them into their body. Not only does this grant a fragment of memories from ancient people of an unknown era, but it also bestows a highly aggressive power.",人々が「魔晶」と呼ばれるこの石に触れると、体内に取り込むことができます。それにより、未知の時代の古代人の記憶の一部を得るだけでなく、非常に攻撃的な能力も得ることができます。,人接触了这种被称为“魔晶”的石块后就能将其摄入体内，由此不光能获得一段来自未知年代古人的记忆，还能获得一项极具攻击性的能力。
-story_part3,"These fragmented memories from the distant past piece together a message: on the day of the Magic Crystals' descent, a crystal known as the ""Emperor"" will be among them.",これらの古代の記憶の断片は、魔晶が降りてくる日に、「帝王」と呼ばれる魔晶も含まれているという情報を組み立てます。,这些来自远古的记忆断片拼凑出一个信息，就是魔晶降临之日，一颗被称为“帝王”的魔晶也会在其中，
-story_part4,Whoever obtains it will possess a supernatural ability to dictate the fate of the world.,「帝王」を手に入れた人は、世界の運命を支配する超能力を持つことになります。,获得它的人将拥有主宰世界命运的超能力。
+story_part1,"A bizarre, vortex-like phenomenon appeared in the skies across the world, followed by countless colorful stones raining down from above.",渦のような不気味な現象が世界各地の空に現れ、続いて無数の色とりどりの石塊が天から降り注いだ。,形如漩涡的诡异现象出现在世界各地上空，随即无数彩色石块从天而降。
+story_part2,"When people came into contact with these stones, later named “Magic Crystals,” they were able to absorb them into their bodies and gained a highly offensive superpower.",人々は「魔晶」と呼ばれるこの石塊に触れると、それを体内へと取り込むことができ、そして強力な攻撃性を持つ超能力を手に入れた。,人接触了这种被称为“魔晶”的石块后就能将其摄入体内，就能获得一项极具攻击性的超能力。
+story_part3,"People began scrambling and fighting to obtain the gemstone known as the “Magic Crystal,”—",人々はこぞって「魔晶」と呼ばれるこの宝石を奪い合い――,人们纷纷争抢这种被称为魔晶的宝石，
+story_part4,The world was transformed into a vast battlefield.,世界は、巨大な戦場へと変貌していった。,世界变成宏大的战场。
 ,,,
 MailBindInstruction,"This account has not yet been bound to an email address. If you wish to log in on another device and bind this account, you must first bind an email address. Please note that each account can only be bound to one email address, so please choose your email address carefully.",このアカウントはまだメールアドレスがバインドされていません。他のデバイスでログインしてこのアカウントをバインドするには、メールアドレスをバインドする必要があります。各アカウントは1つのメールアドレスだけをバインドすることができますので、メールアドレスを選択する際は注意してください。,本账户尚未绑定邮箱。如果要在其他设备登陆并绑定本账户，必须绑定邮箱。每个账户只能绑定一个邮箱，请谨慎选择邮箱地址。
 DeviceBindInstruction,"The current account has already been bound to the device, so you can log in to this account directly when you open the app",現在のアカウントは既にデバイスにバインドされています。アプリを開くと、このアカウントで直接ログインできます。,当前账户已经和设备进行了绑定，你可以在程序打开后直接登陆本账户。
