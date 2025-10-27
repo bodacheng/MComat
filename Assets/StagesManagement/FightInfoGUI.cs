@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class FightInfoGUI : Editor
 {
     private StageEditor _stageEditor;
     private bool _initialized = false;
+    private static readonly Dictionary<string, Sprite> SpriteCache = new Dictionary<string, Sprite>(StringComparer.OrdinalIgnoreCase);
     
     public override void OnInspectorGUI()
     {
@@ -62,15 +64,79 @@ public class FightInfoGUI : Editor
     
     public static Sprite GetSprite(string name)
     {
-        var searchRootAssetFolder = Application.dataPath;
-        var pfGuiPaths = Directory.GetFiles(searchRootAssetFolder, name, SearchOption.AllDirectories);
-        foreach (var eachPath in pfGuiPaths)
+        if (string.IsNullOrEmpty(name))
         {
-            var loadPath = eachPath.Substring(eachPath.LastIndexOf("Assets"));
-            var sprite =(Sprite)AssetDatabase.LoadAssetAtPath(loadPath, typeof(Sprite));
-            return sprite;
+            return null;
         }
-        return null;
+        
+        if (SpriteCache.TryGetValue(name, out var cachedSprite))
+        {
+            return cachedSprite;
+        }
+        
+        Sprite sprite = null;
+        if (name.StartsWith("Assets/", StringComparison.OrdinalIgnoreCase))
+        {
+            sprite = AssetDatabase.LoadAssetAtPath<Sprite>(name);
+        }
+        
+        if (sprite == null)
+        {
+            var searchName = Path.GetFileNameWithoutExtension(name);
+            if (string.IsNullOrEmpty(searchName))
+            {
+                searchName = name;
+            }
+            
+            var guids = AssetDatabase.FindAssets($"{searchName} t:Sprite");
+            foreach (var guid in guids)
+            {
+                var loadPath = AssetDatabase.GUIDToAssetPath(guid);
+                var loadedSprite = AssetDatabase.LoadAssetAtPath<Sprite>(loadPath);
+                if (loadedSprite == null)
+                {
+                    continue;
+                }
+                
+                if (!SpriteCache.ContainsKey(loadedSprite.name))
+                {
+                    SpriteCache[loadedSprite.name] = loadedSprite;
+                }
+                
+                sprite = loadedSprite;
+                break;
+            }
+        }
+        
+        if (sprite == null)
+        {
+            var searchRootAssetFolder = Application.dataPath;
+            var fileName = Path.GetFileName(name);
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                var pfGuiPaths = Directory.GetFiles(searchRootAssetFolder, fileName, SearchOption.AllDirectories);
+                foreach (var eachPath in pfGuiPaths)
+                {
+                    var loadPath = eachPath.Substring(eachPath.LastIndexOf("Assets", StringComparison.Ordinal));
+                    var loadedSprite = AssetDatabase.LoadAssetAtPath<Sprite>(loadPath);
+                    if (loadedSprite == null)
+                    {
+                        continue;
+                    }
+                    
+                    if (!SpriteCache.ContainsKey(loadedSprite.name))
+                    {
+                        SpriteCache[loadedSprite.name] = loadedSprite;
+                    }
+                    
+                    sprite = loadedSprite;
+                    break;
+                }
+            }
+        }
+        
+        SpriteCache[name] = sprite;
+        return sprite;
     }
 }
 #endif
