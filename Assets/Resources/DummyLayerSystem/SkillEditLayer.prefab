@@ -14947,6 +14947,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1599163115949099998, guid: d223a7ec974a54392bba246b17de68c9,
+        type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2003477137100764848, guid: d223a7ec974a54392bba246b17de68c9,
         type: 3}
       propertyPath: m_Pivot.x

@@ -6680,9 +6680,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   center: {x: 0, y: 0, z: 0}
-  size: {x: 0.08, y: 0.15, z: 0.35}
+  size: {x: 0.12, y: 0.12, z: 0.28}
   direction: 0
-  radiusSeparation: 1
+  radiusSeparation: 0
 --- !u!1 &2092304372506950384
 GameObject:
   m_ObjectHideFlags: 0
@@ -12589,7 +12589,7 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
     radius:
-      value: 0.02
+      value: 0.03
       useCurve: 0
       curve:
         serializedVersion: 2
@@ -12664,7 +12664,7 @@ MonoBehaviour:
     angleRestorationConstraint:
       useAngleRestoration: 1
       stiffness:
-        value: 0.2
+        value: 0.3
         useCurve: 1
         curve:
           serializedVersion: 2
@@ -12693,9 +12693,9 @@ MonoBehaviour:
       velocityAttenuation: 0.8
       gravityFalloff: 0
     angleLimitConstraint:
-      useAngleLimit: 0
+      useAngleLimit: 1
       limitAngle:
-        value: 60
+        value: 40
         useCurve: 1
         curve:
           serializedVersion: 2
@@ -12723,9 +12723,9 @@ MonoBehaviour:
           m_RotationOrder: 4
       stiffness: 1
     motionConstraint:
-      useMaxDistance: 0
+      useMaxDistance: 1
       maxDistance:
-        value: 0.3
+        value: 0.12
         useCurve: 0
         curve:
           serializedVersion: 2
@@ -12783,14 +12783,14 @@ MonoBehaviour:
       stiffness: 1
     colliderCollisionConstraint:
       mode: 1
-      friction: 0.05
+      friction: 0
       colliderList:
       - {fileID: 7017270378139130598}
       - {fileID: 1492635836334056125}
     selfCollisionConstraint:
-      selfMode: 0
+      selfMode: 1
       surfaceThickness:
-        value: 0.005
+        value: 0.015
         useCurve: 0
         curve:
           serializedVersion: 2
@@ -13310,9 +13310,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   center: {x: 0, y: 0, z: 0}
-  size: {x: 0.08, y: 0.15, z: 0.35}
+  size: {x: 0.12, y: 0.12, z: 0.28}
   direction: 0
-  radiusSeparation: 1
+  radiusSeparation: 0
 --- !u!1 &4448311372963503364
 GameObject:
   m_ObjectHideFlags: 0
