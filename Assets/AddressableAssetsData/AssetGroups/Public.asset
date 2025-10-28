@@ -1221,6 +1221,48 @@ MonoBehaviour:
     m_SerializedLabels:
     - public
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c006f387d1b24898aa7ed5056023bb3
+    m_Address: Eff_smoke_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e199ee8112362864f831425463b09fda
+    m_Address: Noise1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28d5ea4798c3cd24aa8c43f37983d04b
+    m_Address: CrystalMat_Yellow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67646e93159db5c438fae655a96a12b6
+    m_Address: CrystalMat_DarkBlue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34ff6049b1bcfe8419fd6041a7421ff4
+    m_Address: CrystalMat_Green
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5832d3e2524b35641bab3811346d78bc
+    m_Address: teenth
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 281dc2df910944643b1c8b71d1d35e3b
+    m_Address: CrystalMat_Pink
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
   m_SchemaSet:
