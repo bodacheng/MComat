@@ -406,86 +406,278 @@ public class AIServiceManager : MonoBehaviour
         string additionalRequirements = serviceConfig.AdditionalImageRequirements;
         
         var promptBuilder = new StringBuilder();
-        string languageInstruction = BuildLanguageInstruction();
+        SystemLanguage targetLanguage = GetConfiguredLanguage();
+        string languageInstruction = BuildLanguageInstruction(targetLanguage);
         
-        promptBuilder.AppendLine("你是一名专业的多页连环画编剧与美术总监。");
-        promptBuilder.AppendLine($"围绕主题“{storyTheme}”创作一个由 {pageCount} 个连续场景组成的故事。");
-        promptBuilder.AppendLine("请输出严格的 JSON 数据，禁止添加注释、额外说明或 markdown。");
+        string storytellerIntro;
+        string themeInstruction;
+        string jsonInstruction;
+        string ensureHeader;
+        string[] ensureItems;
+        string templateHeader;
+        string[] templateLines;
+        string styleLineFormat;
+        string additionalStyleFormat;
+        string finalReminder;
+        
+        switch (targetLanguage)
+        {
+            case SystemLanguage.Chinese:
+                storytellerIntro = "你是一名专业的多页连环画编剧与美术总监。";
+                themeInstruction = $"围绕主题“{storyTheme}”创作一个由 {pageCount} 个连续场景组成的故事。";
+                jsonInstruction = "请输出严格的 JSON 数据，禁止添加注释、额外说明或 markdown。";
+                ensureHeader = "请确保：";
+                ensureItems = new[]
+                {
+                    $"- 场景数量必须正好为 {pageCount}，index 从 1 开始，按顺序排列。",
+                    "- 对所有会重复出现的角色提供一致的角色卡片，在文中和 scenes.characters 列表中复用相同的 id。",
+                    "- 对关键场景地点提供地点卡片，在每个场景中引用 locations 的 id 以保持背景一致。",
+                    "- 角色描述需包含发型、五官、体态、肤色、服装和可辨识的随身物品。",
+                    "- 地点描述需包含时间、氛围、色调、重要道具。",
+                    "- 为整部作品给出统一的 style（artDirection、palette、camera、lighting、keywords、negativeKeywords）以保证画风统一。",
+                    "- 每个场景给出 title、description（描述画面）、setting（引用地点并解释时间/情境）、locationId（引用 locations.id）、characters（角色 id 列表）、mood、importantObjects、camera、lighting、visualPrompt、negativePrompt。",
+                    "- dialogues 是数组，包含 speaker 与 text，用于剧情对话。若无对话可返回空数组。",
+                    "- visualPrompt 用简洁英文或中英文混合描述画面要素，便于直接用于图像生成。",
+                    "- negativePrompt 描述应避免的视觉内容和错误。",
+                    "- 全文除 JSON 以外不输出任何内容。"
+                };
+                templateHeader = "请按照以下 JSON 模板返回：";
+                templateLines = new[]
+                {
+                    "{",
+                    "  \"characters\": [",
+                    "    {",
+                    "      \"id\": \"hero\",",
+                    "      \"name\": \"角色姓名\",",
+                    "      \"appearance\": \"身材、发型、肤色等\",",
+                    "      \"outfit\": \"服装、配饰\",",
+                    "      \"personality\": \"性格或当前情绪\",",
+                    "      \"visualTags\": \"关键视觉要素\"",
+                    "    }",
+                    "  ],",
+                    "  \"locations\": [",
+                    "    {",
+                    "      \"id\": \"warehouse\",",
+                    "      \"name\": \"地点名称\",",
+                    "      \"description\": \"背景细节\",",
+                    "      \"palette\": \"主色调\",",
+                    "      \"timeOfDay\": \"时间\",",
+                    "      \"atmosphere\": \"氛围\"",
+                    "    }",
+                    "  ],",
+                    "  \"style\": {",
+                    "    \"artDirection\": \"整体绘画风格\",",
+                    "    \"palette\": \"整体配色\",",
+                    "    \"camera\": \"常用镜头语言\",",
+                    "    \"lighting\": \"整体光影\",",
+                    "    \"keywords\": \"需要强化的视觉关键词\",",
+                    "    \"negativeKeywords\": \"需要避免的元素\"",
+                    "  },",
+                    "  \"scenes\": [",
+                    "    {",
+                    "      \"index\": 1,",
+                    "      \"title\": \"场景标题\",",
+                    "      \"description\": \"画面描述\",",
+                    "      \"setting\": \"引用地点 id 并补充细节\",",
+                    "      \"locationId\": \"warehouse\",",
+                    "      \"characters\": [\"hero\"],",
+                    "      \"mood\": \"情绪\",",
+                    "      \"importantObjects\": \"关键物件\",",
+                    "      \"camera\": \"镜头语言\",",
+                    "      \"lighting\": \"光影\",",
+                    "      \"visualPrompt\": \"图像生成提示\",",
+                    "      \"negativePrompt\": \"需避免的元素\",",
+                    "      \"dialogues\": [",
+                    "        { \"speaker\": \"角色姓名\", \"text\": \"具体台词\" }",
+                    "      ]",
+                    "    }",
+                    "  ]",
+                    "}"
+                };
+                styleLineFormat = "艺术风格需要贴合：{0}。";
+                additionalStyleFormat = "额外风格要求：{0}。";
+                finalReminder = "请注意保持角色造型、服饰、背景在所有场景中的一致性，并确保 JSON 可被解析。";
+                break;
+            case SystemLanguage.Japanese:
+                storytellerIntro = "あなたはプロの連続挿絵物語の脚本家兼アートディレクターです。";
+                themeInstruction = $"テーマ「{storyTheme}」をもとに、{pageCount} 個の連続したシーンで構成される物語を作成してください。";
+                jsonInstruction = "コメントや追加説明、markdown を入れず、厳密な JSON 形式で出力してください。";
+                ensureHeader = "必ず次の点を守ってください:";
+                ensureItems = new[]
+                {
+                    $"- シーン数は必ず {pageCount} 個、index は 1 から連番で並べてください。",
+                    "- 登場を繰り返すキャラクターには一貫したキャラクターシートを用意し、本文と scenes.characters で同じ id を再利用してください。",
+                    "- 重要な舞台にはロケーションシートを作成し、各シーンで locationId として id を参照して背景を揃えてください。",
+                    "- キャラクター説明には髪型・顔立ち・体格・肌の色・衣装・識別できる小物を含めてください。",
+                    "- ロケーション説明には時間帯・雰囲気・色調・重要なオブジェクトを含めてください。",
+                    "- 作品全体のスタイル（artDirection, palette, camera, lighting, keywords, negativeKeywords）を統一してください。",
+                    "- 各シーンには title, description（画面描写）, setting（ロケーション id と状況説明）, locationId, characters（id リスト）, mood, importantObjects, camera, lighting, visualPrompt, negativePrompt を含めてください。",
+                    "- dialogues は speaker と text を持つ要素の配列です。会話がない場合は空配列を返してください。",
+                    "- visualPrompt は画像生成のための要素を簡潔な英語またはバイリンガルで記述してください。",
+                    "- negativePrompt は避けたい要素や誤りを示してください。",
+                    "- JSON 本文以外は何も出力しないでください。"
+                };
+                templateHeader = "次の JSON テンプレートに従って出力してください:";
+                templateLines = new[]
+                {
+                    "{",
+                    "  \"characters\": [",
+                    "    {",
+                    "      \"id\": \"hero\",",
+                    "      \"name\": \"キャラクター名\",",
+                    "      \"appearance\": \"体格・髪型・肌の色など\",",
+                    "      \"outfit\": \"衣装とアクセサリー\",",
+                    "      \"personality\": \"性格または現在の感情\",",
+                    "      \"visualTags\": \"重要なビジュアルタグ\"",
+                    "    }",
+                    "  ],",
+                    "  \"locations\": [",
+                    "    {",
+                    "      \"id\": \"warehouse\",",
+                    "      \"name\": \"ロケーション名\",",
+                    "      \"description\": \"背景の詳細\",",
+                    "      \"palette\": \"主要な配色\",",
+                    "      \"timeOfDay\": \"時間帯\",",
+                    "      \"atmosphere\": \"雰囲気\"",
+                    "    }",
+                    "  ],",
+                    "  \"style\": {",
+                    "    \"artDirection\": \"全体のアートディレクション\",",
+                    "    \"palette\": \"全体の配色\",",
+                    "    \"camera\": \"よく使うカメラ表現\",",
+                    "    \"lighting\": \"全体のライティング\",",
+                    "    \"keywords\": \"強調したいビジュアルキーワード\",",
+                    "    \"negativeKeywords\": \"避けるべき要素\"",
+                    "  },",
+                    "  \"scenes\": [",
+                    "    {",
+                    "      \"index\": 1,",
+                    "      \"title\": \"シーンタイトル\",",
+                    "      \"description\": \"画面描写\",",
+                    "      \"setting\": \"ロケーション id と状況説明\",",
+                    "      \"locationId\": \"warehouse\",",
+                    "      \"characters\": [\"hero\"],",
+                    "      \"mood\": \"感情\",",
+                    "      \"importantObjects\": \"重要なオブジェクト\",",
+                    "      \"camera\": \"カメラ表現\",",
+                    "      \"lighting\": \"ライティング\",",
+                    "      \"visualPrompt\": \"画像生成プロンプト\",",
+                    "      \"negativePrompt\": \"避けるべき要素\",",
+                    "      \"dialogues\": [",
+                    "        { \"speaker\": \"キャラクター名\", \"text\": \"台詞\" }",
+                    "      ]",
+                    "    }",
+                    "  ]",
+                    "}"
+                };
+                styleLineFormat = "アートスタイルは {0} に合わせてください。";
+                additionalStyleFormat = "追加スタイル要件: {0}。";
+                finalReminder = "全シーンでキャラクターデザイン・衣装・背景の整合性を保ち、JSON が正しく解析できるようにしてください。";
+                break;
+            default:
+                storytellerIntro = "You are a professional multi-page picture book writer and art director.";
+                themeInstruction = $"Create a story composed of {pageCount} consecutive scenes around the theme \"{storyTheme}\".";
+                jsonInstruction = "Return strictly formatted JSON with no comments, extra explanations, or markdown.";
+                ensureHeader = "Make sure that:";
+                ensureItems = new[]
+                {
+                    $"- The number of scenes must be exactly {pageCount}, with indexes starting at 1 in sequential order.",
+                    "- Provide consistent character sheets for any recurring characters, and reuse the same ids in the narrative and scenes.characters list.",
+                    "- Provide location sheets for key settings and reference their ids in each scene's locationId to keep backgrounds consistent.",
+                    "- Character descriptions must cover hairstyle, facial features, body type, skin tone, wardrobe, and recognizable props.",
+                    "- Location descriptions must cover time of day, atmosphere, color palette, and important props.",
+                    "- Supply a unified style block (artDirection, palette, camera, lighting, keywords, negativeKeywords) to keep the art coherent.",
+                    "- Each scene must include title, description (visual composition), setting (reference location id and context), locationId, characters (id list), mood, importantObjects, camera, lighting, visualPrompt, negativePrompt.",
+                    "- dialogues is an array of entries with speaker and text. Return an empty array if the scene has no dialogue.",
+                    "- visualPrompt should use concise English or bilingual hints describing the imagery for text-to-image generation.",
+                    "- negativePrompt should specify visual mistakes or elements to avoid.",
+                    "- Output nothing outside of the JSON body."
+                };
+                templateHeader = "Return JSON following this template:";
+                templateLines = new[]
+                {
+                    "{",
+                    "  \"characters\": [",
+                    "    {",
+                    "      \"id\": \"hero\",",
+                    "      \"name\": \"Character name\",",
+                    "      \"appearance\": \"Body type, hairstyle, skin tone, etc.\",",
+                    "      \"outfit\": \"Wardrobe and accessories\",",
+                    "      \"personality\": \"Personality or current emotion\",",
+                    "      \"visualTags\": \"Key visual tags\"",
+                    "    }",
+                    "  ],",
+                    "  \"locations\": [",
+                    "    {",
+                    "      \"id\": \"warehouse\",",
+                    "      \"name\": \"Location name\",",
+                    "      \"description\": \"Background details\",",
+                    "      \"palette\": \"Primary colors\",",
+                    "      \"timeOfDay\": \"Time of day\",",
+                    "      \"atmosphere\": \"Mood\"",
+                    "    }",
+                    "  ],",
+                    "  \"style\": {",
+                    "    \"artDirection\": \"Overall art direction\",",
+                    "    \"palette\": \"Overall palette\",",
+                    "    \"camera\": \"Common camera language\",",
+                    "    \"lighting\": \"Overall lighting\",",
+                    "    \"keywords\": \"Visual keywords to reinforce\",",
+                    "    \"negativeKeywords\": \"Elements to avoid\"",
+                    "  },",
+                    "  \"scenes\": [",
+                    "    {",
+                    "      \"index\": 1,",
+                    "      \"title\": \"Scene title\",",
+                    "      \"description\": \"Visual description\",",
+                    "      \"setting\": \"Reference location id and context\",",
+                    "      \"locationId\": \"warehouse\",",
+                    "      \"characters\": [\"hero\"],",
+                    "      \"mood\": \"Emotion\",",
+                    "      \"importantObjects\": \"Important props\",",
+                    "      \"camera\": \"Camera language\",",
+                    "      \"lighting\": \"Lighting\",",
+                    "      \"visualPrompt\": \"Image generation prompt\",",
+                    "      \"negativePrompt\": \"Elements to avoid\",",
+                    "      \"dialogues\": [",
+                    "        { \"speaker\": \"Character name\", \"text\": \"Dialogue line\" }",
+                    "      ]",
+                    "    }",
+                    "  ]",
+                    "}"
+                };
+                styleLineFormat = "Match the visual style: {0}.";
+                additionalStyleFormat = "Additional style requirements: {0}.";
+                finalReminder = "Maintain consistent character designs, outfits, and backgrounds across all scenes, and ensure the JSON is valid.";
+                break;
+        }
+        
+        promptBuilder.AppendLine(storytellerIntro);
+        promptBuilder.AppendLine(themeInstruction);
+        promptBuilder.AppendLine(jsonInstruction);
         if (!string.IsNullOrEmpty(languageInstruction))
         {
             promptBuilder.AppendLine(languageInstruction);
         }
         promptBuilder.AppendLine();
-        promptBuilder.AppendLine("请确保：");
-        promptBuilder.AppendLine($"- 场景数量必须正好为 {pageCount}，index 从 1 开始，按顺序排列。");
-        promptBuilder.AppendLine("- 对所有会重复出现的角色提供一致的角色卡片，在文中和 scenes.characters 列表中复用相同的 id。");
-        promptBuilder.AppendLine("- 对关键场景地点提供地点卡片，在每个场景中引用 locations 的 id 以保持背景一致。");
-        promptBuilder.AppendLine("- 角色描述需包含发型、五官、体态、肤色、服装和可辨识的随身物品。");
-        promptBuilder.AppendLine("- 地点描述需包含时间、氛围、色调、重要道具。");
-        promptBuilder.AppendLine("- 为整部作品给出统一的 style（artDirection、palette、camera、lighting、keywords、negativeKeywords）以保证画风统一。");
-        promptBuilder.AppendLine("- 每个场景给出 title、description（描述画面）、setting（引用地点并解释时间/情境）、locationId（引用 locations.id）、characters（角色 id 列表）、mood、importantObjects、camera、lighting、visualPrompt、negativePrompt。");
-        promptBuilder.AppendLine("- dialogues 是数组，包含 speaker 与 text，用于剧情对话。若无对话可返回空数组。");
-        promptBuilder.AppendLine("- visualPrompt 用简洁英文或中英文混合描述画面要素，便于直接用于图像生成。");
-        promptBuilder.AppendLine("- negativePrompt 描述应避免的视觉内容和错误。");
-        promptBuilder.AppendLine("- 全文除 JSON 以外不输出任何内容。");
+        promptBuilder.AppendLine(ensureHeader);
+        foreach (var line in ensureItems)
+        {
+            promptBuilder.AppendLine(line);
+        }
         promptBuilder.AppendLine();
-        promptBuilder.AppendLine("请按照以下 JSON 模板返回：");
-        promptBuilder.AppendLine("{");
-        promptBuilder.AppendLine("  \"characters\": [");
-        promptBuilder.AppendLine("    {");
-        promptBuilder.AppendLine("      \"id\": \"hero\",");
-        promptBuilder.AppendLine("      \"name\": \"角色姓名\",");
-        promptBuilder.AppendLine("      \"appearance\": \"身材、发型、肤色等\",");
-        promptBuilder.AppendLine("      \"outfit\": \"服装、配饰\",");
-        promptBuilder.AppendLine("      \"personality\": \"性格或当前情绪\",");
-        promptBuilder.AppendLine("      \"visualTags\": \"关键视觉要素\"");
-        promptBuilder.AppendLine("    }");
-        promptBuilder.AppendLine("  ],");
-        promptBuilder.AppendLine("  \"locations\": [");
-        promptBuilder.AppendLine("    {");
-        promptBuilder.AppendLine("      \"id\": \"warehouse\",");
-        promptBuilder.AppendLine("      \"name\": \"地点名称\",");
-        promptBuilder.AppendLine("      \"description\": \"背景细节\",");
-        promptBuilder.AppendLine("      \"palette\": \"主色调\",");
-        promptBuilder.AppendLine("      \"timeOfDay\": \"时间\",");
-        promptBuilder.AppendLine("      \"atmosphere\": \"氛围\"");
-        promptBuilder.AppendLine("    }");
-        promptBuilder.AppendLine("  ],");
-        promptBuilder.AppendLine("  \"style\": {");
-        promptBuilder.AppendLine("    \"artDirection\": \"整体绘画风格\",");
-        promptBuilder.AppendLine("    \"palette\": \"整体配色\",");
-        promptBuilder.AppendLine("    \"camera\": \"常用镜头语言\",");
-        promptBuilder.AppendLine("    \"lighting\": \"整体光影\",");
-        promptBuilder.AppendLine("    \"keywords\": \"需要强化的视觉关键词\",");
-        promptBuilder.AppendLine("    \"negativeKeywords\": \"需要避免的元素\"");
-        promptBuilder.AppendLine("  },");
-        promptBuilder.AppendLine("  \"scenes\": [");
-        promptBuilder.AppendLine("    {");
-        promptBuilder.AppendLine("      \"index\": 1,");
-        promptBuilder.AppendLine("      \"title\": \"场景标题\",");
-        promptBuilder.AppendLine("      \"description\": \"画面描述\",");
-        promptBuilder.AppendLine("      \"setting\": \"引用地点 id 并补充细节\",");
-        promptBuilder.AppendLine("      \"locationId\": \"warehouse\",");
-        promptBuilder.AppendLine("      \"characters\": [\"hero\"],");
-        promptBuilder.AppendLine("      \"mood\": \"情绪\",");
-        promptBuilder.AppendLine("      \"importantObjects\": \"关键物件\",");
-        promptBuilder.AppendLine("      \"camera\": \"镜头语言\",");
-        promptBuilder.AppendLine("      \"lighting\": \"光影\",");
-        promptBuilder.AppendLine("      \"visualPrompt\": \"图像生成提示\",");
-        promptBuilder.AppendLine("      \"negativePrompt\": \"需避免的元素\",");
-        promptBuilder.AppendLine("      \"dialogues\": [");
-        promptBuilder.AppendLine("        { \"speaker\": \"角色姓名\", \"text\": \"具体台词\" }");
-        promptBuilder.AppendLine("      ]");
-        promptBuilder.AppendLine("    }");
-        promptBuilder.AppendLine("  ]");
-        promptBuilder.AppendLine("}");
+        promptBuilder.AppendLine(templateHeader);
+        foreach (var line in templateLines)
+        {
+            promptBuilder.AppendLine(line);
+        }
         promptBuilder.AppendLine();
-        promptBuilder.AppendLine($"艺术风格需要贴合：{imageStyle}。");
+        promptBuilder.AppendLine(string.Format(styleLineFormat, imageStyle));
         if (!string.IsNullOrWhiteSpace(additionalRequirements))
         {
-            promptBuilder.AppendLine($"额外风格要求：{additionalRequirements}。");
+            promptBuilder.AppendLine(string.Format(additionalStyleFormat, additionalRequirements));
         }
-        promptBuilder.AppendLine("请注意保持角色造型、服饰、背景在所有场景中的一致性，并确保 JSON 可被解析。");
+        promptBuilder.AppendLine(finalReminder);
         
         return promptBuilder.ToString();
     }
@@ -1199,9 +1391,8 @@ public class AIServiceManager : MonoBehaviour
         return segments.Count > 0 ? string.Join(" ", segments) : string.Empty;
     }
     
-    private string BuildLanguageInstruction()
+    private string BuildLanguageInstruction(SystemLanguage language)
     {
-        var language = GetConfiguredLanguage();
         switch (language)
         {
             case SystemLanguage.Chinese:
@@ -1474,7 +1665,8 @@ public class AIServiceManager : MonoBehaviour
         return
             $"在{setting}背景中，{worldDetail}。故事讲述{hero}{companion}，他们需要{goal}，途中{conflict}，最终{resolution}。" +
             $"请将故事编排为{pageCount}个连续场景的童话绘本。所有出现的人物都保持亚洲面容，男角色呈现古雅典竞技士风格（光膀子、可能披短斗篷或披肩、赤脚），发型随意(可能寸头或光头或中长度)，" +
-            "女角色穿着古雅典短裙与古代饰物，可赤脚或系带凉鞋，整体气质温柔而奇幻。";
+            "女角色穿着古雅典短裙与古代饰物，可赤脚或系带凉鞋，整体气质温柔而奇幻。" +
+            "每幅插图务必捕捉角色动作进行中的瞬间，突出肢体张力、飘动的衣饰与丰富表情，强调角色与场景元素的互动，使画面与当前剧情进展紧密契合，避免静态站立或摆拍感。";
     }
     
     /// <summary>
