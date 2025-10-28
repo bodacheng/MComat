@@ -18,6 +18,8 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] float AT_coefficient = 1;
     [SerializeField] float HP_coefficient = 1;
     [SerializeField] float levelPowerAverager = 0.6f;
+    [SerializeField] float levelDiminishStart = 10f;
+    [SerializeField] float levelDiminishingRange = 80f;
     [SerializeField] bool Team1Invincible = false;
     [SerializeField] int NormalSkillExGet = 30;
     [SerializeField] int Sp1SkillExGet = 0;
@@ -59,6 +61,8 @@ public class FightGlobalSetting : ScriptableObject
     static float AtCoefficient = 1;
     static float HpCoefficient = 1;
     static float LevelPowerAverager;
+    static float LevelDiminishStart;
+    static float LevelDiminishingRange;
     public static bool _Team1Invincible;
     public static int _NormalSkillExGet;
     public static int _Sp1SkillExGet;
@@ -105,6 +109,8 @@ public class FightGlobalSetting : ScriptableObject
         AtCoefficient = AT_coefficient;
         HpCoefficient = HP_coefficient;
         LevelPowerAverager = levelPowerAverager;
+        LevelDiminishStart = Mathf.Max(levelDiminishStart, 1f);
+        LevelDiminishingRange = Mathf.Max(levelDiminishingRange, 0.01f);
         FighterRigidMass = fighterRigidMass;
         OnTouchEnemyBodyRigidDrag = onTouchEnemyBodyRigidDrag;
         _Team1Invincible = Team1Invincible;
@@ -176,11 +182,28 @@ public class FightGlobalSetting : ScriptableObject
     // Ex3 ：60
     public static float ATCal(float originAt, float level)
     {
-        return AtCoefficient * originAt * (level > 1 ? (1 + (level - 1) * LevelPowerAverager) : level);
+        return AtCoefficient * originAt * CalcLevelMultiplier(level);
     }
     public static float StoneHpCal(float originHp, float level)
     {
-        return HpCoefficient * originHp * (level > 1 ? (1 + (level - 1) * LevelPowerAverager) : level);
+        return HpCoefficient * originHp * CalcLevelMultiplier(level);
+    }
+    
+    static float CalcLevelMultiplier(float level)
+    {
+        if (level <= 1f || LevelPowerAverager <= 0f)
+            return Mathf.Max(level, 0f);
+
+        var extraLevels = level - 1f;
+        var startExtraLevels = Mathf.Max(LevelDiminishStart - 1f, 0f);
+        if (extraLevels <= startExtraLevels)
+            return 1f + extraLevels * LevelPowerAverager;
+
+        var bonusBeforeDiminish = startExtraLevels * LevelPowerAverager;
+        var beyondLevels = extraLevels - startExtraLevels;
+        var slowFactor = 1f + beyondLevels / LevelDiminishingRange;
+        var diminishedBonus = beyondLevels * (LevelPowerAverager / slowFactor);
+        return 1f + bonusBeforeDiminish + diminishedBonus;
     }
     
     public static string EffectPathDefine(Element element = Element.Null)
