@@ -18,7 +18,7 @@ MonoBehaviour:
   unitsData:
   - id: 0
     r_id: 17
-    level: 12
+    level: 20
     set:
       a1: 190
       a2: 193
@@ -38,5 +38,5 @@ MonoBehaviour:
   team2AIMode: 0
   dumbAIDecisionDelay: 20
   dreamComboAIRateNum: 80
-  stageRefLevel: 12
+  stageRefLevel: 20
   team2GroupSet: []

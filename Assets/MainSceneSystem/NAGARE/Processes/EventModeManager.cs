@@ -13,6 +13,14 @@ public class EventModeManager
     private IResourceLocation _easyModePath, _normalModePath, _hardModePath;
     private FightInfo _easyMode, _normalMode, _hardMode;
     private List<string> _completedLevels;
+    private readonly Dictionary<string, float> _stageRefLevelCache = new Dictionary<string, float>();
+
+    private const string EasyStageAddress = "easy";
+    private const string NormalStageAddress = "normal";
+    private const string HardStageAddress = "hard";
+    private const float DefaultEasyRefLevel = 2f;
+    private const float DefaultNormalRefLevel = 5f;
+    private const float DefaultHardRefLevel = 10f;
     
     public FightInfo EasyMode => _easyMode;
     public FightInfo NormalMode => _normalMode;
@@ -71,17 +79,15 @@ public class EventModeManager
             _hardMode = await LoadStage(_hardModePath);
     }
     
-    public void InitializeRandomMode(string uniqueId)
+    public async UniTask InitializeRandomMode(string uniqueId)
     {
-        _easyMode = LoadRandomStage(CriticalGaugeMode.Normal, 3);
-        _easyMode.stageRefLevel = 2;
-        _easyMode.ID = "easy_"+ uniqueId;
-        _normalMode = LoadRandomStage(CriticalGaugeMode.DoubleGain, 2);
-        _normalMode.stageRefLevel = 5;
-        _normalMode.ID = "normal_"+ uniqueId;
-        _hardMode = LoadRandomStage(CriticalGaugeMode.Unlimited, 1);
-        _hardMode.stageRefLevel = 10;
-        _hardMode.ID = "hard_"+ uniqueId;
+        var easyRefLevel = await GetStageRefLevel(EasyStageAddress, DefaultEasyRefLevel);
+        var normalRefLevel = await GetStageRefLevel(NormalStageAddress, DefaultNormalRefLevel);
+        var hardRefLevel = await GetStageRefLevel(HardStageAddress, DefaultHardRefLevel);
+
+        _easyMode = LoadRandomStage(CriticalGaugeMode.Normal, 3, easyRefLevel, "easy_" + uniqueId);
+        _normalMode = LoadRandomStage(CriticalGaugeMode.DoubleGain, 2, normalRefLevel, "normal_" + uniqueId);
+        _hardMode = LoadRandomStage(CriticalGaugeMode.Unlimited, 1, hardRefLevel, "hard_" + uniqueId);
     }
 
     public UnitInfo GetRepresentativeUnit()
@@ -103,14 +109,45 @@ public class EventModeManager
         return fightInfo;
     }
 
-    FightInfo LoadRandomStage(CriticalGaugeMode mode = CriticalGaugeMode.Normal, int unitCount = 3)
+    FightInfo LoadRandomStage(CriticalGaugeMode mode, int unitCount, float stageRefLevel, string stageId)
     {
         var fightInfo = FightInfo.RandomStage(mode, unitCount);
         fightInfo.EventType = FightEventType.Event;
+        fightInfo.stageRefLevel = stageRefLevel;
         fightInfo.SetUnitLevelByRefLevel();
         fightInfo.SaveDicToData();
         fightInfo.team2CGMode = mode;
+        fightInfo.ID = stageId;
         return fightInfo;
+    }
+
+    async UniTask<float> GetStageRefLevel(string address, float fallback)
+    {
+        if (_stageRefLevelCache.TryGetValue(address, out var cachedLevel))
+        {
+            return cachedLevel;
+        }
+
+        var handle = Addressables.LoadAssetAsync<FightInfo>(address);
+        await handle.Task;
+
+        var refLevel = fallback;
+        if (handle.Status == AsyncOperationStatus.Succeeded && handle.Result != null)
+        {
+            refLevel = handle.Result.stageRefLevel;
+        }
+        else
+        {
+            Debug.LogWarning($"[EventMode] Failed to load stage template '{address}', fallback to {fallback}.");
+        }
+
+        if (handle.IsValid())
+        {
+            Addressables.Release(handle);
+        }
+
+        _stageRefLevelCache[address] = refLevel;
+        return refLevel;
     }
     
     public void OnCloudScriptSuccess(ExecuteCloudScriptResult result)

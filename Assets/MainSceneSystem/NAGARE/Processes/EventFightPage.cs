@@ -69,7 +69,7 @@ public class EventFightPage : MSceneProcess
 
     async UniTask _ProcessEnter()
     {
-        EventModeManager.Instance.InitializeRandomMode(currentTime.ToString("yyyyMMdd"));
+        await EventModeManager.Instance.InitializeRandomMode(currentTime.ToString("yyyyMMdd"));
         layer = UILayerLoader.Load<EventBattleTop>();
         layer.SetupCommon(EventModeManager.Instance.CompletedLevels, 
             EventModeManager.Instance.EasyMode, EventModeManager.Instance.NormalMode, EventModeManager.Instance.HardMode);
