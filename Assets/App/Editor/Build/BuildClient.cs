@@ -529,10 +529,12 @@ namespace Cocone.ProjectP3
 				plist.ReadFromFile(plistPath);	
 			}
 
-			// 日本語に設定
-			plist.root.SetString("CFBundleDevelopmentRegion", "Japan");
+			// Configure bundle localizations so iOS can pick the correct InfoPlist strings per locale.
+			plist.root.SetString("CFBundleDevelopmentRegion", "ja");
 			var localizations = plist.root.CreateArray("CFBundleLocalizations");
-			localizations.AddString ("Japanese");
+			localizations.AddString("en");
+			localizations.AddString("ja");
+			localizations.AddString("zh-Hans");
 			
 			if (BuildConfigurations != null)
 			{
