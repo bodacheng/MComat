@@ -2,6 +2,7 @@
 using System.Linq;
 using System.IO;
 using System.Collections.Generic;
+using System.Text;
 //using DG.DemiEditor;
 using UnityEngine;
 using UnityEditor;
@@ -10,8 +11,7 @@ using UnityEditor.Callbacks;
 #if UNITY_IOS
 using UnityEditor.iOS.Xcode;
 using UnityEditor.iOS.Xcode.Extensions;
-
-
+using UnityEngine.Localization.Tables;
 #endif
 
 
@@ -516,11 +516,134 @@ namespace Cocone.ProjectP3
 		}
 		
 #if UNITY_IOS
+		private const string IOSDisplayNameTableCollection = "local";
+		private const string IOSDisplayNameEntryKey = "display";
+
+		private static Dictionary<string, string> LoadLocalizedDisplayNames()
+		{
+			var result = new Dictionary<string, string>();
+#if UNITY_EDITOR
+			var searchInFolders = new[] { "Assets/Localization" };
+			var tableGuids = AssetDatabase.FindAssets("t:StringTable", searchInFolders);
+			foreach (var guid in tableGuids)
+			{
+				var path = AssetDatabase.GUIDToAssetPath(guid);
+				var table = AssetDatabase.LoadAssetAtPath<StringTable>(path);
+				if (table == null)
+				{
+					continue;
+				}
+
+				var sharedData = table.SharedData;
+				if (sharedData == null || !string.Equals(sharedData.TableCollectionName, IOSDisplayNameTableCollection, StringComparison.OrdinalIgnoreCase))
+				{
+					continue;
+				}
+
+				var entry = table.GetEntry(IOSDisplayNameEntryKey);
+				var localizedValue = entry?.Value;
+				if (string.IsNullOrEmpty(localizedValue))
+				{
+					continue;
+				}
+
+				var localeCode = table.LocaleIdentifier.Code;
+				if (string.IsNullOrEmpty(localeCode))
+				{
+					continue;
+				}
+
+				result[localeCode] = localizedValue;
+			}
+#endif
+			return result;
+		}
+
+		private static string NormalizeLocaleForApple(string localeCode)
+		{
+			if (string.IsNullOrEmpty(localeCode))
+			{
+				return localeCode;
+			}
+
+			return localeCode.Replace('_', '-');
+		}
+
+		private static string DetermineDefaultLocale(Dictionary<string, string> localizedDisplayNames)
+		{
+			if (localizedDisplayNames == null || localizedDisplayNames.Count == 0)
+			{
+				return "ja";
+			}
+
+			if (localizedDisplayNames.ContainsKey("ja"))
+			{
+				return "ja";
+			}
+
+			if (localizedDisplayNames.ContainsKey("en"))
+			{
+				return "en";
+			}
+
+			return localizedDisplayNames.Keys.First();
+		}
+
+		private static string DetermineFallbackDisplayName(Dictionary<string, string> localizedDisplayNames, string defaultLocale)
+		{
+			if (localizedDisplayNames == null || localizedDisplayNames.Count == 0)
+			{
+				return null;
+			}
+
+			if (!string.IsNullOrEmpty(defaultLocale) && localizedDisplayNames.TryGetValue(defaultLocale, out var defaultName))
+			{
+				return defaultName;
+			}
+
+			return localizedDisplayNames.Values.FirstOrDefault();
+		}
+
+		private static string EscapePlistString(string value)
+		{
+			if (string.IsNullOrEmpty(value))
+			{
+				return value;
+			}
+
+			return value.Replace("\\", "\\\\").Replace("\"", "\\\"");
+		}
+
+		private static void WriteInfoPlistLocalizedStrings(string buildPath, Dictionary<string, string> localizedDisplayNames)
+		{
+			if (localizedDisplayNames == null || localizedDisplayNames.Count == 0)
+			{
+				return;
+			}
+
+			foreach (var locale in localizedDisplayNames.Keys.OrderBy(k => k, StringComparer.OrdinalIgnoreCase))
+			{
+				var normalizedLocale = NormalizeLocaleForApple(locale);
+				if (string.IsNullOrEmpty(normalizedLocale))
+				{
+					continue;
+				}
+
+				var directoryName = $"{normalizedLocale}.lproj";
+				var localeDirectory = Path.Combine(buildPath, directoryName);
+				Directory.CreateDirectory(localeDirectory);
+
+				var plistStringsPath = Path.Combine(localeDirectory, "InfoPlist.strings");
+				var content = $"\"CFBundleDisplayName\" = \"{EscapePlistString(localizedDisplayNames[locale])}\";\n";
+				File.WriteAllText(plistStringsPath, content, new UTF8Encoding(false));
+			}
+		}
+
 		/**
 		 * アプリケーションのデフォルト設定plistを取得
 		 * (Unity GUIにて設定する項目がなさそうなのでコード上で指定する）
 		 */
-		private static PlistDocument GetDefaultPlistDocument(string plistPath)
+		private static PlistDocument GetDefaultPlistDocument(string plistPath, Dictionary<string, string> localizedDisplayNames)
 		{
 			// アプリ管理のInfo.plistを設定
 			var plist = new PlistDocument();
@@ -529,12 +652,37 @@ namespace Cocone.ProjectP3
 				plist.ReadFromFile(plistPath);	
 			}
 
-			// Configure bundle localizations so iOS can pick the correct InfoPlist strings per locale.
-			plist.root.SetString("CFBundleDevelopmentRegion", "ja");
+			var defaultLocale = DetermineDefaultLocale(localizedDisplayNames);
+			var normalizedDefaultLocale = NormalizeLocaleForApple(defaultLocale);
+			plist.root.SetString("CFBundleDevelopmentRegion", normalizedDefaultLocale);
 			var localizations = plist.root.CreateArray("CFBundleLocalizations");
-			localizations.AddString("en");
-			localizations.AddString("ja");
-			localizations.AddString("zh-Hans");
+			localizations.values.Clear();
+
+			if (localizedDisplayNames != null && localizedDisplayNames.Count > 0)
+			{
+				foreach (var locale in localizedDisplayNames.Keys
+					         .Select(NormalizeLocaleForApple)
+					         .Where(l => !string.IsNullOrEmpty(l))
+					         .Distinct(StringComparer.OrdinalIgnoreCase)
+					         .OrderBy(l => l, StringComparer.OrdinalIgnoreCase))
+				{
+					localizations.AddString(locale);
+				}
+
+				var fallbackDisplayName = DetermineFallbackDisplayName(localizedDisplayNames, defaultLocale);
+				if (!string.IsNullOrEmpty(fallbackDisplayName))
+				{
+					plist.root.SetString("CFBundleDisplayName", fallbackDisplayName);
+				}
+			}
+			else
+			{
+				localizations.AddString("ja");
+				if (BuildConfigurations != null && !string.IsNullOrEmpty(BuildConfigurations.appDisplayName))
+				{
+					plist.root.SetString("CFBundleDisplayName", BuildConfigurations.appDisplayName);
+				}
+			}
 			
 			if (BuildConfigurations != null)
 			{
@@ -654,7 +802,8 @@ namespace Cocone.ProjectP3
 			{
 				// アプリ管理のInfo.plistを設定
 				var plistPath = Path.Combine(path, "Info.plist");
-				var plist = GetDefaultPlistDocument(plistPath);
+				var localizedDisplayNames = LoadLocalizedDisplayNames();
+				var plist = GetDefaultPlistDocument(plistPath, localizedDisplayNames);
 				
 				var projectPath = PBXProject.GetPBXProjectPath(path);
 
@@ -745,6 +894,8 @@ namespace Cocone.ProjectP3
 				
 				capabilities.WriteToFile();
 				
+				WriteInfoPlistLocalizedStrings(path, localizedDisplayNames);
+
 				plist.WriteToFile(plistPath);
 			}
 		}
