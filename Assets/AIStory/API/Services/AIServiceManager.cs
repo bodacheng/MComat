@@ -438,6 +438,7 @@ public class AIServiceManager : MonoBehaviour
                     "- 每个场景给出 title、description（描述画面）、setting（引用地点并解释时间/情境）、locationId（引用 locations.id）、characters（角色 id 列表）、mood、importantObjects、camera、lighting、visualPrompt、negativePrompt。",
                     "- dialogues 是数组，包含 speaker 与 text，用于剧情对话。若无对话可返回空数组。",
                     "- visualPrompt 用简洁英文或中英文混合描述画面要素，便于直接用于图像生成。",
+                    "- 场景的 description、setting 与 dialogues 要以角色行动、互动、情绪与剧情推进为核心，可以适度融入感官细节，避免重复描述角色外形或服饰（这些信息已体现在角色卡片中）。",
                     "- negativePrompt 描述应避免的视觉内容和错误。",
                     "- 全文除 JSON 以外不输出任何内容。"
                 };
@@ -514,6 +515,7 @@ public class AIServiceManager : MonoBehaviour
                     "- 各シーンには title, description（画面描写）, setting（ロケーション id と状況説明）, locationId, characters（id リスト）, mood, importantObjects, camera, lighting, visualPrompt, negativePrompt を含めてください。",
                     "- dialogues は speaker と text を持つ要素の配列です。会話がない場合は空配列を返してください。",
                     "- visualPrompt は画像生成のための要素を簡潔な英語またはバイリンガルで記述してください。",
+                    "- description と setting、dialogues はキャラクターの行動・感情・物語の進行に焦点を当て、外見や衣装の繰り返し描写は避けてください（外見情報はキャラクターシートに記載済みです）。",
                     "- negativePrompt は避けたい要素や誤りを示してください。",
                     "- JSON 本文以外は何も出力しないでください。"
                 };
@@ -590,6 +592,7 @@ public class AIServiceManager : MonoBehaviour
                     "- Each scene must include title, description (visual composition), setting (reference location id and context), locationId, characters (id list), mood, importantObjects, camera, lighting, visualPrompt, negativePrompt.",
                     "- dialogues is an array of entries with speaker and text. Return an empty array if the scene has no dialogue.",
                     "- visualPrompt should use concise English or bilingual hints describing the imagery for text-to-image generation.",
+                    "- Use scene description, setting, and dialogue to highlight character actions, interactions, emotions, and plot progression; avoid reiterating character appearances or outfits already captured in the character sheets.",
                     "- negativePrompt should specify visual mistakes or elements to avoid.",
                     "- Output nothing outside of the JSON body."
                 };
