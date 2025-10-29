@@ -569,6 +569,12 @@ namespace Cocone.ProjectP3
 			return localeCode.Replace('_', '-');
 		}
 
+		private static string ToAppleLocaleCode(string localeCode)
+		{
+			var normalized = NormalizeLocaleForApple(localeCode);
+			return string.IsNullOrEmpty(normalized) ? normalized : normalized.Replace("-", "_");
+		}
+
 		private static string DetermineDefaultLocale(Dictionary<string, string> localizedDisplayNames)
 		{
 			if (localizedDisplayNames == null || localizedDisplayNames.Count == 0)
@@ -614,36 +620,55 @@ namespace Cocone.ProjectP3
 			return value.Replace("\\", "\\\\").Replace("\"", "\\\"");
 		}
 
-		private static void WriteInfoPlistLocalizedStrings(string buildPath, Dictionary<string, string> localizedDisplayNames)
+		private struct InfoPlistLocalizationEntry
+		{
+			public string Code;
+			public string RelativePath;
+		}
+
+		private static List<InfoPlistLocalizationEntry> WriteInfoPlistLocalizedStrings(string buildPath, Dictionary<string, string> localizedDisplayNames)
 		{
 			if (localizedDisplayNames == null || localizedDisplayNames.Count == 0)
 			{
-				return;
+				return new List<InfoPlistLocalizationEntry>(0);
 			}
+
+			var results = new List<InfoPlistLocalizationEntry>(localizedDisplayNames.Count);
 
 			foreach (var locale in localizedDisplayNames.Keys.OrderBy(k => k, StringComparer.OrdinalIgnoreCase))
 			{
-				var normalizedLocale = NormalizeLocaleForApple(locale);
-				if (string.IsNullOrEmpty(normalizedLocale))
+				var appleCode = ToAppleLocaleCode(locale);
+				if (string.IsNullOrEmpty(appleCode))
 				{
 					continue;
 				}
 
-				var directoryName = $"{normalizedLocale}.lproj";
+				var directoryName = $"{appleCode}.lproj";
 				var localeDirectory = Path.Combine(buildPath, directoryName);
 				Directory.CreateDirectory(localeDirectory);
 
 				var plistStringsPath = Path.Combine(localeDirectory, "InfoPlist.strings");
-				var content = $"\"CFBundleDisplayName\" = \"{EscapePlistString(localizedDisplayNames[locale])}\";\n";
-				File.WriteAllText(plistStringsPath, content, new UTF8Encoding(false));
+				var escapedValue = EscapePlistString(localizedDisplayNames[locale]);
+				var contentBuilder = new StringBuilder();
+				contentBuilder.AppendLine($"\"CFBundleDisplayName\" = \"{escapedValue}\";");
+				contentBuilder.AppendLine($"\"CFBundleName\" = \"{escapedValue}\";");
+				File.WriteAllText(plistStringsPath, contentBuilder.ToString(), new UTF8Encoding(false));
+
+				results.Add(new InfoPlistLocalizationEntry
+				{
+					Code = appleCode,
+					RelativePath = Path.Combine(directoryName, "InfoPlist.strings").Replace('\\', '/')
+				});
 			}
+
+			return results;
 		}
 
 		/**
 		 * アプリケーションのデフォルト設定plistを取得
 		 * (Unity GUIにて設定する項目がなさそうなのでコード上で指定する）
 		 */
-		private static PlistDocument GetDefaultPlistDocument(string plistPath, Dictionary<string, string> localizedDisplayNames)
+		private static PlistDocument GetDefaultPlistDocument(string plistPath, Dictionary<string, string> localizedDisplayNames, string defaultLocale, string fallbackDisplayName)
 		{
 			// アプリ管理のInfo.plistを設定
 			var plist = new PlistDocument();
@@ -652,16 +677,16 @@ namespace Cocone.ProjectP3
 				plist.ReadFromFile(plistPath);	
 			}
 
-			var defaultLocale = DetermineDefaultLocale(localizedDisplayNames);
-			var normalizedDefaultLocale = NormalizeLocaleForApple(defaultLocale);
-			plist.root.SetString("CFBundleDevelopmentRegion", normalizedDefaultLocale);
+			var developmentRegionCode = ToAppleLocaleCode(defaultLocale) ?? "ja";
+			plist.root.SetString("CFBundleDevelopmentRegion", developmentRegionCode);
+			plist.root.SetBoolean("LSHasLocalizedDisplayName", true);
 			var localizations = plist.root.CreateArray("CFBundleLocalizations");
 			localizations.values.Clear();
 
 			if (localizedDisplayNames != null && localizedDisplayNames.Count > 0)
 			{
 				foreach (var locale in localizedDisplayNames.Keys
-					         .Select(NormalizeLocaleForApple)
+					         .Select(ToAppleLocaleCode)
 					         .Where(l => !string.IsNullOrEmpty(l))
 					         .Distinct(StringComparer.OrdinalIgnoreCase)
 					         .OrderBy(l => l, StringComparer.OrdinalIgnoreCase))
@@ -669,7 +694,6 @@ namespace Cocone.ProjectP3
 					localizations.AddString(locale);
 				}
 
-				var fallbackDisplayName = DetermineFallbackDisplayName(localizedDisplayNames, defaultLocale);
 				if (!string.IsNullOrEmpty(fallbackDisplayName))
 				{
 					plist.root.SetString("CFBundleDisplayName", fallbackDisplayName);
@@ -803,7 +827,10 @@ namespace Cocone.ProjectP3
 				// アプリ管理のInfo.plistを設定
 				var plistPath = Path.Combine(path, "Info.plist");
 				var localizedDisplayNames = LoadLocalizedDisplayNames();
-				var plist = GetDefaultPlistDocument(plistPath, localizedDisplayNames);
+				var defaultLocale = DetermineDefaultLocale(localizedDisplayNames);
+				var fallbackDisplayName = DetermineFallbackDisplayName(localizedDisplayNames, defaultLocale);
+				var plist = GetDefaultPlistDocument(plistPath, localizedDisplayNames, defaultLocale, fallbackDisplayName);
+				var localizationEntries = WriteInfoPlistLocalizedStrings(path, localizedDisplayNames);
 				
 				var projectPath = PBXProject.GetPBXProjectPath(path);
 
@@ -882,6 +909,26 @@ namespace Cocone.ProjectP3
 				// NotificationTargetについて設定を行う
 				//AddNotificationExtension(project, mainTargetGuid, path);
 
+				if (localizationEntries.Count > 0)
+				{
+					if (!string.IsNullOrEmpty(defaultLocale))
+					{
+						var developmentRegion = ToAppleLocaleCode(defaultLocale);
+						if (!string.IsNullOrEmpty(developmentRegion))
+						{
+							project.SetDevelopmentRegion(developmentRegion);
+						}
+					}
+
+					project.ClearKnownRegions();
+
+					foreach (var entry in localizationEntries)
+					{
+						project.AddKnownRegion(entry.Code);
+						project.AddLocaleVariantFile("InfoPlist.strings", entry.Code, entry.RelativePath);
+					}
+				}
+
 				project.WriteToFile(projectPath);
 
 				// Firebase プッシュ通知を有効にする
@@ -894,8 +941,6 @@ namespace Cocone.ProjectP3
 				
 				capabilities.WriteToFile();
 				
-				WriteInfoPlistLocalizedStrings(path, localizedDisplayNames);
-
 				plist.WriteToFile(plistPath);
 			}
 		}
