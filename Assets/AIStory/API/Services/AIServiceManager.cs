@@ -14,7 +14,9 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 public class AIServiceManager : MonoBehaviour
 {
     [SerializeField] private string configAddress = "Config/AIServiceConfig";
+    [SerializeField] private string fallbackThemeConfigAddress = "Config/FairyTaleFallbackConfig";
     private AIServiceConfig serviceConfig;
+    private FairyTaleFallbackConfig fallbackThemeConfig;
     private IAIClient currentClient;
     private GeminiClient geminiClient;
     private OpenAIClient openAIClient;
@@ -214,6 +216,46 @@ public class AIServiceManager : MonoBehaviour
                 if (handle.IsValid())
                     Addressables.Release(handle);
                 return;
+            }
+        }
+        
+        if (fallbackThemeConfig == null)
+        {
+            if (string.IsNullOrWhiteSpace(fallbackThemeConfigAddress))
+            {
+                fallbackThemeConfig = FairyTaleFallbackConfig.CreateDefault();
+            }
+            else
+            {
+                Debug.Log("[AIServiceManager] Loading fallback fairy tale config from Addressables...");
+                var fallbackHandle = Addressables.LoadAssetAsync<FairyTaleFallbackConfig>(fallbackThemeConfigAddress);
+                try
+                {
+                    await fallbackHandle.Task;
+                    
+                    if (fallbackHandle.Status == AsyncOperationStatus.Succeeded && fallbackHandle.Result != null)
+                    {
+                        fallbackThemeConfig = FairyTaleFallbackConfig.CreateMerged(fallbackHandle.Result);
+                        Debug.Log("[AIServiceManager] Fallback fairy tale config loaded successfully");
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[AIServiceManager] Failed to load fallback fairy tale config from Addressables ({fallbackThemeConfigAddress}), status: {fallbackHandle.Status}. Using default values.");
+                        fallbackThemeConfig = FairyTaleFallbackConfig.CreateDefault();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning($"[AIServiceManager] Exception while loading fallback fairy tale config: {ex.Message}. Using default values.");
+                    fallbackThemeConfig = FairyTaleFallbackConfig.CreateDefault();
+                }
+                finally
+                {
+                    if (fallbackHandle.IsValid())
+                    {
+                        Addressables.Release(fallbackHandle);
+                    }
+                }
             }
         }
         
@@ -1527,149 +1569,47 @@ public class AIServiceManager : MonoBehaviour
         return selectedTheme;
     }
     
+    private FairyTaleFallbackConfig GetFallbackThemeConfig()
+    {
+        return fallbackThemeConfig ?? FairyTaleFallbackConfig.CreateDefault();
+    }
+    
     private string BuildFallbackFairyTaleTheme()
     {
         var random = new System.Random();
         int pageCount = Math.Max(serviceConfig?.PageCount ?? 6, 1);
         
-        string[] settings =
-        {
-            "漂浮在云海之上的星光森林",
-            "藏在深海珊瑚里的琉璃王国",
-            "由千纸鹤搭建的空中集市",
-            "永不落日的琥珀山谷",
-            "会歌唱的花瓣铺成的小镇",
-            "月光织成的悬空瀑布",
-            "云鲸守护的彩虹湖泊",
-            "与古老龟背同步移动的沙洲都市",
-            "漂流在北极极光中的玻璃温室群岛",
-            "藏在古钟楼内部的螺旋城市",
-            "依靠巨树根须维系的地下光庭",
-            "由时间砂砾浇筑的钟表旷野"
-        };
+        var fallbackConfig = GetFallbackThemeConfig();
         
-        string[] worldDetails =
-        {
-            "这里的居民以编织流星为生，街道会随潮汐移动",
-            "这里融汇海潮乐器与旧时代神庙，夜色会映出新的历史",
-            "这里的市集由纸翼托举，交易的是人们的梦想与记忆",
-            "这里的天空每九小时变换一次季节，庄稼与云同长",
-            "这里的湖面能映射未来，岸边漂浮着记忆的灯笼",
-            "这里的植物会发出旋律，山峦以节奏回应",
-            "这里的建筑会呼吸，窗户会记录来访者的承诺",
-            "这里的时钟靠故事运转，停歇时就会让时间暂停",
-            "这里的旅人以风作信，信笺化作微型的光亮蝴蝶",
-            "这里在黎明时与星辰互换位置，世界因此呈现两种光影"
-        };
-        
-        string[] heroes =
-        {
-            "一位年轻的织梦学徒",
-            "一位胆大的小小药师",
-            "一位爱发明的孤儿木匠",
-            "一位风筝节的守护者",
-            "一位善良的海螺收集者",
-            "一位能与星星交谈的航海少女",
-            "一位勇敢的洞穴探灯手",
-            "一位守护传说档案的云端图书管理员",
-            "一位旅行的香料画家",
-            "一位来自极光沙漠的天文导航者",
-            "一位研究时间花朵的植物学大师",
-            "一位擅长编写风之音乐的历史学徒",
-            "一位为潮汐编织舞蹈的吟游学者",
-            "一对追记风暴记忆的兄妹守望者",
-            "两位来自不同星港的通信使者",
-            "三位与季节签订契约的学徒",
-            "一群守护梦境档案的年轻策展人",
-            "一个跨族盟约的小队，每位伙伴掌管不同元素"
-        };
-        
-        string[] companions =
-        {
-            "，与会说话的石雕猫作伙伴",
-            "，和调皮的风元素精灵同行",
-            "，带着会发光的蒲公英灯",
-            "，在神秘纸鹤的指引下前行",
-            "，与守护森林的鹿角少年同行",
-            "，与擅长歌唱的潮汐姐妹合作",
-            "，携手沉睡千年的星尘狐狸",
-            "，与能复制情绪的水纹幻蝶同行",
-            "，获得能记录气味的青藤乐谱协助",
-            "，与背负昼夜刻度的甲虫使者搭档",
-            "，一路守护会变形的光影木偶",
-            "，与能描绘未来的流光章鱼同行",
-            "，携带能唤醒记忆的折光云雀",
-            "，与会编织梦境的丝线龙结伴",
-            "，与能够翻译情绪的钟摆花狐合作",
-            "，在携光的雨燕车队护送下冒雨前行",
-            "，肩负会化作星火的琉璃蜜蜂群",
-            "，跟随能雕刻风声的沙砾巨人远行",
-            "，与寄宿昼夜故事的双面面具共同行动",
-            "，与能收集失落脚步声的街灯小童同行",
-            "，搭档能折叠空间的风信子折纸师",
-            "，与穿肚兜的会喷火的少年"
-        };
-        
-        string[] goals =
-        {
-            "找回被遗忘的季节钟表",
-            "修复破碎的月亮吊桥",
-            "守护村子的星光果实",
-            "解救被困在梦境里的朋友",
-            "唤醒沉睡的守护神树",
-            "完成古老乐章的最后一节",
-            "让迷路的晨曦再次升起",
-            "筹备连接人间与梦境的灯火盛典",
-            "帮助失声的山峦重新唱歌",
-            "为新生的云龙寻找合适的家园",
-            "调停两座村庄的季节争端",
-            "记录即将消逝的风之故事",
-            "帮助夜行生灵与日间居民共享同一份约定"
-        };
-        
-        string[] conflicts =
-        {
-            "必须跨越会改变记忆的河流",
-            "要与迷惑旅人的是非风对话",
-            "面临由影子编织的迷宫考验",
-            "要安抚被惊醒的巨石守卫",
-            "必须解开倒影里藏起的谜题",
-            "需要穿越会冻结时间的月光雾",
-            "要领悟会自我改写的预言卷轴",
-            "需要协调会说话的月影与阳光的分歧",
-            "要面对不同族群对传统的坚持与顾虑",
-            "必须整理不断重写的历史图卷以找回真相",
-            "要让时间与节奏重新对齐，否则世界失衡",
-            "必须平衡个人愿望与他人寄托的期待"
-        };
-        
-        string[] resolutions =
-        {
-            "在分享勇气与善意后化解危机",
-            "以真诚的倾听战胜恐惧",
-            "发现答案一直藏在心底",
-            "用友谊的光芒驱散阴霾",
-            "学会相信彼此的承诺",
-            "让所有人懂得互相守望",
-            "将希望传递给更需要的人",
-            "让每个声音都得到倾听而达成圆满",
-            "在对传统与创新的融合中找到平衡",
-            "以共同创作的方式让世界继续运转"
-        };
-        
-        string setting = settings[random.Next(settings.Length)];
-        string worldDetail = worldDetails[random.Next(worldDetails.Length)];
-        string hero = heroes[random.Next(heroes.Length)];
-        string companion = companions[random.Next(companions.Length)];
-        string goal = goals[random.Next(goals.Length)];
-        string conflict = conflicts[random.Next(conflicts.Length)];
-        string resolution = resolutions[random.Next(resolutions.Length)];
+        string setting = PickRandom(fallbackConfig.Settings, random);
+        string worldDetail = PickRandom(fallbackConfig.WorldDetails, random);
+        string hero = PickRandom(fallbackConfig.Heroes, random);
+        string companion = PickRandom(fallbackConfig.Companions, random);
+        string goal = PickRandom(fallbackConfig.Goals, random);
+        string conflict = PickRandom(fallbackConfig.Conflicts, random);
+        string resolution = PickRandom(fallbackConfig.Resolutions, random);
         
         return
             $"在{setting}背景中，{worldDetail}。故事讲述{hero}{companion}，他们需要{goal}，途中{conflict}，最终{resolution}。" +
             $"请将故事编排为{pageCount}个连续场景的童话绘本。所有出现的人物都保持亚洲面容，男角色呈现古雅典竞技士风格（光膀子、可能披短斗篷或披肩、赤脚），发型随意(可能寸头或光头或中长度)，" +
             "女角色穿着古雅典短裙与古代饰物，可赤脚或系带凉鞋，整体气质温柔而奇幻。" +
             "每幅插图务必捕捉角色动作进行中的瞬间，突出肢体张力、飘动的衣饰与丰富表情，强调角色与场景元素的互动，使画面与当前剧情进展紧密契合，避免静态站立或摆拍感。";
+    }
+    
+    private string PickRandom(string[] source, System.Random random)
+    {
+        if (source == null)
+        {
+            return string.Empty;
+        }
+        
+        var candidates = source.Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
+        if (candidates.Length == 0)
+        {
+            return string.Empty;
+        }
+        
+        return candidates[random.Next(candidates.Length)];
     }
     
     /// <summary>

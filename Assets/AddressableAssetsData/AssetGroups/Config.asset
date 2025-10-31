@@ -87,6 +87,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - config
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ddd7e5c87b1414a6a843a48b92a6c6b0
+    m_Address: Config/FairyTaleFallbackConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f82352243f33a48c79e9de4316104397
     m_Address: Config/stage_mode
     m_ReadOnly: 0
