@@ -32,10 +32,12 @@ public partial class ArenaFightOver : UILayer
     
     private int _currentSceneIndex = 0;
     private int _currentLineIndex = 0;
+    private bool _storyContentLogged;
     
     bool picStoryEnded = false;
     public async UniTask LoadStory()
     {
+        _storyContentLogged = false;
         bool storyFromAI = false;
         if (CommonSetting.PcMode && 
             (!String.IsNullOrEmpty(FightLoad.Fight.StoryKey) || FightScene.FightScene.target.AIStoryInfo != null))
@@ -65,6 +67,11 @@ public partial class ArenaFightOver : UILayer
                 storyBgColorChangeTween = storyPicBgImage.DOColor(Color.white, storyBgColorChangeDuration);
                 storyPicBgImage.gameObject.SetActive(true);
                 storyPicOnClickBtn.SetListener(() => { OnClick(story); });
+                if (!_storyContentLogged)
+                {
+                    AIServiceManager.LogStoryContentForDebug(story);
+                    _storyContentLogged = true;
+                }
                 _currentSceneIndex = 0;
                 DisplayCurrentScene(story);
                 storyPicBgImage.gameObject.SetActive(true);
@@ -90,7 +97,6 @@ public partial class ArenaFightOver : UILayer
         {
             _currentLineIndex++;
             DisplayCurrentLine(storyInfo);
-            Debug.Log(storyInfo.StoryScenes[_currentSceneIndex].Lines.Count  + " : "+ _currentLineIndex);
         }
         else
         {

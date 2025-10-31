@@ -163,7 +163,6 @@ public class FairyTaleFallbackConfig : ScriptableObject
             return CreateDefault();
         }
 
-        var defaults = CreateDefault();
         var instance = CreateInstance<FairyTaleFallbackConfig>();
         instance.settings = SelectArray(source.settings, DefaultSettings);
         instance.worldDetails = SelectArray(source.worldDetails, DefaultWorldDetails);

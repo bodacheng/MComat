@@ -23,6 +23,14 @@ public class AIServiceManager : MonoBehaviour
     private List<StoryInfo.CharacterProfile> currentStoryCharacters = new List<StoryInfo.CharacterProfile>();
     private List<StoryInfo.LocationProfile> currentStoryLocations = new List<StoryInfo.LocationProfile>();
     private StoryInfo.StoryStyleGuide currentStoryStyleGuide;
+    private const int StoryTextCharactersPerPageLimit = 200;
+    private static readonly char[] StoryTextSplitCandidates =
+    {
+        ' ', '\t', '\r', '\n',
+        ',', '.', ';', ':',
+        '，', '。', '！', '？', '、', '；', '：',
+        '!', '?', '…', '—', '-', '‧', '･'
+    };
     private static readonly object _eventStoryLock = new object();
     private static readonly string[] DefaultImageNegativeTokens = new[]
     {
@@ -481,6 +489,7 @@ public class AIServiceManager : MonoBehaviour
                     "- dialogues 是数组，包含 speaker 与 text，用于剧情对话。若无对话可返回空数组。",
                     "- visualPrompt 用简洁英文或中英文混合描述画面要素，便于直接用于图像生成。",
                     "- 场景的 description、setting 与 dialogues 必须以角色行动、互动、情绪与剧情推进为核心，可以适度融入感官细节，禁止描述或暗示角色外形与服饰（相关信息仅能保留在角色卡片中）。",
+                    "- description 与 dialogues 需表现为连贯的叙事句，交代时间推移和因果关系，避免使用“画面包含…”“主要元素：”等提示词式片段。",
                     "- negativePrompt 描述应避免的视觉内容和错误。",
                     "- 全文除 JSON 以外不输出任何内容。"
                 };
@@ -539,7 +548,7 @@ public class AIServiceManager : MonoBehaviour
                 };
                 styleLineFormat = "艺术风格需要贴合：{0}。";
                 additionalStyleFormat = "额外风格要求：{0}。";
-                finalReminder = "请注意保持角色造型、服饰、背景在所有场景中的一致性，并确保 JSON 可被解析。故事文本中严禁描述角色外貌与服饰细节。";
+                finalReminder = "请注意保持角色造型、服饰、背景在所有场景中的一致性，并确保 JSON 可被解析。整体叙事需自然连贯，故事文本中严禁描述角色外貌与服饰细节，也不要出现提示词式语句。";
                 break;
             case SystemLanguage.Japanese:
                 storytellerIntro = "あなたはプロの連続挿絵物語の脚本家兼アートディレクターです。";
@@ -558,6 +567,7 @@ public class AIServiceManager : MonoBehaviour
                     "- dialogues は speaker と text を持つ要素の配列です。会話がない場合は空配列を返してください。",
                     "- visualPrompt は画像生成のための要素を簡潔な英語またはバイリンガルで記述してください。",
                     "- description と setting、dialogues はキャラクターの行動・感情・物語の進行に専念し、外見・衣装・身体的特徴を描写したり暗示したりしないでください（それらはキャラクターシートのみで扱います）。",
+                    "- description と dialogues は流れるような叙述文で構成し、時間の流れや因果を示しつつ、\"〜を描写せよ\" \"要素:\" のようなプロンプト的表現を避けてください。",
                     "- negativePrompt は避けたい要素や誤りを示してください。",
                     "- JSON 本文以外は何も出力しないでください。"
                 };
@@ -616,7 +626,7 @@ public class AIServiceManager : MonoBehaviour
                 };
                 styleLineFormat = "アートスタイルは {0} に合わせてください。";
                 additionalStyleFormat = "追加スタイル要件: {0}。";
-                finalReminder = "全シーンでキャラクターデザイン・衣装・背景の整合性を保ち、JSON が正しく解析できるようにしてください。ストーリー本文には外見・衣装の描写を入れないこと。";
+                finalReminder = "全シーンでキャラクターデザイン・衣装・背景の整合性を保ち、JSON が正しく解析できるようにしてください。ストーリーは自然な叙述で統一し、本文には外見・衣装の描写やプロンプト的な言い回しを入れないこと。";
                 break;
             default:
                 storytellerIntro = "You are a professional multi-page picture book writer and art director.";
@@ -635,6 +645,7 @@ public class AIServiceManager : MonoBehaviour
                     "- dialogues is an array of entries with speaker and text. Return an empty array if the scene has no dialogue.",
                     "- visualPrompt should use concise English or bilingual hints describing the imagery for text-to-image generation.",
                     "- Use scene description, setting, and dialogue to highlight character actions, interactions, emotions, and plot progression; do not describe or hint at character appearances, outfits, or physical attributes (those belong exclusively in the character sheets).",
+                    "- Write descriptions and dialogue as flowing narrative prose that conveys pacing and causality; avoid prompt-like phrases such as \"show...\", \"elements:\" or keyword lists.",
                     "- negativePrompt should specify visual mistakes or elements to avoid.",
                     "- Output nothing outside of the JSON body."
                 };
@@ -693,7 +704,7 @@ public class AIServiceManager : MonoBehaviour
                 };
                 styleLineFormat = "Match the visual style: {0}.";
                 additionalStyleFormat = "Additional style requirements: {0}.";
-                finalReminder = "Maintain consistent character designs, outfits, and backgrounds across all scenes, ensure the JSON is valid, and keep all story text free of character appearance or wardrobe descriptions.";
+                finalReminder = "Maintain consistent character designs, outfits, and backgrounds across all scenes, ensure the JSON is valid, and keep the story text natural and flowing without appearance descriptions or prompt-like phrasing.";
                 break;
         }
         
@@ -896,10 +907,7 @@ public class AIServiceManager : MonoBehaviour
             scene.AdditionalLocationIds.AddRange(sceneData.additionalLocations.Where(id => !string.IsNullOrWhiteSpace(id)));
         }
         
-        if (!string.IsNullOrEmpty(scene.Description))
-        {
-            scene.Lines.Add(scene.Description);
-        }
+        AddStoryTextLines(scene.Lines, scene.Description);
         
         if (sceneData.dialogues != null && sceneData.dialogues.Length > 0)
         {
@@ -917,10 +925,11 @@ public class AIServiceManager : MonoBehaviour
                 };
                 scene.Dialogues.Add(dialogueLine);
                 
-                string text = string.IsNullOrWhiteSpace(dialogue.speaker) ? dialogue.text : $"{dialogue.speaker}: {dialogue.text}";
-                scene.Lines.Add(text);
+                AddDialogueLines(scene.Lines, dialogue.speaker, dialogue.text);
             }
         }
+        
+        NormalizeStorySceneLines(scene);
         
         if (scene.Lines.Count == 0)
         {
@@ -928,6 +937,175 @@ public class AIServiceManager : MonoBehaviour
         }
         
         return scene;
+    }
+    
+    private void AddStoryTextLines(List<string> target, string text)
+    {
+        if (target == null || string.IsNullOrWhiteSpace(text))
+        {
+            return;
+        }
+        
+        target.Add(text.Trim());
+    }
+    
+    private void AddDialogueLines(List<string> target, string speaker, string text)
+    {
+        if (target == null || string.IsNullOrWhiteSpace(text))
+        {
+            return;
+        }
+        
+        if (string.IsNullOrWhiteSpace(speaker))
+        {
+            AddStoryTextLines(target, text);
+            return;
+        }
+        
+        string trimmedText = text.Trim();
+        if (string.IsNullOrEmpty(trimmedText))
+        {
+            return;
+        }
+        
+        target.Add($"{speaker}: {trimmedText}");
+    }
+    
+    private IEnumerable<string> SplitTextByLength(string text, int maxCharacters)
+    {
+        if (string.IsNullOrWhiteSpace(text) || maxCharacters <= 0)
+        {
+            yield break;
+        }
+        
+        string normalized = text.Replace("\r\n", "\n").Replace('\r', '\n');
+        int index = 0;
+        int length = normalized.Length;
+        
+        while (index < length)
+        {
+            while (index < length && char.IsWhiteSpace(normalized[index]))
+            {
+                index++;
+            }
+            
+            if (index >= length)
+            {
+                yield break;
+            }
+            
+            int remaining = length - index;
+            if (remaining <= maxCharacters)
+            {
+                string tail = normalized.Substring(index, remaining).Trim();
+                if (!string.IsNullOrEmpty(tail))
+                {
+                    yield return tail;
+                }
+                yield break;
+            }
+            
+            int hardLimit = Math.Min(index + maxCharacters, length);
+            int split = hardLimit;
+            for (int i = Math.Min(hardLimit - 1, length - 1); i >= index; i--)
+            {
+                if (IsSplitCharacter(normalized[i]))
+                {
+                    split = i + 1;
+                    break;
+                }
+            }
+            
+            if (split <= index)
+            {
+                split = hardLimit;
+            }
+            
+            string chunk = normalized.Substring(index, split - index).Trim();
+            if (!string.IsNullOrEmpty(chunk))
+            {
+                yield return chunk;
+            }
+            
+            index = split;
+        }
+    }
+    
+    private bool IsSplitCharacter(char c)
+    {
+        return Array.IndexOf(StoryTextSplitCandidates, c) >= 0;
+    }
+    
+    private void NormalizeStorySceneLines(StoryInfo.StoryScene scene)
+    {
+        if (scene == null || scene.Lines == null || scene.Lines.Count == 0)
+        {
+            return;
+        }
+        
+        var normalized = new List<string>();
+        foreach (var line in scene.Lines)
+        {
+            if (string.IsNullOrWhiteSpace(line))
+            {
+                continue;
+            }
+            
+            foreach (var segment in SplitTextByLength(line, StoryTextCharactersPerPageLimit))
+            {
+                if (!string.IsNullOrWhiteSpace(segment))
+                {
+                    normalized.Add(segment);
+                }
+            }
+        }
+        
+        scene.Lines.Clear();
+        if (normalized.Count == 0)
+        {
+            scene.Lines.Add("[空白]");
+        }
+        else
+        {
+            scene.Lines.AddRange(normalized);
+        }
+    }
+    
+    public static void LogStoryContentForDebug(StoryInfo storyInfo)
+    {
+        if (storyInfo?.StoryScenes == null || storyInfo.StoryScenes.Count == 0)
+        {
+            Debug.Log("[AI Story] StoryInfo is empty, nothing to log.");
+            return;
+        }
+        
+        var builder = new StringBuilder();
+        builder.AppendLine("[AI Story] Full story content:");
+        
+        for (int i = 0; i < storyInfo.StoryScenes.Count; i++)
+        {
+            var scene = storyInfo.StoryScenes[i];
+            if (scene == null)
+            {
+                builder.AppendLine($"Scene {i + 1}: [null]");
+                continue;
+            }
+            
+            builder.AppendLine($"Scene {i + 1}: {scene.Title}");
+            if (scene.Lines != null && scene.Lines.Count > 0)
+            {
+                for (int j = 0; j < scene.Lines.Count; j++)
+                {
+                    builder.AppendLine($"  Line {j + 1}: {scene.Lines[j]}");
+                }
+            }
+            else
+            {
+                builder.AppendLine("  (No lines)");
+            }
+        }
+        
+        Debug.Log(builder.ToString());
     }
     
     private List<StoryInfo.StoryScene> EnsureSceneCount(List<StoryInfo.StoryScene> scenes, int expectedCount)
@@ -1003,11 +1181,10 @@ public class AIServiceManager : MonoBehaviour
             
             trimmedLine = trimmedLine.Trim('"', ',', ' ');
             
-            if (!string.IsNullOrEmpty(trimmedLine))
-            {
-                currentScene.Lines.Add(trimmedLine);
-            }
+            AddStoryTextLines(currentScene.Lines, trimmedLine);
         }
+        
+        NormalizeStorySceneLines(currentScene);
         
         if (currentScene.Lines.Count > 0)
         {
