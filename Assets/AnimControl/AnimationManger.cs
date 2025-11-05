@@ -15,6 +15,11 @@ public partial class AnimationManger
 {
     Animator Animator;
     public AnimationClip _toUse;
+    
+    private const int FullBodyLayerIndex = 1;
+    private static readonly int FullBodyState1Hash = UnityEngine.Animator.StringToHash("Full Body.full_body_state1");
+    private static readonly int FullBodyState2Hash = UnityEngine.Animator.StringToHash("Full Body.full_body_state2");
+    private static readonly int FullBodyNullHash = UnityEngine.Animator.StringToHash("Full Body.null");
 
     public struct AnimatorStateSnapshot
     {
@@ -25,6 +30,9 @@ public partial class AnimationManger
         public float NormalizedTime;
         public bool InTransition;
         public float Speed;
+        public AnimationClip Clip;
+        public int StateHash;
+        public int LayerIndex;
     }
 
     List<string> parameters = new List<string>();
@@ -143,50 +151,76 @@ public partial class AnimationManger
         var snapshot = new AnimatorStateSnapshot
         {
             IsValid = false,
+            Clip = null,
             ClipName = null,
             AnimatorStateName = null,
             OverrideKey = null,
             NormalizedTime = 0f,
             InTransition = false,
-            Speed = Animator != null ? Animator.speed : 1f
+            Speed = Animator != null ? Animator.speed : 1f,
+            StateHash = 0,
+            LayerIndex = FullBodyLayerIndex
         };
 
         if (Animator == null)
             return snapshot;
 
-        var clipInfos = Animator.GetCurrentAnimatorClipInfo(1);
-        if (clipInfos == null || clipInfos.Length == 0)
-        {
-            snapshot.InTransition = Animator.GetBool("in_transition");
-            return snapshot;
-        }
-
-        var stateInfo = Animator.GetCurrentAnimatorStateInfo(1);
-        snapshot.ClipName = clipInfos[0].clip != null ? clipInfos[0].clip.name : null;
-        if (stateInfo.IsName("Full Body.full_body_state1"))
-        {
-            snapshot.AnimatorStateName = "Full Body.full_body_state1";
-            snapshot.OverrideKey = "fullbody_empty1";
-        }
-        else if (stateInfo.IsName("Full Body.full_body_state2"))
-        {
-            snapshot.AnimatorStateName = "Full Body.full_body_state2";
-            snapshot.OverrideKey = "fullbody_empty2";
-        }
-        else if (stateInfo.IsName("Full Body.null"))
-        {
-            snapshot.AnimatorStateName = "Full Body.null";
-            snapshot.OverrideKey = null;
-        }
-        else
-        {
-            snapshot.AnimatorStateName = null;
-            snapshot.OverrideKey = null;
-        }
-
         snapshot.InTransition = Animator.GetBool("in_transition");
-        snapshot.NormalizedTime = stateInfo.normalizedTime;
-        snapshot.IsValid = !string.IsNullOrEmpty(snapshot.ClipName) && !string.IsNullOrEmpty(snapshot.AnimatorStateName) && snapshot.OverrideKey != null;
+
+        var layerIndex = snapshot.LayerIndex;
+        var currentStateInfo = Animator.GetCurrentAnimatorStateInfo(layerIndex);
+        var selectedStateInfo = currentStateInfo;
+        AnimationClip selectedClip = null;
+        float selectedWeight = -1f;
+
+        var currentClipInfos = Animator.GetCurrentAnimatorClipInfo(layerIndex);
+        if (currentClipInfos != null && currentClipInfos.Length > 0)
+        {
+            foreach (var clipInfo in currentClipInfos)
+            {
+                if (clipInfo.clip == null)
+                    continue;
+                if (clipInfo.weight > selectedWeight)
+                {
+                    selectedClip = clipInfo.clip;
+                    selectedWeight = clipInfo.weight;
+                    selectedStateInfo = currentStateInfo;
+                }
+            }
+        }
+
+        if (Animator.IsInTransition(layerIndex))
+        {
+            var nextStateInfo = Animator.GetNextAnimatorStateInfo(layerIndex);
+            var nextClipInfos = Animator.GetNextAnimatorClipInfo(layerIndex);
+            if (nextClipInfos != null && nextClipInfos.Length > 0)
+            {
+                foreach (var clipInfo in nextClipInfos)
+                {
+                    if (clipInfo.clip == null)
+                        continue;
+                    if (clipInfo.weight >= selectedWeight)
+                    {
+                        selectedClip = clipInfo.clip;
+                        selectedWeight = clipInfo.weight;
+                        selectedStateInfo = nextStateInfo;
+                    }
+                }
+            }
+        }
+
+        snapshot.StateHash = selectedStateInfo.fullPathHash;
+        snapshot.AnimatorStateName = GetStateNameForHash(snapshot.StateHash);
+        snapshot.OverrideKey = GetOverrideKeyForState(snapshot.StateHash);
+        snapshot.NormalizedTime = selectedStateInfo.normalizedTime;
+
+        if (selectedClip != null)
+        {
+            snapshot.Clip = selectedClip;
+            snapshot.ClipName = selectedClip.name;
+        }
+
+        snapshot.IsValid = snapshot.Clip != null && !string.IsNullOrEmpty(snapshot.AnimatorStateName) && snapshot.OverrideKey != null;
         return snapshot;
     }
 
@@ -210,19 +244,15 @@ public partial class AnimationManger
             return false;
         }
 
-        var clip = ResolveAnimationClip(snapshot.ClipName);
+        var clip = snapshot.Clip != null ? snapshot.Clip : ResolveAnimationClip(snapshot.ClipName);
         if (clip == null)
         {
             return false;
         }
 
-        if (!string.IsNullOrEmpty(snapshot.OverrideKey) && animatorOverride != null)
+        if (!string.IsNullOrEmpty(snapshot.OverrideKey))
         {
-            var current = animatorOverride[snapshot.OverrideKey];
-            if (current != null)
-            {
-                animatorOverride[snapshot.OverrideKey] = clip;
-            }
+            TryAssignOverrideClip(snapshot.OverrideKey, clip);
         }
 
         _toUse = clip;
@@ -238,7 +268,19 @@ public partial class AnimationManger
         }
 
         Animator.Update(0f);
-        Animator.Play(snapshot.AnimatorStateName, 1, normalizedTime);
+        var layerIndex = snapshot.LayerIndex >= 0 ? snapshot.LayerIndex : FullBodyLayerIndex;
+        if (snapshot.StateHash != 0)
+        {
+            Animator.Play(snapshot.StateHash, layerIndex, normalizedTime);
+        }
+        else if (!string.IsNullOrEmpty(snapshot.AnimatorStateName))
+        {
+            Animator.Play(snapshot.AnimatorStateName, layerIndex, normalizedTime);
+        }
+        else
+        {
+            return false;
+        }
         Animator.Update(0f);
         Animator.SetBool("in_transition", snapshot.InTransition);
         return true;
@@ -257,6 +299,55 @@ public partial class AnimationManger
     
     AnimatorStateInfo AnimatorStateInfo;
     AnimatorOverrideController animatorOverride;
+
+    static string GetOverrideKeyForState(int stateHash)
+    {
+        if (stateHash == FullBodyState1Hash)
+            return "fullbody_empty1";
+        if (stateHash == FullBodyState2Hash)
+            return "fullbody_empty2";
+        return null;
+    }
+
+    static string GetStateNameForHash(int stateHash)
+    {
+        if (stateHash == FullBodyState1Hash)
+            return "Full Body.full_body_state1";
+        if (stateHash == FullBodyState2Hash)
+            return "Full Body.full_body_state2";
+        if (stateHash == FullBodyNullHash)
+            return "Full Body.null";
+        return null;
+    }
+
+    bool TryAssignOverrideClip(string overrideKey, AnimationClip clip)
+    {
+        if (animatorOverride == null || string.IsNullOrEmpty(overrideKey) || clip == null)
+        {
+            return false;
+        }
+
+        try
+        {
+            animatorOverride[overrideKey] = clip;
+            return true;
+        }
+        catch (System.ArgumentException)
+        {
+            var overrides = new List<KeyValuePair<AnimationClip, AnimationClip>>();
+            animatorOverride.GetOverrides(overrides);
+            foreach (var pair in overrides)
+            {
+                if (pair.Key != null && pair.Key.name == overrideKey)
+                {
+                    animatorOverride[pair.Key] = clip;
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }
 
 // 下面这些不用了。改使用了crossfade后animator不会被判定为迁移。
