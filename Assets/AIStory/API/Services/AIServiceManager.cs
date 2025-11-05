@@ -1250,6 +1250,9 @@ public class AIServiceManager : MonoBehaviour
         {
             try
             {
+                // Give battle loop a frame before heavy image work.
+                await UniTask.Yield(PlayerLoopTiming.Update);
+
                 var scene = scenes[i];
                 Debug.Log($"[AI Story Image] Generating image for scene {i + 1}/{scenes.Count}...");
                 
@@ -1282,6 +1285,9 @@ public class AIServiceManager : MonoBehaviour
             {
                 Debug.LogError($"[AI Story Image] Error generating image for scene {i + 1}: {ex.Message}");
             }
+
+            // Hand control back to the game loop between scenes to minimize hitches.
+            await UniTask.Yield(PlayerLoopTiming.Update);
         }
     }
     

@@ -137,8 +137,13 @@ namespace FightScene
             FSceneProcessesRunner.Main.ArrangeProcessOrder();
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
             
-            if (FightLoad.Fight.EventType == FightEventType.Event)
+            var eventType = FightLoad.Fight.EventType;
+            var hasDefaultStory = !string.IsNullOrEmpty(FightLoad.Fight.StoryKey);
+            if (eventType == FightEventType.Event ||
+                (eventType == FightEventType.Quest && !hasDefaultStory))
+            {
                 LoadAIStory().Forget();
+            }
         }
 
         private async UniTask LoadAIStory()
