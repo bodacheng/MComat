@@ -67,6 +67,8 @@ public class CommonSetting : ScriptableObject
     [SerializeField] private string wallCrackEffectCode = "wallCrack";
     [SerializeField] private string breakFreeEffectCode = "breakFree";
     [SerializeField] private string memberShiftEffectCode = "memberShift";
+    [Tooltip("副角色登场时的特效代号")]
+    [SerializeField] private string subMemberShiftEffectCode = "";
 
     [Tooltip("sound effects")] 
     [SerializeField] AudioClip btnTapSound;
@@ -168,6 +170,7 @@ public class CommonSetting : ScriptableObject
     public static string WallCrackEffectCode;
     public static string BreakFreeEffectCode;
     public static string MemberShiftEffectCode;
+    public static string SubMemberShiftEffectCode;
     
     public static int AIDetectInterval = 1;
     
@@ -235,6 +238,7 @@ public class CommonSetting : ScriptableObject
         WallCrackEffectCode = wallCrackEffectCode;
         BreakFreeEffectCode = breakFreeEffectCode;
         MemberShiftEffectCode = memberShiftEffectCode;
+        SubMemberShiftEffectCode = subMemberShiftEffectCode;
         
         AIDetectInterval = aiDetectInterval;
         

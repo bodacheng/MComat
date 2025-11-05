@@ -226,7 +226,7 @@ namespace FightScene
                 RMode_Unit.Value.AnimationManger.RestoreAnimatorState(animationSnapshot);
             }
             
-            EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null, RMode_Unit.Value.WholeT.transform.position, Quaternion.identity, RMode_Unit.Value.geometryCenter).Forget();
+            EffectsManager.GenerateEffect(CommonSetting.SubMemberShiftEffectCode, null, RMode_Unit.Value.WholeT.transform.position, Quaternion.identity, RMode_Unit.Value.geometryCenter).Forget();
             
             if (teamConfig.myTeam == RTFightManager.playerTeam && InputsManager != null)
             {

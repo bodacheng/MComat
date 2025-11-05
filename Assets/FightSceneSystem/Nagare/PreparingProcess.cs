@@ -110,9 +110,17 @@ public class PreparingProcess : FSceneProcess
         tasks.Add(EffectsManager.IniEffectsPool("super_combo_explosion", null, sharedEffectCount));
         tasks.Add(EffectsManager.IniEffectsPool("dream_buff", null, sharedEffectCount));
         
-        if ( FightLoad.Fight.FightMode is (FightMode.Rotate or FightMode.Evolve))
+        if (FightLoad.Fight.FightMode is (FightMode.Rotate or FightMode.Evolve))
         {
-            tasks.Add(EffectsManager.IniEffectsPool(CommonSetting.MemberShiftEffectCode, null, 1));
+            if (!string.IsNullOrEmpty(CommonSetting.MemberShiftEffectCode))
+            {
+                tasks.Add(EffectsManager.IniEffectsPool(CommonSetting.MemberShiftEffectCode, null, 1));
+            }
+            if (!string.IsNullOrEmpty(CommonSetting.SubMemberShiftEffectCode) &&
+                CommonSetting.SubMemberShiftEffectCode != CommonSetting.MemberShiftEffectCode)
+            {
+                tasks.Add(EffectsManager.IniEffectsPool(CommonSetting.SubMemberShiftEffectCode, null, 1));
+            }
         }
         ProgressLayer.LoadingPercent(Translate.Get("LoadingBattle"), 0.7f);
         await UniTask.WhenAll(tasks);
