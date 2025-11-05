@@ -607,6 +607,10 @@ namespace PlayFab
         ResourceNotModified = 1606,
         StudioCreationLimitExceeded = 1607,
         StudioDeletionInitiated = 1608,
+        ProductDisabledForTitle = 1609,
+        PreconditionFailed = 1610,
+        CannotEnableAnonymousPlayerCreation = 1611,
+        ParentCustomerAccountNotFound = 1612,
         MatchmakingEntityInvalid = 2001,
         MatchmakingPlayerAttributesInvalid = 2002,
         MatchmakingQueueNotFound = 2016,
@@ -739,6 +743,7 @@ namespace PlayFab
         AsyncExportNotFound = 10012,
         AsyncExportRateLimitExceeded = 10013,
         AnalyticsSegmentCountOverLimit = 10014,
+        GetPlayersInSegmentDeprecated = 10015,
         SnapshotNotFound = 11000,
         InventoryApiNotImplemented = 12000,
         InventoryCollectionDeletionDisallowed = 12001,
@@ -917,6 +922,7 @@ namespace PlayFab
         GameSaveServiceUnavailable = 20327,
         GameSaveConflict = 20328,
         GameSaveManifestNotEligibleForRollback = 20329,
+        GameSaveTitleClientAnonymousAccountCreationNotDisabled = 20330,
         StateShareForbidden = 21000,
         StateShareTitleNotInFlight = 21001,
         StateShareStateNotFound = 21002,
@@ -936,7 +942,13 @@ namespace PlayFab
         InvalidEntityTypeForAggregation = 23006,
         MultiLevelAggregationNotAllowed = 23007,
         AggregationTypeNotAllowedForLinkedStat = 23008,
-        StoreMetricsRequestInvalidInput = 23501
+        OperationDeniedDueToDefinitionPolicy = 23009,
+        StatisticUpdateNotAllowedWhileLinked = 23010,
+        UnsupportedEntityType = 23011,
+        EntityTypeSpecifiedRequiresAggregationSource = 23012,
+        PlayFabErrorEventNotSupportedForEntityType = 23013,
+        StoreMetricsRequestInvalidInput = 23501,
+        StoreMetricsErrorRetrievingMetrics = 23502
     }
 
     public class PlayFabError
