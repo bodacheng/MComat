@@ -161,7 +161,7 @@ public class SettingLayer : UILayer
     
     public void Initialise()
     {
-        nickName.text = PlayerAccountInfo.Me.TitleDisplayName;
+        RefreshNickNameDisplay();
         CurrentEmail.text = PlayerAccountInfo.Me.PlayFabUserName;
         
         void CloseAllPanels()
@@ -271,6 +271,7 @@ public class SettingLayer : UILayer
             await SkillNameTable.LoadSkillNamesFromConfig();
             SkillConfigTable.RefreshSkillConfigDicForReference();
             LanguageIndicator();
+            RefreshNickNameDisplay();
         }
         
         languageBtn.onClick.AddListener(
@@ -357,6 +358,38 @@ public class SettingLayer : UILayer
         linkInstruction.text = PlayerAccountInfo.Me.currentLinkedDeviceId == PlayFabReadClient.CustomId ? 
             Translate.Get("DeviceBindInstruction") : 
             Translate.Get("DeviceNotBindInstruction");
+    }
+
+    void RefreshNickNameDisplay()
+    {
+        if (nickName == null || PlayerAccountInfo.Me == null)
+        {
+            return;
+        }
+
+        if (string.IsNullOrEmpty(PlayerAccountInfo.Me.TitleDisplayName))
+        {
+            nickName.text = GetNickNamePlaceholder();
+        }
+        else
+        {
+            nickName.text = PlayerAccountInfo.Me.TitleDisplayName;
+        }
+    }
+
+    string GetNickNamePlaceholder()
+    {
+        switch (AppSetting.Value.Language)
+        {
+            case SystemLanguage.Japanese:
+                return "右側のボタンでニックネームを設定してください";
+            case SystemLanguage.Chinese:
+            case SystemLanguage.ChineseSimplified:
+            case SystemLanguage.ChineseTraditional:
+                return "点击右侧按钮设置昵称";
+            default:
+                return "Tap the button on the right to set your nickname";
+        }
     }
     
     public static void Close()
