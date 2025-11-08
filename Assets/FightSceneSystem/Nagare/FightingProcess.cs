@@ -55,10 +55,13 @@ namespace FightScene
                 FightingStepLayer.Close();
             }
             
-            var dataCenters = new List<Data_Center>();
-            dataCenters.AddRange(RTFightManager.Target.team1.teamMembers.GetValues());
-            dataCenters.AddRange(RTFightManager.Target.team2.teamMembers.GetValues());
-            HitBoxLogTable.Instance.SkillLog(dataCenters);
+            if (FightLoad.Fight.FightMode != FightMode.Multi && FightLoad.Fight.FightMode != FightMode.Group)
+            {
+                var dataCenters = new List<Data_Center>();
+                dataCenters.AddRange(RTFightManager.Target.team1.teamMembers.GetValues());
+                dataCenters.AddRange(RTFightManager.Target.team2.teamMembers.GetValues());
+                HitBoxLogTable.Instance.SkillLog(dataCenters);
+            }
             RTFightManager.Target.Disposables.Dispose();
             RTFightManager.Target.RefreshTimeDic.Clear();
             RTFightManager.Target.ClearUnitData();
