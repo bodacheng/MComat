@@ -7,6 +7,16 @@ public partial class PlayFabReadClient
 {
     public static void ErrorReport(PlayFabError error)
     {
+        ErrorReportInternal(error, true);
+    }
+
+    public static void ErrorReportStayInScene(PlayFabError error)
+    {
+        ErrorReportInternal(error, false);
+    }
+
+    static void ErrorReportInternal(PlayFabError error, bool returnToMainMenu)
+    {
         Debug.Log("error.ErrorMessage:"+ error.Error);
         switch (error.Error)
         {
@@ -14,14 +24,7 @@ public partial class PlayFabReadClient
                 PopupLayer.ArrangeWarnWindow(
                     ()=>
                     {
-                        if (SceneManager.GetActiveScene().buildIndex != 0)
-                        {
-                            SceneManager.LoadScene(0);
-                        }
-                        else
-                        {
-                            UILayerLoader.Remove<PopupLayer>();
-                        }
+                        HandleErrorReturn(returnToMainMenu);
                     },
                     Translate.Get("NotAuthorizedByTitle"));
                 break;
@@ -29,14 +32,7 @@ public partial class PlayFabReadClient
                 PopupLayer.ArrangeWarnWindow(
                     ()=>
                     {
-                        if (SceneManager.GetActiveScene().buildIndex != 0)
-                        {
-                            SceneManager.LoadScene(0);
-                        }
-                        else
-                        {
-                            UILayerLoader.Remove<PopupLayer>();
-                        }
+                        HandleErrorReturn(returnToMainMenu);
                     },
                     Translate.Get("ReturnToLobbyForConnectionError"));
                 break;
@@ -59,17 +55,28 @@ public partial class PlayFabReadClient
                 PopupLayer.ArrangeWarnWindow(
                     ()=>
                     {
-                        if (SceneManager.GetActiveScene().buildIndex != 0)
-                        {
-                            SceneManager.LoadScene(0);
-                        }
-                        else
-                        {
-                            UILayerLoader.Remove<PopupLayer>();
-                        }
+                        HandleErrorReturn(returnToMainMenu);
                     },
                     Translate.Get("ConnectionError"));
                 break;
+        }
+    }
+
+    static void HandleErrorReturn(bool returnToMainMenu)
+    {
+        if (!returnToMainMenu)
+        {
+            UILayerLoader.Remove<PopupLayer>();
+            return;
+        }
+
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            UILayerLoader.Remove<PopupLayer>();
         }
     }
 }
