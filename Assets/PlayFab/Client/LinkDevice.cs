@@ -78,6 +78,38 @@ public partial class PlayFabReadClient
             ErrorReport
         );
 #endif
+
+#if UNITY_STANDALONE_WIN
+        if (SteamManager.Initialized)
+        {
+            PlayFabClientAPI.UnlinkSteamAccount(
+                new UnlinkSteamAccountRequest(),
+                (x) =>
+                {
+                    Debug.Log(x);
+                    PlayerAccountInfo.Me.currentLinkedDeviceId = null;
+                    success?.Invoke();
+                },
+                ErrorReport
+            );
+        }
+        else
+        {
+            PlayFabClientAPI.UnlinkCustomID(
+                new UnlinkCustomIDRequest
+                {
+                    CustomId = unlinkDeviceId
+                },
+                (x) =>
+                {
+                    Debug.Log(x);
+                    PlayerAccountInfo.Me.currentLinkedDeviceId = null;
+                    success?.Invoke();
+                },
+                ErrorReport
+            );
+        }
+#endif
     }
     
     static void DeletePlayer()
