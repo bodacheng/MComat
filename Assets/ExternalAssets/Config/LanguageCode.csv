@@ -15,10 +15,10 @@ Fighter,Fighter,ファイター,战士
 SkillGem,Skill Gem,スキルジェム,技能宝石
 Practice,Practice,プラクティス,试验
 Chaos,Chaos,混沌,混沌
-EventBattleMode,Boss challenge,ボスチャレンジ,BOSS挑战
+EventBattleMode,BOSS,ボス,魔王
 PlsClearStage5,Unlock after clearing the 5th level,第5ステージクリア後にアンロック,战胜第5关敌人后开启
 ,,,
-EventFightTitle,BOSS CHALLENGE,ボスチャレンジ,BOSS挑战
+EventFightTitle,BOSS,ボス,魔王
 EasyMode,EASY,簡単,轻松模式
 NormalMode,NORMAL,普通,普通模式
 HardMode,HELL,地獄,地狱模式
@@ -37,6 +37,8 @@ NormalSkill,Normal Skill,通常技,普通技
 Ex1Skill,EX1 Skill,コスト1必殺技,一费必杀
 Ex2Skill,EX2 Skill,コスト2必殺技,二费必杀
 Ex3Skill,EX3 Skill,コスト3必殺技,三费必杀
+,,,
+ClickToEditSkill,Click to edit skills,戦士のスキルを編集するにはクリックしてください,点击编辑技能
 ,,,
 illegalword,Contains words that cannot be used,使用できない単語が含んでる,含有非法字符
 InvalidParams,Invalid Params,入力された内容は使用できません,无效的输入

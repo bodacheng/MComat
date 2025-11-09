@@ -59,6 +59,7 @@ namespace FightScene
                     break;
             }
             _textScaleManager.Clear();
+            HideSelectedFrame();
         }
         
         public void InsTeamUI(Action<Data_Center> changeUnit, Func<bool> currentAutoState, Action<bool> switchTeamAuto, ReactiveProperty<Data_Center> rModeUnit)
@@ -83,7 +84,8 @@ namespace FightScene
                 case FightMode.Evolve:
                     IniTeamUI_Rotate(changeUnit);
                     IniComboHit(rModeUnit);
-                    rModeUnit.Subscribe(Refresh).AddTo(gameObject);
+                    rModeUnit?.Subscribe(Refresh).AddTo(gameObject);
+                    SetupRotateSelectedFrameBinding(rModeUnit);
                     break;
             }
 
@@ -256,10 +258,48 @@ namespace FightScene
 
             EnsureStatusWidgetsHierarchy();
         }
-        
+
         public SideUnitIcon GetSideIcon(Data_Center d)
         {
             return UnitIconDic[d];
+        }
+
+        void SetupRotateSelectedFrameBinding(ReactiveProperty<Data_Center> rModeUnit)
+        {
+            if (selectedFrame == null || rModeUnit == null)
+                return;
+
+            if (TeamConfig.myTeam != RTFightManager.playerTeam)
+            {
+                HideSelectedFrame();
+                return;
+            }
+
+            rModeUnit.Subscribe(UpdateSelectedFrame).AddTo(gameObject);
+        }
+
+        void UpdateSelectedFrame(Data_Center center)
+        {
+            if (selectedFrame == null)
+                return;
+
+            if (center != null && UnitIconDic.TryGetValue(center, out var icon) && icon != null)
+            {
+                HeroIcon.SelectedFeature(icon.Icon.transform, selectedFrame.gameObject, 1f);
+            }
+            else
+            {
+                HideSelectedFrame();
+            }
+        }
+
+        void HideSelectedFrame()
+        {
+            if (selectedFrame == null)
+                return;
+
+            selectedFrame.SetParent(transform);
+            selectedFrame.gameObject.SetActive(false);
         }
 
         void EnsureStatusWidgetsHierarchy()
