@@ -14,6 +14,20 @@ using Steamworks;
 public partial class PlayFabReadClient
 {
     const string PLAYFAB_CUSTOM_ID = "PLAYFAB_CUSTOM_ID";
+    const int LoginRetryMaxAttempts = 4;
+    const float LoginRetryBaseDelaySeconds = 1.5f;
+    const float LoginRetryMaxDelaySeconds = 6f;
+    static readonly HashSet<PlayFabErrorCode> TransientLoginErrors = new HashSet<PlayFabErrorCode>
+    {
+        PlayFabErrorCode.Unknown,
+        PlayFabErrorCode.UnknownError,
+        PlayFabErrorCode.ConnectionError,
+        PlayFabErrorCode.ServiceUnavailable,
+        PlayFabErrorCode.InternalServerError,
+        PlayFabErrorCode.DownstreamServiceUnavailable,
+        PlayFabErrorCode.APIRequestLimitExceeded
+    };
+    static bool _loginInProgress;
     
     public static string CustomId
     {
@@ -104,19 +118,26 @@ public partial class PlayFabReadClient
     /// <param name="fail"></param>
     public static void PlayFabEmailLogin(string email, string pw, Action<LoginResult, LoginType> success)
     {
-        PlayFabClientAPI.LoginWithEmailAddress(
-            new LoginWithEmailAddressRequest()
+        RunLoginWithRetry(
+            (onSuccess, onError) =>
             {
-                Email = email,
-                Password = pw,
-                TitleId = PlayFabSettings.TitleId
+                PlayFabClientAPI.LoginWithEmailAddress(
+                    new LoginWithEmailAddressRequest
+                    {
+                        Email = email,
+                        Password = pw,
+                        TitleId = PlayFabSettings.TitleId
+                    },
+                    onSuccess,
+                    onError
+                );
             },
-            (x)=>
+            result =>
             {
                 DeleteAllLocalMails();
-                success.Invoke(x, LoginType.normal);
+                success?.Invoke(result, LoginType.normal);
             },
-            ErrorReport
+            "Email"
         );
     }
     
@@ -127,58 +148,11 @@ public partial class PlayFabReadClient
     /// <param name="fail"></param>
     public static void LoginByDevice(Action<LoginResult, LoginType> success)
     {
-#if UNITY_IOS
-            PlayFabClientAPI.LoginWithIOSDeviceID(
-                new LoginWithIOSDeviceIDRequest
-                {
-                    DeviceId = CustomId,
-                    CreateAccount = true
-                },
-                (x)=> success.Invoke(x, LoginType.normal),
-                ErrorReport
-            );
-#endif
-
-#if UNITY_ANDROID
-        PlayFabClientAPI.LoginWithAndroidDeviceID(
-            new LoginWithAndroidDeviceIDRequest
-            {
-                AndroidDeviceId = CustomId,
-                CreateAccount = true
-            },
-            (x)=>success.Invoke(x, LoginType.normal),
-            ErrorReport
+        RunLoginWithRetry(
+            StartDeviceLogin,
+            result => success?.Invoke(result, LoginType.normal),
+            "Device"
         );
-#endif
-        
-#if UNITY_STANDALONE_WIN
-        if (SteamManager.Initialized) {
-            // Execute PlayFab API call to log in with steam ticket
-            PlayFabClientAPI.LoginWithSteam(
-                new LoginWithSteamRequest 
-                {
-                    CreateAccount = true,
-                    SteamTicket = GetSteamAuthTicket()
-                }, 
-                (x)=>success.Invoke(x, LoginType.normal),
-                ErrorReport
-            );
-        }
-        else
-        {
-            PlayFabClientAPI.LoginWithCustomID(
-                new LoginWithCustomIDRequest
-                {
-                    CustomId = CustomId,
-                    CreateAccount = true
-                },
-                (x)=>success.Invoke(x, LoginType.normal),
-                ErrorReport
-            );
-        }
-        
-
-#endif
     }
     
     static MissionWatcher _missionWatcher;
@@ -295,5 +269,200 @@ public partial class PlayFabReadClient
     {
         MainMenuNote.GoingTo = MainSceneStep.FrontPage;
         SceneManager.LoadScene(1);
+    }
+
+    static void RunLoginWithRetry(
+        Action<Action<LoginResult>, Action<PlayFabError>> startRequest,
+        Action<LoginResult> onSuccess,
+        string loginSource)
+    {
+        if (startRequest == null)
+        {
+            Debug.LogError("Login request action is null.");
+            return;
+        }
+
+        if (_loginInProgress)
+        {
+            Debug.LogWarning($"PlayFab login already running. Skip new {loginSource} request.");
+            return;
+        }
+
+        _loginInProgress = true;
+        RunLoginWithRetryAsync(startRequest, onSuccess, loginSource).Forget();
+    }
+
+    static async UniTaskVoid RunLoginWithRetryAsync(
+        Action<Action<LoginResult>, Action<PlayFabError>> startRequest,
+        Action<LoginResult> onSuccess,
+        string loginSource)
+    {
+        PlayFabError lastError = null;
+        try
+        {
+            for (int attempt = 1; attempt <= LoginRetryMaxAttempts; attempt++)
+            {
+                var (result, error) = await ExecuteLoginRequestAsync(startRequest);
+                if (error == null)
+                {
+                    Debug.Log($"PlayFab {loginSource} login succeeded on attempt {attempt}.");
+                    onSuccess?.Invoke(result);
+                    return;
+                }
+
+                lastError = error;
+                if (!IsTransientLoginError(error) || attempt == LoginRetryMaxAttempts)
+                {
+                    Debug.LogWarning($"PlayFab {loginSource} login failed with {error.Error}: {error.ErrorMessage}");
+                    break;
+                }
+
+                var waitSeconds = GetLoginRetryDelaySeconds(attempt);
+                Debug.LogWarning($"PlayFab {loginSource} login attempt {attempt} failed ({error.Error}). Retrying in {waitSeconds:0.0}s");
+                await UniTask.Delay(TimeSpan.FromSeconds(waitSeconds));
+            }
+        }
+        finally
+        {
+            _loginInProgress = false;
+        }
+
+        ErrorReport(lastError ?? new PlayFabError
+        {
+            Error = PlayFabErrorCode.Unknown,
+            ErrorMessage = "Login failed."
+        });
+    }
+
+    static UniTask<(LoginResult result, PlayFabError error)> ExecuteLoginRequestAsync(
+        Action<Action<LoginResult>, Action<PlayFabError>> startRequest)
+    {
+        var tcs = new UniTaskCompletionSource<(LoginResult, PlayFabError)>();
+        try
+        {
+            startRequest(
+                result => tcs.TrySetResult((result, null)),
+                error => tcs.TrySetResult((null, error ?? new PlayFabError
+                {
+                    Error = PlayFabErrorCode.Unknown,
+                    ErrorMessage = "Unknown login error."
+                }))
+            );
+        }
+        catch (Exception ex)
+        {
+            Debug.LogException(ex);
+            tcs.TrySetResult((null, new PlayFabError
+            {
+                Error = PlayFabErrorCode.Unknown,
+                ErrorMessage = ex.Message
+            }));
+        }
+
+        return tcs.Task;
+    }
+
+    static bool IsTransientLoginError(PlayFabError error)
+    {
+        if (error == null)
+        {
+            return false;
+        }
+
+        if (TransientLoginErrors.Contains(error.Error))
+        {
+            return true;
+        }
+
+        if (error.HttpCode == 0 || error.HttpCode == 408)
+        {
+            return true;
+        }
+
+        if (error.HttpCode >= 500 && error.HttpCode < 600)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    static float GetLoginRetryDelaySeconds(int attempt)
+    {
+        var waitSeconds = LoginRetryBaseDelaySeconds * Mathf.Pow(2f, attempt - 1);
+        return Mathf.Min(waitSeconds, LoginRetryMaxDelaySeconds);
+    }
+
+    static void StartDeviceLogin(Action<LoginResult> onSuccess, Action<PlayFabError> onError)
+    {
+#if UNITY_IOS
+        PlayFabClientAPI.LoginWithIOSDeviceID(
+            new LoginWithIOSDeviceIDRequest
+            {
+                DeviceId = CustomId,
+                CreateAccount = true
+            },
+            onSuccess,
+            onError
+        );
+        return;
+#endif
+
+#if UNITY_ANDROID
+        PlayFabClientAPI.LoginWithAndroidDeviceID(
+            new LoginWithAndroidDeviceIDRequest
+            {
+                AndroidDeviceId = CustomId,
+                CreateAccount = true
+            },
+            onSuccess,
+            onError
+        );
+        return;
+#endif
+
+#if UNITY_STANDALONE_WIN
+        if (SteamManager.Initialized)
+        {
+            var steamTicket = GetSteamAuthTicket();
+            if (string.IsNullOrEmpty(steamTicket))
+            {
+                onError?.Invoke(new PlayFabError
+                {
+                    Error = PlayFabErrorCode.InvalidTicket,
+                    ErrorMessage = "Failed to get Steam auth ticket."
+                });
+                return;
+            }
+
+            PlayFabClientAPI.LoginWithSteam(
+                new LoginWithSteamRequest
+                {
+                    CreateAccount = true,
+                    SteamTicket = steamTicket
+                },
+                onSuccess,
+                onError
+            );
+            return;
+        }
+
+        PlayFabClientAPI.LoginWithCustomID(
+            new LoginWithCustomIDRequest
+            {
+                CustomId = CustomId,
+                CreateAccount = true
+            },
+            onSuccess,
+            onError
+        );
+        return;
+#endif
+
+        onError?.Invoke(new PlayFabError
+        {
+            Error = PlayFabErrorCode.InvalidPlatform,
+            ErrorMessage = "Device login is not supported on this platform."
+        });
     }
 }
