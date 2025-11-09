@@ -43,7 +43,7 @@ namespace ModelView
         public int TaskRunningCount => _singleThreadProcessor.TaskRunningCount;
         public async UniTask ShowModel(string recordID)
         {
-            await _singleThreadProcessor.RunAsQueued(_ShowModel(recordID));
+            await _singleThreadProcessor.RunAsQueued(() => _ShowModel(recordID));
         }
         
         async UniTask _ShowModel(string recordID)
