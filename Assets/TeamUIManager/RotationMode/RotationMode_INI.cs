@@ -97,6 +97,8 @@ namespace FightScene
                     }
                     rotationModeHitCombo.transform.localScale = Vector3.one;
                     rotationModeHitCombo.fontSize = 30;
+
+                    EnsureStatusWidgetsHierarchy();
                     
                     x.FightDataRef._comboHitCount.HitCount.Subscribe(h =>
                     {

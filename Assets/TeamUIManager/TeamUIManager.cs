@@ -36,6 +36,11 @@ namespace FightScene
             get => _teamMembers;
             set => _teamMembers = value;
         }
+
+        void Awake()
+        {
+            EnsureStatusWidgetsHierarchy();
+        }
         
         public void Clear()
         {
@@ -81,6 +86,8 @@ namespace FightScene
                     rModeUnit.Subscribe(Refresh).AddTo(gameObject);
                     break;
             }
+
+            EnsureStatusWidgetsHierarchy();
         }
         
         void RefreshResistanceBar(Data_Center dataCenter, int value)
@@ -246,11 +253,51 @@ namespace FightScene
             {
                 sideIconsContainer.gameObject.SetActive(false);
             }
+
+            EnsureStatusWidgetsHierarchy();
         }
         
         public SideUnitIcon GetSideIcon(Data_Center d)
         {
             return UnitIconDic[d];
+        }
+
+        void EnsureStatusWidgetsHierarchy()
+        {
+            if (_targetCanvasT == null)
+                return;
+
+            var parent = _targetCanvasT.transform;
+            var insertionIndex = 0;
+            insertionIndex = MoveStatusWidgetToIndex(sideIconsContainer, parent, insertionIndex);
+
+            foreach (var icon in UnitIconDic.Values)
+            {
+                if (icon == null)
+                    continue;
+                var rect = icon.transform as RectTransform;
+                insertionIndex = MoveStatusWidgetToIndex(rect, parent, insertionIndex);
+            }
+
+            RectTransform comboRect = rotationModeHitCombo != null ? rotationModeHitCombo.rectTransform : null;
+            MoveStatusWidgetToIndex(comboRect, parent, insertionIndex);
+        }
+
+        int MoveStatusWidgetToIndex(RectTransform target, Transform expectedParent, int desiredIndex)
+        {
+            if (target == null || expectedParent == null)
+                return desiredIndex;
+
+            if (target.parent != expectedParent)
+                return desiredIndex;
+
+            var siblingCount = expectedParent.childCount;
+            desiredIndex = Mathf.Clamp(desiredIndex, 0, siblingCount - 1);
+            if (target.GetSiblingIndex() != desiredIndex)
+            {
+                target.SetSiblingIndex(desiredIndex);
+            }
+            return desiredIndex + 1;
         }
     }
 }
