@@ -76,13 +76,30 @@ public class MailBox : UILayer
     
     public static async void LoadPic(Image mailIcon, string itemId)
     {
+        if (mailIcon == null)
+        {
+            return;
+        }
+
+        void AssignSprite(Sprite sprite)
+        {
+            if (mailIcon == null || sprite == null)
+            {
+                return;
+            }
+
+            mailIcon.sprite = sprite;
+            var adjuster = mailIcon.GetComponent<SizeAdjustBySpriteSize>();
+            adjuster?.AdjustSize();
+        }
+        
         if (itemId.Contains("DM"))
         {
-            mailIcon.sprite = DefaultIconSetting._diamondIcon;
+            AssignSprite(DefaultIconSetting._diamondIcon);
         }
         else if (itemId.Contains("GD"))
         {
-            mailIcon.sprite = DefaultIconSetting._coinIcon;
+            AssignSprite(DefaultIconSetting._coinIcon);
         }
         else if (itemId.Contains("UnitGift"))
         {
@@ -90,8 +107,7 @@ public class MailBox : UILayer
             if (words.Length > 1)
             {
                 var pic = await UnitIconDic.Load(words[1], mailIcon.gameObject);
-                if (mailIcon != null)
-                    mailIcon.sprite = pic;
+                AssignSprite(pic);
             }
         }
         else
