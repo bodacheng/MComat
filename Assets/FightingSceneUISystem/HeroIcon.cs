@@ -14,6 +14,14 @@ public class HeroIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     [SerializeField] Image cooldownCurtain;
     [SerializeField] GameObject warnFlag;
     [SerializeField] bool canDrag = true; // 控制是否允许拖动的标志
+
+    // 通过全局开关限制哪里可以拖动头像
+    static bool globalDragEnabled = false;
+
+    public static void SetGlobalDragPermission(bool enabled)
+    {
+        globalDragEnabled = enabled;
+    }
     
     public UnitConfig unitConfig;
     public GameObject WarnFlag => warnFlag;
@@ -204,8 +212,18 @@ public class HeroIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     static Canvas canvas;                                                       // Canvas for item drag operation
     static readonly string canvasName = "DragAndDropCanvas";                    // Name of canvas
     static readonly int canvasSortOrder = 100;                                  // Sort order for canvas
+
+    bool IsDragAllowed()
+    {
+        return canDrag && globalDragEnabled;
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!IsDragAllowed())
+        {
+            return;
+        }
         if (dragging != null)
         {
             DestroyImmediate(dragging);
@@ -244,7 +262,7 @@ public class HeroIcon : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     /// <param name="data"></param>
     public void OnDrag(PointerEventData data)
     {
-        if (!canDrag)
+        if (!IsDragAllowed())
         {
             return;
         }

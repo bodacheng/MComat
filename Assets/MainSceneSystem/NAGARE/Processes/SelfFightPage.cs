@@ -13,6 +13,7 @@ public class SelfFightPage : MSceneProcess
 
     public override void ProcessEnter()
     {
+        HeroIcon.SetGlobalDragPermission(true);
         SetUp().Forget();
     }
 
@@ -29,6 +30,7 @@ public class SelfFightPage : MSceneProcess
     
     public override void ProcessEnd()
     {
+        HeroIcon.SetGlobalDragPermission(false);
         UILayerLoader.Remove<UnitsLayer>();
         UILayerLoader.Remove<SelfFightLayer>();
     }

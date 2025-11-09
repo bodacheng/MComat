@@ -24,6 +24,7 @@ public class TeamEditPage : MSceneProcess
     void EnterProcess(string teamMode)
     {
         int currentIndex;
+        HeroIcon.SetGlobalDragPermission(teamMode != "arcade");
         var unitsLayer = UILayerLoader.Load<UnitsLayer>();
         switch (teamMode)
         {
@@ -100,6 +101,7 @@ public class TeamEditPage : MSceneProcess
     
     public override void ProcessEnd()
     {
+        HeroIcon.SetGlobalDragPermission(false);
         if (_teamMode == "arcade")
             TeamSet.Default = defaultPosKeySetBefore;
         if (_teamMode == "origin")
