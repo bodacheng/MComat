@@ -50,6 +50,44 @@ namespace Log
             }
         }
 
+        const float LowHitRateThreshold = 0.3f;
+        const int LowHitRateMinAttempts = 20;
+        const string LowHitRateFlagValue = "LowHitRate";
+        const float HighInterruptRatioThreshold = 0.5f;
+        const int InterruptMinAttempts = 15;
+        const string HighInterruptFlagValue = "HighInterrupt";
+
+        static int ParseInt(string value)
+        {
+            return int.TryParse(value, out var result) ? result : 0;
+        }
+
+        static string FormatHitRateString(int success, int untouched, int touched)
+        {
+            var attempts = success + untouched + touched;
+            if (attempts <= 0)
+                return "-";
+            var rate = success / (float)attempts * 100f;
+            return rate.ToString("0.0");
+        }
+
+        static string EvaluateLowHitRateFlag(int success, int untouched, int touched)
+        {
+            var attempts = success + untouched + touched;
+            if (attempts < LowHitRateMinAttempts)
+                return string.Empty;
+            var rate = attempts > 0 ? success / (float)attempts : 0f;
+            return rate < LowHitRateThreshold ? LowHitRateFlagValue : string.Empty;
+        }
+
+        static string EvaluateHighInterruptFlag(int interrupted, int triggeredTimes)
+        {
+            if (triggeredTimes < InterruptMinAttempts)
+                return string.Empty;
+            var ratio = triggeredTimes > 0 ? interrupted / (float)triggeredTimes : 0f;
+            return ratio >= HighInterruptRatioThreshold ? HighInterruptFlagValue : string.Empty;
+        }
+
         public class Row
         {
             public string RECORD_ID;
@@ -60,6 +98,9 @@ namespace Log
             public string Succeeded;
             public string TriggeredTimes;
             public string InterruptedTimes;
+            public string HitRatePercent;
+            public string LowHitRateFlag;
+            public string HighInterruptFlag;
         }
 
         public List<Row> rowList = new List<Row>();
@@ -76,19 +117,22 @@ namespace Log
             string[][] grid = CsvParser2.Parse(csv.text);
             for (int i = 1; i < grid.Length; i++)
             {
-                var row = new Row
-                {
-                    RECORD_ID = grid[i][0],
-                    REAL_NAME = grid[i][1],
-                    MONSTER_TYPE = grid[i][2],
-                    Untouched = grid[i][3],
-                    Touched = grid[i][4],
-                    Succeeded = grid[i][5],
-                    TriggeredTimes = grid[i][6],
-                    InterruptedTimes = grid[i][7]
-                };
-                rowList.Add(row);
-            }
+                    var row = new Row
+                    {
+                        RECORD_ID = grid[i][0],
+                        REAL_NAME = grid[i][1],
+                        MONSTER_TYPE = grid[i][2],
+                        Untouched = grid[i][3],
+                        Touched = grid[i][4],
+                        Succeeded = grid[i][5],
+                        TriggeredTimes = grid[i][6],
+                        InterruptedTimes = grid[i][7],
+                        HitRatePercent = grid[i].Length > 8 ? grid[i][8] : string.Empty,
+                        LowHitRateFlag = grid[i].Length > 9 ? grid[i][9] : string.Empty,
+                        HighInterruptFlag = grid[i].Length > 10 ? grid[i][10] : string.Empty
+                    };
+                    rowList.Add(row);
+                }
             isLoaded = true;
         }
 
@@ -111,7 +155,10 @@ namespace Log
                     Touched = grid[i][4],
                     Succeeded = grid[i][5],
                     TriggeredTimes = grid[i][6],
-                    InterruptedTimes = grid[i][7]
+                    InterruptedTimes = grid[i][7],
+                    HitRatePercent = grid[i].Length > 8 ? grid[i][8] : string.Empty,
+                    LowHitRateFlag = grid[i].Length > 9 ? grid[i][9] : string.Empty,
+                    HighInterruptFlag = grid[i].Length > 10 ? grid[i][10] : string.Empty
                 };
                 rowList.Add(row);
             }
@@ -173,7 +220,7 @@ namespace Log
             string[][] grid = new string[rowList.Count + 1][];
             for (int i = 0; i < grid.Length; i++)
             {
-                grid[i] = new string[12];
+                grid[i] = new string[14];
                 if (i == 0)
                 {
                     grid[i][0] = "RECORD_ID";
@@ -184,31 +231,59 @@ namespace Log
                     grid[i][5] = "Successed(成功击中敌人的hitbox数量)";
                     grid[i][6] = "TriggerdTimes(技能使用次数）";
                     grid[i][7] = "InteruptedTimes（技能被打断次数）";
+                    grid[i][8] = "HitRate(%)";
+                    grid[i][9] = "LowHitRateFlag";
+                    grid[i][10] = "HighInterruptFlag";
+                    grid[i][11] = "Attempts";
                 }
                 else
                 {
+                    var rowData = rowList[i - 1];
                     if (hitBoxLogger == null)
                     {
-                        grid[i][0] = rowList[i - 1].RECORD_ID;
-                        grid[i][1] = rowList[i - 1].REAL_NAME;
-                        grid[i][2] = rowList[i - 1].MONSTER_TYPE;
+                        grid[i][0] = rowData.RECORD_ID;
+                        grid[i][1] = rowData.REAL_NAME;
+                        grid[i][2] = rowData.MONSTER_TYPE;
                         grid[i][3] = "0";
                         grid[i][4] = "0";
                         grid[i][5] = "0";
                         grid[i][6] = "0";
                         grid[i][7] = "0";
+                        grid[i][8] = string.IsNullOrEmpty(rowData.HitRatePercent) ? "-" : rowData.HitRatePercent;
+                        grid[i][9] = rowData.LowHitRateFlag ?? string.Empty;
+                        grid[i][10] = rowData.HighInterruptFlag ?? string.Empty;
+                        grid[i][11] = "0";
 
                     }
                     else
                     {
-                        grid[i][0] = rowList[i - 1].RECORD_ID;
-                        grid[i][1] = rowList[i - 1].REAL_NAME;
-                        grid[i][2] = rowList[i - 1].MONSTER_TYPE;
-                        grid[i][3] = ((hitBoxLogger.untouchedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.untouchedtimes[grid[i][1]] : 0) + int.Parse(rowList[i - 1].Untouched)).ToString();
-                        grid[i][4] = ((hitBoxLogger.touchedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.touchedtimes[grid[i][1]] : 0) + int.Parse(rowList[i - 1].Touched)).ToString();
-                        grid[i][5] = ((hitBoxLogger.successedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.successedtimes[grid[i][1]] : 0) + int.Parse(rowList[i - 1].Succeeded)).ToString();
-                        grid[i][6] = ((StateTriggerTimes_whole.ContainsKey(grid[i][1]) ? StateTriggerTimes_whole[grid[i][1]] : 0) + int.Parse(rowList[i - 1].TriggeredTimes)).ToString();
-                        grid[i][7] = ((StateInterruptedTimes_whole.ContainsKey(grid[i][1]) ? StateInterruptedTimes_whole[grid[i][1]] : 0) + int.Parse(rowList[i - 1].InterruptedTimes)).ToString();
+                        grid[i][0] = rowData.RECORD_ID;
+                        grid[i][1] = rowData.REAL_NAME;
+                        grid[i][2] = rowData.MONSTER_TYPE;
+
+                        var untouchedVal = (hitBoxLogger.untouchedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.untouchedtimes[grid[i][1]] : 0) + ParseInt(rowData.Untouched);
+                        var touchedVal = (hitBoxLogger.touchedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.touchedtimes[grid[i][1]] : 0) + ParseInt(rowData.Touched);
+                        var successVal = (hitBoxLogger.successedtimes.ContainsKey(grid[i][1]) ? hitBoxLogger.successedtimes[grid[i][1]] : 0) + ParseInt(rowData.Succeeded);
+                        var triggerVal = (StateTriggerTimes_whole.ContainsKey(grid[i][1]) ? StateTriggerTimes_whole[grid[i][1]] : 0) + ParseInt(rowData.TriggeredTimes);
+                        var interruptedVal = (StateInterruptedTimes_whole.ContainsKey(grid[i][1]) ? StateInterruptedTimes_whole[grid[i][1]] : 0) + ParseInt(rowData.InterruptedTimes);
+
+                        grid[i][3] = untouchedVal.ToString();
+                        grid[i][4] = touchedVal.ToString();
+                        grid[i][5] = successVal.ToString();
+                        grid[i][6] = triggerVal.ToString();
+                        grid[i][7] = interruptedVal.ToString();
+
+                        var hitRateString = FormatHitRateString(successVal, untouchedVal, touchedVal);
+                        var flag = EvaluateLowHitRateFlag(successVal, untouchedVal, touchedVal);
+                        var interruptFlag = EvaluateHighInterruptFlag(interruptedVal, triggerVal);
+                        grid[i][8] = hitRateString;
+                        grid[i][9] = flag;
+                        grid[i][10] = interruptFlag;
+                        grid[i][11] = (successVal + untouchedVal + touchedVal).ToString();
+
+                        rowData.HitRatePercent = hitRateString;
+                        rowData.LowHitRateFlag = flag;
+                        rowData.HighInterruptFlag = interruptFlag;
                     }
                 }
             }
