@@ -116,7 +116,7 @@ namespace Soul
                     _effectP = gameObject.transform.position;
                     _effectP.y = 0;
                     EffectsManager.GenerateEffect(CommonSetting.HitGroundEffectCode, null, _effectP, Quaternion.LookRotation(Vector3.right), null).Forget();
-                    _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+                    _Rigidbody.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
                     FlyingStep = 2;
                     break;
                 case 2:
@@ -134,7 +134,16 @@ namespace Soul
                     }
                     break;
             }
-            _Rigidbody.linearVelocity = Vector3.zero; //如果没有这一行的话会出现个非常意外的问题，就是产生一个向上的固定velocity，超过了角色自身下坠，导致FlyingStep一直为0
+            if (FlyingStep < 2)
+            {
+                _Rigidbody.linearVelocity = Vector3.zero; //防止空中保持一个向上的固定velocity，超过了角色自身下坠，导致FlyingStep一直为0
+            }
+            else
+            {
+                var planarVelocity = _Rigidbody.linearVelocity;
+                planarVelocity.y = 0f;
+                _Rigidbody.linearVelocity = planarVelocity;
+            }
             _timeCounter += Time.deltaTime;
         }
     }
