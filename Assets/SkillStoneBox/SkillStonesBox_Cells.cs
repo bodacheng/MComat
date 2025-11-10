@@ -19,7 +19,7 @@ namespace mainMenu
         public GridLayoutGroup Grid=> grid;
         public ScrollRect ScrollRect => scrollRect;
         public static GameObject Selected;
-        readonly IDictionary<int, StoneCell> _cellsDic = new Dictionary<int, StoneCell>();
+        readonly List<StoneCell> _cells = new List<StoneCell>();
 
         public void SetBoxHeight(float sizeNeedToRemain)
         {
@@ -33,9 +33,9 @@ namespace mainMenu
         
         public void GenerateCells(int extraCellNum = 0)
         {
-            foreach (var kv in _cellsDic)
+            foreach (var cell in _cells)
             {
-                kv.Value.gameObject.SetActive(false);
+                cell.gameObject.SetActive(false);
             }
             
             var hang = 1;
@@ -44,23 +44,16 @@ namespace mainMenu
             cellCount = ((cellCount / grid.constraintCount) + 1) * grid.constraintCount;
             for (int i = 0; i < cellCount; i++)
             {
-                if (!_cellsDic.ContainsKey(i))
+                var cell = GetOrCreateCell(i);
+                cell.gameObject.SetActive(true);
+                if (cell.transform.parent != BoxT)
                 {
-                    var cell = Instantiate(cellPrefab);
-                    cell.cellPhase = StoneCell.CellPhase.SkillStoneBoxCell;
-                    _cellsDic.Add(i, cell);
+                    cell.transform.SetParent(BoxT);
+                    cell.transform.localPosition = Vector3.zero;
+                    cell.transform.localScale = Vector3.one;
                 }
                 
-                //CellsDictionary[i].RemoveItemWithOutDestroy();//根据之前经验，这个东西有出错的可能
-                _cellsDic[i].gameObject.SetActive(true);
-                if (_cellsDic[i].transform.parent != BoxT)
-                {
-                    _cellsDic[i].transform.SetParent(BoxT);
-                    _cellsDic[i].transform.localPosition = Vector3.zero;
-                    _cellsDic[i].transform.localScale = Vector3.one;
-                }
-                
-                _cellsDic[i]._selected.SetActive(false);
+                cell._selected.SetActive(false);
             }
             
             hang = cellCount / grid.constraintCount + 1;
@@ -71,23 +64,45 @@ namespace mainMenu
             var gridRect = grid.GetComponent<RectTransform>();
             gridRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, (grid.cellSize.y + grid.spacing.y) * hang);
         }
+
+        StoneCell GetOrCreateCell(int index)
+        {
+            if (index < _cells.Count)
+            {
+                if (_cells[index] == null)
+                {
+                    _cells[index] = Instantiate(cellPrefab);
+                    _cells[index].cellPhase = StoneCell.CellPhase.SkillStoneBoxCell;
+                }
+                return _cells[index];
+            }
+
+            var cell = Instantiate(cellPrefab);
+            cell.cellPhase = StoneCell.CellPhase.SkillStoneBoxCell;
+            _cells.Add(cell);
+            return cell;
+        }
         
         public void AddFeatureToCells(Action<StoneCell> action)
         {
-            foreach (var cell in _cellsDic)
+            foreach (var cell in _cells)
             {
-                cell.Value.btn.ClearAllEvents();
-                action.Invoke(cell.Value);
+                if (cell == null)
+                    continue;
+                cell.btn.ClearAllEvents();
+                action.Invoke(cell);
             }
         }
         
         StoneCell GetFirstEmptyCell()
         {
-            foreach (KeyValuePair<int, StoneCell> keyValuePair in _cellsDic)
+            foreach (var cell in _cells)
             {
-                if (keyValuePair.Value.GetItem() != null)
+                if (cell == null)
                     continue;
-                return keyValuePair.Value;
+                if (cell.GetItem() != null)
+                    continue;
+                return cell;
             }
             return null;
         }
@@ -157,4 +172,3 @@ namespace mainMenu
         }
     }
 }
-

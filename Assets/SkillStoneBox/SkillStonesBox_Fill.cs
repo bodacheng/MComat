@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using dataAccess;
 using Skill;
 
@@ -8,6 +9,7 @@ namespace mainMenu
     {
         [SerializeField] private bool skillEditStep;
         private StoneFilterForm _form;
+        readonly List<string> _currentStoneInstanceIds = new List<string>();
         
         public void RestFilter()
         {
@@ -21,7 +23,7 @@ namespace mainMenu
             };
 
             _form = filterForm;
-            PutSkillStonesToBox();
+            RefreshVisibleStones(true);
         }
         
         public class StoneFilterForm
@@ -44,34 +46,48 @@ namespace mainMenu
             }
         }
         
-        void PutSkillStonesToBox()
+        void RefreshVisibleStones(bool refreshFromSource)
         {
-            string focusingUnitInstanceId = null;
-            if (skillEditStep)
-                focusingUnitInstanceId = PreScene.target.Focusing.id;
-            
-            var targetSKs = Stones.TargetStonesFromAccount_except(focusingUnitInstanceId, _form, null, null, false);
-            targetSKs = Order(targetSKs);
-            
-            foreach (var cellPair in _cellsDic)
+            if (refreshFromSource)
             {
-                cellPair.Value.RemoveToTemp();
+                string focusingUnitInstanceId = null;
+                if (skillEditStep && PreScene.target.Focusing != null)
+                    focusingUnitInstanceId = PreScene.target.Focusing.id;
+                var targetSKs = Stones.TargetStonesFromAccount_except(focusingUnitInstanceId, _form, null, null, false);
+                _currentStoneInstanceIds.Clear();
+                if (targetSKs != null)
+                    _currentStoneInstanceIds.AddRange(targetSKs);
+            }
+            
+            Order(_currentStoneInstanceIds);
+            ApplyCurrentTargetsToCells();
+        }
+        
+        void ApplyCurrentTargetsToCells()
+        {
+            foreach (var cell in _cells)
+            {
+                cell?.RemoveToTemp();
             }
             
             var key = 0;
-            foreach (var instanceId in targetSKs)
+            foreach (var instanceId in _currentStoneInstanceIds)
             {
-                _cellsDic.TryGetValue(key, out var cell);
-                if (cell == null)
+                if (key >= _cells.Count)
                 {
                     Debug.Log("Stone box exceed："+ key);
-                    Debug.Log("此时技能石头盒子的总容量：" + _cellsDic.Count);
-                    continue;
+                    Debug.Log("此时技能石头盒子的总容量：" + _cells.Count);
+                    break;
                 }
                 
-                if (!Stones.GetRenderModel(instanceId)._using)
+                var renderModel = Stones.GetRenderModel(instanceId);
+                var cell = _cells[key];
+                if (renderModel == null || cell == null)
+                    continue;
+                
+                if (!renderModel._using)
                 {
-                    cell.AddItem(Stones.GetRenderModel(instanceId));
+                    cell.AddItem(renderModel);
                     key++;
                 }
                 else
