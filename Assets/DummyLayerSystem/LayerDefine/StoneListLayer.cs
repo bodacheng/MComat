@@ -22,6 +22,10 @@ public class StoneListLayer : UILayer
             {
                 skillStoneDetail.RefreshInfo(_targetStoneID);
             }
+            else
+            {
+                skillStoneDetail.Clear();
+            }
             skillStoneDetail.gameObject.SetActive(info != null);
             openPowerUpBtn.gameObject.SetActive(Stones.StoneCanLevelUp(_targetStoneID));
             if (info == null) return;
@@ -32,6 +36,16 @@ public class StoneListLayer : UILayer
                 }
             );
         }
+    }
+    
+    void OnEnable()
+    {
+        ToggleTabListener(true);
+    }
+    
+    void OnDisable()
+    {
+        ToggleTabListener(false);
     }
     
     public async void Setup()
@@ -53,7 +67,11 @@ public class StoneListLayer : UILayer
     public override void OnDestroy()
     {
         skillStoneDetail.Clear();
-        box._tabEffects.CloseShowingTagEffects();
+        if (box != null)
+        {
+            ToggleTabListener(false);
+            box._tabEffects.CloseShowingTagEffects();
+        }
     }
     
     public void CellFeature_StoneShow(StoneCell cell)
@@ -66,7 +84,6 @@ public class StoneListLayer : UILayer
                 StoneCell.SelectedRender(cell, SkillStonesBox.Selected);
                 TargetStoneID = stone.instanceId;
             }else{
-                skillStoneDetail.Clear();
                 TargetStoneID = null;
             }
         }
@@ -93,5 +110,29 @@ public class StoneListLayer : UILayer
         cell.btn.ActivateDoubleClick = true;
         cell.btn.onDoubleClick.AddListener(DoubleClick);
         cell.SetOnDropAction(StoneCell.Install);
+    }
+
+    void ClearSelectionFromTabs()
+    {
+        if (SkillStonesBox.Selected != null)
+        {
+            StoneCell.SelectedRender(null, SkillStonesBox.Selected);
+        }
+        TargetStoneID = null;
+    }
+    
+    void ToggleTabListener(bool subscribe)
+    {
+        if (box == null)
+            return;
+        if (subscribe)
+        {
+            box.ExTabPressed -= ClearSelectionFromTabs;
+            box.ExTabPressed += ClearSelectionFromTabs;
+        }
+        else
+        {
+            box.ExTabPressed -= ClearSelectionFromTabs;
+        }
     }
 }

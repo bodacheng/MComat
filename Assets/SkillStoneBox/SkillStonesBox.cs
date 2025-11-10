@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace mainMenu
 {
     public partial class SkillStonesBox : MonoBehaviour
     {
+        public event Action ExTabPressed;
+        
         [Header("画面主模块parent")]
         [SerializeField] RectTransform BoxT;
         

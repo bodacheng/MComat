@@ -24,6 +24,7 @@ namespace mainMenu
             {
                 btn.onClick.AddListener(() =>
                 {
+                    ExTabPressed?.Invoke();
                     FocusingExType = exLevel;
                     RestFilter();
                 });

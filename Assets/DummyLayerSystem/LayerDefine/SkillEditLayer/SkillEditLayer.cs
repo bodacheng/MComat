@@ -30,9 +30,21 @@ public partial class SkillEditLayer : UILayer
     
     public bool Initialized { get; set; } = false;
     
+    bool _detailFromSkillBox;
+    
     // For Transition Effects
     private readonly List<Tween> _tweens = new List<Tween>();
     private readonly List<GameObject> _transitionEffects = new List<GameObject>();
+    
+    void OnEnable()
+    {
+        ToggleSkillBoxTabListener(true);
+    }
+    
+    void OnDisable()
+    {
+        ToggleSkillBoxTabListener(false);
+    }
     
     public async UniTask ShowCombo(bool dreamCombo)
     {
@@ -148,7 +160,7 @@ public partial class SkillEditLayer : UILayer
         SetGridGroupSize(stonesBox.Grid,0);
         stonesBox.GenerateCells(9);
         gameObject.SetActive(false);
-        nineSlot.PrintSkillInfo = skillStoneDetail.RefreshInfo;
+        nineSlot.PrintSkillInfo = PrintSkillInfoFromSlot;
         nineSlot.StartUp(
             x=>
             {
@@ -171,6 +183,7 @@ public partial class SkillEditLayer : UILayer
         await stonesBox.IniExTabsEffects(PreScene.target.noPostProcessCamera);
         stonesBox.FilterFeatureRefresh(true);
         skillStoneDetail.Clear();
+        _detailFromSkillBox = false;
         SkillEditButtonFeature(PreScene.target.Focusing);
         toDo?.Invoke(this);
         gameObject.SetActive(true);
@@ -197,7 +210,11 @@ public partial class SkillEditLayer : UILayer
                 Destroy(effect);
         }
         _tweens.Clear();
-        stonesBox._tabEffects.CloseShowingTagEffects();
+        if (stonesBox != null)
+        {
+            ToggleSkillBoxTabListener(false);
+            stonesBox._tabEffects.CloseShowingTagEffects();
+        }
     }
 
     void SkillEditButtonFeature(UnitInfo _unitInfo)
@@ -260,6 +277,44 @@ public partial class SkillEditLayer : UILayer
         nineSlot.removeAllBtn.onClick.AddListener(nineSlot.ClearSkillEquip);
         nineSlot.randomBtn.onClick.AddListener(FinishRemains);
     }
+
+    void HandleSkillBoxTabPressed()
+    {
+        if (!_detailFromSkillBox)
+            return;
+        skillStoneDetail.Clear();
+        if (SkillStonesBox.Selected != null)
+        {
+            StoneCell.SelectedRender(null, SkillStonesBox.Selected);
+        }
+        _detailFromSkillBox = false;
+    }
+
+    void ToggleSkillBoxTabListener(bool subscribe)
+    {
+        if (stonesBox == null)
+            return;
+        if (subscribe)
+        {
+            stonesBox.ExTabPressed -= HandleSkillBoxTabPressed;
+            stonesBox.ExTabPressed += HandleSkillBoxTabPressed;
+        }
+        else
+        {
+            stonesBox.ExTabPressed -= HandleSkillBoxTabPressed;
+        }
+    }
+
+    void PrintSkillInfoFromSlot(string instanceId)
+    {
+        _detailFromSkillBox = false;
+        if (string.IsNullOrEmpty(instanceId))
+        {
+            skillStoneDetail.Clear();
+            return;
+        }
+        skillStoneDetail.RefreshInfo(instanceId);
+    }
     
     void ForceClearAll()
     {
@@ -277,8 +332,10 @@ public partial class SkillEditLayer : UILayer
             if (stone != null && stone._SkillConfig != null)
             {
                 skillStoneDetail.RefreshInfo(stone.instanceId);
+                _detailFromSkillBox = true;
             }else{
                 skillStoneDetail.Clear();
+                _detailFromSkillBox = false;
             }
             StoneCell.SelectedRender(cell, SkillStonesBox.Selected);
         }
