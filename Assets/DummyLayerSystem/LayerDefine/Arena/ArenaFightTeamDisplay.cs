@@ -59,7 +59,12 @@ public class ArenaFightTeamDisplay : MonoBehaviour
         stage.Team1LeaderboardEntry = myInfo.PlayerLeaderboardEntry;
         stage.Team2LeaderboardEntry = info.PlayerLeaderboardEntry;
 
-        bigButton.onClick.AddListener(()=> tryBeginStage(stage));
+        bigButton.onClick.AddListener(() =>
+        {
+            stage.Team1OneWord = myInfo.OneWord;
+            stage.Team2OneWord = info.OneWord;
+            tryBeginStage(stage);
+        });
         plusArenaPoint.text = "+" + info.plusPoint;
         plusArenaPoint.gameObject.SetActive(true);
     }

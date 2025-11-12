@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DummyLayerSystem;
 using mainMenu;
 using UnityEngine;
@@ -16,7 +17,6 @@ public class SettingLayer : UILayer
     [SerializeField] BOButton deviceBtn;
     [SerializeField] BOButton supportBtn;
     [SerializeField] BOButton languageBtn;
-    [SerializeField] BOButton nickNameBtn;
     [SerializeField] BOButton controlBtn;
     #endregion
     
@@ -27,7 +27,6 @@ public class SettingLayer : UILayer
     [SerializeField] RectTransform devicePanel;
     [SerializeField] RectTransform supportPanel;
     [SerializeField] RectTransform languagePanel;
-    [SerializeField] RectTransform nickNamePanel;
     [SerializeField] RectTransform controlPanel;
     #endregion
     
@@ -133,7 +132,8 @@ public class SettingLayer : UILayer
         
         CurrentEmail.gameObject.SetActive(true);
         CurrentEmail.text = PlayerAccountInfo.Me.Email;
-        playFabId.text = PlayerAccountInfo.Me.PlayFabId;
+        playFabId.text = String.IsNullOrEmpty(PlayerAccountInfo.Me.PlayFabId) ? 
+            String.Empty : "ID :" + PlayerAccountInfo.Me.PlayFabId ;
         
         EmailInput.gameObject.SetActive(false);
         EmailConfirmBtn.gameObject.SetActive(false);
@@ -170,7 +170,6 @@ public class SettingLayer : UILayer
             accountPanel.gameObject.SetActive(false);
             devicePanel.gameObject.SetActive(false);
             supportPanel.gameObject.SetActive(false);
-            nickNamePanel.gameObject.SetActive(false);
             languagePanel.gameObject.SetActive(false);
             controlPanel.gameObject.SetActive(false);
             if (CommonSetting.PcMode)
@@ -288,15 +287,6 @@ public class SettingLayer : UILayer
         
         LanguageIndicator();
         
-        nickNameBtn.SetListener(
-            () =>
-            {
-                CloseAllPanels();
-                nickNamePanel.gameObject.SetActive(true);
-                SetSelectedFrame(nickNameBtn.GetComponent<RectTransform>());
-            }
-        );
-
         resetNickNameBtn.SetListener(() =>
         {
             PreScene.target.trySwitchToStep(MainSceneStep.Rename);

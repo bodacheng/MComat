@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public partial class ArenaPage : MSceneProcess
 {
     ArenaLayer arenaLayer;
+    static readonly char[] OneWordTrimChars = { ' ', '\u3000', '\t', '\r', '\n' };
     
     public ArenaPage()
     {
@@ -94,14 +95,20 @@ public partial class ArenaPage : MSceneProcess
     // Checks if there is anything entered into the input field.
     async void UpdateOneWord(InputField input)
     {
-        if (String.IsNullOrEmpty(input.text))
+        var trimmed = TrimOneWord(input.text);
+        if (!String.Equals(trimmed, input.text, StringComparison.Ordinal))
+        {
+            input.text = trimmed;
+        }
+        
+        if (String.IsNullOrEmpty(trimmed))
         {
             return;
         }
         
         BWFManager.Instance.Load();
         await UniTask.WaitUntil(()=> BWFManager.Instance.isReady);
-        var filteredWord = BadWordFilter(input.text);
+        var filteredWord = BadWordFilter(trimmed);
         if (filteredWord.Contains("*"))
         {
             PopupLayer.ArrangeWarnWindow(Translate.Get("illegalword"));
@@ -109,16 +116,25 @@ public partial class ArenaPage : MSceneProcess
         }
         else
         {
+            var newIntro = trimmed;
             PlayFabReadClient.UpdateUserData(
                 new UpdateUserDataRequest()
                 {
                     Data = new Dictionary<string, string>()
                     {
-                        { "OneWord", input.text }
+                        { "OneWord", newIntro }
                     }
                 },
                 () =>
                 {
+                    if (_myLeaderboardInfo != null)
+                    {
+                        _myLeaderboardInfo.OneWord = newIntro;
+                    }
+                    if (input != null)
+                    {
+                        input.text = newIntro;
+                    }
                 }
             );
         }
@@ -128,6 +144,11 @@ public partial class ArenaPage : MSceneProcess
     {
         currentTxt = BWFManager.Instance.ReplaceAll(currentTxt);
         return currentTxt;
+    }
+    
+    string TrimOneWord(string value)
+    {
+        return string.IsNullOrEmpty(value) ? string.Empty : value.Trim(OneWordTrimChars);
     }
     
     void PrepareForIt(FightInfo stage)

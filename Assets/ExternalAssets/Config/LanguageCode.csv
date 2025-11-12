@@ -27,7 +27,9 @@ TimeTillNextSeason,Till Next Season,次のシーズンまで,距离下一个赛�
 TimeTillArenaTicket,Until Next,チャージまで,体力补充剩余
 ArenaIsRefreshingPoint,Remaining time in the arena score settlement,競技場スコアの精算中。残り時間,竞技场分数清算中，剩余时间
 TypeInInstruction,"Enter your one-sentence introduction here  
-(within 20 characters)",ここに一言を入力してください（20文字以内）,在这里输入你的一句话介绍（20字以下）
+(within 20 characters)","ここに一言を入力してください
+（20文字以内）","在这里输入你的一句话介绍
+（20字以下）"
 ,,,
 Gem,energy crystal,エネルギーの結晶,能量结晶
 Gold,wisdom crystal,知恵の結晶,智慧结晶
