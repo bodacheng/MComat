@@ -4,10 +4,10 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using PlayFab;
 using PlayFab.ClientModels;
 using PlayFab.CloudScriptModels;
-using PlayFab.ServerModels;
+using UnityEngine.Networking;
+using System.Threading.Tasks;
 
 public class SKillAnalyzerGUI : EditorWindow
 {
@@ -19,6 +19,12 @@ public class SKillAnalyzerGUI : EditorWindow
     string skillTypeFolderName = "G_Attack_State";
     readonly string[] _skillTypeFolderNames = { "G_Attack_State", "G_Attack_State_Stay", "GMStates"};
     string old_name, new_name;
+    string azureTextPrompt = "青春故事";
+    string azureImagePrompt = "赛博朋克风格的城市夜景";
+    string azureImageAspectRatio = "16:9";
+    int azureImageSampleCount = 1;
+    Texture2D azureImagePreview;
+    string azureImageStatus;
     void OnGUI()
     {
         EditorGUILayout.LabelField(" 技能参数统计类  ");
@@ -79,20 +85,304 @@ public class SKillAnalyzerGUI : EditorWindow
             );
         }
         
-        if (GUILayout.Button("任意Azure Function测试"))
+        EditorGUILayout.Space(10);
+        EditorGUILayout.LabelField("Azure Function 调试", EditorStyles.boldLabel);
+        azureTextPrompt = EditorGUILayout.TextField("文本 Prompt", azureTextPrompt);
+        if (GUILayout.Button("任意Azure Function文本测试"))
         {
-            CloudScript.ExecuteFunctionCommon(
-                new ExecuteFunctionRequest()
+            RequestAzureText();
+        }
+
+        GUILayout.Space(5);
+        azureImagePrompt = EditorGUILayout.TextField("图片 Prompt", azureImagePrompt);
+        azureImageAspectRatio = EditorGUILayout.TextField("图片宽高比", azureImageAspectRatio);
+        azureImageSampleCount = EditorGUILayout.IntSlider("Sample Count", azureImageSampleCount, 1, 4);
+        if (GUILayout.Button("任意Azure Function图片测试"))
+        {
+            RequestAzureImage();
+        }
+        if (!string.IsNullOrEmpty(azureImageStatus))
+        {
+            EditorGUILayout.HelpBox(azureImageStatus, MessageType.Info);
+        }
+        if (azureImagePreview != null)
+        {
+            var maxWidth = position.width - 20f;
+            maxWidth = Mathf.Clamp(maxWidth, 64f, 512f);
+            var ratio = azureImagePreview.height > 0 ? (float)azureImagePreview.height / azureImagePreview.width : 1f;
+            var rect = GUILayoutUtility.GetRect(maxWidth, maxWidth * ratio, GUILayout.ExpandWidth(false));
+            EditorGUI.DrawPreviewTexture(rect, azureImagePreview, null, ScaleMode.ScaleToFit);
+        }
+    }
+
+    private void RequestAzureText()
+    {
+        CloudScript.ExecuteFunctionCommon(
+            new ExecuteFunctionRequest()
+            {
+                FunctionName = "generateGeminiText",
+                FunctionParameter = new
                 {
-                    FunctionName = "azureTest",
-                    //FunctionParameter = new { stage = 10 },
-                    GeneratePlayStreamEvent = true
+                    prompt = azureTextPrompt,
+                    model = "gemini-2.5-flash-lite",
+                    timeoutMs = 10000
                 },
-                (x) =>
+                GeneratePlayStreamEvent = true
+            },
+            x =>
+            {
+                if (x.Error != null)
                 {
-                    Debug.Log(x);
+                    Debug.LogError($"[AzureFn/Text] Error: {x.Error.Error} - {x.Error.Message}\n{x.Error.StackTrace}");
+                    return;
                 }
-            );
+
+                if (x.FunctionResult == null)
+                {
+                    Debug.LogWarning("[AzureFn/Text] FunctionResult is null");
+                    return;
+                }
+
+                var raw = PlayFab.Json.PlayFabSimpleJson.SerializeObject(x.FunctionResult);
+                Debug.Log($"[AzureFn/Text] Raw result: {raw}");
+
+                try
+                {
+                    var dict = PlayFab.Json.PlayFabSimpleJson.DeserializeObject<Dictionary<string, object>>(raw);
+                    if (dict != null && dict.TryGetValue("text", out var story))
+                    {
+                        Debug.Log($"[AzureFn/Text] Generated story:\n{story}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning($"[AzureFn/Text] Failed to parse story text: {ex.Message}");
+                }
+            },
+            error =>
+            {
+                Debug.LogError($"[AzureFn/Text] Request failed: {error.GenerateErrorReport()}");
+            }
+        );
+    }
+
+    private void RequestAzureImage()
+    {
+        CloudScript.ExecuteFunctionCommon(
+            new ExecuteFunctionRequest()
+            {
+                FunctionName = "generateGeminiImages",
+                FunctionParameter = new
+                {
+                    prompt = azureImagePrompt,
+                    imageModel = "imagen-4.0-ultra-generate-001",
+                    sampleCount = Mathf.Clamp(azureImageSampleCount, 1, 4),
+                    aspectRatio = string.IsNullOrWhiteSpace(azureImageAspectRatio) ? "1:1" : azureImageAspectRatio
+                },
+                GeneratePlayStreamEvent = true
+            },
+            x =>
+            {
+                if (x.Error != null)
+                {
+                    azureImageStatus = $"AzureFn/Image Error: {x.Error.Error} - {x.Error.Message}";
+                    Debug.LogError($"[AzureFn/Image] {azureImageStatus}\n{x.Error.StackTrace}");
+                    ClearPreviewTexture();
+                    Repaint();
+                    return;
+                }
+
+                if (x.FunctionResult == null)
+                {
+                    if (x.FunctionResultTooLarge == true)
+                    {
+                        azureImageStatus = "返回数据过大（PlayFab 限制 350KB），请降低分辨率或让函数返回URL。";
+                        Debug.LogWarning("[AzureFn/Image] FunctionResult too large, consider returning smaller payload.");
+                    }
+                    else
+                    {
+                        azureImageStatus = "AzureFn/Image FunctionResult is null";
+                        Debug.LogWarning("[AzureFn/Image] FunctionResult is null");
+                    }
+                    ClearPreviewTexture();
+                    Repaint();
+                    return;
+                }
+
+                try
+                {
+                    var raw = PlayFab.Json.PlayFabSimpleJson.SerializeObject(x.FunctionResult);
+                    Debug.Log($"[AzureFn/Image] Raw result: {raw}");
+
+                    if (TryHandleImageUrls(raw))
+                    {
+                        return;
+                    }
+
+                    var response = PlayFab.Json.PlayFabSimpleJson.DeserializeObject<Imagen4Service.CloudScriptImageResponse>(raw);
+                    if (response?.predictions != null && response.predictions.Length > 0)
+                    {
+                        var first = response.predictions[0];
+                        if (!string.IsNullOrEmpty(first.bytesBase64Encoded))
+                        {
+                            var bytes = Convert.FromBase64String(first.bytesBase64Encoded);
+                            var tex = new Texture2D(2, 2, TextureFormat.RGBA32, false)
+                            {
+                                hideFlags = HideFlags.DontSave
+                            };
+                            if (tex.LoadImage(bytes))
+                            {
+                                ClearPreviewTexture();
+                                azureImagePreview = tex;
+                                azureImageStatus = $"生成成功 ({tex.width}x{tex.height})";
+                            }
+                            else
+                            {
+                                UnityEngine.Object.DestroyImmediate(tex);
+                                azureImageStatus = "图片解码失败";
+                                ClearPreviewTexture();
+                            }
+                        }
+                        else
+                        {
+                            azureImageStatus = "返回的数据为空";
+                            ClearPreviewTexture();
+                        }
+                    }
+                    else
+                    {
+                        azureImageStatus = "没有返回图片";
+                        ClearPreviewTexture();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    azureImageStatus = $"解析失败: {ex.Message}";
+                    Debug.LogWarning($"[AzureFn/Image] {azureImageStatus}");
+                    ClearPreviewTexture();
+                }
+
+                Repaint();
+            },
+            error =>
+            {
+                azureImageStatus = $"AzureFn/Image Request failed: {error.GenerateErrorReport()}";
+                Debug.LogError($"[AzureFn/Image] {azureImageStatus}");
+                ClearPreviewTexture();
+                Repaint();
+            }
+        );
+    }
+
+    private void ClearPreviewTexture()
+    {
+        if (azureImagePreview != null)
+        {
+            UnityEngine.Object.DestroyImmediate(azureImagePreview);
+            azureImagePreview = null;
+        }
+    }
+
+    private void OnDisable()
+    {
+        ClearPreviewTexture();
+    }
+
+    [Serializable]
+    private class AzureImageEntry
+    {
+        public string url;
+        public string mimeType;
+    }
+
+    [Serializable]
+    private class AzureImageResponse
+    {
+        public AzureImageEntry[] images;
+    }
+
+    private bool TryHandleImageUrls(string raw)
+    {
+        try
+        {
+            var response = PlayFab.Json.PlayFabSimpleJson.DeserializeObject<AzureImageResponse>(raw);
+            if (response?.images == null || response.images.Length == 0)
+            {
+                return false;
+            }
+
+            foreach (var entry in response.images)
+            {
+                if (entry == null || string.IsNullOrEmpty(entry.url))
+                {
+                    continue;
+                }
+
+                DownloadImageFromUrl(entry.url);
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning($"[AzureFn/Image] Failed to parse image urls: {ex.Message}");
+        }
+
+        return false;
+    }
+
+    private async void DownloadImageFromUrl(string url)
+    {
+        try
+        {
+            azureImageStatus = "下载图片中...";
+            ClearPreviewTexture();
+            Repaint();
+
+            var tex = await DownloadTextureAsync(url);
+            if (tex != null)
+            {
+                ClearPreviewTexture();
+                tex.hideFlags = HideFlags.DontSave;
+                azureImagePreview = tex;
+                azureImageStatus = $"生成成功 ({tex.width}x{tex.height})";
+            }
+            else
+            {
+                azureImageStatus = "下载失败";
+            }
+        }
+        catch (Exception ex)
+        {
+            azureImageStatus = $"下载失败: {ex.Message}";
+            Debug.LogWarning($"[AzureFn/Image] Download failed: {ex.Message}");
+            ClearPreviewTexture();
+        }
+        finally
+        {
+            Repaint();
+        }
+    }
+
+    private async Task<Texture2D> DownloadTextureAsync(string url)
+    {
+        using (var req = UnityWebRequestTexture.GetTexture(url))
+        {
+            var op = req.SendWebRequest();
+            while (!op.isDone)
+            {
+                await Task.Yield();
+            }
+
+#if UNITY_2020_2_OR_NEWER
+            if (req.result != UnityWebRequest.Result.Success)
+#else
+            if (req.isHttpError || req.isNetworkError)
+#endif
+            {
+                throw new Exception(req.error);
+            }
+
+            return DownloadHandlerTexture.GetContent(req);
         }
     }
 }

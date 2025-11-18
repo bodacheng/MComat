@@ -1,7 +1,7 @@
 using System;
-using System.Text;
+using System.Threading.Tasks;
+using PlayFab.CloudScriptModels;
 using UnityEngine;
-using UnityEngine.Networking;
 
 public class GeminiClient : IAIClient
 {
@@ -9,98 +9,93 @@ public class GeminiClient : IAIClient
     private readonly Imagen4Service imagenService;
     public Imagen4Service Imagen4Service => imagenService;
     
-    private const string BaseUrl = "https://generativelanguage.googleapis.com/v1beta/models";
-    
     public string ProviderName => "Gemini";
     public bool IsConfigured => config != null && config.IsValid();
     
     public GeminiClient(GeminiConfig config)
     {
         this.config = config;
-        this.imagenService = new Imagen4Service(config);
+        this.imagenService = new Imagen4Service(config, ExecuteFunctionAsync<Imagen4Service.CloudScriptImageResponse>);
         Debug.Log("GeminiClient Generated:" + this.config);
     }
-    
-    [Serializable] class Part { public string text; }
-    [Serializable] class Content { public string role = "user"; public Part[] parts; }
-    [Serializable] class RequestBody { public Content[] contents; }
-    // Response structure (only taking the part we need)
-    [Serializable] class ResponsePart { public string text; }
-    [Serializable] class ResponseContent { public ResponsePart[] parts; }
-    [Serializable] class Candidate { public ResponseContent content; }
-    [Serializable] class ResponseRoot { public Candidate[] candidates; }
+
+    [Serializable]
+    private class GeminiTextResponse
+    {
+        public string text;
+    }
     
     /// <summary>
     /// Send a "question" and return Gemini's text response
     /// </summary>
-    public System.Threading.Tasks.Task<string> AskAsync(string question, int? timeoutMs = null)
+    public async System.Threading.Tasks.Task<string> AskAsync(string question, int? timeoutMs = null)
     {
-        var tcs = new System.Threading.Tasks.TaskCompletionSource<string>();
-        var actualTimeout = timeoutMs ?? config.DefaultTimeoutMs;
-
-        // Construct request body
-        var body = new RequestBody {
-            contents = new [] {
-                new Content {
-                    role = "user",
-                    parts = new [] { new Part { text = question } }
-                }
-            }
-        };
-        var json = JsonUtility.ToJson(body);
-        var url = $"{BaseUrl}/{config.Model}:generateContent?key={config.ApiKey}";
-
-        var req = new UnityWebRequest(url, "POST");
-        byte[] raw = Encoding.UTF8.GetBytes(json);
-        req.uploadHandler = new UploadHandlerRaw(raw);
-        req.downloadHandler = new DownloadHandlerBuffer();
-        req.SetRequestHeader("Content-Type", "application/json");
-        req.timeout = Mathf.CeilToInt(actualTimeout / 1000f);
-
-        // Use MonoBehaviourRunner to execute coroutine
-        MonoBehaviourRunner.Instance.StartCoroutine(Send(req, tcs));
-        return tcs.Task;
-    }
-
-    private System.Collections.IEnumerator Send(UnityWebRequest req, System.Threading.Tasks.TaskCompletionSource<string> tcs)
-    {
-        yield return req.SendWebRequest();
-
-#if UNITY_2020_2_OR_NEWER
-        bool hasError = req.result != UnityWebRequest.Result.Success;
-#else
-        bool hasError = req.isHttpError || req.isNetworkError;
-#endif
-        if (hasError)
-        {
-            tcs.SetException(new Exception($"HTTP {(int)req.responseCode}: {req.error}\n{req.downloadHandler?.text}"));
-            yield break;
-        }
-
-        var text = req.downloadHandler.text;
-        try
-        {
-            var resp = JsonUtility.FromJson<ResponseRoot>(text);
-            string answer = "(empty)";
-            if (resp?.candidates != null && resp.candidates.Length > 0 &&
-                resp.candidates[0].content?.parts != null && resp.candidates[0].content.parts.Length > 0)
+        var response = await ExecuteFunctionAsync<GeminiTextResponse>(
+            config.TextFunctionName,
+            new
             {
-                answer = resp.candidates[0].content.parts[0].text;
-            }
-            tcs.SetResult(answer);
-        }
-        catch (Exception e)
-        {
-            tcs.SetException(new Exception("Parse error: " + e.Message + "\nRaw: " + text));
-        }
+                prompt = question,
+                model = config.Model,
+                timeoutMs = timeoutMs ?? config.DefaultTimeoutMs
+            });
+
+        return response?.text ?? string.Empty;
     }
-    
+
     public async System.Threading.Tasks.Task<Texture2D[]> GeneratePic(string prompt, int? count = null, string aspectRatio = null)
     {
-        var actualCount = count ?? config.DefaultImageCount;
-        var actualAspectRatio = aspectRatio ?? config.DefaultAspectRatio;
+        var actualCount = count ?? 1;
+        var actualAspectRatio = aspectRatio ?? "1:1";
         
         var data = await imagenService.GenerateImagesImagenAsync(prompt, actualCount, actualAspectRatio);
         return data;
+    }
+
+    private Task<T> ExecuteFunctionAsync<T>(string functionName, object parameters)
+    {
+        var tcs = new TaskCompletionSource<T>();
+        CloudScript.ExecuteFunctionCommon(
+            new ExecuteFunctionRequest
+            {
+                FunctionName = functionName,
+                FunctionParameter = parameters,
+                GeneratePlayStreamEvent = false
+            },
+            result =>
+            {
+                if (result.Error != null)
+                {
+                    var errorMessage = PlayFab.Json.PlayFabSimpleJson.SerializeObject(result.Error);
+                    tcs.TrySetException(new Exception($"Azure Function '{functionName}' error: {errorMessage}"));
+                    return;
+                }
+
+                if (result.FunctionResult == null)
+                {
+                    tcs.TrySetException(new Exception($"Azure Function '{functionName}' returned no result"));
+                    return;
+                }
+
+                try
+                {
+                    var json = PlayFab.Json.PlayFabSimpleJson.SerializeObject(result.FunctionResult);
+                    Debug.Log($"[Gemini] {functionName} raw result: {json}");
+                    var data = PlayFab.Json.PlayFabSimpleJson.DeserializeObject<T>(json);
+                    tcs.TrySetResult(data);
+                }
+                catch (Exception e)
+                {
+                    tcs.TrySetException(new Exception($"Failed to parse Azure Function '{functionName}' result: {e.Message}"));
+                }
+            },
+            error =>
+            {
+                var message = error?.GenerateErrorReport() ?? "Unknown PlayFab error";
+                tcs.TrySetException(new Exception($"Azure Function '{functionName}' failed: {message}"));
+            },
+            showLoading: false,
+            showErrorPopup: false);
+
+        return tcs.Task;
     }
 }

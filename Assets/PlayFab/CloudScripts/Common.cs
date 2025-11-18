@@ -36,21 +36,24 @@ public partial class CloudScript
         ExecuteFunctionRequest request, 
         Action<ExecuteFunctionResult> resultCallback, 
         Action<PlayFabError> errorCallback = null, 
-        object customData = null, Dictionary<string, string> extraHeaders = null)
+        object customData = null, Dictionary<string, string> extraHeaders = null,
+        bool showLoading = true, bool showErrorPopup = true)
     {
-        if (Application.isPlaying)
+        if (showLoading && Application.isPlaying)
             ProgressLayer.Loading(string.Empty);
         
         PlayFabCloudScriptAPI.ExecuteFunction( request,
             (x)=>
             {
                 resultCallback(x);
-                ProgressLayer.Close();
+                if (showLoading)
+                    ProgressLayer.Close();
             },
             (x)=>
             {
                 errorCallback?.Invoke(x);
-                PlayFabReadClient.ErrorReport(x);
+                if (showErrorPopup)
+                    PlayFabReadClient.ErrorReport(x);
             },
             customData, extraHeaders);
     }

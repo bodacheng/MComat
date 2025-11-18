@@ -1,83 +1,136 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class Imagen4Service
 {
     private readonly GeminiConfig config;
+    private readonly Func<string, object, Task<CloudScriptImageResponse>> executeFunction;
     
-    public Imagen4Service(GeminiConfig config)
+    public Imagen4Service(GeminiConfig config, Func<string, object, Task<CloudScriptImageResponse>> executeFunction)
     {
         this.config = config;
+        this.executeFunction = executeFunction;
     }
     
-    [Serializable] class ImagenInstances { public string prompt; }
-    [Serializable] class ImagenParams { public int sampleCount = 1; public string aspectRatio = "1:1"; }
-    [Serializable] class ImagenRequest { public ImagenInstances[] instances; public ImagenParams parameters; }
-    [Serializable] class ImagenPrediction { public string bytesBase64Encoded; public string mimeType; public string prompt; }
-    [Serializable] class ImagenResponse { public ImagenPrediction[] predictions; }
+    [Serializable] public class ImagenPrediction { public string bytesBase64Encoded; public string mimeType; public string prompt; }
+    [Serializable] public class ImageInfo { public string url; public string mimeType; }
+    [Serializable] public class CloudScriptImageResponse
+    {
+        public ImageInfo[] images;
+        public ImagenPrediction[] predictions;
+    }
 
     public async System.Threading.Tasks.Task<Texture2D[]> GenerateImagesImagenAsync(string prompt, int count = 1, string aspect = "1:1", int? timeoutMs = null)
     {
-        var actualTimeout = timeoutMs ?? config.ImageTimeoutMs;
+        if (executeFunction == null)
+        {
+            throw new Exception("Cloud Function executor is not configured for Imagen4Service");
+        }
+
         var actualCount = Mathf.Clamp(count, 1, 4);
-        
-        var body = new ImagenRequest {
-            instances = new [] { new ImagenInstances { prompt = prompt } },
-            parameters = new ImagenParams { sampleCount = actualCount, aspectRatio = aspect }
-        };
-        var json = JsonUtility.ToJson(body);
+        var actualTimeout = timeoutMs ?? config.ImageTimeoutMs;
         var imageModel = string.IsNullOrEmpty(config.ImageModel) 
             ? "imagen-4.0-generate-preview-06-06" 
             : config.ImageModel;
-        var url = $"https://generativelanguage.googleapis.com/v1beta/models/{imageModel}:predict?key={config.ApiKey}";
+        var cloudScriptPayload = new
+        {
+            prompt = prompt,
+            sampleCount = actualCount,
+            aspectRatio = aspect,
+            imageModel = imageModel,
+            timeoutMs = actualTimeout
+        };
 
-        var req = new UnityWebRequest(url, "POST");
-        req.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
-        req.downloadHandler = new DownloadHandlerBuffer();
-        req.SetRequestHeader("Content-Type", "application/json");
-        req.timeout = Mathf.CeilToInt(actualTimeout / 1000f);
+        var response = await executeFunction(config.ImageFunctionName, cloudScriptPayload);
 
-        var tcs = new System.Threading.Tasks.TaskCompletionSource<Texture2D[]>();
-        MonoBehaviourRunner.Instance.StartCoroutine(SendImagen(req, tcs));
-        return await tcs.Task;
+        // Prefer CDN/Blob URLs if provided
+        if (response?.images != null && response.images.Length > 0)
+        {
+            var textures = new List<Texture2D>();
+            foreach (var info in response.images)
+            {
+                if (info == null || string.IsNullOrEmpty(info.url))
+                    continue;
+
+                try
+                {
+                    var data = await DownloadTexture(info.url);
+                    if (data != null)
+                    {
+                        textures.Add(data);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning($"Failed to download image from {info.url}: {ex.Message}");
+                }
+            }
+
+            if (textures.Count > 0)
+            {
+                return textures.ToArray();
+            }
+        }
+
+        if (response?.predictions == null || response.predictions.Length == 0)
+        {
+            throw new Exception("No predictions returned from Gemini CloudScript");
+        }
+
+        var list = new List<Texture2D>();
+        foreach (var prediction in response.predictions)
+        {
+            if (prediction == null || string.IsNullOrEmpty(prediction.bytesBase64Encoded))
+            {
+                continue;
+            }
+
+            try
+            {
+                var bytes = Convert.FromBase64String(prediction.bytesBase64Encoded);
+                var tex = new Texture2D(2, 2, TextureFormat.RGBA32, false);
+                if (tex.LoadImage(bytes))
+                {
+                    list.Add(tex);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"Failed to decode Gemini image prediction: {ex.Message}");
+            }
+        }
+
+        if (list.Count == 0)
+        {
+            throw new Exception("All images failed to decode.");
+        }
+
+        return list.ToArray();
     }
 
-    private IEnumerator SendImagen(UnityWebRequest req, System.Threading.Tasks.TaskCompletionSource<Texture2D[]> tcs)
+    private async Task<Texture2D> DownloadTexture(string url)
     {
-        yield return req.SendWebRequest();
-    #if UNITY_2020_2_OR_NEWER
-        bool hasError = req.result != UnityWebRequest.Result.Success;
-    #else
-        bool hasError = req.isHttpError || req.isNetworkError;
-    #endif
-        if (hasError) { 
-            tcs.SetException(new Exception($"HTTP {(int)req.responseCode}: {req.error}\n{req.downloadHandler?.text}")); 
-            yield break; 
-        }
-
-        var text = req.downloadHandler.text;
-        try
+        using (var req = UnityWebRequestTexture.GetTexture(url))
         {
-            var resp = JsonUtility.FromJson<ImagenResponse>(text);
-            if (resp?.predictions == null || resp.predictions.Length == 0) 
-                throw new Exception("No predictions.\nRaw: " + text);
-
-            var list = new List<Texture2D>();
-            foreach (var p in resp.predictions)
+            var op = req.SendWebRequest();
+            while (!op.isDone)
             {
-                var bytes = Convert.FromBase64String(p.bytesBase64Encoded);
-                var tex = new Texture2D(2, 2, TextureFormat.RGBA32, false);
-                if (tex.LoadImage(bytes)) list.Add(tex);
+                await Task.Yield();
             }
-            if (list.Count == 0) throw new Exception("All images failed to decode.");
-            tcs.SetResult(list.ToArray());
-        }
-        catch (Exception e) { 
-            tcs.SetException(new Exception("Parse error: " + e.Message + "\nRaw: " + text)); 
+
+#if UNITY_2020_2_OR_NEWER
+            if (req.result != UnityWebRequest.Result.Success)
+#else
+            if (req.isHttpError || req.isNetworkError)
+#endif
+            {
+                throw new Exception(req.error);
+            }
+
+            return DownloadHandlerTexture.GetContent(req);
         }
     }
 }

@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50ce809b5b88146888126a1de20dea16, type: 3}
   m_Name: GeminiConfig
   m_EditorClassIdentifier: 
-  apiKey: AIzaSyCU5dxk2ZzNyQwyRfug5pBdYElalV22eTo
   model: gemini-2.5-flash-lite
   imageModel: imagen-4.0-ultra-generate-001
+  textFunctionName: generateGeminiText
+  imageFunctionName: generateGeminiImages
   defaultTimeoutMs: 20000
   imageTimeoutMs: 60000
-  defaultImageCount: 1
-  defaultAspectRatio: 1:1
