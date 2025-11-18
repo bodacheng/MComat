@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using PlayFab;
 using PlayFab.ClientModels;
+using PlayFab.CloudScriptModels;
 using PlayFab.ServerModels;
 
 public class SKillAnalyzerGUI : EditorWindow
@@ -62,13 +63,13 @@ public class SKillAnalyzerGUI : EditorWindow
         }
         GUILayout.Space(10);
 
-        if (GUILayout.Button("任意函数测试"))
+        if (GUILayout.Button("任意CloudScript测试"))
         {
             CloudScript.ExecuteCloudScriptMainSceneCommon(
                 new ExecuteCloudScriptRequest
                 {
-                    FunctionName = "claimQuestReward",
-                    FunctionParameter = new { stage = 10 },
+                    FunctionName = "azureTest",
+                    //FunctionParameter = new { stage = 10 },
                     GeneratePlayStreamEvent = true
                 },
                 (x) =>
@@ -76,183 +77,22 @@ public class SKillAnalyzerGUI : EditorWindow
                     Debug.Log(x);
                 }
             );
-            
-            
-            //PlayFabReadClient.DevUserLogin("helloMACTEST2");
-
-            // CloudScript.ArcadeProgress("2", 
-            //     result => {});
-
-
-
-            // CloudScript.CheckIn(() =>
-            // {
-            //     
-            // });
-
-            // CloudScript.GetLeaderboardAroundUser(
-            //     (x) =>
-            //     {
-            //         for (int i = 0; i < x.Count; i++)
-            //         {
-            //             Debug.Log("返回值 :"+ x[i].PlayerLeaderboardEntry.StatValue+ ", "+ x[i].PlayerLeaderboardEntry.DisplayName);
-            //         }
-            //     },
-            //     () =>
-            //     {
-            //         Debug.Log("failed");
-            //     });
-
-
-            // CloudScript.ArcadeProgress(
-            //     "1",
-            //     result =>
-            //     {
-            //         var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-            //         var level = jsonResult.ContainsKey("progressLevel") ? jsonResult["progressLevel"] : 0;
-            //         var rewardGd = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
-            //         var rewardDia = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
-            //                     
-            //         Debug.Log(jsonResult);
-            //     }
-            // );
-
-
-            //CloudScript.ArenaPointUp(980,2000,(x,y,z)=>{});
-
-            //PlayFabReadClient.SendPwResetEmail("bodacheng123@gmail.com");
-
-
-            // var guidValue = Guid.NewGuid();
-            // PlayFabClientAPI.AddUsernamePassword(new PlayFab.ClientModels.AddUsernamePasswordRequest
-            //     {
-            //         Username = "bodacheng3".ToLower(),
-            //         Email = "bodacheng1234@gmail.com",
-            //         Password = guidValue.ToString()
-            //     }, result =>
-            //     {
-            //         Debug.Log("我们把玩家的PlayFab username设置成了他的PlayFabId:" + result.Username);
-            //     }, 
-            //     (x) =>
-            //     {
-            //         Debug.Log("添加username失败："+ x.Error);
-            //     }
-            // );
-
-            // var request = new UpdatePlayerStatisticsRequest
-            // {
-            //     Statistics = new List<StatisticUpdate>()
-            //     {
-            //         new StatisticUpdate
-            //         {
-            //             StatisticName = "arenapoint",
-            //             Value = 2000
-            //         }
-            //     }
-            // };
-            //
-            // PlayFabClientAPI.UpdatePlayerStatistics(
-            //     request,
-            //     (x) =>
-            //     {
-            //         Debug.Log(x);
-            //     }, (y) =>
-            //     {
-            //         Debug.Log(y);
-            //     }
-            // );
-
-            // PlayFabClientAPI.ExecuteCloudScript(
-            //     new ExecuteCloudScriptRequest()
-            //     {
-            //         FunctionName = "completedLevel",
-            //         FunctionParameter = new { level = "3" },
-            //         GeneratePlayStreamEvent = true
-            //     },
-            //     (ExecuteCloudScriptResult result) => {
-            //         
-            //         var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-            //         var level = jsonResult.ContainsKey("progressLevel") ? jsonResult["progressLevel"] : 0;
-            //         var reward_GD = jsonResult.ContainsKey("gold") ? jsonResult["gold"] : 0;
-            //         var reward_DIA = jsonResult.ContainsKey("diamond") ? jsonResult["diamond"] : 0;
-            //     },
-            //     error => {
-            //         Debug.Log(error.Error);
-            //     }
-            // );            
-
-
-            //PlayFabReadClient.GetPresentGetCatalogItems();
-
-            // PlayFabClientAPI.ExecuteCloudScript(
-            //     new ExecuteCloudScriptRequest()
-            //     {
-            //         FunctionName = "test",
-            //         GeneratePlayStreamEvent = true
-            //     },
-            //     (ExecuteCloudScriptResult result) => {
-            //         //var jsonResult = (PlayFab.Json.JsonObject) result.FunctionResult;
-            //         //Debug.Log(jsonResult);
-            //     },
-            //     error => {
-            //         Debug.Log(error.Error);
-            //     }
-            // );
-
-            // PlayFabClientAPI.ExecuteCloudScript(
-            //     new ExecuteCloudScriptRequest()
-            //     {
-            //         FunctionName = "ArenaPointUp",
-            //         GeneratePlayStreamEvent = true
-            //     },
-            //     (ExecuteCloudScriptResult result) => {
-            //         PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-            //         Debug.Log(" 竞技场分数增加 返回：" + jsonResult);
-            //     },
-            //     error => {
-            //         Debug.Log(error.Error);
-            //     }
-            // );
-
-            // PlayFabClientAPI.ExecuteCloudScript(
-            //     new ExecuteCloudScriptRequest()
-            //     {
-            //         FunctionName = "claimAllPresentMails",
-            //         GeneratePlayStreamEvent = true
-            //     },
-            //     (ExecuteCloudScriptResult result) => {
-            //         PlayFab.Json.JsonObject jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
-            //         object gd, dm, unlockedidlist;
-            //         jsonResult.TryGetValue("DM", out dm);
-            //         jsonResult.TryGetValue("GD", out gd);
-            //         jsonResult.TryGetValue("UnlockedItemInstanceIds", out unlockedidlist);
-            //         Debug.Log(
-            //             " 获得黄金"+ gd.ToString()+
-            //             " 宝石"+ dm.ToString()
-            //         );
-            //         List<string> ids =JsonConvert.DeserializeObject<List<string>>(unlockedidlist.ToString());
-            //         for (int i = 0; i < ids.Count; i++)
-            //         {
-            //             Debug.Log("unlockedid" + ids[i]);
-            //         }
-            //         
-            //     },
-            //     error => {
-            //         Debug.Log(error.Error);
-            //     }
-            // );
-
-            //TitleData.SetArcadeRewards();
-            //PlayFabClientAPI.WritePlayerEvent(new WriteClientPlayerEventRequest()
-            //{
-            //    Body = new Dictionary<string, object>() {
-            //        { "ChestType", "sdf" },
-            //        { "LevelId", "sdf" }
-            //    },
-            //    EventName = "EveryThing"
-            //},
-            //result => Debug.Log("Success"),
-            //error => Debug.LogError(error.GenerateErrorReport()));
+        }
+        
+        if (GUILayout.Button("任意Azure Function测试"))
+        {
+            CloudScript.ExecuteFunctionCommon(
+                new ExecuteFunctionRequest()
+                {
+                    FunctionName = "azureTest",
+                    //FunctionParameter = new { stage = 10 },
+                    GeneratePlayStreamEvent = true
+                },
+                (x) =>
+                {
+                    Debug.Log(x);
+                }
+            );
         }
     }
 }
