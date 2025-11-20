@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GeminiConfig
   m_EditorClassIdentifier: 
   model: gemini-2.5-flash-lite
-  imageModel: imagen-4.0-ultra-generate-001
+  imageModel: imagen-4.0-fast-generate-001
   textFunctionName: generateGeminiText
   imageFunctionName: generateGeminiImages
   defaultTimeoutMs: 20000
