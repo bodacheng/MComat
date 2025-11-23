@@ -5217,8 +5217,8 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
+    m_Top: 10
+    m_Bottom: -10
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
@@ -14817,6 +14817,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1128322802311145514, guid: d223a7ec974a54392bba246b17de68c9,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1128322802311145514, guid: d223a7ec974a54392bba246b17de68c9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1228876882461544692, guid: d223a7ec974a54392bba246b17de68c9,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -14946,6 +14956,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1599163115949099998, guid: d223a7ec974a54392bba246b17de68c9,
+        type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1599163115949099998, guid: d223a7ec974a54392bba246b17de68c9,
         type: 3}
