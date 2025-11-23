@@ -49,6 +49,7 @@ public partial class SkillEditLayer : UILayer
         var options = Stones.GetMyStonesBySkillID(skillID);
         if (originSkillInfo != null && skillID == originSkillInfo.SkillId)
         {
+            Stones.SetTempUnitUsage(originSkillInfo.InstanceId, unitInstanceId);
             nineSlot.AllSlot[targetSlot - 1]._cell.AddItem(Stones.GetRenderModel(originSkillInfo.InstanceId));
         }else{
             options = options.OrderByDescending(x => Stones.Get(x).Level).ToList();
@@ -64,6 +65,7 @@ public partial class SkillEditLayer : UILayer
                     break;
                 }
             }
+            Stones.SetTempUnitUsage(targetStoneId, unitInstanceId);
             nineSlot.AllSlot[targetSlot - 1]._cell.AddItem(Stones.GetRenderModel(targetStoneId));
         }
         

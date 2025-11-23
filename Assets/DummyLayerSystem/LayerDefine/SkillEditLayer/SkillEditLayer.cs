@@ -215,10 +215,12 @@ public partial class SkillEditLayer : UILayer
             ToggleSkillBoxTabListener(false);
             stonesBox._tabEffects.CloseShowingTagEffects();
         }
+        dataAccess.Stones.ClearTempUnitUsage();
     }
 
     void SkillEditButtonFeature(UnitInfo _unitInfo)
     {
+        dataAccess.Stones.ClearTempUnitUsage();
         if (_unitInfo == null || _unitInfo.r_id == null)
         {
             Debug.Log("到达了没道理到达的地方");

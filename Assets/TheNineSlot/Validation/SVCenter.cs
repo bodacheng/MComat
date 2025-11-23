@@ -18,18 +18,7 @@ public static class SVCenter
             }
             
             var layer = UILayerLoader.Get<SkillEditLayer>();
-            // 如果把技能石从9宫格拖到技能背包的一个有石头的格子上，那么就直接把拖动中的技能石先从九宫格拔下来，接着让技能背包自动排序一下
-            if (boxcell.GetItem() != null)
-            {
-                layer.stonesBox.ReturnStoneToBox(stone);
-            }
-            else
-            {
-                // 如果把技能石从9宫格拖到空技能背包格子上，那就让这个技能石在那个空格子上就可以。
-                // 的确这个瞬间可能产生这个技能石所在位置和当前背包显示类型不一致问题，但如果是进行了一个背包自动排序的话，
-                // 松手瞬间会有一个技能石“变图案”的错觉。
-                boxcell.AddItem(stone);
-            }
+            layer.stonesBox.PlaceStoneFromSlot(stone);
             layer.nineSlot.NineSlotsStatusRefresh();
         }
         else if (sourceCell.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
@@ -42,6 +31,7 @@ public static class SVCenter
             }            
             else
             {
+                ApplyTempUnitUsage(stone, boxcell);
                 boxcell.AddItem(stone);
             }
             sl.levelManager.RefreshSkillLevelUpModule(sl.TargetStoneID);
@@ -78,8 +68,13 @@ public static class SVCenter
                 layer.stonesBox._tabEffects.transform);
         }
         
+        ApplyTempUnitUsage(item, to);
         to.AddItem(item);
         from.UpdateMyItem();
+        if (from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
+        {
+            from.ClearUsingUnitIcon();
+        }
         
         if (from.cellPhase == StoneCell.CellPhase.NineSlotCell || to.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {
@@ -102,6 +97,7 @@ public static class SVCenter
         
         var toItem = to.GetItem();
         
+        var skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
         if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
             var info = Stones.Get(fromItem.instanceId);
@@ -112,7 +108,6 @@ public static class SVCenter
                 return;
             }
             
-            var skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
             var currentSkillIds = skillEditLayer.nineSlot.GetCurrentNineSlotAllSkillIds();
             
             if (toItem != null)
@@ -149,12 +144,32 @@ public static class SVCenter
                 return;
             }
         }
-        
+
+        // 特殊处理：从盒子拖到有石头的技能槽时，原槽石头按EX页自动归位并滚动显示
+        if (to.cellPhase == StoneCell.CellPhase.NineSlotCell && from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell && toItem != null)
+        {
+            ApplyTempUnitUsage(fromItem, to);
+            to.AddItem(fromItem);
+            from.RemoveToTemp();
+            skillEditLayer?.stonesBox.PlaceStoneFromSlot(toItem);
+            from.ClearUsingUnitIcon();
+            
+            skillEditLayer?.nineSlot.NineSlotsStatusRefresh();
+            return;
+        }
+
         SwapItems(from, to);
+        if (from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
+        {
+            from.ClearUsingUnitIcon();
+        }
+        if (to.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
+        {
+            to.ClearUsingUnitIcon();
+        }
         
         if (from.cellPhase == StoneCell.CellPhase.NineSlotCell || to.cellPhase == StoneCell.CellPhase.NineSlotCell)
         {
-            var skillEditLayer = UILayerLoader.Get<SkillEditLayer>();
             skillEditLayer.nineSlot.NineSlotsStatusRefresh();
         }
         
@@ -179,6 +194,7 @@ public static class SVCenter
         // Swap items
         if (firstItem != null)
         {
+            ApplyTempUnitUsage(firstItem, secondCell);
             //firstItem.transform.DOMove(secondCell.transform.position,1f);
             //firstItem.transform.localPosition = Vector3.zero;
             //firstItem.MakeRaycast(true);
@@ -186,6 +202,7 @@ public static class SVCenter
         }
         if (secondItem != null)
         {
+            ApplyTempUnitUsage(secondItem, firstCell);
             firstCell.AddItem(secondItem);
             secondItem.transform.position = secondCell.transform.position;
             secondItem.transform.DOMove(firstCell.transform.position,0.5f).OnComplete(() =>
@@ -215,5 +232,19 @@ public static class SVCenter
             }
         }
         return true;
+    }
+
+    static void ApplyTempUnitUsage(SKStoneItem item, StoneCell targetCell)
+    {
+        if (item == null || targetCell == null)
+            return;
+        switch (targetCell.cellPhase)
+        {
+            case StoneCell.CellPhase.NineSlotCell:
+                Stones.SetTempUnitUsage(item.instanceId, PreScene.target?.Focusing?.id);
+                break;
+            case StoneCell.CellPhase.SkillStoneBoxCell:
+                break;
+        }
     }
 }

@@ -59,6 +59,7 @@ namespace mainMenu
                     _currentStoneInstanceIds.AddRange(targetSKs);
             }
             
+            UpdateVisibleCells(_currentStoneInstanceIds.Count);
             Order(_currentStoneInstanceIds);
             ApplyCurrentTargetsToCells();
         }
@@ -73,10 +74,10 @@ namespace mainMenu
             var key = 0;
             foreach (var instanceId in _currentStoneInstanceIds)
             {
-                if (key >= _cells.Count)
+                if (key >= _activeCellCount)
                 {
                     Debug.Log("Stone box exceed："+ key);
-                    Debug.Log("此时技能石头盒子的总容量：" + _cells.Count);
+                    Debug.Log("此时技能石头盒子的总容量：" + _activeCellCount);
                     break;
                 }
                 

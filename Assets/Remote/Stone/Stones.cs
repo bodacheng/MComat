@@ -8,10 +8,12 @@ namespace dataAccess
     {
         static readonly IDictionary<string, StoneOfPlayerInfo> Dic = new Dictionary<string, StoneOfPlayerInfo>();
         static readonly IDictionary<string, SKStoneItem> RenderModelDic = new Dictionary<string, SKStoneItem>();
+        static readonly IDictionary<string, string> TempUnitUsageDic = new Dictionary<string, string>(); // 临时用于界面显示的装备信息
         
         public static void ClearData()
         {
             Dic.Clear();
+            TempUnitUsageDic.Clear();
         }
 
         public static bool TooManyStones()
@@ -26,6 +28,40 @@ namespace dataAccess
                 GameObject.Destroy(kv.Value);
             }
             RenderModelDic.Clear();
+        }
+
+        /// <summary>
+        /// 设置临时的装备角色，用于界面展示当前编辑状态。
+        /// 传入null时移除临时记录；传入string.Empty时表示明确未装备，避免回退到持久化的unitInstanceId。
+        /// </summary>
+        public static void SetTempUnitUsage(string stoneInstanceId, string unitInstanceId)
+        {
+            if (string.IsNullOrEmpty(stoneInstanceId))
+                return;
+            if (unitInstanceId == null)
+            {
+                if (TempUnitUsageDic.ContainsKey(stoneInstanceId))
+                    TempUnitUsageDic.Remove(stoneInstanceId);
+            }
+            else
+            {
+                TempUnitUsageDic[stoneInstanceId] = unitInstanceId;
+            }
+        }
+
+        public static void ClearTempUnitUsage()
+        {
+            TempUnitUsageDic.Clear();
+        }
+
+        /// <summary>
+        /// 优先返回临时的装备角色，用于UI显示当前编辑状态。
+        /// </summary>
+        public static string GetUnitInstanceIdForDisplay(string stoneInstanceId)
+        {
+            if (stoneInstanceId != null && TempUnitUsageDic.TryGetValue(stoneInstanceId, out var tempUnit))
+                return tempUnit;
+            return Get(stoneInstanceId)?.unitInstanceId;
         }
         
         public static StoneOfPlayerInfo Get(string id)

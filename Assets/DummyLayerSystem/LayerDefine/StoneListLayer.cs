@@ -41,11 +41,13 @@ public class StoneListLayer : UILayer
     void OnEnable()
     {
         ToggleTabListener(true);
+        SKStoneItem.DragBlocked = true;
     }
     
     void OnDisable()
     {
         ToggleTabListener(false);
+        SKStoneItem.DragBlocked = false;
     }
     
     public async void Setup()
@@ -53,6 +55,7 @@ public class StoneListLayer : UILayer
         var cts = new CancellationTokenSource();
         ReturnLayer.AddUniTaskCancel(cts);
         
+        Stones.ClearTempUnitUsage();
         box.IniExTabs();
         box.GenerateCells();
         await box._tabEffects.SwitchElement(Element.blueMagic, cts.Token);

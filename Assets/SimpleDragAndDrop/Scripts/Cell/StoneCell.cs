@@ -78,14 +78,14 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             targetIcon.gameObject.SetActive(false);
             return;
         }
-        var ssInfo = Stones.Get(item.instanceId);
-        if (ssInfo == null || ssInfo.unitInstanceId == null)
+        var unitInstanceId = Stones.GetUnitInstanceIdForDisplay(item.instanceId);
+        if (string.IsNullOrEmpty(unitInstanceId))
         {
             targetIcon.gameObject.SetActive(false);
             return;
         }
-        
-        var unitInfo = dataAccess.Units.Get(ssInfo.unitInstanceId);
+
+        var unitInfo = dataAccess.Units.Get(unitInstanceId);
         if (unitInfo == null)
         {
             targetIcon.gameObject.SetActive(false);
@@ -94,6 +94,12 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         targetIcon.transform.SetAsLastSibling();
         targetIcon.gameObject.SetActive(true);
         targetIcon.ChangeIcon(unitInfo);
+    }
+
+    public void ClearUsingUnitIcon()
+    {
+        if (unitIcon != null)
+            unitIcon.gameObject.SetActive(false);
     }
     
     /// <summary>
