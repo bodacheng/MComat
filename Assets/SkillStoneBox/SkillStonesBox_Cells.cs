@@ -171,6 +171,7 @@ namespace mainMenu
                 if (dragAndDropCell != null)
                 {
                     dragAndDropCell.AddItem(item);
+                    SVCenter.PlayDropSe();
                 }
                 else
                 {
@@ -217,6 +218,7 @@ namespace mainMenu
                 {
                     targetCell.AddItem(item);
                 }
+                SVCenter.PlayDropSe();
                 ScrollToCell(targetCell);
             }
             else

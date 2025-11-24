@@ -19,6 +19,7 @@ public static class SVCenter
             
             var layer = UILayerLoader.Get<SkillEditLayer>();
             layer.stonesBox.PlaceStoneFromSlot(stone);
+            PlayDropSe();
             layer.nineSlot.NineSlotsStatusRefresh();
         }
         else if (sourceCell.cellPhase == StoneCell.CellPhase.SKLevelUpMSlot)
@@ -33,6 +34,7 @@ public static class SVCenter
             {
                 ApplyTempUnitUsage(stone, boxcell);
                 boxcell.AddItem(stone);
+                PlayDropSe();
             }
             sl.levelManager.RefreshSkillLevelUpModule(sl.TargetStoneID);
         }
@@ -70,6 +72,7 @@ public static class SVCenter
         
         ApplyTempUnitUsage(item, to);
         to.AddItem(item);
+        PlayDropSe();
         from.UpdateMyItem();
         if (from.cellPhase == StoneCell.CellPhase.SkillStoneBoxCell)
         {
@@ -150,6 +153,7 @@ public static class SVCenter
         {
             ApplyTempUnitUsage(fromItem, to);
             to.AddItem(fromItem);
+            PlayDropSe();
             from.RemoveToTemp();
             skillEditLayer?.stonesBox.PlaceStoneFromSlot(toItem);
             from.ClearUsingUnitIcon();
@@ -199,6 +203,7 @@ public static class SVCenter
             //firstItem.transform.localPosition = Vector3.zero;
             //firstItem.MakeRaycast(true);
             secondCell.AddItem(firstItem);
+            PlayDropSe();
         }
         if (secondItem != null)
         {
@@ -209,6 +214,7 @@ public static class SVCenter
             {
                 secondItem.transform.localPosition = Vector3.zero;
             });
+            PlayDropSe();
         }
     }
     
@@ -246,5 +252,13 @@ public static class SVCenter
             case StoneCell.CellPhase.SkillStoneBoxCell:
                 break;
         }
+    }
+
+    public static void PlayDropSe()
+    {
+        if (AppSetting.UiAudioSource == null || CommonSetting.BtnTapSound == null)
+            return;
+        AppSetting.UiAudioSource.volume = AppSetting.Value.EffectsVolume;
+        AppSetting.UiAudioSource.PlayOneShot(CommonSetting.BtnTapSound);
     }
 }
