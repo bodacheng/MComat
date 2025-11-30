@@ -97,6 +97,8 @@ namespace FightScene
                 return;
             }
             
+            ArenaFightOver.PreloadQuestShortStoryIfNeeded();
+            
             AppSetting.BGMSource = audioSource;
             AppSetting.UiAudioSource = uiAudioSource;
             QualitySettings.vSyncCount = 0; // 关闭 VSync

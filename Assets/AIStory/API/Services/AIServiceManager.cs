@@ -177,6 +177,33 @@ public class AIServiceManager : MonoBehaviour
     }
     
     /// <summary>
+    /// Generate a short proverb that matches the current language settings.
+    /// </summary>
+    public async Task<string> GenerateLocalizedProverbAsync(int? timeoutMs = null)
+    {
+        await EnsureServiceInitializedAsync();
+        
+        if (!IsConfigured)
+        {
+            return null;
+        }
+        
+        var targetLanguage = GetConfiguredLanguage();
+        var prompt = BuildProverbPrompt(targetLanguage);
+        
+        try
+        {
+            var result = await AskAsync(prompt, timeoutMs);
+            return ExtractSingleLineText(result);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning($"[AIServiceManager] Failed to generate proverb: {ex.Message}");
+            return null;
+        }
+    }
+    
+    /// <summary>
     /// Generate images using the current AI model
     /// </summary>
     public System.Threading.Tasks.Task<Texture2D[]> GeneratePic(string prompt, int? count = null, string aspectRatio = null)
@@ -1647,6 +1674,38 @@ public class AIServiceManager : MonoBehaviour
             default:
                 return language;
         }
+    }
+    
+    private string BuildProverbPrompt(SystemLanguage language)
+    {
+        switch (language)
+        {
+            case SystemLanguage.Chinese:
+                return "请只返回一句不超过35个字的中文谚语，不要添加引号、翻译或解释。";
+            case SystemLanguage.Japanese:
+                return "短いことわざを日本語で1つだけ（35文字以内）返してください。引用符や説明は禁止です。";
+            case SystemLanguage.English:
+                return "Return exactly one concise English proverb under 50 words. No quotes, translation, or explanations.";
+            default:
+                return $"Return one short proverb in {language} (max 50 words). No quotes or explanations.";
+        }
+    }
+    
+    private string ExtractSingleLineText(string rawText)
+    {
+        if (string.IsNullOrWhiteSpace(rawText))
+        {
+            return null;
+        }
+        
+        var firstLine = rawText.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault();
+        if (string.IsNullOrWhiteSpace(firstLine))
+        {
+            return null;
+        }
+        
+        var cleaned = firstLine.Trim().Trim('\"', '“', '”', '\'');
+        return string.IsNullOrWhiteSpace(cleaned) ? null : cleaned;
     }
     
     private class ParsedStoryResult

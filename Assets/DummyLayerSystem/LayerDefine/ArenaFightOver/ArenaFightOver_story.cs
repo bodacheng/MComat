@@ -6,7 +6,6 @@ using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using FightScene;
 
 public partial class ArenaFightOver : UILayer
@@ -166,20 +165,24 @@ public partial class ArenaFightOver : UILayer
     }
     
     bool clickedOnShortStory = false;
+    private static readonly Dictionary<string, string> QuestShortStoryCache = new Dictionary<string, string>();
+    private static readonly HashSet<string> QuestShortStoryPrefetching = new HashSet<string>();
     
     public async UniTask LoadShortMessage()
     {
         var code = FightLoad.Fight.ID;
+        string shortMessage = string.Empty;
 
         switch (FightLoad.Fight.EventType)
         {
             case FightEventType.Quest:
-                shortStory.text = ShortStory.Get(code);
+                shortMessage = GetPrefetchedQuestShortStory(code);
                 break;
             default:
                 break;
         }
         
+        shortStory.text = shortMessage ?? string.Empty;
         storyLayerAudio.volume = AppSetting.Value.BgmVolume;
         
         bool notNull = !string.IsNullOrEmpty(shortStory.text);
@@ -200,5 +203,69 @@ public partial class ArenaFightOver : UILayer
             clickedOnShortStory = true;
         }
         await UniTask.WaitUntil(()=> clickedOnShortStory);
+    }
+    
+    public static void PreloadQuestShortStoryIfNeeded()
+    {
+        var fight = FightLoad.Fight;
+        if (fight == null || fight.EventType != FightEventType.Quest)
+        {
+            return;
+        }
+
+        var code = fight.ID;
+        if (string.IsNullOrWhiteSpace(code) || QuestShortStoryCache.ContainsKey(code) || QuestShortStoryPrefetching.Contains(code))
+        {
+            return;
+        }
+
+        var tableStory = ShortStory.Get(code);
+        if (!string.IsNullOrWhiteSpace(tableStory))
+        {
+            QuestShortStoryCache[code] = tableStory.Trim();
+            return;
+        }
+
+        QuestShortStoryPrefetching.Add(code);
+        PrefetchQuestShortStoryAsync(code).Forget();
+    }
+
+    private static async UniTaskVoid PrefetchQuestShortStoryAsync(string code)
+    {
+        var manager = FightScene.FightScene.target?.AIServiceManager;
+        if (manager == null)
+        {
+            Debug.LogWarning("[ArenaFightOver] AIServiceManager missing, cannot generate short story fallback.");
+            QuestShortStoryPrefetching.Remove(code);
+            return;
+        }
+
+        try
+        {
+            var generated = await manager.GenerateLocalizedProverbAsync();
+            generated = string.IsNullOrWhiteSpace(generated) ? null : generated.Trim();
+            if (!string.IsNullOrEmpty(generated))
+            {
+                QuestShortStoryCache[code] = generated;
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning($"[ArenaFightOver] Failed to generate short story via AI: {e.Message}");
+        }
+        finally
+        {
+            QuestShortStoryPrefetching.Remove(code);
+        }
+    }
+
+    private string GetPrefetchedQuestShortStory(string code)
+    {
+        if (QuestShortStoryCache.TryGetValue(code, out var cached) && !string.IsNullOrWhiteSpace(cached))
+        {
+            return cached;
+        }
+
+        return null;
     }
 }
