@@ -39,12 +39,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - config
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3dcacaa4c9fea46fcb5a8fb806b94f08
-    m_Address: Config/gb_short_story
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - config
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 51715071703f44a39b79e07457b5c0e7
     m_Address: Config/short_story
     m_ReadOnly: 0
