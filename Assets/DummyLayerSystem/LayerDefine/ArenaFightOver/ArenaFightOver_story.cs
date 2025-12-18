@@ -167,6 +167,14 @@ public partial class ArenaFightOver : UILayer
     bool clickedOnShortStory = false;
     private static readonly Dictionary<string, string> QuestShortStoryCache = new Dictionary<string, string>();
     private static readonly HashSet<string> QuestShortStoryPrefetching = new HashSet<string>();
+    private static int QuestShortStoryCacheVersion;
+
+    public static void ClearQuestShortStoryCache()
+    {
+        QuestShortStoryCache.Clear();
+        QuestShortStoryPrefetching.Clear();
+        QuestShortStoryCacheVersion++;
+    }
     
     public async UniTask LoadShortMessage()
     {
@@ -227,10 +235,10 @@ public partial class ArenaFightOver : UILayer
         }
 
         QuestShortStoryPrefetching.Add(code);
-        PrefetchQuestShortStoryAsync(code).Forget();
+        PrefetchQuestShortStoryAsync(code, QuestShortStoryCacheVersion).Forget();
     }
 
-    private static async UniTaskVoid PrefetchQuestShortStoryAsync(string code)
+    private static async UniTaskVoid PrefetchQuestShortStoryAsync(string code, int cacheVersion)
     {
         var manager = FightScene.FightScene.target?.AIServiceManager;
         if (manager == null)
@@ -246,7 +254,10 @@ public partial class ArenaFightOver : UILayer
             generated = string.IsNullOrWhiteSpace(generated) ? null : generated.Trim();
             if (!string.IsNullOrEmpty(generated))
             {
-                QuestShortStoryCache[code] = generated;
+                if (cacheVersion == QuestShortStoryCacheVersion)
+                {
+                    QuestShortStoryCache[code] = generated;
+                }
             }
         }
         catch (Exception e)

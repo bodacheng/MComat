@@ -266,6 +266,7 @@ public class SettingLayer : UILayer
         async void SetLanguage(SystemLanguage code)
         {
             AppSetting.Value.Language = code;
+            ArenaFightOver.ClearQuestShortStoryCache();
             LanguageConverterManger.ChangeLanguage();
             await SkillNameTable.LoadSkillNamesFromConfig();
             SkillConfigTable.RefreshSkillConfigDicForReference();
