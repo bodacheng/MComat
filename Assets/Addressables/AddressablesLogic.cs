@@ -117,8 +117,11 @@ public static class AddressablesLogic
         if (handle.Status == AsyncOperationStatus.Succeeded)
         {
             CommonSetting commonSetting = handle.Result;
+            LoadingHandlerList.Add(handle);
             return commonSetting;
         }
+        if (handle.IsValid())
+            Addressables.Release(handle);
         return null;
     }
     
@@ -317,9 +320,10 @@ public static class AddressablesLogic
     
     public static async UniTask<T> LoadTOnObject<T>(string prefabPathName, GameObject memoryReleaseTarget = null, CancellationTokenSource _cancellationTokenSource = null)
     {
+        AsyncOperationHandle<GameObject> handle = default;
         try
         {
-            var handle = Addressables.InstantiateAsync(prefabPathName);
+            handle = Addressables.InstantiateAsync(prefabPathName);
             if (_cancellationTokenSource != null)
             {
                 await handle.ToUniTask(cancellationToken: _cancellationTokenSource.Token);
@@ -357,8 +361,15 @@ public static class AddressablesLogic
                 return returnValue;
             }
         }
+        catch (OperationCanceledException)
+        {
+            if (handle.IsValid())
+                Addressables.ReleaseInstance(handle);
+        }
         catch (Exception e)
         {
+            if (handle.IsValid())
+                Addressables.ReleaseInstance(handle);
             Debug.Log(e.Message);
             await LoadErrorThenBackToStart();
         }
@@ -388,7 +399,8 @@ public static class AddressablesLogic
             {
                 memoryReleaseTarget.AddOnDestroyCallback( () =>
                 {
-                    Addressables.ReleaseInstance(handle);
+                    if (handle.IsValid())
+                        Addressables.Release(handle);
                 });
             }
             return handle.Result;
@@ -416,7 +428,8 @@ public static class AddressablesLogic
             {
                 memoryReleaseTarget.AddOnDestroyCallback( () =>
                 {
-                    Addressables.ReleaseInstance(handle);
+                    if (handle.IsValid())
+                        Addressables.Release(handle);
                 });
             }
             return handle.Result;

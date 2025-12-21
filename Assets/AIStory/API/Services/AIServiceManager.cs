@@ -16,6 +16,7 @@ public class AIServiceManager : MonoBehaviour
     [SerializeField] private string configAddress = "Config/AIServiceConfig";
     [SerializeField] private string fallbackThemeConfigAddress = "Config/FairyTaleFallbackConfig";
     private AIServiceConfig serviceConfig;
+    private AsyncOperationHandle<AIServiceConfig> serviceConfigHandle;
     private FairyTaleFallbackConfig fallbackThemeConfig;
     private IAIClient currentClient;
     private GeminiClient geminiClient;
@@ -237,19 +238,23 @@ public class AIServiceManager : MonoBehaviour
         if (serviceConfig == null)
         {
             Debug.Log("[AIServiceManager] Loading AIServiceConfig from Addressables...");
-            var handle = Addressables.LoadAssetAsync<AIServiceConfig>(configAddress);
-            await handle.Task;
-            
-            if (handle.Status == AsyncOperationStatus.Succeeded)
+            if (!serviceConfigHandle.IsValid())
             {
-                serviceConfig = handle.Result;
+                serviceConfigHandle = Addressables.LoadAssetAsync<AIServiceConfig>(configAddress);
+            }
+            await serviceConfigHandle.Task;
+            
+            if (serviceConfigHandle.Status == AsyncOperationStatus.Succeeded)
+            {
+                serviceConfig = serviceConfigHandle.Result;
                 Debug.Log("[AIServiceManager] AIServiceConfig loaded successfully");
             }
             else
             {
-                Debug.LogError($"[AIServiceManager] Failed to load AIServiceConfig from Addressables. Status: {handle.Status}");
-                if (handle.IsValid())
-                    Addressables.Release(handle);
+                Debug.LogError($"[AIServiceManager] Failed to load AIServiceConfig from Addressables. Status: {serviceConfigHandle.Status}");
+                if (serviceConfigHandle.IsValid())
+                    Addressables.Release(serviceConfigHandle);
+                serviceConfigHandle = default;
                 return;
             }
         }
@@ -298,6 +303,14 @@ public class AIServiceManager : MonoBehaviour
         {
             InitializeClients();
             Debug.Log($"[AIServiceManager] Clients initialized, Current Model: {CurrentModel}, IsConfigured: {IsConfigured}");
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (serviceConfigHandle.IsValid())
+        {
+            Addressables.Release(serviceConfigHandle);
         }
     }
 
