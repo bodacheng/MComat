@@ -167,12 +167,14 @@ public partial class ArenaFightOver : UILayer
     bool clickedOnShortStory = false;
     private static readonly Dictionary<string, string> QuestShortStoryCache = new Dictionary<string, string>();
     private static readonly HashSet<string> QuestShortStoryPrefetching = new HashSet<string>();
+    private static readonly HashSet<string> QuestShortStoryShown = new HashSet<string>(StringComparer.Ordinal);
     private static int QuestShortStoryCacheVersion;
 
     public static void ClearQuestShortStoryCache()
     {
         QuestShortStoryCache.Clear();
         QuestShortStoryPrefetching.Clear();
+        QuestShortStoryShown.Clear();
         QuestShortStoryCacheVersion++;
     }
     
@@ -189,8 +191,14 @@ public partial class ArenaFightOver : UILayer
             default:
                 break;
         }
-        
-        shortStory.text = shortMessage ?? string.Empty;
+
+        var normalizedShortMessage = string.IsNullOrWhiteSpace(shortMessage) ? string.Empty : shortMessage.Trim();
+        if (!string.IsNullOrEmpty(normalizedShortMessage) && QuestShortStoryShown.Contains(normalizedShortMessage))
+        {
+            normalizedShortMessage = string.Empty;
+        }
+
+        shortStory.text = normalizedShortMessage;
         storyLayerAudio.volume = AppSetting.Value.BgmVolume;
         
         bool notNull = !string.IsNullOrEmpty(shortStory.text);
@@ -198,6 +206,7 @@ public partial class ArenaFightOver : UILayer
         shortStory.gameObject.SetActive(notNull);
         if (notNull)
         {
+            QuestShortStoryShown.Add(shortStory.text);
             storyBgImage.color = storyBgFromColor;
             storyBgColorChangeTween = storyBgImage.DOColor(FightLoad.Fight.EventType == FightEventType.Quest ? storyBgToColor : gbStoryBgToColor, storyBgColorChangeDuration);
             storyMaskBtn.SetListener(()=>

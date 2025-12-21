@@ -51,6 +51,10 @@ public class AIServiceManager : MonoBehaviour
     private static StoryInfo _cachedEventStory;
     private static bool _cachedEventStoryShown;
     private static UniTaskCompletionSource<StoryInfo> _eventStoryGenerationSource;
+    private static readonly object ProverbHistoryLock = new object();
+    private static readonly List<string> ProverbHistory = new List<string>();
+    private static readonly HashSet<string> ProverbHistoryKeys = new HashSet<string>(StringComparer.Ordinal);
+    private static SystemLanguage ProverbHistoryLanguage = SystemLanguage.Unknown;
     
     // Properties
     public IAIClient CurrentClient => currentClient;
@@ -190,12 +194,14 @@ public class AIServiceManager : MonoBehaviour
         }
         
         var targetLanguage = GetConfiguredLanguage();
-        var prompt = BuildProverbPrompt(targetLanguage);
+        var prompt = BuildProverbPrompt(targetLanguage, GetProverbHistorySnapshot(targetLanguage));
         
         try
         {
             var result = await AskAsync(prompt, timeoutMs);
-            return ExtractSingleLineText(result);
+            var proverb = ExtractSingleLineText(result);
+            RecordProverb(targetLanguage, proverb);
+            return proverb;
         }
         catch (Exception ex)
         {
@@ -1689,19 +1695,84 @@ public class AIServiceManager : MonoBehaviour
         }
     }
     
-    private string BuildProverbPrompt(SystemLanguage language)
+    private string BuildProverbPrompt(SystemLanguage language, IReadOnlyList<string> usedProverbs)
     {
+        var avoidList = BuildProverbAvoidList(usedProverbs);
         switch (language)
         {
             case SystemLanguage.Chinese:
-                return "请只返回一句不超过35个字的中文谚语，不要添加引号、翻译或解释。";
+                return string.IsNullOrEmpty(avoidList)
+                    ? "请只返回一句不超过35个字的中文谚语，不要添加引号、翻译或解释。"
+                    : $"请只返回一句不超过35个字的中文谚语，不要添加引号、翻译或解释。请避免与以下内容重复：{avoidList}";
             case SystemLanguage.Japanese:
-                return "短いことわざを日本語で1つだけ（35文字以内）返してください。引用符や説明は禁止です。";
+                return string.IsNullOrEmpty(avoidList)
+                    ? "短いことわざを日本語で1つだけ（35文字以内）返してください。引用符や説明は禁止です。"
+                    : $"短いことわざを日本語で1つだけ（35文字以内）返してください。引用符や説明は禁止です。以下と重複しないでください：{avoidList}";
             case SystemLanguage.English:
-                return "Return exactly one concise English proverb under 50 words. No quotes, translation, or explanations.";
+                return string.IsNullOrEmpty(avoidList)
+                    ? "Return exactly one concise English proverb under 50 words. No quotes, translation, or explanations."
+                    : $"Return exactly one concise English proverb under 50 words. No quotes, translation, or explanations. Do not repeat any of these: {avoidList}";
             default:
-                return $"Return one short proverb in {language} (max 50 words). No quotes or explanations.";
+                return string.IsNullOrEmpty(avoidList)
+                    ? $"Return one short proverb in {language} (max 50 words). No quotes or explanations."
+                    : $"Return one short proverb in {language} (max 50 words). No quotes or explanations. Do not repeat any of these: {avoidList}";
         }
+    }
+
+    private static List<string> GetProverbHistorySnapshot(SystemLanguage language)
+    {
+        lock (ProverbHistoryLock)
+        {
+            if (ProverbHistoryLanguage != language)
+            {
+                ProverbHistoryLanguage = language;
+                ProverbHistory.Clear();
+                ProverbHistoryKeys.Clear();
+            }
+
+            return ProverbHistory.Count == 0 ? new List<string>() : new List<string>(ProverbHistory);
+        }
+    }
+
+    private static void RecordProverb(SystemLanguage language, string proverb)
+    {
+        var normalized = NormalizeProverb(proverb);
+        if (string.IsNullOrEmpty(normalized))
+        {
+            return;
+        }
+
+        lock (ProverbHistoryLock)
+        {
+            if (ProverbHistoryLanguage != language || ProverbHistoryKeys.Contains(normalized))
+            {
+                return;
+            }
+
+            ProverbHistoryKeys.Add(normalized);
+            ProverbHistory.Add(proverb.Trim());
+        }
+    }
+
+    private static string NormalizeProverb(string proverb)
+    {
+        if (string.IsNullOrWhiteSpace(proverb))
+        {
+            return null;
+        }
+
+        var parts = proverb.Trim().Split(new[] { ' ', '\t', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+        return parts.Length == 0 ? null : string.Join(" ", parts);
+    }
+
+    private static string BuildProverbAvoidList(IReadOnlyList<string> usedProverbs)
+    {
+        if (usedProverbs == null || usedProverbs.Count == 0)
+        {
+            return null;
+        }
+
+        return string.Join("; ", usedProverbs);
     }
     
     private string ExtractSingleLineText(string rawText)
