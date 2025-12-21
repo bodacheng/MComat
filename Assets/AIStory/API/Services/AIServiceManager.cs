@@ -462,6 +462,12 @@ public class AIServiceManager : MonoBehaviour
             
             // 为每个场景生成对应的图片
             await GenerateStoryImagesAsync(parsedStory.Scenes);
+
+            if (!IsAIStoryComplete(parsedStory.Scenes))
+            {
+                Debug.LogWarning("[AI Story] Incomplete AI story (missing text or images). Skipping story display.");
+                return null;
+            }
             
             // 创建StoryInfo对象
             var storyInfo = ScriptableObject.CreateInstance<StoryInfo>();
@@ -1790,6 +1796,65 @@ public class AIServiceManager : MonoBehaviour
         
         var cleaned = firstLine.Trim().Trim('\"', '“', '”', '\'');
         return string.IsNullOrWhiteSpace(cleaned) ? null : cleaned;
+    }
+
+    private bool IsAIStoryComplete(List<StoryInfo.StoryScene> scenes)
+    {
+        if (scenes == null || scenes.Count == 0)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < scenes.Count; i++)
+        {
+            if (!IsStorySceneComplete(scenes[i]))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private bool IsStorySceneComplete(StoryInfo.StoryScene scene)
+    {
+        if (scene == null || scene.Pic == null)
+        {
+            return false;
+        }
+
+        if (scene.Lines == null || scene.Lines.Count == 0)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < scene.Lines.Count; i++)
+        {
+            if (IsMeaningfulStoryLine(scene.Lines[i]))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private bool IsMeaningfulStoryLine(string line)
+    {
+        if (string.IsNullOrWhiteSpace(line))
+        {
+            return false;
+        }
+
+        var trimmed = line.Trim();
+        if (trimmed == "[空白]" ||
+            trimmed.StartsWith("[场景", StringComparison.Ordinal) ||
+            trimmed.StartsWith("[自动填充场景", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        return true;
     }
     
     private class ParsedStoryResult
