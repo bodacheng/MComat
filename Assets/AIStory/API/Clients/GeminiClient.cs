@@ -24,6 +24,14 @@ public class GeminiClient : IAIClient
     {
         public string text;
     }
+
+    [Serializable]
+    private class GeminiTextCacheResponse
+    {
+        public string text;
+        public string cacheKey;
+        public bool cached;
+    }
     
     /// <summary>
     /// Send a "question" and return Gemini's text response
@@ -42,12 +50,45 @@ public class GeminiClient : IAIClient
         return response?.text ?? string.Empty;
     }
 
+    public async System.Threading.Tasks.Task<string> AskWithCacheAsync(string question, string cacheKey, int? timeoutMs = null)
+    {
+        if (string.IsNullOrWhiteSpace(cacheKey))
+        {
+            return await AskAsync(question, timeoutMs);
+        }
+
+        var response = await ExecuteFunctionAsync<GeminiTextCacheResponse>(
+            config.TextFunctionName,
+            new
+            {
+                prompt = question,
+                model = config.Model,
+                timeoutMs = timeoutMs ?? config.DefaultTimeoutMs,
+                cacheKey = cacheKey
+            });
+
+        return response?.text ?? string.Empty;
+    }
+
     public async System.Threading.Tasks.Task<Texture2D[]> GeneratePic(string prompt, int? count = null, string aspectRatio = null)
     {
         var actualCount = count ?? 1;
         var actualAspectRatio = aspectRatio ?? "1:1";
         
         var data = await imagenService.GenerateImagesImagenAsync(prompt, actualCount, actualAspectRatio);
+        return data;
+    }
+
+    public async System.Threading.Tasks.Task<Texture2D[]> GeneratePicWithCache(string prompt, string cacheKey, string storyId, int? sceneIndex, int? count = null, string aspectRatio = null)
+    {
+        if (string.IsNullOrWhiteSpace(cacheKey))
+        {
+            return await GeneratePic(prompt, count, aspectRatio);
+        }
+
+        var actualCount = count ?? 1;
+        var actualAspectRatio = aspectRatio ?? "1:1";
+        var data = await imagenService.GenerateImagesImagenAsync(prompt, actualCount, actualAspectRatio, null, cacheKey, storyId, sceneIndex);
         return data;
     }
 

@@ -23,7 +23,14 @@ public class Imagen4Service
         public ImagenPrediction[] predictions;
     }
 
-    public async System.Threading.Tasks.Task<Texture2D[]> GenerateImagesImagenAsync(string prompt, int count = 1, string aspect = "1:1", int? timeoutMs = null)
+    public async System.Threading.Tasks.Task<Texture2D[]> GenerateImagesImagenAsync(
+        string prompt,
+        int count = 1,
+        string aspect = "1:1",
+        int? timeoutMs = null,
+        string cacheKey = null,
+        string storyId = null,
+        int? sceneIndex = null)
     {
         if (executeFunction == null)
         {
@@ -41,7 +48,10 @@ public class Imagen4Service
             sampleCount = actualCount,
             aspectRatio = aspect,
             imageModel = imageModel,
-            timeoutMs = actualTimeout
+            timeoutMs = actualTimeout,
+            cacheKey = cacheKey,
+            storyId = storyId,
+            sceneIndex = sceneIndex
         };
 
         var response = await executeFunction(config.ImageFunctionName, cloudScriptPayload);

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
@@ -25,6 +26,7 @@ public class AIServiceManager : MonoBehaviour
     private List<StoryInfo.LocationProfile> currentStoryLocations = new List<StoryInfo.LocationProfile>();
     private StoryInfo.StoryStyleGuide currentStoryStyleGuide;
     private const int StoryTextCharactersPerPageLimit = 200;
+    private const string StoryCacheKeyPrefix = "ai_story_v1";
     private static readonly char[] StoryTextSplitCandidates =
     {
         ' ', '\t', '\r', '\n',
@@ -55,6 +57,7 @@ public class AIServiceManager : MonoBehaviour
     private static readonly List<string> ProverbHistory = new List<string>();
     private static readonly HashSet<string> ProverbHistoryKeys = new HashSet<string>(StringComparer.Ordinal);
     private static SystemLanguage ProverbHistoryLanguage = SystemLanguage.Unknown;
+    private string currentStoryCacheKey;
     
     // Properties
     public IAIClient CurrentClient => currentClient;
@@ -428,9 +431,10 @@ public class AIServiceManager : MonoBehaviour
 
             // 构建故事生成提示词
             string prompt = BuildStoryPrompt(storyPrompt);
+            currentStoryCacheKey = BuildStoryCacheKey(storyPrompt);
             
-            // 使用AI生成故事文本
-            string storyText = await AskAsync(prompt);
+            // 使用AI生成故事文本（支持缓存）
+            string storyText = await AskStoryWithCacheAsync(prompt, currentStoryCacheKey);
             
             if (string.IsNullOrEmpty(storyText))
             {
@@ -1309,9 +1313,23 @@ public class AIServiceManager : MonoBehaviour
                 Debug.Log($"[AI Story Image] Generating image for scene {i + 1}/{scenes.Count}...");
                 
                 var imagePrompt = BuildImagePrompt(scene, i, scenes.Count);
+                string imageCacheKey = null;
+                if (currentClient is GeminiClient && !string.IsNullOrWhiteSpace(currentStoryCacheKey))
+                {
+                    var imageModel = serviceConfig?.GeminiConfig?.ImageModel;
+                    imageCacheKey = BuildImageCacheKey(currentStoryCacheKey, i + 1, imagePrompt, aspectRatio, imageModel);
+                }
                 
-                // 使用AI生成图片
-                var textures = await GeneratePic(imagePrompt, 1, aspectRatio);
+                // 使用AI生成图片（支持缓存）
+                Texture2D[] textures;
+                if (currentClient is GeminiClient geminiClient && !string.IsNullOrWhiteSpace(imageCacheKey))
+                {
+                    textures = await geminiClient.GeneratePicWithCache(imagePrompt, imageCacheKey, currentStoryCacheKey, i + 1, 1, aspectRatio);
+                }
+                else
+                {
+                    textures = await GeneratePic(imagePrompt, 1, aspectRatio);
+                }
                 
                 if (textures != null && textures.Length > 0 && textures[0] != null)
                 {
@@ -1669,6 +1687,90 @@ public class AIServiceManager : MonoBehaviour
         }
         
         return segments.Count > 0 ? string.Join(" ", segments) : string.Empty;
+    }
+
+    private async Task<string> AskStoryWithCacheAsync(string prompt, string cacheKey, int? timeoutMs = null)
+    {
+        if (currentClient is GeminiClient geminiClient && !string.IsNullOrWhiteSpace(cacheKey))
+        {
+            return await geminiClient.AskWithCacheAsync(prompt, cacheKey, timeoutMs);
+        }
+
+        return await AskAsync(prompt, timeoutMs);
+    }
+
+    private string BuildStoryCacheKey(string customPrompt)
+    {
+        var fight = FightLoad.Fight;
+        var fightId = fight?.ID ?? "unknown";
+        var eventType = fight != null ? fight.EventType.ToString() : "none";
+        var fightMode = fight != null ? fight.FightMode.ToString() : "none";
+        var language = GetConfiguredLanguage();
+        var pageCount = serviceConfig?.PageCount ?? 0;
+        var imageStyle = serviceConfig != null ? serviceConfig.ImageStyle.ToString() : "unknown";
+        var aspectRatio = serviceConfig?.ImageAspectRatio ?? "unknown";
+        var extraStyle = serviceConfig?.AdditionalImageRequirements ?? string.Empty;
+        var textModel = serviceConfig?.GeminiConfig?.Model ?? string.Empty;
+        var imageModel = serviceConfig?.GeminiConfig?.ImageModel ?? string.Empty;
+        var themes = serviceConfig?.StoryThemes == null ? string.Empty : string.Join("|", serviceConfig.StoryThemes);
+        var promptSeed = string.IsNullOrWhiteSpace(customPrompt) ? "auto" : customPrompt;
+        var source = string.Join("|", new[]
+        {
+            StoryCacheKeyPrefix,
+            fightId,
+            eventType,
+            fightMode,
+            language.ToString(),
+            pageCount.ToString(),
+            imageStyle,
+            aspectRatio,
+            textModel,
+            imageModel,
+            extraStyle,
+            themes,
+            promptSeed
+        });
+
+        return $"story_{ComputeSha256Hex(source)}";
+    }
+
+    private string BuildImageCacheKey(string storyCacheKey, int sceneIndex, string prompt, string aspectRatio, string imageModel)
+    {
+        if (string.IsNullOrWhiteSpace(storyCacheKey) || string.IsNullOrWhiteSpace(prompt))
+        {
+            return null;
+        }
+
+        var source = string.Join("|", new[]
+        {
+            storyCacheKey,
+            sceneIndex.ToString(),
+            aspectRatio ?? string.Empty,
+            imageModel ?? string.Empty,
+            prompt
+        });
+
+        return $"img_{ComputeSha256Hex(source)}";
+    }
+
+    private static string ComputeSha256Hex(string input)
+    {
+        if (string.IsNullOrEmpty(input))
+        {
+            return string.Empty;
+        }
+
+        using (var sha = SHA256.Create())
+        {
+            var bytes = Encoding.UTF8.GetBytes(input);
+            var hash = sha.ComputeHash(bytes);
+            var builder = new StringBuilder(hash.Length * 2);
+            foreach (var value in hash)
+            {
+                builder.Append(value.ToString("x2"));
+            }
+            return builder.ToString();
+        }
     }
     
     private string BuildLanguageInstruction(SystemLanguage language)
