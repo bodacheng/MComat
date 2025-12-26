@@ -38,8 +38,7 @@ public partial class ArenaFightOver : UILayer
     {
         _storyContentLogged = false;
         bool storyFromAI = false;
-        if (CommonSetting.PcMode && 
-            (!String.IsNullOrEmpty(FightLoad.Fight.StoryKey) || FightScene.FightScene.target.AIStoryInfo != null))
+        if (!String.IsNullOrEmpty(FightLoad.Fight.StoryKey) || FightScene.FightScene.target.AIStoryInfo != null)
         {
             StoryInfo story = null;
             if (!String.IsNullOrEmpty(FightLoad.Fight.StoryKey))
