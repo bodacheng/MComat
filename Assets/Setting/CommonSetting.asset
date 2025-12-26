@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CommonSetting
   m_EditorClassIdentifier: 
   devMode: 0
-  pcMode: 1
+  pcMode: 0
   mosaikCameraScreenScale: 5
   maxStoneCount: 1000
   gangbangModeMaxUnitPerTeam1: 24
@@ -29,7 +29,6 @@ MonoBehaviour:
   skillDynamicAnalysis: SkillDynamicAnalysis.csv
   languageCodeFile: LanguageCode
   shortStoryFile: short_story
-  gbShortStoryFile: gb_short_story
   storyFile: story
   admob_interstitial_iosKey: ca-app-pub-9232931129246316/3313510110
   admob_rewarded_iosKey: ca-app-pub-9232931129246316/8442323499
