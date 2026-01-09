@@ -75,12 +75,29 @@ public class IAPManager : MonoBehaviour, IDetailedStoreListener {
     public void Start() {
         // Make PlayFab log in
         Target = this;
+        EnsureIapInitialization();
+    }
+
+    void EnsureIapInitialization()
+    {
+        if (IsInitialized.Value)
+            return;
+        
+        if (PlayerAccountInfo.Me == null)
+        {
+            Observable.EveryUpdate()
+                .First(_ => PlayerAccountInfo.Me != null)
+                .Subscribe(_ => RefreshIAPItems())
+                .AddTo(this);
+            return;
+        }
+        
         RefreshIAPItems();
     }
     
     void RefreshIAPItems() {
         
-        if (IsInitialized.Value || PlayerAccountInfo.Me == null)
+        if (IsInitialized.Value)
             return;
         PlayFabClientAPI.GetCatalogItems(
             new GetCatalogItemsRequest

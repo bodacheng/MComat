@@ -63,7 +63,7 @@ public class AdsBtnRender : MonoBehaviour
                         }
                         else
                         {
-                            Currencies.ArenaTicket.Value += 1;
+                            Currencies.AdTicket.Value += 1;
                             Currencies.SecondsToRechargeAdTicket = 60 * 60;
                         }
                     }).AddTo(gameObject);
