@@ -119,7 +119,7 @@ MonoBehaviour:
       - m_Id: b06b7dac454e04a1b8447caade86f7fc
         m_Value: 'https://mcombat.s3.ap-northeast-1.amazonaws.com/release/2.3.3/[BuildTarget]'
       - m_Id: cd58eb709aef248a0a61cfcf5029d3c5
-        m_Value: 'ServerData/dev/2.3.3/[BuildTarget]'
+        m_Value: 'ServerData/release/2.3.3/[BuildTarget]'
       - m_Id: eda21008cba8e428482d4e8f9aadebdf
         m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
     - m_InheritedParent: 
