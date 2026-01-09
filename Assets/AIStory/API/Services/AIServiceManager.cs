@@ -18,7 +18,7 @@ public class AIServiceManager : MonoBehaviour
     [SerializeField] private string fallbackThemeConfigAddress = "Config/FairyTaleFallbackConfig";
     private AIServiceConfig serviceConfig;
     private AsyncOperationHandle<AIServiceConfig> serviceConfigHandle;
-    private FairyTaleFallbackConfig fallbackThemeConfig;
+    private StoryFallbackConfigBase fallbackThemeConfig;
     private IAIClient currentClient;
     private GeminiClient geminiClient;
     private OpenAIClient openAIClient;
@@ -270,42 +270,7 @@ public class AIServiceManager : MonoBehaviour
         
         if (fallbackThemeConfig == null)
         {
-            if (string.IsNullOrWhiteSpace(fallbackThemeConfigAddress))
-            {
-                fallbackThemeConfig = FairyTaleFallbackConfig.CreateDefault();
-            }
-            else
-            {
-                Debug.Log("[AIServiceManager] Loading fallback fairy tale config from Addressables...");
-                var fallbackHandle = Addressables.LoadAssetAsync<FairyTaleFallbackConfig>(fallbackThemeConfigAddress);
-                try
-                {
-                    await fallbackHandle.Task;
-                    
-                    if (fallbackHandle.Status == AsyncOperationStatus.Succeeded && fallbackHandle.Result != null)
-                    {
-                        fallbackThemeConfig = FairyTaleFallbackConfig.CreateMerged(fallbackHandle.Result);
-                        Debug.Log("[AIServiceManager] Fallback fairy tale config loaded successfully");
-                    }
-                    else
-                    {
-                        Debug.LogWarning($"[AIServiceManager] Failed to load fallback fairy tale config from Addressables ({fallbackThemeConfigAddress}), status: {fallbackHandle.Status}. Using default values.");
-                        fallbackThemeConfig = FairyTaleFallbackConfig.CreateDefault();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogWarning($"[AIServiceManager] Exception while loading fallback fairy tale config: {ex.Message}. Using default values.");
-                    fallbackThemeConfig = FairyTaleFallbackConfig.CreateDefault();
-                }
-                finally
-                {
-                    if (fallbackHandle.IsValid())
-                    {
-                        Addressables.Release(fallbackHandle);
-                    }
-                }
-            }
+            await LoadFallbackThemeConfigAsync();
         }
         
         if ((currentClient == null || !IsConfigured) && serviceConfig != null)
@@ -320,6 +285,57 @@ public class AIServiceManager : MonoBehaviour
         if (serviceConfigHandle.IsValid())
         {
             Addressables.Release(serviceConfigHandle);
+        }
+    }
+
+    private async UniTask LoadFallbackThemeConfigAsync()
+    {
+        var tone = GetFallbackTone();
+
+        var inlineConfig = serviceConfig?.GetSelectedFallbackConfig();
+        if (inlineConfig != null)
+        {
+            fallbackThemeConfig = inlineConfig.CreateMergedInstance() ?? CreateDefaultFallbackConfig(tone);
+            Debug.Log($"[AIServiceManager] Using inline fallback config ({tone}) from AIServiceConfig");
+            return;
+        }
+
+        string address = ResolveFallbackConfigAddress(tone);
+        if (string.IsNullOrWhiteSpace(address))
+        {
+            fallbackThemeConfig = CreateDefaultFallbackConfig(tone);
+            Debug.LogWarning("[AIServiceManager] Fallback config address is empty, using default values.");
+            return;
+        }
+
+        Debug.Log($"[AIServiceManager] Loading fallback config ({tone}) from Addressables at {address}...");
+        var fallbackHandle = Addressables.LoadAssetAsync<StoryFallbackConfigBase>(address);
+        try
+        {
+            await fallbackHandle.Task;
+
+            if (fallbackHandle.Status == AsyncOperationStatus.Succeeded && fallbackHandle.Result != null)
+            {
+                fallbackThemeConfig = MergeFallbackConfig(fallbackHandle.Result, tone);
+                Debug.Log("[AIServiceManager] Fallback config loaded successfully");
+            }
+            else
+            {
+                Debug.LogWarning($"[AIServiceManager] Failed to load fallback config from Addressables ({address}), status: {fallbackHandle.Status}. Using default values.");
+                fallbackThemeConfig = CreateDefaultFallbackConfig(tone);
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning($"[AIServiceManager] Exception while loading fallback config: {ex.Message}. Using default values.");
+            fallbackThemeConfig = CreateDefaultFallbackConfig(tone);
+        }
+        finally
+        {
+            if (fallbackHandle.IsValid())
+            {
+                Addressables.Release(fallbackHandle);
+            }
         }
     }
 
@@ -2049,8 +2065,8 @@ public class AIServiceManager : MonoBehaviour
         
         if (availableThemes == null || availableThemes.Length == 0)
         {
-            string fallbackTheme = BuildFallbackFairyTaleTheme();
-            Debug.Log($"[AIServiceManager] Selected fallback fairy tale theme: {fallbackTheme}");
+            string fallbackTheme = BuildFallbackStoryTheme();
+            Debug.Log($"[AIServiceManager] Selected fallback story theme: {fallbackTheme}");
             return fallbackTheme;
         }
         
@@ -2062,12 +2078,17 @@ public class AIServiceManager : MonoBehaviour
         return selectedTheme;
     }
     
-    private FairyTaleFallbackConfig GetFallbackThemeConfig()
+    private StoryFallbackConfigBase GetFallbackThemeConfig()
     {
-        return fallbackThemeConfig ?? FairyTaleFallbackConfig.CreateDefault();
+        if (fallbackThemeConfig != null)
+        {
+            return fallbackThemeConfig;
+        }
+
+        return CreateDefaultFallbackConfig(GetFallbackTone());
     }
     
-    private string BuildFallbackFairyTaleTheme()
+    private string BuildFallbackStoryTheme()
     {
         var random = new System.Random();
         int pageCount = Math.Max(serviceConfig?.PageCount ?? 6, 1);
@@ -2081,12 +2102,79 @@ public class AIServiceManager : MonoBehaviour
         string goal = PickRandom(fallbackConfig.Goals, random);
         string conflict = PickRandom(fallbackConfig.Conflicts, random);
         string resolution = PickRandom(fallbackConfig.Resolutions, random);
-        
-        return
-            $"在{setting}背景中，{worldDetail}。故事讲述{hero}{companion}，他们需要{goal}，途中{conflict}，最终{resolution}。" +
-            $"请将故事编排为{pageCount}个连续场景的童话绘本。所有出现的人物都保持亚洲面容，男角色呈现古雅典竞技士风格（光膀子、可能披短斗篷或披肩、赤脚），发型随意(可能寸头或光头或中长度)，" +
-            "女角色穿着古雅典短裙与古代饰物，可赤脚或系带凉鞋，整体气质温柔而奇幻。" +
-            "每幅插图务必捕捉角色动作进行中的瞬间，突出肢体张力、飘动的衣饰与丰富表情，强调角色与场景元素的互动，使画面与当前剧情进展紧密契合，避免静态站立或摆拍感。";
+
+        string theme = $"在{setting}背景中，{worldDetail}。故事讲述{hero}{companion}，他们需要{goal}，途中{conflict}，最终{resolution}。";
+        string styleGuidance = FormatStyleGuidance(fallbackConfig.StyleGuidance, pageCount);
+
+        if (!string.IsNullOrWhiteSpace(styleGuidance))
+        {
+            theme = $"{theme}{styleGuidance}";
+        }
+
+        return theme;
+    }
+
+    private string FormatStyleGuidance(string styleGuidance, int pageCount)
+    {
+        if (string.IsNullOrWhiteSpace(styleGuidance))
+        {
+            return string.Empty;
+        }
+
+        return styleGuidance.Replace("{pageCount}", pageCount.ToString());
+    }
+
+    private StoryFallbackTone GetFallbackTone()
+    {
+        return serviceConfig?.FallbackTone ?? StoryFallbackTone.FairyTale;
+    }
+
+    private string ResolveFallbackConfigAddress(StoryFallbackTone tone)
+    {
+        if (serviceConfig != null)
+        {
+            var addressFromConfig = serviceConfig.GetSelectedFallbackAddress();
+            if (!string.IsNullOrWhiteSpace(addressFromConfig))
+            {
+                return addressFromConfig;
+            }
+
+            // When AIServiceConfig is present but empty, prefer built-in defaults for the chosen tone.
+            return null;
+        }
+
+        // Backward compatibility: fall back to serialized field if config is empty
+        return fallbackThemeConfigAddress;
+    }
+
+    private StoryFallbackConfigBase MergeFallbackConfig(StoryFallbackConfigBase source, StoryFallbackTone tone)
+    {
+        if (source == null)
+        {
+            return CreateDefaultFallbackConfig(tone);
+        }
+
+        if (source is FairyTaleFallbackConfig fairy)
+        {
+            return FairyTaleFallbackConfig.CreateMerged(fairy);
+        }
+
+        if (source is MatureStoryFallbackConfig mature)
+        {
+            return MatureStoryFallbackConfig.CreateMerged(mature);
+        }
+
+        // Unknown derived type: try to merge with its own defaults
+        return source.CreateMergedInstance() ?? CreateDefaultFallbackConfig(tone);
+    }
+
+    private StoryFallbackConfigBase CreateDefaultFallbackConfig(StoryFallbackTone tone)
+    {
+        return tone switch
+        {
+            StoryFallbackTone.Mature => StoryFallbackConfigBase.CreateDefault<MatureStoryFallbackConfig>(),
+            _ => StoryFallbackConfigBase.CreateDefault<FairyTaleFallbackConfig>()
+        };
     }
     
     private string PickRandom(string[] source, System.Random random)

@@ -11,6 +11,12 @@ public enum ImageStyle
     Cinematic           // 电影风格
 }
 
+public enum StoryFallbackTone
+{
+    FairyTale,
+    Mature
+}
+
 [CreateAssetMenu(fileName = "AIServiceConfig", menuName = "StoryBook/API/AI Service Config")]
 public class AIServiceConfig : ScriptableObject
 {
@@ -39,6 +45,18 @@ public class AIServiceConfig : ScriptableObject
     
     [Tooltip("图片宽高比，例如：16:9, 1:1, 4:3")]
     [SerializeField] private string imageAspectRatio = "16:9";
+
+    [Header("Fallback Story Config")]
+    [Tooltip("选择备用主题配置的风格，用于 storyThemes 为空时自动生成主题")]
+    [SerializeField] private StoryFallbackTone fallbackTone = StoryFallbackTone.FairyTale;
+    [Tooltip("童话风格的地址，留空则使用默认内置数据")]
+    [SerializeField] private string fairyTaleFallbackConfigAddress = "Config/FairyTaleFallbackConfig";
+    [Tooltip("成熟/现实风格的地址，留空则使用默认内置数据")]
+    [SerializeField] private string matureFallbackConfigAddress = "Config/MatureStoryFallbackConfig";
+    [Tooltip("直接引用一个童话风格的配置，优先级高于地址")]
+    [SerializeField] private FairyTaleFallbackConfig fairyTaleFallbackConfig;
+    [Tooltip("直接引用一个成熟风格的配置，优先级高于地址")]
+    [SerializeField] private MatureStoryFallbackConfig matureFallbackConfig;
     
     // Public properties
     public AIModelType CurrentModel => currentModel;
@@ -49,6 +67,31 @@ public class AIServiceConfig : ScriptableObject
     public ImageStyle ImageStyle => imageStyle;
     public string AdditionalImageRequirements => additionalImageRequirements;
     public string ImageAspectRatio => imageAspectRatio;
+    public StoryFallbackTone FallbackTone => fallbackTone;
+    public string FairyTaleFallbackConfigAddress => fairyTaleFallbackConfigAddress;
+    public string MatureFallbackConfigAddress => matureFallbackConfigAddress;
+    public FairyTaleFallbackConfig FairyTaleFallbackConfig => fairyTaleFallbackConfig;
+    public MatureStoryFallbackConfig MatureFallbackConfig => matureFallbackConfig;
+    
+    public StoryFallbackConfigBase GetSelectedFallbackConfig()
+    {
+        return fallbackTone switch
+        {
+            StoryFallbackTone.Mature => matureFallbackConfig,
+            _ => fairyTaleFallbackConfig
+        };
+    }
+
+    public string GetSelectedFallbackAddress()
+    {
+        var address = fallbackTone switch
+        {
+            StoryFallbackTone.Mature => matureFallbackConfigAddress,
+            _ => fairyTaleFallbackConfigAddress
+        };
+
+        return string.IsNullOrWhiteSpace(address) ? null : address;
+    }
     
     /// <summary>
     /// Switch to a different AI model
@@ -118,6 +161,10 @@ public class AIServiceConfig : ScriptableObject
         {
             Debug.LogWarning($"[{name}] Current model ({currentModel}) is not properly configured");
         }
+
+        if (GetSelectedFallbackConfig() == null && string.IsNullOrWhiteSpace(GetSelectedFallbackAddress()))
+        {
+            Debug.LogWarning($"[{name}] Fallback story config is not set for tone {fallbackTone}, will use built-in defaults.");
+        }
     }
 }
-

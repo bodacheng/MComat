@@ -1,14 +1,13 @@
 using System;
-using System.Linq;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 [CreateAssetMenu(fileName = "FairyTaleFallbackConfig", menuName = "AI Story/Fairy Tale Fallback Config")]
-public class FairyTaleFallbackConfig : ScriptableObject
+public class FairyTaleFallbackConfig : StoryFallbackConfigBase
 {
-    private static readonly string[] DefaultSettings =
+    private static readonly string[] DefaultSettingsData =
     {
         "雲海に浮かぶ星明かりの森",
         "深海サンゴに隠された瑠璃の王国",
@@ -24,7 +23,7 @@ public class FairyTaleFallbackConfig : ScriptableObject
         "時間の砂で鋳造された時計荒野"
     };
     
-    private static readonly string[] DefaultWorldDetails =
+    private static readonly string[] DefaultWorldDetailsData =
     {
         "住民は流星を織りながら暮らし、街路は潮の満ち引きで移ろう",
         "潮騒の楽器と古代の神殿が溶け合い、夜ごとに新しい歴史が映し出される",
@@ -38,7 +37,7 @@ public class FairyTaleFallbackConfig : ScriptableObject
         "黎明には星々と位置を入れ替え、世界は二重の光と影をまとう"
     };
     
-    private static readonly string[] DefaultHeroes =
+    private static readonly string[] DefaultHeroesData =
     {
         "夢を織ることを学ぶ若き徒弟",
         "勇敢な小さな薬師",
@@ -60,7 +59,7 @@ public class FairyTaleFallbackConfig : ScriptableObject
         "種族を越えた盟約の小隊で、各自が異なる元素を司る"
     };
     
-    private static readonly string[] DefaultCompanions =
+    private static readonly string[] DefaultCompanionsData =
     {
         "、言葉を話す石像の猫と共に",
         "、いたずら好きな風の精霊と旅する",
@@ -86,7 +85,7 @@ public class FairyTaleFallbackConfig : ScriptableObject
         "、腹掛け姿で火を噴く少年とペアを組む"
     };
     
-    private static readonly string[] DefaultGoals =
+    private static readonly string[] DefaultGoalsData =
     {
         "忘れ去られた季節の時計を取り戻す",
         "壊れた月のつり橋を修復する",
@@ -103,7 +102,7 @@ public class FairyTaleFallbackConfig : ScriptableObject
         "夜行の生き物と昼の住民が同じ約束を分かち合えるよう手助けする"
     };
     
-    private static readonly string[] DefaultConflicts =
+    private static readonly string[] DefaultConflictsData =
     {
         "記憶を変えてしまう川を渡らねばならない",
         "旅人を惑わす是非の風と対話しなければならない",
@@ -119,7 +118,7 @@ public class FairyTaleFallbackConfig : ScriptableObject
         "自らの願いと託された期待の均衡を取らなければならない"
     };
     
-    private static readonly string[] DefaultResolutions =
+    private static readonly string[] DefaultResolutionsData =
     {
         "勇気と善意を分かち合い危機を解く",
         "真摯に耳を傾け恐れを乗り越える",
@@ -132,71 +131,29 @@ public class FairyTaleFallbackConfig : ScriptableObject
         "伝統と革新の融和にバランスを見出す",
         "共に物語を創り世界を動かし続ける"
     };
-    
-    [SerializeField] private string[] settings = Array.Empty<string>();
-    [SerializeField] private string[] worldDetails = Array.Empty<string>();
-    [SerializeField] private string[] heroes = Array.Empty<string>();
-    [SerializeField] private string[] companions = Array.Empty<string>();
-    [SerializeField] private string[] goals = Array.Empty<string>();
-    [SerializeField] private string[] conflicts = Array.Empty<string>();
-    [SerializeField] private string[] resolutions = Array.Empty<string>();
 
-    public string[] Settings => settings;
-    public string[] WorldDetails => worldDetails;
-    public string[] Heroes => heroes;
-    public string[] Companions => companions;
-    public string[] Goals => goals;
-    public string[] Conflicts => conflicts;
-    public string[] Resolutions => resolutions;
+    private const string DefaultStyleInstructions =
+        "请将故事编排为{pageCount}个连续场景的童话绘本。所有出现的人物都保持亚洲面容，男角色呈现古雅典竞技士风格（光膀子、可能披短斗篷或披肩、赤脚），发型随意(可能寸头或光头或中长度)，" +
+        "女角色穿着古雅典短裙与古代饰物，可赤脚或系带凉鞋，整体气质温柔而奇幻。" +
+        "每幅插图务必捕捉角色动作进行中的瞬间，突出肢体张力、飘动的衣饰与丰富表情，强调角色与场景元素的互动，使画面与当前剧情进展紧密契合，避免静态站立或摆拍感。";
+
+    protected override string[] DefaultSettings => DefaultSettingsData;
+    protected override string[] DefaultWorldDetails => DefaultWorldDetailsData;
+    protected override string[] DefaultHeroes => DefaultHeroesData;
+    protected override string[] DefaultCompanions => DefaultCompanionsData;
+    protected override string[] DefaultGoals => DefaultGoalsData;
+    protected override string[] DefaultConflicts => DefaultConflictsData;
+    protected override string[] DefaultResolutions => DefaultResolutionsData;
+    protected override string DefaultStyleGuidance => DefaultStyleInstructions;
 
     public static FairyTaleFallbackConfig CreateDefault()
     {
-        var config = CreateInstance<FairyTaleFallbackConfig>();
-        config.ApplyDefaultValues();
-        return config;
+        return CreateDefault<FairyTaleFallbackConfig>();
     }
 
     public static FairyTaleFallbackConfig CreateMerged(FairyTaleFallbackConfig source)
     {
-        if (source == null)
-        {
-            return CreateDefault();
-        }
-
-        var instance = CreateInstance<FairyTaleFallbackConfig>();
-        instance.settings = SelectArray(source.settings, DefaultSettings);
-        instance.worldDetails = SelectArray(source.worldDetails, DefaultWorldDetails);
-        instance.heroes = SelectArray(source.heroes, DefaultHeroes);
-        instance.companions = SelectArray(source.companions, DefaultCompanions);
-        instance.goals = SelectArray(source.goals, DefaultGoals);
-        instance.conflicts = SelectArray(source.conflicts, DefaultConflicts);
-        instance.resolutions = SelectArray(source.resolutions, DefaultResolutions);
-        return instance;
-    }
-
-    private static string[] SelectArray(string[] primary, string[] fallback)
-    {
-        if (primary != null)
-        {
-            var filtered = primary.Where(s => !string.IsNullOrWhiteSpace(s)).ToArray();
-            if (filtered.Length > 0)
-            {
-                return filtered;
-            }
-        }
-
-        return fallback != null ? fallback.ToArray() : Array.Empty<string>();
-    }
-
-    private void ApplyDefaultValues()
-    {
-        settings = DefaultSettings.ToArray();
-        worldDetails = DefaultWorldDetails.ToArray();
-        heroes = DefaultHeroes.ToArray();
-        companions = DefaultCompanions.ToArray();
-        goals = DefaultGoals.ToArray();
-        conflicts = DefaultConflicts.ToArray();
-        resolutions = DefaultResolutions.ToArray();
+        return CreateMerged<FairyTaleFallbackConfig>(source);
     }
 
 #if UNITY_EDITOR

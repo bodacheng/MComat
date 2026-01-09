@@ -63,6 +63,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - config
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aacc187ad02bf45f3a257375487f8232
+    m_Address: Config/MatureStoryFallbackConfig
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - config
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: be5a474c0ad9644d5b635fd5a9f58fe6
     m_Address: Config/story
     m_ReadOnly: 0
