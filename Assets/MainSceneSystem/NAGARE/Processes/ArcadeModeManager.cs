@@ -13,6 +13,27 @@ public class ArcadeModeManager
     public int MaxStageNum => _maxStageNum;
 
     public static readonly ArcadeModeManager Instance = new ArcadeModeManager();
+
+    private static bool DemoQuestLimitEnabled =>
+        CommonSetting.DemoMode && CommonSetting.DemoMaxQuestStage > 0;
+
+    public static int ClampQuestStage(int stageNo)
+    {
+        if (!DemoQuestLimitEnabled)
+        {
+            return stageNo;
+        }
+        return Math.Min(stageNo, CommonSetting.DemoMaxQuestStage);
+    }
+
+    public static int ClampQuestProgress(int progress)
+    {
+        if (!DemoQuestLimitEnabled)
+        {
+            return progress;
+        }
+        return Math.Min(progress, CommonSetting.DemoMaxQuestStage);
+    }
     
     public async UniTask Initialize()
     {
@@ -31,10 +52,18 @@ public class ArcadeModeManager
             }
         }
         Addressables.Release(locationHandle);
+        if (DemoQuestLimitEnabled && _maxStageNum > CommonSetting.DemoMaxQuestStage)
+        {
+            _maxStageNum = CommonSetting.DemoMaxQuestStage;
+        }
     }
     
     public async UniTask<FightInfo> LoadStage(int stageNo)
     {
+        if (DemoQuestLimitEnabled && stageNo > CommonSetting.DemoMaxQuestStage)
+        {
+            return null;
+        }
         locationKeyDic.TryGetValue(stageNo.ToString(), out var location);
         if (location == null)
             return null;
@@ -47,6 +76,7 @@ public class ArcadeModeManager
 
     public async void DirectToArcadeStage(int stageNo, bool forward)
     {
+        stageNo = ClampQuestStage(stageNo);
         var stage = await LoadStage(stageNo);
         if (stage == null)
         {

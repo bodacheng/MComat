@@ -168,6 +168,25 @@ public partial class ArenaFightOver : UILayer
     private static readonly HashSet<string> QuestShortStoryPrefetching = new HashSet<string>();
     private static readonly HashSet<string> QuestShortStoryShown = new HashSet<string>(StringComparer.Ordinal);
     private static int QuestShortStoryCacheVersion;
+    private const string DemoEndShortStoryKey = "demo_end";
+
+    private static string GetQuestShortStoryCode(FightInfo fight)
+    {
+        if (fight == null || fight.EventType != FightEventType.Quest)
+        {
+            return null;
+        }
+
+        if (CommonSetting.DemoMode && CommonSetting.DemoMaxQuestStage > 0)
+        {
+            if (int.TryParse(fight.ID, out var stageNo) && stageNo == CommonSetting.DemoMaxQuestStage)
+            {
+                return DemoEndShortStoryKey;
+            }
+        }
+
+        return fight.ID;
+    }
 
     public static void ClearQuestShortStoryCache()
     {
@@ -179,13 +198,23 @@ public partial class ArenaFightOver : UILayer
     
     public async UniTask LoadShortMessage()
     {
-        var code = FightLoad.Fight.ID;
+        var fight = FightLoad.Fight;
+        var code = GetQuestShortStoryCode(fight);
         string shortMessage = string.Empty;
 
-        switch (FightLoad.Fight.EventType)
+        switch (fight.EventType)
         {
             case FightEventType.Quest:
                 shortMessage = GetPrefetchedQuestShortStory(code);
+                if (string.IsNullOrWhiteSpace(shortMessage))
+                {
+                    var tableStory = ShortStory.Get(code);
+                    if (!string.IsNullOrWhiteSpace(tableStory))
+                    {
+                        shortMessage = tableStory.Trim();
+                        QuestShortStoryCache[code] = shortMessage;
+                    }
+                }
                 break;
             default:
                 break;
@@ -229,7 +258,7 @@ public partial class ArenaFightOver : UILayer
             return;
         }
 
-        var code = fight.ID;
+        var code = GetQuestShortStoryCode(fight);
         if (string.IsNullOrWhiteSpace(code) || QuestShortStoryCache.ContainsKey(code) || QuestShortStoryPrefetching.Contains(code))
         {
             return;
@@ -280,6 +309,10 @@ public partial class ArenaFightOver : UILayer
 
     private string GetPrefetchedQuestShortStory(string code)
     {
+        if (string.IsNullOrWhiteSpace(code))
+        {
+            return null;
+        }
         if (QuestShortStoryCache.TryGetValue(code, out var cached) && !string.IsNullOrWhiteSpace(cached))
         {
             return cached;

@@ -49,7 +49,8 @@ public class FrontLayer : UILayer
         ArcadeBtn.onClick.AddListener(
             ()=>
             {
-                ArcadeModeManager.Instance.DirectToArcadeStage(PlayerAccountInfo.Me.arcadeProcess + 1, true);
+                var nextStage = ArcadeModeManager.ClampQuestStage(PlayerAccountInfo.Me.arcadeProcess + 1);
+                ArcadeModeManager.Instance.DirectToArcadeStage(nextStage, true);
             });
         
         ArenaBtn.onClick.AddListener(() =>

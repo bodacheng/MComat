@@ -7,6 +7,10 @@ public class CommonSetting : ScriptableObject
 {
     [SerializeField] bool devMode;
     [SerializeField] bool pcMode;
+    [Tooltip("Enable demo mode limits")]
+    [SerializeField] bool demoMode;
+    [Tooltip("Max quest stage allowed in demo mode")]
+    [SerializeField] int demoMaxQuestStage = 4;
     [SerializeField] int mosaikCameraScreenScale = 7;
     [SerializeField] int maxStoneCount = 30;
     [SerializeField] int gangbangModeMaxUnitPerTeam1 = 24;
@@ -124,6 +128,8 @@ public class CommonSetting : ScriptableObject
     
     public static bool DevMode;
     public static bool PcMode;
+    public static bool DemoMode;
+    public static int DemoMaxQuestStage;
     public static int MosaikCameraScreenScale;
     public static int GangbangModeMaxUnitPerTeam1;
     public static int GangbangModeMaxUnitPerTeam2;
@@ -199,6 +205,8 @@ public class CommonSetting : ScriptableObject
     {
         DevMode = devMode;
         PcMode = pcMode;
+        DemoMode = demoMode;
+        DemoMaxQuestStage = demoMaxQuestStage;
 
         MosaikCameraScreenScale = mosaikCameraScreenScale;
         

@@ -45,7 +45,8 @@ public class TutorialRunner
         var waitFighting = new WaitProcess(StageOneFinished);
         _tutorialProcesses.Clear();
         _tutorialProcesses.Add(waitFighting);
-        ArcadeModeManager.Instance.DirectToArcadeStage(PlayerAccountInfo.Me.arcadeProcess + 1, false);
+        var nextStage = ArcadeModeManager.ClampQuestStage(PlayerAccountInfo.Me.arcadeProcess + 1);
+        ArcadeModeManager.Instance.DirectToArcadeStage(nextStage, false);
     }
     
     void GenerateStep3Tutorial()
@@ -77,7 +78,8 @@ public class TutorialRunner
     
     void GenerateStep5Tutorial()
     {
-        ArcadeModeManager.Instance.DirectToArcadeStage(PlayerAccountInfo.Me.arcadeProcess + 1, false);
+        var nextStage = ArcadeModeManager.ClampQuestStage(PlayerAccountInfo.Me.arcadeProcess + 1);
+        ArcadeModeManager.Instance.DirectToArcadeStage(nextStage, false);
         
         bool StageTwoFinished()
         {

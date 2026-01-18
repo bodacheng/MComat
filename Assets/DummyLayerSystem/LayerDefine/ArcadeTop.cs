@@ -29,6 +29,15 @@ public class ArcadeTop : UILayer
     Action<int, bool> directToStage;
     int _maxStageNum;
     int _stageCountPerPage = 3;
+
+    int GetCurrentProgress()
+    {
+        if (step == MainSceneStep.ArcadeFront)
+        {
+            return ArcadeModeManager.ClampQuestProgress(PlayerAccountInfo.Me.arcadeProcess);
+        }
+        return PlayerAccountInfo.Me.gangbangProcess;
+    }
     
     void SetupCommon()
     {
@@ -72,7 +81,7 @@ public class ArcadeTop : UILayer
 
     void ToNew()
     {
-        var stages = NewStages(step == MainSceneStep.ArcadeFront ? PlayerAccountInfo.Me.arcadeProcess : PlayerAccountInfo.Me.gangbangProcess);
+        var stages = NewStages(GetCurrentProgress());
         ShowStages(stages).Forget();
     }
 
@@ -95,15 +104,16 @@ public class ArcadeTop : UILayer
         }
         _stageButtons.Clear();
         _currentStages = stages;
+        var progress = GetCurrentProgress();
         var tasks = new List<UniTask>();
         for (var index = 0; index < _currentStages.Count; index++)
         {
             tasks.Add(LoadStage(_currentStages[index], 
                 _currentStages[index] == 
-                (step == MainSceneStep.ArcadeFront ? PlayerAccountInfo.Me.arcadeProcess : PlayerAccountInfo.Me.gangbangProcess) + 1));
+                progress + 1));
         }
         await UniTask.WhenAll(tasks);
-        Refresh(step == MainSceneStep.ArcadeFront ? PlayerAccountInfo.Me.arcadeProcess : PlayerAccountInfo.Me.gangbangProcess,  
+        Refresh(progress,  
             step == MainSceneStep.ArcadeFront ? PlayFabReadClient.StageAwards : PlayFabReadClient.GangbangAwards);
         if (container != null)
             container.transform.gameObject.SetActive(true);

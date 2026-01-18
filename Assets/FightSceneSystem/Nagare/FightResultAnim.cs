@@ -70,7 +70,10 @@ namespace FightScene
                     if (FightLogger.value.GetWinnerTeam() == Team.player1)
                     {
                         await arenaFightOver.LoadShortMessage();
-                        await arenaFightOver.LoadStory();
+                        if (!CommonSetting.DemoMode)
+                        {
+                            await arenaFightOver.LoadStory();
+                        }
                     }
                     arenaFightOver.Setup();
                     await EndPart();
@@ -78,7 +81,10 @@ namespace FightScene
                 case FightEventType.Event:
                     if (FightLogger.value.GetWinnerTeam() == Team.player1)
                     {
-                        await arenaFightOver.LoadStory();
+                        if (!CommonSetting.DemoMode)
+                        {
+                            await arenaFightOver.LoadStory();
+                        }
                     }
                     await EndPart();
                     break;
