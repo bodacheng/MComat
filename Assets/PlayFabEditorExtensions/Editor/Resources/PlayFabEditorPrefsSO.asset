@@ -11,14 +11,14 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d0199c11aa6f514784c5c69cd8378d8, type: 3}
   m_Name: PlayFabEditorPrefsSO
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: PlayFabEditorExtensions::PlayFab.PfEditor.PlayFabEditorPrefsSO
   DevAccountEmail: hakuforwork@gmail.com
-  DevAccountToken: qufs4yz78wod8mdbcwp4p7nz7yfpe6hwyg5deky8zdgcetcykk7xiq9haxdry9t5jxafpbes7yakhrpbhmjkhf6nh5tdrb9stbuq776gkndbuj6scg7k9aajcfhq5f6rd6wc6c8q8phcm7y4h6zaes7m1mshnrcofje1oqn1hor6ijg665fpcmxo3f9erqx8gr38dnxo
+  DevAccountToken: a8gede3mnk5jxauafhor7yapy8fezxhtbyrk6ybycdu4wuhwptk85smmkjkzsgz93ckkkckrrnp9ep5fphwirzxgih4zifnamu9cw5tmtiz4zsbn5wareh9h6anxjxy5g13jadie8n3173w41fbie8tyf1qqwfd1ref56zrnrtqs8oybmnki9kh8c3rzxhrza66d9kjw
   AadAuthorization: 
   SelectedStudio: 
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
-  LocalCloudScriptPath: /Users/nettest/MComat/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js
+  LocalCloudScriptPath: 
   PanelIsShown: 0
   curMainMenuIdx: 0
   curSubMenuIdx: 0
