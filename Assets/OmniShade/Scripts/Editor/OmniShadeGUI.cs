@@ -343,7 +343,7 @@ public class OmniShadeGUI : ShaderGUI {
 		string currentHeaderName = string.Empty;
 		int uvTileCount = 0;
 		foreach (var prop in properties) {
-			if (((uint)prop.flags & (uint)MaterialProperty.PropFlags.HideInInspector) == 1)
+			if (((uint)prop.propertyFlags & (uint)ShaderPropertyFlags.HideInInspector) == 1)
 				continue;
 
 			// If start of header, begin a new foldout group
