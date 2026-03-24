@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ElementEffectsGroup
 {
     IDictionary<Button, ParticleSystem> _btnRefreshEffects = new Dictionary<Button, ParticleSystem>();
+    readonly IDictionary<Button, RectTransform> _buttonRects = new Dictionary<Button, RectTransform>();
     ParticleSystem _triggerExplosion0;
     ParticleSystem _triggerExplosion1;
     ParticleSystem _triggerExplosion2;
@@ -31,7 +32,12 @@ public class ElementEffectsGroup
     
     public void StartPressing(Button targetBtn)
     {
-        var targetPos = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, targetBtn.GetComponent<RectTransform>(), 7);
+        if (!_buttonRects.TryGetValue(targetBtn, out var targetRect) || targetRect == null)
+        {
+            return;
+        }
+
+        var targetPos = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, targetRect, 7);
         _pressingExplosion.transform.position = targetPos;
         _pressingExplosion.Play();
     }
@@ -45,7 +51,12 @@ public class ElementEffectsGroup
     {
         foreach (var pair in _btnRefreshEffects)
         {
-            pair.Value.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, pair.Key.GetComponent<RectTransform>(),4);
+            if (!_buttonRects.TryGetValue(pair.Key, out var targetRect) || targetRect == null)
+            {
+                continue;
+            }
+
+            pair.Value.transform.position = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, targetRect, 4);
             pair.Value.Play(true);
         }
     }
@@ -124,6 +135,11 @@ public class ElementEffectsGroup
     public async UniTask InitializeCommon(Transform targetRectT, Element element, Button a1Btn, Button a2Btn, Button a3Btn, Button dreamComboBtn)
     {
         var path = FightGlobalSetting.EffectPathDefine(element);
+        _buttonRects.Clear();
+        CacheButtonRect(a1Btn);
+        CacheButtonRect(a2Btn);
+        CacheButtonRect(a3Btn);
+        CacheButtonRect(dreamComboBtn);
         
         var tasks = new List<UniTask<ParticleSystem>> 
         {
@@ -193,6 +209,20 @@ public class ElementEffectsGroup
         foreach (var p in results2)
         {
             p.transform.SetParent(targetRectT);
+        }
+    }
+
+    void CacheButtonRect(Button button)
+    {
+        if (button == null)
+        {
+            return;
+        }
+
+        var rectTransform = button.GetComponent<RectTransform>();
+        if (rectTransform != null)
+        {
+            _buttonRects[button] = rectTransform;
         }
     }
     

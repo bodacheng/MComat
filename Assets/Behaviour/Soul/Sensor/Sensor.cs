@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using Unity.Burst;
-using Unity.Collections;
-using Unity.Jobs;
 using UnityEngine;
 
 public partial class Sensor
@@ -94,74 +91,80 @@ public partial class Sensor
     List<GameObject> FindTargetsByDistance(Team[] tags, IDictionary<Team, List<Data_Center>> targetDic)
     {
         var targetList = new List<GameObject>();
-        if (tags == null) return targetList;
+        FindTargetsByDistance(tags, targetDic, targetList);
+        return targetList;
+    }
+
+    void FindTargetsByDistance(Team[] tags, IDictionary<Team, List<Data_Center>> targetDic, List<GameObject> targetList)
+    {
+        targetList.Clear();
+        if (tags == null || targetDic == null)
+        {
+            return;
+        }
+
         for (var i = 0; i < tags.Length; i++)
         {
-            if (targetDic != null)
+            if (!targetDic.TryGetValue(tags[i], out var searchingMembers) || searchingMembers == null)
             {
-                for (var y = 0; y < tags.Length; y++)
+                continue;
+            }
+
+            for (var k = 0; k < searchingMembers.Count; k++)
+            {
+                var member = searchingMembers[k];
+                if (member != null && member.WholeT != null)
                 {
-                    targetDic.TryGetValue(tags[y], out var searchingMembers);
-                    if (searchingMembers != null)
-                    {
-                        for (var k = 0; k < searchingMembers.Count; k++)
-                        {
-                            if (searchingMembers[k] != null)
-                                targetList.Add(searchingMembers[k].WholeT.gameObject);
-                            else
-                                Debug.Log("检测逻辑错误");
-                        }
-                    }
+                    targetList.Add(member.WholeT.gameObject);
+                }
+                else
+                {
+                    Debug.Log("检测逻辑错误");
                 }
             }
         }
-        
-        return SortByHorizontalDistance(targetList);
+
+        SortByHorizontalDistance(targetList);
     }
     
-    List<GameObject> SortByHorizontalDistance(List<GameObject> targetList)
+    void SortByHorizontalDistance(List<GameObject> targetList)
     {
-        int count = targetList.Count;
-        if (count == 0) return　targetList;
-
-        // 原始位置数据
-        positions = new NativeArray<Vector3>(count, Allocator.TempJob);
-        // 存储原始索引
-        indices = new NativeArray<int>(count, Allocator.TempJob);
-        Vector3 center = Center.position;
-
-        for (int i = 0; i < count; i++)
+        if (targetList.Count < 2 || Center == null)
         {
-            positions[i] = targetList[i].transform.position;
-            indices[i] = i;
+            return;
         }
 
-        // 调用排序 Job
-        var sortJob = new SortByHorizontalDistanceJob
+        var center = Center.position;
+        for (var i = 1; i < targetList.Count; i++)
         {
-            Positions = positions,
-            Indices = indices,
-            Center = center
-        };
+            var current = targetList[i];
+            var currentDistance = current != null ? HorizontalDistanceSqr(current.transform.position, center) : float.MaxValue;
+            var j = i - 1;
 
-        JobHandle handle = sortJob.Schedule();
-        handle.Complete();
+            while (j >= 0)
+            {
+                var comparing = targetList[j];
+                var comparingDistance = comparing != null ? HorizontalDistanceSqr(comparing.transform.position, center) : float.MaxValue;
+                if (comparingDistance <= currentDistance)
+                {
+                    break;
+                }
 
-        // 根据排好序的索引重建 List
-        List<GameObject> sorted = new List<GameObject>(count);
-        for (int i = 0; i < count; i++)
-        {
-            sorted.Add(targetList[indices[i]]);
+                targetList[j + 1] = comparing;
+                j--;
+            }
+
+            targetList[j + 1] = current;
         }
-
-        // 替换原始 List（也可以直接用 sorted）
-        targetList = sorted;
-
-        positions.Dispose();
-        indices.Dispose();
-        return　targetList;
     }
-    
+
+    static float HorizontalDistanceSqr(Vector3 position, Vector3 center)
+    {
+        var dx = position.x - center.x;
+        var dz = position.z - center.z;
+        return dx * dx + dz * dz;
+    }
+
     public void SensorDetectionResultSortProcess(Collider[] hits) //这个函数的调用必须要确保每次都在update函数之后
     {
         float sensorRadiusSqr = SensorRadius * SensorRadius;  // 预计算半径的平方
@@ -186,40 +189,7 @@ public partial class Sensor
         _nearestEnemyCollider = FindNearestCollider(_detectedEnemies);
         _nearestDamagingWeapon = FindNearestCollider(_damagingWeaponAround);
     }
-    
-    [BurstCompile]
-    struct SortByHorizontalDistanceJob : IJob
-    {
-        public NativeArray<Vector3> Positions;
-        public NativeArray<int> Indices;
-        public Vector3 Center;
 
-        public void Execute()
-        {
-            // 使用插入排序，对 Indices 按 Position 与 Center 的水平距离排序
-            for (int i = 1; i < Indices.Length; i++)
-            {
-                int currentIndex = Indices[i];
-                float currentDistance = HorizontalDistanceSqr(Positions[currentIndex], Center);
-                int j = i - 1;
-
-                while (j >= 0 && HorizontalDistanceSqr(Positions[Indices[j]], Center) > currentDistance)
-                {
-                    Indices[j + 1] = Indices[j];
-                    j--;
-                }
-                Indices[j + 1] = currentIndex;
-            }
-        }
-
-        private float HorizontalDistanceSqr(Vector3 p1, Vector3 center)
-        {
-            float dx = p1.x - center.x;
-            float dz = p1.z - center.z;
-            return dx * dx + dz * dz;
-        }
-    }
-    
     //void OnDrawGizmosSelected()
     //{
     //    Gizmos.color = Color.white;

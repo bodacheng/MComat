@@ -41,6 +41,14 @@ public class MobileInputsManager : MonoBehaviour {
     
     public Camera FXCamera { get; set; }
     public EasyKeyBinding.KeyBindingUpdater KeyBindingUpdater => keyBindingUpdater;
+
+    RectTransform _a1BtnRect;
+    RectTransform _a2BtnRect;
+    RectTransform _a3BtnRect;
+    RectTransform _defendBtnRect;
+    RectTransform _dashBtnRect;
+    RectTransform _dreamComboBtnRect;
+    readonly Dictionary<Button, RectTransform> _buttonRects = new Dictionary<Button, RectTransform>();
     
     //攻击键系成员
     readonly IDictionary<string, GameObject> _aIcons = new Dictionary<string, GameObject>();
@@ -49,6 +57,11 @@ public class MobileInputsManager : MonoBehaviour {
     IDictionary<Button, IDictionary<string, GameObject>> btnIcons = new Dictionary<Button, IDictionary<string, GameObject>>();
     readonly IDictionary<Element, ElementEffectsGroup> _elementEffects = new Dictionary<Element, ElementEffectsGroup>();
     Element _focusing;
+
+    void Awake()
+    {
+        CacheButtonRects();
+    }
 
     
     async UniTask AddGemIcon(string skillID, IDictionary<string, GameObject> dic, Button btn)
@@ -181,6 +194,41 @@ public class MobileInputsManager : MonoBehaviour {
         _cIcons.Clear();
         Destroy(gameObject);
     }
+
+    void CacheButtonRects()
+    {
+        CacheButtonRect(a1Btn, ref _a1BtnRect);
+        CacheButtonRect(a2Btn, ref _a2BtnRect);
+        CacheButtonRect(a3Btn, ref _a3BtnRect);
+        CacheButtonRect(defendBtn, ref _defendBtnRect);
+        CacheButtonRect(dashBtn, ref _dashBtnRect);
+        CacheButtonRect(dreamComboBtn, ref _dreamComboBtnRect);
+    }
+
+    void CacheButtonRect(Button button, ref RectTransform rectTransform)
+    {
+        rectTransform = button != null ? button.GetComponent<RectTransform>() : null;
+        if (button != null && rectTransform != null)
+        {
+            _buttonRects[button] = rectTransform;
+        }
+    }
+
+    RectTransform GetButtonRect(Button button)
+    {
+        return button != null && _buttonRects.TryGetValue(button, out var rectTransform) ? rectTransform : null;
+    }
+
+    Vector3 GetButtonWorldPos(Button button, float depth)
+    {
+        var rectTransform = GetButtonRect(button);
+        if (rectTransform == null)
+        {
+            return Vector3.zero;
+        }
+
+        return PosCal.GetWorldPos(FXCamera, rectTransform, depth);
+    }
     
     // 切换输入按键表现层（红黄蓝绿）.这个函数使用的前提是所有用的上的控制器组都已经注册并初始化
     void SwitchElementEffects(Element element)
@@ -194,9 +242,9 @@ public class MobileInputsManager : MonoBehaviour {
         {
             _focusing = element;
             _elementEffects[element].Open(
-                PosCal.GetWorldPos(FXCamera, defendBtn.GetComponent<RectTransform>(), 5), 
-                PosCal.GetWorldPos(FXCamera, dashBtn.GetComponent<RectTransform>(), 5),
-                PosCal.GetWorldPos(FXCamera, dreamComboBtn.GetComponent<RectTransform>(), 5)
+                GetButtonWorldPos(defendBtn, 5),
+                GetButtonWorldPos(dashBtn, 5),
+                GetButtonWorldPos(dreamComboBtn, 5)
             );
         }else{
             Debug.Log("检查手机控制器渲染模块加载顺序");
@@ -252,16 +300,16 @@ public class MobileInputsManager : MonoBehaviour {
         switch (key)
         {
             case InputKey.Attack1:
-                targetExplode.transform.position = PosCal.GetWorldPos(FXCamera, a1Btn.GetComponent<RectTransform>(), 3);
+                targetExplode.transform.position = GetButtonWorldPos(a1Btn, 3);
                 break;
             case InputKey.Attack2:
-                targetExplode.transform.position = PosCal.GetWorldPos(FXCamera, a2Btn.GetComponent<RectTransform>(), 3);
+                targetExplode.transform.position = GetButtonWorldPos(a2Btn, 3);
                 break;
             case InputKey.Attack3:
-                targetExplode.transform.position = PosCal.GetWorldPos(FXCamera, a3Btn.GetComponent<RectTransform>(), 3);
+                targetExplode.transform.position = GetButtonWorldPos(a3Btn, 3);
                 break;
             case InputKey.DreamCombo:
-                targetExplode.transform.position = PosCal.GetWorldPos(FXCamera, dreamComboBtn.GetComponent<RectTransform>(), 3);
+                targetExplode.transform.position = GetButtonWorldPos(dreamComboBtn, 3);
                 break;
         }
         targetExplode?.Play();
@@ -527,7 +575,7 @@ public class MobileInputsManager : MonoBehaviour {
     void Update()
     {
         // Executes when the jump key is pressed
-        if (Input.GetKey(AppSetting.Value.JumpKeyCode))
+        if (Input.GetKeyDown(AppSetting.Value.JumpKeyCode))
         {
             RushDown();
         }
@@ -539,7 +587,7 @@ public class MobileInputsManager : MonoBehaviour {
         }
         
         // Executes when the jump key is pressed
-        if (Input.GetKey(AppSetting.Value.DreamComboKeyCode))
+        if (Input.GetKeyDown(AppSetting.Value.DreamComboKeyCode))
         {
             DreamComboDown();
         }
@@ -551,7 +599,7 @@ public class MobileInputsManager : MonoBehaviour {
         }
 
         // Executes when the fire1 key is pressed
-        if (Input.GetKey(AppSetting.Value.Fire1KeyCode))
+        if (Input.GetKeyDown(AppSetting.Value.Fire1KeyCode))
         {
             AttackDown();
         }
@@ -563,7 +611,7 @@ public class MobileInputsManager : MonoBehaviour {
         }
 
         // Executes when the fire2 key is pressed
-        if (Input.GetKey(AppSetting.Value.Fire2KeyCode))
+        if (Input.GetKeyDown(AppSetting.Value.Fire2KeyCode))
         {
             Fire1Down();
         }
@@ -575,7 +623,7 @@ public class MobileInputsManager : MonoBehaviour {
         }
 
         // Executes when the fire3 key is pressed
-        if (Input.GetKey(AppSetting.Value.Fire3KeyCode))
+        if (Input.GetKeyDown(AppSetting.Value.Fire3KeyCode))
         {
             Fire2Down();
         }
@@ -591,9 +639,8 @@ public class MobileInputsManager : MonoBehaviour {
     
     void RefreshPattern(Button button, string skillId) //按钮切换也可以在这里做文章
     {
-        if (btnIcons.ContainsKey(button))
+        if (btnIcons.TryGetValue(button, out var target))
         {
-            var target = btnIcons[button];
             foreach(var pair in target)
             {
                 pair.Value.gameObject.SetActive(pair.Key == skillId);
@@ -602,7 +649,7 @@ public class MobileInputsManager : MonoBehaviour {
         
         if (_elementEffects.ContainsKey(_focusing))
         {
-            Vector3 targetPos = PosCal.GetWorldPos(FXCamera, button.GetComponent<RectTransform>(), 5);
+            Vector3 targetPos = GetButtonWorldPos(button, 5);
             _elementEffects[_focusing].RefreshSlotEffect(button, skillId, targetPos);
         }
     }

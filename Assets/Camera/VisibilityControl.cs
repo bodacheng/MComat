@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class VisibilityControl : MonoBehaviour
@@ -12,19 +10,18 @@ public class VisibilityControl : MonoBehaviour
     [SerializeField] int wallLayer;
     [SerializeField] int detectInterval = 10;
     [SerializeField] int rayCastMax = 20;
-    private List<Renderer> _hiddenObjects = new List<Renderer>(); // 存储当前被隐藏的物体
-    private int _frameCounter = 0;
-    
-    // 预先分配一个足够大的数组，以存储可能检测到的所有collider
-    // 数组的大小取决于你预计场景中可能同时存在的最大collider数量
+    readonly List<Renderer> _hiddenObjects = new List<Renderer>(); // 存储当前被隐藏的物体
+    readonly List<Renderer> _thisFrameDetected = new List<Renderer>();
+    readonly HashSet<Renderer> _thisFrameDetectedSet = new HashSet<Renderer>();
+    readonly Dictionary<Transform, Renderer[]> _wallRendererCache = new Dictionary<Transform, Renderer[]>();
+    int _frameCounter = 0;
+
+    // 预先分配一个足够大的数组，以存储可能检测到的所有 collider
     private RaycastHit[] _hitColliders;
-    private readonly List<Renderer> thisFrameDetected = new List<Renderer>();
-    private List<RaycastHit> hitList = new List<RaycastHit>();
-    private readonly List<RaycastHit> unitTargets = new List<RaycastHit>();
-    private readonly List<RaycastHit> wallTargets = new List<RaycastHit>();
+
     void Start()
     {
-        _hitColliders = new RaycastHit[rayCastMax];
+        _hitColliders = new RaycastHit[Mathf.Max(1, rayCastMax)];
     }
 
     public void LocalUpdate()
@@ -35,70 +32,111 @@ public class VisibilityControl : MonoBehaviour
             return;
         }
         _frameCounter = 0;
-        
-        Ray ray = new Ray(transform.position, transform.forward);
-        
-        // 获取实际检测到的collider数量
-        int numColliders = Physics.SphereCastNonAlloc(ray, radius, _hitColliders, detectDis, layerMask, QueryTriggerInteraction.Collide);
-        // 雅典城场景1对1模式下加上角色大概能检测到不到30个对象
-        
-        if (numColliders > 0)
+
+        var origin = transform.position;
+        var ray = new Ray(origin, transform.forward);
+
+        // 获取实际检测到的 collider 数量
+        var detectedCount = Physics.SphereCastNonAlloc(ray, radius, _hitColliders, detectDis, layerMask, QueryTriggerInteraction.Collide);
+        var nearestUnitSqr = float.PositiveInfinity;
+        var unitLayerMaskValue = unitLayer.value;
+
+        for (var i = 0; i < detectedCount; i++)
         {
-            hitList = new List<RaycastHit>(_hitColliders.Take(numColliders)); // 直接使用数组的切片
-            foreach (var hit in hitList)
+            var collider = _hitColliders[i].collider;
+            if (collider == null)
             {
-                if ((unitLayer & (1 << hit.collider.gameObject.layer)) != 0)
-                    unitTargets.Add(hit);
-                if (hit.collider.gameObject.layer == wallLayer)
-                    wallTargets.Add(hit);
+                continue;
             }
-            
-            if (unitTargets.Count > 0 && wallTargets.Count > 0)
+
+            if ((unitLayerMaskValue & (1 << collider.gameObject.layer)) == 0)
             {
-                var minDis = unitTargets.Min(x=> Vector3.Distance(x.transform.position, transform.position));
-                foreach (var wall in wallTargets)
+                continue;
+            }
+
+            var unitDistanceSqr = (collider.transform.position - origin).sqrMagnitude;
+            if (unitDistanceSqr < nearestUnitSqr)
+            {
+                nearestUnitSqr = unitDistanceSqr;
+            }
+        }
+
+        if (!float.IsPositiveInfinity(nearestUnitSqr))
+        {
+            for (var i = 0; i < detectedCount; i++)
+            {
+                var collider = _hitColliders[i].collider;
+                if (collider == null || collider.gameObject.layer != wallLayer)
                 {
-                    if (Vector3.Distance(wall.transform.position, transform.position) < minDis)
-                    {
-                        var renderer = wall.transform.GetComponent<Renderer>();
-                        if (renderer != null)
-                        {
-                            renderer.enabled = false; // 禁用Renderer组件
-                            thisFrameDetected.Add(renderer); // 将对象添加到隐藏对象集合中
-                        }
-                        var renderers = wall.transform.GetComponentsInChildren<Renderer>();
-                        if (renderers.Length > 0)
-                        {
-                            foreach (var r in renderers)
-                            {
-                                r.enabled = false; // 禁用Renderer组件
-                                thisFrameDetected.Add(r); // 将对象添加到隐藏对象集合中
-                            }
-                        }
-                    }
+                    continue;
+                }
+
+                var wallDistanceSqr = (collider.transform.position - origin).sqrMagnitude;
+                if (wallDistanceSqr < nearestUnitSqr)
+                {
+                    HideWallRenderers(collider.transform);
                 }
             }
         }
-        
+
         // 检查被隐藏的物体是否已经移出了半径范围
-        foreach (var renderer in _hiddenObjects)
+        for (var i = 0; i < _hiddenObjects.Count; i++)
         {
+            var renderer = _hiddenObjects[i];
             if (renderer == null || renderer.gameObject == null)
             {
                 continue;
             }
-            if (!thisFrameDetected.Contains(renderer))
+            if (!_thisFrameDetectedSet.Contains(renderer))
+            {
                 renderer.enabled = true; // 启用Renderer组件
+            }
         }
-        
-        _hiddenObjects = new List<Renderer>(thisFrameDetected);
-        thisFrameDetected.Clear();
-        unitTargets.Clear();
-        wallTargets.Clear();
+
+        _hiddenObjects.Clear();
+        _hiddenObjects.AddRange(_thisFrameDetected);
+        _thisFrameDetected.Clear();
+        _thisFrameDetectedSet.Clear();
+    }
+
+    void HideWallRenderers(Transform wallTransform)
+    {
+        if (!_wallRendererCache.TryGetValue(wallTransform, out var renderers) || renderers == null)
+        {
+            renderers = wallTransform.GetComponentsInChildren<Renderer>(true);
+            _wallRendererCache[wallTransform] = renderers;
+        }
+
+        for (var i = 0; i < renderers.Length; i++)
+        {
+            var renderer = renderers[i];
+            if (renderer == null)
+            {
+                continue;
+            }
+
+            if (_thisFrameDetectedSet.Add(renderer))
+            {
+                renderer.enabled = false;
+                _thisFrameDetected.Add(renderer);
+            }
+        }
     }
 
     public void Clear()
     {
+        for (var i = 0; i < _hiddenObjects.Count; i++)
+        {
+            var renderer = _hiddenObjects[i];
+            if (renderer != null)
+            {
+                renderer.enabled = true;
+            }
+        }
+
         _hiddenObjects.Clear();
+        _thisFrameDetected.Clear();
+        _thisFrameDetectedSet.Clear();
+        _wallRendererCache.Clear();
     }
 }

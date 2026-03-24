@@ -326,11 +326,17 @@ namespace FightScene
         {
             if (FSceneProcessesRunner.Main.CurrentStep() == SceneStep.Fighting)
             {
-                for (var i = 0; i < teamMembers.GetValues().Count; i++)
+                var refreshTimes = RTFightManager.Target.RefreshTimeDic;
+                foreach (var member in teamMembers.mDict.Values)
                 {
-                    if (RTFightManager.Target.RefreshTimeDic[teamMembers.GetValues()[i]].Value > 0)
+                    if (member == null || !refreshTimes.TryGetValue(member, out var refreshTime))
                     {
-                        RTFightManager.Target.RefreshTimeDic[teamMembers.GetValues()[i]].Value -= Time.deltaTime; // 角色切换倒计时;
+                        continue;
+                    }
+
+                    if (refreshTime.Value > 0)
+                    {
+                        refreshTime.Value -= Time.deltaTime; // 角色切换倒计时;
                     }
                 }
             

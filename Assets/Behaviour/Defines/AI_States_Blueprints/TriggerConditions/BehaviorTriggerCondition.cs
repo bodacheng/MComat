@@ -108,20 +108,41 @@ namespace Soul
         
         bool HasLowCollider(List<Collider> inColliders)
         {
-            var finds = inColliders.FindAll(x=> x.transform.position.y < 0.5f);
-            return finds.Count > 0;
+            for (var i = 0; i < inColliders.Count; i++)
+            {
+                var collider = inColliders[i];
+                if (collider != null && collider.transform.position.y < 0.5f)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         
         bool HasMidCollider(List<Collider> inColliders)
         {
-            var finds = inColliders.FindAll(x=> x.transform.position.y >= 0.8f);
-            return finds.Count > 0;
+            for (var i = 0; i < inColliders.Count; i++)
+            {
+                var collider = inColliders[i];
+                if (collider != null && collider.transform.position.y >= 0.8f)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         
         bool HasHighCollider(List<Collider> inColliders)
         {
-            var finds = inColliders.FindAll(x=> x.transform.position.y >= 1f);
-            return finds.Count > 0;
+            for (var i = 0; i < inColliders.Count; i++)
+            {
+                var collider = inColliders[i];
+                if (collider != null && collider.transform.position.y >= 1f)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         
         public bool TimeToAttack_Reluctant()
