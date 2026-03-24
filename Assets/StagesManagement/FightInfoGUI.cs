@@ -251,7 +251,7 @@ public class FightInfoGUI : Editor
 
         if (BattleGroundOptions.Count == 0)
         {
-            var guids = AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/ExternalAssets/BattleGround" });
+            var guids = AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/ExternalAssets/Prefabs/BattleGround" });
             foreach (var guid in guids)
             {
                 var assetPath = AssetDatabase.GUIDToAssetPath(guid);

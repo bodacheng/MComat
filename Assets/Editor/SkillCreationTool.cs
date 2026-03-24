@@ -15,11 +15,11 @@ using UnityEngine;
 /// </summary>
 public class SkillCreationTool : EditorWindow
 {
-    private const string SkillConfigCsvPath = "Assets/ExternalAssets/Config/mst_skill.csv";
-    private const string SkillAiCsvPath = "Assets/ExternalAssets/Config/skill_ai_attrs.csv";
-    private const string SkillNameCsvPath = "Assets/ExternalAssets/Config/skill_name.csv";
-    private const string SkillStaticCsvPath = "Assets/ExternalAssets/Config/SkillStaticAnalysis.csv";
-    private const string SkillIconFolder = "Assets/ExternalAssets/SkillIcon";
+    private const string SkillConfigCsvPath = "Assets/ExternalAssets/Data/Config/mst_skill.csv";
+    private const string SkillAiCsvPath = "Assets/ExternalAssets/Data/Config/skill_ai_attrs.csv";
+    private const string SkillNameCsvPath = "Assets/ExternalAssets/Data/Config/skill_name.csv";
+    private const string SkillStaticCsvPath = "Assets/ExternalAssets/Data/Config/SkillStaticAnalysis.csv";
+    private const string SkillIconFolder = "Assets/ExternalAssets/Textures/Icons/Skill";
     private const string SkillAnimationRoot = "Assets/ExternalAssets/Animations";
     private const string CsvNewLine = "\r\n";
 
