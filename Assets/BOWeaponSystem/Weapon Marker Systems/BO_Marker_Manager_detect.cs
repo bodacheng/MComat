@@ -23,10 +23,12 @@ namespace HittingDetection
                     // 射线检测目前不具备根据伤害等级大小修正自身能量消耗的能力
                     if (_markers[i] is Trail_Marker)
                     {
-                        RaycastHit[] _hits = ((Trail_Marker)_markers[i])._hits;
+                        var trailMarker = (Trail_Marker)_markers[i];
+                        RaycastHit[] _hits = trailMarker._hits;
+                        int hitCount = trailMarker.HitCount;
                         if (_traditionalDefendMode)
                         {
-                            for (int hit_target_index = 0; hit_target_index < _hits.Length; hit_target_index++)
+                            for (int hit_target_index = 0; hit_target_index < hitCount; hit_target_index++)
                             {
                                 if (_markers[i].enemyShieldLayer == (_markers[i].enemyShieldLayer | 1 << _hits[hit_target_index].collider.gameObject.layer) && !_shieldsHit.Contains(_hits[hit_target_index].collider.transform))
                                 {
@@ -83,7 +85,7 @@ namespace HittingDetection
                         }
                         //以上全部内容都是针对射线检测的防御判断
 
-                        for (int hit_target_index = 0; hit_target_index < _hits.Length; hit_target_index++)
+                        for (int hit_target_index = 0; hit_target_index < hitCount; hit_target_index++)
                         {
                             if (weaponHP > 0 && CurrentHP <= 0)
                             {

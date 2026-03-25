@@ -51,9 +51,10 @@ namespace HittingDetection
         bool HitFlesh;
         bool HitShield;
         private List<Marker> _markers = new List<Marker>();
-        List<Transform> _usedTargets = new List<Transform>(); // 就是每一帧所碰撞到的所有collider的母体。所有collider。不论是否包含mainhealth什么的。是以武器启动周期为处理单位。处理过的单位才会加入至其中
-        readonly List<Transform> _Targets_Raw_Hit = new List<Transform>(); //Targets initialy hit by the blade (pre-check 这个是以一帧为单位处理，为了避免多个marker重复处理击中的bodyhealth。
-        private readonly List<Transform> _shieldsHit = new List<Transform>();
+        readonly HashSet<Transform> _localUsedTargets = new HashSet<Transform>();
+        HashSet<Transform> _usedTargets; // 就是每一帧所碰撞到的所有collider的母体。所有collider。不论是否包含mainhealth什么的。是以武器启动周期为处理单位。处理过的单位才会加入至其中
+        readonly HashSet<Transform> _Targets_Raw_Hit = new HashSet<Transform>(); //Targets initialy hit by the blade (pre-check 这个是以一帧为单位处理，为了避免多个marker重复处理击中的bodyhealth。
+        private readonly HashSet<Transform> _shieldsHit = new HashSet<Transform>();
         private readonly List<Vector3> _shieldHitPos = new List<Vector3>();
         private readonly List<V_Damage> hitsOnHealthBody = new List<V_Damage>();
         readonly bool _traditionalDefendMode = false;
@@ -102,9 +103,10 @@ namespace HittingDetection
 
         void Awake()
         {
+            _usedTargets = _localUsedTargets;
             Transform _MarkersParent = transform;
             Transform[] children = new Transform[_MarkersParent.childCount];
-            var bms = new List<Marker>();
+            var bms = new List<Marker>(children.Length);
             for (var i = 0; i < children.Length; i++)
             {
                 var bO_Marker = _MarkersParent.GetChild(i).gameObject.GetComponent<BO_Marker>();
@@ -177,9 +179,9 @@ namespace HittingDetection
         {
             return _attackerRef;
         }
-        public void SetDetectionTargetsUnion(List<Transform> usedTargets)
+        public void SetDetectionTargetsUnion(HashSet<Transform> usedTargets)
         {
-            _usedTargets = usedTargets;
+            _usedTargets = usedTargets ?? _localUsedTargets;
         }
 
         public void SetTeamConfig(TeamConfig teamConfig)
