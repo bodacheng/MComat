@@ -457,46 +457,49 @@ namespace Soul
             }
         }
 
+        protected Vector3 CalFixPushVector(V_Damage damage, Vector3 victimTPos)
+        {
+            if (damage == null || damage.from_weapon == null)
+                return Vector3.zero;
+
+            var attackerPos = damage.attacker?.Center?.WholeT != null
+                ? damage.attacker.Center.WholeT.position
+                : victimTPos;
+            var pushOrigin = damage.from_weapon.damage_type == DamageType.explosion
+                ? damage.DamageEffectPoint
+                : damage.impactComingPoint;
+
+            if (damage.from_weapon.ShouldPreferAttackerLinePush() && damage.attacker?.Center?.WholeT != null)
+            {
+                pushOrigin = damage.attacker.Center.WholeT.position;
+            }
+
+            return CalFixPushVector(pushOrigin, attackerPos, victimTPos, damage.from_weapon.damage_type, damage.from_weapon._WeaponMode);
+        }
+
         /// <summary>
-        /// Get fixed Pos destination
-        /// damageHappenPoint 伤害发生点
-        /// attackerTransform_foward 攻击方“前方”的单位向量
-        /// victimT_pos 受害者点
-        /// _DamageType 攻击种类
+        /// damageHappenPoint 是已经解析后的推移原点：
+        /// 身体部位攻击传入攻击者位置，伤害物体攻击传入物体位置，爆炸传入爆点。
         /// </summary>
-        ///
-        // 点积的计算方式为:  a·b=|a|·|b|cos<a,b>  其中|a|和|b|表示向量的模，<a,b>表示两个向量的夹角。另外在 点积 中，<a,b>和<b,a> 夹角是不分顺序的。 
-        // 所以通过点积，我们其实是可以计算两个向量的夹角的。 
-        // 另外通过点积的计算我们可以简单粗略的判断当前物体是否朝向另外一个物体: 只需要计算当前物体的transform.forward向量与 (otherObj.transform.position – transform.position)的点积即可， 大于0则面对，否则则背对着。当然这个计算也会有一点误差，但大致够用。 
-        float f_temp;
-        Vector3 v_temp;
         protected Vector3 CalFixPushVector(Vector3 damageHappenPoint, Vector3 attackerTPos, Vector3 victimTPos, 
             DamageType damageType, WeaponMode weaponMode)
         {
-            f_temp = Vector3.Distance(attackerTPos, victimTPos);
-            if (weaponMode == WeaponMode.EnergyFromBodyWeapon || f_temp < FightGlobalSetting._SureToPushForwardDis)
-            {
-                v_temp = victimTPos - attackerTPos;
-                v_temp.y = 0;
-                if (v_temp.normalized != Vector3.zero)
-                    return v_temp.normalized;
-            }
-            
-            if (damageType == DamageType.explosion)
-            {
-                v_temp = victimTPos - damageHappenPoint;
-                v_temp.y = 0;
-                return v_temp.normalized;
-            }
-            
-            damageHappenPoint.y = 0;
-            f_temp = Vector3.Dot(damageHappenPoint - attackerTPos, attackerTPos - victimTPos);
-            if (f_temp > 0 && Vector3.Distance(attackerTPos, victimTPos) < FightGlobalSetting._attackDrawingDistance)
-            {
-                v_temp = f_temp * (attackerTPos - victimTPos);//+ (touchingEnemyBody ? attackerTransform_foward : Vector3.zero);
-                return v_temp.normalized;
-            }
-            return CalFixPushVector(damageHappenPoint, attackerTPos, victimTPos, DamageType.explosion, weaponMode);
+            var resolvedDir = victimTPos - damageHappenPoint;
+            resolvedDir.y = 0f;
+            if (resolvedDir.sqrMagnitude > MovementEpsilon * MovementEpsilon)
+                return resolvedDir.normalized;
+
+            resolvedDir = victimTPos - attackerTPos;
+            resolvedDir.y = 0f;
+            if (resolvedDir.sqrMagnitude > MovementEpsilon * MovementEpsilon)
+                return resolvedDir.normalized;
+
+            resolvedDir = gameObject.transform.forward;
+            resolvedDir.y = 0f;
+            if (resolvedDir.sqrMagnitude > MovementEpsilon * MovementEpsilon)
+                return resolvedDir.normalized;
+
+            return damageType == DamageType.explosion ? Vector3.back : Vector3.forward;
         }
 
         Vector3 use_direction;

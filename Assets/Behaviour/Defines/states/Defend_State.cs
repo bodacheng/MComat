@@ -112,10 +112,7 @@ namespace Soul
             _SkillCancelFlag.turn_off_flag();
             //this.AI_DATA_CENTER.turnShield(true);
 
-            fixDesV3 = CalFixPushVector(newValue.DamageEffectPoint,
-                newValue.attacker.Center.WholeT.position,
-                                               gameObject.transform.position,
-                                                   newValue.from_weapon.damage_type, newValue.from_weapon._WeaponMode);
+            fixDesV3 = CalFixPushVector(newValue, gameObject.transform.position);
             switch (newValue.from_weapon.damage_type)
             {
                 case DamageType.light_damage_forward:

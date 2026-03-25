@@ -9,8 +9,7 @@ namespace Soul
         void HeavyStart(V_Damage newValue)
         {
             //gameObject.transform.DOMove(fixDesPos, 0.1f);
-            _Rigidbody.linearVelocity = CalFixPushVector(newValue.impactComingPoint, newValue.attacker.Center.WholeT.position, gameObject.transform.position, 
-                newValue.from_weapon.damage_type, newValue.from_weapon._WeaponMode);
+            _Rigidbody.linearVelocity = CalFixPushVector(newValue, gameObject.transform.position);
             
             _physicMissionDisposable = new SingleAssignmentDisposable();
             _physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>

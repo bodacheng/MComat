@@ -86,6 +86,20 @@ namespace HittingDetection
             return weaponHP > 0 ? AT / weaponHP : AT;
         }
 
+        public bool ShouldPreferAttackerLinePush()
+        {
+            switch (damage_type)
+            {
+                case DamageType.draw:
+                case DamageType.explosion:
+                case DamageType.time_pause:
+                case DamageType.sekka:
+                    return false;
+                default:
+                    return _decomposition != null && _decomposition.IsFromDefaultHitBoxPool();
+            }
+        }
+
         void Awake()
         {
             Transform _MarkersParent = transform;

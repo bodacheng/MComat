@@ -48,8 +48,7 @@ namespace Soul
         public override void AI_State_enter(V_Damage newValue)
         {
             AI_State_enter();
-            _xz = CalFixPushVector(newValue.impactComingPoint,  newValue.attacker.Center.WholeT.position, gameObject.transform.position, 
-                newValue.from_weapon.damage_type, newValue.from_weapon._WeaponMode);
+            _xz = CalFixPushVector(newValue, gameObject.transform.position);
             rotateTween = RotateToTargetTween(gameObject.transform.position - _xz, 0f);
             
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);

@@ -51,8 +51,7 @@ namespace Soul
             AnimationManger.AnimationTrigger(AnimationManger.GetRandomKnockOffAnim(), 0.05f);
             //_xz = newValue.attacker._Center.WholeT.forward;
             var position = gameObject.transform.position;
-            _xz = CalFixPushVector(value.impactComingPoint,  value.attacker.Center.WholeT.position, position, 
-                value.from_weapon.damage_type, value.from_weapon._WeaponMode);
+            _xz = CalFixPushVector(value, position);
             rotateTween = RotateToTargetTween(position - _xz, 0f);
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
             EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(value.from_weapon.element), value.DamageEffectPoint, value.CutRotation, null).Forget();

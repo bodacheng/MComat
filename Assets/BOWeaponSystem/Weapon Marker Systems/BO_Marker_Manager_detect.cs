@@ -148,7 +148,7 @@ namespace HittingDetection
                                     _Targets_Raw_Hit.Add(_Raw_Target_Instance.Center.geometryCenter);
                                     _TrailModeStartPoint = _hits[hit_target_index].point;
                                     _TrailModeStartPoint = _TrailModeStartPoint + (_hits[hit_target_index].transform.position - _TrailModeStartPoint) * 0.3f;
-                                    hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _attackerRef, _TrailModeStartPoint,_TrailModeStartPoint, Quaternion.LookRotation(_Raw_Target_Instance.Center.geometryCenter.position-_TrailModeStartPoint,Vector3.up)));
+                                    hitsOnHealthBody.Add(new V_Damage(this, _markers[i],_Raw_Target_Instance, _attackerRef, _TrailModeStartPoint,_markers[i].transform.position, Quaternion.LookRotation(_Raw_Target_Instance.Center.geometryCenter.position-_TrailModeStartPoint,Vector3.up)));
                                     
                                     HitPointPara hitPointPara = new HitPointPara
                                     {
