@@ -187,6 +187,12 @@ MonoBehaviour:
     - story
     - public
     - audio
+    - public_audio
+    - public_shader
+    - public_material
+    - public_texture
+    - public_model
+    - public_other
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 7ed3c4f91e15949209e5cda4294e805b, type: 2}

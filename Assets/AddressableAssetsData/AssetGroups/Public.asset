@@ -15,1253 +15,1811 @@ MonoBehaviour:
   m_GroupName: Public
   m_GUID: 90d86ee747b974ade8c69a8f00d2c647
   m_SerializeEntries:
+  - m_GUID: 009752f10c9d8f94fbdedf3b366ca5b1
+    m_Address: Public/Textures/EffectsResource/textures/Circle89
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0140f0e8e47530b438adcf26e3b875e4
     m_Address: Magic Explosion 1
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0155bcaefb385764299abfc5b1146e64
+    m_Address: Public/Audio/EffectsResource/Sounds/shoot_laser3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 03e4ee8d0b5f45045bb12e2930ed4058
+    m_Address: Public/Textures/EffectsResource/textures/Gradients/GradientCenter03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0406db5a14f94604a8c57ccfbc9f3b46
     m_Address: ParticlesUnlit
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_shader
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 04a40b50e9e63ed43af8af28f2ba4f86
+    m_Address: Public/Textures/EffectsResource/textures/Noise28
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 05f7e107e67fece469b382c40f118238
     m_Address: Lightning Spell 02
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 066524a80e5b29a42817d8249e80eed5
+    m_Address: Public/Textures/EffectsResource/textures/MagicCircle51
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 07660251047e8e54ea928f013ff7799e
     m_Address: DirtBcg
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_material
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0a8a860975bcc4945be9a82edad7ebb3
     m_Address: frost_cloud
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0abe55a3158bb5f41925e4fddbfe9de2
     m_Address: Gradient17cg2
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0adda91cb44a83949adb973749051fed
+    m_Address: Public/Materials/EffectsResource/materials/Smoke/Smoke32bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0baf8600b856b794b90ef46e9e7fb215
+    m_Address: Public/Audio/EffectsResource/Sounds/Explosion1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_audio
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0c3d46e2006ff435caf7d53013ef460d
     m_Address: Eff_ring_1
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0ce86839734cb09488155f80acfb8eee
+    m_Address: Public/Textures/EffectsResource/textures/Flash3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0d1fb353c40bd6345af42a3b4f0bdb1a
     m_Address: Trail21
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e1abc933455e0247ad2cd6ac9ba5da6
+    m_Address: Public/Materials/EffectsResource/materials/Circle/Circle17cg3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0e60c63a7a6bdba4896433dd90442d2a
     m_Address: eff_shock_cone1
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_model
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1225d44fbe405b54bb08ffc3ec704d62
     m_Address: Base_Mesh
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_model
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 130bdc6151982754a8f7b5197f716c4e
     m_Address: StormSharpSwirl
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_material
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 13109e2a7b1b9f94681c9752518d5f65
     m_Address: glowspiky
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1351222f920b3ca49bc1347a65ad436d
     m_Address: storm_dust
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 136398b09ad2c4d7f857703d5f87c9e3
     m_Address: Glow
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 14d86213d7eb66d488a487dc38bc79d1
     m_Address: Snow4cg
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1521508e793d5164790d90e7601389b4
+    m_Address: Public/Audio/EffectsResource/Sounds/General Spell/Healing 06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_audio
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 16bc6d0a64902fd4b882f83293d53220
     m_Address: Trail1
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 16d625988a0b8954ba0fbb341eaa211b
     m_Address: bullet_blue
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_material
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 16d9635229482504385be63ec2cbf5e3
     m_Address: funnel_purple
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 172849c3abd98144ba9b169a123d712c
+    m_Address: Public/Textures/EffectsResource/textures/len_glow1_yellow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1a8eb290d9ffa53489d076ac4c51e73b
     m_Address: trailblue
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_material
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1ae55ae61d1144248b1cbd80a738177c
     m_Address: ArcaneGlow
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_material
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1b3dc741307366f49963537f635ac1e5
     m_Address: StormCloud
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_material
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1b5f613319e0f324c9637cfac64149e4
     m_Address: HPL2cg
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1d2e6d5641ac99b46847794322c608b6
+    m_Address: Public/Materials/EffectsResource/materials/Materials/m_fx_lightning4x2_red
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1d4b6cacc26bf2b4aa986690b73c9085
     m_Address: S_spell01_1
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_audio
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1eae6143ce30e2849b37136524e197f0
     m_Address: Noise41
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1eb614596030841cbbdb034483a7b79c
     m_Address: eff_par_1
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_material
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1fdceabf78fb3ff4fb99322c5e89962c
     m_Address: FireLine01_3x3
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1fe1832970320174484977050bfb76f4
     m_Address: ground_lightning
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 23af959d4a53f4a04b8ce4368101aeac
     m_Address: rush
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 247d486af215d2941851952d0eba53f0
+    m_Address: Public/Textures/EffectsResource/textures/CircleRainbow11
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 263dce5d3c11b6f4fbc5ead0f080b8dc
     m_Address: frost_spike
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 270254f57b56970418579b7d49429c03
     m_Address: portal2
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 28cc404f794e4354fbfef6ed011b4641
-    m_Address: smallglow01
+  - m_GUID: 280916d7e90704c42b4c427f0b2fa34e
+    m_Address: Public/Materials/EffectsResource/materials/Crater36bcg
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 28f5951beee0961438eade046ff70348
-    m_Address: bigglow_purple
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 29bc3b9693100ff4391d51aa924bb282
-    m_Address: tornado1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2ac6e0bb814992b4f9cd0c6c2159bec0
-    m_Address: storm_sharpswirl
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2c907c722ddf34d509edf8a32522caee
-    m_Address: eff_smoke_1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2dbe75cf06e0c6842b4eae60ddda63ef
-    m_Address: Snow4
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2dd400ab29834834cb5fa454e5b6b3c1
-    m_Address: modular_aura06
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2e528703cfe94471da9b3d9d5e43e4ab
-    m_Address: UniqueProjectilesVol2_Add_10x10_2K
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2e9baf8e427b5e04d90088a52788f21e
-    m_Address: lensflare
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2ea55beb9345a33498fc16106277de3a
-    m_Address: fire4x4_purple
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2fbac1fb84fe14c79944e97176473868
-    m_Address: eff_ring_1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3372dfca043bf3445832b4a37461bbf8
-    m_Address: Trail66
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3584f2bf4afb5284d91edb6a29126e62
-    m_Address: Noise69
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 35f5e6dc715494f44b17248eee5426bd
-    m_Address: Snow4bcg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 36e335017ad71d54fbb10842863188ae
-    m_Address: FallbackShader
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 377f73880c6a5044aa97ceeeedb8ad2d
-    m_Address: Flare2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3b92e2c240ad18940bcd6b4e0114d2fd
-    m_Address: light_orb
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3d4f1128b9f2c504b9133b98aa46f9d3
-    m_Address: ice_core_len
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4000721759898ed438063ff5c2cfc889
-    m_Address: light_particle
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 441029f84b3a0b84f93db84572263d15
-    m_Address: ElectricLine01_Add_4x4
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 445ad0260dea2c643a02eb2a2acb826a
-    m_Address: LightSprinkles
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 44a6f271d8af00945aa1879221ab56da
-    m_Address: drop
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 44e32f16ae6df4f49ab59a36bda6ca9f
-    m_Address: StormDustBright
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4568d446846012c4bb50c348fa2aaf21
-    m_Address: fire4x4_modular
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 464385e721d14ff458adeff2b5f605b4
-    m_Address: Trail29.2cg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 46c699b0b4d0f334fb6cd711a731aebe
-    m_Address: Buff Defense 06
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4814b9ddfaf3a4b41a4b38bc3d1d6589
-    m_Address: lightning1x3seq_blue
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 49e8fa54d8b5d394d98a037964663ce5
-    m_Address: Flash1cg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4b824615a41ccee4ca31dd020dc2f5cf
-    m_Address: magicslash_spritesheet
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4b963661ff30bb44cb43409db4141e79
-    m_Address: Smoke24bcg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4ba51bcdd8b1423449a7cc578297fd18
-    m_Address: Dark_bllue
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4de1419ac14d16d44b9c82b76ea6d884
-    m_Address: Smoke24
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4fa14b346873f4061ad776f8e7e73586
-    m_Address: Circle
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5239e3e287052cc41b0b2e78a0c7f73c
-    m_Address: lensflare
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 52b767eecc2845a429e0e9e2155a8ea5
-    m_Address: Smoke3
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 52e408040764e6849beee90052c77738
-    m_Address: Flare02
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 54f1f0934c5544a44916f2e0ec6cc81c
-    m_Address: Trail22
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5632893a0e345054998ef42f1e5748ed
-    m_Address: Glow_Main
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5c03bc4b80b50384a9904843f3769487
-    m_Address: Trail6
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5c1cf2dbdb638664bb74459f28170f62
-    m_Address: Flare23cg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5ccd241cba9e188478c5bed9feea9bb1
-    m_Address: arcane_spark_offcenter
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5cd2c2b5c00d4fb48839af0e5f84d407
-    m_Address: lightning_new_arcs_2x2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5dfed3dd686054146a53842d5f100ec2
-    m_Address: Smoke27bcg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5e1a134d192fcbe4aa05e9d8a5f04a78
-    m_Address: fire4x4_modular
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 60c4f99d55be7ee44a8521d1da5a59c6
-    m_Address: Trail21cg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 60f3a3909173f714ba34d0d07abda54d
-    m_Address: lightning_green
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 61335d4325278ea4eb3f59c13a217fa2
-    m_Address: magicslash_glow_spritesheet
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 61e68320eb0a34646ae9e7855bba9d92
-    m_Address: Gradient17
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 61f631dd684e8444cad16197ffba70bf
-    m_Address: glow_smoke_dusty
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 630a3f4a68ab5c447952208de02137f5
-    m_Address: bigglow_modular
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 64c774a016e044548b7752ac7e5d088c
-    m_Address: LightParticle
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 68be60b9f51e6b447a28cdb9af6a52cf
-    m_Address: CircleRainbow10
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6996a6f16f175d5458270f7d76002c88
-    m_Address: eff_shock1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6a8d78cb95270dd45b35a1cf85ada012
-    m_Address: ground_light03
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6ab6673ffc36e0543bd310e5677e9031
-    m_Address: Circle17
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6b3ade2740748114b93a7c0310e7c324
-    m_Address: glowsmooth
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6b745b80aad135d4cb2caf2f972a5400
-    m_Address: scifi_hexagon_tube
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6c6076316faf3ec48b1600130510cc09
-    m_Address: Flash21
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6ce04723dedf8af4fa258fa76caace12
-    m_Address: Noise69bcg2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6dbe17a63da165546a56738435f24460
-    m_Address: Wind Spell 8
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6e84943fb8e1c4916b9d22588a543944
-    m_Address: Circle
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6ec7de1e2d58baf45ac3071983c20993
-    m_Address: fire1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6f3d772710ae54a4f97e32af1dedf4f0
-    m_Address: Noise53bcg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 707c7399dea3873468f73f9fd0dcc3a0
-    m_Address: Glow_Main
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 70b6e007003158e4fa167f9b0a084a77
-    m_Address: Hand2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7154a27ca4f209047bbd02657bbbc16c
-    m_Address: Trail22cg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7156646a7cfd5f34fbcc28f89706a487
-    m_Address: lightning_new_arcs_2x2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7203fed567fe20343b5ca1cb3357cd90
-    m_Address: fire_ring
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 72da916cf60fb554c9ca50a281f0494b
-    m_Address: Flare2cg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 73ec9295a9aa444f9b5b456a3f6cf93c
-    m_Address: UniqueProjectilesVol2_10X10_2K
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 75335fb43235a1c4a8a3f0b3994f9986
-    m_Address: Combat_LODC
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 78abf9d170e5efa4daf5ff6b008e0ce1
-    m_Address: Magical_Orb_20
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 799a8dd38e212474bb42d2e832024f04
-    m_Address: smokedissolve
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7b7977f141795c649899f18d2302645f
-    m_Address: eff_shock1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7c707bedfbf7942459e20471e6f8d740
-    m_Address: FireRing
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7d0601fd824ecca4e9245023dc099fe0
-    m_Address: glow_lines
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7d68a918c0765ff46bd6aa7513519399
-    m_Address: Noise53
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7dcb8a9c3f171064387b66c3e553ab24
-    m_Address: Circle8
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7f0f54f5368099247ae0c0d9749775ef
-    m_Address: Flare_Slash_Yellow
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7f29dd3789e247d42b71f88ff4aff20a
-    m_Address: modular_aura03
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 807b66e23ff88474db79f678aec746fd
-    m_Address: Smoke27
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8118ac5675a7f49cf959886eb2bb37e2
-    m_Address: Shield_1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8222466244f58594c8105d7023742bcd
-    m_Address: bigglow_modular
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 82f16bfe1d124c54e877ead985da0dc0
-    m_Address: Flare6cg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 83b0aff793ac32b49853992300b25a8f
-    m_Address: ground_light
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 83e7e28af5ce6e447971585469a133fe
-    m_Address: WaterSplash2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 842061ee1c34c1d4e91618b2b6642917
-    m_Address: SKM_Fantasy_Golem_Man_2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8428bd00ef3f5834fa75a70201d65b5a
-    m_Address: smokedissolve
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 868801a1c2b417a4abb244e17a825086
-    m_Address: glow_smoke_dusty AB
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 87cb893449346e248954843aef223546
-    m_Address: Circle102
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 889be8c6b8c67164085643289b68efad
-    m_Address: Trail1cg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8b84072a0493d984a9316fb847145f01
-    m_Address: StarrySkyOuterSpace
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 910457dc152f8c341b02cf22c406c5c6
-    m_Address: m_fx_lightning4x2_blue
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 915af7e8e25dfdb47904b321b5c03a1b
-    m_Address: FrostSpike
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 91c2f0460582c824b98907d3b48cc15a
-    m_Address: Yellow
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 921925958e5357a44ab7d552d0ff7568
-    m_Address: Red
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 933532a4fcc9baf4fa0491de14d08ed7
-    m_Address: Lit
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 947fe6f544d82394db98003a81460397
-    m_Address: Flare21
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 95bfaff9c1365cf48bd6530d62ea553a
-    m_Address: Wind Spell 2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 985fab18e1dd3c2488d651ce20cba67d
-    m_Address: Punch 31
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9b409b2e65af3cf44b3fc61491dce714
-    m_Address: Lightning Spell 03
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9c363cac801b76e459dcb51994de0382
-    m_Address: funnel_green
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9d5b0897c7b3e5241878478c672f09e4
-    m_Address: GroundLight03
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9ee27d8670d11a149a37ab74ca7d8b11
-    m_Address: TC_kouqiang_D
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9f36d24197196874ba276deaa7efccca
-    m_Address: FrostCloud
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a2a06e22c08354d9699356710b69ca9c
-    m_Address: OmniShade URP
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a334254c09c85294d8ffe9ec69b11665
-    m_Address: lightning_purple
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a7980b15d03d447b08d873db5a38b219
-    m_Address: adam
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a8e6fb127999dd947b9c4f665fb6167b
-    m_Address: firering
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a912a573136439b4f8f3ff61d687d6eb
-    m_Address: Circle122bcg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a9da3fe4943c9434385db152bf635fa4
-    m_Address: GroundLight01
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ac39884ca65698c46ab28cb5f1445d69
-    m_Address: Flare21cg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: acdebe7a41b31aa4ea14d91f14bfbc0a
-    m_Address: Circle102cg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ae879f5ee624349a4b6adc3591a232c6
-    m_Address: rush
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: afead6c891d269240ab73569b16de21f
-    m_Address: bullet_blue
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b11db633c21b18541b727be34dd5628b
-    m_Address: Flare_Slash_Yellow
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b1f8d78a5fe9ad94cb9f2eaa2f795e1e
-    m_Address: Trail29
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b416258e44600d54e87cf544fefa3ed5
-    m_Address: Pink
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b4909f0efbf214573962836e9d2b0e79
-    m_Address: clown
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b4a39e223b86cf24d82d7c34e6366131
-    m_Address: MatCap_Toon
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b4a3cd532f543a4448281dc9c13d9aec
-    m_Address: FireSmokeEmbers
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b68b99c2e57cef4419465c63c527201b
-    m_Address: Blend_CenterGlow
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b6bb4a16fa5a7a343a966b02286b332d
-    m_Address: len_ring02
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b72d05466331ce2458417edeab75c2c2
-    m_Address: LightOrb
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b8aecfbdfe3d27a4a9919e9f60bc4600
-    m_Address: m_fx_glow_ice_core
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b9a1b65604adb4a458f4cdd51d23ae90
-    m_Address: bigglow_blue
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b9e879cde921eb241bbc716410ae2b8e
-    m_Address: modular_aura06
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bafdb712bebb28d40988e5644ed9bf5b
-    m_Address: smallglow01
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bb06d0b8aba546947ad43e2225752b6c
-    m_Address: m_fx_glow_yellow
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: be9d5ac190c892843bfdb397f48ff9b2
-    m_Address: S_Thunder_horn_1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c0a59984519a57249a48cb3247487c12
-    m_Address: eff_tornado_1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c20c5eebb5a4af546b323e2de5054f7c
-    m_Address: Circle134
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c336fee2e55784686950c68ddf95fc3a
-    m_Address: eff_smoke_2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c3f81953d6f8f3644a53caa6bc38b630
-    m_Address: Flash1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c89ba8ee725ace445b48f25f5531b730
-    m_Address: glow_smoke_dusty
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c9b3eaae0aa575c4db6feb3ae6fea5a7
-    m_Address: QuadToCircle
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cb434ac087fcf8d44b7bb74405a330c0
-    m_Address: trail_scifi_blue
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cc312dfb05f20164eacc14fd327913d6
-    m_Address: Trail66cg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cecf0fbb3d560cc4dae3dfd6d02f762c
-    m_Address: Shadow Punch 3
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: cf3e3119ad6254c4fae0fe38c98835da
-    m_Address: Smoke32
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d752321c319e6e848822bd54f453c5bd
-    m_Address: ElectricLine01_4x4
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d7ddbb9fb301eae4a92a2ff2360330ef
-    m_Address: m_fx_len_01
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d88a64f741e6d5d49b6f086ce70d1fa9
-    m_Address: ArcaneSparkRot
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d8a148aefc3bb3446a8478f7a2d60d0f
-    m_Address: light_sprinkles
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d97cbb4fc7bccdf4db4770ebb71d7d44
-    m_Address: Gem_for_URP
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: daa6a0ce484bc1147ba58a37cd90b5da
-    m_Address: MatCap_Toon3
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: dd93ece84d407cd44931653f592c0cb4
-    m_Address: Noise29
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e15c425fc13c20a46b7985933309f0a6
-    m_Address: glowspiky_add
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e16a7ba5ced93f945a55354db0c485a0
-    m_Address: glowdarkring
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e17deef6b62052045b4bbd8c499f266b
-    m_Address: fire4x4
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e1f5daa4611af4844a03ec5a45012456
-    m_Address: HandPaintedLightning2
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e27d68612bac8074ea19cb2a114ff5f9
-    m_Address: helix_spinner
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e545a56101174b44cae5fe18850eead2
-    m_Address: lightning_new_arc
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e55efdef48fb88042bd462e055df8423
-    m_Address: firering
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e6e9a19c3678ded42a3bc431ebef7dbd
-    m_Address: FallbackError
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e7061965d8dab6c4cb3d8b1e3a15784e
-    m_Address: Circle116
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e711a4f7f6b8bfc48b65135b3a25e80f
-    m_Address: Red
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e768d759ee0021943a8d96e2aab49a5f
-    m_Address: bigglow_blue
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e7c824ca80d0d9d45a23d790757a915b
-    m_Address: lensflare
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ec194b84f7a17fd419c28602be23444f
-    m_Address: Trail21bcg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ef846046fd6066d44a9442581c99967b
-    m_Address: glow_lines
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: efa8362802f88ef48b7bcf14ff42cccf
-    m_Address: m_fx_lightning1x3_blue
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f1c850a81945bd740ac024c4b76a4603
-    m_Address: bigglow_red
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f4205f7c8c8f91244b7d43f68308744a
-    m_Address: CircleRainbow10cg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f75fa4eaa4fda8c4d91ab4fefcdb3d0c
-    m_Address: Circle17cg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f7ddbe0c37e16c548b18108c9ef59e96
-    m_Address: Noise50cg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f8b1a36af41214f079689857ae15f1ea
-    m_Address: eff_par_1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f8d5c193cad8f5449a28999e5ca04652
-    m_Address: Green
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fda9d0d6dd696074d8c9635bfa5dab95
-    m_Address: lightning_yellow
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fe3b797ec81f61d4daf3032fd0980b1e
-    m_Address: FireExplosion3
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: fe3fbcea8e93fec468be670c547e0aa1
-    m_Address: Smoke3cg
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3c006f387d1b24898aa7ed5056023bb3
-    m_Address: Eff_smoke_1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e199ee8112362864f831425463b09fda
-    m_Address: Noise1
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 28d5ea4798c3cd24aa8c43f37983d04b
-    m_Address: CrystalMat_Yellow
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 67646e93159db5c438fae655a96a12b6
-    m_Address: CrystalMat_DarkBlue
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 34ff6049b1bcfe8419fd6041a7421ff4
-    m_Address: CrystalMat_Green
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5832d3e2524b35641bab3811346d78bc
-    m_Address: teenth
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - public
+    - public_material
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 281dc2df910944643b1c8b71d1d35e3b
     m_Address: CrystalMat_Pink
     m_ReadOnly: 0
     m_SerializedLabels:
     - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28c7aad1372ff114b90d330f8a2dd938
+    m_Address: Public/Textures/EffectsResource/textures/Noise/Noise02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28cc404f794e4354fbfef6ed011b4641
+    m_Address: smallglow01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28d5ea4798c3cd24aa8c43f37983d04b
+    m_Address: CrystalMat_Yellow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 28f5951beee0961438eade046ff70348
+    m_Address: bigglow_purple
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29bc3b9693100ff4391d51aa924bb282
+    m_Address: tornado1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_model
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2ac6e0bb814992b4f9cd0c6c2159bec0
+    m_Address: storm_sharpswirl
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2c907c722ddf34d509edf8a32522caee
+    m_Address: eff_smoke_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2dbe75cf06e0c6842b4eae60ddda63ef
+    m_Address: Snow4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2dd400ab29834834cb5fa454e5b6b3c1
+    m_Address: modular_aura06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e528703cfe94471da9b3d9d5e43e4ab
+    m_Address: UniqueProjectilesVol2_Add_10x10_2K
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e9baf8e427b5e04d90088a52788f21e
+    m_Address: lensflare
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2ea55beb9345a33498fc16106277de3a
+    m_Address: fire4x4_purple
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f061e69d76c79748883dd593a7e74c8
+    m_Address: Public/Materials/EffectsResource/materials/Flash3cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2fbac1fb84fe14c79944e97176473868
+    m_Address: eff_ring_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 30117e022c53742eb800fb8ecaa8728f
+    m_Address: Public/Materials/EffectsResource/materials/Materials/Flare03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 32f03b9a36856a74eb575cb04c36f8ad
+    m_Address: Public/Materials/EffectsResource/materials/Circle/Circle89bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3372dfca043bf3445832b4a37461bbf8
+    m_Address: Trail66
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 34ff6049b1bcfe8419fd6041a7421ff4
+    m_Address: CrystalMat_Green
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3584f2bf4afb5284d91edb6a29126e62
+    m_Address: Noise69
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 35f5e6dc715494f44b17248eee5426bd
+    m_Address: Snow4bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36e335017ad71d54fbb10842863188ae
+    m_Address: FallbackShader
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_shader
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 377f73880c6a5044aa97ceeeedb8ad2d
+    m_Address: Flare2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b92e2c240ad18940bcd6b4e0114d2fd
+    m_Address: light_orb
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3c006f387d1b24898aa7ed5056023bb3
+    m_Address: Eff_smoke_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3d4f1128b9f2c504b9133b98aa46f9d3
+    m_Address: ice_core_len
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f1d4fadb37c37e4488860109d7dce4b
+    m_Address: Public/Textures/EffectsResource/textures/Noise34
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4000721759898ed438063ff5c2cfc889
+    m_Address: light_particle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 441029f84b3a0b84f93db84572263d15
+    m_Address: ElectricLine01_Add_4x4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4458e46d26210ab4aaf1928a2d1a0f8c
+    m_Address: Public/Textures/EffectsResource/textures/lightning2x4_blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 445ad0260dea2c643a02eb2a2acb826a
+    m_Address: LightSprinkles
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44a6f271d8af00945aa1879221ab56da
+    m_Address: drop
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44e32f16ae6df4f49ab59a36bda6ca9f
+    m_Address: StormDustBright
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4568d446846012c4bb50c348fa2aaf21
+    m_Address: fire4x4_modular
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 464385e721d14ff458adeff2b5f605b4
+    m_Address: Trail29.2cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 46c699b0b4d0f334fb6cd711a731aebe
+    m_Address: Buff Defense 06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4814b9ddfaf3a4b41a4b38bc3d1d6589
+    m_Address: lightning1x3seq_blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49bcec700a97eb94d8067c32b34a1a3b
+    m_Address: Public/Materials/EffectsResource/materials/Materials/m_fx_glow_ice_core_red
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49e8fa54d8b5d394d98a037964663ce5
+    m_Address: Flash1cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b824615a41ccee4ca31dd020dc2f5cf
+    m_Address: magicslash_spritesheet
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b963661ff30bb44cb43409db4141e79
+    m_Address: Smoke24bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4ba51bcdd8b1423449a7cc578297fd18
+    m_Address: Dark_bllue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4de1419ac14d16d44b9c82b76ea6d884
+    m_Address: Smoke24
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e3951c538fc8a647a4a10a99b480987
+    m_Address: Public/Textures/EffectsResource/textures/Noise50
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4fa14b346873f4061ad776f8e7e73586
+    m_Address: Circle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5239e3e287052cc41b0b2e78a0c7f73c
+    m_Address: lensflare
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 52b767eecc2845a429e0e9e2155a8ea5
+    m_Address: Smoke3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 52e408040764e6849beee90052c77738
+    m_Address: Flare02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54f1f0934c5544a44916f2e0ec6cc81c
+    m_Address: Trail22
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5632893a0e345054998ef42f1e5748ed
+    m_Address: Glow_Main
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 56facc2b662f44b82a36d66f25f9c6fc
+    m_Address: Public/Textures/EffectsResource/Effect3FromJapanNet/Textures/Eff_ring_2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 578ab9edc1cd0b946ac4ba2dd9d6c653
+    m_Address: Public/Textures/EffectsResource/textures/lightning_new_glow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5832d3e2524b35641bab3811346d78bc
+    m_Address: teenth
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c03bc4b80b50384a9904843f3769487
+    m_Address: Trail6
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c1cf2dbdb638664bb74459f28170f62
+    m_Address: Flare23cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ccd241cba9e188478c5bed9feea9bb1
+    m_Address: arcane_spark_offcenter
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5cd2c2b5c00d4fb48839af0e5f84d407
+    m_Address: lightning_new_arcs_2x2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5dfed3dd686054146a53842d5f100ec2
+    m_Address: Smoke27bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5e1a134d192fcbe4aa05e9d8a5f04a78
+    m_Address: fire4x4_modular
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f56080448de341499312ba2961990c2
+    m_Address: Public/Textures/EffectsResource/textures/ice_core_len_red
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5fef4f3752f06244b849b3c43e673fc1
+    m_Address: Public/Textures/EffectsResource/textures/lightning2x4_yellow_alpha
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 60c4f99d55be7ee44a8521d1da5a59c6
+    m_Address: Trail21cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 60f3a3909173f714ba34d0d07abda54d
+    m_Address: lightning_green
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61335d4325278ea4eb3f59c13a217fa2
+    m_Address: magicslash_glow_spritesheet
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61e68320eb0a34646ae9e7855bba9d92
+    m_Address: Gradient17
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 61f631dd684e8444cad16197ffba70bf
+    m_Address: glow_smoke_dusty
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 630a3f4a68ab5c447952208de02137f5
+    m_Address: bigglow_modular
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64c774a016e044548b7752ac7e5d088c
+    m_Address: LightParticle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 67646e93159db5c438fae655a96a12b6
+    m_Address: CrystalMat_DarkBlue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 68be60b9f51e6b447a28cdb9af6a52cf
+    m_Address: CircleRainbow10
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6996a6f16f175d5458270f7d76002c88
+    m_Address: eff_shock1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a66b6954bd464e029e45d3478ca41fb
+    m_Address: Public/Materials/EffectsResource/Effect3FromJapanNet/FBX/Materials/test
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a8d78cb95270dd45b35a1cf85ada012
+    m_Address: ground_light03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ab6673ffc36e0543bd310e5677e9031
+    m_Address: Circle17
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6adbd2a70514bd644a6d8c1377482f6a
+    m_Address: Public/Materials/EffectsResource/materials/Materials/m_fx_lightning4x2_yellow_alpha
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b3ade2740748114b93a7c0310e7c324
+    m_Address: glowsmooth
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b745b80aad135d4cb2caf2f972a5400
+    m_Address: scifi_hexagon_tube
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_model
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6c6076316faf3ec48b1600130510cc09
+    m_Address: Flash21
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ce04723dedf8af4fa258fa76caace12
+    m_Address: Noise69bcg2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6dbe17a63da165546a56738435f24460
+    m_Address: Wind Spell 8
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e84943fb8e1c4916b9d22588a543944
+    m_Address: Circle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6ec7de1e2d58baf45ac3071983c20993
+    m_Address: fire1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6f3d772710ae54a4f97e32af1dedf4f0
+    m_Address: Noise53bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 707c7399dea3873468f73f9fd0dcc3a0
+    m_Address: Glow_Main
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70b6e007003158e4fa167f9b0a084a77
+    m_Address: Hand2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7154a27ca4f209047bbd02657bbbc16c
+    m_Address: Trail22cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7156646a7cfd5f34fbcc28f89706a487
+    m_Address: lightning_new_arcs_2x2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7203fed567fe20343b5ca1cb3357cd90
+    m_Address: fire_ring
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72da916cf60fb554c9ca50a281f0494b
+    m_Address: Flare2cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 73ec9295a9aa444f9b5b456a3f6cf93c
+    m_Address: UniqueProjectilesVol2_10X10_2K
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 75335fb43235a1c4a8a3f0b3994f9986
+    m_Address: Combat_LODC
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_model
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 776a939b6f835cf4db6390f59965a8af
+    m_Address: Public/Materials/EffectsResource/materials/Projectiles/Lightning/LightningBallNew
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 78abf9d170e5efa4daf5ff6b008e0ce1
+    m_Address: Magical_Orb_20
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 799a8dd38e212474bb42d2e832024f04
+    m_Address: smokedissolve
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a70e430f6cccf642816a3994983a529
+    m_Address: Public/Materials/EffectsResource/materials/Glow/glowsmooth
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b7977f141795c649899f18d2302645f
+    m_Address: eff_shock1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c707bedfbf7942459e20471e6f8d740
+    m_Address: FireRing
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d0601fd824ecca4e9245023dc099fe0
+    m_Address: glow_lines
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d68a918c0765ff46bd6aa7513519399
+    m_Address: Noise53
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7dad299f9caed054ea10097fd11f0a54
+    m_Address: Public/Materials/EffectsResource/materials/Flash21bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7dcb8a9c3f171064387b66c3e553ab24
+    m_Address: Circle8
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f0f54f5368099247ae0c0d9749775ef
+    m_Address: Flare_Slash_Yellow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7f29dd3789e247d42b71f88ff4aff20a
+    m_Address: modular_aura03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 807b66e23ff88474db79f678aec746fd
+    m_Address: Smoke27
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8118ac5675a7f49cf959886eb2bb37e2
+    m_Address: Shield_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8222466244f58594c8105d7023742bcd
+    m_Address: bigglow_modular
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 82f16bfe1d124c54e877ead985da0dc0
+    m_Address: Flare6cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 82f4b06147155c54da475b309b9e24fa
+    m_Address: Public/Textures/EffectsResource/textures/Noise/Noise01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 83b0aff793ac32b49853992300b25a8f
+    m_Address: ground_light
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 83e7e28af5ce6e447971585469a133fe
+    m_Address: WaterSplash2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 842061ee1c34c1d4e91618b2b6642917
+    m_Address: SKM_Fantasy_Golem_Man_2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_model
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8428bd00ef3f5834fa75a70201d65b5a
+    m_Address: smokedissolve
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 868801a1c2b417a4abb244e17a825086
+    m_Address: glow_smoke_dusty AB
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87cb893449346e248954843aef223546
+    m_Address: Circle102
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 889be8c6b8c67164085643289b68efad
+    m_Address: Trail1cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b84072a0493d984a9316fb847145f01
+    m_Address: StarrySkyOuterSpace
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8cb3458e2f63df54dafcc544ba5527ab
+    m_Address: Public/Materials/EffectsResource/materials/Circle/CircleRainbow11cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90dda2ff946cf9340bb30e712cc1422d
+    m_Address: Public/Textures/EffectsResource/textures/Test
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 910457dc152f8c341b02cf22c406c5c6
+    m_Address: m_fx_lightning4x2_blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 915af7e8e25dfdb47904b321b5c03a1b
+    m_Address: FrostSpike
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 91c2f0460582c824b98907d3b48cc15a
+    m_Address: Yellow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 921925958e5357a44ab7d552d0ff7568
+    m_Address: Red
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 933532a4fcc9baf4fa0491de14d08ed7
+    m_Address: Lit
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_shader
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 947fe6f544d82394db98003a81460397
+    m_Address: Flare21
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95bfaff9c1365cf48bd6530d62ea553a
+    m_Address: Wind Spell 2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 985fab18e1dd3c2488d651ce20cba67d
+    m_Address: Punch 31
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b409b2e65af3cf44b3fc61491dce714
+    m_Address: Lightning Spell 03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9beffdc4f342f4c08b67045fea7b38a6
+    m_Address: Public/Materials/EffectsResource/Effect3FromJapanNet/Materials/eff_ring_2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c2743a0d27e37c498033ad8e66d79d7
+    m_Address: Public/Textures/EffectsResource/textures/len_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c363cac801b76e459dcb51994de0382
+    m_Address: funnel_green
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9d5b0897c7b3e5241878478c672f09e4
+    m_Address: GroundLight03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9ee27d8670d11a149a37ab74ca7d8b11
+    m_Address: TC_kouqiang_D
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9f36d24197196874ba276deaa7efccca
+    m_Address: FrostCloud
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a2a06e22c08354d9699356710b69ca9c
+    m_Address: OmniShade URP
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_shader
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a334254c09c85294d8ffe9ec69b11665
+    m_Address: lightning_purple
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a7980b15d03d447b08d873db5a38b219
+    m_Address: adam
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_other
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a8e6fb127999dd947b9c4f665fb6167b
+    m_Address: firering
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a912a573136439b4f8f3ff61d687d6eb
+    m_Address: Circle122bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9da3fe4943c9434385db152bf635fa4
+    m_Address: GroundLight01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac39884ca65698c46ab28cb5f1445d69
+    m_Address: Flare21cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: acdebe7a41b31aa4ea14d91f14bfbc0a
+    m_Address: Circle102cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae879f5ee624349a4b6adc3591a232c6
+    m_Address: rush
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: afead6c891d269240ab73569b16de21f
+    m_Address: bullet_blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b06790285152de34c882d3c64d300e08
+    m_Address: Public/Materials/EffectsResource/materials/Crater28bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b11db633c21b18541b727be34dd5628b
+    m_Address: Flare_Slash_Yellow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b1f8d78a5fe9ad94cb9f2eaa2f795e1e
+    m_Address: Trail29
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b416258e44600d54e87cf544fefa3ed5
+    m_Address: Pink
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4909f0efbf214573962836e9d2b0e79
+    m_Address: clown
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_other
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4a39e223b86cf24d82d7c34e6366131
+    m_Address: MatCap_Toon
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4a3cd532f543a4448281dc9c13d9aec
+    m_Address: FireSmokeEmbers
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b68b99c2e57cef4419465c63c527201b
+    m_Address: Blend_CenterGlow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_shader
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6bb4a16fa5a7a343a966b02286b332d
+    m_Address: len_ring02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b72d05466331ce2458417edeab75c2c2
+    m_Address: LightOrb
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b757888c0c90221499b2c530c0ff1624
+    m_Address: Public/Textures/EffectsResource/textures/Crater36
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8aecfbdfe3d27a4a9919e9f60bc4600
+    m_Address: m_fx_glow_ice_core
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9a1b65604adb4a458f4cdd51d23ae90
+    m_Address: bigglow_blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9e879cde921eb241bbc716410ae2b8e
+    m_Address: modular_aura06
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba5cfc26017b4b04b8f3d2a22b8d2f27
+    m_Address: Public/Audio/EffectsResource/Sounds/Skill/Shield_buff
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bafdb712bebb28d40988e5644ed9bf5b
+    m_Address: smallglow01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb06d0b8aba546947ad43e2225752b6c
+    m_Address: m_fx_glow_yellow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be9d5ac190c892843bfdb397f48ff9b2
+    m_Address: S_Thunder_horn_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0a59984519a57249a48cb3247487c12
+    m_Address: eff_tornado_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c20c5eebb5a4af546b323e2de5054f7c
+    m_Address: Circle134
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c336fee2e55784686950c68ddf95fc3a
+    m_Address: eff_smoke_2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c3f81953d6f8f3644a53caa6bc38b630
+    m_Address: Flash1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c89ba8ee725ace445b48f25f5531b730
+    m_Address: glow_smoke_dusty
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9b3eaae0aa575c4db6feb3ae6fea5a7
+    m_Address: QuadToCircle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_model
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb434ac087fcf8d44b7bb74405a330c0
+    m_Address: trail_scifi_blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cc312dfb05f20164eacc14fd327913d6
+    m_Address: Trail66cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cdf65b85feb3e454c8ea4cf55e4ec3ce
+    m_Address: Public/Textures/EffectsResource/textures/lightning2x4_red
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cecf0fbb3d560cc4dae3dfd6d02f762c
+    m_Address: Shadow Punch 3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf3e3119ad6254c4fae0fe38c98835da
+    m_Address: Smoke32
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d752321c319e6e848822bd54f453c5bd
+    m_Address: ElectricLine01_4x4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d7ddbb9fb301eae4a92a2ff2360330ef
+    m_Address: m_fx_len_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d886c0cb73a19514a8be80f38031dd73
+    m_Address: Public/Textures/EffectsResource/textures/Gradients/Gradient_blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d88a64f741e6d5d49b6f086ce70d1fa9
+    m_Address: ArcaneSparkRot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d8a148aefc3bb3446a8478f7a2d60d0f
+    m_Address: light_sprinkles
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d97c9ebda779c954daa8bcfe1066276d
+    m_Address: Public/Models/EffectsResource/model/Crystal_2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_model
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d97cbb4fc7bccdf4db4770ebb71d7d44
+    m_Address: Gem_for_URP
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_shader
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: daa6a0ce484bc1147ba58a37cd90b5da
+    m_Address: MatCap_Toon3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dbec9039c70e09e47b8ff15d508f39ac
+    m_Address: Public/Textures/EffectsResource/textures/Trail58
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd93ece84d407cd44931653f592c0cb4
+    m_Address: Noise29
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: de9ee4d95b95f284cb6b32ecfe7e100d
+    m_Address: Public/Materials/EffectsResource/materials/Noise69bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e15c425fc13c20a46b7985933309f0a6
+    m_Address: glowspiky_add
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e16a7ba5ced93f945a55354db0c485a0
+    m_Address: glowdarkring
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e17deef6b62052045b4bbd8c499f266b
+    m_Address: fire4x4
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e199ee8112362864f831425463b09fda
+    m_Address: Noise1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1f5daa4611af4844a03ec5a45012456
+    m_Address: HandPaintedLightning2
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e27d68612bac8074ea19cb2a114ff5f9
+    m_Address: helix_spinner
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_model
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e545a56101174b44cae5fe18850eead2
+    m_Address: lightning_new_arc
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e55efdef48fb88042bd462e055df8423
+    m_Address: firering
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5c690a7dc8ed7f43bef9768888b2b57
+    m_Address: Public/Textures/EffectsResource/Effect3FromJapanNet/Textures/Eff_tornado_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e6e9a19c3678ded42a3bc431ebef7dbd
+    m_Address: FallbackError
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_shader
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7061965d8dab6c4cb3d8b1e3a15784e
+    m_Address: Circle116
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e711a4f7f6b8bfc48b65135b3a25e80f
+    m_Address: Red
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e768d759ee0021943a8d96e2aab49a5f
+    m_Address: bigglow_blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e7c824ca80d0d9d45a23d790757a915b
+    m_Address: lensflare
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e8b9066b0e08f3d48a8d24357089c773
+    m_Address: Public/Materials/EffectsResource/materials/Materials/m_fx_len_ring02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec194b84f7a17fd419c28602be23444f
+    m_Address: Trail21bcg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ed3a5efebe958ba429d350e04f14d1ab
+    m_Address: Public/Textures/EffectsResource/textures/Gradient3r
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ef846046fd6066d44a9442581c99967b
+    m_Address: glow_lines
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: efa8362802f88ef48b7bcf14ff42cccf
+    m_Address: m_fx_lightning1x3_blue
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f1c850a81945bd740ac024c4b76a4603
+    m_Address: bigglow_red
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f306e6ccfb7d52041827d4a4be0a55a6
+    m_Address: Public/Textures/EffectsResource/textures/Crater28
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4205f7c8c8f91244b7d43f68308744a
+    m_Address: CircleRainbow10cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f75fa4eaa4fda8c4d91ab4fefcdb3d0c
+    m_Address: Circle17cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7ddbe0c37e16c548b18108c9ef59e96
+    m_Address: Noise50cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f8b1a36af41214f079689857ae15f1ea
+    m_Address: eff_par_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f8d5c193cad8f5449a28999e5ca04652
+    m_Address: Green
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb60f4826d03c644c80d10aace44bfcb
+    m_Address: Public/Textures/EffectsResource/textures/Flare6
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fda9d0d6dd696074d8c9635bfa5dab95
+    m_Address: lightning_yellow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe3b797ec81f61d4daf3032fd0980b1e
+    m_Address: FireExplosion3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_audio
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe3fbcea8e93fec468be670c547e0aa1
+    m_Address: Smoke3cg
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fecbc2dbf76d9ab4089330c3e5ee2423
+    m_Address: Public/Textures/EffectsResource/textures/Noise63
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - public
+    - public_texture
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 71b5b3d21994d4290b615da003f839e9, type: 2}
