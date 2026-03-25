@@ -13,6 +13,9 @@ public class TimeLimitedBundleCell : MonoBehaviour
     
     public void ShowTimeLimitedBundle(TimeLimitedBuyData data)
     {
+        _disposeSeasonCountDown?.Dispose();
+        _disposeSeasonCountDown = null;
+
         var on = ShopTop.HasTimeLimitSale(data);
         if (!on)
         {
@@ -25,18 +28,24 @@ public class TimeLimitedBundleCell : MonoBehaviour
         dmAmount.text = data.dmAmount.ToString();
         
         DateTime endTime = DateTime.Parse(data.endTime);
-        TimeSpan timeRemaining = endTime - DateTime.UtcNow;    
         _disposeSeasonCountDown = 
             Observable.Timer(TimeSpan.Zero, TimeSpan.FromSeconds(1)).Subscribe(
                 (_) =>
                 {
-                    timeRemaining = timeRemaining.Subtract(TimeSpan.FromSeconds(1));
+                    var timeRemaining = endTime - DateTime.UtcNow;
                     countDownText.text = timeRemaining.ToString(@"dd\:hh\:mm\:ss");
                     if (timeRemaining.TotalSeconds <= 0)
                     {
                         gameObject.SetActive(false);
                         _disposeSeasonCountDown.Dispose();
+                        _disposeSeasonCountDown = null;
                     }
                 }).AddTo(gameObject);
+    }
+
+    void OnDisable()
+    {
+        _disposeSeasonCountDown?.Dispose();
+        _disposeSeasonCountDown = null;
     }
 }

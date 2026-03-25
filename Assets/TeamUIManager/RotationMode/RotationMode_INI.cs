@@ -9,7 +9,7 @@ namespace FightScene
     {
         void IniTeamUI_Rotate(Action<Data_Center> changeUnit)
         {
-            foreach (var center in _teamMembers.GetValues())
+            foreach (var center in _teamMembers.mDict.Values)
             {
                 var sideIcon = Instantiate(unitIconPrefab);
                 sideIcon.name = center.name + " ICon";

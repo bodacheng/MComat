@@ -25,6 +25,8 @@ namespace FightScene
         public TeamConfig TeamConfig { get; set; }
         public readonly IDictionary<Data_Center, SideUnitIcon> UnitIconDic = new Dictionary<Data_Center, SideUnitIcon>();
         private TweenTextScaleManager _textScaleManager = new TweenTextScaleManager();
+        private static readonly Vector3 EnemyStatusOffset = Vector3.up * 2.5f;
+        private static readonly Vector3 TeamIndicatorOffset = Vector3.up * 1.5f;
         
         private IDisposable _barPosUpdate;
         private IDisposable _teamIndicatorCloseDisposable;
@@ -40,6 +42,28 @@ namespace FightScene
         void Awake()
         {
             EnsureStatusWidgetsHierarchy();
+        }
+
+        bool TryGetTeamMembers(out Dictionary<(int, int), Data_Center>.ValueCollection teamMembers)
+        {
+            if (_teamMembers?.mDict == null)
+            {
+                teamMembers = null;
+                return false;
+            }
+
+            teamMembers = _teamMembers.mDict.Values;
+            return true;
+        }
+
+        void UpdateTrackedUiPosition(Transform target, Vector3 worldPosition)
+        {
+            if (target == null || CameraManager._camera == null)
+            {
+                return;
+            }
+
+            target.position = CameraManager._camera.WorldToScreenPoint(worldPosition);
         }
         
         public void Clear()
@@ -116,7 +140,12 @@ namespace FightScene
         
         public void Refresh(Data_Center fighting = null)
         {
-            foreach (var dataCenter in _teamMembers.GetValues())
+            if (!TryGetTeamMembers(out var teamMembers))
+            {
+                return;
+            }
+
+            foreach (var dataCenter in teamMembers)
             {
                 UnitIconDic.TryGetValue(dataCenter, out var tempSi);
                 if (tempSi == null)
@@ -142,7 +171,7 @@ namespace FightScene
             {
                 case FightMode.Rotate:
                 case FightMode.Evolve:
-                    foreach (var dataCenter in _teamMembers.GetValues())
+                    foreach (var dataCenter in teamMembers)
                     {
                         UnitIconDic.TryGetValue(dataCenter, out var tempSi);
                         if (tempSi == null)
@@ -157,7 +186,7 @@ namespace FightScene
                                 if (fighting == null)
                                     return;
                                 UnitIconDic.TryGetValue(fighting, out var tempSi);
-                                _textScaleManager.AddNew(tempSi.transform, tempSi.transform.DOMove(CameraManager._camera.WorldToScreenPoint(fighting.transform.position + Vector3.up * 2.5f), 0.5f));
+                                UpdateTrackedUiPosition(tempSi.transform, fighting.transform.position + EnemyStatusOffset);
                             }
                         ).AddTo(gameObject);
                     }
@@ -173,7 +202,7 @@ namespace FightScene
                                 if (fighting == null)
                                     return;
                                 UnitIconDic.TryGetValue(fighting, out var tempSi);
-                                _textScaleManager.AddNew(tempSi.TeamIndicator.transform, tempSi.TeamIndicator.transform.DOMove(CameraManager._camera.WorldToScreenPoint(fighting.transform.position + Vector3.up * 1.5f), 0.5f));
+                                UpdateTrackedUiPosition(tempSi.TeamIndicator.transform, fighting.transform.position + TeamIndicatorOffset);
                             }
                         ).AddTo(gameObject);
                         
@@ -193,7 +222,7 @@ namespace FightScene
                 case FightMode.Group:
                     if (TeamConfig.myTeam != RTFightManager.playerTeam)
                     {
-                        foreach (var dataCenter in _teamMembers.GetValues())
+                        foreach (var dataCenter in teamMembers)
                         {
                             UnitIconDic.TryGetValue(dataCenter, out var tempSi);
                             if (tempSi == null)
@@ -202,17 +231,17 @@ namespace FightScene
                         }
                         _barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
                         {
-                            foreach (var one in _teamMembers.GetValues())
+                            foreach (var one in teamMembers)
                             {
                                 UnitIconDic.TryGetValue(one, out var tempSi);
                                 if (tempSi != null)
-                                    _textScaleManager.AddNew(tempSi.transform, tempSi.transform.DOMove(CameraManager._camera.WorldToScreenPoint(one.transform.position + Vector3.up * 2.5f), 0.5f));
+                                    UpdateTrackedUiPosition(tempSi.transform, one.transform.position + EnemyStatusOffset);
                             }
                         }).AddTo(gameObject);
                     }
                     else
                     {
-                        foreach (var one in _teamMembers.GetValues())
+                        foreach (var one in teamMembers)
                         {
                             UnitIconDic.TryGetValue(one, out var tempSi);
                             if (inputsManager.CurrentFocus.Value == null)
@@ -225,17 +254,17 @@ namespace FightScene
                         {
                             _barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
                             {
-                                foreach (var one in _teamMembers.GetValues())
+                                foreach (var one in teamMembers)
                                 {
                                     UnitIconDic.TryGetValue(one, out var tempSi);
-                                    _textScaleManager.AddNew(tempSi.TeamIndicator.transform,tempSi.TeamIndicator.transform.DOMove(CameraManager._camera.WorldToScreenPoint(one.transform.position + Vector3.up * 1.5f), 0.5f));
+                                    UpdateTrackedUiPosition(tempSi.TeamIndicator.transform, one.transform.position + TeamIndicatorOffset);
                                 }
                             }).AddTo(gameObject);
                         
                             _teamIndicatorCloseDisposable = Observable.Timer(TimeSpan.FromSeconds(teamIndicatorCloseDelay)).Subscribe(_ =>
                             {
                                 _barPosUpdate.Dispose();
-                                foreach (var one in _teamMembers.GetValues())
+                                foreach (var one in teamMembers)
                                 {
                                     UnitIconDic.TryGetValue(one, out var tempSi);
                                     tempSi.TeamIndicator.gameObject.SetActive(false);

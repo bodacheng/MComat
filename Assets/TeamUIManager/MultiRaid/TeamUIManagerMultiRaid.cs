@@ -17,7 +17,7 @@ namespace FightScene
         void SetLiveUnitCount()
         {
             int liveCount = 0;
-            foreach (var dc in _teamMembers.GetValues())
+            foreach (var dc in _teamMembers.mDict.Values)
             {
                 if (!dc.FightDataRef.IsDead.Value)
                 {
@@ -25,7 +25,7 @@ namespace FightScene
                 }
             }
             liveUnitCount.text = (TeamConfig.myTeam == RTFightManager.playerTeam ? "Player:":"Enemy:") +
-                liveCount +  "/" + _teamMembers.GetValues().Count;
+                liveCount +  "/" + _teamMembers.mDict.Count;
             
             _liveUnitCountNum = liveCount;
         }
@@ -37,7 +37,7 @@ namespace FightScene
         
         void InsTeamUI_Multi(Action<bool> switchTeamAuto, Func<bool> currentAutoState)//这个环节应该能够同时把HP bar也适配好。
         {
-            foreach (var center in _teamMembers.GetValues())
+            foreach (var center in _teamMembers.mDict.Values)
             {
                 // SideIcon整备
                 void ClickUnitIcon(Data_Center c)
@@ -147,7 +147,7 @@ namespace FightScene
                         RTFightManager.Target.CameraAdjustment(Team.player1, FightMode.Multi, x != null ? x.geometryCenter : null);
                         _teamIndicatorCloseDisposable?.Dispose();
                         _barPosUpdate?.Dispose();
-                        foreach (var one in _teamMembers.GetValues())
+                        foreach (var one in _teamMembers.mDict.Values)
                         {
                             UnitIconDic.TryGetValue(one, out var tempSi);
                             tempSi.TeamIndicator.gameObject.SetActive(inputsManager.CurrentFocus.Value == one);
@@ -156,10 +156,7 @@ namespace FightScene
                                 _barPosUpdate = Observable.IntervalFrame(barPosUpdateInterval).Subscribe(_ =>
                                 {
                                     UnitIconDic.TryGetValue(one, out var tempSi);
-                                    _textScaleManager.AddNew(tempSi.TeamIndicator.transform,
-                                        tempSi.TeamIndicator.transform.DOMove(
-                                            CameraManager._camera.WorldToScreenPoint(one.transform.position + Vector3.up * 1.5f), 0.5f)
-                                    );
+                                    UpdateTrackedUiPosition(tempSi.TeamIndicator.transform, one.transform.position + TeamIndicatorOffset);
                                 }).AddTo(gameObject);
                             }
                         }
