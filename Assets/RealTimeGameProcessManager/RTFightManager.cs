@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
@@ -65,7 +66,7 @@ namespace FightScene
             return subUnit.Key;
         }
         
-        public async UniTask LoadUnits(FightInfo info)
+        public async UniTask LoadUnits(FightInfo info, Action<float> onProgress = null)
         {
             if (SubUnitDic.Count == 0)
             {
@@ -115,11 +116,33 @@ namespace FightScene
                     AddSubUnit(unitInfo, Team.player2, supportIndex);
                 }
             }
+
+            var totalUnits = info.FightMembers.HeroSets.GetValues().Count + info.FightMembers.EnemySets.GetValues().Count;
+            if (totalUnits <= 0)
+            {
+                onProgress?.Invoke(1f);
+                return;
+            }
+
+            float loadedUnitsProgress = 0f;
+            void ReportUnitProgressDelta(float delta)
+            {
+                if (delta <= 0f)
+                {
+                    return;
+                }
+
+                loadedUnitsProgress = Mathf.Clamp01(loadedUnitsProgress + delta / totalUnits);
+                onProgress?.Invoke(loadedUnitsProgress);
+            }
+
+            onProgress?.Invoke(0f);
             
             await UniTask.WhenAll(
-                team1._UnitsLoad(info.FightMembers.HeroSets, UnitInfoRef), 
-                team2._UnitsLoad(info.FightMembers.EnemySets, UnitInfoRef)
+                team1._UnitsLoad(info.FightMembers.HeroSets, UnitInfoRef, ReportUnitProgressDelta), 
+                team2._UnitsLoad(info.FightMembers.EnemySets, UnitInfoRef, ReportUnitProgressDelta)
             );
+            onProgress?.Invoke(1f);
         }
         
         public void SetGame(FightInfo stage)

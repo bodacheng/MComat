@@ -23,6 +23,26 @@ public class PreparingProcess : FSceneProcess
     
     async UniTask EnterProcess()
     {
+        const float preloadStart = 0.03f;
+        const float preloadEnd = 0.84f;
+        const float postLoadTeamSetupProgress = 0.88f;
+        const float postLoadBattleInitProgress = 0.92f;
+        const float fightingLayerOpenProgress = 0.95f;
+        const float fightingLayerSetupStart = 0.95f;
+        const float fightingLayerSetupEnd = 0.995f;
+
+        float currentProgress = 0f;
+        void SetLoadingProgress(string description, float progress)
+        {
+            progress = Mathf.Clamp01(progress);
+            if (progress < currentProgress)
+            {
+                progress = currentProgress;
+            }
+            currentProgress = progress;
+            ProgressLayer.LoadingPercent(description, currentProgress, false);
+        }
+
         var unitInstructionLayer = UILayerLoader.Load<UnitInstructionLayer>(true, null, true);
         unitInstructionLayer.LoadUnitImage();
         
@@ -44,7 +64,9 @@ public class PreparingProcess : FSceneProcess
         RTFightManager.Target._CameraManager.Assign_Camera(C_Mode.NULL, null,null);
         RTFightManager.Target._CameraManager.SetPosToStart();
         UILayerLoader.Load<ProgressLayer>(true, null, true);
-        ProgressLayer.LoadingPercent(Translate.Get("LoadingBattle"), 0.5f);
+        var loadingBattleText = Translate.Get("LoadingBattle");
+        var loadingBattleAboutToEndText = Translate.Get("LoadingBattleAboutToEnd");
+        SetLoadingProgress(loadingBattleText, preloadStart);
         
         var heroUnits = FightLoad.Fight.FightMembers.HeroSets.GetValues();
         var enemyUnits = FightLoad.Fight.FightMembers.EnemySets.GetValues();
@@ -55,13 +77,48 @@ public class PreparingProcess : FSceneProcess
         
         var tasks = taskBuffer;
         tasks.Clear();
-        tasks.Add(AppSetting.PlayBGM(FightLoad.Fight.GetBGMKey()));
-        tasks.Add(HurtObjectManager.ConstructDPool());
-        tasks.Add(AddressablesLogic.Essentials());
-        tasks.Add(BoundaryControlByGod.target.ChangeBackGround(FightLoad.Fight.battleGroundID));
-        tasks.Add(RTFightManager.Target.LoadUnits(FightLoad.Fight));
-        tasks.Add(EffectsManager.IniEffectsPool(CommonSetting.HitGroundEffectCode, null, effectPreloadCount));
-        tasks.Add(EffectsManager.IniEffectsPool(CommonSetting.WallCrackEffectCode, null, effectPreloadCount));
+        float asyncCompletedWeight = 0f;
+        float asyncTotalWeight = 0f;
+        float unitLoadProgress = 0f;
+        float unitLoadWeight = Mathf.Max(6f, (heroUnits.Count + enemyUnits.Count) * 2f);
+
+        void RefreshAsyncProgress()
+        {
+            if (asyncTotalWeight <= 0f)
+            {
+                SetLoadingProgress(loadingBattleText, preloadStart);
+                return;
+            }
+
+            float asyncProgress = (asyncCompletedWeight + unitLoadWeight * unitLoadProgress) / asyncTotalWeight;
+            SetLoadingProgress(loadingBattleText, Mathf.Lerp(preloadStart, preloadEnd, asyncProgress));
+        }
+
+        async UniTask TrackAsync(UniTask task, float weight)
+        {
+            await task;
+            asyncCompletedWeight += weight;
+            RefreshAsyncProgress();
+        }
+
+        void AddTrackedTask(UniTask task, float weight = 1f)
+        {
+            asyncTotalWeight += weight;
+            tasks.Add(TrackAsync(task, weight));
+        }
+
+        AddTrackedTask(AppSetting.PlayBGM(FightLoad.Fight.GetBGMKey()));
+        AddTrackedTask(HurtObjectManager.ConstructDPool());
+        AddTrackedTask(AddressablesLogic.Essentials());
+        AddTrackedTask(BoundaryControlByGod.target.ChangeBackGround(FightLoad.Fight.battleGroundID));
+        asyncTotalWeight += unitLoadWeight;
+        tasks.Add(RTFightManager.Target.LoadUnits(FightLoad.Fight, progress =>
+        {
+            unitLoadProgress = progress;
+            RefreshAsyncProgress();
+        }));
+        AddTrackedTask(EffectsManager.IniEffectsPool(CommonSetting.HitGroundEffectCode, null, effectPreloadCount));
+        AddTrackedTask(EffectsManager.IniEffectsPool(CommonSetting.WallCrackEffectCode, null, effectPreloadCount));
         
         var elementCounts = elementCountBuffer;
         elementCounts.Clear();
@@ -101,30 +158,31 @@ public class PreparingProcess : FSceneProcess
             var effectPath = FightGlobalSetting.EffectPathDefine(kv.Key);
             for (int i = 0; i < elementEffectKeys.Length; i++)
             {
-                tasks.Add(EffectsManager.IniEffectsPool(elementEffectKeys[i], effectPath, kv.Value));
+                AddTrackedTask(EffectsManager.IniEffectsPool(elementEffectKeys[i], effectPath, kv.Value));
             }
         }
         elementCounts.Clear();
 
         var sharedEffectCount = Mathf.Max(effectPreloadCount, totalUnitCount);
-        tasks.Add(EffectsManager.IniEffectsPool("super_combo_explosion", null, sharedEffectCount));
-        tasks.Add(EffectsManager.IniEffectsPool("dream_buff", null, sharedEffectCount));
+        AddTrackedTask(EffectsManager.IniEffectsPool("super_combo_explosion", null, sharedEffectCount));
+        AddTrackedTask(EffectsManager.IniEffectsPool("dream_buff", null, sharedEffectCount));
         
         if (FightLoad.Fight.FightMode is (FightMode.Rotate or FightMode.Evolve))
         {
             if (!string.IsNullOrEmpty(CommonSetting.MemberShiftEffectCode))
             {
-                tasks.Add(EffectsManager.IniEffectsPool(CommonSetting.MemberShiftEffectCode, null, 1));
+                AddTrackedTask(EffectsManager.IniEffectsPool(CommonSetting.MemberShiftEffectCode, null, 1));
             }
             if (!string.IsNullOrEmpty(CommonSetting.SubMemberShiftEffectCode) &&
                 CommonSetting.SubMemberShiftEffectCode != CommonSetting.MemberShiftEffectCode)
             {
-                tasks.Add(EffectsManager.IniEffectsPool(CommonSetting.SubMemberShiftEffectCode, null, 1));
+                AddTrackedTask(EffectsManager.IniEffectsPool(CommonSetting.SubMemberShiftEffectCode, null, 1));
             }
         }
-        ProgressLayer.LoadingPercent(Translate.Get("LoadingBattle"), 0.7f);
+        RefreshAsyncProgress();
         await UniTask.WhenAll(tasks);
         tasks.Clear();
+        SetLoadingProgress(loadingBattleText, preloadEnd);
         
         var teamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
         RTFightManager.Target.heroTeamConfig.playID = FightLoad.Fight.Team1ID;
@@ -140,6 +198,7 @@ public class PreparingProcess : FSceneProcess
         RTFightManager.Target.team2.teamConfig = RTFightManager.Target.EnemyTeamConfig;
         RTFightManager.Target.team1.Auto = FightLoad.Fight.Team1Auto;
         RTFightManager.Target.team2.Auto = FightLoad.Fight.RunTutorial ? false : FightLoad.Fight.Team2Auto;
+        SetLoadingProgress(loadingBattleText, postLoadTeamSetupProgress);
         
         if (FightLoad.Fight.EventType == FightEventType.Screensaver)
         {
@@ -200,10 +259,13 @@ public class PreparingProcess : FSceneProcess
         }
         
         RTFightManager.Target.SetGame(FightLoad.Fight);
-        ProgressLayer.LoadingPercent(Translate.Get("LoadingBattleAboutToEnd"), 0.8f);
+        SetLoadingProgress(loadingBattleAboutToEndText, postLoadBattleInitProgress);
         fightingStepLayer = FightingStepLayer.Open();
-        await fightingStepLayer.Setup(false);
-        ProgressLayer.LoadingPercent(Translate.Get("LoadingBattleAboutToEnd"), 1f);
+        SetLoadingProgress(loadingBattleAboutToEndText, fightingLayerOpenProgress);
+        await fightingStepLayer.Setup(false, progress =>
+        {
+            SetLoadingProgress(loadingBattleAboutToEndText, Mathf.Lerp(fightingLayerSetupStart, fightingLayerSetupEnd, progress));
+        });
         
         switch (FightLoad.Fight.FightMode)
         {
@@ -231,6 +293,7 @@ public class PreparingProcess : FSceneProcess
             }
         ).AddTo(RTFightManager.Target.Disposables);
         
+        SetLoadingProgress(loadingBattleAboutToEndText, 1f);
         ProgressLayer.Close();
     }
     

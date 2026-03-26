@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -52,14 +53,31 @@ namespace FightScene
             get => _auto;
         }
         
-        public async UniTask _UnitsLoad(MultiDic<int, int, UnitInfo> membersSets, IDictionary<Data_Center, UnitInfo> unitInfoRef)
+        public async UniTask _UnitsLoad(MultiDic<int, int, UnitInfo> membersSets, IDictionary<Data_Center, UnitInfo> unitInfoRef,
+            Action<float> onUnitProgressDelta = null)
         {
             async UniTask LoadOneUnit(int key1, int key2, UnitInfo info, int preloadCount)
             {
+                float unitProgress = 0f;
+                void ReportProgress(float progress)
+                {
+                    var delta = Mathf.Clamp01(progress) - unitProgress;
+                    if (delta <= 0f)
+                    {
+                        return;
+                    }
+                    unitProgress += delta;
+                    onUnitProgressDelta?.Invoke(delta);
+                }
+
                 var center = teamMembers.Get(key1, key2);
                 if (center == null)
                 {
-                    center = await UnitCreator.CreateUnit(info, preloadCount);
+                    center = await UnitCreator.CreateUnit(info, preloadCount, ReportProgress);
+                }
+                else
+                {
+                    ReportProgress(1f);
                 }
                 teamMembers.Set(key1, key2, center);
                 DicAdd<Data_Center, UnitInfo>.Add(unitInfoRef, center, info);

@@ -73,9 +73,10 @@ public class FightingStepLayer : UILayer
         pauseButton.gameObject.SetActive(!preparingMode);
     }
     
-    public async UniTask Setup(bool active = true)
+    public async UniTask Setup(bool active = true, Action<float> onProgress = null)
     {
         gameObject.SetActive(active && FightLoad.Fight.EventType != FightEventType.Screensaver);
+        onProgress?.Invoke(0f);
         await StartUp(
             (x) =>
             {
@@ -106,7 +107,8 @@ public class FightingStepLayer : UILayer
                         WinIndicatorFlash();
                     }
                 );
-            });
+            },
+            onProgress);
     }
     
     public static void Close()
@@ -138,9 +140,11 @@ public class FightingStepLayer : UILayer
         fps.text = $"FPS: {Mathf.Ceil(1.0f / deltaTime)}";
     }
 
-    async UniTask StartUp(Action<bool> switchTeam1Auto, Action<bool> switchTeam2Auto, Action pauseAction)
+    async UniTask StartUp(Action<bool> switchTeam1Auto, Action<bool> switchTeam2Auto, Action pauseAction,
+        Action<float> onProgress = null)
     {
         Initialized = false;
+        onProgress?.Invoke(0.08f);
         
         RTFightManager.Target.team1.InputsManager = inputsManager;
         RTFightManager.Target.team2.InputsManager = inputsManager;
@@ -155,10 +159,12 @@ public class FightingStepLayer : UILayer
         team2UI.TeamConfig.playID = FightLoad.Fight.Team2ID;
         team1UI.TeamMembers = RTFightManager.Target.team1.teamMembers;
         team2UI.TeamMembers = RTFightManager.Target.team2.teamMembers;
+        onProgress?.Invoke(0.22f);
         
         // 角色第二次初始化在这之前已经结束
         team1UI.InsTeamUI(RTFightManager.Target.team1.ReadyForNextMember, (() => RTFightManager.Target.team1.Auto),switchTeam1Auto, RTFightManager.Target.team1.RMode_Unit);
         team2UI.InsTeamUI(RTFightManager.Target.team2.ReadyForNextMember, (() => RTFightManager.Target.team2.Auto),switchTeam2Auto, RTFightManager.Target.team2.RMode_Unit);
+        onProgress?.Invoke(0.4f);
 
         team1UI.LiveUnitCount.gameObject.SetActive(FightLoad.Fight.FightMode == FightMode.Group);
         team2UI.LiveUnitCount.gameObject.SetActive(FightLoad.Fight.FightMode == FightMode.Group);
@@ -172,13 +178,26 @@ public class FightingStepLayer : UILayer
             }).AddTo(fps.gameObject);
         }
         
+        var members = RTFightManager.Target.team1.teamMembers.GetValues();
         var inputEffectsLoading = new List<UniTask>();
-        foreach (var d in RTFightManager.Target.team1.teamMembers.GetValues())
+        var totalMembers = members.Count;
+        var completedMembers = 0;
+        foreach (var d in members)
         {
-            inputEffectsLoading.Add(inputsManager.ElementRegister(d.element, RTFightManager.Target.UnitInfoRef[d]));
+            inputEffectsLoading.Add(LoadInputEffects(d));
         }
+
+        async UniTask LoadInputEffects(Data_Center unit)
+        {
+            await inputsManager.ElementRegister(unit.element, RTFightManager.Target.UnitInfoRef[unit]);
+            completedMembers++;
+            var phaseProgress = totalMembers <= 0 ? 1f : (float)completedMembers / totalMembers;
+            onProgress?.Invoke(Mathf.Lerp(0.4f, 0.92f, phaseProgress));
+        }
+
         await UniTask.WhenAll(inputEffectsLoading);
         inputsManager.GroupSkillIcons();
+        onProgress?.Invoke(1f);
         
         // foreach (var d in RTFightManager.Target.team2.teamMembers.GetValues())
         // {
@@ -230,4 +249,3 @@ public class FightingStepLayer : UILayer
         base.OnDestroy();
     }
 }
-
