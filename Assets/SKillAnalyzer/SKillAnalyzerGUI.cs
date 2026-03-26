@@ -9,7 +9,7 @@ using PlayFab.CloudScriptModels;
 using UnityEngine.Networking;
 using System.Threading.Tasks;
 
-public class SKillAnalyzerGUI : EditorWindow
+public partial class SKillAnalyzerGUI : EditorWindow
 {
     readonly SKillAnalyzer target = new SKillAnalyzer();
     string _focusingType = "human";
@@ -27,6 +27,25 @@ public class SKillAnalyzerGUI : EditorWindow
     string azureImageStatus;
     void OnGUI()
     {
+        HandleClipDragAndDrop(Event.current);
+        EnsureSkillCreationPanel();
+        DrawWorkbenchToolbar();
+        EditorGUILayout.Space(8f);
+
+        if (_selectedWorkbenchTab == 0)
+        {
+            DrawClipEventEditorSection();
+            return;
+        }
+
+        if (_selectedWorkbenchTab == 1)
+        {
+            DrawSkillCreationWorkbench();
+            return;
+        }
+
+        EditorGUILayout.Space(6);
+        EditorGUILayout.LabelField("旧版分析与云调试工具", EditorStyles.boldLabel);
         EditorGUILayout.LabelField(" 技能参数统计类  ");
         _focusingType = EditorGUILayout.TextField("统计以下类型角色的技能信息", _focusingType);
         _targetEventName = EditorGUILayout.TextField("选择拥有该事件的技能动画片段", _targetEventName);
@@ -285,6 +304,8 @@ public class SKillAnalyzerGUI : EditorWindow
 
     private void OnDisable()
     {
+        DisposeClipEditorState();
+        DisposeSkillCreationPanel();
         ClearPreviewTexture();
     }
 

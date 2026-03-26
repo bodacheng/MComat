@@ -19,15 +19,15 @@ public partial class SKillAnalyzer
         "SetHeadMarkerManager","SetTailMarkerManager"
     };
     
-    static readonly List<string> AttackClearMethodNames = new List<string>() {
+    public static readonly List<string> AttackClearMethodNames = new List<string>() {
         "SetRightHandMarkerManager","SetLeftHandMarkerManager",
         "SetRightFootMarkerManager","SetLeftFootMarkerManager",
         "SetRightHandWeaponMarkerManager","SetLeftHandWeaponMarkerManager",
         "SetHeadMarkerManager","SetTailMarkerManager"
     };
-    static readonly List<string> EffectsAttackFrameStartMethodNames = new List<string>()
+    public static readonly List<string> EffectsAttackFrameStartMethodNames = new List<string>()
     {
-        "MagicForward","Bullet_shoot_from_body_part","Bullet_shoot_from_body_part_TD","BlastAttack","ReleasePreparedMagic","ReleasePreparedMagicToAir","MagicToEnemy"
+        "MagicForward","MagicForwardOnBody","Bullet_shoot_from_body_part","Bullet_shoot_from_body_part_TD","BlastAttack","ReleasePreparedMagic","ReleasePreparedMagicToAir","MagicToEnemy"
     };
     
     public static async UniTask<IDictionary<string, AnimationClip>> AllSkillAnims(string type)

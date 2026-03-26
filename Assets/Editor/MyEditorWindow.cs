@@ -31,9 +31,7 @@ public static class MyEditorWindow
     [MenuItem("MCombat/Skill Analise", priority = 3)]
     static void SKillAnalyzer()
     {
-        SKillAnalyzerGUI window = (SKillAnalyzerGUI)EditorWindow.GetWindow(typeof(SKillAnalyzerGUI));
-        window.titleContent = new GUIContent("技能分析工具");
-        window.Show();
+        SKillAnalyzerGUI.OpenWorkbench();
     }
     
     [MenuItem("MCombat/other tool", priority = 4)]
