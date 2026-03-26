@@ -33,6 +33,10 @@ public class FrontLayer : UILayer
     [SerializeField] float skillShowInterval = 5;
     
     public GameObject HasStoneToBeUpdateBadge => hasStoneToBeUpdateBadge;
+    public Action<bool> OnBusyStateChanged { get; set; }
+
+    private readonly HashSet<string> _preparedModelRecordIds = new HashSet<string>();
+    private int _showModelRequestVersion;
     
     public void RefreshBadge()
     {
@@ -96,6 +100,49 @@ public class FrontLayer : UILayer
         viewSwitchBtn.onClick.AddListener(ViewSwitch);
     }
 
+    public void SetInteractive(bool on)
+    {
+        ArcadeBtn.interactable = on;
+        ArenaBtn.interactable = on;
+        EventFightBtn.interactable = on;
+        UnitBtn.interactable = on;
+        TrainBtn.interactable = on;
+        StonesBtn.interactable = on;
+        GotchaBtn.interactable = on;
+        SkillTestRBtn.interactable = on;
+        SkillTestMBtn.interactable = on;
+        viewSwitchBtn.interactable = on && viewSwitchBtn.gameObject.activeSelf;
+    }
+
+    void SetBusy(bool busy)
+    {
+        SetInteractive(!busy);
+        OnBusyStateChanged?.Invoke(busy);
+    }
+
+    void Warmup3DModel(string recordID)
+    {
+        if (string.IsNullOrEmpty(recordID) || !_preparedModelRecordIds.Add(recordID))
+        {
+            return;
+        }
+
+        UniTask.Void(async () =>
+        {
+            try
+            {
+                await camConnector.PrepareModel(recordID);
+            }
+            catch (OperationCanceledException)
+            {
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"[FrontLayer] Model warmup failed for {recordID}: {ex.Message}");
+            }
+        });
+    }
+
     private IDisposable _disposeShowSkill;
     private List<string> skillList;
     void RegisterRandomShowSkill()
@@ -123,52 +170,68 @@ public class FrontLayer : UILayer
     private string instanceID;
     public async UniTask ShowMyModel(string instanceID)
     {
+        var requestVersion = ++_showModelRequestVersion;
+        SetBusy(true);
         ProgressLayer.Loading(string.Empty);
-        this.instanceID = instanceID;
-        var info = dataAccess.Units.Get(instanceID);
-        if (info == null)
+        try
         {
-            Debug.Log("error unit info:"+ instanceID);
-            return;
-        }
-        viewText.text = view3D ? "3D" : "2D";
-        if (view3D)
-        {
-            camConnector.gameObject.SetActive(true);
-            view2D.gameObject.SetActive(false);
-            
-            if (camConnector.TaskRunningCount == 0)
+            this.instanceID = instanceID;
+            var info = dataAccess.Units.Get(instanceID);
+            if (info == null)
             {
-                await camConnector.ShowModel(info?.r_id);
-                var equipments = Stones.GetEquippingStones(info?.id);
-                skillList = equipments.Select(x=>
-                {
-                    var skillConfig =  SkillConfigTable.GetSkillConfigByRecordId(x.SkillId);
-                    return skillConfig.REAL_NAME;
-                }).ToList();
-                if (this == null)
-                {
-                    return;
-                }
-                RegisterRandomShowSkill();
+                Debug.Log("error unit info:"+ instanceID);
+                return;
             }
-        }
-        else
-        {
-            camConnector.gameObject.SetActive(false);
-            view2D.gameObject.SetActive(true);
-            var sprite = await Set2DView(info.r_id, view2D, unitOutAnimator, 
-                10, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtLeft(info.r_id));
-            if (sprite == null)
+            viewText.text = view3D ? "3D" : "2D";
+            if (view3D)
             {
-                ViewSwitch();
+                camConnector.gameObject.SetActive(true);
+                view2D.gameObject.SetActive(false);
+                
+                if (camConnector.TaskRunningCount == 0)
+                {
+                    await camConnector.ShowModel(info?.r_id);
+                    var equipments = Stones.GetEquippingStones(info?.id);
+                    skillList = equipments.Select(x=>
+                    {
+                        var skillConfig =  SkillConfigTable.GetSkillConfigByRecordId(x.SkillId);
+                        return skillConfig.REAL_NAME;
+                    }).ToList();
+                    if (this == null)
+                    {
+                        return;
+                    }
+                    RegisterRandomShowSkill();
+                }
             }
             else
             {
-                viewSwitchBtn.gameObject.SetActive(true);
+                camConnector.gameObject.SetActive(false);
+                view2D.gameObject.SetActive(true);
+                var sprite = await Set2DView(info.r_id, view2D, unitOutAnimator, 
+                    10, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtLeft(info.r_id));
+                if (sprite == null)
+                {
+                    ViewSwitch();
+                }
+                else
+                {
+                    Warmup3DModel(info.r_id);
+                    viewSwitchBtn.gameObject.SetActive(true);
+                }
             }
         }
-        ProgressLayer.Close();
+        finally
+        {
+            if (requestVersion == _showModelRequestVersion)
+            {
+                ProgressLayer.Close();
+                if (this != null)
+                {
+                    SetBusy(false);
+                }
+            }
+        }
     }
     
     public void PlsClickBtn(MainSceneStep btnCode)

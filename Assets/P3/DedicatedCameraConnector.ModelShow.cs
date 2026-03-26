@@ -143,6 +143,16 @@ namespace ModelView
                 {
                     return;
                 }
+                if (this == null)
+                {
+                    if (saveData.WholeT != null)
+                    {
+                        Destroy(saveData.WholeT.gameObject);
+                    }
+                    return;
+                }
+                saveData.WholeT.SetParent(transform);
+                saveData.WholeT.position = modelPos;
                 saveData.WholeT.gameObject.SetActive(false);
                 DicAdd<string, Data_Center>.Add(_saves, recordID, saveData);
             }

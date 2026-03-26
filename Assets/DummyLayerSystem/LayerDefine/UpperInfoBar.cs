@@ -58,7 +58,7 @@ public class UpperInfoBar : UILayer
     {
         settingBtn.interactable = on;
         mailBtn.interactable = on;
-        diamondPlus.interactable = on;
+        diamondPlus.interactable = on && IAPManager.Target.IsInitialized.Value;
     }
     
     public void Setup(string titleDisplayName, Action openSetting, Action openMail, Action openDmShop, bool isVip)

@@ -12,21 +12,23 @@ public class FrontPage : MSceneProcess
     }
     
     FrontLayer _frontLayer;
+    UpperInfoBar _upperInfoBar;
     bool _askedIfLinkDevice;
     
     void EnterProcess()
     {
+        SetLoaded(false);
         AppSetting.PlayBGM(CommonSetting.LobbyThemeAddressKey).Forget();
         _frontLayer = UILayerLoader.Load<FrontLayer>();
         _frontLayer.Initialise(PreScene.target);
+        _frontLayer.OnBusyStateChanged = SetBusyState;
 
         string focusInstanceID = PreScene.target.GetRandomFocusInstanceID();
         PreScene.target.SetFocusingUnit(focusInstanceID);
-        _frontLayer.ShowMyModel(focusInstanceID).Forget();
         
-        var upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
+        _upperInfoBar = UILayerLoader.Load<UpperInfoBar>();
         var openShopAction = CommonSetting.PcMode ? null : (Action)(() => PreScene.target.trySwitchToStep(MainSceneStep.ShopTop));
-        upperInfoBar.Setup(PlayerAccountInfo.Me.TitleDisplayName,
+        _upperInfoBar.Setup(PlayerAccountInfo.Me.TitleDisplayName,
             () => PreScene.target.trySwitchToStep(MainSceneStep.Setting), 
             () => PreScene.target.trySwitchToStep(MainSceneStep.MailBox),
             openShopAction,
@@ -63,8 +65,25 @@ public class FrontPage : MSceneProcess
         }
         
         StoneLevelUpProccessor.CalUpdateAllForms();
-        
-        SetLoaded(true);
+        UniTask.Void(async () =>
+        {
+            try
+            {
+                await _frontLayer.ShowMyModel(focusInstanceID);
+            }
+            finally
+            {
+                if (ProcessesRunner.Main.currentProcess == this)
+                {
+                    SetLoaded(true);
+                }
+            }
+        });
+    }
+
+    void SetBusyState(bool busy)
+    {
+        _upperInfoBar?.SetInteractive(!busy);
     }
     
     public override void ProcessEnter()
@@ -74,6 +93,10 @@ public class FrontPage : MSceneProcess
     
     public override void ProcessEnd()
     {
+        if (_frontLayer != null)
+        {
+            _frontLayer.OnBusyStateChanged = null;
+        }
         UILayerLoader.Remove<FrontLayer>();
         UILayerLoader.Remove<UpperInfoBar>();
     }
