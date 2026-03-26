@@ -29,6 +29,13 @@ namespace MagicaCloth2
         /// </summary>
         public List<Renderer> sourceRenderers = new List<Renderer>();
 
+        /// <summary>
+        /// Write target to mesh in MeshCloth.
+        /// [OK] Runtime changes.
+        /// [NG] Export/Import with Presets
+        /// </summary>
+        public ClothMeshWriteMode meshWriteMode = ClothMeshWriteMode.PositionAndNormal;
+
         public enum PaintMode
         {
             Manual = 0,
@@ -54,6 +61,14 @@ namespace MagicaCloth2
         /// [NG] Export/Import with Presets
         /// </summary>
         public List<Texture2D> paintMaps = new List<Texture2D>();
+
+        /// <summary>
+        /// The UV channel that references the paint map.
+        /// [NG] Runtime changes.
+        /// [NG] Export/Import with Presets
+        /// </summary>
+        [Range(0, 7)]
+        public int paintMapUvChannel = 0;
 
         /// <summary>
         /// Root bone list used in BoneCloth.
@@ -92,7 +107,15 @@ namespace MagicaCloth2
         /// [OK] Runtime changes.
         /// [NG] Export/Import with Presets
         /// </summary>
-        public ClothUpdateMode updateMode = ClothUpdateMode.Normal;
+        public ClothUpdateMode updateMode = ClothUpdateMode.AnimatorLinkage;
+
+        /// <summary>
+        /// Set the disable mode.
+        /// Component inactive behavior.
+        /// [OK] Runtime changes.
+        /// [NG] Export/Import with Presets
+        /// </summary>
+        public ClothDisableMode disableMode = ClothDisableMode.Reset;
 
         /// <summary>
         /// Blend ratio between initial pose and animation pose.
@@ -116,6 +139,11 @@ namespace MagicaCloth2
         /// Normal definition.
         /// </summary>
         public NormalAlignmentSettings normalAlignmentSetting = new NormalAlignmentSettings();
+
+        /// <summary>
+        /// culling settings.
+        /// </summary>
+        public CullingSettings cullingSettings = new CullingSettings();
 
         /// <summary>
         /// axis to use as normal.
@@ -175,7 +203,7 @@ namespace MagicaCloth2
         /// [OK] Runtime changes.
         /// [NG] Export/Import with Presets
         /// </summary>
-        [System.NonSerialized]
+        [Range(0.0f, 1.0f)]
         public float blendWeight = 1.0f;
 
         /// <summary>
@@ -241,5 +269,10 @@ namespace MagicaCloth2
         /// Wind
         /// </summary>
         public WindSettings wind = new WindSettings();
+
+        /// <summary>
+        /// Spring
+        /// </summary>
+        public SpringConstraint.SerializeData springConstraint = new SpringConstraint.SerializeData();
     }
 }
