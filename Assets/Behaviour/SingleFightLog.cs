@@ -17,6 +17,7 @@ namespace Soul
         
         public class FightRecord
         {
+            public string skillId;
             public string stateKey;
             public BehaviorType behaviorType;
         }
@@ -37,30 +38,41 @@ namespace Soul
         // 这个函数待写。我们设想可以每次战斗结束后进行个总的报告，来分析各个技能有没有取得正面效应。
         public void Summary()
         {
+            string AggregateKey(FightRecord fightRecord)
+            {
+                if (fightRecord == null)
+                    return null;
+                return string.IsNullOrEmpty(fightRecord.skillId) ? fightRecord.stateKey : fightRecord.skillId;
+            }
+
             for (int i = 0; i < MyBehaviourHistory.Count; i++)
             {
                 if (MyBehaviourHistory[i] is BehaviourFightRecord)
                 {
-                    if (StateTriggerdTimes.ContainsKey(MyBehaviourHistory[i].stateKey))
+                    var aggregateKey = AggregateKey(MyBehaviourHistory[i]);
+                    if (string.IsNullOrEmpty(aggregateKey))
+                        continue;
+
+                    if (StateTriggerdTimes.ContainsKey(aggregateKey))
                     {
-                        StateTriggerdTimes[MyBehaviourHistory[i].stateKey] += 1;
+                        StateTriggerdTimes[aggregateKey] += 1;
                     }
                     else
                     {
-                        StateTriggerdTimes.Add(MyBehaviourHistory[i].stateKey, 1);
+                        StateTriggerdTimes.Add(aggregateKey, 1);
                     }
                     
                     if (i != MyBehaviourHistory.Count - 1)
                     {
                         if (MyBehaviourHistory[i+1] is NegativeRecord)
                         {
-                            if (StateInterruptedTimes.ContainsKey(MyBehaviourHistory[i].stateKey))
+                            if (StateInterruptedTimes.ContainsKey(aggregateKey))
                             {
-                                StateInterruptedTimes[MyBehaviourHistory[i].stateKey] += 1;
+                                StateInterruptedTimes[aggregateKey] += 1;
                             }
                             else
                             {
-                                StateInterruptedTimes.Add(MyBehaviourHistory[i].stateKey, 1);
+                                StateInterruptedTimes.Add(aggregateKey, 1);
                             }
                         }
                     }

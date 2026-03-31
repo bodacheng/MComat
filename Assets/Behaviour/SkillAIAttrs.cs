@@ -40,6 +40,7 @@ public class SkillAIAttrs
             };
             rowList.Add(row);
 		}
+		SkillAIDistanceAutoTuner.ApplyOverrides(rowList);
 		isLoaded = true;
 	}
 

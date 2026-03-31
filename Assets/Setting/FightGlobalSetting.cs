@@ -47,6 +47,12 @@ public class FightGlobalSetting : ScriptableObject
     [SerializeField] int dreamComboResistUpCount = 5;
     [SerializeField] int player1DreamComboAIRateNumM;//玩家队伍共斗模式下非控制队员DreamCombo触发率数字。
     [SerializeField] int arenaEnemyDreamComboAIRate;
+    [SerializeField] bool autoTuneSkillAIDistance = true;
+    [SerializeField] int skillAIAutoTuneMinTriggeredTimes = 12;
+    [SerializeField] int skillAIAutoTuneRetuneTriggerStep = 6;
+    [SerializeField] float skillAIAutoTuneStepMin = 0.15f;
+    [SerializeField] float skillAIAutoTuneStepMax = 0.6f;
+    [SerializeField] float skillAIAutoTuneMaxDistance = 18f;
     [SerializeField] int energyResolveAfterExtendBoundary = 5;
     [SerializeField] float evolutionModeEnemyHpIncreaseRate = 0.5f;
     [SerializeField] PhysicsMaterial _physicMaterial;
@@ -84,6 +90,12 @@ public class FightGlobalSetting : ScriptableObject
     public static int _dreamComboResistUpCount;
     public static int _player1DreamComboAIRateNumM;
     public static int ArenaEnemyDreamComboAIRate;
+    public static bool AutoTuneSkillAIDistance = true;
+    public static int SkillAIAutoTuneMinTriggeredTimes = 12;
+    public static int SkillAIAutoTuneRetuneTriggerStep = 6;
+    public static float SkillAIAutoTuneStepMin = 0.15f;
+    public static float SkillAIAutoTuneStepMax = 0.6f;
+    public static float SkillAIAutoTuneMaxDistance = 18f;
     public static AnimationCurve KnockOffYAnimationCurve, KnockOffZAnimationCurve;
     public static AnimationCurve HDamageYAnimationCurve;
     public static AnimationCurve HDamageZAnimationCurve;
@@ -161,9 +173,15 @@ public class FightGlobalSetting : ScriptableObject
         EnergyResolveAfterExtendBoundary = energyResolveAfterExtendBoundary;
 
         EvolutionModeEnemyHpIncreaseRate = evolutionModeEnemyHpIncreaseRate;
-        
+
         _player1DreamComboAIRateNumM = player1DreamComboAIRateNumM;
         ArenaEnemyDreamComboAIRate = arenaEnemyDreamComboAIRate;
+        AutoTuneSkillAIDistance = autoTuneSkillAIDistance;
+        SkillAIAutoTuneMinTriggeredTimes = skillAIAutoTuneMinTriggeredTimes;
+        SkillAIAutoTuneRetuneTriggerStep = skillAIAutoTuneRetuneTriggerStep;
+        SkillAIAutoTuneStepMin = skillAIAutoTuneStepMin;
+        SkillAIAutoTuneStepMax = skillAIAutoTuneStepMax;
+        SkillAIAutoTuneMaxDistance = skillAIAutoTuneMaxDistance;
     }
     
     // 900血，10攻击力，1打1的话接近40秒左右游戏结束。但如果存在大量远距离对火立回那么就不太好说这个时间。。

@@ -46,6 +46,10 @@ namespace FightScene
         
         public override void ProcessEnd()
         {
+            var dataCenters = new List<Data_Center>();
+            dataCenters.AddRange(RTFightManager.Target.team1.teamMembers.GetValues());
+            dataCenters.AddRange(RTFightManager.Target.team2.teamMembers.GetValues());
+
             if (FightLoad.Fight.EventType == FightEventType.Screensaver)
             {
                 UILayerLoader.Remove<TitleScreenLayer>();
@@ -55,12 +59,14 @@ namespace FightScene
                 FightingStepLayer.Close();
             }
             
-            if (FightLoad.Fight.FightMode != FightMode.Multi && FightLoad.Fight.FightMode != FightMode.Group)
+            if (FightLoad.Fight.FightMode is FightMode.Rotate or FightMode.Evolve &&
+                FightLoad.Fight.EventType != FightEventType.Screensaver)
             {
-                var dataCenters = new List<Data_Center>();
-                dataCenters.AddRange(RTFightManager.Target.team1.teamMembers.GetValues());
-                dataCenters.AddRange(RTFightManager.Target.team2.teamMembers.GetValues());
                 HitBoxLogTable.Instance.SkillLog(dataCenters);
+            }
+            else
+            {
+                HitBoxLogTable.Instance.ClearRuntimeLogs(dataCenters);
             }
             RTFightManager.Target.Disposables.Dispose();
             RTFightManager.Target.RefreshTimeDic.Clear();

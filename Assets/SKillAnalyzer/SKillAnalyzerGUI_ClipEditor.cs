@@ -102,6 +102,8 @@ public partial class SKillAnalyzerGUI
 
     private int _quickMagicEventIndex;
     private int _quickMarkerEventIndex;
+    private bool _autoAddAttackClearAfterStart = true;
+    private int _autoAddAttackClearOffsetFrames = 1;
     private bool _autoAnalysisReplaceExistingAttackEvents = true;
     private string _autoAnalysisStatus = string.Empty;
     private MessageType _autoAnalysisStatusType = MessageType.None;
@@ -321,7 +323,7 @@ public partial class SKillAnalyzerGUI
             DrawLegendItem("攻击开始", GetColorByKind(SkillEventKind.AttackStart));
             DrawLegendItem("攻击清理", GetColorByKind(SkillEventKind.AttackClear));
             DrawLegendItem("魔法攻击", GetColorByKind(SkillEventKind.MagicAttack));
-            DrawLegendItem("取消帧", GetColorByKind(SkillEventKind.Cancel));
+            DrawLegendItem("技能迁移", GetColorByKind(SkillEventKind.Cancel));
             DrawLegendItem("其他", GetColorByKind(SkillEventKind.Other));
         }
     }
@@ -337,12 +339,14 @@ public partial class SKillAnalyzerGUI
     private void DrawEventEditingPanel()
     {
         EditorGUILayout.Space(4f);
+        var attackStartButtonLabel = _autoAddAttackClearAfterStart ? "添加全身攻击开始(+关闭)" : "添加全身攻击开始";
+        var bodyPartStartButtonLabel = _autoAddAttackClearAfterStart ? "添加部位攻击开始(+关闭)" : "添加部位攻击开始";
 
         using (new EditorGUILayout.HorizontalScope())
         {
-            if (GUILayout.Button("添加全身攻击开始"))
+            if (GUILayout.Button(attackStartButtonLabel))
             {
-                AddEvent(CreateAllBodyAttackStartEvent(_previewTime));
+                AddAttackStartEvent(CreateAllBodyAttackStartEvent(_previewTime));
             }
 
             if (GUILayout.Button("添加全身攻击清理"))
@@ -350,7 +354,7 @@ public partial class SKillAnalyzerGUI
                 AddEvent(CreateAttackClearEvent(_previewTime));
             }
 
-            if (GUILayout.Button("添加取消帧"))
+            if (GUILayout.Button("添加技能迁移标志"))
             {
                 AddEvent(CreateCancelEvent(_previewTime));
             }
@@ -368,14 +372,23 @@ public partial class SKillAnalyzerGUI
         using (new EditorGUILayout.HorizontalScope())
         {
             _quickMarkerEventIndex = EditorGUILayout.Popup("手脚攻击事件", _quickMarkerEventIndex, QuickMarkerLabels);
-            if (GUILayout.Button("添加部位攻击开始", GUILayout.Width(130f)))
+            if (GUILayout.Button(bodyPartStartButtonLabel, GUILayout.Width(150f)))
             {
-                AddEvent(CreateBodyPartAttackEvent(_previewTime, GetQuickMarkerFunctionName(), 1));
+                AddAttackStartEvent(CreateBodyPartAttackEvent(_previewTime, GetQuickMarkerFunctionName(), 1));
             }
 
             if (GUILayout.Button("添加部位攻击清理", GUILayout.Width(130f)))
             {
                 AddEvent(CreateBodyPartAttackEvent(_previewTime, GetQuickMarkerFunctionName(), 0));
+            }
+        }
+
+        using (new EditorGUILayout.HorizontalScope())
+        {
+            _autoAddAttackClearAfterStart = EditorGUILayout.ToggleLeft("攻击开始后自动补关闭帧", _autoAddAttackClearAfterStart, GUILayout.Width(170f));
+            using (new EditorGUI.DisabledScope(!_autoAddAttackClearAfterStart))
+            {
+                _autoAddAttackClearOffsetFrames = EditorGUILayout.IntSlider("关闭帧偏移", _autoAddAttackClearOffsetFrames, 1, 6);
             }
         }
 
@@ -454,7 +467,7 @@ public partial class SKillAnalyzerGUI
         }
 
         var kind = ClassifyEvent(selected);
-        EditorGUILayout.LabelField($"选中事件：{kind}", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField($"选中事件：{GetKindDisplayName(kind)}", EditorStyles.boldLabel);
 
         EditorGUI.BeginChangeCheck();
         var functionName = EditorGUILayout.TextField("Function", selected.functionName);
@@ -519,7 +532,7 @@ public partial class SKillAnalyzerGUI
 
         using (new EditorGUILayout.HorizontalScope())
         {
-            if (GUILayout.Button("设为取消帧"))
+            if (GUILayout.Button("设为技能迁移标志"))
             {
                 selected.functionName = "turn_on_flag";
                 selected.intParameter = 0;
@@ -1080,22 +1093,24 @@ public partial class SKillAnalyzerGUI
             });
         }
 
+        var pendingEvents = new List<AnimationEvent>();
         AnimationEvent lastAdded = null;
         foreach (var window in windows.OrderBy(x => x.StartFrame).ThenBy(x => x.FunctionName))
         {
             var startEvent = CreateBodyPartAttackEvent(FrameToTime(window.StartFrame), window.FunctionName, 1);
             var endEvent = CreateBodyPartAttackEvent(FrameToTime(window.EndFrame), window.FunctionName, 0);
-            _workingEvents.Add(startEvent);
-            _workingEvents.Add(endEvent);
+            pendingEvents.Add(startEvent);
+            pendingEvents.Add(endEvent);
             lastAdded = endEvent;
         }
+
+        AddEvents(pendingEvents);
 
         if (lastAdded != null)
         {
             _previewTime = lastAdded.time;
         }
 
-        MarkEventsDirty();
         if (lastAdded != null)
         {
             _selectedEventIndex = _workingEvents.IndexOf(lastAdded);
@@ -1442,12 +1457,114 @@ public partial class SKillAnalyzerGUI
         }));
     }
 
-    private void AddEvent(AnimationEvent animationEvent)
+    private void AddAttackStartEvent(AnimationEvent animationEvent)
     {
-        _workingEvents.Add(animationEvent);
-        MarkEventsDirty();
+        if (animationEvent == null)
+        {
+            return;
+        }
+
+        var pendingEvents = new List<AnimationEvent> { animationEvent };
+        AppendAutoAttackClearAfterStart(pendingEvents, animationEvent);
+        AddEvents(pendingEvents);
         _selectedEventIndex = _workingEvents.IndexOf(animationEvent);
         _previewTime = animationEvent.time;
+    }
+
+    private void AddEvent(AnimationEvent animationEvent)
+    {
+        AddEvents(new[] { animationEvent });
+    }
+
+    private void AddEvents(IEnumerable<AnimationEvent> animationEvents)
+    {
+        if (animationEvents == null)
+        {
+            return;
+        }
+
+        AnimationEvent lastAdded = null;
+        foreach (var animationEvent in animationEvents)
+        {
+            if (animationEvent == null || ContainsEquivalentEvent(_workingEvents, animationEvent))
+            {
+                continue;
+            }
+
+            _workingEvents.Add(animationEvent);
+            lastAdded = animationEvent;
+        }
+
+        if (lastAdded == null)
+        {
+            return;
+        }
+
+        MarkEventsDirty();
+        _selectedEventIndex = _workingEvents.IndexOf(lastAdded);
+        _previewTime = lastAdded.time;
+    }
+
+    private void AppendAutoAttackClearAfterStart(ICollection<AnimationEvent> pendingEvents, AnimationEvent attackStartEvent)
+    {
+        if (!_autoAddAttackClearAfterStart || pendingEvents == null || attackStartEvent == null || !IsAttackStartEvent(attackStartEvent))
+        {
+            return;
+        }
+
+        var clearEvent = CreateAttackClearEventAfterAttackStart(attackStartEvent.time);
+        if (ContainsEquivalentEvent(_workingEvents, clearEvent) || ContainsEquivalentEvent(pendingEvents, clearEvent))
+        {
+            return;
+        }
+
+        pendingEvents.Add(clearEvent);
+    }
+
+    private bool IsAttackStartEvent(AnimationEvent animationEvent)
+    {
+        if (animationEvent == null)
+        {
+            return false;
+        }
+
+        if (animationEvent.functionName == "SetAllBodyMarkerManagersIn")
+        {
+            return true;
+        }
+
+        return SKillAnalyzer.AttackFrameStartMethodNames.Contains(animationEvent.functionName) && animationEvent.intParameter != 0;
+    }
+
+    private AnimationEvent CreateAttackClearEventAfterAttackStart(float attackStartTime)
+    {
+        var clearFrame = TimeToFrame(attackStartTime) + Mathf.Max(1, _autoAddAttackClearOffsetFrames);
+        return CreateAttackClearEvent(FrameToTime(clearFrame));
+    }
+
+    private static bool ContainsEquivalentEvent(IEnumerable<AnimationEvent> events, AnimationEvent candidate)
+    {
+        if (events == null || candidate == null)
+        {
+            return false;
+        }
+
+        foreach (var animationEvent in events)
+        {
+            if (animationEvent == null)
+            {
+                continue;
+            }
+
+            if (animationEvent.functionName == candidate.functionName
+                && Mathf.Approximately(animationEvent.time, candidate.time)
+                && animationEvent.intParameter == candidate.intParameter)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void MarkEventsDirty()
@@ -1521,6 +1638,23 @@ public partial class SKillAnalyzerGUI
                 return new Color(1f, 0.88f, 0.2f, 1f);
             default:
                 return new Color(0.75f, 0.75f, 0.75f, 1f);
+        }
+    }
+
+    private static string GetKindDisplayName(SkillEventKind kind)
+    {
+        switch (kind)
+        {
+            case SkillEventKind.AttackStart:
+                return "攻击开始";
+            case SkillEventKind.AttackClear:
+                return "攻击清理";
+            case SkillEventKind.MagicAttack:
+                return "魔法攻击";
+            case SkillEventKind.Cancel:
+                return "技能迁移";
+            default:
+                return "其他";
         }
     }
 
@@ -1634,6 +1768,11 @@ public partial class SKillAnalyzerGUI
         if (animationEvent.functionName == "ClearMarkerManagers")
         {
             return "全身攻击清理";
+        }
+
+        if (animationEvent.functionName == "turn_on_flag")
+        {
+            return "技能迁移标志";
         }
 
         var bodyPartLabel = GetBodyPartLabel(animationEvent.functionName);

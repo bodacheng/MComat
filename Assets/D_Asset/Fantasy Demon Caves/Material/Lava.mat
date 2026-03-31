@@ -36,10 +36,14 @@ Material:
   - _DETAILUV_UV1
   - _HEIGHTCOLORSBLEND_ALPHA_BLEND
   - _LAYER1BLEND_ALPHA_BLEND
+  - _LAYER1UV_UV1
   - _LAYER2BLEND_ALPHA_BLEND
+  - _LAYER2UV_UV1
   - _LAYER3BLEND_ALPHA_BLEND
+  - _LAYER3UV_UV1
   - _LIGHTMAPUV_UV1
   - _MATCAPBLEND_MULTIPLY
+  - _NORMALUV2_UV1
   - _NORMALUV_UV1
   - _PLANTTYPE_PLANT
   - _RIMBLEND_ADDITIVE
@@ -76,3 +80,4 @@ Material:
     - _BaseColor: {r: 0.588, g: 0.588, b: 0.588, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

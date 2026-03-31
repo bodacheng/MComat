@@ -88,6 +88,7 @@ namespace Soul
                             new SingleFightLog.BehaviourFightRecord
                             {
                                 AI_Decided = false,
+                                skillId = options[i].SkillID,
                                 stateKey = options[i].REAL_NAME,
                                 whyIDidThis = null
                             }
@@ -105,6 +106,7 @@ namespace Soul
                             new SingleFightLog.BehaviourFightRecord
                             {
                                 AI_Decided = false,
+                                skillId = options[i].SkillID,
                                 stateKey = options[i].REAL_NAME,
                                 whyIDidThis = null
                             }
@@ -122,6 +124,7 @@ namespace Soul
                         new SingleFightLog.BehaviourFightRecord
                             {
                                 AI_Decided = false,
+                                skillId = options[i].SkillID,
                                 stateKey = options[i].REAL_NAME,
                                 whyIDidThis = null
                             }
@@ -138,6 +141,7 @@ namespace Soul
                         new SingleFightLog.BehaviourFightRecord
                             {
                                 AI_Decided = false,
+                                skillId = options[i].SkillID,
                                 stateKey = options[i].REAL_NAME,
                                 whyIDidThis = null
                             }
@@ -154,6 +158,7 @@ namespace Soul
                         new SingleFightLog.BehaviourFightRecord
                             {
                                 AI_Decided = false,
+                                skillId = options[i].SkillID,
                                 stateKey = options[i].REAL_NAME,
                                 whyIDidThis = null
                             }
@@ -265,6 +270,7 @@ namespace Soul
                             new SingleFightLog.BehaviourFightRecord
                             {
                                 AI_Decided = true,
+                                skillId = se.SkillID,
                                 stateKey = se.REAL_NAME,
                                 whyIDidThis = _finalConditionStateKeySet[random].Item1
                             }
@@ -283,6 +289,16 @@ namespace Soul
         {
             if (option != null)
             {
+                behaviorRunner.SingleFightLog.WriteLog(
+                    new SingleFightLog.BehaviourFightRecord
+                    {
+                        AI_Decided = false,
+                        skillId = option.SkillID,
+                        stateKey = option.REAL_NAME,
+                        whyIDidThis = null
+                    }
+                );
+                behaviorRunner.SingleFightLog.AnalysisLog(behaviorRunner.ConditionAndRespondPriority);
                 behaviorRunner.ChangeState(option.REAL_NAME);
                 behaviorRunner.InputsManager?.SkillExplosion(option.EnterInput, option.SP_LEVEL);
                 return true;
@@ -299,4 +315,3 @@ namespace Soul
         }
     }
 }
-

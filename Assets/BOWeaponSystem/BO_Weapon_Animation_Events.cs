@@ -99,7 +99,7 @@ public class BO_Weapon_Animation_Events : MonoBehaviour
             
             if (FightGlobalSetting.HitBoxLogger)
             {
-                decomposition._HitBox.GeneratedByStateKey = BEs.myownheath.Center._MyBehaviorRunner.GetNowState().StateKey;
+                decomposition._HitBox.GeneratedByStateKey = SkillLogIdentity.ResolveCurrentSkillKey(BEs.myownheath.Center._MyBehaviorRunner);
                 decomposition._HitBox.HitBoxLifeEnding = HitBoxLifeEnding.untouched;
             }
         }

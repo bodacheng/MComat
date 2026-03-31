@@ -229,7 +229,11 @@ public partial class FightParamsReference
         
         _d = dmg.from_weapon.GetDamageAmount();
         if (!Invincible)
+        {
             CurrentHp.Value -= _d;
+            if (_d > 0f)
+                dmg.from_weapon.HitBoxLifeEnding = HitBoxLifeEnding.successed;
+        }
         if (CurrentHp.Value <= 0)
         {
             Center._MyBehaviorRunner.ChangeState("Death", dmg);
@@ -244,7 +248,6 @@ public partial class FightParamsReference
         );
         Center._MyBehaviorRunner.SingleFightLog.AnalysisLog(Center._MyBehaviorRunner.ConditionAndRespondPriority);
         Center._MyBehaviorRunner.ChangeState("Hit", dmg);
-        dmg.from_weapon.HitBoxLifeEnding = HitBoxLifeEnding.successed;
     }
     
     // 打别人计数
