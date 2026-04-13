@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using HittingDetection;
 using UniRx;
 
@@ -8,8 +9,12 @@ namespace Soul
     {
         void HeavyStart(V_Damage newValue)
         {
-            //gameObject.transform.DOMove(fixDesPos, 0.1f);
-            _Rigidbody.linearVelocity = CalFixPushVector(newValue, gameObject.transform.position);
+            var startPos = gameObject.transform.position;
+            var pushDir = CalFixPushVector(newValue, startPos);
+            var targetPos = CalcFixedPlanarMoveTarget(startPos, pushDir, FightGlobalSetting.NormalAttackPosFixingTime);
+            _fixedDisplacementTweener?.Kill();
+            _fixedDisplacementTweener = StartFixedPlanarMoveTween(_DATA_CENTER.WholeT, _Rigidbody, targetPos,
+                FightGlobalSetting.NormalAttackPosFixingTime);
             
             _physicMissionDisposable = new SingleAssignmentDisposable();
             _physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>

@@ -393,6 +393,61 @@ namespace Soul
                                                          Time.deltaTime * acceleration);
         }
 
+        protected Vector3 ClampPositionToBattleRing(Vector3 worldPos)
+        {
+            var clampedPos = worldPos;
+            var originY = clampedPos.y;
+            clampedPos.y = 0f;
+            var battleRingRadius = BoundaryControlByGod._BattleRingRadius;
+            if (battleRingRadius > 0f && clampedPos.sqrMagnitude > battleRingRadius * battleRingRadius)
+            {
+                clampedPos = clampedPos.normalized * battleRingRadius;
+            }
+
+            clampedPos.y = originY < 0f ? 0f : originY;
+            return clampedPos;
+        }
+
+        protected Vector3 CalcFixedPlanarMoveTarget(Vector3 startPos, Vector3 direction, float distance)
+        {
+            var planarDirection = direction;
+            planarDirection.y = 0f;
+            if (planarDirection.sqrMagnitude <= MovementEpsilon * MovementEpsilon || distance <= 0f)
+            {
+                return ClampPositionToBattleRing(startPos);
+            }
+
+            var targetPos = startPos + planarDirection.normalized * distance;
+            targetPos.y = startPos.y;
+            return ClampPositionToBattleRing(targetPos);
+        }
+
+        protected Tweener StartFixedPlanarMoveTween(Transform mover, Rigidbody rigidbody, Vector3 targetPos, float duration)
+        {
+            if (mover == null || duration <= 0f)
+            {
+                return null;
+            }
+
+            targetPos = ClampPositionToBattleRing(targetPos);
+            if (rigidbody != null)
+            {
+                rigidbody.linearVelocity = Vector3.zero;
+                rigidbody.angularVelocity = Vector3.zero;
+            }
+
+            return mover.DOMove(targetPos, duration).SetEase(Ease.Linear).OnUpdate(() =>
+            {
+                if (rigidbody == null)
+                {
+                    return;
+                }
+
+                rigidbody.linearVelocity = Vector3.zero;
+                rigidbody.angularVelocity = Vector3.zero;
+            });
+        }
+
         // apply friction to rigidbody, and make sure it doesn't exceed its max speed
         public void ManageSpeed(Rigidbody rigidbody, float maxSpeed, bool ignoreY)
         {

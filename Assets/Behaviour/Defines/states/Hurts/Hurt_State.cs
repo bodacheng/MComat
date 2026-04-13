@@ -14,6 +14,7 @@ namespace Soul
         SingleAssignmentDisposable _physicMissionDisposable;
         private float hurtAnimDuration = 0.05f;
         private Sequence mySequence;
+        private Tweener _fixedDisplacementTweener;
         
         #region Shake
         private Tweener _shakeTweener;
@@ -66,6 +67,7 @@ namespace Soul
             FightParamsRef.GettingDamage = false;
             if (mySequence != null && mySequence.active && mySequence.IsPlaying())
                 mySequence.Kill();
+            _fixedDisplacementTweener?.Kill();
             _physicMissionDisposable?.Dispose();
             if (_BuffsRunner.Freezing)
             {

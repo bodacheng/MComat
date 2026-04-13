@@ -275,10 +275,23 @@ public class BasicPhysicSupport : MonoBehaviour
     {
         hiddenMethods.OverrideOnEnemyDrag = e.intParameter;
     }
+
+    bool ShouldSkipEnemyContactCorrection()
+    {
+        return _DATA_CENTER != null
+               && _DATA_CENTER.FightDataRef != null
+               && _DATA_CENTER.FightDataRef.GettingDamage;
+    }
     
     // Smooth out small root jitter when rubbing against other fighters.
     void ApplyContactStabilizer()
     {
+        if (ShouldSkipEnemyContactCorrection())
+        {
+            ResetContactStabilizer();
+            return;
+        }
+
         if (!hiddenMethods.TouchingEnemy())
         {
             ResetContactStabilizer();
@@ -338,6 +351,8 @@ public class BasicPhysicSupport : MonoBehaviour
     {
         if (_DATA_CENTER == null || _DATA_CENTER.WholeT == null)
             return;
+        if (ShouldSkipEnemyContactCorrection())
+            return;
         if (!hiddenMethods.IfStepOnEnemy(collision.collider))
             return;
         if (Rigidbody.linearVelocity.sqrMagnitude > contactVelocityThreshold * contactVelocityThreshold)
@@ -389,6 +404,8 @@ public class BasicPhysicSupport : MonoBehaviour
     {
         if (_DATA_CENTER != null && _DATA_CENTER._MyBehaviorRunner.IfRunning())
         {
+            if (ShouldSkipEnemyContactCorrection())
+                return;
             ResolveContactPenetration(collision);
         }
     }

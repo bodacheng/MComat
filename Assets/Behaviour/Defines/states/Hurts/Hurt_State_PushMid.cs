@@ -27,21 +27,8 @@ namespace Soul
                 midDistanceFromMe.y = originY;
             }
             
-            mySequence.Append(_DATA_CENTER.WholeT.DOMove(midDistanceFromMe, 0.3f).OnUpdate(
-                () =>
-                {
-                    if (gameObject == null)
-                    {
-                        mySequence.Kill();
-                        return;
-                    }
-                    if (_BasicPhysicSupport.AtRing || (_BasicPhysicSupport.hiddenMethods.TouchingEnemy() && TimeCounter > 0.2f))
-                    {
-                        mySequence.Kill();
-                        _Rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-                    }
-                }) 
-            );
+            var targetPos = ClampPositionToBattleRing(midDistanceFromMe);
+            mySequence.Append(StartFixedPlanarMoveTween(_DATA_CENTER.WholeT, _Rigidbody, targetPos, 0.3f));
         }
     }
 }
