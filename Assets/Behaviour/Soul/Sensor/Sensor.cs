@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
+using MCombat.Shared.Combat;
 using UnityEngine;
 
 public partial class Sensor
 {
     LayerMask _meAndEnemyLayerMask;
     TeamConfig _teamConfig = TeamConfig.DefaultSet;
-    static readonly IDictionary<Team, List<Data_Center>> SharedUnitDic = new Dictionary<Team, List<Data_Center>>();
-    static readonly IDictionary<Team, List<Data_Center>> SharedDeadUnitDic = new Dictionary<Team, List<Data_Center>>();
+    static readonly CombatUnitRegistry<Data_Center> SharedUnitRegistry = new CombatUnitRegistry<Data_Center>();
+    static readonly CombatUnitRegistry<Data_Center> SharedDeadUnitRegistry = new CombatUnitRegistry<Data_Center>();
     readonly List<Collider> _detectedEnemies = new List<Collider>();
     Collider _nearestEnemyCollider;
     readonly List<Collider> _damagingWeaponAround = new List<Collider>();
@@ -34,52 +35,18 @@ public partial class Sensor
     
     public static void ClearFightingMember()
     {
-        SharedUnitDic.Clear();
-        SharedDeadUnitDic.Clear();
+        SharedUnitRegistry.Clear();
+        SharedDeadUnitRegistry.Clear();
     }
     
     public static void AddOrRemoveSharedUnitInfo(Data_Center member, Team team, bool add) // add:true remove: false
     {
-        if (!SharedUnitDic.ContainsKey(team))
-            SharedUnitDic.Add(team, new List<Data_Center>());
-        var fightingUnits = SharedUnitDic[team];
-        if (add)
-        {
-            if (!fightingUnits.Contains(member))
-            {
-                fightingUnits.Add(member);
-            }
-        }
-        else
-        {
-            if (fightingUnits.Contains(member))
-            {
-                fightingUnits.Remove(member);
-            }
-        }
-        SharedUnitDic[team] = fightingUnits;
+        SharedUnitRegistry.AddOrRemove(member, team, add);
     }
     
     public static void AddOrRemoveSharedDeadUnitInfo(Data_Center member, Team team, bool add) // add:true remove: false
     {
-        if (!SharedDeadUnitDic.ContainsKey(team))
-            SharedDeadUnitDic.Add(team, new List<Data_Center>());
-        var fightingUnits = SharedDeadUnitDic[team];
-        if (add)
-        {
-            if (!fightingUnits.Contains(member))
-            {
-                fightingUnits.Add(member);
-            }
-        }
-        else
-        {
-            if (fightingUnits.Contains(member))
-            {
-                fightingUnits.Remove(member);
-            }
-        }
-        SharedDeadUnitDic[team] = fightingUnits;
+        SharedDeadUnitRegistry.AddOrRemove(member, team, add);
     }
     
     public void SensorDetectionResultClearProcess()
@@ -88,24 +55,25 @@ public partial class Sensor
         _damagingWeaponAround.Clear();
     }
     
-    List<GameObject> FindTargetsByDistance(Team[] tags, IDictionary<Team, List<Data_Center>> targetDic)
+    List<GameObject> FindTargetsByDistance(Team[] tags, CombatUnitRegistry<Data_Center> targetRegistry)
     {
         var targetList = new List<GameObject>();
-        FindTargetsByDistance(tags, targetDic, targetList);
+        FindTargetsByDistance(tags, targetRegistry, targetList);
         return targetList;
     }
 
-    void FindTargetsByDistance(Team[] tags, IDictionary<Team, List<Data_Center>> targetDic, List<GameObject> targetList)
+    void FindTargetsByDistance(Team[] tags, CombatUnitRegistry<Data_Center> targetRegistry, List<GameObject> targetList)
     {
         targetList.Clear();
-        if (tags == null || targetDic == null)
+        if (tags == null || targetRegistry == null)
         {
             return;
         }
 
         for (var i = 0; i < tags.Length; i++)
         {
-            if (!targetDic.TryGetValue(tags[i], out var searchingMembers) || searchingMembers == null)
+            var searchingMembers = targetRegistry.GetUnits(tags[i]);
+            if (searchingMembers == null)
             {
                 continue;
             }
@@ -134,35 +102,10 @@ public partial class Sensor
             return;
         }
 
-        var center = Center.position;
-        for (var i = 1; i < targetList.Count; i++)
-        {
-            var current = targetList[i];
-            var currentDistance = current != null ? HorizontalDistanceSqr(current.transform.position, center) : float.MaxValue;
-            var j = i - 1;
-
-            while (j >= 0)
-            {
-                var comparing = targetList[j];
-                var comparingDistance = comparing != null ? HorizontalDistanceSqr(comparing.transform.position, center) : float.MaxValue;
-                if (comparingDistance <= currentDistance)
-                {
-                    break;
-                }
-
-                targetList[j + 1] = comparing;
-                j--;
-            }
-
-            targetList[j + 1] = current;
-        }
-    }
-
-    static float HorizontalDistanceSqr(Vector3 position, Vector3 center)
-    {
-        var dx = position.x - center.x;
-        var dz = position.z - center.z;
-        return dx * dx + dz * dz;
+        CombatSpatialUtility.SortByHorizontalDistance(
+            targetList,
+            Center.position,
+            target => target != null ? target.transform.position : (Vector3?)null);
     }
 
     public void SensorDetectionResultSortProcess(Collider[] hits) //这个函数的调用必须要确保每次都在update函数之后
@@ -177,11 +120,11 @@ public partial class Sensor
             }
             
             var hitLayer = hit.gameObject.layer;
-            if (_teamConfig.enemyLayerMask == (_teamConfig.enemyLayerMask | (1 << hitLayer)) || _teamConfig.enemyShieldLayerMask == (_teamConfig.enemyShieldLayerMask | (1 << hitLayer)))
+            if (CombatLayerUtility.ContainsLayer(_teamConfig.enemyLayerMask, hitLayer) || CombatLayerUtility.ContainsLayer(_teamConfig.enemyShieldLayerMask, hitLayer))
             {
                 _detectedEnemies.Add(hit);
             }
-            if (_teamConfig.enemyWeaponLayerMask == (_teamConfig.enemyWeaponLayerMask | (1 << hitLayer)))
+            if (CombatLayerUtility.ContainsLayer(_teamConfig.enemyWeaponLayerMask, hitLayer))
             {
                 _damagingWeaponAround.Add(hit);
             }

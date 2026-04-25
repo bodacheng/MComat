@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MCombat.Shared.Combat;
 using UnityEngine;
 
 public partial class Sensor
@@ -23,7 +24,7 @@ public partial class Sensor
                 continue;
             }
 
-            var sqr = HorizontalDistanceSqr(enemy.transform.position, center);
+            var sqr = CombatSpatialUtility.HorizontalDistanceSqr(enemy.transform.position, center);
             if (sqr >= minSqr && sqr <= maxSqr)
             {
                 _targetRangeEnemies.Add(enemy);
@@ -46,7 +47,7 @@ public partial class Sensor
             return null;
         }
 
-        var sqr = HorizontalDistanceSqr(threat.transform.position, Center.position);
+        var sqr = CombatSpatialUtility.HorizontalDistanceSqr(threat.transform.position, Center.position);
         var minSqr = min * min;
         var maxSqr = max * max;
         if (sqr >= minSqr && sqr <= maxSqr)
@@ -81,7 +82,7 @@ public partial class Sensor
             return _enemiesByDistance;
         }
         if (refresh)
-            FindTargetsByDistance(this._teamConfig.myEnemies.ToArray(), SharedUnitDic, _enemiesByDistance);
+            FindTargetsByDistance(this._teamConfig.myEnemies.ToArray(), SharedUnitRegistry, _enemiesByDistance);
         return _enemiesByDistance;
     }
     
@@ -94,7 +95,7 @@ public partial class Sensor
             return _alliesByDistance;
         }
         if (refresh)
-            FindTargetsByDistance(new [] { this._teamConfig.myTeam }, SharedUnitDic, _alliesByDistance);
+            FindTargetsByDistance(new [] { this._teamConfig.myTeam }, SharedUnitRegistry, _alliesByDistance);
         return _alliesByDistance;
     }
     
@@ -105,7 +106,7 @@ public partial class Sensor
             return null;
         }
 
-        FindTargetsByDistance(this._teamConfig.myEnemies.ToArray(), SharedDeadUnitDic, _deadEnemiesByDistance);
+        FindTargetsByDistance(this._teamConfig.myEnemies.ToArray(), SharedDeadUnitRegistry, _deadEnemiesByDistance);
         return _deadEnemiesByDistance.Count > 0 ? _deadEnemiesByDistance[_deadEnemiesByDistance.Count - 1] : null;
     }
     
@@ -114,26 +115,9 @@ public partial class Sensor
         if (colliderList == null || colliderList.Count == 0 || Center == null)
             return null;
 
-        var center = Center.position;
-        Collider nearest = null;
-        var nearestDistance = float.MaxValue;
-
-        for (var i = 0; i < colliderList.Count; i++)
-        {
-            var collider = colliderList[i];
-            if (collider == null)
-            {
-                continue;
-            }
-
-            var sqr = HorizontalDistanceSqr(collider.transform.position, center);
-            if (sqr < nearestDistance)
-            {
-                nearestDistance = sqr;
-                nearest = collider;
-            }
-        }
-
-        return nearest;
+        return CombatSpatialUtility.FindNearest(
+            colliderList,
+            Center.position,
+            collider => collider != null ? collider.transform.position : (Vector3?)null);
     }
 }

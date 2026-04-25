@@ -395,37 +395,3 @@ public partial class FightInfo : ScriptableObject
         return stage;
     }
 }
-
-public enum CriticalGaugeMode
-{
-    Normal,
-    DoubleGain,
-    Unlimited
-}
-
-public enum AIMode
-{
-    Aggressive,
-    Dumb
-}
-
-// 系统会根据这个量来决定一场战斗结束后应该做什么。
-// 比如一个剧情战斗，他结束了后应该是播放某个动画片，
-// 再比如是自己打自己的一个战斗，结束后回到的应该是那个自己打自己的选人菜单。
-public enum FightEventType
-{
-    Screensaver = 0,
-    Quest = 1,
-    Arena = 2,
-    Self = 4,
-    SkillTest = 5,
-    Event = 6
-}
-
-public enum FightMode
-{
-    Rotate = 1,
-    Multi = 2,
-    Evolve = 3,
-    Group = 4
-}
