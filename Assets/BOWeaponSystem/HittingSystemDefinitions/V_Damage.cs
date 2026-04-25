@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using MCombat.Shared.CombatHit;
 
 namespace HittingDetection
 {
@@ -31,8 +32,7 @@ namespace HittingDetection
     
         public static DamageType FormalIntToDamageType(int num)
         {
-            var damageType = (DamageType)num;
-            return damageType;
+            return HitDamageUtility.FormalIntToDamageType(num);
         }
         
         /// <summary>
@@ -45,24 +45,7 @@ namespace HittingDetection
         /// <returns></returns>
         public static float WpHpCost(int meLevel, int counterLevel)
         {
-            if (meLevel > counterLevel)
-            {
-                switch (meLevel - counterLevel)
-                {
-                    case 1:
-                        return 0.5f;
-                    case 2:
-                        return 0.25f;
-                    case 3:
-                        return 0.2f;
-                }
-
-                if (meLevel - counterLevel > 3)
-                {
-                    return 0.1f;
-                }
-            }
-            return 1;
+            return HitDamageUtility.WeaponHpCost(meLevel, counterLevel);
         }
     }
 }

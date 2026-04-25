@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System;
+using MCombat.Shared.CombatGroup;
 using UnityEngine;
 
 public partial class FightInfo : ScriptableObject
@@ -15,16 +16,7 @@ public partial class FightInfo : ScriptableObject
 
     public List<string> GetNonZeroInstanceIds(int team)
     {
-        var sets = team == 1 ? team1GroupSet : team2GroupSet;
-        List<string> returnValue = new List<string>();
-        foreach (var set in sets)
-        {
-            if (set.Count > 0)
-            {
-                returnValue.Add(set.id);
-            }
-        }
-        return returnValue;
+        return GroupUnitCountUtility.GetNonZeroIds(GetTeamGroupSets(team));
     }
     
     public List<SoldierGroupSet> Team2GroupSet
@@ -35,18 +27,13 @@ public partial class FightInfo : ScriptableObject
 
     public int SetTeamUnitCount(int team, string instanceID, int count, int teamMaxCount)
     {
-        if (count < 0) { count = 0; }
-        var set = GetSoldierGroupSet(instanceID, team);
-        var ifWholeCount = GetIfGroupWholeUnitCount(team, instanceID, count);
-        if (ifWholeCount <= teamMaxCount)
-        {
-            set.Count = count;
-        }
-        else
-        {
-            set.Count = Mathf.Clamp((count - (ifWholeCount - teamMaxCount)), 0, Int32.MaxValue);
-        }
-        return GetGroupWholeUnitCount(team);
+        return GroupUnitCountUtility.SetTeamUnitCount(
+            GetTeamGroupSets(team),
+            instanceID,
+            count,
+            teamMaxCount,
+            false,
+            CreateSoldierGroupSet);
     }
 
     public int GetTeamUnitCount(int team, string instanceID, bool useLocalData = false)
@@ -57,7 +44,7 @@ public partial class FightInfo : ScriptableObject
     
     // Start is called before the first frame update
     [Serializable]
-    public class SoldierGroupSet
+    public class SoldierGroupSet : IGroupUnitCountEntry
     {
         public SoldierGroupSet(string id, int count)
         {
@@ -67,8 +54,14 @@ public partial class FightInfo : ScriptableObject
         }
         
         public string id;
+        public string Id => id;
         public int Count = 1;
         public int OriginCount { get; set; }
+        int IGroupUnitCountEntry.Count
+        {
+            get => Count;
+            set => Count = value;
+        }
     }
     
     SoldierGroupSet GetTeam1GroupSet(string id)
@@ -83,49 +76,26 @@ public partial class FightInfo : ScriptableObject
     
     SoldierGroupSet GetSoldierGroupSet(string id, int team, bool useLocalSet = false)
     {
-        var sets = team == 1 ? team1GroupSet : team2GroupSet;
-        var s = sets.Find(x => x.id == id);
-        if (s == null)
-        {
-            s = new SoldierGroupSet(id, useLocalSet ? PlayerPrefs.GetInt("gangbangPos"+ id, 8) : 8);
-            sets.Add(s);
-            return s;
-        }
-        return s;
+        return GroupUnitCountUtility.GetOrCreate(
+            GetTeamGroupSets(team),
+            id,
+            CreateSoldierGroupSet,
+            useLocalSet ? PlayerPrefs.GetInt("gangbangPos"+ id, 8) : 8);
     }
 
     public void ClearWholeUnitCount(int team)
     {
-        var sets = team == 1 ? team1GroupSet : team2GroupSet;
-        foreach (var set in sets)
-        {
-            set.Count = 0;
-        }
+        GroupUnitCountUtility.ClearWholeCount(GetTeamGroupSets(team));
     }
     
     public int GetGroupWholeUnitCount(int team)
     {
-        var sets = team == 1 ? team1GroupSet : team2GroupSet;
-        int wholeUnitCount = 0;
-        foreach (var set in sets)
-        {
-            wholeUnitCount += set.Count;
-        }
-        return wholeUnitCount;
+        return GroupUnitCountUtility.GetWholeCount(GetTeamGroupSets(team));
     }
 
     int GetIfGroupWholeUnitCount(int team, string instanceID, int count)
     {
-        var sets = team == 1 ? team1GroupSet : team2GroupSet;
-        int wholeUnitCount = 0;
-        foreach (var set in sets)
-        {
-            if (set.id != instanceID)
-                wholeUnitCount += set.Count;
-            else
-                wholeUnitCount += count;
-        }
-        return wholeUnitCount;
+        return GroupUnitCountUtility.GetWholeCountIfSet(GetTeamGroupSets(team), instanceID, count);
     }
     
     public void ConvertTeamToGangbang()
@@ -163,42 +133,23 @@ public partial class FightInfo : ScriptableObject
     
     public int GangbangAutoAdjustTeamUnitByMaxCount(int team, List<UnitInfo> unitSets, int selectedMaxTeamCount, bool adaptMode = false)
     {
-        ClearWholeUnitCount(team);
-        int wholeTeamCount = 0;
-        foreach(var unitInfo in unitSets)
-        {
-            wholeTeamCount += GetTeamUnitCount(team, unitInfo.id);
-        }
-        
-        if (adaptMode)
-        {
-            foreach(var unitInfo in unitSets)
-            {
-                wholeTeamCount = SetTeamUnitCount(team, unitInfo.id, 0, selectedMaxTeamCount);
-            }
-            // reset to origin first;
-            if (team == 2)
-            {
-                foreach(var unitInfo in unitSets)
-                {
-                    var set = GetSoldierGroupSet(unitInfo.id, team);
-                    wholeTeamCount = SetTeamUnitCount(team, unitInfo.id, set.OriginCount, selectedMaxTeamCount);
-                }
-            }
-            
-            var toBeAdd = selectedMaxTeamCount - wholeTeamCount;
-            for (var index = 0; index < unitSets.Count; index++)
-            {
-                if (toBeAdd > 0)
-                {
-                    var unitInfo = unitSets[index];
-                    var addCount = (index != unitSets.Count - 1) ? (int)((float)toBeAdd / unitSets.Count) : toBeAdd;
-                    wholeTeamCount = SetTeamUnitCount(team, unitInfo.id,  GetTeamUnitCount(team, unitInfo.id) + addCount, selectedMaxTeamCount);
-                    toBeAdd = selectedMaxTeamCount - wholeTeamCount;
-                }
-            }
-        }
-        
-        return wholeTeamCount;
+        return GroupUnitCountUtility.AutoAdjustTeamUnitByMaxCount(
+            GetTeamGroupSets(team),
+            unitSets,
+            selectedMaxTeamCount,
+            adaptMode,
+            team == 2,
+            unitInfo => unitInfo?.id,
+            CreateSoldierGroupSet);
+    }
+
+    List<SoldierGroupSet> GetTeamGroupSets(int team)
+    {
+        return team == 1 ? team1GroupSet : team2GroupSet;
+    }
+
+    static SoldierGroupSet CreateSoldierGroupSet(string id, int count)
+    {
+        return new SoldierGroupSet(id, count);
     }
 }
