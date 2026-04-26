@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MCombat.Shared.Camera;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -13,11 +14,11 @@ public class CameraManager : MonoBehaviour
     [SerializeField] Transform StartPosRef;
     [SerializeField] Transform topDownModeEndRef;
     [SerializeField] VisibilityControl visibilityControl;
-    CameraMode CurrentMode;
+    CameraModeCore CurrentMode;
     public Transform TopDownModeEndRef => topDownModeEndRef;
     public VisibilityControl VisibilityControl => visibilityControl;
 
-    readonly IDictionary<C_Mode, CameraMode> CModeDic = new Dictionary<C_Mode, CameraMode>()
+    readonly IDictionary<C_Mode, CameraModeCore> CModeDic = new Dictionary<C_Mode, CameraModeCore>()
     {
         {C_Mode.CertainYAntiVibration, new ChatGptFix(8f, 5f, 40f)},
         //{C_Mode.CertainYAntiVibration, new New2023(8.8f, 5f)},
@@ -30,7 +31,7 @@ public class CameraManager : MonoBehaviour
         {C_Mode.ScreenSaver, new New2023(8.8f, 5f)}//new ScreenSaverC(8.8f, 8.8f)}
     };
 
-    public CameraMode GetMode(C_Mode mode)
+    public CameraModeCore GetMode(C_Mode mode)
     {
         CModeDic.TryGetValue(mode, out var c);
         return c;
@@ -51,7 +52,10 @@ public class CameraManager : MonoBehaviour
 
         foreach (var kv in CModeDic)
         {
-            kv.Value.cameraManager = this;
+            if (kv.Value is CameraMode mode)
+            {
+                mode.cameraManager = this;
+            }
         }
     }
 
