@@ -21,7 +21,7 @@ namespace FightScene
                          .ThenBy(kv => kv.Key.Item2)
                          .Select(kv => kv.Value))
             {
-                if (dataCenter == null || dataCenter.IsSub)
+                if (!RTFightManager.Target.SubUnits.CanSelectAsRotationMember(dataCenter))
                 {
                     continue;
                 }
@@ -75,7 +75,7 @@ namespace FightScene
                         Sensor.AddOrRemoveSharedUnitInfo(center, teamConfig.myTeam, false);
                         if (FightLogger.value.GetWinnerTeam() == Team.none)
                         {
-                            if (teamConfig.myTeam == Team.player2 && FightLoad.Fight.FightMode == FightMode.Evolve && !center.IsSub && !center.ChangedToSubUnit)
+                            if (teamConfig.myTeam == Team.player2 && FightLoad.Fight.FightMode == FightMode.Evolve && center.CanUseMainUnitDeathFlow)
                             {
                                 HitBoxesProcesser.Instance.AllProcessingFade();
                                 RTFightManager.Target.team1.RMode_Unit.Value._MyBehaviorRunner.ChangeToWaitingState();
@@ -125,7 +125,7 @@ namespace FightScene
                             }
                             else
                             {
-                                if (!center.ChangedToSubUnit)
+                                if (!center.HasChangedToSubUnit)
                                     ToNewUnit(2);
                             }
                         }
@@ -142,7 +142,7 @@ namespace FightScene
                         disposableUnit.Disposable = Observable.Amb<Unit>(boolObservable, timerObservable)
                             .Subscribe(async (_) =>
                             {
-                                if (center != null && !center.ChangedToSubUnit)
+                                if (center != null && !center.HasChangedToSubUnit)
                                 {
                                     await EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null,
                                         center.geometryCenter.position, Quaternion.identity, null);
@@ -154,25 +154,16 @@ namespace FightScene
                     }
                 }).AddTo(center);
 
-                if (RTFightManager.Target.SubUnitDic.TryGetValue(center.UnitInfo.r_id, out var subUnitInfo))
+                if (RTFightManager.Target.SubUnits.HasSubUnit(center))
                 {
-                    center.ChangeToSub = (x, y) => ChangeFightingUnitToHerSub(center, x, y);
+                    center.AssignSubUnitSwitcher((x, y) => ChangeFightingUnitToHerSub(center, x, y));
                 }
             }
         }
         
         private bool ChangeFightingUnitToHerSub(Data_Center main, string stateKey, V_Damage damage)
         {
-            Data_Center changeTo = null;
-            foreach (var dataCenter in teamMembers.GetValues())
-            {
-                if ("sub_" + main.UnitInfo.Guid == dataCenter.UnitInfo.id)
-                {
-                    changeTo = dataCenter;
-                    break;
-                }
-            }
-            
+            var changeTo = RTFightManager.Target.SubUnits.FindSubUnit(main, RTFightManager.Target.UnitInfoRef);
             if (changeTo == null)
             {
                 return false;
@@ -215,7 +206,7 @@ namespace FightScene
             RMode_Unit.Value.FightDataRef.CurrentHp.Value = main.FightDataRef.CurrentHp.Value;
             RMode_Unit.Value.FightDataRef.Resistance.Value = main.FightDataRef.Resistance.Value;
             RMode_Unit.Value.FightDataRef.CriticalGaugeMode = main.FightDataRef.CriticalGaugeMode;
-            main.ChangedToSubUnit = true;
+            main.MarkChangedToSubUnit();
             main.FightDataRef.IsDead.Value = true;
             
             main.WholeT.gameObject.SetActive(false);
@@ -387,7 +378,7 @@ namespace FightScene
         
         public void ReadyForNextMember(Data_Center next)
         {
-            if (!next.IsSub)
+            if (RTFightManager.Target.SubUnits.CanSelectAsRotationMember(next))
                 waitingMember = next;
         }
         
@@ -409,7 +400,7 @@ namespace FightScene
                          .ThenBy(kv => kv.Key.Item2)
                          .Select(kv => kv.Value))
             {
-                if (dataCenter != null && !dataCenter.FightDataRef.IsDead.Value && !dataCenter.IsSub)
+                if (dataCenter != null && !dataCenter.FightDataRef.IsDead.Value && RTFightManager.Target.SubUnits.CanSelectAsRotationMember(dataCenter))
                 {
                     if (ChangeFightingUnit(dataCenter))
                     {

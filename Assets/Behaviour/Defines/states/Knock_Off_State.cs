@@ -25,15 +25,9 @@ namespace Soul
         
         public override void AI_State_enter(V_Damage value)
         {
-            if (_DATA_CENTER.FightDataRef.CurrentHp.Value <
-                _DATA_CENTER.FightDataRef.MaxHp * CommonSetting.ChangeToSubHpPercent)
+            if (_DATA_CENTER.TryChangeToSub(StateKey, value))
             {
-                if (this._DATA_CENTER.ChangeToSub != null && !_DATA_CENTER.ChangedToSubUnit)
-                {
-                    var changedToSub = this._DATA_CENTER.ChangeToSub != null && this._DATA_CENTER.ChangeToSub.Invoke(this.StateKey, value);
-                    if (changedToSub)
-                        return;
-                }
+                return;
             }
             
             base.AI_State_enter();

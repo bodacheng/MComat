@@ -29,6 +29,11 @@ public class FightLogger
         GameOver.Value = false;
         DisposeDeathWatchers();
     }
+
+    public void StopWatchingDeaths()
+    {
+        DisposeDeathWatchers();
+    }
     
     public void ReadyToLog(IDictionary<TeamConfig, List<Data_Center>> teamMembers)
     {
@@ -48,9 +53,9 @@ public class FightLogger
                 {
                     _eliminationTracker.MarkDead(pair.Key.myTeam, dataCenter);
 
-                    if (!dataCenter.IsSub && !dataCenter.ChangedToSubUnit && RTFightManager.Target != null)
+                    if (dataCenter.CanUseMainUnitDeathFlow && RTFightManager.Target != null)
                     {
-                        var subUnit = RTFightManager.Target.FindSubUnit(dataCenter);
+                        var subUnit = RTFightManager.Target.SubUnits.FindSubUnit(dataCenter, RTFightManager.Target.UnitInfoRef);
                         if (subUnit != null)
                         {
                             _eliminationTracker.MarkDead(pair.Key.myTeam, subUnit);

@@ -34,88 +34,17 @@ namespace FightScene
 
         public CompositeDisposable Disposables = new CompositeDisposable();
 
-        public readonly IDictionary<string, string> SubUnitDic = new Dictionary<string, string>();
+        public readonly SubUnitSupport SubUnits = new SubUnitSupport();
         
         void Awake()
         {
             Target = this;
-            RefreshSubUnitDictionary();
+            SubUnits.RefreshDefinitions();
         }
 
-        void RefreshSubUnitDictionary()
-        {
-            SubUnitDic.Clear();
-            if (!Units.IsLoaded())
-                return;
-
-            foreach (var pair in Units.Dic)
-            {
-                var config = pair.Value;
-                if (!string.IsNullOrEmpty(config.SubUnitRecordId))
-                {
-                    SubUnitDic[pair.Key] = config.SubUnitRecordId;
-                }
-            }
-        }
-
-        public Data_Center FindSubUnit(Data_Center center)
-        {
-            var subUnit= UnitInfoRef.FirstOrDefault(x => (x.Value.id == "sub_" + center.UnitInfo.Guid) &&
-                                            (x.Key._TeamConfig.myTeam == center._TeamConfig.myTeam)
-            );
-            return subUnit.Key;
-        }
-        
         public async UniTask LoadUnits(FightInfo info, Action<float> onProgress = null)
         {
-            if (SubUnitDic.Count == 0)
-            {
-                RefreshSubUnitDictionary();
-            }
-
-            if (info.FightMode is FightMode.Rotate or FightMode.Evolve)
-            {
-                // 那个supportIndex是防止两个同样角色都有变身体的时候在HeroSets或者EnemySets里重位置
-                void AddSubUnit(UnitInfo unitInfo, Team team, int supportIndex)
-                {
-                    if (SubUnitDic.TryGetValue(unitInfo.r_id, out var subUnitRid))
-                    {
-                        var subAdam = unitInfo.Clone();
-                        subAdam.r_id = subUnitRid;
-                        subAdam.id = "sub_" + unitInfo.Guid;
-                        
-                        if (team == Team.player1)
-                        {
-                            var alreadyThere = info.FightMembers.HeroSets.GetValues().FirstOrDefault(x => x.id == subAdam.id);
-                            if (alreadyThere == null)
-                            {
-                                info.FightMembers.HeroSets.Set(0, (supportIndex + 1) * 10 + 1, subAdam);
-                            }
-                        }
-                        else
-                        {
-                            var alreadyThere = info.FightMembers.EnemySets.GetValues().FirstOrDefault(x => x.id == subAdam.id);
-                            if (alreadyThere == null)
-                            {
-                                info.FightMembers.EnemySets.Set(0, (supportIndex + 1) * 10 + 1, subAdam);
-                            }
-                        }
-                    }
-                }
-                
-                var supportIndex = 0;
-                foreach (var unitInfo in info.FightMembers.HeroSets.GetValues())
-                {
-                    supportIndex++;
-                    AddSubUnit(unitInfo, Team.player1, supportIndex);
-                }
-                supportIndex = 0;
-                foreach (var unitInfo in info.FightMembers.EnemySets.GetValues())
-                {
-                    supportIndex++;
-                    AddSubUnit(unitInfo, Team.player2, supportIndex);
-                }
-            }
+            SubUnits.AddSubUnits(info);
 
             var totalUnits = info.FightMembers.HeroSets.GetValues().Count + info.FightMembers.EnemySets.GetValues().Count;
             if (totalUnits <= 0)

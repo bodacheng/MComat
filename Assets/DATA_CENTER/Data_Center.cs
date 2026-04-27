@@ -48,11 +48,6 @@ public partial class Data_Center : MonoBehaviour
     private UnitInfo unitInfo;
     public UnitInfo UnitInfo => unitInfo;
     
-    public bool IsSub => unitInfo != null && unitInfo.id.Contains("sub_");
-    public bool ChangedToSubUnit { get; set; }
-    
-    public Func<string, V_Damage, bool> ChangeToSub;
-
     public UnitConfig UnitConfig()
     {
         return Units.GetUnitConfig(UnitInfo.r_id);
@@ -249,7 +244,7 @@ public partial class Data_Center : MonoBehaviour
                 this.Sensor.SensorDetectionResultSortProcess(x);
             });
 
-        ChangedToSubUnit = false;
+        ResetSubUnitState();
     }
 
     private IDisposable _hpSubscription;

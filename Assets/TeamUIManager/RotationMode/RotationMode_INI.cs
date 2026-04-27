@@ -17,7 +17,7 @@ namespace FightScene
                 sideIcon.Icon.iconButton.onClick.AddListener(() => { changeUnit(center); });
                 var info = RTFightManager.Target.UnitInfoRef[center];
                 sideIcon.Icon.ChangeIcon(info);
-                sideIcon.gameObject.SetActive(!center.IsSub);
+                sideIcon.gameObject.SetActive(!center.IsSubUnit);
                 sideIcon.Icon.CooldownCurtainUpdate(0);
                 
                 if (TeamConfig.myTeam == RTFightManager.playerTeam)

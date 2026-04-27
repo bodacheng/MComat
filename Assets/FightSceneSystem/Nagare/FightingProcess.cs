@@ -73,7 +73,7 @@ namespace FightScene
             RTFightManager.Target.ClearUnitData();
             HitBoxesProcesser.Instance.AllProcessingFade();
             RTFightManager.Target.EvolutionManager.EvolutionCount = 0;
-            FightLogger.value.WatchMissionsAbandon();
+            FightLogger.value.StopWatchingDeaths();
             FightScene.target.SensorUnity.Stop();
         }
 

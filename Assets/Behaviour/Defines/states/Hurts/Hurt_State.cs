@@ -81,14 +81,9 @@ namespace Soul
         {
             _shakeTweener?.Kill();
             
-            if (_DATA_CENTER.FightDataRef.CurrentHp.Value < _DATA_CENTER.FightDataRef.MaxHp * CommonSetting.ChangeToSubHpPercent)
+            if (_DATA_CENTER.TryChangeToSub(StateKey, newValue))
             {
-                if (this._DATA_CENTER.ChangeToSub != null && !_DATA_CENTER.ChangedToSubUnit)
-                {
-                    var changedToSub = this._DATA_CENTER.ChangeToSub != null && this._DATA_CENTER.ChangeToSub.Invoke(this.StateKey, newValue);
-                    if (changedToSub)
-                        return;
-                }
+                return;
             }
             
             target = newValue;

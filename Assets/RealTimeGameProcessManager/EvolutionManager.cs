@@ -100,7 +100,7 @@ public class EvolutionManager
             }
         }
         tasks.Add(_ChangeSkill(focusUnit, targetSlotIndex, skillId));
-        var subUnit = RTFightManager.Target.FindSubUnit(focusUnit);
+        var subUnit = RTFightManager.Target.SubUnits.FindSubUnit(focusUnit, RTFightManager.Target.UnitInfoRef);
         if (subUnit != null)
         {
             tasks.Add(_ChangeSkill(subUnit, targetSlotIndex, skillId));
