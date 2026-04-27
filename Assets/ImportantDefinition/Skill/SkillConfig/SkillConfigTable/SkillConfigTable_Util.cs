@@ -30,28 +30,10 @@ public partial class SkillConfigTable
             TYPE = skillConfig.TYPE,
             REAL_NAME = skillConfig.REAL_NAME,
             ATTACK_WEIGHT = skillConfig.ATTACK_WEIGHT.ToString(),
-            HP_WEIGHT = skillConfig.HP_WEIGHT.ToString()
+            HP_WEIGHT = skillConfig.HP_WEIGHT.ToString(),
+            ATTACK_TYPE = SkillAttackTypeUtility.ToCanonicalAttackTypeCode(skillConfig.STATE_TYPE)
         };
-        
-        switch (skillConfig.STATE_TYPE)
-        {
-            case BehaviorType.GR:
-                row.ATTACK_TYPE = "GR";
-                break;
-            case BehaviorType.GI:
-                row.ATTACK_TYPE = "GI";
-                break;
-            case BehaviorType.GM:
-                row.ATTACK_TYPE = "GM";
-                break;
-            case BehaviorType.CT:
-                row.ATTACK_TYPE = "CT";
-                break;
-            case BehaviorType.NONE:
-                row.ATTACK_TYPE = "NONE";
-                break;
-        }
-        
+
         switch (skillConfig.SP_LEVEL)
         {
             case 0:
@@ -86,32 +68,9 @@ public partial class SkillConfigTable
                 ATTACK_WEIGHT = float.Parse(row.ATTACK_WEIGHT),
                 HP_WEIGHT = float.Parse(row.HP_WEIGHT)
             };
-            
-            switch (row.ATTACK_TYPE)
-            {
-                case "GR":
-                    skillConfig.STATE_TYPE = BehaviorType.GR;
-                    break;
-                case "GI":
-                    skillConfig.STATE_TYPE = BehaviorType.GI;
-                    break;
-                case "GM":
-                    skillConfig.STATE_TYPE = BehaviorType.GM;
-                    break;
-                case "GMB":
-                    skillConfig.STATE_TYPE = BehaviorType.GMB;
-                    break;
-                case "CT":
-                    skillConfig.STATE_TYPE = BehaviorType.CT;
-                    break;
-                case "RB":
-                    skillConfig.STATE_TYPE = BehaviorType.RB;
-                    break;
-                case "NONE":
-                    skillConfig.STATE_TYPE = BehaviorType.NONE;
-                    break;
-            }
-            
+
+            skillConfig.STATE_TYPE = SkillAttackTypeUtility.ToBehaviorType(row.ATTACK_TYPE, false);
+
             skillConfig.AIAttrs.AI_MIN_DIS = float.Parse(aiRow.TRIGGER_DIS_MIN);
             skillConfig.AIAttrs.AI_MAX_DIS = float.Parse(aiRow.TRIGGER_DIS_MAX);
             skillConfig.AIAttrs.height = int.Parse(aiRow.TRIGGER_HEIGHT);
