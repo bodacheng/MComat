@@ -1528,12 +1528,7 @@ public partial class SKillAnalyzerGUI
             return false;
         }
 
-        if (animationEvent.functionName == "SetAllBodyMarkerManagersIn")
-        {
-            return true;
-        }
-
-        return SKillAnalyzer.AttackFrameStartMethodNames.Contains(animationEvent.functionName) && animationEvent.intParameter != 0;
+        return SKillAnalyzer.IsNormalAttackStartEvent(animationEvent);
     }
 
     private AnimationEvent CreateAttackClearEventAfterAttackStart(float attackStartTime)
@@ -1602,21 +1597,19 @@ public partial class SKillAnalyzerGUI
             return SkillEventKind.Cancel;
         }
 
-        if (animationEvent.functionName == "SetAllBodyMarkerManagersIn"
-            || (SKillAnalyzer.AttackFrameStartMethodNames.Contains(animationEvent.functionName) && animationEvent.intParameter != 0))
+        if (SKillAnalyzer.IsNormalAttackStartEvent(animationEvent))
         {
             return SkillEventKind.AttackStart;
         }
 
-        if (animationEvent.functionName == "ClearMarkerManagers"
+        if (SKillAnalyzer.IsNormalAttackClearEvent(animationEvent)
             || animationEvent.functionName == "ClearTargets"
-            || animationEvent.functionName == "EnableMarkers"
-            || (SKillAnalyzer.AttackClearMethodNames.Contains(animationEvent.functionName) && animationEvent.intParameter == 0))
+            || animationEvent.functionName == "EnableMarkers")
         {
             return SkillEventKind.AttackClear;
         }
 
-        if (SKillAnalyzer.EffectsAttackFrameStartMethodNames.Contains(animationEvent.functionName))
+        if (SKillAnalyzer.IsEffectAttackStartEvent(animationEvent))
         {
             return SkillEventKind.MagicAttack;
         }
