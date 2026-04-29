@@ -19,7 +19,7 @@ namespace Soul
             var death = new Death_State();
             BehaviorDic.Add("Victory", victory);
             BehaviorDic.Add("Death", death);
-            
+
             if (FightGlobalSetting.HasDefend)
             {
                 var defend = new Defend_State("block", "block_break")
@@ -29,7 +29,7 @@ namespace Soul
                 };
                 BehaviorDic.Add("Defend", defend);
             }
-            
+
             MoveType moveType;
             switch (moveState.SkillID)
             {
@@ -43,14 +43,14 @@ namespace Soul
                     moveType = MoveType.normal;
                     break;
             }
-                            
+
             var move = new Move_State(moveType)
             {
                 StateType = BehaviorType.MV,
                 nextAttackCanRushFirst = false
             };
             BehaviorDic.Add("Move", move);
-            
+
             var hit = new Hurt_State()
             {
                 nextAttackCanRushFirst = false,
@@ -78,7 +78,7 @@ namespace Soul
                     continue;
 
                 SkillConfig skillConfig = SkillConfigTable.GetSkillConfigByRecordId(_set.SkillID);
-                
+
                 if (!BehaviorDic.Keys.Contains(_set.REAL_NAME))
                 {
                     switch (_set.StateType)

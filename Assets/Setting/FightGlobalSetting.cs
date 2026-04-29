@@ -110,6 +110,8 @@ public class FightGlobalSetting : ScriptableObject
     public static float EvolutionModeEnemyHpIncreaseRate;
     public static int EnergyResolveAfterExtendBoundary;
     public static PhysicsMaterial PhysicMaterial;
+    public static float HurtAutoFixPosCrossLimit = 0.2f;
+    public static float HurtAutoFixPosDuration = 0.1f;
     
     public void Initialise()
     {

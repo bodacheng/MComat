@@ -16,7 +16,7 @@ namespace Soul
         AnimationCurve _usedZCurve;
         float _temp;
         private Tweener rotateTween;
-        
+
         public Death_State()
         {
             StateType = BehaviorType.KnockOff;
@@ -27,7 +27,7 @@ namespace Soul
             base.AI_State_enter();
             _DATA_CENTER.FightDataRef.IsDead.Value = true;
             FightParamsRef.ChangeLayerForLimbs(14);
-            
+
             _flyingStep = 0;
             _timeCounter = 0;
             _touchedBoundary = false;
@@ -44,13 +44,13 @@ namespace Soul
             AnimationManger.AnimationTrigger(AnimationManger.GetRandomKnockOffAnim(),0.05f);
             FightParamsRef.EnableAllLimbs(false);
         }
-        
+
         public override void AI_State_enter(V_Damage newValue)
         {
             AI_State_enter();
             _xz = CalFixPushVector(newValue, gameObject.transform.position);
             rotateTween = RotateToTargetTween(gameObject.transform.position - _xz, 0f);
-            
+
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
             EffectsManager.GenerateEffect("super_hit", FightGlobalSetting.EffectPathDefine(newValue.from_weapon.element), newValue.DamageEffectPoint, newValue.CutRotation, null).Forget();
             _usedYCurve = newValue.from_weapon.damage_type == DamageType.high ? FightGlobalSetting.HDamageYAnimationCurve : FightGlobalSetting.KnockOffYAnimationCurve;
@@ -61,7 +61,7 @@ namespace Soul
         {
             return false;
         }
-        
+
         public override bool Force_enter_condition()
         {
             return false;
@@ -78,7 +78,7 @@ namespace Soul
             if (rotateTween != null && rotateTween.active && rotateTween.IsPlaying())
                 rotateTween.Kill();
         }
-        
+
         Vector3 _effectP, _quaV;
         private int _flyingStep;// 0 拔地 1 曲线 2 落地以及躺地昏迷
         private static readonly int Speed = Animator.StringToHash("speed");
@@ -102,7 +102,7 @@ namespace Soul
                         EffectsManager.GenerateEffect(CommonSetting.WallCrackEffectCode, null, _effectP, Quaternion.LookRotation(_quaV, Vector3.up), null).Forget();
                 }
             }
-            
+
             switch (_flyingStep)
             {
                 case 0:

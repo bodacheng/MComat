@@ -9,7 +9,7 @@ using Log;
 public partial class FightParamsReference
 {
     public Data_Center Center;
-    
+
     public readonly ComboHitCount _comboHitCount = new ComboHitCount();
     readonly KnockOffCount _knockOffCount = new KnockOffCount();
     readonly BeHitCount _beHitCount = new BeHitCount();
@@ -19,10 +19,10 @@ public partial class FightParamsReference
     readonly List<E_Damage> _eventDamageList = new List<E_Damage>();
     readonly List<E_Damage> _eventAttackSuccessList = new List<E_Damage>();
     readonly HashSet<Decomposition> _ownedDecompositions = new HashSet<Decomposition>();
-    
+
     // [Tooltip("与健康体同级的那个collider作不作为伤害判断?")]
     // public bool collider_on_health = false; //固定值 虽然这个值本身没有在本脚本中进行任何计算，但由于BO_Health会频繁访问BO_Health，所以如果需要这样一个参数，放在这里仍然合适
-    
+
     public ReactiveProperty<bool> IsDead { get; set; } = new ReactiveProperty<bool>(false);
     public ReactiveProperty<float> CurrentHp { get; set; } = new ReactiveProperty<float>();
     public float MaxHp { get; set; }
@@ -33,12 +33,12 @@ public partial class FightParamsReference
         get => _resistance;
         set => _resistance.Value = value.Value >= 0 ? value.Value : 0;
     }
-    
+
     public float AT { get; set; }
     public CriticalGaugeMode CriticalGaugeMode{ get; set; }
     public bool Invincible { get; set; }
     public bool GettingDamage { get; set; }
-    
+
     public void HealthBodyFixedUpdate()
     {
         _knockOffCount.Update();
@@ -58,7 +58,7 @@ public partial class FightParamsReference
             _myLimbs.Add(limb);
         }
     }
-    
+
     public void EnableAllLimbs(bool on)
     {
         foreach (var limb in _myLimbs)
@@ -67,7 +67,7 @@ public partial class FightParamsReference
                 limb.myColliderMustEquip.isTrigger = !on;
         }
     }
-        
+
     public void ChangeLayerForLimbs(int layer)
     {
         for (var i = 0; i < _myLimbs.Count; i++)
@@ -77,9 +77,9 @@ public partial class FightParamsReference
         }
         Center.geometryCenter.gameObject.layer = layer;
     }
-    
+
     public bool IfMyBody(Collider collider) => _myColliders.Contains(collider);
-    
+
     public void FindAllSelfCollidersAndIgnoreCollision()
     {
         _myColliders.Clear();
@@ -97,7 +97,7 @@ public partial class FightParamsReference
         }
         if (_shield != null)
         {
-            if (_shield._shieldCollider != null)           
+            if (_shield._shieldCollider != null)
                 _myColliders.Add(_shield._shieldCollider);
         }
         for (var i = 0; i < _myColliders.Count; i++)
@@ -122,7 +122,7 @@ public partial class FightParamsReference
             return;
         _ownedDecompositions.Remove(decomposition);
     }
-    
+
     public void ResolveAllDecompositions()
     {
         if (_ownedDecompositions.Count == 0)
@@ -132,18 +132,18 @@ public partial class FightParamsReference
             decomposition.Phase = -1;
         }
     }
-    
+
     public void MyDamageCount(V_Damage dmg)
     {
         _causeDamages?.Add(dmg);
     }
-    
+
     string _temp;
     void HitEffect(V_Damage damage)
     {
         if (Center.FightDataRef.Resistance.Value > 0)
         {
-            EffectsManager.GenerateEffect("shield_hit", 
+            EffectsManager.GenerateEffect("shield_hit",
                 FightGlobalSetting.EffectPathDefine(damage.from_weapon.element),
                 damage.DamageEffectPoint,
                 damage.CutRotation,
@@ -170,7 +170,7 @@ public partial class FightParamsReference
                         break;
                 }
             }
-            
+
             EffectsManager.GenerateEffect(_temp, FightGlobalSetting.EffectPathDefine(damage.from_weapon.element),
             damage.DamageEffectPoint,
             damage.CutRotation,
@@ -189,7 +189,7 @@ public partial class FightParamsReference
             this.EventProcess = eventProcess;
         }
     }
-    
+
     private readonly List<GetHitTriggerEvent> _getHitTriggerEvent = new List<GetHitTriggerEvent>();
     public List<GetHitTriggerEvent> GetHitTriggerEvents => _getHitTriggerEvent;
 
@@ -197,7 +197,7 @@ public partial class FightParamsReference
     {
         _getHitTriggerEvent.Add(new GetHitTriggerEvent(eventKey, process));
     }
-    
+
     public void RemoveEventKey(string eventKey)
     {
         _getHitTriggerEvent.RemoveAll(x=> x.EventKey == eventKey);
@@ -216,17 +216,17 @@ public partial class FightParamsReference
             }
             _getHitTriggerEvent.Clear();
         }
-        
+
         if (Center.FightDataRef.Resistance.Value > 0)
         {
             Center.FightDataRef.Resistance.Value -= 1;
             return;
         }
-        
+
         dmg.attacker.HitCountPlus(this);
         _comboHitCount.HitCountInterrupt();
         _beHitCount.BeHitCountPlus();
-        
+
         _d = dmg.from_weapon.GetDamageAmount();
         if (!Invincible)
         {
@@ -239,7 +239,7 @@ public partial class FightParamsReference
             Center._MyBehaviorRunner.ChangeState("Death", dmg);
             return;
         }
-        
+
         Center._MyBehaviorRunner.SingleFightLog.WriteLog(
             new Soul.SingleFightLog.NegativeRecord
             {
@@ -249,7 +249,7 @@ public partial class FightParamsReference
         Center._MyBehaviorRunner.SingleFightLog.AnalysisLog(Center._MyBehaviorRunner.ConditionAndRespondPriority);
         Center._MyBehaviorRunner.ChangeState("Hit", dmg);
     }
-    
+
     // 打别人计数
     void HitCountPlus(FightParamsReference victim)
     {
@@ -263,9 +263,9 @@ public partial class FightParamsReference
         Center._MyBehaviorRunner.SingleFightLog.AnalysisLog(Center._MyBehaviorRunner.ConditionAndRespondPriority);
         Center._MyBehaviorRunner.GetNowState().EnergyAbsorb(CriticalGaugeMode, victim);
     }
-    
+
     public int GetBeHitCount() => _beHitCount.GetBeHitCount(); //自己被揍计数
-    
+
     public void DreamComboStart()
     {
         UnityEngine.Events.UnityAction eventStart = () =>
@@ -310,7 +310,7 @@ public partial class FightParamsReference
     {
         return _eventAttackSuccessList;
     }
-    
+
     Color _damageColor;
     public void RunShaderChangeProcess(Element element, float time)
     {
@@ -341,7 +341,7 @@ public partial class FightParamsReference
             Center._ShaderManager.RimEffectsForAShortTime(_damageColor, time);
         }
     }
-    
+
     // 旧防御盾系列函数。已经基本不用
     BO_Shield _shield;
     public void SetShield(BO_Shield shield)

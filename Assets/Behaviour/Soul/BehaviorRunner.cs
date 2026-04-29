@@ -13,18 +13,18 @@ namespace Soul
         public List<SkillEntity> skillEntityList;
         BehaviorsIncubator _statesIncubator;
         #endregion
-        
+
         #region 辅助模块：技能链接时机判断器
         public SkillCancelFlag _SkillCancelFlag;
         #endregion
-        
+
         #region 运行时活参数
         public readonly SingleFightLog SingleFightLog = new SingleFightLog();
         public IDictionary<string, Behavior> BehaviourDic = new Dictionary<string, Behavior>();
         public IDictionary<string, SkillEntity> SkillEntityDic;//大状态机真正的运行依据，其他内容都是为了生成它而存在的中间变量
         public SkillEntity currentSKillEntity;
         SkillEntity _tempSKillEntity;
-        
+
         public readonly List<SkillEntity> fixedSkillSequence = new List<SkillEntity>();
         public Func<bool> AITriggerDreamComboRateCondition;
 
@@ -49,24 +49,24 @@ namespace Soul
             get;
             set;
         }
-        
+
         public bool BeingControl()
         {
             return InputsManager!= null && InputsManager.Inputting;
         }
-        
+
         void Awake()
         {
-            _nowBehavior = _emptyState;   
+            _nowBehavior = _emptyState;
         }
-        
+
         public bool AI { set; get; }
 
         public bool IfRunning()
         {
             return _nowBehavior != _emptyState;
         }
-        
+
         public Behavior GetNowState()
         {
             return _nowBehavior;
@@ -104,7 +104,7 @@ namespace Soul
             }
             return false;
         }
-        
+
         public Action sequenceBeginAct;
         private Action sequenceEndAct;
         public void RegisterSequenceCommand(Action onStart, Action onEnd)
@@ -112,7 +112,7 @@ namespace Soul
             this.sequenceBeginAct = onStart;
             this.sequenceEndAct = onEnd;
         }
-        
+
         public void StartOffSequenceEngine()
         {
             var first = fixedSkillSequence.FirstOrDefault();
@@ -137,11 +137,11 @@ namespace Soul
                     else
                         BehaviourSequenceEngine();
                 }
-                
+
                 #region 按钮技能刷新
                 InputsManager?.ButtonsFeatureLoad(optionsForButtonRefresh);
                 #endregion
-                
+
                 #region 决策制定
                 if (!onFixedSequence)
                     _controller.Decision(this, _canTranTo, AI && !BeingControl()); // 梦幻连段开始的时候应该是有单独的函数和这个并列
@@ -150,11 +150,11 @@ namespace Soul
                     _controller.RunFixedSequence(this, _canTranTo);
                 }
                 #endregion
-                
+
                 _nowBehavior?._State_Update();
             }
         }
-        
+
         void FixedUpdate()
         {
             if (IfRunning())
@@ -174,14 +174,14 @@ namespace Soul
                 }
             }
         }
-        
+
         void EndSequence()
         {
             _sequenceIndex = -1;
             onFixedSequence = false;
             this.sequenceEndAct?.Invoke();
         }
-        
+
         private int _sequenceIndex = -1;
         public void ChangeState(string num)
         {
@@ -199,7 +199,7 @@ namespace Soul
             _lastBehavior = _nowBehavior;
             _nowBehavior = _tryBehavior;
             SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out currentSKillEntity);
-            
+
             if (onFixedSequence)
             {
                 _sequenceIndex += 1;
@@ -208,7 +208,7 @@ namespace Soul
                     EndSequence();
                 }
             }
-            
+
             if (AI && !BeingControl())
             {
                 _nowBehavior.AI_State_enter();
@@ -218,21 +218,21 @@ namespace Soul
                 _nowBehavior.C_State_enter();
             }
         }
-        
+
         public void ChangeState(string num, V_Damage damage)
         {
             BehaviourDic.TryGetValue(num, out _tryBehavior);
             _nowBehavior?.AI_State_exit();
-            
+
             _lastBehavior = _nowBehavior;
             _nowBehavior = _tryBehavior;
             SkillEntityDic.TryGetValue(_nowBehavior.StateKey, out currentSKillEntity);
-            
+
             if (onFixedSequence)
             {
                 EndSequence();
             }
-            
+
             if (AI && !BeingControl())
                 _nowBehavior.AI_State_enter(damage);
             else
@@ -248,7 +248,12 @@ namespace Soul
                 ChangeState(_commandWaitingState.StateKey);
             }
         }
-        
+
+        public void ChangeToTestMode()
+        {
+            ChangeToWaitingState();
+        }
+
         public void INIStates(Data_Center data_Center)
         {
             if (BehaviourDic == null)
@@ -263,7 +268,7 @@ namespace Soul
             }
 
             BehaviourDic.TryGetValue("Empty", out _nowBehavior);
-            
+
             if (!AI)
             {
                 _nowBehavior.C_State_enter();
@@ -272,6 +277,6 @@ namespace Soul
             {
                 _nowBehavior.AI_State_enter();
             }
-        }       
+        }
     }
 }

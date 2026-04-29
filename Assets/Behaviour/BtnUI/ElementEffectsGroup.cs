@@ -29,7 +29,7 @@ public class ElementEffectsGroup
             _dreamComboBtn.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
     }
-    
+
     public void StartPressing(Button targetBtn)
     {
         if (!_buttonRects.TryGetValue(targetBtn, out var targetRect) || targetRect == null)
@@ -41,12 +41,12 @@ public class ElementEffectsGroup
         _pressingExplosion.transform.position = targetPos;
         _pressingExplosion.Play();
     }
-    
+
     public void StopPressing()
     {
         _pressingExplosion.Stop();
     }
-    
+
     public void BtnRefreshEffect()
     {
         foreach (var pair in _btnRefreshEffects)
@@ -83,19 +83,19 @@ public class ElementEffectsGroup
         }
         return targetExplode;
     }
-    
+
     public void Close(ParticleSystemStopBehavior systemStopBehavior)
     {
         foreach (var kv in _buttonSlotEffects)
         {
             kv.Value.Stop(true, systemStopBehavior);
         }
-        
+
         _triggerExplosion0.Stop(true, systemStopBehavior);
         _triggerExplosion1.Stop(true, systemStopBehavior);
         _triggerExplosion2.Stop(true, systemStopBehavior);
         _triggerExplosion3.Stop(true, systemStopBehavior);
-        
+
         foreach (var keyValue in _btnRefreshEffects)
         {
             keyValue.Value.Stop(true, systemStopBehavior);
@@ -103,18 +103,18 @@ public class ElementEffectsGroup
         _pressingExplosion.Stop(true, systemStopBehavior);
         _rushBtn.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         _dreamComboBtn.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        
+
         if (FightGlobalSetting.HasDefend)
             _defendBtn.Stop(true, systemStopBehavior);
     }
-    
+
     public void Open(Vector3 defendBtnPos, Vector3 rushBtnPos, Vector3 dreamComboPos)
     {
         _triggerExplosion0.Stop(true);
         _triggerExplosion1.Stop(true);
         _triggerExplosion2.Stop(true);
         _triggerExplosion3.Stop(true);
-        
+
         foreach (var keyValue in _btnRefreshEffects)
         {
             keyValue.Value.Stop(true);
@@ -124,7 +124,7 @@ public class ElementEffectsGroup
         _rushBtn.Play(true);
 
         _dreamComboBtn.transform.position = dreamComboPos;
-        
+
         if (FightGlobalSetting.HasDefend)
         {
             _defendBtn.gameObject.transform.position = defendBtnPos;
@@ -140,8 +140,8 @@ public class ElementEffectsGroup
         CacheButtonRect(a2Btn);
         CacheButtonRect(a3Btn);
         CacheButtonRect(dreamComboBtn);
-        
-        var tasks = new List<UniTask<ParticleSystem>> 
+
+        var tasks = new List<UniTask<ParticleSystem>>
         {
             AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab"),
             AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/slot.prefab"),
@@ -153,12 +153,12 @@ public class ElementEffectsGroup
         var fire1Slot = results[1];
         var fire2Slot = results[2];
         var dreamSlot = results[3];
-        
+
         attackSlot.transform.SetParent(targetRectT);
         fire1Slot.transform.SetParent(targetRectT);
         fire2Slot.transform.SetParent(targetRectT);
         dreamSlot.transform.SetParent(targetRectT);
-        
+
         _buttonSlotEffects = new Dictionary<Button, ParticleSystem>
         {
             { a1Btn, attackSlot },
@@ -171,8 +171,8 @@ public class ElementEffectsGroup
         {
             _defendBtn = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/defend.prefab");
         }
-        
-        var tasks2 = new List<UniTask<ParticleSystem>> 
+
+        var tasks2 = new List<UniTask<ParticleSystem>>
         {
             AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/rush.prefab"),
             AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/refresh.prefab"),
@@ -187,7 +187,7 @@ public class ElementEffectsGroup
         };
 
         var results2 = await UniTask.WhenAll(tasks2);
-        
+
         _rushBtn = results2[0];
         var a1Refresh = results2[1];
         var a2Refresh = results2[2];
@@ -198,14 +198,14 @@ public class ElementEffectsGroup
         _triggerExplosion3 = results2[7];
         _pressingExplosion = results2[8];
         _dreamComboBtn = results2[9];
-        
+
         _btnRefreshEffects = new Dictionary<Button, ParticleSystem>
         {
             { a1Btn, a1Refresh },
             { a2Btn, a2Refresh },
             { a3Btn, a3Refresh }
         };
-        
+
         foreach (var p in results2)
         {
             p.transform.SetParent(targetRectT);
@@ -225,7 +225,7 @@ public class ElementEffectsGroup
             _buttonRects[button] = rectTransform;
         }
     }
-    
+
     public void RefreshSlotEffect(Button button, string skillId, Vector3 pos)
     {
         if (String.IsNullOrEmpty(skillId))

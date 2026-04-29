@@ -15,7 +15,7 @@ public partial class AnimationManger
 {
     Animator Animator;
     public AnimationClip _toUse;
-    
+
     private const int FullBodyLayerIndex = 1;
     private static readonly int FullBodyState1Hash = UnityEngine.Animator.StringToHash("Full Body.full_body_state1");
     private static readonly int FullBodyState2Hash = UnityEngine.Animator.StringToHash("Full Body.full_body_state2");
@@ -71,7 +71,7 @@ public partial class AnimationManger
         SpeedBuff maxSpeedBuff = _speedBuffs.OrderByDescending(buff => buff.speed).FirstOrDefault();
         Speed = maxSpeedBuff.speed;
     }
-    
+
     public void RemoveSpeedBuff(string reasonKey)
     {
         _speedBuffs.RemoveAll(x=> x.reasonKey == reasonKey);
@@ -100,7 +100,7 @@ public partial class AnimationManger
         animFreezeSequence.Append(DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed - 1, FightGlobalSetting.HurtFreezeInDuration))
             .Append(DOTween.To(() => Animator.speed, x => Animator.speed = x, Speed, FightGlobalSetting.HurtFreezeOutDuration).SetEase(Ease.InExpo));
     }
-    
+
     public AnimationClip TryAnimationClip(string clip_name)
     {
         if (!string.IsNullOrEmpty(clip_name))
@@ -114,7 +114,7 @@ public partial class AnimationManger
         }
         return null;
     }
-    
+
     public bool GetBool(string anim)
     {
         return Animator.GetBool(anim);
@@ -285,18 +285,33 @@ public partial class AnimationManger
         Animator.SetBool("in_transition", snapshot.InTransition);
         return true;
     }
-    
+
     public void AnimationTrigger(string clip, float returnDuration)
     {
         AnimationClip clipx = TryAnimationClip(clip);
         PlayLayerAnim_clip(clipx, returnDuration);
     }
-    
+
     public void AnimationTrigger(AnimationClip clip, float returnDuration)
     {
         PlayLayerAnim_clip(clip, returnDuration);
     }
-    
+
+    public void AnimationTrigger(string clip, bool inTransition, float duration)
+    {
+        PlayLayerAnim(clip, inTransition, duration);
+    }
+
+    public void AnimationTrigger(AnimationClip clip, bool inTransition, float duration)
+    {
+        PlayLayerAnim_clip(clip, duration);
+    }
+
+    public void PlayLayerAnim(string clipName, bool inTransition, float duration)
+    {
+        PlayLayerAnim_clip(TryAnimationClip(clipName), duration);
+    }
+
     AnimatorStateInfo AnimatorStateInfo;
     AnimatorOverrideController animatorOverride;
 
@@ -353,13 +368,13 @@ public partial class AnimationManger
 // 下面这些不用了。改使用了crossfade后animator不会被判定为迁移。
 //public bool GetOnAniTransitionFlag()
 //{
-//    return Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.full_body_state2") 
+//    return Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.full_body_state2")
 //            || Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.full_body_state1");
 //}
 
 //public bool GetOnAniTransitionFlag2()
 //{
-//        return !Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.full_body_state2") 
+//        return !Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state1 -> Full Body.full_body_state2")
 //            && !Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.full_body_state2 -> Full Body.full_body_state1")
 //            && !Animator.GetAnimatorTransitionInfo(1).IsName("Full Body.null -> Full Body.full_body_state1");
 //}

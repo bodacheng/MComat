@@ -15,7 +15,7 @@ namespace Soul
         private float hurtAnimDuration = 0.05f;
         private Sequence mySequence;
         private Tweener _fixedDisplacementTweener;
-        
+
         #region Shake
         private Tweener _shakeTweener;
         private readonly float duration   = 0.3f;
@@ -29,7 +29,7 @@ namespace Soul
             _shakeTweener = _DATA_CENTER.WholeT.DOPunchPosition(-_DATA_CENTER.WholeT.forward * magnitude, duration,
                 vibrato, randomness);
         }
-        
+
         void PlayHurtAnim(V_Damage newValue)
         {
             if (_AIStateRunner.GetLastState().StateKey == "KnockOff" && _BasicPhysicSupport.hiddenMethods.Grounded)
@@ -37,7 +37,7 @@ namespace Soul
                 AnimationManger.AnimationTrigger(AnimationManger.GetRandomHurtAnim("lay"), hurtAnimDuration);
                 return;
             }
-            
+
             string hurtAnimKey;
             var meToAttacker = Vector3.Distance(_DATA_CENTER.WholeT.position, newValue.attacker.Center.WholeT.position);
             var rotateToTarget = meToAttacker <= FightGlobalSetting._closeDis
@@ -50,7 +50,7 @@ namespace Soul
             {
                 hurtAnimKey = newValue.DamageEffectPoint.y > _DATA_CENTER.geometryCenter.position.y ? "high" : "low";
             }
-            
+
             var obj = AnimationManger.GetRandomHurtAnim(hurtAnimKey);
             AnimationManger.AnimationTrigger(obj, hurtAnimDuration);
             AnimationManger.TriggerExpression(Facial.hit);
@@ -80,17 +80,17 @@ namespace Soul
         public override void AI_State_enter(V_Damage newValue)
         {
             _shakeTweener?.Kill();
-            
+
             if (_DATA_CENTER.TryChangeToSub(StateKey, newValue))
             {
                 return;
             }
-            
+
             target = newValue;
             base.AI_State_enter();
             _BO_Ani_E.hiddenMethods.CloseEffectsOnBodyParts(true);
             _BO_Ani_E.CloseOnProcessEnergyFromBodyWeapons();
-            if ((newValue.from_weapon.damage_type == DamageType.stable_draw && _BasicPhysicSupport.AtRing) || 
+            if ((newValue.from_weapon.damage_type == DamageType.stable_draw && _BasicPhysicSupport.AtRing) ||
                 (_AIStateRunner.GetLastState().StateKey == "KnockOff" && _BasicPhysicSupport.Weight == Weight.normal))
             {
                 //var knockOffState = (Knock_Off_State)_AIStateRunner.GetLastState();
@@ -98,14 +98,14 @@ namespace Soul
                     _AIStateRunner.ChangeState("KnockOff", target);
                 return;
             }
-            
+
             //_Animator.applyRootMotion = false;
             PlayHurtAnim(newValue);
             FightParamsRef.GettingDamage = true;
             _Weapon_Animation_Events.ClearMarkerManagers();
             TimeCounter = 0f;
             pEvents.CloseAllPersonalityEffects();
-            
+
             if (_BuffsRunner.Freezing)
                 return;
 
@@ -113,7 +113,7 @@ namespace Soul
             {
                 FightParamsRef.RunShaderChangeProcess(target.from_weapon.element, 0.1f);
             }
-            
+
             FightParamsRef.GetKnockOffCount().PlusGauge(1f);
             FightParamsRef.GetKnockOffCount().PlusTimeCounter(0.2f);
             if (FightParamsRef.GetKnockOffCount().GetGauge() >= FightGlobalSetting.KnockOffExtent
@@ -217,7 +217,7 @@ namespace Soul
                         return;
                 }
             }
-            
+
             AnimationManger.TriggerExpression(Facial.hit);
         }
 
@@ -241,7 +241,7 @@ namespace Soul
             }
             PreventUnitOverlap();
         }
-        
+
         public override bool Capacity_Exit_Condition()
         {
             return TimeCounter > _usedDizzyTime && !_BuffsRunner.Freezing;

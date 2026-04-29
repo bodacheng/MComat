@@ -20,6 +20,11 @@ public partial class SkillSet {
     {
         return _moveType;
     }
+
+    public RushType GetR()
+    {
+        return RushType.None;
+    }
     
     public SkillSet()
     {
@@ -41,6 +46,11 @@ public partial class SkillSet {
         this._def = canDefend;
     }
 
+    public SkillSet(MoveType moveType, bool canDefend, RushType rushType)
+        : this(moveType, canDefend)
+    {
+    }
+
     public SkillSet DeepCopy()
     {
         return (SkillSet)MemberwiseClone();
@@ -50,6 +60,11 @@ public partial class SkillSet {
     {
         _def = _Def;
         _moveType = _MoveType;
+    }
+
+    public void SetPassive(bool _Def, MoveType _MoveType, RushType _RushType)
+    {
+        SetPassive(_Def, _MoveType);
     }
 
     public SkillEditError CheckEdit()

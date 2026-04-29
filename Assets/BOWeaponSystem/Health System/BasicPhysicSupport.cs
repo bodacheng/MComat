@@ -23,7 +23,7 @@ public class BasicPhysicSupport : MonoBehaviour
     private float pushIntoRingSpeed = 1;
     public bool AtRing;
     public bool NearRing;
-    
+
     [Header("Contact Stabilizer")]
     [SerializeField] private float contactStabilizeSmoothTime = 0.08f;
     [SerializeField] private float contactJitterThreshold = 0.15f;
@@ -33,7 +33,7 @@ public class BasicPhysicSupport : MonoBehaviour
     private Vector3 contactStabilizedXZ;
     private Vector3 contactStabilizeVelocity;
     private bool contactStabilizerInitialized;
-    
+
     bool atRing
     {
         get
@@ -42,7 +42,7 @@ public class BasicPhysicSupport : MonoBehaviour
             var originY = _DATA_CENTER.WholeT.position.y;
             pos = _DATA_CENTER.WholeT.position;
             pos.y = 0;
-        
+
             var atRing = maxLimbDisFromCenter.magnitude > BoundaryControlByGod._BattleRingRadius;
             NearRing = maxLimbDisFromCenter.magnitude + 2 > BoundaryControlByGod._BattleRingRadius;
             if (atRing)
@@ -52,7 +52,7 @@ public class BasicPhysicSupport : MonoBehaviour
                 pos.y = originY;
                 _DATA_CENTER.WholeT.position = Vector3.Lerp(_DATA_CENTER.WholeT.position, pos, pushIntoRingSpeed * Time.deltaTime);
             }
-            
+
             if (originY < 0)
             {
                 pos.y = 0f;
@@ -61,12 +61,81 @@ public class BasicPhysicSupport : MonoBehaviour
             return atRing;
         }
     }
-    
+
+    public static bool TryGetHorizontalDirection(Vector3 vector, out Vector3 direction)
+    {
+        vector.y = 0f;
+        if (vector.sqrMagnitude <= Mathf.Epsilon)
+        {
+            direction = Vector3.zero;
+            return false;
+        }
+
+        direction = vector.normalized;
+        return true;
+    }
+
+    public static bool IsNearParallelOnXZ(Vector3 dir1, Vector3 dir2)
+    {
+        if (!TryGetHorizontalDirection(dir1, out var n1) || !TryGetHorizontalDirection(dir2, out var n2))
+            return false;
+
+        return Vector3.Cross(n1, n2).sqrMagnitude < FightGlobalSetting.HurtAutoFixPosCrossLimit;
+    }
+
+    public static Vector3 FindClosestPointOnLine(Vector3 linePoint, Vector3 point, Vector3 lineDirection)
+    {
+        if (!TryGetHorizontalDirection(lineDirection, out var normalizedDirection))
+            return point;
+
+        var toPoint = point - linePoint;
+        var projectionLength = Vector3.Dot(toPoint, normalizedDirection);
+        return linePoint + normalizedDirection * projectionLength;
+    }
+
+    public Vector3 ClampPositionToBattleRange(Vector3 targetPosition)
+    {
+        if (FightGlobalSetting.SceneStep == 1 && BoundaryControlByGod._BattleRingRadius > 0f)
+        {
+            var groundPos = targetPosition;
+            groundPos.y = 0f;
+            if (groundPos.magnitude > BoundaryControlByGod._BattleRingRadius)
+            {
+                groundPos = groundPos.normalized * BoundaryControlByGod._BattleRingRadius;
+                targetPosition.x = groundPos.x;
+                targetPosition.z = groundPos.z;
+            }
+        }
+
+        if (targetPosition.y < 0f)
+            targetPosition.y = 0f;
+
+        return targetPosition;
+    }
+
+    public void SetPositionBySkill(Vector3 targetPosition)
+    {
+        targetPosition = ClampPositionToBattleRange(targetPosition);
+
+        if (Rigidbody != null)
+        {
+            Rigidbody.linearVelocity = Vector3.zero;
+            Rigidbody.angularVelocity = Vector3.zero;
+            Rigidbody.position = targetPosition;
+        }
+
+        if (_DATA_CENTER != null && _DATA_CENTER.WholeT != null)
+            _DATA_CENTER.WholeT.position = targetPosition;
+        else
+            transform.position = targetPosition;
+    }
+
     public class HiddenMethods
     {
         readonly BasicPhysicSupport _BasicPhysicSupport;
         public bool EnemyTouchingDrag;
-        
+        Tween _attackPosFixTween;
+
         public HiddenMethods(BasicPhysicSupport _BasicPhysicSupport)
         {
             this._BasicPhysicSupport = _BasicPhysicSupport;
@@ -81,21 +150,21 @@ public class BasicPhysicSupport : MonoBehaviour
                 return false;
             if (_BasicPhysicSupport._DATA_CENTER._TeamConfig == null)
                 return false;
-                
+
             return _BasicPhysicSupport._DATA_CENTER._TeamConfig.enemyLayerMask == (_BasicPhysicSupport._DATA_CENTER._TeamConfig.enemyLayerMask | (1 << box.gameObject.layer))
                 ||
                 (_BasicPhysicSupport._DATA_CENTER._TeamConfig.enemyShieldLayerMask & (1 << box.gameObject.layer)) != 0;
         }
-        
+
         public bool IfStepOnFriendCharacter(Collider box)
         {
             return _BasicPhysicSupport._DATA_CENTER == null || _BasicPhysicSupport._DATA_CENTER._TeamConfig != null
                 && (_BasicPhysicSupport._DATA_CENTER._TeamConfig.mylayer == box.gameObject.layer) || _BasicPhysicSupport._DATA_CENTER._TeamConfig.myShieldLayer == box.gameObject.layer;
         }
-        
+
         // 与敌人的接触摩操功能
         private readonly List<Collider> _touchingEnemyCs = new List<Collider>();
-        
+
         public bool TouchingEnemy()
         {
             return _touchingEnemyCs.Count > 0;
@@ -115,7 +184,7 @@ public class BasicPhysicSupport : MonoBehaviour
             sum.y = 0;
             return sum / _touchingEnemyCs.Count;
         }
-        
+
         //弃用
         private Vector3 keptEnemyPoint;
         private Vector3 keptMePoint;
@@ -127,7 +196,7 @@ public class BasicPhysicSupport : MonoBehaviour
             pos = keptMePoint + ( keptEnemyPoint- keptMePoint).normalized * temp;
             return pos;
         }
-        
+
         public void AddTouchedEnemyBody(Collider c)
         {
             if (!_touchingEnemyCs.Contains(c))
@@ -147,15 +216,15 @@ public class BasicPhysicSupport : MonoBehaviour
                 _BasicPhysicSupport.Rigidbody.linearDamping = 0f;
             }
         }
-        
+
         public void ClearTouchedEnemyBody()
         {
             _touchingEnemyCs.Clear();
             _BasicPhysicSupport.Rigidbody.linearDamping = 0f;
         }
-        
+
         public int OverrideOnEnemyDrag = -1;
-        
+
         public bool Grounded => _BasicPhysicSupport._DATA_CENTER.WholeT.position.y <= floorY;
 
         readonly float floorY = 0f;
@@ -178,33 +247,56 @@ public class BasicPhysicSupport : MonoBehaviour
             }
             _BasicPhysicSupport.Rigidbody.useGravity = _BasicPhysicSupport.usingGravity;
         }
-        
+
         public void RecoverRootPosChange( )
         {
             if (!TouchingEnemy() && _BasicPhysicSupport.Rigidbody.linearVelocity == Vector3.zero)
                 _BasicPhysicSupport._DATA_CENTER.WholeT.transform.position += _BasicPhysicSupport._DATA_CENTER.AnimationManger.AnimatorRef.deltaPosition;
         }
-        
+
         public void LockPos()
         {
             _BasicPhysicSupport.SetUsingGravity(false);
             _BasicPhysicSupport.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
             _BasicPhysicSupport.Rigidbody.linearVelocity = Vector3.zero;
         }
+
+        public void AutoFixPosWhenAttackNearEnemy(Vector3 enemyPos, Vector3 mvDirection)
+        {
+            var dataCenter = _BasicPhysicSupport._DATA_CENTER;
+            if (dataCenter == null || dataCenter.geometryCenter == null || dataCenter.WholeT == null)
+                return;
+
+            var mePos = dataCenter.geometryCenter.position;
+            mePos.y = 0f;
+            enemyPos.y = 0f;
+
+            if (!BasicPhysicSupport.IsNearParallelOnXZ(mvDirection, enemyPos - mePos))
+                return;
+
+            var targetPos = BasicPhysicSupport.FindClosestPointOnLine(enemyPos, mePos, mvDirection);
+            targetPos.y = dataCenter.WholeT.position.y;
+            targetPos = _BasicPhysicSupport.ClampPositionToBattleRange(targetPos);
+
+            _attackPosFixTween?.Kill();
+            _attackPosFixTween = dataCenter.WholeT
+                .DOMove(targetPos, FightGlobalSetting.HurtAutoFixPosDuration)
+                .OnComplete(() => _attackPosFixTween = null);
+        }
     }
-    
+
     void Awake()
     {
         hiddenMethods = new HiddenMethods(this);
     }
-    
+
     void Update()
     {
         if (FightGlobalSetting.SceneStep == 1)
         {
             hiddenMethods.AutoSwitchGravity();
             AtRing = atRing;
-            
+
             float fps = 1.0f / Time.deltaTime;
             if (fps < 45f && Rigidbody.collisionDetectionMode != CollisionDetectionMode.Discrete)
             {
@@ -244,7 +336,7 @@ public class BasicPhysicSupport : MonoBehaviour
             return Mathf.Infinity;
         }
     }
-    
+
     private Tweener rotateTween;
     public Tweener RotateToTarget_Tween(Vector3 target, float duration)
     {
@@ -270,7 +362,7 @@ public class BasicPhysicSupport : MonoBehaviour
             hiddenMethods.OverrideOnEnemyDrag = -1;
         }
     }
-    
+
     public void SetOverrideOnEnemyDrag(AnimationEvent e)
     {
         hiddenMethods.OverrideOnEnemyDrag = e.intParameter;
@@ -282,7 +374,7 @@ public class BasicPhysicSupport : MonoBehaviour
                && _DATA_CENTER.FightDataRef != null
                && _DATA_CENTER.FightDataRef.GettingDamage;
     }
-    
+
     // Smooth out small root jitter when rubbing against other fighters.
     void ApplyContactStabilizer()
     {
@@ -297,7 +389,7 @@ public class BasicPhysicSupport : MonoBehaviour
             ResetContactStabilizer();
             return;
         }
-        
+
         if (Rigidbody.linearVelocity.sqrMagnitude > contactVelocityThreshold * contactVelocityThreshold)
         {
             ResetContactStabilizer();

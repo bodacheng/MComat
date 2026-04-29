@@ -11,12 +11,12 @@ namespace Soul
             {
                 DecideDirection();
             }
-            
+
             if (Finished())
             {
                 DecideDirection();
             }
-            
+
             switch (_moveDirection)
             {
                 case AIMoveDirection.Stay:
@@ -40,7 +40,7 @@ namespace Soul
                     //use_direction = (EnemiesByDistance[0].transform.position - gameObject.transform.position).normalized;
                     break;
             }
-            
+
             var enemyAndTeammateBetweenMeAndEnemy = Sensor.EnemyAndTeammateBetweenMeAndEnemy();
             if (enemyAndTeammateBetweenMeAndEnemy != null)
             {
@@ -49,7 +49,7 @@ namespace Soul
                 temp.y = 0;
                 _useDirection = Vector3.RotateTowards(_useDirection, temp, 10 * Time.fixedDeltaTime, 0).normalized;//里面的参数都是些很微妙的东西
             }
-            
+
             _useDirection.y = 0;
             _useDirection = _useDirection.normalized;
         }
@@ -66,7 +66,7 @@ namespace Soul
             if (!CommonSetting.PcMode)
             {
                 h = (Input.GetKey(AppSetting.Value.LeftKeyCode) ? -1f : 0f) +
-                        (Input.GetKey(AppSetting.Value.RightKeyCode) ? 1f : 0f) +                                    
+                        (Input.GetKey(AppSetting.Value.RightKeyCode) ? 1f : 0f) +
                         UltimateJoystick.GetHorizontalAxis("joystick");
                 v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
                         (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f) +
@@ -79,12 +79,12 @@ namespace Soul
                 v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
                     (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f);
             }
-            
+
             _useDirection = (_screenMovementForward * v) + (_screenMovementRight * h);
             _useDirection.y = 0;
             _useDirection = _useDirection.normalized;
         }
-        
+
         public override void _c_State_FixedUpdate1()
         {
             _c_State_Update_SP();
@@ -93,10 +93,10 @@ namespace Soul
                 _useDirection = Vector3.zero;
             }
             ApplyMovementIntent(_useDirection, speed, 20f);
-            
+
             PreventUnitOverlap();
         }
-        
+
         public override void _State_FixedUpdate1()
         {
             _f_State_Update_SP();

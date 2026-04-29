@@ -15,7 +15,7 @@ namespace Soul
         {
             if (newValue.from_weapon.weaponHP > 0 && newValue.from_weapon.CurrentHP <= 0)
                 return;
-            
+
             Vector3 Destination()
             {
                 var vector3 = newValue.from_weapon_marker.transform.position;

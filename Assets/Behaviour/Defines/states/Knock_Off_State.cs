@@ -17,19 +17,19 @@ namespace Soul
         float _temp;
         Tweener rotateTween;
         float curveEndTime;
-        
+
         public Knock_Off_State()
         {
             StateType = BehaviorType.KnockOff;
         }
-        
+
         public override void AI_State_enter(V_Damage value)
         {
             if (_DATA_CENTER.TryChangeToSub(StateKey, value))
             {
                 return;
             }
-            
+
             base.AI_State_enter();
             FlyingStep = 0;
             _timeCounter = 0;
@@ -58,7 +58,7 @@ namespace Soul
         {
             return false;
         }
-        
+
         public override void AI_State_exit()
         {
             base.AI_State_exit();
@@ -70,7 +70,7 @@ namespace Soul
             if (rotateTween != null && rotateTween.active && rotateTween.IsPlaying())
                 rotateTween.Kill();
         }
-        
+
         Vector3 _effectP, _quaV;
         public int FlyingStep;// 0 拔地 1 曲线 2 落地以及躺地昏迷
         public override void _State_Update()
@@ -91,7 +91,7 @@ namespace Soul
                         EffectsManager.GenerateEffect(CommonSetting.WallCrackEffectCode, null, _effectP, Quaternion.LookRotation(_quaV, Vector3.up), null).Forget();
                 }
             }
-            
+
             switch (FlyingStep)
             {
                 case 0:
@@ -159,8 +159,8 @@ namespace Soul
 //}else{
 //    touchedBoundary = _DATA_CENTER.onBattleGroundBundary;
 //}
-//gameObject.transform.position = Matrix.MultiplyPoint3x4(new Vector3(0, 
-//FightGlobalSetting._knockOffyAnimationCurve.Evaluate( time_counter ) * 1f - alreadyFinishedYTranslation, 
+//gameObject.transform.position = Matrix.MultiplyPoint3x4(new Vector3(0,
+//FightGlobalSetting._knockOffyAnimationCurve.Evaluate( time_counter ) * 1f - alreadyFinishedYTranslation,
 //FightGlobalSetting._knockOffzAnimationCurve.Evaluate( time_counter ) * 1f - alreadyFinishedZTranslation));
 
 // Knock_off_state should not be super_canceled to revive state,here is the reason:

@@ -9,14 +9,14 @@ public class SensorUnity : MonoBehaviour
     private Collider[] _hits;//What was hit in this frame?
     private Vector3 _centerPos;
     private float _sensorRadius;
-    
+
     int _detectionInterval = -1; // -1 会保持检测器停止
     int _detectionResultKeepFrames;
     bool _continuousDetection;
-    
+
     public readonly List<Action> SensorDetectionResultClearProcesses = new List<Action>();
     public readonly List<Action<Collider[]>> SensorDetectionResultSortProcesses = new List<Action<Collider[]>>();
-    
+
     int DetectionInterval
     {
         get => _detectionInterval;
@@ -27,7 +27,7 @@ public class SensorUnity : MonoBehaviour
             {
                 one.Invoke();
             }
-            
+
             if (_detectionInterval != -1)
             {
                 SensorDetectProcess();//检测
@@ -38,9 +38,9 @@ public class SensorUnity : MonoBehaviour
             }
         }
     }
-    
+
     // continuousDetectionStart(0) 的情况下。
-    // round 0: (一次检测) this.DetectionResultLastFrame == 0, DetectionInterval = 1 
+    // round 0: (一次检测) this.DetectionResultLastFrame == 0, DetectionInterval = 1
     // round 1: DetectionInterval = 0; (上次检测结果未被清空)
     // round 2: 一次检测，DetectionInterval++; (上次检测未被清空)
     // round 3: DetectionInterval == 1, DetectionInterval = 0,(上次检测未被清空)
@@ -60,7 +60,7 @@ public class SensorUnity : MonoBehaviour
         _continuousDetection = continuous;
         _detectionResultKeepFrames = detectionResultKeepFrames;
     }
-    
+
     public void SensorFixedUpdate()
     {
         if (DetectionInterval != -1)
@@ -77,7 +77,7 @@ public class SensorUnity : MonoBehaviour
             _detectionInterval++;
         }
     }
-    
+
     public void Stop()
     {
         DetectionInterval = -1;
@@ -110,11 +110,11 @@ public class SensorUnity : MonoBehaviour
             _detectionInterval = 0;
         }
     }
-    
+
     public void SensorSetting(float battleRingRadius, int groupFightRemainUnitCount)
     {
         var detectColliderCount = 0;
-        
+
         if (FightLoad.Fight.FightMode == FightMode.Group)
         {
             detectColliderCount = groupFightRemainUnitCount * 2;
@@ -131,17 +131,17 @@ public class SensorUnity : MonoBehaviour
                 detectColliderCount = 15;
             }
         }
-        
+
         Setup(battleRingRadius, Vector3.zero, detectColliderCount);
     }
-    
-    private void Setup(float radius, Vector3 center, int detectColliderCount)
+
+    public void Setup(float radius, Vector3 center, int detectColliderCount)
     {
         _sensorRadius = radius;
         _centerPos = center;
         _hits = new Collider[detectColliderCount] ; //What was hit in this frame?
     }
-    
+
     void SensorDetectProcess()
     {
         Physics.OverlapSphereNonAlloc(_centerPos, _sensorRadius, _hits, _layers);
