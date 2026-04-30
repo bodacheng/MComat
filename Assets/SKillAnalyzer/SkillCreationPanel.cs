@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using MCombat.Shared.Behaviour;
 using Skill;
 using UnityEditor;
 using UnityEditor.AddressableAssets;
@@ -33,16 +34,7 @@ public class SkillCreationPanel
     private const string CsvNewLine = "\r\n";
     private const int PlaceholderIconSize = 128;
 
-    private static readonly BehaviorType[] BehaviorTypeOptions =
-    {
-        BehaviorType.GR,
-        BehaviorType.GI,
-        BehaviorType.GM,
-        BehaviorType.GMB,
-        BehaviorType.CT,
-        BehaviorType.RB,
-        BehaviorType.NONE
-    };
+    private static readonly BehaviorType[] BehaviorTypeOptions = BehaviorTypeUtility.CreateSkillStateOptions(true);
 
     private static readonly string[] BehaviorTypeLabels = BehaviorTypeOptions.Select(x => x.ToString()).ToArray();
     private static readonly string[] RequiredCsvPaths =
