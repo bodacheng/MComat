@@ -95,7 +95,7 @@ Material:
     m_Ints: []
     m_Floats:
     - PixelSnap: 0
-    - _Animation_Factor: 1.6840998
+    - _Animation_Factor: 2
     - _AutoManualAnimation: 1
     - _ColorMask: 15
     - _DetailsMaskDistortionMult: 1

@@ -654,6 +654,11 @@ namespace MagicaCloth2
                         // buffer
                         stepBasicPositionBuffer = stepBasicPositionBuffer,
                         stepBasicRotationBuffer = stepBasicRotationBuffer,
+                        // temp
+                        tempVectorBufferA = tempVectorBufferA,
+                        tempVectorBufferB = tempVectorBufferB,
+                        tempCountBuffer = tempCountBuffer,
+                        tempFloatBufferA = tempFloatBufferA,
                     };
                     splitClothJobHandle = splitStep_B_job.Schedule(splitClothTeamCount * workerCount, 1, splitClothJobHandle);
 

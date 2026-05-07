@@ -459,7 +459,12 @@ namespace MagicaCloth2
                         ref frictionArray,
                         // buffer
                         ref stepBasicPositionBuffer,
-                        ref stepBasicRotationBuffer
+                        ref stepBasicRotationBuffer,
+                        // temp
+                        ref tempVectorBufferA,
+                        ref tempVectorBufferB,
+                        ref tempCountBuffer,
+                        ref tempFloatBufferA
                         );
 
                     // 制約解決のためのステップごとの基準姿勢を計算
@@ -1070,7 +1075,12 @@ namespace MagicaCloth2
             ref NativeArray<float> frictionArray,
             // buffer
             ref NativeArray<float3> stepBasicPositionBuffer,
-            ref NativeArray<quaternion> stepBasicRotationBuffer
+            ref NativeArray<quaternion> stepBasicRotationBuffer,
+            // temp buffer
+            ref NativeArray<float3> tempVectorBufferA,
+            ref NativeArray<float3> tempVectorBufferB,
+            ref NativeArray<int> tempCountBuffer,
+            ref NativeArray<float> tempFloatBufferA
             )
         {
             // 速度更新、外力の影響、慣性シフト
@@ -1225,6 +1235,12 @@ namespace MagicaCloth2
 
                 // 予測位置格納
                 nextPosArray[pindex] = nextPos;
+
+                // 作業バッファクリア
+                tempVectorBufferA[pindex] = 0;
+                tempVectorBufferB[pindex] = 0;
+                tempCountBuffer[pindex] = 0;
+                tempFloatBufferA[pindex] = 0;
             }
         }
 
