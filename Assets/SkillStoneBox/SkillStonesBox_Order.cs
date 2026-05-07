@@ -22,7 +22,7 @@ namespace mainMenu
                 }
             }
         }
-        
+
         // 功能本身直接放按钮上，但text要适配到SkillStonesBox上。
         public void SwitchOrder()
         {
@@ -30,7 +30,7 @@ namespace mainMenu
             Selected?.SetActive(false);
             RefreshVisibleStones(false);
         }
-              
+
         void Order(List<string> targets)
         {
             if (targets == null || targets.Count <= 1)
@@ -84,7 +84,7 @@ namespace mainMenu
             var right = Stones.Get(second);
             return CompareByRecordIdAscending(left, right);
         }
-        
+
         int CompareByLevel(string first, string second, bool ascending)
         {
             var left = Stones.Get(first);
@@ -92,7 +92,7 @@ namespace mainMenu
             var nullCompare = CompareNull(left, right);
             if (nullCompare != 0)
                 return nullCompare;
-            
+
             var result = left.Level.CompareTo(right.Level);
             if (result == 0)
                 result = CompareByRecordIdAscending(left, right);

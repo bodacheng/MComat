@@ -23,11 +23,11 @@ public class StonesPage : MSceneProcess
         await Stones.RenderAll();
         ProgressLayer.Close();
         layer = UILayerLoader.Load<StoneListLayer>();
-        layer.Setup();
+        await layer.Setup();
         ReturnLayer.MoveFront();
-        SSLevelUpManager.CalUpdateAllForms();
-        layer.levelManager.LevelUpAllStonesBtn.interactable = SSLevelUpManager.HasStoneToBeUpdate();
-        layer.levelManager.LevelUpAllStonesBtnAnimator.SetBool("on", SSLevelUpManager.HasStoneToBeUpdate());
+        StoneLevelUpProccessor.CalUpdateAllForms();
+        layer.levelManager.LevelUpAllStonesBtn.interactable = StoneLevelUpProccessor.HasStoneToBeUpdate();
+        layer.levelManager.LevelUpAllStonesBtnAnimator.SetBool("on", StoneLevelUpProccessor.HasStoneToBeUpdate());
         SetLoaded(true);
     }
     

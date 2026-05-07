@@ -7,10 +7,10 @@ namespace mainMenu
     public partial class SkillStonesBox : MonoBehaviour
     {
         public event Action ExTabPressed;
-        
+
         [Header("画面主模块parent")]
         [SerializeField] RectTransform BoxT;
-        
+
         [Header("type按钮")]
         [SerializeField] Dropdown types;
         [SerializeField] BOButton NormalTab;
@@ -18,19 +18,19 @@ namespace mainMenu
         [SerializeField] BOButton EX2Tab;
         [SerializeField] BOButton EX3Tab;
 
-        [Header("order")] 
+        [Header("order")]
         [SerializeField] BOButton orderBtn;
         [Header("Order Button")]
         [SerializeField] Text orderButtonText;
-        
+
         [Header("type特效管理")]
         public SkillStoneBoxTabEffectsManager _tabEffects;
-        
+
         [Header("攻击范围限定")]
         [SerializeField] Toggle closeCheckBox;
         [SerializeField] Toggle nearCheckBox;
         [SerializeField] Toggle farCheckBox;
-        
+
         [SerializeField] ShowAllMyStoneLevel showAllMyStoneLevel;
 
         public void TutorialSimpleMode()
@@ -40,7 +40,7 @@ namespace mainMenu
             farCheckBox.gameObject.SetActive(false);
             showAllMyStoneLevel.gameObject.SetActive(false);
         }
-        
+
         void Awake()
         {
             Selected = selectedFrame;
@@ -53,7 +53,19 @@ namespace mainMenu
             get;
             set;
         }
-        
+
+        RectTransform BoxRoot
+        {
+            get
+            {
+                if (BoxT != null)
+                    return BoxT;
+                if (grid != null)
+                    return grid.GetComponent<RectTransform>();
+                return transform as RectTransform;
+            }
+        }
+
         // 功能系。刷新技能石陈列界面。这里应该包括一个特殊功能，就是展示Tutorial模式下临时可用的那些石头
         public void FilterFeatureRefresh(bool viewingMode)
         {

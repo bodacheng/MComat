@@ -7,7 +7,7 @@ public class StoneContentCell : MonoBehaviour
     [SerializeField] private RectTransform stoneIconParent;
     [SerializeField] private Text skillName;
     [SerializeField] private string skillId;
-    
+
     void Start()
     {
         Render();

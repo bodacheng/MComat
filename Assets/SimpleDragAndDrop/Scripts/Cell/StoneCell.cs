@@ -18,7 +18,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         SKLevelUpMSlot,
         StoneMergeSlot
     }
-    
+
     public BOButton btn;
     [Tooltip("using Stone Unit Icon")]
     [SerializeField] HeroIcon unitIcon;
@@ -26,9 +26,9 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
     public GameObject _selected;
     [Tooltip("Functional type of this cell")]
     public CellPhase cellPhase = CellPhase.SkillStoneBoxCell;
-    
+
     SKStoneItem _myDadItem;
-    
+
     /// <summary>
     /// Put item into this cell.(Keep old item in that cell safe)
     /// </summary>
@@ -54,7 +54,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         item.transform.localPosition = Vector3.zero;
         item.MakeRaycast(true);
     }
-    
+
     /// <summary>
     /// Updates my item
     /// </summary>
@@ -69,7 +69,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             }
         }
     }
-    
+
     // Show Character icon using this SkillStone
     void ShowUsingUnit(SKStoneItem item, HeroIcon targetIcon)
     {
@@ -101,7 +101,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
         if (unitIcon != null)
             unitIcon.gameObject.SetActive(false);
     }
-    
+
     /// <summary>
     /// Manualy add item into this cell
     /// </summary>
@@ -114,7 +114,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             UpdateMyItem();
         }
     }
-    
+
     /// <summary>
     /// Swap items between two cells
     /// </summary>
@@ -144,7 +144,7 @@ public partial class StoneCell : MonoBehaviour, IDropHandler
             }
         }
     }
-    
+
     /// <summary>
     /// Get item from this cell
     /// </summary>

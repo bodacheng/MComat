@@ -10,7 +10,7 @@ namespace mainMenu
     {
         [Header("格子")]
         [SerializeField] StoneCell cellPrefab;
-        
+
         [Header("选中框")]
         [SerializeField] GameObject selectedFrame;
 
@@ -25,14 +25,15 @@ namespace mainMenu
 
         public void SetBoxHeight(float sizeNeedToRemain)
         {
-            var gridLayoutGroup = BoxT.GetComponent<GridLayoutGroup>();
+            var gridLayoutGroup = BoxRoot != null ? BoxRoot.GetComponent<GridLayoutGroup>() : null;
+            gridLayoutGroup ??= grid;
             var stoneBoxRect = transform.GetComponent<RectTransform>();
             var temp = PosCal.CanvasHeight - sizeNeedToRemain;
-            temp =  (gridLayoutGroup.cellSize.y + gridLayoutGroup.spacing.y) * 
+            temp =  (gridLayoutGroup.cellSize.y + gridLayoutGroup.spacing.y) *
                     Mathf.Floor(temp / (gridLayoutGroup.cellSize.y + gridLayoutGroup.spacing.y)) - gridLayoutGroup.spacing.y;
             stoneBoxRect.sizeDelta = new Vector2(stoneBoxRect.sizeDelta.x, temp);
         }
-        
+
         public void GenerateCells(int extraCellNum = 0)
         {
             _extraCellNum = Mathf.Max(0, extraCellNum);
@@ -43,7 +44,7 @@ namespace mainMenu
                 cell.RemoveToTemp();
                 cell.gameObject.SetActive(false);
             }
-            
+
             var poolCellCount = CalculateRequiredCellCount(BoxLength());
             EnsureCellPoolSize(poolCellCount);
             var viewPortHeight = PosCal.AdjustedViewPortHeight(scrollRect.GetComponent<RectTransform>().rect.height, grid.cellSize.y, grid.spacing.y);
@@ -91,9 +92,12 @@ namespace mainMenu
         {
             if (cell == null)
                 return;
-            if (cell.transform.parent != BoxT)
+            var boxRoot = BoxRoot;
+            if (boxRoot == null)
+                return;
+            if (cell.transform.parent != boxRoot)
             {
-                cell.transform.SetParent(BoxT);
+                cell.transform.SetParent(boxRoot);
                 cell.transform.localPosition = Vector3.zero;
                 cell.transform.localScale = Vector3.one;
             }
@@ -136,7 +140,7 @@ namespace mainMenu
             var gridRect = grid.GetComponent<RectTransform>();
             gridRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, height);
         }
-        
+
         public void AddFeatureToCells(Action<StoneCell> action)
         {
             foreach (var cell in _cells)
@@ -147,7 +151,7 @@ namespace mainMenu
                 action.Invoke(cell);
             }
         }
-        
+
         StoneCell GetFirstEmptyCell()
         {
             foreach (var cell in _cells)
@@ -209,7 +213,7 @@ namespace mainMenu
             // 重新排布并定位格子
             UpdateVisibleCells(_currentStoneInstanceIds.Count);
             RefreshVisibleStones(false);
-            
+
             var targetCell = FindCellByInstanceId(item.instanceId) ?? GetFirstEmptyCell();
             if (targetCell != null)
             {
@@ -267,7 +271,7 @@ namespace mainMenu
             var normalized = 1f - Mathf.Clamp01(targetY / (contentHeight - viewHeight));
             scrollRect.verticalNormalizedPosition = normalized;
         }
-        
+
         void RemoveToTemp(SKStoneItem item)
         {
             item._using = false;
@@ -300,12 +304,12 @@ namespace mainMenu
                     Type = C_Types[i],
                     ExType = new[] { 3 },
                 };
-                
+
                 var skillStonesOfTypeNormal = Stones.TargetStonesFromAccount(filterForm0, null);
                 var skillStonesOfTypeEx1 = Stones.TargetStonesFromAccount(filterForm1, null);
                 var skillStonesOfTypeEx2 = Stones.TargetStonesFromAccount(filterForm2, null);
                 var skillStonesOfTypeEx3 = Stones.TargetStonesFromAccount(filterForm3, null);
-                
+
                 returnValue = Mathf.Max(returnValue, skillStonesOfTypeNormal.Count, skillStonesOfTypeEx1.Count, skillStonesOfTypeEx2.Count, skillStonesOfTypeEx3.Count);
             }
             return returnValue;

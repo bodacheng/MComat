@@ -145,7 +145,7 @@ class MCamera : CameraMode
             //             return Mathf.Abs(Vector2.Angle(enemyScreenPos - meScreenPos, -Vector3.right));
             //         }
             //     }
-            //     
+            //
             //     angleToHorizontal = CheckNeedForAutoRotate();
             //     if (angleToHorizontal > autoChangeAngleLimit)
             //     {
@@ -184,7 +184,7 @@ class MCamera : CameraMode
                 shouldZoomIn &= (ePosX >= edgeForIn && ePosX <= (1 - edgeForIn) && ePosY >= edgeForIn && ePosY <= (1 - edgeForIn));
                 shouldZoomOut |= (ePosX < edgeForOut || ePosX > (1 - edgeForOut) || ePosY < edgeForOut || ePosY > (1 - edgeForOut));
             }
-            
+
             if (shouldZoomIn)
             {
                 XZDistance -= _changeSpeed;
@@ -199,9 +199,9 @@ class MCamera : CameraMode
         wholeTargets.AddRange(myTeamTargets);
         wholeTargets.AddRange(targets);
         AdjustXZDis(wholeTargets);
-        
+
         YDis = XZDistance * disToH;
-        
+
         // 判断我与敌人哪个更接近相机位置
         if (enemyScreenPos.y >= meScreenPos.y)
         {

@@ -98,8 +98,8 @@ public partial class NineForShow : MonoBehaviour
         {
             editSkillIndicator.SetActive(showEditSkillIndicator &&
                                          (PreScene.target.Focusing != null && PreScene.target.Focusing.id != null) &&
-                                         (valR == SkillSet.SkillEditError.UnBalanced 
-                                          || valR == SkillSet.SkillEditError.RepeatedSkill 
+                                         (valR == SkillSet.SkillEditError.UnBalanced
+                                          || valR == SkillSet.SkillEditError.RepeatedSkill
                                           || valR == SkillSet.SkillEditError.NoNormalStart
                                           || valR == SkillSet.SkillEditError.NotFull));
         }
@@ -127,7 +127,7 @@ public partial class NineForShow : MonoBehaviour
         string c1SkillId, string c2SkillId, string c3SkillId)
     {
         ClearCurrent();
-        
+
         var tasks =  new[]
         {
             Stones.GenerateStoneModel(a1SkillId, false),
@@ -140,9 +140,9 @@ public partial class NineForShow : MonoBehaviour
             Stones.GenerateStoneModel(c2SkillId, false),
             Stones.GenerateStoneModel(c3SkillId, false)
         };
-        
+
         var results = await UniTask.WhenAll(tasks);
-        
+
         _a1S = results[0];
         _a2S = results[1];
         _a3S = results[2];
@@ -152,11 +152,11 @@ public partial class NineForShow : MonoBehaviour
         _c1S = results[6];
         _c2S = results[7];
         _c3S = results[8];
-        
+
         Parent();
-        
+
         return;
-        
+
         if (_a1S != null && A1Frame != null)
         {
             A1Frame.color = RefreshFrameColor(_a1S._SkillConfig.SP_LEVEL);

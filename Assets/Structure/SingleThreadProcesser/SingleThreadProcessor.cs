@@ -19,7 +19,7 @@ public class SingleThreadProcessor
             }
         }
     }
-    
+
     public async UniTask RunAsQueued(Func<UniTask> originFactory)
     {
         if (originFactory == null)
@@ -29,7 +29,7 @@ public class SingleThreadProcessor
         {
             pendingCount++;
         }
-        
+
         await semaphore.WaitAsync();
         try
         {

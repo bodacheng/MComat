@@ -253,10 +253,10 @@ namespace ModelView
             {
                 upDownRotateRangeMax = y;
             }
-    
+
             // 对y值进行夹取
             float clampedY = Mathf.Clamp(y, upDownRotateRangeMin, upDownRotateRangeMax);
-    
+
             // 目标值
             Vector3 endValue = new Vector3(x, clampedY, z);
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System;
+using mainMenu;
 
 namespace dataAccess
 {
@@ -8,8 +9,8 @@ namespace dataAccess
     {
         static readonly IDictionary<string, StoneOfPlayerInfo> Dic = new Dictionary<string, StoneOfPlayerInfo>();
         static readonly IDictionary<string, SKStoneItem> RenderModelDic = new Dictionary<string, SKStoneItem>();
-        static readonly IDictionary<string, string> TempUnitUsageDic = new Dictionary<string, string>(); // 临时用于界面显示的装备信息
-        
+        static readonly IDictionary<string, string> TempUnitUsageDic = new Dictionary<string, string>();
+
         public static void ClearData()
         {
             Dic.Clear();
@@ -20,7 +21,7 @@ namespace dataAccess
         {
             return Dic.Count > CommonSetting.MaxStoneCount;
         }
-        
+
         public static void ClearRender()
         {
             foreach (var kv in RenderModelDic)
@@ -30,23 +31,18 @@ namespace dataAccess
             RenderModelDic.Clear();
         }
 
-        /// <summary>
-        /// 设置临时的装备角色，用于界面展示当前编辑状态。
-        /// 传入null时移除临时记录；传入string.Empty时表示明确未装备，避免回退到持久化的unitInstanceId。
-        /// </summary>
         public static void SetTempUnitUsage(string stoneInstanceId, string unitInstanceId)
         {
             if (string.IsNullOrEmpty(stoneInstanceId))
                 return;
+
             if (unitInstanceId == null)
             {
-                if (TempUnitUsageDic.ContainsKey(stoneInstanceId))
-                    TempUnitUsageDic.Remove(stoneInstanceId);
+                TempUnitUsageDic.Remove(stoneInstanceId);
+                return;
             }
-            else
-            {
-                TempUnitUsageDic[stoneInstanceId] = unitInstanceId;
-            }
+
+            TempUnitUsageDic[stoneInstanceId] = unitInstanceId;
         }
 
         public static void ClearTempUnitUsage()
@@ -54,21 +50,27 @@ namespace dataAccess
             TempUnitUsageDic.Clear();
         }
 
-        /// <summary>
-        /// 优先返回临时的装备角色，用于UI显示当前编辑状态。
-        /// </summary>
         public static string GetUnitInstanceIdForDisplay(string stoneInstanceId)
         {
             if (stoneInstanceId != null && TempUnitUsageDic.TryGetValue(stoneInstanceId, out var tempUnit))
                 return tempUnit;
             return Get(stoneInstanceId)?.unitInstanceId;
         }
-        
+
+        public static void TempRemoveAllStoneModel()
+        {
+            foreach (var kv in RenderModelDic)
+            {
+                kv.Value._using = false;
+                kv.Value.gameObject.transform.SetParent(PreScene.target.stonesTempContainer);
+            }
+        }
+
         public static StoneOfPlayerInfo Get(string id)
         {
             return id == null ? null : Dic.ContainsKey(id) ? Dic[id] : null;
         }
-        
+
         public static List<string> GetMyStonesBySkillID(string skillID)
         {
             var infoModels = new List<string>();
@@ -88,15 +90,15 @@ namespace dataAccess
             if (stoneInfo == null)
                 return false;
 
-            var form = SSLevelUpManager.DecideForm(stoneInfo.SkillId, stoneInfo.InstanceId);
+            var form = StoneLevelUpProccessor.DecideForm(stoneInfo.SkillId, stoneInfo.InstanceId);
             return form != null;
         }
-        
+
         public static SKStoneItem GetRenderModel(string itemId)
         {
             return itemId == null ? null : RenderModelDic.ContainsKey(itemId) ? RenderModelDic[itemId] : null;
         }
-        
+
         public static void HighLight(string skillId)
         {
             foreach (var kv in RenderModelDic)
@@ -135,6 +137,25 @@ namespace dataAccess
                 var stoneOfPlayerInfo = Dic[kv.Key];
                 stoneOfPlayerInfo.unitInstanceId = kv.Value.Item1;
                 stoneOfPlayerInfo.slot = kv.Value.Item2;
+            }
+        }
+
+        public static void SanitizeAgainstCurrentUnits()
+        {
+            foreach (var kv in Dic)
+            {
+                var stone = kv.Value;
+                if (stone == null || string.IsNullOrEmpty(stone.unitInstanceId))
+                {
+                    continue;
+                }
+
+                if (Units.Get(stone.unitInstanceId) == null)
+                {
+                    Debug.LogWarning($"[StoneCompat] Unequip stone {stone.InstanceId} from unsupported unit {stone.unitInstanceId}");
+                    stone.unitInstanceId = null;
+                    stone.slot = null;
+                }
             }
         }
     }

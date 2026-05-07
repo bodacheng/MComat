@@ -213,9 +213,9 @@ class ChatGptFix : CameraMode
             XZDistance -= _changeSpeed;
             UsedHeight -= _changeSpeed;
         }
-        else if (ePosX <= 0.2f || ePosX >= 0.8f || 
-                 mPosX <= 0.2f || mPosX >= 0.8f || 
-                 ePosY <= 0.2f || ePosY >= 0.8f || 
+        else if (ePosX <= 0.2f || ePosX >= 0.8f ||
+                 mPosX <= 0.2f || mPosX >= 0.8f ||
+                 ePosY <= 0.2f || ePosY >= 0.8f ||
                  mPosY <= 0.2f || mPosY >= 0.8f)
         {
             XZDistance += _changeSpeed;
@@ -240,10 +240,10 @@ class ChatGptFix : CameraMode
         if (hasTargets || meCenter != null || h != 0)
         {
             camera.transform.position = Vector3.Lerp(camera.transform.position, cameraTargetPos, _changeSpeed);
-            
+
             lookPoint = (backWPos - frontWPos) * 0.5f + frontWPos;
             lookPoint.y = _lookPointHeight;
-            
+
             rotateToDirection = lookPoint - cameraTargetPos;
             ToRotation = Quaternion.LookRotation(rotateToDirection.normalized);
             camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, ToRotation, _changeSpeed);

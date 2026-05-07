@@ -65,8 +65,8 @@ public static class SVCenter
                 PopupLayer.ArrangeWarnWindow(Translate.Get("CantEquipSameSkill"));
                 return;
             }
-            layer.stonesBox._tabEffects.SkillButtonExplosion(item._SkillConfig.SP_LEVEL, 
-                PosCal.GetWorldPos(PreScene.target.noPostProcessCamera, to.GetComponent<RectTransform>(), 3), 
+            layer.stonesBox._tabEffects.SkillButtonExplosion(item._SkillConfig.SP_LEVEL,
+                PosCal.GetWorldPos(PreScene.target.noPostProcessCamera, to.GetComponent<RectTransform>(), 3),
                 layer.stonesBox._tabEffects.transform);
         }
         
@@ -132,8 +132,8 @@ public static class SVCenter
                 }
             }
             
-            skillEditLayer.stonesBox._tabEffects.SkillButtonExplosion(fromItem._SkillConfig.SP_LEVEL, 
-            PosCal.GetWorldPos(PreScene.target.noPostProcessCamera, to.GetComponent<RectTransform>(), 3), 
+            skillEditLayer.stonesBox._tabEffects.SkillButtonExplosion(fromItem._SkillConfig.SP_LEVEL,
+            PosCal.GetWorldPos(PreScene.target.noPostProcessCamera, to.GetComponent<RectTransform>(), 3),
             skillEditLayer.stonesBox._tabEffects.transform);
         }
         
@@ -157,7 +157,7 @@ public static class SVCenter
             from.RemoveToTemp();
             skillEditLayer?.stonesBox.PlaceStoneFromSlot(toItem);
             from.ClearUsingUnitIcon();
-            
+
             skillEditLayer?.nineSlot.NineSlotsStatusRefresh();
             return;
         }

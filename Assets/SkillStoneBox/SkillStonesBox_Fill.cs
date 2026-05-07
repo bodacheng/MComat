@@ -10,7 +10,7 @@ namespace mainMenu
         [SerializeField] private bool skillEditStep;
         private StoneFilterForm _form;
         readonly List<string> _currentStoneInstanceIds = new List<string>();
-        
+
         public void RestFilter()
         {
             var filterForm = new StoneFilterForm
@@ -25,7 +25,7 @@ namespace mainMenu
             _form = filterForm;
             RefreshVisibleStones(true);
         }
-        
+
         public class StoneFilterForm
         {
             public string Type;
@@ -35,17 +35,17 @@ namespace mainMenu
             public bool Close;
             public bool Near;
             public bool Far;
-            
+
             public StoneFilterForm()
             {
             }
-            
+
             public StoneFilterForm(string type)
             {
                 Type = type;
             }
         }
-        
+
         void RefreshVisibleStones(bool refreshFromSource)
         {
             if (refreshFromSource)
@@ -58,19 +58,19 @@ namespace mainMenu
                 if (targetSKs != null)
                     _currentStoneInstanceIds.AddRange(targetSKs);
             }
-            
+
             UpdateVisibleCells(_currentStoneInstanceIds.Count);
             Order(_currentStoneInstanceIds);
             ApplyCurrentTargetsToCells();
         }
-        
+
         void ApplyCurrentTargetsToCells()
         {
             foreach (var cell in _cells)
             {
                 cell?.RemoveToTemp();
             }
-            
+
             var key = 0;
             foreach (var instanceId in _currentStoneInstanceIds)
             {
@@ -80,12 +80,12 @@ namespace mainMenu
                     Debug.Log("此时技能石头盒子的总容量：" + _activeCellCount);
                     break;
                 }
-                
+
                 var renderModel = Stones.GetRenderModel(instanceId);
                 var cell = _cells[key];
                 if (renderModel == null || cell == null)
                     continue;
-                
+
                 if (!renderModel._using)
                 {
                     cell.AddItem(renderModel);
