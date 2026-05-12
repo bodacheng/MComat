@@ -50,6 +50,11 @@ public static class AddressablesLogic
         return KeyExists[tag].Contains(primaryKey);
     }
 
+    public static bool HasIndexedTag(string tag)
+    {
+        return KeyExists.ContainsKey(tag);
+    }
+
     public static async UniTask<bool> VersionConfirm() // false : need to update
     {
         bool needToUpdate = false;
@@ -131,8 +136,24 @@ public static class AddressablesLogic
         {
             CheckExistedKey("weapon"),
             CheckExistedKey("effect"),
+            CheckExistedKey("audio"),
             CheckExistedKey("unit_image")
         });
+    }
+
+    static bool IsNonCriticalAssetType<T>()
+    {
+        var type = typeof(T);
+        return type == typeof(Sprite) || type == typeof(AnimationClip) || type == typeof(AudioClip);
+    }
+
+    static async UniTask HandleLoadFailure<T>(string key)
+    {
+        Debug.LogWarning($"[Addressables] Failed to load: {key}");
+        if (!IsNonCriticalAssetType<T>())
+        {
+            await LoadErrorThenBackToStart();
+        }
     }
     
     static async UniTask<long> DownLoadSize(string label, Action<string> exceptionProcess)
@@ -380,17 +401,18 @@ public static class AddressablesLogic
     
     public static async UniTask<T> LoadT<T>(string prefabPathName, GameObject memoryReleaseTarget = null)
     {
-        var handle = Addressables.LoadAssetAsync<T>(prefabPathName);
-        await handle.Task;
-        if (handle.Status != AsyncOperationStatus.Succeeded)
+        AsyncOperationHandle<T> handle = default;
+        try
         {
-            Debug.Log($"Failed to load : {prefabPathName}");
-            Addressables.Release(handle);
-            await LoadErrorThenBackToStart();
-            return default;
-        }
-        else
-        {
+            handle = Addressables.LoadAssetAsync<T>(prefabPathName);
+            await handle.Task;
+            if (handle.Status != AsyncOperationStatus.Succeeded)
+            {
+                if (handle.IsValid())
+                    Addressables.Release(handle);
+                await HandleLoadFailure<T>(prefabPathName);
+                return default;
+            }
             if (memoryReleaseTarget == null)
             {
                 LoadingHandlerList.Add(handle);
@@ -404,22 +426,31 @@ public static class AddressablesLogic
                 });
             }
             return handle.Result;
+        }
+        catch (Exception e)
+        {
+            if (handle.IsValid())
+                Addressables.Release(handle);
+            Debug.LogWarning($"[Addressables] Exception loading {prefabPathName}: {e.Message}");
+            await HandleLoadFailure<T>(prefabPathName);
+            return default;
         }
     }
     
     public static async UniTask<T> LoadT<T>(IResourceLocation location, GameObject memoryReleaseTarget = null)
     {
-        var handle = Addressables.LoadAssetAsync<T>(location);
-        await handle.Task;
-        if (handle.Status != AsyncOperationStatus.Succeeded)
+        AsyncOperationHandle<T> handle = default;
+        try
         {
-            Debug.Log($"Failed to load : {location}");
-            Addressables.Release(handle);
-            await LoadErrorThenBackToStart();
-            return default;
-        }
-        else
-        {
+            handle = Addressables.LoadAssetAsync<T>(location);
+            await handle.Task;
+            if (handle.Status != AsyncOperationStatus.Succeeded)
+            {
+                if (handle.IsValid())
+                    Addressables.Release(handle);
+                await HandleLoadFailure<T>(location.PrimaryKey);
+                return default;
+            }
             if (memoryReleaseTarget == null)
             {
                 LoadingHandlerList.Add(handle);
@@ -433,6 +464,14 @@ public static class AddressablesLogic
                 });
             }
             return handle.Result;
+        }
+        catch (Exception e)
+        {
+            if (handle.IsValid())
+                Addressables.Release(handle);
+            Debug.LogWarning($"[Addressables] Exception loading {location}: {e.Message}");
+            await HandleLoadFailure<T>(location?.PrimaryKey);
+            return default;
         }
     }
     

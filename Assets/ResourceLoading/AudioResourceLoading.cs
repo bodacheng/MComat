@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -17,46 +16,31 @@ public class AudioResourceLoading
             return instance;
         }
     }
-    public readonly IDictionary<string, AudioClip> SoundClipsDic = new Dictionary<string, AudioClip>();
-    
-    public IEnumerator LoadAudioClipFromCachAndPutItIntoDic(string bundleURL,string additionalPath, string clip_name)
-    {
-        // AudioClip _AudioClip = null;
-        // string clipkey = additionalPath + "/" + clip_name;
-        // soundClipsDic.TryGetValue(clipkey, out _AudioClip);
-        // if (_AudioClip != null)
-        // {
-        //     Debug.Log("声音：" + clipkey + "已经存在");
-        //     yield break;
-        // }
-        // IEnumerator task = CachManager.Instance.getABFromCach(bundleURL,clip_name);
-        // yield return task;
-        // AssetBundle readingBundle = (AssetBundle)task.Current;
-        // if (readingBundle != null)
-        // {
-        //     _AudioClip = readingBundle.LoadAsset<AudioClip>(clip_name);
-        //     if (_AudioClip != null)
-        //     {
-        //         readingBundle.Unload(false);
-        //         if (!soundClipsDic.ContainsKey(clipkey))
-        //             soundClipsDic.Add(clipkey, _AudioClip);
-        //         else
-        //             soundClipsDic[clipkey] = _AudioClip;
-        //     }
-        //     else
-        //     {
-        //         readingBundle.Unload(false);
-        //         yield break;
-        //     }
-        // }
-        
-        yield break;
-    }
+    public IDictionary<string, AudioClip> SoundClipsDic => AudioResourceLoaderCore.SoundClipsDic;
     
     public async UniTask LoadAudioClipFromResourceAndPutItIntoDic(string additionalPath, string clipName)
     {
-        string path = additionalPath + "/" + clipName;
+        if (string.IsNullOrWhiteSpace(clipName))
+            return;
+
+        var path = AudioResourceLoaderCore.AudioClipKey(additionalPath, clipName);
+        if (AudioResourceLoaderCore.HasAudioClip(path))
+            return;
+
+        if (AddressablesLogic.HasIndexedTag(AudioResourceLoaderCore.AudioLabel) &&
+            !AddressablesLogic.CheckKeyExist(AudioResourceLoaderCore.AudioLabel, path))
+        {
+            Debug.LogWarning($"[AudioResourceLoading] Missing audio addressable key: {path}");
+            return;
+        }
+
         var audioClip = await AddressablesLogic.LoadT<AudioClip>(path);
-        SoundClipsDic[path] = audioClip;
+        if (audioClip == null)
+        {
+            Debug.LogWarning($"[AudioResourceLoading] Failed to load audio clip: {path}");
+            return;
+        }
+
+        AudioResourceLoaderCore.AddOrReplaceAudioClip(path, audioClip);
     }
 }

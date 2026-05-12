@@ -1,15 +1,14 @@
-﻿using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public static class HurtObjectManager
 {
     static DecompositionPool _defaultHitBoxPool;
-    static readonly IDictionary<string, DecompositionPool> HurtPoolDic = new Dictionary<string, DecompositionPool>();
+    static readonly ResourcePoolRegistry<DecompositionPool> HurtPools = new ResourcePoolRegistry<DecompositionPool>();
     
     static UniTask<GameObject> TryLoadWeaponPrefab(string key)
     {
-        if (!AddressablesLogic.CheckKeyExist("weapon", key))
+        if (!AddressablesLogic.CheckKeyExist(EffectResourceKeyUtility.WeaponLabel, key))
         {
             return default;
         }
@@ -27,18 +26,15 @@ public static class HurtObjectManager
     
     public static void Clear()
     {
-        foreach (var keyValuePair in HurtPoolDic)
-        {
-            keyValuePair.Value.Clear();
-        }
-        HurtPoolDic.Clear();
+        HurtPools.Clear(pool => pool.Clear());
     }
     
     // 默认攻击物件池的创建
     public static async UniTask ConstructDPool()
     {
         _defaultHitBoxPool?.Clear();
-        var resultObject = await AddressablesLogic.LoadT<GameObject>(FightGlobalSetting.EffectPathDefine() + "/dHitBox.prefab");
+        var resultObject = await AddressablesLogic.LoadT<GameObject>(
+            EffectResourceKeyUtility.DefaultHitBoxAddress(FightGlobalSetting.EffectPathDefine()));
         if (resultObject == null)
         {
             return;
@@ -50,69 +46,41 @@ public static class HurtObjectManager
     
     public static async UniTask ConstructHurtObjectPool(string resourceName, Element element, int preloadCount)
     {
-        DecompositionPool poolToConstruct;
-        GameObject weaponPrefab = null;
-        
-        ///////////////第二环节 ： 搜索属性魔法//////////////////
-        string basicMagicForwardPath = FightGlobalSetting.EffectPathDefine(element);
-        if (HurtPoolDic.ContainsKey(basicMagicForwardPath + "/" + resourceName))
+        var defaultEffectPath = FightGlobalSetting.EffectPathDefine();
+        foreach (var resourcePath in EffectResourceKeyUtility.ResourcePathFallbacks(
+                     FightGlobalSetting.EffectPathDefine(element),
+                     defaultEffectPath))
         {
-            HurtPoolDic.TryGetValue(basicMagicForwardPath + "/" + resourceName, out poolToConstruct);
-            if (poolToConstruct != null)
+            if (await TryConstructHurtObjectPoolAtPath(resourceName, resourcePath, element, preloadCount))
+            {
                 return;
-        }
-        
-        weaponPrefab = await TryLoadWeaponPrefab(basicMagicForwardPath + "/" + resourceName + ".prefab");
-        if (weaponPrefab != null)
-        {
-            poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resourceName, preloadCount);
-            
-            var decomposition = weaponPrefab.GetComponent<Decomposition>();
-            if (decomposition != null)
-            {
-                if (decomposition.Attachments != null && decomposition.Attachments.Length > 0)
-                {
-                    for (var i = 0; i < decomposition.Attachments.Length; i++)
-                    {
-                        await ConstructHurtObjectPool(decomposition.Attachments[i], element, preloadCount);
-                    }
-                }
             }
-            return;
         }
+    }
 
-        //////////// 第三环节  /////////////
-        if (basicMagicForwardPath != FightGlobalSetting.EffectPathDefine())
+    static async UniTask<bool> TryConstructHurtObjectPoolAtPath(string resourceName, string resourcePath, Element element, int preloadCount)
+    {
+        var resourceKey = EffectResourceKeyUtility.ResourceKey(resourcePath, resourceName);
+        if (HurtPools.TryGet(resourceKey, out _))
+            return true;
+
+        var weaponPrefab = await TryLoadWeaponPrefab(EffectResourceKeyUtility.PrefabAddress(resourcePath, resourceName));
+        if (weaponPrefab == null)
+            return false;
+
+        ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, resourceKey, preloadCount);
+        await ConstructAttachmentPools(weaponPrefab.GetComponent<Decomposition>(), element, preloadCount);
+        return true;
+    }
+
+    static async UniTask ConstructAttachmentPools(Decomposition decomposition, Element element, int preloadCount)
+    {
+        if (decomposition?.Attachments == null || decomposition.Attachments.Length == 0)
+            return;
+
+        for (var i = 0; i < decomposition.Attachments.Length; i++)
         {
-            basicMagicForwardPath = FightGlobalSetting.EffectPathDefine();
-            if (HurtPoolDic.ContainsKey(basicMagicForwardPath + "/" + resourceName))
-            {
-                HurtPoolDic.TryGetValue(basicMagicForwardPath + "/" + resourceName, out poolToConstruct);
-                if (poolToConstruct != null)
-                {
-                    return;
-                }
-            }
-            
-            weaponPrefab = await TryLoadWeaponPrefab(basicMagicForwardPath + "/" + resourceName + ".prefab");
-            if (weaponPrefab != null)
-            {
-                poolToConstruct = ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, basicMagicForwardPath + "/" + resourceName, preloadCount);
-                
-                var d = weaponPrefab.GetComponent<Decomposition>();
-                if (d != null)
-                {
-                    if (d.Attachments != null && d.Attachments.Length > 0)
-                    {
-                        for (int i = 0; i < d.Attachments.Length; i++)
-                        {
-                            await ConstructHurtObjectPool(d.Attachments[i], element, preloadCount);
-                        }
-                    }
-                }else{
-                    Debug.Log(resourceName + "没有Decompositioner！？");
-                }
-            }
+            await ConstructHurtObjectPool(decomposition.Attachments[i], element, preloadCount);
         }
     }
     
@@ -121,27 +89,14 @@ public static class HurtObjectManager
     {
         _hurtObjectPool = null;
         
-        // 第二轮
-        if (HurtPoolDic.ContainsKey(myDefaultMagicPath + "/" + resource_name))
+        foreach (var resourcePath in EffectResourceKeyUtility.ResourcePathFallbacks(
+                     myDefaultMagicPath,
+                     FightGlobalSetting.EffectPathDefine()))
         {
-            HurtPoolDic.TryGetValue(myDefaultMagicPath + "/" + resource_name, out _hurtObjectPool);
-            if (_hurtObjectPool != null)
+            var resourceKey = EffectResourceKeyUtility.ResourceKey(resourcePath, resource_name);
+            if (HurtPools.TryGet(resourceKey, out _hurtObjectPool))
             {
                 return _hurtObjectPool;
-            }
-        }
-        
-        // 第三轮
-        if (myDefaultMagicPath != FightGlobalSetting.EffectPathDefine())
-        {
-            myDefaultMagicPath = FightGlobalSetting.EffectPathDefine();
-            if (HurtPoolDic.ContainsKey(myDefaultMagicPath + "/" + resource_name))
-            {
-                HurtPoolDic.TryGetValue(myDefaultMagicPath + "/" + resource_name, out _hurtObjectPool);
-                if (_hurtObjectPool != null)
-                {
-                    return _hurtObjectPool;
-                }
             }
         }
         return null;
@@ -153,7 +108,7 @@ public static class HurtObjectManager
         {
             var poolToConstruct = new DecompositionPool(prefab);
             poolToConstruct.PreloadAsync(iniCount, 1);
-            DicAdd<string, DecompositionPool>.Add(HurtPoolDic, key, poolToConstruct);
+            HurtPools.AddOrReplace(key, poolToConstruct, iniCount);
             return poolToConstruct;
         }
         return null;

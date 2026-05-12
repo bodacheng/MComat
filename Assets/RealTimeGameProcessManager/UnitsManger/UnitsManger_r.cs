@@ -32,12 +32,17 @@ namespace FightScene
             }
             if (unit == null)
             {
-                ChangeFightingUnit(null, true, TeamStandPoints[0]);
+                ChangeFightingUnit(null, true, InitialStandPoint());
                 return;
             }
             if (FightLoad.Fight.RunTutorial)
                 unit.StartAutoModeWhenGetHurt();
-            ChangeFightingUnit(unit, true, TeamStandPoints[0]);
+            ChangeFightingUnit(unit, true, InitialStandPoint());
+        }
+
+        Transform InitialStandPoint()
+        {
+            return TeamStandPoints != null && TeamStandPoints.Length > 0 ? TeamStandPoints[0] : null;
         }
         
         void ToNewUnit(int delayInSeconds)
@@ -309,7 +314,17 @@ namespace FightScene
 
         public void UnitStartOff()
         {
-            RMode_Unit.Value._MyBehaviorRunner.ChangeToWaitingState();
+            if (RMode_Unit.Value == null)
+            {
+                ToStartPosRotate();
+            }
+
+            RMode_Unit.Value?._MyBehaviorRunner?.ChangeToWaitingState();
+
+            if (teamConfig.myTeam == RTFightManager.playerTeam && InputsManager != null && RMode_Unit.Value != null)
+            {
+                InputsManager.FocusUnit(RMode_Unit.Value, true);
+            }
         }
         
         // 计算时间统计可上场角色，更新上场冷却图标UI
@@ -342,7 +357,7 @@ namespace FightScene
             {
                 if (waitingMember != null && RMode_Unit.Value != waitingMember)
                 {
-                    ChangeFightingUnit(waitingMember, true, TeamStandPoints[0]);
+                    ChangeFightingUnit(waitingMember, true, InitialStandPoint());
                 }
             }
         }

@@ -6,11 +6,11 @@ using UnityEngine.Animations;
 public static class EffectsManager
 {
     // 以下的重点是主界面和战斗界面通用问题
-    static readonly IDictionary<string, DecompositionPool> EffectPoolsDic = new Dictionary<string, DecompositionPool>();
+    static readonly ResourcePoolRegistry<DecompositionPool> EffectPools = new ResourcePoolRegistry<DecompositionPool>();
     
     static UniTask<GameObject> TryLoadEffectPrefab(string key)
     {
-        if (!AddressablesLogic.CheckKeyExist("effect", key))
+        if (!AddressablesLogic.CheckKeyExist(EffectResourceKeyUtility.EffectLabel, key))
         {
             return default;
         }
@@ -23,11 +23,7 @@ public static class EffectsManager
     
     public static void Clear()
     {
-        foreach (var pool in EffectPoolsDic)
-        {
-            pool.Value.Clear();
-        }
-        EffectPoolsDic.Clear();
+        EffectPools.Clear(pool => pool.Clear());
     }
     
     public static async UniTask<Decomposition> GenerateEffect(string resourceName, string effectPath, Vector3 pos, Quaternion qua, Transform parentT)
@@ -60,10 +56,7 @@ public static class EffectsManager
     {
         var poolToConstruct = new DecompositionPool(prefab);
         poolToConstruct.PreloadAsync(iniCount, 1);
-        if (EffectPoolsDic.ContainsKey(key))
-            EffectPoolsDic[key] = poolToConstruct;
-        else
-            EffectPoolsDic.Add(new KeyValuePair<string, DecompositionPool>(key, poolToConstruct));
+        EffectPools.AddOrReplace(key, poolToConstruct, iniCount);
         
         return poolToConstruct;
     }
@@ -73,17 +66,16 @@ public static class EffectsManager
         DecompositionPool effectPool;
         if (effectPath != null)
         {
-            if (EffectPoolsDic.ContainsKey(effectPath + "/" + resourceName))
+            var resourceKey = EffectResourceKeyUtility.ResourceKey(effectPath, resourceName);
+            if (EffectPools.TryGet(resourceKey, out effectPool))
             {
-                EffectPoolsDic.TryGetValue(effectPath + "/" + resourceName, out effectPool);
-                if (effectPool != null)
-                    return effectPool;
+                return effectPool;
             }
             
-            var effectPrefab = await TryLoadEffectPrefab(effectPath + "/" + resourceName + ".prefab");
+            var effectPrefab = await TryLoadEffectPrefab(EffectResourceKeyUtility.PrefabAddress(effectPath, resourceName));
             if (effectPrefab != null)
             {
-                effectPool = ConstructEffectPoolWithPrefabAndKey(effectPrefab, effectPath + "/" + resourceName, objectCount);
+                effectPool = ConstructEffectPoolWithPrefabAndKey(effectPrefab, resourceKey, objectCount);
                 return effectPool;
             }
             if (effectPath == FightGlobalSetting.EffectPathDefine())

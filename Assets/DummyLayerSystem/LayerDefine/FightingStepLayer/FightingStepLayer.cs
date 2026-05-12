@@ -54,7 +54,6 @@ public class FightingStepLayer : UILayer
         var fightingLayer = CommonSetting.PcMode ? 
             UILayerLoader.Load<FightingStepLayer>(true, "FightingStepLayer_st", true):
             UILayerLoader.Load<FightingStepLayer>();
-
         fightingLayer.InputsManager.FXCamera = FightScene.FightScene.target.fxCamera;
         return fightingLayer;
     }

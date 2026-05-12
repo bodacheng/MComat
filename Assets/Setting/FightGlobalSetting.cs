@@ -1,6 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "FightGlobalSetting", menuName = "ScriptableObjects/FightGlobalSetting", order = 1)]
 public class FightGlobalSetting : ScriptableObject
@@ -202,58 +201,29 @@ public class FightGlobalSetting : ScriptableObject
     // Ex3 ：60
     public static float ATCal(float originAt, float level)
     {
-        return AtCoefficient * originAt * CalcLevelMultiplier(level);
+        return FightGlobalSettingUtility.CalculateScaledValue(
+            AtCoefficient,
+            originAt,
+            level,
+            LevelPowerAverager,
+            LevelDiminishStart,
+            LevelDiminishingRange);
     }
+
     public static float StoneHpCal(float originHp, float level)
     {
-        return HpCoefficient * originHp * CalcLevelMultiplier(level);
-    }
-    
-    static float CalcLevelMultiplier(float level)
-    {
-        if (level <= 1f || LevelPowerAverager <= 0f)
-            return Mathf.Max(level, 0f);
-
-        var extraLevels = level - 1f;
-        var startExtraLevels = Mathf.Max(LevelDiminishStart - 1f, 0f);
-        if (extraLevels <= startExtraLevels)
-            return 1f + extraLevels * LevelPowerAverager;
-
-        var bonusBeforeDiminish = startExtraLevels * LevelPowerAverager;
-        var beyondLevels = extraLevels - startExtraLevels;
-        var slowFactor = 1f + beyondLevels / LevelDiminishingRange;
-        var diminishedBonus = beyondLevels * (LevelPowerAverager / slowFactor);
-        return 1f + bonusBeforeDiminish + diminishedBonus;
+        return FightGlobalSettingUtility.CalculateScaledValue(
+            HpCoefficient,
+            originHp,
+            level,
+            LevelPowerAverager,
+            LevelDiminishStart,
+            LevelDiminishingRange);
     }
     
     public static string EffectPathDefine(Element element = Element.Null)
     {
-        string personalEffectPath;
-        switch (element)
-        {
-            case Element.blueMagic:
-                personalEffectPath = "bluemagic";
-                break;
-            case Element.redMagic:
-                personalEffectPath = "redmagic";
-                break;
-            case Element.greenMagic:
-                personalEffectPath = "greenmagic";
-                break;
-            case Element.lightMagic:
-                personalEffectPath = "lightmagic";
-                break;
-            case Element.darkMagic:
-                personalEffectPath = "darkmagic";
-                break;
-            case Element.Null:
-                personalEffectPath = "defaultmagic";
-                break;
-            default:
-                personalEffectPath = "defaultmagic";
-                break;
-        }
-        return personalEffectPath;
+        return FightGlobalSettingUtility.EffectPathDefine(element);
     }
 
     public static async UniTask LoadFightParams()

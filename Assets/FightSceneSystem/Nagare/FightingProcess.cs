@@ -1,6 +1,7 @@
 ﻿using DummyLayerSystem;
 using System.Collections.Generic;
 using Log;
+using UnityEngine;
 
 namespace FightScene
 {
@@ -21,6 +22,7 @@ namespace FightScene
         
         public override void ProcessEnter()
         {
+            Time.timeScale = 1f;
             UILayerLoader.Remove<InBattleEvolution>();
             _layer = UILayerLoader.Get<FightingStepLayer>();
             if (_layer.InputsManager.KeyBindingUpdater != null)
