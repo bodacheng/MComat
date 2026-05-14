@@ -8,15 +8,11 @@ public static class HurtObjectManager
     
     static UniTask<GameObject> TryLoadWeaponPrefab(string key)
     {
-        if (!AddressablesLogic.CheckKeyExist(EffectResourceKeyUtility.WeaponLabel, key))
-        {
-            return default;
-        }
-        else
-        {
-            var returnValue =  AddressablesLogic.LoadT<GameObject>(key);
-            return returnValue;
-        }
+        return IndexedResourceLoadUtility.LoadIfKeyExists<GameObject>(
+            EffectResourceKeyUtility.WeaponLabel,
+            key,
+            AddressablesLogic.CheckKeyExist,
+            assetKey => AddressablesLogic.LoadT<GameObject>(assetKey));
     }
     
     public static DecompositionPool GetDPool()
@@ -26,6 +22,8 @@ public static class HurtObjectManager
     
     public static void Clear()
     {
+        _defaultHitBoxPool?.Clear();
+        _defaultHitBoxPool = null;
         HurtPools.Clear(pool => pool.Clear());
     }
     
@@ -41,7 +39,7 @@ public static class HurtObjectManager
         }
         
         _defaultHitBoxPool = new DecompositionPool(resultObject);
-        _defaultHitBoxPool.PreloadAsync(10, 1);
+        await _defaultHitBoxPool.PreloadAsync(10, 1).ToUniTask();
     }
     
     public static async UniTask ConstructHurtObjectPool(string resourceName, Element element, int preloadCount)
@@ -68,14 +66,27 @@ public static class HurtObjectManager
         if (weaponPrefab == null)
             return false;
 
-        ConstructHitBoxPoolWithPrefabAndKey(weaponPrefab, resourceKey, preloadCount);
-        await ConstructAttachmentPools(weaponPrefab.GetComponent<Decomposition>(), element, preloadCount);
+        await ResourcePoolConstructionUtility.GetOrCreatePool(
+            HurtPools,
+            resourceKey,
+            weaponPrefab,
+            preloadCount,
+            prefab => new DecompositionPool(prefab),
+            (pool, count) => pool.PreloadAsync(count, 1).ToUniTask(),
+            pool => pool.Clear());
+        await ConstructAttachmentPools(resourceName, weaponPrefab.GetComponent<Decomposition>(), element, preloadCount);
         return true;
     }
 
-    static async UniTask ConstructAttachmentPools(Decomposition decomposition, Element element, int preloadCount)
+    static async UniTask ConstructAttachmentPools(string resourceName, Decomposition decomposition, Element element, int preloadCount)
     {
-        if (decomposition?.Attachments == null || decomposition.Attachments.Length == 0)
+        if (decomposition == null)
+        {
+            Debug.Log(resourceName + "没有Decompositioner！？");
+            return;
+        }
+
+        if (decomposition.Attachments == null || decomposition.Attachments.Length == 0)
             return;
 
         for (var i = 0; i < decomposition.Attachments.Length; i++)
@@ -98,18 +109,6 @@ public static class HurtObjectManager
             {
                 return _hurtObjectPool;
             }
-        }
-        return null;
-    }
-    
-    static DecompositionPool ConstructHitBoxPoolWithPrefabAndKey(GameObject prefab, string key, int iniCount)
-    {
-        if (prefab != null)
-        {
-            var poolToConstruct = new DecompositionPool(prefab);
-            poolToConstruct.PreloadAsync(iniCount, 1);
-            HurtPools.AddOrReplace(key, poolToConstruct, iniCount);
-            return poolToConstruct;
         }
         return null;
     }

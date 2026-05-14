@@ -30,7 +30,7 @@ public class SkillCreationPanel
     private const string SkillAnimationRoot = "Assets/ExternalAssets/Animations";
     private const string SkillIconGroupName = "SkillIcon";
     private const string SkillAnimationGroupName = "SkillAnim";
-    private const string SkillAnimationLabel = "skill_anim";
+    private const string SkillAnimationLabel = AddressablesResourcePolicy.SkillAnimationLabel;
     private const string CsvNewLine = "\r\n";
     private const int PlaceholderIconSize = 128;
 

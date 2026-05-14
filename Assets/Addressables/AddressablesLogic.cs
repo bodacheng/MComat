@@ -57,64 +57,44 @@ public static class AddressablesLogic
 
     public static async UniTask<bool> VersionConfirm() // false : need to update
     {
-        bool needToUpdate = false;
-        await DownLoadMission("app_version", (x)=>{});
-        AsyncOperationHandle<TextAsset> handle = Addressables.LoadAssetAsync<TextAsset>("app_version");
-        while (!handle.IsDone)
+        await DownLoadMission(AddressablesResourcePolicy.AppVersionKey, (x)=>{});
+        AsyncOperationHandle<TextAsset> handle = Addressables.LoadAssetAsync<TextAsset>(AddressablesResourcePolicy.AppVersionKey);
+        try
         {
-            await UniTask.DelayFrame(0);
-        }
-        if (handle.Status == AsyncOperationStatus.Succeeded)
-        {
-            TextAsset appVersionJson = handle.Result;
-            ParseVersion(appVersionJson.text);
-        }
-        
-        void ParseVersion(string jsonText)
-        {
-            JObject jsonNode = JObject.Parse(jsonText);
-            string serverVersion = jsonNode["version"].ToString();
-            CompareVersions(serverVersion);
-        }
-        
-        void CompareVersions(string serverVersion)
-        {
-            string currentVersion = Application.version;
+            while (!handle.IsDone)
+            {
+                await UniTask.DelayFrame(0);
+            }
+
+            if (handle.Status != AsyncOperationStatus.Succeeded)
+            {
+                return false;
+            }
+
+            var appVersionJson = handle.Result;
+            var jsonNode = JObject.Parse(appVersionJson.text);
+            var serverVersion = jsonNode[AddressablesResourcePolicy.VersionJsonProperty]?.ToString();
+            var currentVersion = Application.version;
             Debug.Log("currentVersion:" + currentVersion);
             Debug.Log("serverVersion:" + serverVersion);
-            
-            string[] serverVersionParts = serverVersion.Split('.');
-            string[] currentVersionParts = currentVersion.Split('.');
-            
-            for (int i = 0; i < serverVersionParts.Length && i < currentVersionParts.Length; i++)
-            {
-                int serverVersionPart = int.Parse(serverVersionParts[i]);
-                int currentVersionPart = int.Parse(currentVersionParts[i]);
 
-                if (serverVersionPart > currentVersionPart)
-                {
-                    needToUpdate = true;
-                    break;
-                }
-                else if (serverVersionPart < currentVersionPart)
-                {
-                    needToUpdate = false;
-                    break;
-                }
-            }
+            return AddressablesResourcePolicy.IsServerVersionNewer(currentVersion, serverVersion);
         }
-        Addressables.Release(handle);
-        return needToUpdate;
+        finally
+        {
+            if (handle.IsValid())
+                Addressables.Release(handle);
+        }
     }
 
     public static async UniTask DownLoadConfig()
     {
-        await DownLoadMission("config", (x)=>{});
+        await DownLoadMission(AddressablesResourcePolicy.ConfigLabel, (x)=>{});
     }
 
     public static async UniTask<CommonSetting> GetCommonSetting()
     {
-        AsyncOperationHandle<CommonSetting> handle = Addressables.LoadAssetAsync<CommonSetting>("Config/commonSetting");
+        AsyncOperationHandle<CommonSetting> handle = Addressables.LoadAssetAsync<CommonSetting>(AddressablesResourcePolicy.CommonSettingKey);
         while (!handle.IsDone)
         {
             await UniTask.DelayFrame(0);
@@ -132,25 +112,13 @@ public static class AddressablesLogic
     
     public static async UniTask Essentials()
     {
-        await UniTask.WhenAll(new List<UniTask>()
-        {
-            CheckExistedKey("weapon"),
-            CheckExistedKey("effect"),
-            CheckExistedKey("audio"),
-            CheckExistedKey("unit_image")
-        });
-    }
-
-    static bool IsNonCriticalAssetType<T>()
-    {
-        var type = typeof(T);
-        return type == typeof(Sprite) || type == typeof(AnimationClip) || type == typeof(AudioClip);
+        await UniTask.WhenAll(AddressablesResourcePolicy.MCombatEssentialLabels.Select(CheckExistedKey));
     }
 
     static async UniTask HandleLoadFailure<T>(string key)
     {
-        Debug.LogWarning($"[Addressables] Failed to load: {key}");
-        if (!IsNonCriticalAssetType<T>())
+        Debug.LogWarning(AddressablesResourcePolicy.LoadFailureMessage(key));
+        if (AddressablesResourcePolicy.ShouldReturnToStartOnLoadFailure<T>())
         {
             await LoadErrorThenBackToStart();
         }
@@ -163,26 +131,22 @@ public static class AddressablesLogic
         {
             handle = Addressables.GetDownloadSizeAsync(label);
             await handle.Task;
-
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
-                long result = handle.Result;
+                var result = handle.Result;
                 if (result > 0)
                 {
-                    DicAdd<string, long>.Add(Sizes, label, result);
+                    DicAdd<string,long>.Add(Sizes, label, result);
                 }
                 return result;
             }
-            else
-            {
-                Debug.LogError($"[Addressables] Failed to get download size for label: {label}");
-                exceptionProcess?.Invoke(label);
-                return 0;
-            }
+            Debug.LogError(AddressablesResourcePolicy.DownloadSizeFailureMessage(label));
+            exceptionProcess?.Invoke(label);
+            return 0;
         }
         catch (Exception ex)
         {
-            Debug.LogError($"[Addressables] Exception during GetDownloadSizeAsync for label: {label}, Exception: {ex}");
+            Debug.LogError(AddressablesResourcePolicy.DownloadSizeExceptionMessage(label, ex));
             exceptionProcess?.Invoke(label);
             return 0;
         }
@@ -198,7 +162,7 @@ public static class AddressablesLogic
         AsyncOperationHandle downloadHandle = default;
         try
         {
-            downloadHandle = Addressables.DownloadDependenciesAsync(label, true); // 强制校验CRC
+            downloadHandle = Addressables.DownloadDependenciesAsync(label, true);
             while (!downloadHandle.IsDone)
             {
                 if (downloadedBytes.ContainsKey(label))
@@ -206,22 +170,15 @@ public static class AddressablesLogic
                     downloadedBytes[label] = downloadHandle.GetDownloadStatus().DownloadedBytes;
                 }
 
-                var text = AppSetting.Value.Language switch
-                {
-                    SystemLanguage.English => "Downloading Assets",
-                    SystemLanguage.Japanese => "リソースをダウンロード中です",
-                    SystemLanguage.Chinese => "正在下载资源",
-                    _ => "リソースをダウンロード中です"
-                };
-                progressUIRefresh(text);
+                progressUIRefresh(AddressablesResourcePolicy.DownloadProgressText(AppSetting.Value.Language));
                 await UniTask.DelayFrame(0);
             }
-            
+
             return true;
         }
         catch (Exception ex)
         {
-            Debug.LogError($"DownloadMission Exception: {ex}");
+            Debug.LogError(AddressablesResourcePolicy.DownloadMissionExceptionMessage(ex));
             return false;
         }
         finally
@@ -242,7 +199,7 @@ public static class AddressablesLogic
             downLoadSizeCal.Add(DownLoadSize(label, exception));
         }
         await UniTask.WhenAll(downLoadSizeCal);
-        
+
         foreach (var kv in Sizes)
         {
             wholeSize += kv.Value;
@@ -272,7 +229,7 @@ public static class AddressablesLogic
         //unitInstructionLayer.LoadUnitImage();
         foreach (var label in downLoadLabel)
         {
-            downloadedBytes.TryAdd(label, 0);
+            AddressablesResourcePolicy.EnsureDownloadedBytesLabel(downloadedBytes, label);
         }
         
         var downLoadTasks = new List<UniTask<bool>>();
@@ -282,7 +239,7 @@ public static class AddressablesLogic
                 downLoadTasks.Add(DownLoadMission(label, progressUIRefresh));
         }
         var results = await UniTask.WhenAll(downLoadTasks);
-        if (results.Any(r => r == false))
+        if (results.Any(result => result == false))
         {
             await LoadErrorThenBackToStart();
             return;
@@ -296,7 +253,7 @@ public static class AddressablesLogic
         await handle.Task;
         if (handle.Status != AsyncOperationStatus.Succeeded)
         {
-            Debug.Log($"Failed to load : {prefabPathName}");
+            Debug.Log(AddressablesResourcePolicy.InstantiateFailureMessage(prefabPathName));
             Addressables.ReleaseInstance(handle);
             await LoadErrorThenBackToStart();
             return default;
@@ -318,7 +275,7 @@ public static class AddressablesLogic
         await handle.Task;
         if (handle.IsValid() && handle.Status != AsyncOperationStatus.Succeeded)
         {
-            Debug.Log($"Failed to load : {prefabPathName}");
+            Debug.Log(AddressablesResourcePolicy.InstantiateFailureMessage(prefabPathName));
             Addressables.ReleaseInstance(handle);
             await LoadErrorThenBackToStart();
             return default;
@@ -353,10 +310,10 @@ public static class AddressablesLogic
             {
                 await handle.Task;
             }
-            
+
             if (handle.IsValid() && handle.Status != AsyncOperationStatus.Succeeded)
             {
-                Debug.Log($"Failed to load : {prefabPathName}");
+                Debug.Log(AddressablesResourcePolicy.InstantiateFailureMessage(prefabPathName));
                 Addressables.ReleaseInstance(handle);
                 await LoadErrorThenBackToStart();
                 return default;
@@ -391,7 +348,7 @@ public static class AddressablesLogic
         {
             if (handle.IsValid())
                 Addressables.ReleaseInstance(handle);
-            Debug.Log(e.Message);
+            Debug.LogWarning(AddressablesResourcePolicy.ExceptionMessage(prefabPathName, e));
             await LoadErrorThenBackToStart();
         }
         return default;
@@ -431,7 +388,7 @@ public static class AddressablesLogic
         {
             if (handle.IsValid())
                 Addressables.Release(handle);
-            Debug.LogWarning($"[Addressables] Exception loading {prefabPathName}: {e.Message}");
+            Debug.LogWarning(AddressablesResourcePolicy.ExceptionMessage(prefabPathName, e));
             await HandleLoadFailure<T>(prefabPathName);
             return default;
         }
@@ -448,7 +405,7 @@ public static class AddressablesLogic
             {
                 if (handle.IsValid())
                     Addressables.Release(handle);
-                await HandleLoadFailure<T>(location.PrimaryKey);
+                await HandleLoadFailure<T>(location?.PrimaryKey);
                 return default;
             }
             if (memoryReleaseTarget == null)
@@ -469,7 +426,7 @@ public static class AddressablesLogic
         {
             if (handle.IsValid())
                 Addressables.Release(handle);
-            Debug.LogWarning($"[Addressables] Exception loading {location}: {e.Message}");
+            Debug.LogWarning(AddressablesResourcePolicy.ExceptionMessage(location?.PrimaryKey, e));
             await HandleLoadFailure<T>(location?.PrimaryKey);
             return default;
         }
