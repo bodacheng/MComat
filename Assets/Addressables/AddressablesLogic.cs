@@ -174,7 +174,18 @@ public static class AddressablesLogic
                 await UniTask.DelayFrame(0);
             }
 
-            return true;
+            if (downloadHandle.Status == AsyncOperationStatus.Succeeded)
+            {
+                if (downloadedBytes.ContainsKey(label))
+                {
+                    downloadedBytes[label] = downloadHandle.GetDownloadStatus().DownloadedBytes;
+                }
+
+                return true;
+            }
+
+            Debug.LogError(AddressablesResourcePolicy.DownloadMissionFailureMessage(label, downloadHandle.OperationException));
+            return false;
         }
         catch (Exception ex)
         {

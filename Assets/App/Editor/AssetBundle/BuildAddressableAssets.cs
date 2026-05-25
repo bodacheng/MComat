@@ -23,6 +23,7 @@ namespace Cocone.ProjectP3
         {
             // 引数取得
             string assetProfile = "dev";
+            string assetVersion = null;
             BuildTarget buildTarget = BuildTarget.iOS;
             BuildTargetGroup buildTargetGroup = BuildTargetGroup.iOS;
             for (int i = 0; i < args.Length; i++)
@@ -30,7 +31,8 @@ namespace Cocone.ProjectP3
                 switch (args[i])
                 {
                     case "-assetVersion":
-                        i++; // ignore assetVersion
+                        assetVersion = args[i + 1];
+                        i++;
                         break;
                     
                     case "-buildTarget":
@@ -56,6 +58,8 @@ namespace Cocone.ProjectP3
             EditorUtility.SetDirty(settings);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+
+            VersionSyncUtility.AssertVersionSettingsSynchronized(assetVersion);
             
             CleanBuild(); // TODO: TargetPlatform設定は要らない？
         }
