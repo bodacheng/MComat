@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using MCombat.Shared.Combat;
 
 namespace FightScene
 {
@@ -169,6 +170,63 @@ namespace FightScene
             }
 
             return null;
+        }
+
+        void PlaceUnitAtStandPoint(Data_Center dataCenter, Transform standPoint)
+        {
+            if (standPoint == null)
+            {
+                return;
+            }
+
+            PlaceUnitByGeometryCenter(dataCenter, standPoint.position, standPoint.rotation);
+        }
+
+        void PlaceUnitByGeometryCenter(Data_Center dataCenter, Vector3 targetGeometryCenterPosition, Quaternion targetRotation)
+        {
+            StopPlacementTweens(dataCenter);
+            CombatPlacementUtility.PlaceRootByGeometryCenter(
+                dataCenter?.WholeT,
+                dataCenter?._BasicPhysicSupport?.Rigidbody,
+                dataCenter?.geometryCenter,
+                targetGeometryCenterPosition,
+                targetRotation);
+        }
+
+        public void FacePreparedUnitsToward(UnitsManger opponent)
+        {
+            if (opponent == null)
+            {
+                return;
+            }
+
+            CombatPlacementUtility.FaceRootsTowards(
+                teamMembers.GetValues(),
+                opponent.teamMembers.GetValues(),
+                IsPreparedFacingUnit,
+                center => center?.WholeT,
+                center => center?.geometryCenter,
+                center => center?._BasicPhysicSupport?.Rigidbody,
+                StopPlacementTweens);
+        }
+
+        static bool IsPreparedFacingUnit(Data_Center dataCenter)
+        {
+            return dataCenter != null
+                   && dataCenter.WholeT != null
+                   && dataCenter.WholeT.gameObject.activeSelf
+                   && dataCenter.FightDataRef != null
+                   && !dataCenter.FightDataRef.IsDead.Value;
+        }
+
+        static void StopPlacementTweens(Data_Center dataCenter)
+        {
+            if (dataCenter?.WholeT == null)
+            {
+                return;
+            }
+
+            DG.Tweening.DOTween.Kill(dataCenter.WholeT);
         }
         
         // 全队无敌

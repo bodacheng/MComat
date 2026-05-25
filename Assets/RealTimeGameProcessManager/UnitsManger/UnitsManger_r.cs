@@ -260,8 +260,10 @@ namespace FightScene
             {
                 if (RMode_Unit.Value != null)
                 {
-                    targetPos = RMode_Unit.Value.transform.position;
-                    targetRot = Quaternion.Euler(new Vector3(1,0,1));
+                    targetPos = RMode_Unit.Value.geometryCenter != null
+                        ? RMode_Unit.Value.geometryCenter.position
+                        : RMode_Unit.Value.WholeT.position;
+                    targetRot = RMode_Unit.Value.WholeT.rotation;
                 }
             }
             
@@ -286,8 +288,7 @@ namespace FightScene
                     {
                         RMode_Unit.Value._MyBehaviorRunner.ChangeToWaitingState();
                     }
-                    RMode_Unit.Value.WholeT.transform.position = targetPos;
-                    RMode_Unit.Value.WholeT.transform.rotation = targetRot;
+                    PlaceUnitByGeometryCenter(RMode_Unit.Value, targetPos, targetRot);
                     EffectsManager.GenerateEffect(CommonSetting.MemberShiftEffectCode, null, RMode_Unit.Value.WholeT.transform.position, Quaternion.identity, RMode_Unit.Value.geometryCenter).Forget();
                     unitChanged = true;
                 }
@@ -307,6 +308,11 @@ namespace FightScene
             }
 
             global::FightScene.FightScene.target?.SensorUnity.ForceImmediateDetection();
+
+            if (emptyState)
+            {
+                RTFightManager.Target?.FacePreparedTeamsTowardEachOther();
+            }
             
             //Refresh(TeamMembers);
             return unitChanged;
