@@ -84,7 +84,7 @@ public partial class ArenaFightOver : UILayer
         if (storyFromAI)
         {
             var manager = FightScene.FightScene.target?.AIServiceManager;
-            manager?.MarkEventStoryAsShown();
+            manager?.MarkAIStoryAsShown();
         }
     }
     

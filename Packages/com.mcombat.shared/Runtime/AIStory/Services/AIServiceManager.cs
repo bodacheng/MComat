@@ -34,7 +34,7 @@ public class AIServiceManager : MonoBehaviour
         '，', '。', '！', '？', '、', '；', '：',
         '!', '?', '…', '—', '-', '‧', '･'
     };
-    private static readonly object _eventStoryLock = new object();
+    private static readonly object GeneratedStoryLock = new object();
     private static readonly string[] DefaultImageNegativeTokens = new[]
     {
         "speech bubble",
@@ -50,9 +50,11 @@ public class AIServiceManager : MonoBehaviour
         "comic lettering",
         "watermark"
     };
-    private static StoryInfo _cachedEventStory;
-    private static bool _cachedEventStoryShown;
-    private static UniTaskCompletionSource<StoryInfo> _eventStoryGenerationSource;
+    private static StoryInfo _cachedGeneratedStory;
+    private static string _cachedGeneratedStoryKey;
+    private static bool _cachedGeneratedStoryShown;
+    private static UniTaskCompletionSource<StoryInfo> _generatedStorySource;
+    private static string _generatedStoryKey;
     private static readonly object ProverbHistoryLock = new object();
     private static readonly List<string> ProverbHistory = new List<string>();
     private static readonly HashSet<string> ProverbHistoryKeys = new HashSet<string>(StringComparer.Ordinal);
@@ -233,13 +235,14 @@ public class AIServiceManager : MonoBehaviour
         // 如果没有配置成功，尽量复用已有的缓存故事
         if (!IsConfigured)
         {
-            lock (_eventStoryLock)
+            var cacheKey = BuildStoryCacheKey(null);
+            lock (GeneratedStoryLock)
             {
-                return _cachedEventStory;
+                return string.Equals(_cachedGeneratedStoryKey, cacheKey, StringComparison.Ordinal) ? _cachedGeneratedStory : null;
             }
         }
         
-        return await GetOrCreateEventStoryAsync();
+        return await GetOrCreateAIStoryAsync();
     }
 
     private async UniTask EnsureServiceInitializedAsync()
@@ -339,36 +342,46 @@ public class AIServiceManager : MonoBehaviour
         }
     }
 
-    private UniTask<StoryInfo> GetOrCreateEventStoryAsync()
+    private UniTask<StoryInfo> GetOrCreateAIStoryAsync()
     {
+        var cacheKey = BuildStoryCacheKey(null);
         UniTaskCompletionSource<StoryInfo> generationSource = null;
-        lock (_eventStoryLock)
+        lock (GeneratedStoryLock)
         {
-            if (_cachedEventStory != null && !_cachedEventStoryShown)
+            if (_cachedGeneratedStory != null && !string.Equals(_cachedGeneratedStoryKey, cacheKey, StringComparison.Ordinal))
             {
-                return UniTask.FromResult(_cachedEventStory);
+                _cachedGeneratedStory = null;
+                _cachedGeneratedStoryKey = null;
+                _cachedGeneratedStoryShown = false;
+            }
+
+            if (_cachedGeneratedStory != null && !_cachedGeneratedStoryShown)
+            {
+                return UniTask.FromResult(_cachedGeneratedStory);
             }
             
-            if (_cachedEventStory != null && _cachedEventStoryShown)
+            if (_cachedGeneratedStory != null && _cachedGeneratedStoryShown)
             {
-                _cachedEventStory = null;
-                _cachedEventStoryShown = false;
+                _cachedGeneratedStory = null;
+                _cachedGeneratedStoryKey = null;
+                _cachedGeneratedStoryShown = false;
             }
             
-            if (_eventStoryGenerationSource != null)
+            if (_generatedStorySource != null && string.Equals(_generatedStoryKey, cacheKey, StringComparison.Ordinal))
             {
-                return _eventStoryGenerationSource.Task;
+                return _generatedStorySource.Task;
             }
             
-            _eventStoryGenerationSource = new UniTaskCompletionSource<StoryInfo>();
-            generationSource = _eventStoryGenerationSource;
+            _generatedStorySource = new UniTaskCompletionSource<StoryInfo>();
+            _generatedStoryKey = cacheKey;
+            generationSource = _generatedStorySource;
         }
         
-        GenerateEventStoryInternalAsync(generationSource).Forget();
+        GenerateAIStoryInternalAsync(generationSource, cacheKey).Forget();
         return generationSource.Task;
     }
 
-    private async UniTaskVoid GenerateEventStoryInternalAsync(UniTaskCompletionSource<StoryInfo> generationSource)
+    private async UniTaskVoid GenerateAIStoryInternalAsync(UniTaskCompletionSource<StoryInfo> generationSource, string cacheKey)
     {
         StoryInfo story = null;
         Exception exception = null;
@@ -382,17 +395,21 @@ public class AIServiceManager : MonoBehaviour
             exception = ex;
         }
         
-        lock (_eventStoryLock)
+        lock (GeneratedStoryLock)
         {
-            if (_eventStoryGenerationSource == generationSource)
+            var isCurrentGeneration = _generatedStorySource == generationSource &&
+                                      string.Equals(_generatedStoryKey, cacheKey, StringComparison.Ordinal);
+            if (isCurrentGeneration)
             {
-                _eventStoryGenerationSource = null;
+                _generatedStorySource = null;
+                _generatedStoryKey = null;
             }
             
-            if (exception == null && story != null)
+            if (isCurrentGeneration && exception == null && story != null)
             {
-                _cachedEventStory = story;
-                _cachedEventStoryShown = false;
+                _cachedGeneratedStory = story;
+                _cachedGeneratedStoryKey = cacheKey;
+                _cachedGeneratedStoryShown = false;
             }
         }
         
@@ -406,15 +423,20 @@ public class AIServiceManager : MonoBehaviour
         }
     }
 
-    public void MarkEventStoryAsShown()
+    public void MarkAIStoryAsShown()
     {
-        lock (_eventStoryLock)
+        lock (GeneratedStoryLock)
         {
-            if (_cachedEventStory != null)
+            if (_cachedGeneratedStory != null)
             {
-                _cachedEventStoryShown = true;
+                _cachedGeneratedStoryShown = true;
             }
         }
+    }
+
+    public void MarkEventStoryAsShown()
+    {
+        MarkAIStoryAsShown();
     }
     
     /// <summary>

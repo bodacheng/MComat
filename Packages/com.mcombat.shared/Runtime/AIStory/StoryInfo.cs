@@ -37,6 +37,29 @@ public class StoryInfo : ScriptableObject
         set => _styleGuide = value;
     }
 
+    public bool HasVisualScene()
+    {
+        return FindNextVisualSceneIndex(-1) >= 0;
+    }
+
+    public int FindNextVisualSceneIndex(int currentIndex)
+    {
+        if (_storyScenes == null)
+        {
+            return -1;
+        }
+
+        for (var i = currentIndex + 1; i < _storyScenes.Count; i++)
+        {
+            if (_storyScenes[i]?.Pic != null)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     [Serializable]
     public class StoryScene
     {

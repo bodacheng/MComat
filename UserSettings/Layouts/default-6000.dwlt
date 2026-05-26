@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1690
     height: 952
   m_ShowMode: 4
-  m_Title: Addressables Groups
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 63
+  controlID: 162
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 64
+  controlID: 163
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 65
+  controlID: 164
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 66
+  controlID: 165
   draggingID: 0
 --- !u!114 &9
 MonoBehaviour:
@@ -277,8 +277,8 @@ MonoBehaviour:
     y: 584.5
     width: 1181
     height: 311.5
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 101, y: 126}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 27}
   m_Panes:
   - {fileID: 25}
@@ -646,7 +646,7 @@ MonoBehaviour:
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectEntityId:
-    m_Data: -1742
+    m_Data: 0
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
@@ -805,7 +805,7 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -1330
+      - m_Data: -1450
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -2054,7 +2054,7 @@ MonoBehaviour:
       m_Data: 66608
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 66328
+    - m_Data: 66368
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2088,7 +2088,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 66328
+    - m_Data: 66368
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -3292,7 +3292,7 @@ MonoBehaviour:
       m_Data: 66210
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 66328
+    - m_Data: 66368
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -3326,7 +3326,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 66328
+    - m_Data: 66368
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -3465,7 +3465,7 @@ MonoBehaviour:
       m_Data: 66210
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 66328
+    - m_Data: 66368
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -3499,7 +3499,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 66328
+    - m_Data: 66368
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -3647,7 +3647,7 @@ MonoBehaviour:
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectEntityId:
-    m_Data: -1742
+    m_Data: 0
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
@@ -3919,7 +3919,7 @@ MonoBehaviour:
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectEntityId:
-    m_Data: -1742
+    m_Data: 0
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
@@ -3972,7 +3972,7 @@ MonoBehaviour:
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectEntityId:
-    m_Data: -1742
+    m_Data: 0
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
