@@ -12,25 +12,40 @@ public partial class CloudScript
         ExecuteCloudScriptRequest request, 
         Action<ExecuteCloudScriptResult> resultCallback, 
         Action<PlayFabError> errorCallback = null, 
-        object customData = null, Dictionary<string, string> extraHeaders = null)
+        object customData = null, Dictionary<string, string> extraHeaders = null,
+        bool showLoading = true, bool showErrorPopup = true)
     {
-        if (Application.isPlaying)
+        if (showLoading && Application.isPlaying)
             ProgressLayer.Loading(string.Empty);
-        
-        PlayFabClientAPI.ExecuteCloudScript(
-            request,
-            (x)=>
-            {
-                resultCallback(x);
-                ProgressLayer.Close();
-            },
-            (x)=>
-            {
-                errorCallback?.Invoke(x);
-                ProgressLayer.Close();
-                PlayFabReadClient.ErrorReport(x);
-            },
-            customData, extraHeaders);
+
+        void Attempt(int attempt)
+        {
+            PlayFabClientAPI.ExecuteCloudScript(
+                request,
+                (x)=>
+                {
+                    resultCallback?.Invoke(x);
+                    if (showLoading)
+                        ProgressLayer.Close();
+                },
+                (x)=>
+                {
+                    if (PlayFabReadClient.ShouldRetryPlayFabRequest(x, attempt))
+                    {
+                        PlayFabReadClient.RetryPlayFabRequest(() => Attempt(attempt + 1), attempt, request.FunctionName);
+                        return;
+                    }
+
+                    errorCallback?.Invoke(x);
+                    if (showLoading)
+                        ProgressLayer.Close();
+                    if (showErrorPopup)
+                        PlayFabReadClient.ErrorReport(x);
+                },
+                customData, extraHeaders);
+        }
+
+        Attempt(1);
     }
     
     public static void ExecuteFunctionCommon(
@@ -42,22 +57,33 @@ public partial class CloudScript
     {
         if (showLoading && Application.isPlaying)
             ProgressLayer.Loading(string.Empty);
-        
-        PlayFabCloudScriptAPI.ExecuteFunction( request,
-            (x)=>
-            {
-                resultCallback(x);
-                if (showLoading)
-                    ProgressLayer.Close();
-            },
-            (x)=>
-            {
-                errorCallback?.Invoke(x);
-                if (showLoading)
-                    ProgressLayer.Close();
-                if (showErrorPopup)
-                    PlayFabReadClient.ErrorReport(x);
-            },
-            customData, extraHeaders);
+
+        void Attempt(int attempt)
+        {
+            PlayFabCloudScriptAPI.ExecuteFunction( request,
+                (x)=>
+                {
+                    resultCallback?.Invoke(x);
+                    if (showLoading)
+                        ProgressLayer.Close();
+                },
+                (x)=>
+                {
+                    if (PlayFabReadClient.ShouldRetryPlayFabRequest(x, attempt))
+                    {
+                        PlayFabReadClient.RetryPlayFabRequest(() => Attempt(attempt + 1), attempt, request.FunctionName);
+                        return;
+                    }
+
+                    errorCallback?.Invoke(x);
+                    if (showLoading)
+                        ProgressLayer.Close();
+                    if (showErrorPopup)
+                        PlayFabReadClient.ErrorReport(x);
+                },
+                customData, extraHeaders);
+        }
+
+        Attempt(1);
     }
 }

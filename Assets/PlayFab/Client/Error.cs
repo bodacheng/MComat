@@ -1,3 +1,5 @@
+using System;
+using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using PlayFab;
 using UnityEngine;
@@ -5,6 +7,10 @@ using UnityEngine.SceneManagement;
 
 public partial class PlayFabReadClient
 {
+    const int PlayFabRequestRetryMaxAttempts = 3;
+    const float PlayFabRequestRetryBaseDelaySeconds = 0.75f;
+    const float PlayFabRequestRetryMaxDelaySeconds = 3f;
+
     public static void ErrorReport(PlayFabError error)
     {
         ErrorReportInternal(error, true);
@@ -85,6 +91,56 @@ public partial class PlayFabReadClient
             default:
                 return false;
         }
+    }
+
+    public static bool ShouldRetryPlayFabRequest(PlayFabError error, int attempt)
+    {
+        return attempt < PlayFabRequestRetryMaxAttempts && IsTransientPlayFabError(error);
+    }
+
+    public static void RetryPlayFabRequest(Action retry, int attempt, string operation)
+    {
+        if (retry == null)
+        {
+            return;
+        }
+
+        var waitSeconds = GetPlayFabRequestRetryDelaySeconds(attempt);
+        Debug.LogWarning($"PlayFab {operation} failed with a transient error. Retrying in {waitSeconds:0.0}s");
+        UniTask.Delay(TimeSpan.FromSeconds(waitSeconds)).ContinueWith(retry).Forget();
+    }
+
+    public static bool IsTransientPlayFabError(PlayFabError error)
+    {
+        if (error == null)
+        {
+            return false;
+        }
+
+        switch (error.Error)
+        {
+            case PlayFabErrorCode.Unknown:
+            case PlayFabErrorCode.UnknownError:
+            case PlayFabErrorCode.ConnectionError:
+            case PlayFabErrorCode.ServiceUnavailable:
+            case PlayFabErrorCode.InternalServerError:
+            case PlayFabErrorCode.DownstreamServiceUnavailable:
+            case PlayFabErrorCode.APIRequestLimitExceeded:
+                return true;
+        }
+
+        if (error.HttpCode == 0 || error.HttpCode == 408 || error.HttpCode == 429)
+        {
+            return true;
+        }
+
+        return error.HttpCode >= 500 && error.HttpCode < 600;
+    }
+
+    static float GetPlayFabRequestRetryDelaySeconds(int attempt)
+    {
+        var waitSeconds = PlayFabRequestRetryBaseDelaySeconds * Mathf.Pow(2f, attempt - 1);
+        return Mathf.Min(waitSeconds, PlayFabRequestRetryMaxDelaySeconds);
     }
 
     static void HandleErrorReturn(bool returnToMainMenu)

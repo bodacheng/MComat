@@ -85,6 +85,7 @@ namespace mainMenu
                 {
                     dataLoadingFinished = true;
                     timer.Stop();
+                    PlayFabReadClient.ReconcileTutorialProgressAfterDataLoad();
                     switch (PlayerAccountInfo.Me.tutorialProgress)
                     {
                         case "Started":
