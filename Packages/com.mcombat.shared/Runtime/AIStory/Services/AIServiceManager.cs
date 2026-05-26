@@ -524,8 +524,8 @@ public class AIServiceManager : MonoBehaviour
         
         int pageCount = serviceConfig.PageCount;
         string storyTheme = GetStoryThemeFromConfig();
+        string storyStyle = serviceConfig.GetStoryStylePrompt();
         string imageStyle = GetImageStyleFromConfig();
-        string additionalRequirements = serviceConfig.AdditionalImageRequirements;
         
         var promptBuilder = new StringBuilder();
         SystemLanguage targetLanguage = GetConfiguredLanguage();
@@ -538,8 +538,8 @@ public class AIServiceManager : MonoBehaviour
         string[] ensureItems;
         string templateHeader;
         string[] templateLines;
-        string styleLineFormat;
-        string additionalStyleFormat;
+        string storyStyleLineFormat;
+        string imageStyleLineFormat;
         string finalReminder;
         
         switch (targetLanguage)
@@ -618,8 +618,8 @@ public class AIServiceManager : MonoBehaviour
                     "  ]",
                     "}"
                 };
-                styleLineFormat = "艺术风格需要贴合：{0}。";
-                additionalStyleFormat = "额外风格要求：{0}。";
+                storyStyleLineFormat = "故事叙事风格需要贴合：{0}。";
+                imageStyleLineFormat = "插图视觉风格需要贴合：{0}。";
                 finalReminder = "请注意保持角色造型、服饰、背景在所有场景中的一致性，并确保 JSON 可被解析。整体叙事需自然连贯，故事文本中严禁描述角色外貌与服饰细节，也不要出现提示词式语句。";
                 break;
             case SystemLanguage.Japanese:
@@ -696,8 +696,8 @@ public class AIServiceManager : MonoBehaviour
                     "  ]",
                     "}"
                 };
-                styleLineFormat = "アートスタイルは {0} に合わせてください。";
-                additionalStyleFormat = "追加スタイル要件: {0}。";
+                storyStyleLineFormat = "物語の語り口は {0} に合わせてください。";
+                imageStyleLineFormat = "挿絵のビジュアルスタイルは {0} に合わせてください。";
                 finalReminder = "全シーンでキャラクターデザイン・衣装・背景の整合性を保ち、JSON が正しく解析できるようにしてください。ストーリーは自然な叙述で統一し、本文には外見・衣装の描写やプロンプト的な言い回しを入れないこと。";
                 break;
             default:
@@ -774,8 +774,8 @@ public class AIServiceManager : MonoBehaviour
                     "  ]",
                     "}"
                 };
-                styleLineFormat = "Match the visual style: {0}.";
-                additionalStyleFormat = "Additional style requirements: {0}.";
+                storyStyleLineFormat = "Match the narrative style: {0}.";
+                imageStyleLineFormat = "Match the illustration style: {0}.";
                 finalReminder = "Maintain consistent character designs, outfits, and backgrounds across all scenes, ensure the JSON is valid, and keep the story text natural and flowing without appearance descriptions or prompt-like phrasing.";
                 break;
         }
@@ -800,11 +800,8 @@ public class AIServiceManager : MonoBehaviour
             promptBuilder.AppendLine(line);
         }
         promptBuilder.AppendLine();
-        promptBuilder.AppendLine(string.Format(styleLineFormat, imageStyle));
-        if (!string.IsNullOrWhiteSpace(additionalRequirements))
-        {
-            promptBuilder.AppendLine(string.Format(additionalStyleFormat, additionalRequirements));
-        }
+        promptBuilder.AppendLine(string.Format(storyStyleLineFormat, storyStyle));
+        promptBuilder.AppendLine(string.Format(imageStyleLineFormat, imageStyle));
         promptBuilder.AppendLine(finalReminder);
         
         return promptBuilder.ToString();
@@ -1663,6 +1660,12 @@ public class AIServiceManager : MonoBehaviour
     private string BuildStylePrompt(StoryInfo.StoryScene scene)
     {
         var segments = new List<string>();
+
+        var configuredImageStyle = GetImageStyleFromConfig();
+        if (!string.IsNullOrWhiteSpace(configuredImageStyle))
+        {
+            segments.Add(configuredImageStyle);
+        }
         
         if (!string.IsNullOrWhiteSpace(currentStoryStyleGuide?.ArtDirection))
         {
@@ -1717,13 +1720,17 @@ public class AIServiceManager : MonoBehaviour
 
     private string BuildStoryCacheKey(string customPrompt)
     {
-        var fight = FightLoad.Fight;
-        var fightId = fight?.ID ?? "unknown";
-        var eventType = fight != null ? fight.EventType.ToString() : "none";
-        var fightMode = fight != null ? fight.FightMode.ToString() : "none";
+        var cacheContext = AIStoryRuntimeContext.GetCacheContext();
+        var fightId = cacheContext.FightId;
+        var eventType = cacheContext.EventType;
+        var fightMode = cacheContext.FightMode;
         var language = GetConfiguredLanguage();
         var pageCount = serviceConfig?.PageCount ?? 0;
+        var storyStyle = serviceConfig != null ? serviceConfig.StoryStyle.ToString() : "unknown";
+        var customStoryStyle = serviceConfig?.CustomStoryStylePrompt ?? string.Empty;
+        var extraStory = serviceConfig?.AdditionalStoryRequirements ?? string.Empty;
         var imageStyle = serviceConfig != null ? serviceConfig.ImageStyle.ToString() : "unknown";
+        var customImageStyle = serviceConfig?.CustomImageStylePrompt ?? string.Empty;
         var aspectRatio = serviceConfig?.ImageAspectRatio ?? "unknown";
         var extraStyle = serviceConfig?.AdditionalImageRequirements ?? string.Empty;
         var textModel = serviceConfig?.GeminiConfig?.Model ?? string.Empty;
@@ -1738,7 +1745,11 @@ public class AIServiceManager : MonoBehaviour
             fightMode,
             language.ToString(),
             pageCount.ToString(),
+            storyStyle,
+            customStoryStyle,
+            extraStory,
             imageStyle,
+            customImageStyle,
             aspectRatio,
             textModel,
             imageModel,
@@ -1806,7 +1817,7 @@ public class AIServiceManager : MonoBehaviour
     
     private SystemLanguage GetConfiguredLanguage()
     {
-        var language = AppSetting.Value != null ? AppSetting.Value.Language : Application.systemLanguage;
+        var language = AIStoryRuntimeContext.GetLanguage();
         switch (language)
         {
             case SystemLanguage.ChineseSimplified:
@@ -2202,26 +2213,7 @@ public class AIServiceManager : MonoBehaviour
         {
             return "photorealistic style, high quality, natural colors";
         }
-        
-        string baseStyle = serviceConfig.ImageStyle switch
-        {
-            ImageStyle.Photorealistic => "photorealistic style, high quality, natural colors",
-            ImageStyle.Anime => "anime style, cel-shaded, vibrant colors",
-            ImageStyle.Watercolor => "watercolor painting style, soft brushstrokes, artistic",
-            ImageStyle.OilPainting => "oil painting style, rich textures, classical art",
-            ImageStyle.PencilSketch => "pencil sketch style, detailed linework, monochrome",
-            ImageStyle.DigitalArt => "digital art style, clean lines, modern illustration",
-            ImageStyle.Cinematic => "cinematic style, dramatic lighting, movie quality",
-            _ => "photorealistic style, high quality, natural colors"
-        };
-        
-        // 添加额外要求
-        if (!string.IsNullOrWhiteSpace(serviceConfig.AdditionalImageRequirements))
-        {
-            baseStyle += $", {serviceConfig.AdditionalImageRequirements}";
-            Debug.Log($"[AIServiceManager] Image style with additional requirements: {baseStyle}");
-        }
-        
-        return baseStyle;
+
+        return serviceConfig.GetImageStylePrompt();
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using PlayFab;
 using PlayFab.CloudScriptModels;
 using UnityEngine;
 
@@ -95,7 +96,7 @@ public class GeminiClient : IAIClient
     private Task<T> ExecuteFunctionAsync<T>(string functionName, object parameters)
     {
         var tcs = new TaskCompletionSource<T>();
-        CloudScript.ExecuteFunctionCommon(
+        PlayFabCloudScriptAPI.ExecuteFunction(
             new ExecuteFunctionRequest
             {
                 FunctionName = functionName,
@@ -133,9 +134,7 @@ public class GeminiClient : IAIClient
             {
                 var message = error?.GenerateErrorReport() ?? "Unknown PlayFab error";
                 tcs.TrySetException(new Exception($"Azure Function '{functionName}' failed: {message}"));
-            },
-            showLoading: false,
-            showErrorPopup: false);
+            });
 
         return tcs.Task;
     }

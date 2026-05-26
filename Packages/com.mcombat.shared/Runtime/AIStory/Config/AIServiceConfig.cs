@@ -8,7 +8,18 @@ public enum ImageStyle
     OilPainting,        // 油画风格
     PencilSketch,       // 铅笔素描风格
     DigitalArt,         // 数字艺术风格
-    Cinematic           // 电影风格
+    Cinematic,          // 电影风格
+    Custom              // 自定义风格
+}
+
+public enum StoryStyle
+{
+    FairyTale,
+    Adventure,
+    SportsDrama,
+    Comedy,
+    DarkFantasy,
+    Custom
 }
 
 public enum StoryFallbackTone
@@ -36,9 +47,23 @@ public class AIServiceConfig : ScriptableObject
     
     [Tooltip("连环画总页数")]
     [SerializeField] private int pageCount = 6;
+
+    [Header("Story Style Settings")]
+    [Tooltip("故事叙事风格，可与图片风格分别设置")]
+    [SerializeField] private StoryStyle storyStyle = StoryStyle.FairyTale;
+
+    [Tooltip("故事风格选择 Custom 时使用")]
+    [SerializeField] [TextArea(2, 5)] private string customStoryStylePrompt = "";
+
+    [Tooltip("故事生成额外要求，在故事风格基础上补充说明")]
+    [SerializeField] [TextArea(2, 5)] private string additionalStoryRequirements = "";
     
+    [Header("Image Style Settings")]
     [Tooltip("图片风格")]
     [SerializeField] private ImageStyle imageStyle = ImageStyle.Photorealistic;
+
+    [Tooltip("图片风格选择 Custom 时使用")]
+    [SerializeField] [TextArea(2, 5)] private string customImageStylePrompt = "";
     
     [Tooltip("图片生成额外要求，在风格基础上补充说明")]
     [SerializeField] [TextArea(2, 5)] private string additionalImageRequirements = "";
@@ -64,7 +89,11 @@ public class AIServiceConfig : ScriptableObject
     public OpenAIConfig OpenAIConfig => openAIConfig;
     public string[] StoryThemes => storyThemes;
     public int PageCount => pageCount;
+    public StoryStyle StoryStyle => storyStyle;
+    public string CustomStoryStylePrompt => customStoryStylePrompt;
+    public string AdditionalStoryRequirements => additionalStoryRequirements;
     public ImageStyle ImageStyle => imageStyle;
+    public string CustomImageStylePrompt => customImageStylePrompt;
     public string AdditionalImageRequirements => additionalImageRequirements;
     public string ImageAspectRatio => imageAspectRatio;
     public StoryFallbackTone FallbackTone => fallbackTone;
@@ -91,6 +120,54 @@ public class AIServiceConfig : ScriptableObject
         };
 
         return string.IsNullOrWhiteSpace(address) ? null : address;
+    }
+
+    public string GetStoryStylePrompt()
+    {
+        var baseStyle = storyStyle switch
+        {
+            StoryStyle.FairyTale => "warm fairy-tale picture-book storytelling, clear emotional beats, hopeful tone",
+            StoryStyle.Adventure => "energetic adventure serial storytelling, escalating stakes, teamwork and discovery",
+            StoryStyle.SportsDrama => "fast-paced sports drama storytelling, rivalry, training tension, comeback moments",
+            StoryStyle.Comedy => "light comedic storytelling, playful reversals, expressive character reactions",
+            StoryStyle.DarkFantasy => "dark fantasy storytelling, mysterious atmosphere, high stakes and bittersweet choices",
+            StoryStyle.Custom => string.IsNullOrWhiteSpace(customStoryStylePrompt)
+                ? "coherent illustrated story storytelling"
+                : customStoryStylePrompt.Trim(),
+            _ => "coherent illustrated story storytelling"
+        };
+
+        if (!string.IsNullOrWhiteSpace(additionalStoryRequirements))
+        {
+            baseStyle += $", {additionalStoryRequirements.Trim()}";
+        }
+
+        return baseStyle;
+    }
+
+    public string GetImageStylePrompt()
+    {
+        var baseStyle = imageStyle switch
+        {
+            ImageStyle.Photorealistic => "photorealistic style, high quality, natural colors",
+            ImageStyle.Anime => "anime style, cel-shaded, vibrant colors",
+            ImageStyle.Watercolor => "watercolor painting style, soft brushstrokes, artistic",
+            ImageStyle.OilPainting => "oil painting style, rich textures, classical art",
+            ImageStyle.PencilSketch => "pencil sketch style, detailed linework, monochrome",
+            ImageStyle.DigitalArt => "digital art style, clean lines, modern illustration",
+            ImageStyle.Cinematic => "cinematic style, dramatic lighting, movie quality",
+            ImageStyle.Custom => string.IsNullOrWhiteSpace(customImageStylePrompt)
+                ? "high quality illustration style"
+                : customImageStylePrompt.Trim(),
+            _ => "photorealistic style, high quality, natural colors"
+        };
+
+        if (!string.IsNullOrWhiteSpace(additionalImageRequirements))
+        {
+            baseStyle += $", {additionalImageRequirements.Trim()}";
+        }
+
+        return baseStyle;
     }
     
     /// <summary>
@@ -147,12 +224,12 @@ public class AIServiceConfig : ScriptableObject
     // Validate in editor
     private void OnValidate()
     {
-        if (geminiConfig == null)
+        if (currentModel == AIModelType.Gemini && geminiConfig == null)
         {
             Debug.LogWarning($"[{name}] Gemini config is not assigned");
         }
         
-        if (openAIConfig == null)
+        if (currentModel == AIModelType.OpenAI && openAIConfig == null)
         {
             Debug.LogWarning($"[{name}] OpenAI config is not assigned");
         }
