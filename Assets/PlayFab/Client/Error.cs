@@ -17,7 +17,14 @@ public partial class PlayFabReadClient
 
     static void ErrorReportInternal(PlayFabError error, bool returnToMainMenu)
     {
-        Debug.Log("error.ErrorMessage:"+ error.Error);
+        if (error == null)
+        {
+            Debug.LogWarning("PlayFab error is null.");
+            return;
+        }
+
+        Debug.LogWarning("PlayFab error: " + error.GenerateErrorReport());
+        var shouldReturnToMainMenu = returnToMainMenu && ShouldReturnToMainMenu(error);
         if (Application.isPlaying)
         {
             switch (error.Error)
@@ -26,7 +33,7 @@ public partial class PlayFabReadClient
                     PopupLayer.ArrangeWarnWindow(
                         ()=>
                         {
-                            HandleErrorReturn(returnToMainMenu);
+                            HandleErrorReturn(shouldReturnToMainMenu);
                         },
                         Translate.Get("NotAuthorizedByTitle"));
                     break;
@@ -34,9 +41,9 @@ public partial class PlayFabReadClient
                     PopupLayer.ArrangeWarnWindow(
                         ()=>
                         {
-                            HandleErrorReturn(returnToMainMenu);
+                            HandleErrorReturn(shouldReturnToMainMenu);
                         },
-                        Translate.Get("ReturnToLobbyForConnectionError"));
+                        Translate.Get("ConnectionError"));
                     break;
                 case PlayFabErrorCode.InvalidUsername:
                     PopupLayer.ArrangeWarnWindow(Translate.Get("InvalidUsername"));
@@ -57,11 +64,26 @@ public partial class PlayFabReadClient
                     PopupLayer.ArrangeWarnWindow(
                         ()=>
                         {
-                            HandleErrorReturn(returnToMainMenu);
+                            HandleErrorReturn(shouldReturnToMainMenu);
                         },
                         Translate.Get("ConnectionError"));
                     break;
             }
+        }
+    }
+
+    static bool ShouldReturnToMainMenu(PlayFabError error)
+    {
+        switch (error.Error)
+        {
+            case PlayFabErrorCode.AccountBanned:
+            case PlayFabErrorCode.InvalidSessionTicket:
+            case PlayFabErrorCode.NotAuthenticated:
+            case PlayFabErrorCode.ExpiredAuthToken:
+            case PlayFabErrorCode.NotAuthorizedByTitle:
+                return true;
+            default:
+                return false;
         }
     }
 

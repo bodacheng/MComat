@@ -27,6 +27,7 @@ public partial class CloudScript
             (x)=>
             {
                 errorCallback?.Invoke(x);
+                ProgressLayer.Close();
                 PlayFabReadClient.ErrorReport(x);
             },
             customData, extraHeaders);
@@ -52,6 +53,8 @@ public partial class CloudScript
             (x)=>
             {
                 errorCallback?.Invoke(x);
+                if (showLoading)
+                    ProgressLayer.Close();
                 if (showErrorPopup)
                     PlayFabReadClient.ErrorReport(x);
             },

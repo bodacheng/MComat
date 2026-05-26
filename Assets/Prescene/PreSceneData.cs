@@ -4,13 +4,13 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using dataAccess;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Random = System.Random;
 
 namespace mainMenu
 {
     public partial class PreScene : MonoBehaviour
     {
+        const float DataLoadingSoftTimeoutSeconds = 30f;
         protected MissionWatcher missionWatcher;
         
         void StatisticsLoadFinished(bool value)
@@ -46,22 +46,17 @@ namespace mainMenu
         public void DataLoading(Action onDataLoad)
         {
             var timer = new SafeTimer();
-            bool errorReturn = false;
-
-            async void ErrorReturn()
-            {
-                ProgressLayer.Loading(Translate.Get("ReturnToLobbyForConnectionError"));
-                await UniTask.Delay(TimeSpan.FromSeconds(3));
-                if (SceneManager.GetActiveScene().buildIndex != 0)
-                {
-                    SceneManager.LoadScene(0);
-                }
-            }
+            bool dataLoadingFinished = false;
             
-            timer.StartTimer(5,  () =>
+            timer.StartTimer(DataLoadingSoftTimeoutSeconds,  () =>
             {
-                errorReturn = true;
-                ErrorReturn();
+                if (dataLoadingFinished)
+                {
+                    return;
+                }
+
+                Debug.LogWarning($"Data loading did not finish in {DataLoadingSoftTimeoutSeconds} seconds. Keep waiting for pending PlayFab requests.");
+                ProgressLayer.Loading(Translate.Get("GettingData"));
             });
             ProgressLayer.Loading(Translate.Get("GettingData"));
             PlayFabReadClient.GetStatistics(StatisticsLoadFinished);
@@ -88,11 +83,8 @@ namespace mainMenu
                 },
                 () =>
                 {
+                    dataLoadingFinished = true;
                     timer.Stop();
-                    if (errorReturn)
-                    {
-                        return;
-                    }
                     switch (PlayerAccountInfo.Me.tutorialProgress)
                     {
                         case "Started":
@@ -112,8 +104,9 @@ namespace mainMenu
                 },
                 () =>
                 {
+                    dataLoadingFinished = true;
                     timer.Stop();
-                    ErrorReturn();
+                    ProgressLayer.Close();
                 }
             );
         }
