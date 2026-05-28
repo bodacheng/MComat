@@ -24,6 +24,23 @@ public partial class CloudScript
                 request,
                 (x)=>
                 {
+                    if (x.Error != null)
+                    {
+                        var scriptError = ToPlayFabError(x);
+                        if (PlayFabReadClient.ShouldRetryPlayFabRequest(scriptError, attempt))
+                        {
+                            PlayFabReadClient.RetryPlayFabRequest(() => Attempt(attempt + 1), attempt, request.FunctionName);
+                            return;
+                        }
+
+                        errorCallback?.Invoke(scriptError);
+                        if (showLoading)
+                            ProgressLayer.Close();
+                        if (showErrorPopup)
+                            PlayFabReadClient.ErrorReport(scriptError);
+                        return;
+                    }
+
                     resultCallback?.Invoke(x);
                     if (showLoading)
                         ProgressLayer.Close();
@@ -46,6 +63,26 @@ public partial class CloudScript
         }
 
         Attempt(1);
+    }
+
+    static PlayFabError ToPlayFabError(ExecuteCloudScriptResult result)
+    {
+        var errorCode = PlayFabErrorCode.CloudScriptAPIRequestError;
+        if (!string.IsNullOrEmpty(result?.Error?.Error))
+        {
+            Enum.TryParse(result.Error.Error, out errorCode);
+        }
+
+        var functionName = string.IsNullOrEmpty(result?.FunctionName) ? "CloudScript" : result.FunctionName;
+        var message = result?.Error == null
+            ? $"{functionName} failed."
+            : $"{functionName}: {result.Error.Error} {result.Error.Message}";
+
+        return new PlayFabError
+        {
+            Error = errorCode,
+            ErrorMessage = message
+        };
     }
     
     public static void ExecuteFunctionCommon(

@@ -129,7 +129,14 @@ namespace FightScene
                                 {
                                     Debug.LogWarning($"Failed to sync arcade progress for stage {FightLoad.Fight.ID}: {error.GenerateErrorReport()}");
                                     ShowQuestFightOver(null, false);
-                                }
+                                },
+                                error =>
+                                {
+                                    Debug.LogWarning($"Failed to claim arcade reward for stage {FightLoad.Fight.ID}: {error.GenerateErrorReport()}");
+                                    TrySaveTutorialProgressAfterStage(FightLoad.Fight.ID);
+                                    ShowQuestFightOver(null, true);
+                                },
+                                false
                             );
                         }
                         else

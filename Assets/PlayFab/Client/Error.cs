@@ -72,10 +72,30 @@ public partial class PlayFabReadClient
                         {
                             HandleErrorReturn(shouldReturnToMainMenu);
                         },
-                        Translate.Get("ConnectionError"));
+                        GetPlayFabErrorMessage(error));
                     break;
             }
         }
+    }
+
+    static string GetPlayFabErrorMessage(PlayFabError error)
+    {
+        if (error == null)
+        {
+            return Translate.Get("ConnectionError");
+        }
+
+        if (error.Error == PlayFabErrorCode.ConnectionError)
+        {
+            return Translate.Get("ConnectionError");
+        }
+
+        if (!string.IsNullOrEmpty(error.ErrorMessage))
+        {
+            return error.ErrorMessage;
+        }
+
+        return error.Error.ToString();
     }
 
     static bool ShouldReturnToMainMenu(PlayFabError error)
@@ -126,6 +146,9 @@ public partial class PlayFabReadClient
             case PlayFabErrorCode.InternalServerError:
             case PlayFabErrorCode.DownstreamServiceUnavailable:
             case PlayFabErrorCode.APIRequestLimitExceeded:
+            case PlayFabErrorCode.CloudScriptAPIRequestError:
+            case PlayFabErrorCode.CloudScriptHTTPRequestError:
+            case PlayFabErrorCode.CloudScriptAzureFunctionsHTTPRequestError:
                 return true;
         }
 
