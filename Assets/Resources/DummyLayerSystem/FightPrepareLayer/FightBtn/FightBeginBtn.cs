@@ -45,28 +45,47 @@ public class FightBeginBtn : MonoBehaviour
         
         titleTween?.Kill();
         titleTween = DOTween.To(() => titleAnimFactor, (x) => titleAnimFactor = x, endValue, duration)
+            .SetLink(gameObject)
             .OnUpdate(
                 () =>
                 {
+                    if (this == null)
+                    {
+                        return;
+                    }
+
                     SetTexts(titleAnimFactor);
                 }
             ).OnComplete(() =>
             {
+                if (this == null || animator == null)
+                {
+                    return;
+                }
+
                 animator.SetBool("On", on);
             });
     }
 
     void SetTexts(float value)
     {
+        if (texts == null)
+        {
+            return;
+        }
+
         texts.ToList().ForEach(x =>
         {
-            x.material.SetFloat("_Animation_Factor", value);
+            if (x != null)
+            {
+                x.material.SetFloat("_Animation_Factor", value);
+            }
         });
     }
     
     private void OnDestroy()
     {
         titleTween?.Kill();
+        titleTween = null;
     }
 }
-

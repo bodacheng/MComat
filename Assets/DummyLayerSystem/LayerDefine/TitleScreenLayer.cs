@@ -48,13 +48,23 @@ public class TitleScreenLayer : UILayer
             devLoginBtn.onClick.AddListener(DevUserLogin);
         }
         
-        titleTween = DOTween.To(() => titleAnimFactor, (x) => titleAnimFactor = x, 2, 10).OnUpdate(() =>
-        {
-            title.ToList().ForEach(x =>
+        titleTween = DOTween.To(() => titleAnimFactor, (x) => titleAnimFactor = x, 2, 10)
+            .SetLink(gameObject)
+            .OnUpdate(() =>
+            {
+                if (this == null || title == null)
                 {
-                    x.material.SetFloat("_Animation_Factor", titleAnimFactor);
+                    return;
+                }
+
+                title.ToList().ForEach(x =>
+                {
+                    if (x != null)
+                    {
+                        x.material.SetFloat("_Animation_Factor", titleAnimFactor);
+                    }
                 });
-        });
+            });
     }
     
     void SwitchTab(int step) // step 1:main ,step 2: login by pw
@@ -94,7 +104,8 @@ public class TitleScreenLayer : UILayer
 
     public override void OnDestroy()
     {
-        base.OnDestroy();
         titleTween?.Kill();
+        titleTween = null;
+        base.OnDestroy();
     }
 }

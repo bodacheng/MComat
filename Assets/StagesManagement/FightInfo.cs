@@ -5,6 +5,7 @@ using dataAccess;
 using System.IO;
 using System.Linq;
 using mainMenu;
+using MCombat.Shared.Combat;
 using NoSuchStudio.Common;
 using PlayFab.ClientModels;
 
@@ -33,6 +34,13 @@ public partial class FightInfo : ScriptableObject
         get => fightMode;
         set => fightMode = value;
     }
+
+    public bool IsGroupBattle => FightControlPolicy.IsGroupBattle(FightMode, EventType);
+    public bool AllowsManualUnitControl => FightControlPolicy.AllowsManualUnitControl(FightMode, EventType);
+    public bool ShouldForceAutoBattle =>
+        FightControlPolicy.ShouldForceAutoBattle(FightMode, EventType);
+    public bool ShouldRunFirstQuestTutorial =>
+        FightControlPolicy.ShouldRunFirstQuestTutorial(FightMode, ID, EventType);
 
     public UnitInfo GetRepresentUnitInfo()
     {

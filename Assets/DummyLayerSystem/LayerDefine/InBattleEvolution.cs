@@ -114,23 +114,59 @@ public class InBattleEvolution : UILayer
                     await RTFightManager.Target.EvolutionManager.ChangeSkill(focusUnit, nineForShow.ClickedSlot, skills[index]);
                     var t = skillOptions[index].Btn.transform.GetComponentInChildren<SKStoneItem>();
                     var clickedSlot = nineForShow.GetClickedSlot();
-                    var moveTween = t.transform.DOMove(clickedSlot.transform.position, animEndInSeconds).SetEase(Ease.InBack).OnComplete(
+                    if (t == null || clickedSlot == null)
+                    {
+                        return;
+                    }
+
+                    var moveTween = t.transform.DOMove(clickedSlot.transform.position, animEndInSeconds).SetEase(Ease.InBack).SetLink(gameObject).OnComplete(
                         async () =>
                         {
+                            if (this == null || clickedSlot == null)
+                            {
+                                return;
+                            }
+
                             var stone = clickedSlot.transform.GetComponentInChildren<SKStoneItem>();
                             if (stone != null)
                                 stone.gameObject.SetActive(false);
                             
+                            if (FightScene.FightScene.target == null)
+                            {
+                                return;
+                            }
+
                             var targetPos = PosCal.GetWorldPos(FightScene.FightScene.target.fxCamera, clickedSlot.transform.GetComponent<RectTransform>(), 7);
                             var _layer = UILayerLoader.Get<FightingStepLayer>();
+                            if (_layer == null || _layer.InputsManager == null)
+                            {
+                                return;
+                            }
+
                             var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(skills[index]);
-                            var explosion = _layer.InputsManager.GetCurrentElementEffectsGroup().GetExplosionEffect(skillConfig.SP_LEVEL);
+                            var elementEffectsGroup = _layer.InputsManager.GetCurrentElementEffectsGroup();
+                            if (elementEffectsGroup == null)
+                            {
+                                return;
+                            }
+
+                            var explosion = elementEffectsGroup.GetExplosionEffect(skillConfig.SP_LEVEL);
+                            if (explosion == null)
+                            {
+                                return;
+                            }
+
                             explosion.transform.position = targetPos;
                             explosion.transform.localScale *= 3;
                             explosion.Play();
                             await UniTask.Delay(TimeSpan.FromSeconds(animEndOutSeconds));
+                            if (explosion == null)
+                            {
+                                return;
+                            }
+
                             explosion.transform.localScale /= 3;
-                            onFinishedSkillEvolution.Invoke();
+                            onFinishedSkillEvolution?.Invoke();
                         }
                     );
                 }

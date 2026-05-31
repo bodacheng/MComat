@@ -53,11 +53,11 @@ public partial class FightPrepareLayer : UILayer
             
             RefreshCountDisplay(1, team1UnitCount, _selectedMaxTeamCount);
             RefreshCountDisplay(2, team2UnitCount, _selectedMaxTeamCount);
-            foreach (var icon in _gangbangHeroIconsE)
+            foreach (var icon in _gangbangHeroIconsE ?? Enumerable.Empty<GangbangHeroIcon>())
             {
                 icon.RefreshCount();
             }
-            foreach (var icon in _gangbangHeroIconsM)
+            foreach (var icon in _gangbangHeroIconsM ?? Enumerable.Empty<GangbangHeroIcon>())
             {
                 icon.RefreshCount();
             }
@@ -132,6 +132,8 @@ public partial class FightPrepareLayer : UILayer
     
     public async UniTask GangbangStageUnitsDisplay(FightInfo stage, CancellationToken token)
     {
+        var displayVersion = ++_displayVersion;
+        
         var heroUnits = stage.FightMembers.HeroSets.GetValues();
         var enemyUnits = stage.FightMembers.EnemySets.GetValues();
         var heroLookup = BuildUnitLookup(heroUnits);
@@ -145,13 +147,17 @@ public partial class FightPrepareLayer : UILayer
             FocusTeamUnit(instanceId,
                           heroLookup,
                           connector,
-                          nineForShow);
+                          nineForShow,
+                          displayVersion,
+                          token);
 
         UniTask FocusEnemy(string instanceId) =>
             FocusTeamUnit(instanceId,
                           enemyLookup,
                           connectorE,
-                          nineForShowE);
+                          nineForShowE,
+                          displayVersion,
+                          token);
 
         // 用于收集所有需要等待的任务
         var focusTasks = new List<UniTask>();
@@ -159,7 +165,11 @@ public partial class FightPrepareLayer : UILayer
         // ---------- 我方图标 ----------
         _gangbangHeroIconsM = GangbangInfosShow(
             heroUnits,
-            id => FocusHero(id).Forget(),
+            id =>
+            {
+                if (IsActiveDisplay(displayVersion, token))
+                    FocusHero(id).Forget();
+            },
             myTeamShowT,
             true,
             1,
@@ -184,7 +194,11 @@ public partial class FightPrepareLayer : UILayer
         // ---------- 敌方图标 ----------
         _gangbangHeroIconsE = GangbangInfosShow(
             enemyUnits,
-            id => FocusEnemy(id).Forget(),          // 同样收集
+            id =>
+            {
+                if (IsActiveDisplay(displayVersion, token))
+                    FocusEnemy(id).Forget();
+            },
             enemyTeamShowT,
             false,
             2);
@@ -194,22 +208,27 @@ public partial class FightPrepareLayer : UILayer
         WarmupUnitModels(enemyUnits, defaultEnemyId, connectorE, _preparedEnemyModelIds, token);
 
         // ---------- 默认焦点 ----------
-        if (!string.IsNullOrEmpty(defaultHeroId))
+        if (!string.IsNullOrEmpty(defaultHeroId) && IsActiveDisplay(displayVersion, token))
             focusTasks.Add(FocusHero(defaultHeroId));
 
-        if (!string.IsNullOrEmpty(defaultEnemyId))
+        if (!string.IsNullOrEmpty(defaultEnemyId) && IsActiveDisplay(displayVersion, token))
             focusTasks.Add(FocusEnemy(defaultEnemyId));
 
         // ---------- 并行等待 ----------
         await UniTask.WhenAll(focusTasks);
 
-        if (token.IsCancellationRequested)
+        if (!IsActiveDisplay(displayVersion, token))
         {
             return;
         }
 
         // ---------- UI 收尾 ----------
-        _gangbangHeroIconsE.FirstOrDefault()?.iconButton.onClick.Invoke();
+        if (IsActiveDisplay(displayVersion, token))
+            _gangbangHeroIconsE.FirstOrDefault()?.iconButton.onClick.Invoke();
+        
+        if (!IsActiveDisplay(displayVersion, token))
+            return;
+        
         team1Name.text = "YOU";
 
         switch (PlayerPrefs.GetInt("gangbangCountOption", 1))
@@ -222,10 +241,7 @@ public partial class FightPrepareLayer : UILayer
     
     List<GangbangHeroIcon> GangbangInfosShow(List<UnitInfo> unitSets, Action<string> iconBehaviour, RectTransform showT, bool withSkillCheck, int team, bool btnInteractive = true)
     {
-        foreach (Transform t in showT)
-        {
-            Destroy(t.gameObject);
-        }
+        ClearUnitIcons(showT);
         var icons = new List<GangbangHeroIcon>();
         int wholeTeamCount = 0;
         foreach(var unitInfo in unitSets)

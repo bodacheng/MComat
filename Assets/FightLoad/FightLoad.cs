@@ -9,26 +9,18 @@ public static class FightLoad
     
     public static void Go(FightInfo fightInfo, bool inSceneLoad = false)
     {
-        if (fightInfo.FightMode == FightMode.Group)
+        if (fightInfo.ShouldForceAutoBattle)
         {
             fightInfo.Team1Auto = true;
             fightInfo.Team2Auto = true;
         }
-        
-        switch (fightInfo.EventType)
+        else
         {
-            case FightEventType.Screensaver:
-            case FightEventType.SkillTest:
-                fightInfo.Team1Auto = true;
-                fightInfo.Team2Auto = true;
-                break;
-            default:
-                fightInfo.Team1Auto = PlayerPrefs.GetInt("auto", 0) == 1;
-                fightInfo.Team2Auto = true;
-                break;
+            fightInfo.Team1Auto = PlayerPrefs.GetInt("auto", 0) == 1;
+            fightInfo.Team2Auto = true;
         }
         
-        if (fightInfo.ID == "1" && fightInfo.EventType == FightEventType.Quest)
+        if (fightInfo.ShouldRunFirstQuestTutorial)
         {
             fightInfo.RunTutorial = true;
             fightInfo.Team1Auto = false;

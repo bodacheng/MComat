@@ -65,15 +65,19 @@ public partial class StageButton : MonoBehaviour
         mModeFlg.SetActive(fightMode == FightMode.Multi);
     }
     
-    public void LoadUnitIcons(List<UnitInfo> units, Func<UnitInfo, UniTask> iconButtonFeature, bool clickBoss = false)
+    public void LoadUnitIcons(List<UnitInfo> units, Func<UnitInfo, UniTask> iconButtonFeature, bool clickBoss = false, Func<bool> isActive = null)
     {
         var heroIcons = UnitInfosShow(units, 
             async (x) =>
             {
+                if (isActive != null && !isActive())
+                    return;
+                
                 ProgressLayer.Loading(string.Empty);
                 var targetUnitInfo = units.FirstOrDefault(info => info.id == x);
                 await iconButtonFeature(targetUnitInfo);
-                ProgressLayer.Close();
+                if (isActive == null || isActive())
+                    ProgressLayer.Close();
             },
             iconsT
         );
@@ -88,12 +92,18 @@ public partial class StageButton : MonoBehaviour
         }
     } 
     
-    List<HeroIcon> UnitInfosShow(List<UnitInfo> heroSets, Action<string> iconFeature, RectTransform showT)
+    protected void ClearUnitIcons(RectTransform showT)
     {
         foreach (Transform t in showT)
         {
+            t.gameObject.SetActive(false);
             Destroy(t.gameObject);
         }
+    }
+    
+    List<HeroIcon> UnitInfosShow(List<UnitInfo> heroSets, Action<string> iconFeature, RectTransform showT)
+    {
+        ClearUnitIcons(showT);
         var icons = new List<HeroIcon>();
         foreach (var unitInfo in heroSets)
         {

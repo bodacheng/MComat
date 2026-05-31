@@ -24,6 +24,7 @@ public class ArcadeTop : UILayer
     private MainSceneStep step;
     List<int> _currentStages;
     readonly List<StageButton> _stageButtons = new List<StageButton>();
+    int _showStagesVersion;
     
     LoadStageDelegate LoadStageMethod;
     Action<int, bool> directToStage;
@@ -41,6 +42,9 @@ public class ArcadeTop : UILayer
     
     void SetupCommon()
     {
+        nextChapter.onClick.RemoveListener(ShowNextStages);
+        lastChapter.onClick.RemoveListener(ShowLastStages);
+        jumpToNewStage.onClick.RemoveListener(ToNew);
         nextChapter.onClick.AddListener(ShowNextStages);
         lastChapter.onClick.AddListener(ShowLastStages);
         jumpToNewStage.onClick.AddListener(ToNew);
@@ -57,8 +61,58 @@ public class ArcadeTop : UILayer
         SetupCommon();
     }
     
-    async UniTask IconButtonFeature(UnitInfo unitInfo)
+    bool IsActiveShowStages(int showStagesVersion)
     {
+        return showStagesVersion == _showStagesVersion && this != null && container != null && !container.IsDestroyed();
+    }
+    
+    void DestroyStageButton(StageButton stageButton)
+    {
+        if (stageButton == null)
+            return;
+        
+        stageButton.gameObject.SetActive(false);
+        Destroy(stageButton.gameObject);
+    }
+    
+    void DestroyStageButtons(IEnumerable<StageButton> stageButtons)
+    {
+        foreach (var stageButton in stageButtons)
+        {
+            DestroyStageButton(stageButton);
+        }
+    }
+    
+    void ClearStageButtons()
+    {
+        DestroyStageButtons(_stageButtons);
+        _stageButtons.Clear();
+        
+        if (container == null)
+            return;
+        
+        foreach (Transform child in container.transform)
+        {
+            var stageButton = child.GetComponent<StageButton>();
+            if (stageButton != null)
+            {
+                DestroyStageButton(stageButton);
+            }
+        }
+    }
+    
+    public override void OnDestroy()
+    {
+        _showStagesVersion++;
+        ClearStageButtons();
+        base.OnDestroy();
+    }
+    
+    async UniTask IconButtonFeature(UnitInfo unitInfo, int showStagesVersion)
+    {
+        if (!IsActiveShowStages(showStagesVersion) || unitInfo == null)
+            return;
+        
         UnitConfig unitConfig = Units.GetUnitConfig(unitInfo.r_id);
         
         ProgressLayer.Loading(string.Empty);
@@ -69,9 +123,18 @@ public class ArcadeTop : UILayer
             nineForShow.SkillSetInfoOfUnitOnArcadePage(unitInfo.set)
         );
         
+        if (!IsActiveShowStages(showStagesVersion))
+        {
+            ProgressLayer.Close();
+            return;
+        }
+        
         nineForShow.AddOnClickToSlots(
             (RECORD_ID) =>
             {
+                if (!IsActiveShowStages(showStagesVersion))
+                    return;
+                
                 var skillConfig = SkillConfigTable.GetSkillConfigByRecordId(RECORD_ID);
                 connector.SkillShowRunWithPrepare(skillConfig.REAL_NAME).Forget();
             }
@@ -97,43 +160,56 @@ public class ArcadeTop : UILayer
     
     public async UniTask ShowStages(List<int> stages)
     {
+        if (container == null || container.IsDestroyed())
+            return;
+        
+        var showStagesVersion = ++_showStagesVersion;
         ProgressLayer.Loading("Loading stages");
         container.transform.gameObject.SetActive(false);
-        foreach (var child in _stageButtons) {
-            Destroy(child.gameObject);
-        }
-        _stageButtons.Clear();
+        ClearStageButtons();
         _currentStages = stages;
         var progress = GetCurrentProgress();
-        var tasks = new List<UniTask>();
+        var tasks = new List<UniTask<StageButton>>();
+        var currentStagesMax = _currentStages.Count > 0 ? _currentStages.Max() : 0;
         for (var index = 0; index < _currentStages.Count; index++)
         {
             tasks.Add(LoadStage(_currentStages[index], 
-                _currentStages[index] == 
-                progress + 1));
+                _currentStages[index] == progress + 1,
+                _currentStages[index] == currentStagesMax,
+                showStagesVersion));
         }
-        await UniTask.WhenAll(tasks);
+        
+        var loadedStageButtons = await UniTask.WhenAll(tasks);
+        if (!IsActiveShowStages(showStagesVersion))
+        {
+            DestroyStageButtons(loadedStageButtons);
+            return;
+        }
+        
+        _stageButtons.AddRange(loadedStageButtons.Where(stageButton => stageButton != null));
         Refresh(progress,  
             step == MainSceneStep.ArcadeFront ? PlayFabReadClient.StageAwards : PlayFabReadClient.GangbangAwards);
         if (container != null)
             container.transform.gameObject.SetActive(true);
-        ProgressLayer.Close();
+        if (IsActiveShowStages(showStagesVersion))
+            ProgressLayer.Close();
     }
     
-    async UniTask LoadStage(int stageNo, bool isNewStage = false)
+    async UniTask<StageButton> LoadStage(int stageNo, bool isNewStage, bool clickBoss, int showStagesVersion)
     {
         var one = await LoadStageMethod(stageNo);
-        if (one == null)
+        if (!IsActiveShowStages(showStagesVersion) || one == null)
         {
-            return;
+            return null;
         }
         
         var stageBtn = Instantiate(stageNo % _stageCountPerPage == 0 ? bossStagePrefab : normalStagePrefab);
-        _stageButtons.Add(stageBtn);
+        stageBtn.gameObject.SetActive(false);
         stageBtn.Button.onClick.AddListener(
             ()=>
             {
-                directToStage(stageNo, true);
+                if (IsActiveShowStages(showStagesVersion))
+                    directToStage(stageNo, true);
             }
         );
         stageBtn.name = "Stage" + stageNo;
@@ -147,12 +223,17 @@ public class ArcadeTop : UILayer
                 stageBtn.LoadUnitIconsGangbang(
                     one.FightMembers.EnemySets.GetValues(), 
                     (x)=> one.GetTeam2GroupSet(x).Count,
-                    IconButtonFeature, 
-                    stageNo == _currentStages.Max());
+                    (unitInfo)=> IconButtonFeature(unitInfo, showStagesVersion), 
+                    clickBoss,
+                    ()=> IsActiveShowStages(showStagesVersion));
             }
             else
             {
-                stageBtn.LoadUnitIcons(one.FightMembers.EnemySets.GetValues(), IconButtonFeature, stageNo == _currentStages.Max());
+                stageBtn.LoadUnitIcons(
+                    one.FightMembers.EnemySets.GetValues(),
+                    (unitInfo)=> IconButtonFeature(unitInfo, showStagesVersion),
+                    clickBoss,
+                    ()=> IsActiveShowStages(showStagesVersion));
             }
         }
         stageBtn.SetFightModeFlg(one.FightMode);
@@ -162,6 +243,14 @@ public class ArcadeTop : UILayer
         {
             stageBtn.ShowUnitGetInfo(getUnitRId);
         }
+        
+        if (!IsActiveShowStages(showStagesVersion))
+        {
+            DestroyStageButton(stageBtn);
+            return null;
+        }
+        
+        return stageBtn;
         
         string UnitGetChart(int stage)
         {
@@ -214,6 +303,7 @@ public class ArcadeTop : UILayer
             stageBtn.transform.localPosition = Vector3.zero;
             stageBtn.transform.localRotation = Quaternion.identity;
             stageBtn.transform.localScale = Vector3.one;
+            stageBtn.gameObject.SetActive(true);
         }
         
         int currentStagesMax = _currentStages.Count > 0 ? _currentStages.Max() : progress;

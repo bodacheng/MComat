@@ -37,12 +37,18 @@ namespace FightScene
         
         void InsTeamUI_Multi(Action<bool> switchTeamAuto, Func<bool> currentAutoState)//这个环节应该能够同时把HP bar也适配好。
         {
+            var allowsManualUnitControl = FightLoad.Fight.AllowsManualUnitControl;
             foreach (var center in _teamMembers.mDict.Values)
             {
                 // SideIcon整备
                 void ClickUnitIcon(Data_Center c)
                 {
                     if (c.FightDataRef.IsDead.Value)
+                    {
+                        return;
+                    }
+
+                    if (!allowsManualUnitControl)
                     {
                         return;
                     }
@@ -144,7 +150,7 @@ namespace FightScene
                     
                     if (TeamConfig.myTeam == RTFightManager.playerTeam)
                     {
-                        RTFightManager.Target.CameraAdjustment(Team.player1, FightMode.Multi, x != null ? x.geometryCenter : null);
+                        RTFightManager.Target.CameraAdjustment(Team.player1, FightMode, x != null ? x.geometryCenter : null);
                         _teamIndicatorCloseDisposable?.Dispose();
                         _barPosUpdate?.Dispose();
                         foreach (var one in _teamMembers.mDict.Values)
@@ -166,8 +172,15 @@ namespace FightScene
             
             if (TeamConfig.myTeam == RTFightManager.playerTeam)
             {
-                inputsManager.FocusUnit(ResolveDefaultFocus(), true);
-                switchTeamAuto(currentAutoState());
+                if (!allowsManualUnitControl)
+                {
+                    inputsManager.FocusUnit(null, true);
+                }
+                else
+                {
+                    inputsManager.FocusUnit(ResolveDefaultFocus(), true);
+                    switchTeamAuto(currentAutoState());
+                }
             }
             SetLiveUnitCount();
         }

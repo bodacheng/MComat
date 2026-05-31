@@ -11,6 +11,7 @@ public class ShaderManager : MonoBehaviour
     [SerializeField] List<DummyMesh> meshes;
     private List<TweenerCore<Color, Color, ColorOptions>> _tweenerCores = new List<TweenerCore<Color, Color, ColorOptions>>();
     private List<Sequence> _sequences = new List<Sequence>();
+    private bool _destroyed;
     void Start()
     {
         #region outdated
@@ -63,6 +64,7 @@ public class ShaderManager : MonoBehaviour
 
     void OnDestroy()
     {
+        _destroyed = true;
         ClearDoing();
     }
 
@@ -70,17 +72,21 @@ public class ShaderManager : MonoBehaviour
     public void RimEffectsUp(Color color, float duration)
     {
         ClearDoing();
-        TweenerCore<Color, Color, ColorOptions> tweener = null;
+        if (meshes == null)
+        {
+            return;
+        }
+
         meshes.ForEach(x =>
         {
-            if (x.CurrentMaterials != null)
+            if (CanTween(x))
             {
-                tweener = DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, color, duration).OnComplete(
+                TweenerCore<Color, Color, ColorOptions> tweener = null;
+                tweener = TweenEmission(x, color, duration).OnComplete(
                     () =>
                     {
                         if (tweener != null)
                         {
-                            tweener.Kill();
                             _tweenerCores.Remove(tweener);
                         }
                     });
@@ -92,17 +98,21 @@ public class ShaderManager : MonoBehaviour
     public void RimEffectsClear(float duration)
     {
         ClearDoing();
+        if (meshes == null)
+        {
+            return;
+        }
+
         meshes.ForEach(x =>
         {
             TweenerCore<Color, Color, ColorOptions> tweener = null;
-            if (x.CurrentMaterials != null)
+            if (CanTween(x))
             {
-                tweener = DOTween.To(() => x.EmissionColor, c => x.EmissionColor = c, Color.clear, duration).OnComplete(
+                tweener = TweenEmission(x, Color.clear, duration).OnComplete(
                     () =>
                     {
                         if (tweener != null)
                         {
-                            tweener.Kill();
                             _tweenerCores.Remove(tweener);
                         }
                     });
@@ -140,27 +150,31 @@ public class ShaderManager : MonoBehaviour
     public void RimEffectsForAShortTime(Color targetColor, float duration)
     {
         ClearDoing();
+        if (meshes == null)
+        {
+            return;
+        }
+
         foreach (var mesh in meshes)
         {
-            if (mesh.CurrentMaterials != null)
+            if (CanTween(mesh))
             {
                 // 创建一个新的 Sequence
-                var sequence = DOTween.Sequence();
+                var sequence = DOTween.Sequence().SetLink(gameObject);
 
                 // 第一步：将 EmissionColor 从当前值渐变到 targetColor
                 sequence.Append(
-                    DOTween.To(() => mesh.EmissionColor, c => mesh.EmissionColor = c, targetColor, duration)
+                    TweenEmission(mesh, targetColor, duration)
                 );
 
                 // 第二步：在第一步完成后，将 EmissionColor 从 targetColor 渐变回 Color.clear
                 sequence.Append(
-                    DOTween.To(() => mesh.EmissionColor, c => mesh.EmissionColor = c, Color.clear, duration)
+                    TweenEmission(mesh, Color.clear, duration)
                 );
                 
                 sequence.OnComplete(() =>
                 {
-                    sequence.Kill();
-                    sequence = null;
+                    _sequences.Remove(sequence);
                 });
                 
                 _sequences.Add(sequence);
@@ -174,17 +188,21 @@ public class ShaderManager : MonoBehaviour
     public void FlatColor(Color targetColor, float duration)
     {
         ClearDoing();
+        if (meshes == null)
+        {
+            return;
+        }
+
         meshes.ForEach(x =>
         {
-            if (x.CurrentMaterials != null)
+            if (CanTween(x))
             {
                 TweenerCore<Color, Color, ColorOptions> tweener = null;
-                tweener = DOTween.To(() => x.BaseColor, c => x.BaseColor = c, targetColor, duration).OnComplete(
+                tweener = TweenBaseColor(x, targetColor, duration).OnComplete(
                     () =>
                     {
                         if (tweener != null)
                         {
-                            tweener.Kill();
                             _tweenerCores.Remove(tweener);
                         }
                     });
@@ -196,27 +214,31 @@ public class ShaderManager : MonoBehaviour
     public void FlatColorForAShortTime(Color targetColor, float addTime, float fadeTime)
     {
         ClearDoing();
+        if (meshes == null)
+        {
+            return;
+        }
+
         foreach (var mesh in meshes)
         {
-            if (mesh.CurrentMaterials != null)
+            if (CanTween(mesh))
             {
                 // 创建一个新的 Sequence
-                var sequence = DOTween.Sequence();
+                var sequence = DOTween.Sequence().SetLink(gameObject);
 
                 // 第一步：将 EmissionColor 从当前值渐变到 targetColor，持续 addTime
                 sequence.Append(
-                    DOTween.To(() => mesh.EmissionColor, c => mesh.EmissionColor = c, targetColor, addTime)
+                    TweenEmission(mesh, targetColor, addTime)
                 );
 
                 // 第二步：将 EmissionColor 从 targetColor 渐变回 Color.clear，持续 fadeTime
                 sequence.Append(
-                    DOTween.To(() => mesh.EmissionColor, c => mesh.EmissionColor = c, Color.clear, fadeTime)
+                    TweenEmission(mesh, Color.clear, fadeTime)
                 );
 
                 sequence.OnComplete(() =>
                 {
-                    sequence.Kill();
-                    sequence = null;
+                    _sequences.Remove(sequence);
                 });
                 
                 _sequences.Add(sequence);
@@ -225,4 +247,41 @@ public class ShaderManager : MonoBehaviour
     }
 
     #endregion
+
+    bool CanTween(DummyMesh mesh)
+    {
+        return !_destroyed && mesh != null && mesh.CurrentMaterials != null;
+    }
+
+    TweenerCore<Color, Color, ColorOptions> TweenEmission(DummyMesh mesh, Color color, float duration)
+    {
+        return DOTween.To(
+            () => CanTween(mesh) ? mesh.EmissionColor : Color.clear,
+            c =>
+            {
+                if (CanTween(mesh))
+                {
+                    mesh.EmissionColor = c;
+                }
+            },
+            color,
+            duration
+        ).SetLink(gameObject);
+    }
+
+    TweenerCore<Color, Color, ColorOptions> TweenBaseColor(DummyMesh mesh, Color color, float duration)
+    {
+        return DOTween.To(
+            () => CanTween(mesh) ? mesh.BaseColor : Color.clear,
+            c =>
+            {
+                if (CanTween(mesh))
+                {
+                    mesh.BaseColor = c;
+                }
+            },
+            color,
+            duration
+        ).SetLink(gameObject);
+    }
 }

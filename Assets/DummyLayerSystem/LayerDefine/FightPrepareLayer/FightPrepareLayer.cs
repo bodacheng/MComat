@@ -49,6 +49,7 @@ public partial class FightPrepareLayer : UILayer
     readonly HashSet<string> _preparedHeroModelIds = new HashSet<string>(StringComparer.Ordinal);
     readonly HashSet<string> _preparedEnemyModelIds = new HashSet<string>(StringComparer.Ordinal);
     readonly HashSet<string> _warmedIconRecordIds = new HashSet<string>(StringComparer.Ordinal);
+    int _displayVersion;
 
     public void SetLayerAnimatorTrigger(string code)
     {
@@ -162,8 +163,35 @@ public partial class FightPrepareLayer : UILayer
         );
     }
     
+    bool IsActiveDisplay(int displayVersion, CancellationToken token)
+    {
+        return displayVersion == _displayVersion && this != null && !token.IsCancellationRequested;
+    }
+    
+    void ClearUnitIcons(RectTransform showT)
+    {
+        if (showT == null)
+            return;
+        
+        foreach (Transform t in showT)
+        {
+            t.gameObject.SetActive(false);
+            Destroy(t.gameObject);
+        }
+    }
+    
+    public override void OnDestroy()
+    {
+        _displayVersion++;
+        ClearUnitIcons(myTeamShowT);
+        ClearUnitIcons(enemyTeamShowT);
+        base.OnDestroy();
+    }
+    
     public async UniTask StageMembersInfoShow(FightInfo stage, CancellationToken token)
     {
+        var displayVersion = ++_displayVersion;
+        
         // ----------------- 准备数据缓存 -----------------
         var heroUnits = stage.FightMembers.HeroSets.GetValues();
         var enemyUnits = stage.FightMembers.EnemySets.GetValues();
@@ -178,13 +206,17 @@ public partial class FightPrepareLayer : UILayer
             FocusTeamUnit(id,
                           heroLookup,
                           connector,
-                          nineForShow);
+                          nineForShow,
+                          displayVersion,
+                          token);
 
         UniTask FocusEnemy(string id) =>
             FocusTeamUnit(id,
                           enemyLookup,
                           connectorE,
-                          nineForShowE);
+                          nineForShowE,
+                          displayVersion,
+                          token);
 
         // 用于收集所有要等待的异步任务
         var focusTasks = new List<UniTask>();
@@ -192,13 +224,17 @@ public partial class FightPrepareLayer : UILayer
         // ----------------- 我方成员 -----------------
         var icons1 = MemberInfosShow(
             heroUnits,
-            id => FocusHero(id).Forget(),
+            id =>
+            {
+                if (IsActiveDisplay(displayVersion, token))
+                    FocusHero(id).Forget();
+            },
             myTeamShowT,
             true,
             PlayerAccountInfo.Me.tutorialProgress == "Finished");
 
         var defaultHeroId = icons1.FirstOrDefault()?.InstanceID;
-        if (!string.IsNullOrEmpty(defaultHeroId))
+        if (!string.IsNullOrEmpty(defaultHeroId) && IsActiveDisplay(displayVersion, token))
             focusTasks.Add(FocusHero(defaultHeroId));
         
         WarmupUnitModels(heroUnits, defaultHeroId, connector, _preparedHeroModelIds, token);
@@ -223,12 +259,16 @@ public partial class FightPrepareLayer : UILayer
         // ----------------- 敌方成员 -----------------
         var icons2 = MemberInfosShow(
             enemyUnits,
-            id => FocusEnemy(id).Forget(),
+            id =>
+            {
+                if (IsActiveDisplay(displayVersion, token))
+                    FocusEnemy(id).Forget();
+            },
             enemyTeamShowT,
             false);
 
         var defaultEnemyId = icons2.FirstOrDefault()?.InstanceID;
-        if (!string.IsNullOrEmpty(defaultEnemyId))
+        if (!string.IsNullOrEmpty(defaultEnemyId) && IsActiveDisplay(displayVersion, token))
             focusTasks.Add(FocusEnemy(defaultEnemyId));
 
         WarmupUnitModels(enemyUnits, defaultEnemyId, connectorE, _preparedEnemyModelIds, token);
@@ -236,7 +276,7 @@ public partial class FightPrepareLayer : UILayer
         // ----------------- 并行等待所有 Focus 操作 -----------------
         await UniTask.WhenAll(focusTasks);
 
-        if (token.IsCancellationRequested)
+        if (!IsActiveDisplay(displayVersion, token))
         {
             return;
         }
@@ -258,9 +298,9 @@ public partial class FightPrepareLayer : UILayer
         enemyInfiniteExModeFlg.SetActive(stage.team2CGMode == CriticalGaugeMode.Unlimited);
     }
     
-    async UniTask FocusTeamUnit(string instanceId, IReadOnlyDictionary<string, UnitInfo> teamUnits, DedicatedCameraConnector _connector, NineForShow _nineForShow)
+    async UniTask FocusTeamUnit(string instanceId, IReadOnlyDictionary<string, UnitInfo> teamUnits, DedicatedCameraConnector _connector, NineForShow _nineForShow, int displayVersion, CancellationToken token)
     {
-        if (string.IsNullOrEmpty(instanceId) || teamUnits == null || !teamUnits.TryGetValue(instanceId, out var info))
+        if (!IsActiveDisplay(displayVersion, token) || string.IsNullOrEmpty(instanceId) || teamUnits == null || !teamUnits.TryGetValue(instanceId, out var info))
         {
             return;
         }
@@ -272,20 +312,22 @@ public partial class FightPrepareLayer : UILayer
                 _nineForShow.SkillSetInfoOfUnitOnArcadePage(info.set),
                 //Set2DView(info.r_id, view2D, unitOutAnimator, 0, 0.6f, 0, DedicatedCameraConnector.Unit2DViewYoKoSpaceWhenAtRight(info.r_id)),
                 _connector.ShowModel(info.r_id)
-            );
+            ).AttachExternalCancellation(token);
+        }
+        catch (OperationCanceledException)
+        {
+            // cancellation is expected when layer is closed early
         }
         finally
         {
-            ProgressLayer.Close();
+            if (IsActiveDisplay(displayVersion, token))
+                ProgressLayer.Close();
         }
     }
     
     List<HeroIcon> MemberInfosShow(List<UnitInfo> heroSets, Action<string> iconBehaviour, RectTransform _showT, bool withSkillCheck, bool btnInteractive = true)
     {
-        foreach (Transform t in _showT)
-        {
-            Destroy(t.gameObject);
-        }
+        ClearUnitIcons(_showT);
         var icons = new List<HeroIcon>();
         foreach(var oneMember in heroSets)
         {

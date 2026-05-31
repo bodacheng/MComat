@@ -89,14 +89,15 @@ namespace FightScene
         public void InsTeamUI(Action<Data_Center> changeUnit, Func<bool> currentAutoState, Action<bool> switchTeamAuto, ReactiveProperty<Data_Center> rModeUnit)
         {
             teamAutoSwitch.Initialize(currentAutoState, switchTeamAuto);
+            var allowsManualUnitControl = FightLoad.Fight.AllowsManualUnitControl;
             if (TeamConfig.myTeam != RTFightManager.playerTeam)
             {
                 teamAutoSwitch.gameObject.SetActive((CommonSetting.DevMode || FightLoad.Fight.EventType == FightEventType.Self)
-                                                    && FightLoad.Fight.FightMode != FightMode.Group);
+                                                    && allowsManualUnitControl);
             }
             else
             {
-                teamAutoSwitch.gameObject.SetActive(FightLoad.Fight.FightMode != FightMode.Group);
+                teamAutoSwitch.gameObject.SetActive(allowsManualUnitControl);
             }
             switch (FightMode)
             {
@@ -280,7 +281,7 @@ namespace FightScene
                     break;
             }
             
-            if (FightLoad.Fight.FightMode == FightMode.Group)
+            if (!FightLoad.Fight.AllowsManualUnitControl)
             {
                 sideIconsContainer.gameObject.SetActive(false);
             }

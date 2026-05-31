@@ -165,10 +165,10 @@ public class FightingStepLayer : UILayer
         team2UI.InsTeamUI(RTFightManager.Target.team2.ReadyForNextMember, (() => RTFightManager.Target.team2.Auto),switchTeam2Auto, RTFightManager.Target.team2.RMode_Unit);
         onProgress?.Invoke(0.4f);
 
-        team1UI.LiveUnitCount.gameObject.SetActive(FightLoad.Fight.FightMode == FightMode.Group);
-        team2UI.LiveUnitCount.gameObject.SetActive(FightLoad.Fight.FightMode == FightMode.Group);
+        team1UI.LiveUnitCount.gameObject.SetActive(FightLoad.Fight.IsGroupBattle);
+        team2UI.LiveUnitCount.gameObject.SetActive(FightLoad.Fight.IsGroupBattle);
 
-        if (FightLoad.Fight.FightMode == FightMode.Group)
+        if (FightLoad.Fight.IsGroupBattle)
         {
             fps.gameObject.SetActive(true);
             Observable.EveryUpdate().Subscribe((_) =>
@@ -196,6 +196,10 @@ public class FightingStepLayer : UILayer
 
         await UniTask.WhenAll(inputEffectsLoading);
         inputsManager.GroupSkillIcons();
+        if (FightLoad.Fight.AllowsManualUnitControl && inputsManager.CurrentFocus.Value != null)
+        {
+            inputsManager.FocusUnit(inputsManager.CurrentFocus.Value, true);
+        }
         onProgress?.Invoke(1f);
         
         // foreach (var d in RTFightManager.Target.team2.teamMembers.GetValues())

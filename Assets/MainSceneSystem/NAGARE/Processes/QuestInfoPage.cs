@@ -7,9 +7,18 @@ using UnityEngine;
 public class QuestInfoPage : MSceneProcess
 {
     private FightPrepareLayer _layer;
+    int _enterVersion;
     
-    async UniTask EnterProcess(FightInfo stage)
+    bool IsActiveEnter(int enterVersion)
     {
+        return enterVersion == _enterVersion;
+    }
+    
+    async UniTask EnterProcess(FightInfo stage, int enterVersion)
+    {
+        if (stage == null || !IsActiveEnter(enterVersion))
+            return;
+        
         var represent = stage.GetRepresentUnitInfo();
         UnitConfig unitConfig = Units.GetUnitConfig(represent.r_id);
         BackGroundPS.target.ChangeBGByElement(unitConfig.element);
@@ -23,6 +32,9 @@ public class QuestInfoPage : MSceneProcess
         {
             _layer = UILayerLoader.Load<FightPrepareLayer>(false, "FightPrepareLayer_gb");
         }
+        
+        if (!IsActiveEnter(enterVersion) || _layer == null)
+            return;
         
         string teamKey;
         switch (FightLoad.Fight.EventType)
@@ -70,6 +82,9 @@ public class QuestInfoPage : MSceneProcess
             case FightEventType.Arena:
                 _layer.SetLayerAnimatorTrigger("normal");
                 await _layer.BattleGroundSwitch.INI();
+                if (!IsActiveEnter(enterVersion) || _layer == null)
+                    return;
+                
                 _layer.BattleGroundSwitch.gameObject.SetActive(true);
                 _layer.SetFightMode(FightMode.Evolve);// 不是rotate或multi的任意值
                 break;
@@ -131,11 +146,17 @@ public class QuestInfoPage : MSceneProcess
         if (stage.FightMode is FightMode.Group)
         {
             await _layer.GangbangStageUnitsDisplay(FightLoad.Fight, _layer.gameObject.GetCancellationTokenOnDestroy());
+            if (!IsActiveEnter(enterVersion) || _layer == null)
+                return;
+            
             _layer.SetFightBeginFeature(()=> GoToFight(FightLoad.Fight, _layer.SelectedMaxTeamCount));
         }
         else
         {
             await _layer.StageMembersInfoShow(stage, _layer.gameObject.GetCancellationTokenOnDestroy());
+            if (!IsActiveEnter(enterVersion) || _layer == null)
+                return;
+            
             _layer.SetFightBeginFeature(()=> GoToFight(FightLoad.Fight));
         }
         
@@ -152,17 +173,24 @@ public class QuestInfoPage : MSceneProcess
     
     public override void ProcessEnter()
     {
-        EnterProcess(FightLoad.Fight).Forget();
+        SetLoaded(false);
+        var enterVersion = ++_enterVersion;
+        EnterProcess(FightLoad.Fight, enterVersion).Forget();
     }
     
     public override void ProcessEnter<T>(T t)
     {
-        EnterProcess(t as FightInfo).Forget();
+        SetLoaded(false);
+        var enterVersion = ++_enterVersion;
+        EnterProcess(t as FightInfo, enterVersion).Forget();
     }
     
     public override void ProcessEnd()
     {
+        _enterVersion++;
+        SetLoaded(false);
         UILayerLoader.Remove<FightPrepareLayer>();
+        _layer = null;
     }
     
     public static bool CanFightCheck(FightInfo fight)

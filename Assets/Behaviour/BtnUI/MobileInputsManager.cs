@@ -220,15 +220,16 @@ public class MobileInputsManager : MonoBehaviour {
     // 切换输入按键表现层（红黄蓝绿）.这个函数使用的前提是所有用的上的控制器组都已经注册并初始化
     void SwitchElementEffects(Element element)
     {
-        if (_elementEffects.ContainsKey(_focusing))
+        if (_elementEffects.TryGetValue(_focusing, out var previousElementEffect))
         {
-            _elementEffects[_focusing].Close(ParticleSystemStopBehavior.StopEmitting);
+            previousElementEffect.Close(ParticleSystemStopBehavior.StopEmitting);
         }
+
+        _focusing = element;
         
-        if (_elementEffects.ContainsKey(element))
+        if (_elementEffects.TryGetValue(element, out var currentElementEffect))
         {
-            _focusing = element;
-            _elementEffects[element].Open(
+            currentElementEffect.Open(
                 GetButtonWorldPos(defendBtn, 5),
                 GetButtonWorldPos(dashBtn, 5),
                 GetButtonWorldPos(dreamComboBtn, 5)
@@ -260,11 +261,18 @@ public class MobileInputsManager : MonoBehaviour {
         );
         
         _elementEffects[element].Close(ParticleSystemStopBehavior.StopEmittingAndClear);
+
+        if (focus.Value != null && focus.Value.element == element)
+        {
+            SwitchElementEffects(element);
+            SuddenRefreshButtons(focus.Value._MyBehaviorRunner, true);
+        }
     }
 
     public ElementEffectsGroup GetCurrentElementEffectsGroup()
     {
-        return _elementEffects[_focusing];
+        _elementEffects.TryGetValue(_focusing, out var currentElementEffectsGroup);
+        return currentElementEffectsGroup;
     }
 
     public void GroupSkillIcons()
@@ -305,7 +313,10 @@ public class MobileInputsManager : MonoBehaviour {
     //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效 刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变
     public void BtnRefreshFrames()
     {
-        _elementEffects[_focusing].BtnRefreshEffect();
+        if (_elementEffects.TryGetValue(_focusing, out var elementEffect))
+        {
+            elementEffect.BtnRefreshEffect();
+        }
     }
     
     // 等把机动和防御分离后，要做这样的事情：

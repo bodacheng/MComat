@@ -69,13 +69,19 @@ public class UpperInfoBar : UILayer
         {
             int.TryParse(DiamondText, out int currentValue);
             int targetValue = currentValue;
+            _dmTween?.Kill();
             _dmTween = DOTween.To(
                 () => targetValue,
                 setterValue => targetValue = setterValue,
                 x,
                 currencyTextChangeDuration
-            ).OnUpdate(() =>
+            ).SetLink(gameObject).OnUpdate(() =>
             {
+                if (this == null)
+                {
+                    return;
+                }
+
                 DiamondText = targetValue.ToString();
             });
         }).AddTo(this.gameObject);
@@ -86,13 +92,19 @@ public class UpperInfoBar : UILayer
             int.TryParse(GoldText, out int currentValue);
             int targetValue = currentValue;
             
+            _gdTween?.Kill();
             _gdTween = DOTween.To(
                 () => targetValue,
                 setterValue => targetValue = setterValue,
                 x,
                 currencyTextChangeDuration
-            ).OnUpdate(() =>
+            ).SetLink(gameObject).OnUpdate(() =>
             {
+                if (this == null)
+                {
+                    return;
+                }
+
                 GoldText = targetValue.ToString();
             });
         }).AddTo(this.gameObject);
