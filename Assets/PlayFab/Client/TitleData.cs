@@ -89,9 +89,8 @@ public partial class PlayFabReadClient
                 
                     #region time limit buy
                 
-                    if (result.Data.ContainsKey(PlayFabSetting._timeLimitBuyCode))
+                    if (result.Data.TryGetValue(PlayFabSetting._timeLimitBuyCode, out var specialBuyJson))
                     {
-                        string specialBuyJson = result.Data[PlayFabSetting._timeLimitBuyCode];
                         TimeLimitedBuyData = JsonConvert.DeserializeObject<TimeLimitedBuyData>(specialBuyJson);
                     }
                 

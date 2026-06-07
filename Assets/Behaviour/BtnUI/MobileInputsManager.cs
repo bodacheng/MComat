@@ -287,11 +287,17 @@ public class MobileInputsManager : MonoBehaviour {
     
     public void SkillExplosion(InputKey key, int spLevel)
     {
-        if (!_elementEffects.ContainsKey(_focusing))
+        if (!_elementEffects.TryGetValue(_focusing, out var elementEffect))
         {
             return;
         }
-        var targetExplode = _elementEffects[_focusing].GetExplosionEffect(spLevel);
+
+        var targetExplode = elementEffect.GetExplosionEffect(spLevel);
+        if (targetExplode == null)
+        {
+            return;
+        }
+
         switch (key)
         {
             case InputKey.Attack1:
@@ -307,7 +313,7 @@ public class MobileInputsManager : MonoBehaviour {
                 targetExplode.transform.position = GetButtonWorldPos(dreamComboBtn, 3);
                 break;
         }
-        targetExplode?.Play();
+        targetExplode.Play();
     }
 
     //下面这些是说，每当有技能爆炸特效也就代表技能表更新，那么需要整体刷新特效 刷新特效都是三个键位一起出现，省的给人种误导好像我技能没变
@@ -325,31 +331,29 @@ public class MobileInputsManager : MonoBehaviour {
     // 而防御与机动则是确定一直显示。
     void StartPressing(Button targetBtn)
     {
-        if (_elementEffects.ContainsKey(_focusing))
-            _elementEffects[_focusing].StartPressing(targetBtn);
+        if (_elementEffects.TryGetValue(_focusing, out var elementEffect))
+            elementEffect.StartPressing(targetBtn);
     }
 
     void StopPressing()
     {
-        if (_elementEffects.ContainsKey(_focusing))
-            _elementEffects[_focusing].StopPressing();
+        if (_elementEffects.TryGetValue(_focusing, out var elementEffect))
+            elementEffect.StopPressing();
     }
 
     void DreamComboEffectOn()
     {
-        if (_elementEffects.ContainsKey(_focusing))
-            _elementEffects[_focusing].DreamComboEffectOn(true);
+        if (_elementEffects.TryGetValue(_focusing, out var elementEffect))
+            elementEffect.DreamComboEffectOn(true);
     }
     
     void DreamComboEffectOff()
     {
-        if (_elementEffects.ContainsKey(_focusing))
-            _elementEffects[_focusing].DreamComboEffectOn(false);
+        if (_elementEffects.TryGetValue(_focusing, out var elementEffect))
+            elementEffect.DreamComboEffectOn(false);
     }
     
     // 如果不是对准角色，不会跑。
-    static float h;
-    static float v;
     void CheckIfPlayerIsInputting()
     {
         _inputting = defendButtonHover || attack || fire1 || fire2;
@@ -358,31 +362,31 @@ public class MobileInputsManager : MonoBehaviour {
             return;
         }
 
+        var appSetting = AppSetting.Value;
+        float horizontal;
+        float vertical;
         if (!CommonSetting.PcMode)
         {
-            h = (Input.GetKey(AppSetting.Value.LeftKeyCode) ? -1f : 0f) +
-                (Input.GetKey(AppSetting.Value.RightKeyCode) ? 1f : 0f) +                                    
+            horizontal = (Input.GetKey(appSetting.LeftKeyCode) ? -1f : 0f) +
+                (Input.GetKey(appSetting.RightKeyCode) ? 1f : 0f) +
                 UltimateJoystick.GetHorizontalAxis("joystick");
-            v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
-                (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f) +
+            vertical = (Input.GetKey(appSetting.UpKeyCode) ? 1f : 0f) +
+                (Input.GetKey(appSetting.DownKeyCode) ? -1f : 0f) +
                 UltimateJoystick.GetVerticalAxis("joystick");
         }
         else
         {
-            h = (Input.GetKey(AppSetting.Value.LeftKeyCode) ? -1f : 0f) +
-                (Input.GetKey(AppSetting.Value.RightKeyCode) ? 1f : 0f);
-            v = (Input.GetKey(AppSetting.Value.UpKeyCode) ? 1f : 0f) +
-                (Input.GetKey(AppSetting.Value.DownKeyCode) ? -1f : 0f);
+            horizontal = (Input.GetKey(appSetting.LeftKeyCode) ? -1f : 0f) +
+                (Input.GetKey(appSetting.RightKeyCode) ? 1f : 0f);
+            vertical = (Input.GetKey(appSetting.UpKeyCode) ? 1f : 0f) +
+                (Input.GetKey(appSetting.DownKeyCode) ? -1f : 0f);
         }
-        _inputting = (h > 0f || h < 0 || v > 0f || v < 0f);
+        _inputting = horizontal != 0f || vertical != 0f;
     }
     
-    readonly Dictionary<InputKey, SkillEntity> _optionsLastFrame = new Dictionary<InputKey, SkillEntity>()
-    {
-        {InputKey.Attack1,null},
-        {InputKey.Attack2,null},
-        {InputKey.Attack3,null}
-    };
+    SkillEntity _lastButton1Skill;
+    SkillEntity _lastButton2Skill;
+    SkillEntity _lastButton3Skill;
     
     // 动态按钮系统是基于状态流动
     SkillEntity _behaviorPreviewButton1, _behaviorPreviewButton2, _behaviorPreviewButton3;
@@ -408,30 +412,30 @@ public class MobileInputsManager : MonoBehaviour {
             }
         }
         
-        if (_optionsLastFrame[InputKey.Attack1] != _behaviorPreviewButton1 || force)
+        if (_lastButton1Skill != _behaviorPreviewButton1 || force)
         {
             RefreshPattern(a1Btn, _behaviorPreviewButton1 != null ? _behaviorPreviewButton1.SkillID : string.Empty);
         }
-        if (_optionsLastFrame[InputKey.Attack2] != _behaviorPreviewButton2 || force)
+        if (_lastButton2Skill != _behaviorPreviewButton2 || force)
         {
             RefreshPattern(a2Btn, _behaviorPreviewButton2 != null ? _behaviorPreviewButton2.SkillID : string.Empty);
         }
-        if (_optionsLastFrame[InputKey.Attack3] != _behaviorPreviewButton3 || force)
+        if (_lastButton3Skill != _behaviorPreviewButton3 || force)
         {
             RefreshPattern(a3Btn, _behaviorPreviewButton3 != null ? _behaviorPreviewButton3.SkillID : string.Empty);
         }
         
-        _optionsLastFrame[InputKey.Attack1] = _behaviorPreviewButton1;
-        _optionsLastFrame[InputKey.Attack2] = _behaviorPreviewButton2;
-        _optionsLastFrame[InputKey.Attack3] = _behaviorPreviewButton3;
+        _lastButton1Skill = _behaviorPreviewButton1;
+        _lastButton2Skill = _behaviorPreviewButton2;
+        _lastButton3Skill = _behaviorPreviewButton3;
     }
     
     // 直接根据角色状态刷新按钮。因为动态按钮系统是基于状态流动
     void SuddenRefreshButtons(BehaviorRunner behaviorRunner, bool force = false)
     {
-        _optionsLastFrame[InputKey.Attack1] = null;
-        _optionsLastFrame[InputKey.Attack2] = null;
-        _optionsLastFrame[InputKey.Attack3] = null;
+        _lastButton1Skill = null;
+        _lastButton2Skill = null;
+        _lastButton3Skill = null;
         
         ButtonsFeatureLoad(behaviorRunner.GetNextSkills(), force);
     }
@@ -553,9 +557,9 @@ public class MobileInputsManager : MonoBehaviour {
             defendButtonHover = false;
         }
 
-        if (_elementEffects.ContainsKey(_focusing))
+        if (_elementEffects.TryGetValue(_focusing, out var elementEffect))
         {
-            _elementEffects[_focusing].Close(ParticleSystemStopBehavior.StopEmittingAndClear);
+            elementEffect.Close(ParticleSystemStopBehavior.StopEmittingAndClear);
         }
         
         foreach(var kv in btnIcons)
@@ -572,62 +576,64 @@ public class MobileInputsManager : MonoBehaviour {
     
     void Update()
     {
+        var appSetting = AppSetting.Value;
+
         // Executes when the jump key is pressed
-        if (Input.GetKeyDown(AppSetting.Value.JumpKeyCode))
+        if (Input.GetKeyDown(appSetting.JumpKeyCode))
         {
             RushDown();
         }
 
         // Executes when the jump key is released
-        if (Input.GetKeyUp(AppSetting.Value.JumpKeyCode))
+        if (Input.GetKeyUp(appSetting.JumpKeyCode))
         {
             RushUp();
         }
         
         // Executes when the jump key is pressed
-        if (Input.GetKeyDown(AppSetting.Value.DreamComboKeyCode))
+        if (Input.GetKeyDown(appSetting.DreamComboKeyCode))
         {
             DreamComboDown();
         }
 
         // Executes when the jump key is released
-        if (Input.GetKeyUp(AppSetting.Value.DreamComboKeyCode))
+        if (Input.GetKeyUp(appSetting.DreamComboKeyCode))
         {
             DreamComboUp();
         }
 
         // Executes when the fire1 key is pressed
-        if (Input.GetKeyDown(AppSetting.Value.Fire1KeyCode))
+        if (Input.GetKeyDown(appSetting.Fire1KeyCode))
         {
             AttackDown();
         }
 
         // Executes when the fire1 key is released
-        if (Input.GetKeyUp(AppSetting.Value.Fire1KeyCode))
+        if (Input.GetKeyUp(appSetting.Fire1KeyCode))
         {
             AttackUp();
         }
 
         // Executes when the fire2 key is pressed
-        if (Input.GetKeyDown(AppSetting.Value.Fire2KeyCode))
+        if (Input.GetKeyDown(appSetting.Fire2KeyCode))
         {
             Fire1Down();
         }
 
         // Executes when the fire2 key is released
-        if (Input.GetKeyUp(AppSetting.Value.Fire2KeyCode))
+        if (Input.GetKeyUp(appSetting.Fire2KeyCode))
         {
             Fire1Up();
         }
 
         // Executes when the fire3 key is pressed
-        if (Input.GetKeyDown(AppSetting.Value.Fire3KeyCode))
+        if (Input.GetKeyDown(appSetting.Fire3KeyCode))
         {
             Fire2Down();
         }
 
         // Executes when the fire3 key is released
-        if (Input.GetKeyUp(AppSetting.Value.Fire3KeyCode))
+        if (Input.GetKeyUp(appSetting.Fire3KeyCode))
         {
             Fire2Up();
         }
@@ -645,18 +651,18 @@ public class MobileInputsManager : MonoBehaviour {
             }
         }
         
-        if (_elementEffects.ContainsKey(_focusing))
+        if (_elementEffects.TryGetValue(_focusing, out var elementEffect))
         {
             Vector3 targetPos = GetButtonWorldPos(button, 5);
-            _elementEffects[_focusing].RefreshSlotEffect(button, skillId, targetPos);
+            elementEffect.RefreshSlotEffect(button, skillId, targetPos);
         }
     }
 
     void StopSlot(Button button)
     {
-        if (_elementEffects.ContainsKey(_focusing))
+        if (_elementEffects.TryGetValue(_focusing, out var elementEffect))
         {
-            _elementEffects[_focusing].RefreshSlotEffect(button, "empty", Vector3.zero);
+            elementEffect.RefreshSlotEffect(button, "empty", Vector3.zero);
         }
     }
 
