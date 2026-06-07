@@ -45966,7 +45966,7 @@ MeshRenderer:
   m_GameObject: {fileID: 4149764330777923682}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -52185,7 +52185,7 @@ MeshRenderer:
   m_GameObject: {fileID: 8306353831738504683}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -52516,7 +52516,7 @@ SkinnedMeshRenderer:
   m_GameObject: {fileID: 8949395686331592349}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1

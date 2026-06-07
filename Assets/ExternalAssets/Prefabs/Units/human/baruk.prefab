@@ -28875,7 +28875,7 @@ MeshRenderer:
   m_GameObject: {fileID: 4144125154980682134}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -48627,7 +48627,7 @@ SkinnedMeshRenderer:
   m_GameObject: {fileID: 7506564168984178548}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -48738,7 +48738,7 @@ SkinnedMeshRenderer:
   m_GameObject: {fileID: 7506564169047701563}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -48927,7 +48927,7 @@ SkinnedMeshRenderer:
   m_GameObject: {fileID: 7506564169864388459}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -49031,7 +49031,7 @@ SkinnedMeshRenderer:
   m_GameObject: {fileID: 7506564169974197165}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -49251,7 +49251,7 @@ SkinnedMeshRenderer:
   m_GameObject: {fileID: 7506564170202652913}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -49354,7 +49354,7 @@ SkinnedMeshRenderer:
   m_GameObject: {fileID: 7506564170277161848}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -49465,7 +49465,7 @@ SkinnedMeshRenderer:
   m_GameObject: {fileID: 7506564170536163320}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -54552,7 +54552,7 @@ MeshRenderer:
   m_GameObject: {fileID: 9145045000455890618}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
