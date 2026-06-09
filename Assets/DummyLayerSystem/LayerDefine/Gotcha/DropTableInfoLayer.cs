@@ -1,5 +1,4 @@
 using System.Linq;
-using PlayFab.ServerModels;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +7,7 @@ public class DropTableInfoLayer : UILayer
     [SerializeField] ResultTableNode prefab;
     [SerializeField] VerticalLayoutGroup resultT;
     
-    public void ShowDropTableInfo(RandomResultTableListing tableInfo)
+    public void ShowDropTableInfo(CloudScriptRandomResultTableListing tableInfo)
     {
         float rectHeight = 0;
         var wholeWeight = 0;
@@ -33,4 +32,3 @@ public class DropTableInfoLayer : UILayer
             new Vector2(resultT.GetComponent<RectTransform>().sizeDelta.x, rectHeight);
     }
 }
-
