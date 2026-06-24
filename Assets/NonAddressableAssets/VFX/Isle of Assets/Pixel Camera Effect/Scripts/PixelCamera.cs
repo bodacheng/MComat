@@ -6,7 +6,19 @@ namespace PixelCameraEffect
     [HelpURL("https://assetstore.unity.com/packages/slug/231188")]
     public class PixelCamera : MonoBehaviour
     {
-        
+        public static PixelCamera Instance { get; private set; }
+
+        /// <summary>
+        /// Returns the main camera on the scene
+        /// </summary>
+        public Camera MainCamera
+        {
+            get
+            {
+                return cam;
+            }
+        }
+
         /// <summary>
         /// Sets or returns the degree of pixilization
         /// </summary>
@@ -35,22 +47,26 @@ namespace PixelCameraEffect
             }
             set
             {
+                if (isOn == value)
+                    return;
                 isOn = value;
-                screenScale = CommonSetting.MosaikCameraScreenScale;
                 if (value)
                 {
                     DrawEffect();
                 }
                 else
                 {
+                    if (!TryEnsureReferences())
+                        return;
+
+                    screenWidth = screenWidth > 0 ? screenWidth : (Screen.width > 0 ? Screen.width : 1920);
+                    screenHeight = screenHeight > 0 ? screenHeight : (Screen.height > 0 ? Screen.height : 1080);
                     RenderTexture renderTexture = new RenderTexture(screenWidth, screenHeight, 24);
                     cam.targetTexture = renderTexture;
                     displayRawImage.texture = renderTexture;
                 }
             }
         }
-        
-        [SerializeField]private Camera cam;
 
         [SerializeField]
         private RawImage displayRawImage;
@@ -61,7 +77,8 @@ namespace PixelCameraEffect
 
         [SerializeField]
         private bool initOnAwake = true, dontDestroyOnLoad;
-        
+
+        private Camera cam;
         private int screenWidth, screenHeight;
         private bool isOn;
 
@@ -70,16 +87,40 @@ namespace PixelCameraEffect
         /// </summary>
         private void DrawEffect()
         {
-            screenWidth = Screen.width;
-            screenHeight = Screen.height;
-            if (screenWidth <= 0 || screenHeight <= 0)
-            {
-                screenWidth = 1920;
-                screenHeight= 1080;
-            }
-            RenderTexture renderTexture = new RenderTexture(screenWidth / screenScale, screenHeight / screenScale, 24) { filterMode = FilterMode.Point, antiAliasing = 1 };
+            if (!TryEnsureReferences())
+                return;
+
+            screenWidth = Screen.width > 0 ? Screen.width : 1920;
+            screenHeight = Screen.height > 0 ? Screen.height : 1080;
+            int safeScreenScale = Mathf.Max(1, screenScale);
+            RenderTexture renderTexture = new RenderTexture(
+                Mathf.Max(1, screenWidth / safeScreenScale),
+                Mathf.Max(1, screenHeight / safeScreenScale),
+                24)
+            { filterMode = FilterMode.Point, antiAliasing = 1 };
             cam.targetTexture = renderTexture;
+            displayRawImage.gameObject.SetActive(true);
             displayRawImage.texture = renderTexture;
+        }
+
+        private bool TryEnsureReferences()
+        {
+            if (cam == null)
+                cam = GetComponent<Camera>();
+
+            if (cam == null)
+            {
+                Debug.LogError($"{nameof(PixelCamera)} requires a Camera component.", this);
+                return false;
+            }
+
+            if (displayRawImage == null)
+            {
+                Debug.LogError($"{nameof(PixelCamera)} requires a display RawImage.", this);
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -87,9 +128,12 @@ namespace PixelCameraEffect
         /// </summary>
         private void Awake()
         {
+            if (Instance == null)
+                Instance = this;
+
             if (dontDestroyOnLoad)
                 DontDestroyOnLoad(gameObject);
-            
+
             if (initOnAwake)
                 IsOn = true;
         }

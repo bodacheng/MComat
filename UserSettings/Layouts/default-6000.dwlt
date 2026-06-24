@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1690
     height: 952
   m_ShowMode: 4
-  m_Title: Console
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SceneHierarchyWindow
+  m_Name: PlayFabEditor
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -217,14 +217,14 @@ MonoBehaviour:
     y: 0
     width: 381
     height: 616.5
-  m_MinSize: {x: 201, y: 226}
+  m_MinSize: {x: 321, y: 26}
   m_MaxSize: {x: 4001, y: 4026}
-  m_ActualView: {fileID: 17}
+  m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 17}
   - {fileID: 18}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -289,7 +289,7 @@ MonoBehaviour:
   - {fileID: 28}
   - {fileID: 29}
   m_Selected: 2
-  m_LastSelected: 1
+  m_LastSelected: 3
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -675,9 +675,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 682.5
-    width: 1180
-    height: 285.5
+    y: 714.5
+    width: 1240.5
+    height: 253.5
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -782,7 +782,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 24
+    y: 98
     width: 380
     height: 590.5
   m_SerializedDataModeController:
@@ -805,7 +805,7 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -1330
+      - m_Data: -1456
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -854,8 +854,8 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 98
-    width: 360
+    y: 24
+    width: 380
     height: 590.5
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1368,9 +1368,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 321.49353, y: 299.30103, z: 7.9829125}
+    m_Target: {x: -3.5783305, y: 1.427876, z: 1.206178}
     speed: 2
-    m_Value: {x: 321.49353, y: 299.30103, z: 7.9829125}
+    m_Value: {x: -3.5783305, y: 1.427876, z: 1.206178}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1421,9 +1421,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.019798037, y: -0.03929432, z: 0.00068808015, w: -0.9990824}
   m_Size:
-    m_Target: 843.9098
+    m_Target: 5.458385
     speed: 2
-    m_Value: 843.9098
+    m_Value: 5.458385
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -2054,7 +2054,7 @@ MonoBehaviour:
       m_Data: 66688
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 79798
+    - m_Data: 66398
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2088,7 +2088,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 79798
+    - m_Data: 66398
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2235,7 +2235,7 @@ MonoBehaviour:
         m_PaneScroll: {x: 0, y: 0}
         m_ViewType: 2
         updateViewLive: 0
-        m_CurrentFrameIndex: 144
+        m_CurrentFrameIndex: -1
         m_HierarchyOverruledThreadFromSelection: 0
         m_ProfilerViewFilteringOptions: 1
         m_FrameDataHierarchyView:
@@ -3291,7 +3291,7 @@ MonoBehaviour:
       m_Data: 66340
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 79798
+    - m_Data: 66398
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -3325,7 +3325,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 79798
+    - m_Data: 66398
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -3463,7 +3463,7 @@ MonoBehaviour:
       m_Data: 66628
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 79798
+    - m_Data: 66398
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -3497,7 +3497,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 79798
+    - m_Data: 66398
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -3644,7 +3644,7 @@ MonoBehaviour:
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectEntityId:
-    m_Data: -1742
+    m_Data: -1858
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
@@ -3916,7 +3916,7 @@ MonoBehaviour:
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectEntityId:
-    m_Data: -1742
+    m_Data: -1858
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0
@@ -3969,7 +3969,7 @@ MonoBehaviour:
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectEntityId:
-    m_Data: -1742
+    m_Data: -1858
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0

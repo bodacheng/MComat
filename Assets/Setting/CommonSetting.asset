@@ -16,7 +16,7 @@ MonoBehaviour:
   pcMode: 0
   demoMode: 0
   demoMaxQuestStage: 4
-  mosaikCameraScreenScale: 5
+  mosaikCameraScreenScale: 1
   maxStoneCount: 1000
   gangbangModeMaxUnitPerTeam1: 24
   gangbangModeMaxUnitPerTeam2: 36
