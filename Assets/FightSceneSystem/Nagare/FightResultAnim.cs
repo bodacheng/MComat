@@ -67,7 +67,7 @@ namespace FightScene
             switch (FightLoad.Fight.EventType)
             {
                 case FightEventType.Quest:
-                    if (FightLogger.value.GetWinnerTeam() == Team.player1)
+                    if (FightLogger.value.IsLocalPlayerWinner(RTFightManager.playerTeam, PlayerAccountInfo.Me.PlayFabId))
                     {
                         await arenaFightOver.LoadShortMessage();
                         if (!CommonSetting.DemoMode)
@@ -79,7 +79,7 @@ namespace FightScene
                     await EndPart();
                     break;
                 case FightEventType.Event:
-                    if (FightLogger.value.GetWinnerTeam() == Team.player1)
+                    if (FightLogger.value.IsLocalPlayerWinner(RTFightManager.playerTeam, PlayerAccountInfo.Me.PlayFabId))
                     {
                         if (!CommonSetting.DemoMode)
                         {
