@@ -230,7 +230,8 @@ public partial class Data_Center : MonoBehaviour
                 if (teamConfig.myTeam == Team.player1 && 
                     inputsManager != null &&
                     inputsManager.CurrentFocus != null &&
-                    inputsManager.CurrentFocus.Value == this)
+                    inputsManager.CurrentFocus.Value == this &&
+                    inputsManager.Inputting)
                 {
                     return false;
                 }
