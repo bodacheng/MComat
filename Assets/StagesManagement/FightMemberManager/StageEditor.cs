@@ -15,7 +15,7 @@ public partial class StageEditor
     UnitInfo _focusingUnitInfo;
     string _focusingType = "human";
     readonly Dictionary<string, Sprite> _unitIconSpriteCache = new Dictionary<string, Sprite>();
-    readonly Dictionary<int, Texture2D> _spriteTextureCache = new Dictionary<int, Texture2D>();
+    readonly Dictionary<Sprite, Texture2D> _spriteTextureCache = new Dictionary<Sprite, Texture2D>();
     readonly HashSet<string> _iconLoadingRecordIds = new HashSet<string>();
 
     Sprite GetCachedUnitIcon(string recordId)

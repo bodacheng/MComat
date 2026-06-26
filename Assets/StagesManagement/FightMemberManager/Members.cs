@@ -17,8 +17,7 @@ public partial class StageEditor {
             }
         }
 
-        var key = icon.GetInstanceID();
-        if (_spriteTextureCache.TryGetValue(key, out var cachedTexture))
+        if (_spriteTextureCache.TryGetValue(icon, out var cachedTexture))
         {
             return cachedTexture;
         }
@@ -33,7 +32,7 @@ public partial class StageEditor {
             height);
         croppedTexture.SetPixels(pixels);
         croppedTexture.Apply();
-        _spriteTextureCache[key] = croppedTexture;
+        _spriteTextureCache[icon] = croppedTexture;
         return croppedTexture;
     }
     

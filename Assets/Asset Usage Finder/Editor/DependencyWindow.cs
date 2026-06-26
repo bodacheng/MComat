@@ -214,8 +214,6 @@ namespace AssetUsageFinder {
         }
 
         void DrawRow(ResultRow dependency) {
-            var id = dependency.Main.GetInstanceID();
-
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox)) {
                 using (new EditorGUILayout.HorizontalScope()) {
                     if (GUILayout.Button(dependency.LabelContent, StyleInstance.RowMainAssetBtn)) {
