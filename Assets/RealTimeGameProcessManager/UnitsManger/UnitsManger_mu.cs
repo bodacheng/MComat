@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UniRx;
 
@@ -41,10 +42,24 @@ namespace FightScene
             }
         }
 
-        public void InitializeMulti(float teamHpRate, CriticalGaugeMode teamCGMode, AIMode aiMode, int aiDelayFrame, Func<bool> aiTriggerDreamComboRateCondition)
+        public async UniTask InitializeMulti(
+            float teamHpRate,
+            CriticalGaugeMode teamCGMode,
+            AIMode aiMode,
+            int aiDelayFrame,
+            Func<bool> aiTriggerDreamComboRateCondition,
+            Action<float> onProgress = null)
         {
-            foreach (var center in teamMembers.GetValues())
+            var members = teamMembers.GetValues();
+            if (members.Count == 0)
             {
+                onProgress?.Invoke(1f);
+                return;
+            }
+
+            for (var index = 0; index < members.Count; index++)
+            {
+                var center = members[index];
                 center.Step3Initialize(teamConfig, teamCGMode, aiMode, aiDelayFrame, aiTriggerDreamComboRateCondition,
                     teamHpRate, RTFightManager.Target.UnitInfoRef[center]);
 
@@ -60,14 +75,14 @@ namespace FightScene
                         }
                     ).AddTo(center);;
                 }
-                
+
                 center.FightDataRef.IsDead.Subscribe(x =>
                     {
                         if (x)
                         {
                             Sensor.AddOrRemoveSharedDeadUnitInfo(center, teamConfig.myTeam, true);
                             Sensor.AddOrRemoveSharedUnitInfo(center, teamConfig.myTeam, false);
-                            
+
                             var disposable = new SerialDisposable();
 
                             // 这里假设你有一个 Observable<bool> 的布尔值监控（例如：boolObservable），这个值在变化时会发出事件。
@@ -97,6 +112,9 @@ namespace FightScene
                         }
                     }
                 ).AddTo(center);
+
+                onProgress?.Invoke((index + 1) / (float)members.Count);
+                await UniTask.Yield(PlayerLoopTiming.Update);
             }
         }
     }

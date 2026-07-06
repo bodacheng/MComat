@@ -108,7 +108,7 @@ public static class AddressablesLogic
             Addressables.Release(handle);
         return null;
     }
-    
+
     public static async UniTask Essentials()
     {
         await UniTask.WhenAll(AddressablesResourcePolicy.MCombatEssentialLabels.Select(CheckExistedKey));
@@ -122,7 +122,7 @@ public static class AddressablesLogic
             await LoadErrorThenBackToStart();
         }
     }
-    
+
     static UniTask<bool> DownLoadMission(string label, Action<string> progressUIRefresh)
     {
         return AddressablesDependencyDownloader.DownloadDependencies(
@@ -130,14 +130,14 @@ public static class AddressablesLogic
             progressUIRefresh,
             AddressablesResourcePolicy.DownloadProgressText(AppSetting.Value.Language));
     }
-    
+
     public static UniTask<long> GetWholeDownLoadSize(Action<string> exception, List<string> downLoadLabel)
     {
         return AddressablesDependencyDownloader.GetWholeDownloadSize(downLoadLabel, exception);
     }
-    
+
     public static long DownloadedBytes => AddressablesDependencyDownloader.DownloadedBytes;
-    
+
     public static async UniTask ResourcePrepareProcess(Action complete, Action<string> progressUIRefresh, List<string> downLoadLabel)
     {
         var success = await AddressablesDependencyDownloader.DownloadRequiredDependencies(
@@ -152,10 +152,16 @@ public static class AddressablesLogic
         }
         complete.Invoke();
     }
-    
-    public static async UniTask<GameObject> LoadObject(string prefabPathName, Vector3 pos = new Vector3())
+
+    public static async UniTask<GameObject> LoadObject(string prefabPathName, Vector3 pos = new Vector3(), Action<float> onProgress = null)
     {
         var handle = Addressables.InstantiateAsync(prefabPathName, pos, Quaternion.identity);
+        while (!handle.IsDone)
+        {
+            onProgress?.Invoke(Mathf.Clamp01(handle.PercentComplete));
+            await UniTask.Yield(PlayerLoopTiming.Update);
+        }
+
         await handle.Task;
         if (handle.Status != AsyncOperationStatus.Succeeded)
         {
@@ -166,6 +172,7 @@ public static class AddressablesLogic
         }
         else
         {
+            onProgress?.Invoke(1f);
             var _object = handle.Result; // インスタンス化されたもの
             _object.AddOnDestroyCallback( () =>
             {
@@ -174,7 +181,7 @@ public static class AddressablesLogic
             return _object;
         }
     }
-    
+
     public static async UniTask<T> LoadTOnObject<T>(string prefabPathName)
     {
         var handle = Addressables.InstantiateAsync(prefabPathName);
@@ -201,7 +208,7 @@ public static class AddressablesLogic
             return returnValue;
         }
     }
-    
+
     public static async UniTask<T> LoadTOnObject<T>(string prefabPathName, GameObject memoryReleaseTarget = null, CancellationTokenSource _cancellationTokenSource = null)
     {
         AsyncOperationHandle<GameObject> handle = default;
@@ -261,7 +268,7 @@ public static class AddressablesLogic
     }
 
     private static readonly List<AsyncOperationHandle> LoadingHandlerList = new List<AsyncOperationHandle>();
-    
+
     public static async UniTask<T> LoadT<T>(string prefabPathName, GameObject memoryReleaseTarget = null)
     {
         AsyncOperationHandle<T> handle = default;
@@ -299,7 +306,7 @@ public static class AddressablesLogic
             return default;
         }
     }
-    
+
     public static async UniTask<T> LoadT<T>(IResourceLocation location, GameObject memoryReleaseTarget = null)
     {
         AsyncOperationHandle<T> handle = default;
@@ -337,7 +344,7 @@ public static class AddressablesLogic
             return default;
         }
     }
-    
+
     public static void ReleaseAsyncOperationHandles()
     {
         foreach (var handle in LoadingHandlerList)

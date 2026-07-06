@@ -14,16 +14,16 @@ public class PreparingProcess : FSceneProcess
     static readonly Dictionary<Element, int> elementCountBuffer = new Dictionary<Element, int>(8);
     static readonly List<UniTask> taskBuffer = new List<UniTask>(16);
     static readonly string[] elementEffectKeys = { "light_hit", "heavy_hit", "super_hit", "electric_s_e" };
-    
+
     public PreparingProcess()
     {
         Step = SceneStep.Preparing;
         nextProcessStep = SceneStep.CountDown;
     }
-    
+
     async UniTask EnterProcess()
     {
-        const float preloadStart = 0.03f;
+        const float preloadStart = FightLoad.SceneLoadingProgressEnd;
         const float preloadEnd = 0.84f;
         const float postLoadTeamSetupProgress = 0.88f;
         const float postLoadBattleInitProgress = 0.92f;
@@ -45,20 +45,20 @@ public class PreparingProcess : FSceneProcess
 
         var unitInstructionLayer = UILayerLoader.Load<UnitInstructionLayer>(true, null, true);
         unitInstructionLayer.LoadUnitImage();
-        
+
         RTFightManager.Target.team1.Clear();
         RTFightManager.Target.team2.Clear();
-        
+
         if ((FightLoad.Fight.EventType == FightEventType.Quest || FightLoad.Fight.FightMode == FightMode.Group || FightLoad.Fight.EventType == FightEventType.Event))
         {
 #if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
             FightScene.FightScene.target.LoadAds();
 #endif
         }
-        
+
         RTFightManager.Target.Disposables?.Dispose();
         RTFightManager.Target.Disposables = new CompositeDisposable();
-        
+
         Sensor.ClearFightingMember();
         UILayerLoader.Remove<ArenaFightOver>();
         RTFightManager.Target._CameraManager.Assign_Camera(C_Mode.NULL, null,null);
@@ -67,14 +67,14 @@ public class PreparingProcess : FSceneProcess
         var loadingBattleText = Translate.Get("LoadingBattle");
         var loadingBattleAboutToEndText = Translate.Get("LoadingBattleAboutToEnd");
         SetLoadingProgress(loadingBattleText, preloadStart);
-        
+
         var heroUnits = FightLoad.Fight.FightMembers.HeroSets.GetValues();
         var enemyUnits = FightLoad.Fight.FightMembers.EnemySets.GetValues();
 
         var effectPreloadCount = FightLoad.Fight.FightMode is (FightMode.Rotate or FightMode.Evolve)
             ? 1
             : Mathf.Max(heroUnits.Count, enemyUnits.Count);
-        
+
         var tasks = taskBuffer;
         tasks.Clear();
         float asyncCompletedWeight = 0f;
@@ -119,7 +119,7 @@ public class PreparingProcess : FSceneProcess
         }));
         AddTrackedTask(EffectsManager.IniEffectsPool(CommonSetting.HitGroundEffectCode, null, effectPreloadCount));
         AddTrackedTask(EffectsManager.IniEffectsPool(CommonSetting.WallCrackEffectCode, null, effectPreloadCount));
-        
+
         var elementCounts = elementCountBuffer;
         elementCounts.Clear();
         var totalUnitCount = 0;
@@ -138,7 +138,7 @@ public class PreparingProcess : FSceneProcess
                     continue;
 
                 totalUnitCount++;
-                
+
                 if (elementCounts.TryGetValue(config.element, out var current))
                 {
                     elementCounts[config.element] = current + 1;
@@ -166,7 +166,7 @@ public class PreparingProcess : FSceneProcess
         var sharedEffectCount = Mathf.Max(effectPreloadCount, totalUnitCount);
         AddTrackedTask(EffectsManager.IniEffectsPool("super_combo_explosion", null, sharedEffectCount));
         AddTrackedTask(EffectsManager.IniEffectsPool("dream_buff", null, sharedEffectCount));
-        
+
         if (FightLoad.Fight.FightMode is (FightMode.Rotate or FightMode.Evolve))
         {
             if (!string.IsNullOrEmpty(CommonSetting.MemberShiftEffectCode))
@@ -183,15 +183,15 @@ public class PreparingProcess : FSceneProcess
         await UniTask.WhenAll(tasks);
         tasks.Clear();
         SetLoadingProgress(loadingBattleText, preloadEnd);
-        
+
         var teamMembers = new Dictionary<TeamConfig, List<Data_Center>>();
         RTFightManager.Target.heroTeamConfig.playID = FightLoad.Fight.Team1ID;
         RTFightManager.Target.EnemyTeamConfig.playID = FightLoad.Fight.Team2ID;
-        
+
         DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.Target.heroTeamConfig, RTFightManager.Target.team1.teamMembers.GetValues());
         DicAdd<TeamConfig, List<Data_Center>>.Add(teamMembers, RTFightManager.Target.EnemyTeamConfig, RTFightManager.Target.team2.teamMembers.GetValues());
         FightLogger.value.ReadyToLog(teamMembers);
-        
+
         RTFightManager.Target.team1.FightMode = FightLoad.Fight.FightMode;
         RTFightManager.Target.team2.FightMode = FightLoad.Fight.FightMode;
         RTFightManager.Target.team1.teamConfig = RTFightManager.Target.heroTeamConfig;
@@ -199,7 +199,7 @@ public class PreparingProcess : FSceneProcess
         RTFightManager.Target.team1.Auto = FightLoad.Fight.Team1Auto;
         RTFightManager.Target.team2.Auto = FightLoad.Fight.RunTutorial ? false : FightLoad.Fight.Team2Auto;
         SetLoadingProgress(loadingBattleText, postLoadTeamSetupProgress);
-        
+
         if (FightLoad.Fight.EventType == FightEventType.Screensaver)
         {
             RTFightManager.Target.team1.TurnAllUnitsInvincible(true);
@@ -208,56 +208,79 @@ public class PreparingProcess : FSceneProcess
             RTFightManager.Target.team1.TurnAllUnitsInvincible(FightGlobalSetting._Team1Invincible);
             RTFightManager.Target.team2.TurnAllUnitsInvincible(false);
         }
-        
+
+        var team1BattleInitEnd = Mathf.Lerp(postLoadTeamSetupProgress, postLoadBattleInitProgress, 0.5f);
+        void SetTeam1BattleInitProgress(float progress)
+        {
+            SetLoadingProgress(
+                loadingBattleText,
+                Mathf.Lerp(postLoadTeamSetupProgress, team1BattleInitEnd, progress));
+        }
+
+        void SetTeam2BattleInitProgress(float progress)
+        {
+            SetLoadingProgress(
+                loadingBattleText,
+                Mathf.Lerp(team1BattleInitEnd, postLoadBattleInitProgress, progress));
+        }
+
         switch (FightLoad.Fight.FightMode)
         {
             case FightMode.Multi:
-                RTFightManager.Target.team1.InitializeMulti(
+                await RTFightManager.Target.team1.InitializeMulti(
                     FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode,
                     FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay,
-                    CreateRandomBoolFunc(FightGlobalSetting._player1DreamComboAIRateNumM));
-                RTFightManager.Target.team2.InitializeMulti(
+                    CreateRandomBoolFunc(FightGlobalSetting._player1DreamComboAIRateNumM),
+                    SetTeam1BattleInitProgress);
+                await RTFightManager.Target.team2.InitializeMulti(
                     FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode,
                     FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay,
                     CreateRandomBoolFunc(
-                        FightLoad.Fight.EventType == FightEventType.Arena ? 
-                            FightGlobalSetting.ArenaEnemyDreamComboAIRate : FightLoad.Fight.dreamComboAIRateNum));
+                        FightLoad.Fight.EventType == FightEventType.Arena ?
+                            FightGlobalSetting.ArenaEnemyDreamComboAIRate : FightLoad.Fight.dreamComboAIRateNum),
+                    SetTeam2BattleInitProgress);
                 break;
             case FightMode.Group:
-                RTFightManager.Target.team1.InitializeMulti(
+                await RTFightManager.Target.team1.InitializeMulti(
                     FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode,
                     FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay,
-                    CreateRandomBoolFunc(100));
-                RTFightManager.Target.team2.InitializeMulti(
-                    FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode, 
+                    CreateRandomBoolFunc(100),
+                    SetTeam1BattleInitProgress);
+                await RTFightManager.Target.team2.InitializeMulti(
+                    FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode,
                     FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay,
-                    CreateRandomBoolFunc(100));
+                    CreateRandomBoolFunc(100),
+                    SetTeam2BattleInitProgress);
                 break;
             case FightMode.Rotate:
-                RTFightManager.Target.team1.TeamsIniRotate(
-                    FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode, 
+                await RTFightManager.Target.team1.TeamsIniRotate(
+                    FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode,
                     FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay,
-                    CreateRandomBoolFunc(FightGlobalSetting._player1DreamComboAIRateNumM));
-                RTFightManager.Target.team2.TeamsIniRotate(
-                    FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode, 
+                    CreateRandomBoolFunc(FightGlobalSetting._player1DreamComboAIRateNumM),
+                    onProgress: SetTeam1BattleInitProgress);
+                await RTFightManager.Target.team2.TeamsIniRotate(
+                    FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode,
                     FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay,
-                    CreateRandomBoolFunc(FightLoad.Fight.EventType == FightEventType.Arena ? 
-                        FightGlobalSetting.ArenaEnemyDreamComboAIRate: FightLoad.Fight.dreamComboAIRateNum));
+                    CreateRandomBoolFunc(FightLoad.Fight.EventType == FightEventType.Arena ?
+                        FightGlobalSetting.ArenaEnemyDreamComboAIRate: FightLoad.Fight.dreamComboAIRateNum),
+                    onProgress: SetTeam2BattleInitProgress);
                 break;
             case FightMode.Evolve:
-                RTFightManager.Target.team1.TeamsIniRotate(
-                    FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode, 
+                await RTFightManager.Target.team1.TeamsIniRotate(
+                    FightLoad.Fight.team1HpRate, FightLoad.Fight.team1CGMode,
                     FightLoad.Fight.team1AIMode, FightLoad.Fight.dumbAIDecisionDelay,
-                    CreateRandomBoolFunc(FightGlobalSetting._player1DreamComboAIRateNumM));
-                RTFightManager.Target.team2.TeamsIniRotate(
-                    FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode, 
+                    CreateRandomBoolFunc(FightGlobalSetting._player1DreamComboAIRateNumM),
+                    onProgress: SetTeam1BattleInitProgress);
+                await RTFightManager.Target.team2.TeamsIniRotate(
+                    FightLoad.Fight.team2HpRate, FightLoad.Fight.team2CGMode,
                     FightLoad.Fight.team2AIMode, FightLoad.Fight.dumbAIDecisionDelay,
-                    CreateRandomBoolFunc(FightLoad.Fight.EventType == FightEventType.Arena ? 
-                        FightGlobalSetting.ArenaEnemyDreamComboAIRate: FightLoad.Fight.dreamComboAIRateNum), 
-                    true);
+                    CreateRandomBoolFunc(FightLoad.Fight.EventType == FightEventType.Arena ?
+                        FightGlobalSetting.ArenaEnemyDreamComboAIRate: FightLoad.Fight.dreamComboAIRateNum),
+                    true,
+                    SetTeam2BattleInitProgress);
                 break;
         }
-        
+
         RTFightManager.Target.SetGame(FightLoad.Fight);
         SetLoadingProgress(loadingBattleAboutToEndText, postLoadBattleInitProgress);
         fightingStepLayer = FightingStepLayer.Open();
@@ -266,7 +289,7 @@ public class PreparingProcess : FSceneProcess
         {
             SetLoadingProgress(loadingBattleAboutToEndText, Mathf.Lerp(fightingLayerSetupStart, fightingLayerSetupEnd, progress));
         });
-        
+
         switch (FightLoad.Fight.FightMode)
         {
             case FightMode.Multi:
@@ -282,35 +305,35 @@ public class PreparingProcess : FSceneProcess
         }
 
         RTFightManager.Target.FacePreparedTeamsTowardEachOther();
-        
+
         RTFightManager.Target.team1.RMode_Unit.Subscribe(x =>
             {
                 RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.FightMode);
             }
         ).AddTo(RTFightManager.Target.Disposables);
-        
+
         RTFightManager.Target.team2.RMode_Unit.Subscribe(x =>
             {
                 RTFightManager.Target.CameraAdjustment(RTFightManager.playerTeam, RTFightManager.Target.team1.FightMode);
             }
         ).AddTo(RTFightManager.Target.Disposables);
-        
+
         SetLoadingProgress(loadingBattleAboutToEndText, 1f);
         ProgressLayer.Close();
     }
-    
+
     public override void ProcessEnter()
     {
         EnterProcess().Forget();
     }
-    
+
     public override void ProcessEnd()
     {
         FightScene.FightScene.target.LoadStageFinished.Value = false;
         //HighLightLayer.LightUp(1f);
         UILayerLoader.Remove<UnitInstructionLayer>();
     }
-    
+
     public override bool CanEnterOtherProcess()
     {
         return FightScene.FightScene.target.LoadStageFinished.Value
@@ -318,7 +341,7 @@ public class PreparingProcess : FSceneProcess
                && RTFightManager.Target.team2.IfAllUnitsPreparedForBattle()
                && (fightingStepLayer != null && fightingStepLayer.Initialized);
     }
-    
+
     Func<bool> CreateRandomBoolFunc(int probabilityPercentage)
     {
         // 使用Random类生成随机数

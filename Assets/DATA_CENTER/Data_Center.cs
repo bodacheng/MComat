@@ -82,10 +82,11 @@ public partial class Data_Center : MonoBehaviour
         return returnValue;
     }
 
-    public async UniTask Step1Initialize(string type, string basicPackName)
+    public async UniTask Step1Initialize(string type, string basicPackName, Action<float> onProgress = null)
     {
         if (!Phase1Initialized)
         {
+            onProgress?.Invoke(0f);
             if (WholeT == null)
             {
                 Debug.LogError($"{name} is missing WholeT reference. Step1Initialize aborted.");
@@ -108,7 +109,12 @@ public partial class Data_Center : MonoBehaviour
             _AudioSource.volume = AppSetting.Value.EffectsVolume;
             BodyElementTagAndLayerSet(TeamConfig.DefaultSet);
             bO_Weapon_Animation_Events.hiddenMethods.AssignWeaponsFromDataCenter(FightDataRef,geometryCenter, right_hand_t, left_hand_t, right_foot_t, left_foot_t, head_t, tail_t);
-            await AnimationManger.PreloadBasicPersonalAnims(type, basicPackName, _facialAnimManager);
+            onProgress?.Invoke(0.2f);
+            await AnimationManger.PreloadBasicPersonalAnims(
+                type,
+                basicPackName,
+                _facialAnimManager,
+                progress => onProgress?.Invoke(Mathf.Lerp(0.2f, 0.95f, progress)));
             _BO_Ani_E.BasicMagicAndEffectsPathDefine(element);
             posCalTrans = new List<Transform>()
             {
@@ -123,6 +129,11 @@ public partial class Data_Center : MonoBehaviour
             //    this.blendShapeProxy.VRMBlendShapeProxy.AvaterRemerge(this.WholeT);
             //}                
             Phase1Initialized = true;
+            onProgress?.Invoke(1f);
+        }
+        else
+        {
+            onProgress?.Invoke(1f);
         }
     }
 
@@ -144,8 +155,9 @@ public partial class Data_Center : MonoBehaviour
         }
     }
     
-    public async UniTask Step2Initialize(string type, Element element, SkillSet skillSet, int preloadCount)
+    public async UniTask Step2Initialize(string type, Element element, SkillSet skillSet, int preloadCount, Action<float> onProgress = null)
     {
+        onProgress?.Invoke(0f);
         if (!Phase2Initialized)
         {
             Phase2Initialized = true;
@@ -182,7 +194,14 @@ public partial class Data_Center : MonoBehaviour
         //这个环节之后我应该有一份列表来展示到底我一个角色一场战斗都能用上什么招
         // 上面这个环节结束后，有这样几个重要情况1. state_Transition_Dictionary的内容就正确了 2.AIStateRunner内的States_Dictionary实例内将有一份正确的skill类key的列表
         var toLoadSkillAnimsNames = _MyBehaviorRunner.PassSkillTypeKeys();
-        await AnimationManger.PreloadPersonalAnimsResourceMode(type, toLoadSkillAnimsNames, element, preloadCount);
+        onProgress?.Invoke(0.2f);
+        await AnimationManger.PreloadPersonalAnimsResourceMode(
+            type,
+            toLoadSkillAnimsNames,
+            element,
+            preloadCount,
+            progress => onProgress?.Invoke(Mathf.Lerp(0.2f, 1f, progress)));
+        onProgress?.Invoke(1f);
     }
 
     IDisposable _reIDisposable = null;

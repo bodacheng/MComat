@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using MCombat.Shared.Combat;
@@ -10,17 +9,17 @@ namespace FightScene
     public partial class UnitsManger : MonoBehaviour
     {
         public MultiDic<int, int, Data_Center> teamMembers;
-        
+
         public FightMode FightMode;
         public TeamConfig teamConfig;
         public Transform[] TeamStandPoints;
-        
+
         public MobileInputsManager InputsManager
         {
             set;
             get;
         }
-        
+
         private bool _auto;
         public bool Auto
         {
@@ -53,7 +52,7 @@ namespace FightScene
             }
             get => _auto;
         }
-        
+
         public async UniTask _UnitsLoad(MultiDic<int, int, UnitInfo> membersSets, IDictionary<Data_Center, UnitInfo> unitInfoRef,
             Action<float> onUnitProgressDelta = null)
         {
@@ -83,16 +82,29 @@ namespace FightScene
                 teamMembers.Set(key1, key2, center);
                 DicAdd<Data_Center, UnitInfo>.Add(unitInfoRef, center, info);
             }
-            var tasks = new List<UniTask>();
+            var sameUnitCounts = new Dictionary<(string rId, float level), int>();
             foreach (var kv in membersSets.mDict)
             {
-                var sameUnits = membersSets.mDict.Values.ToList().FindAll(x => x.r_id == kv.Value.r_id && x.level == kv.Value.level);
-                // 上面给的这个统计相同种类角色的逻辑并不精确。如果一个队伍里有两个同masterid角色，等级还一样，问题就出来了，但现在我们的代码构造造成没有别的做法。
-                tasks.Add(LoadOneUnit(kv.Key.Item1, kv.Key.Item2, kv.Value, sameUnits.Count));
+                var unitKey = (kv.Value.r_id, kv.Value.level);
+                if (sameUnitCounts.TryGetValue(unitKey, out var count))
+                {
+                    sameUnitCounts[unitKey] = count + 1;
+                }
+                else
+                {
+                    sameUnitCounts.Add(unitKey, 1);
+                }
             }
-            await UniTask.WhenAll(tasks);
+
+            foreach (var kv in membersSets.mDict)
+            {
+                var unitKey = (kv.Value.r_id, kv.Value.level);
+                // 这个统计相同种类角色的逻辑并不精确。如果一个队伍里有两个同masterid角色，等级还一样，问题就出来了，但现在我们的代码构造造成没有别的做法。
+                await LoadOneUnit(kv.Key.Item1, kv.Key.Item2, kv.Value, sameUnitCounts[unitKey]);
+                await UniTask.Yield(PlayerLoopTiming.Update);
+            }
         }
-        
+
         public bool IfAllUnitsPreparedForBattle()
         {
             foreach (var oneMember in teamMembers.GetValues())
@@ -102,7 +114,7 @@ namespace FightScene
             }
             return true;
         }
-        
+
         public void LocalUpdate()
         {
             switch (FightMode)
@@ -115,7 +127,7 @@ namespace FightScene
                     break;
             }
         }
-        
+
         public List<Transform> GetFightingUnitTs()
         {
             var transforms = new List<Transform>();
@@ -228,7 +240,7 @@ namespace FightScene
 
             DG.Tweening.DOTween.Kill(dataCenter.WholeT);
         }
-        
+
         // 全队无敌
         public void TurnAllUnitsInvincible(bool _Invincible)
         {
@@ -237,7 +249,7 @@ namespace FightScene
                 center.FightDataRef.Invincible = _Invincible;
             }
         }
-        
+
         public void Clear()
         {
             foreach (var one in teamMembers.GetValues())

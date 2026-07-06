@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -14,19 +15,25 @@ public partial class AnimationManger
         if (facialAnimManager != null)
             facialAnimManager.CasualFace();
     }
-    
+
     public void TriggerExpression(Facial facial)
     {
         facialAnimManager?.TriggerExpression(facial);
     }
-    
-    public async UniTask PreloadBasicPersonalAnims(string type, string basicPackName, FacialAnimManager facialAnimManager = null)
+
+    public async UniTask PreloadBasicPersonalAnims(
+        string type,
+        string basicPackName,
+        FacialAnimManager facialAnimManager = null,
+        Action<float> onProgress = null)
     {
+        onProgress?.Invoke(0f);
         var basicAnims = new List<AnimationClip>();
         var basicPackKey = AnimationResourceKeyUtility.BasicPackSeriesKey(type, basicPackName);
         if (AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(basicPackKey))
         {
             AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(basicPackKey, out basicAnims);
+            onProgress?.Invoke(0.3f);
         }
         else
         {
@@ -34,6 +41,8 @@ public partial class AnimationManger
             await loadPath;
             if (loadPath.Status == AsyncOperationStatus.Succeeded)
             {
+                var checkedLocations = 0;
+                var totalLocations = loadPath.Result.Count;
                 foreach (var path in loadPath.Result)
                 {
                     if (AnimationResourceKeyUtility.IsBasicAnimationLocation(path.PrimaryKey, type, basicPackName))
@@ -45,10 +54,17 @@ public partial class AnimationManger
                             basicAnims.Add(animationClip);
                         }
                     }
+
+                    checkedLocations++;
+                    if (totalLocations > 0)
+                    {
+                        onProgress?.Invoke(Mathf.Lerp(0.05f, 0.3f, checkedLocations / (float)totalLocations));
+                    }
                 }
             }
             Addressables.Release(loadPath);
             DicAdd<string, List<AnimationClip>>.Add(AnimationResourceLoader.SeriesAnimationClipsDic, basicPackKey, basicAnims);
+            onProgress?.Invoke(0.3f);
         }
 
         toLoadAnims = new Dictionary<string, AnimationClip>();
@@ -83,7 +99,7 @@ public partial class AnimationManger
                 // {
                 //     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("rushback", animationClip));
                 // }
-                
+
                 if (animationClip.name == "getup")
                 {
                     toLoadAnims.Add(new KeyValuePair<string, AnimationClip>("getup", animationClip));
@@ -124,7 +140,7 @@ public partial class AnimationManger
                         }
                     }
                 }
-                
+
                 Addressables.Release(loadPath);
                 foreach (var clip in humanHurtAnimsObjects)
                 {
@@ -136,15 +152,23 @@ public partial class AnimationManger
             }
         }
 
+        var hurtLoadFinished = 0;
+        async UniTask TrackHurtAnim(UniTask task)
+        {
+            await task;
+            hurtLoadFinished++;
+            onProgress?.Invoke(Mathf.Lerp(0.3f, 0.75f, hurtLoadFinished / 6f));
+        }
+
         await UniTask.WhenAll(
-            LoadHurtAnim(type, "basic_hurts/back", new List<string> { "hurt_anim" }),
-            LoadHurtAnim(type, "basic_hurts/high", new List<string> { "hurt_anim" }),
-            LoadHurtAnim(type, "basic_hurts/lay", new List<string> { "hurt_anim" }),
-            LoadHurtAnim(type, "basic_hurts/low", new List<string> { "hurt_anim" }),
-            LoadHurtAnim(type, "basic_hurts/press", new List<string> { "hurt_anim" }),
-            LoadHurtAnim(type, "basic_knockoffs", new List<string> { "knock_anim" })
+            TrackHurtAnim(LoadHurtAnim(type, "basic_hurts/back", new List<string> { "hurt_anim" })),
+            TrackHurtAnim(LoadHurtAnim(type, "basic_hurts/high", new List<string> { "hurt_anim" })),
+            TrackHurtAnim(LoadHurtAnim(type, "basic_hurts/lay", new List<string> { "hurt_anim" })),
+            TrackHurtAnim(LoadHurtAnim(type, "basic_hurts/low", new List<string> { "hurt_anim" })),
+            TrackHurtAnim(LoadHurtAnim(type, "basic_hurts/press", new List<string> { "hurt_anim" })),
+            TrackHurtAnim(LoadHurtAnim(type, "basic_knockoffs", new List<string> { "knock_anim" }))
         );
-        
+
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(AnimationResourceKeyUtility.SeriesKey(type, "basic_knockoffs"), out knockoffAnimations);
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(AnimationResourceKeyUtility.SeriesKey(type, "basic_hurts/back"), out _hurtClipsBack);
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(AnimationResourceKeyUtility.SeriesKey(type, "basic_hurts/low"), out _hurtClipsLow);
@@ -154,10 +178,12 @@ public partial class AnimationManger
 
         if (Animator == null || Animator.gameObject == null)
         {
+            onProgress?.Invoke(1f);
             return; // When the character model is displayed, there may be issues such as the menu suddenly closing
         }
         animatorOverride = new AnimatorOverrideController(Animator.runtimeAnimatorController);
-        
+        onProgress?.Invoke(0.85f);
+
         // 以上内容为个性化动画片段对base层基础动画的覆盖
         foreach (var animationClip in basicAnims)
         {
@@ -166,39 +192,48 @@ public partial class AnimationManger
                 if (animatorOverride["idle"])
                     animatorOverride["idle"] = animationClip;
             }
-            
+
             if (animationClip.name == "walk")
             {
                 if (animatorOverride["walk"])
                     animatorOverride["walk"] = animationClip;
             }
-            
+
             if (animationClip.name == "run")
             {
                 if (animatorOverride["run"])
                     animatorOverride["run"] = animationClip;
             }
-            
+
             // if (animationClip.name == "air")
             // {
             //     if (animatorOverride["air"])
             //         animatorOverride["air"] = animationClip;
             // }
         }
-        
+
         this.facialAnimManager = facialAnimManager;
         this.facialAnimManager?.INI(Animator, animatorOverride);
         Animator.runtimeAnimatorController = animatorOverride;
+        onProgress?.Invoke(1f);
     }
-    
-    public async UniTask PreloadPersonalAnimResourceMode(string animPath, string key, Element element, int preloadCount)
+
+    public async UniTask PreloadPersonalAnimResourceMode(
+        string animPath,
+        string key,
+        Element element,
+        int preloadCount,
+        Action<float> onProgress = null)
     {
+        onProgress?.Invoke(0f);
         if (toLoadAnims.ContainsKey(key))
         {
+            onProgress?.Invoke(1f);
             return;
         }
-        
+
         await AnimationResourceLoader.LoadAnim(animPath, key);
+        onProgress?.Invoke(0.3f);
         var clip = AnimationResourceLoader.Instance.GetAnimationClip(AnimationResourceKeyUtility.SkillClipKey(animPath, key));
         if (clip != null)
         {
@@ -206,7 +241,7 @@ public partial class AnimationManger
             {
                 toLoadAnims.Add(new KeyValuePair<string, AnimationClip>(key, clip));
                 var tasks = new List<UniTask>();
-                
+
                 foreach (AnimationEvent e in clip.events)
                 {
                     if (e.functionName == "MagicForward")
@@ -267,18 +302,73 @@ public partial class AnimationManger
                             AudioResourceLoaderCore.EffectAudioPath, e.stringParameter));
                     }
                 }
-                await UniTask.WhenAll(tasks);
+                if (tasks.Count == 0)
+                {
+                    onProgress?.Invoke(1f);
+                }
+                else
+                {
+                    var completedResources = 0;
+                    var trackedTasks = new List<UniTask>(tasks.Count);
+                    async UniTask TrackResourceTask(UniTask task)
+                    {
+                        await task;
+                        completedResources++;
+                        onProgress?.Invoke(Mathf.Lerp(0.3f, 1f, completedResources / (float)tasks.Count));
+                    }
+
+                    foreach (var task in tasks)
+                    {
+                        trackedTasks.Add(TrackResourceTask(task));
+                    }
+                    await UniTask.WhenAll(trackedTasks);
+                }
             }
         }
+        onProgress?.Invoke(1f);
     }
-    
-    public async UniTask PreloadPersonalAnimsResourceMode(string type, List<string> toLoadSkillAnimsNames, Element element, int preloadCount)
+
+    public async UniTask PreloadPersonalAnimsResourceMode(
+        string type,
+        List<string> toLoadSkillAnimsNames,
+        Element element,
+        int preloadCount,
+        Action<float> onProgress = null)
     {
-        var tasks = new List<UniTask>();
+        const int maxConcurrentSkillPreloads = 3;
+        onProgress?.Invoke(0f);
+        if (toLoadSkillAnimsNames == null || toLoadSkillAnimsNames.Count == 0)
+        {
+            onProgress?.Invoke(1f);
+            return;
+        }
+
+        var tasks = new List<UniTask>(maxConcurrentSkillPreloads);
+        var completedSkills = 0;
+        async UniTask TrackSkillLoad(string animName)
+        {
+            await PreloadPersonalAnimResourceMode(type, animName, element, preloadCount);
+            completedSkills++;
+            onProgress?.Invoke(completedSkills / (float)toLoadSkillAnimsNames.Count);
+        }
+
         foreach (var animName in toLoadSkillAnimsNames)
         {
-            tasks.Add(PreloadPersonalAnimResourceMode(type, animName, element, preloadCount));
+            tasks.Add(TrackSkillLoad(animName));
+            if (tasks.Count < maxConcurrentSkillPreloads)
+            {
+                continue;
+            }
+
+            await UniTask.WhenAll(tasks);
+            tasks.Clear();
+            await UniTask.Yield(PlayerLoopTiming.Update);
         }
-        await UniTask.WhenAll(tasks);
+
+        if (tasks.Count > 0)
+        {
+            await UniTask.WhenAll(tasks);
+        }
+        onProgress?.Invoke(1f);
     }
 }
