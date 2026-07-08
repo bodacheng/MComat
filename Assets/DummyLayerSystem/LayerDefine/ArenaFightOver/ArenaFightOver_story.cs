@@ -37,25 +37,28 @@ public partial class ArenaFightOver : UILayer
     public async UniTask LoadStory()
     {
         _storyContentLogged = false;
+        picStoryEnded = false;
         bool storyFromAI = false;
-        if (!String.IsNullOrEmpty(FightLoad.Fight.StoryKey) || FightScene.FightScene.target.AIStoryInfo != null)
+        StoryInfo story = null;
+        var fight = FightLoad.Fight;
+        var fightScene = FightScene.FightScene.target;
+        if (fight != null && !String.IsNullOrEmpty(fight.StoryKey))
         {
-            StoryInfo story = null;
-            if (!String.IsNullOrEmpty(FightLoad.Fight.StoryKey))
-                story = await StoryManager.Instance.LoadStory(FightLoad.Fight.StoryKey);
-            
-            if (story == null)
-            {
-                story = FightScene.FightScene.target.AIStoryInfo;
-                storyFromAI = story != null;
-            }
-            
-            if (story == null)
-            {
-                picStoryEnded = true;
-            }
-            else
-            {
+            story = await StoryManager.Instance.LoadStory(fight.StoryKey);
+        }
+
+        if (story == null && fightScene != null)
+        {
+            story = await fightScene.GetAIStoryForCurrentFightAsync();
+            storyFromAI = story != null;
+        }
+
+        if (story == null)
+        {
+            picStoryEnded = true;
+        }
+        else
+        {
                 RectTransform rectTransform = storyPicBgImage.GetComponent<RectTransform>();
                 // 获取当前宽度
                 float currentWidth = rectTransform.sizeDelta.x;
@@ -73,11 +76,6 @@ public partial class ArenaFightOver : UILayer
                 _currentSceneIndex = 0;
                 DisplayCurrentScene(story);
                 storyPicBgImage.gameObject.SetActive(true);
-            }
-        }
-        else
-        {
-            picStoryEnded = true;
         }
         await UniTask.WaitUntil(()=> picStoryEnded);
         

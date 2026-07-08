@@ -28,6 +28,8 @@ namespace FightScene
         
         public AIServiceManager AIServiceManager => aiServiceManager;
         private StoryInfo aiStoryInfo;
+        private string aiStoryRequestKey;
+        private UniTaskCompletionSource<StoryInfo> aiStoryLoadSource;
         public StoryInfo AIStoryInfo => aiStoryInfo;
         
         public static FightScene target;
@@ -97,7 +99,7 @@ namespace FightScene
                 return;
             }
             
-            ArenaFightOver.PreloadQuestShortStoryIfNeeded();
+            PrepareStoryContentForCurrentFight();
             
             AppSetting.BGMSource = audioSource;
             AppSetting.UiAudioSource = uiAudioSource;
@@ -138,19 +140,98 @@ namespace FightScene
             }
             FSceneProcessesRunner.Main.ArrangeProcessOrder();
             FSceneProcessesRunner.Main.ChangeProcess(SceneStep.Preparing);
-            
-            var eventType = FightLoad.Fight.EventType;
-            var hasDefaultStory = !string.IsNullOrEmpty(FightLoad.Fight.StoryKey);
-            if (eventType == FightEventType.Event ||
-                (eventType == FightEventType.Quest && !hasDefaultStory))
-            {
-                LoadAIStory().Forget();
-            }
         }
 
-        private async UniTask LoadAIStory()
+        public void PrepareStoryContentForCurrentFight()
         {
-            aiStoryInfo = await aiServiceManager.LoadAIStory();
+            ArenaFightOver.PreloadQuestShortStoryIfNeeded();
+            PrepareAIStoryForCurrentFight();
+        }
+
+        public void PrepareAIStoryForCurrentFight()
+        {
+            var fight = FightLoad.Fight;
+            if (!ShouldLoadAIStory(fight))
+            {
+                aiStoryInfo = null;
+                aiStoryRequestKey = null;
+                aiStoryLoadSource = null;
+                return;
+            }
+
+            var requestKey = BuildAIStoryRequestKey(fight);
+            if (aiStoryLoadSource != null && aiStoryRequestKey == requestKey)
+            {
+                return;
+            }
+
+            aiStoryInfo = null;
+            aiStoryRequestKey = requestKey;
+            aiStoryLoadSource = new UniTaskCompletionSource<StoryInfo>();
+            LoadAIStoryForCurrentFight(aiStoryLoadSource, requestKey).Forget();
+        }
+
+        public async UniTask<StoryInfo> GetAIStoryForCurrentFightAsync()
+        {
+            if (aiStoryInfo != null)
+            {
+                return aiStoryInfo;
+            }
+
+            if (!ShouldLoadAIStory(FightLoad.Fight))
+            {
+                return null;
+            }
+
+            PrepareAIStoryForCurrentFight();
+            var loadSource = aiStoryLoadSource;
+            return loadSource == null ? null : await loadSource.Task;
+        }
+
+        private async UniTaskVoid LoadAIStoryForCurrentFight(UniTaskCompletionSource<StoryInfo> loadSource, string requestKey)
+        {
+            StoryInfo story = null;
+            try
+            {
+                if (aiServiceManager == null)
+                {
+                    Debug.LogWarning("[FightScene] AIServiceManager missing, cannot load AI story.");
+                }
+                else
+                {
+                    story = await aiServiceManager.LoadAIStory();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning($"[FightScene] Failed to load AI story: {e.Message}");
+            }
+
+            if (aiStoryLoadSource == loadSource && aiStoryRequestKey == requestKey)
+            {
+                aiStoryInfo = story;
+            }
+
+            loadSource.TrySetResult(story);
+        }
+
+        private static bool ShouldLoadAIStory(FightInfo fight)
+        {
+            if (fight == null)
+            {
+                return false;
+            }
+
+            var hasDefaultStory = !string.IsNullOrEmpty(fight.StoryKey);
+            return fight.EventType == FightEventType.Event ||
+                   (fight.EventType == FightEventType.Quest && !hasDefaultStory);
+        }
+
+        private static string BuildAIStoryRequestKey(FightInfo fight)
+        {
+            return fight == null
+                ? string.Empty
+                : $"{fight.EventType}:{fight.FightMode}:{fight.ID}";
         }
 
         public void LoadAds()

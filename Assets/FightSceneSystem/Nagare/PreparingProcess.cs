@@ -49,6 +49,8 @@ public class PreparingProcess : FSceneProcess
         RTFightManager.Target.team1.Clear();
         RTFightManager.Target.team2.Clear();
 
+        FightScene.FightScene.target?.PrepareStoryContentForCurrentFight();
+
         if ((FightLoad.Fight.EventType == FightEventType.Quest || FightLoad.Fight.FightMode == FightMode.Group || FightLoad.Fight.EventType == FightEventType.Event))
         {
 #if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
