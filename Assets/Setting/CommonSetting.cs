@@ -70,6 +70,8 @@ public class CommonSetting : ScriptableObject
     [SerializeField] private string memberShiftEffectCode = "memberShift";
     [Tooltip("副角色登场时的特效代号")]
     [SerializeField] private string subMemberShiftEffectCode = "";
+    [Tooltip("变身角色受击切换到副角色时的爆衣特效代号；留空则不播放")]
+    [SerializeField] private string clothesBurstEffectCode = "clothesBurst";
 
     [Tooltip("sound effects")] 
     [SerializeField] AudioClip btnTapSound;
@@ -173,6 +175,7 @@ public class CommonSetting : ScriptableObject
     public static string BreakFreeEffectCode;
     public static string MemberShiftEffectCode;
     public static string SubMemberShiftEffectCode;
+    public static string ClothesBurstEffectCode;
     
     public static int AIDetectInterval = 1;
     
@@ -242,6 +245,7 @@ public class CommonSetting : ScriptableObject
         BreakFreeEffectCode = breakFreeEffectCode;
         MemberShiftEffectCode = memberShiftEffectCode;
         SubMemberShiftEffectCode = subMemberShiftEffectCode;
+        ClothesBurstEffectCode = clothesBurstEffectCode;
         
         AIDetectInterval = aiDetectInterval;
         

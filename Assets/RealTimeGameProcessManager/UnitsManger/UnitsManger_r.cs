@@ -210,6 +210,7 @@ namespace FightScene
 
             var targetPos = main.WholeT.transform.position;
             var targetRot = main.WholeT.transform.rotation;
+            var effectPos = main.geometryCenter != null ? main.geometryCenter.position : targetPos;
 
             if (RMode_Unit.Value != null) // 继承hit数
             {
@@ -228,6 +229,8 @@ namespace FightScene
             RMode_Unit.Value.FightDataRef.CriticalGaugeMode = main.FightDataRef.CriticalGaugeMode;
             main.MarkChangedToSubUnit();
             main.FightDataRef.IsDead.Value = true;
+
+            EffectsManager.GenerateEffect(CommonSetting.ClothesBurstEffectCode, null, effectPos, Quaternion.identity, null).Forget();
 
             main.WholeT.gameObject.SetActive(false);
             RMode_Unit.Value.WholeT.gameObject.SetActive(true);
