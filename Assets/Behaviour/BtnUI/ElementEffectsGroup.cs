@@ -4,6 +4,59 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
+sealed class FullResolutionParticleIcon
+{
+    Material _material;
+    Texture _texture;
+    Color _color = Color.white;
+    RawImage _activeTarget;
+
+    public void Initialize(ParticleSystem source)
+    {
+        var renderer = source != null ? source.GetComponent<ParticleSystemRenderer>() : null;
+        var material = renderer != null ? renderer.sharedMaterial : null;
+        var texture = material != null ? material.mainTexture : null;
+
+        if (renderer == null || texture == null)
+        {
+            return;
+        }
+
+        var main = source.main;
+        _material = material;
+        _texture = texture;
+        _color = main.startColor.color;
+
+        // Only the root renderer is the fixed icon. Child particle rings and glows keep rendering normally.
+        renderer.enabled = false;
+    }
+
+    public void Show(RawImage target)
+    {
+        if (target == null || _material == null || _texture == null)
+        {
+            return;
+        }
+
+        _activeTarget = target;
+        _activeTarget.material = _material;
+        _activeTarget.texture = _texture;
+        _activeTarget.color = _color;
+        _activeTarget.enabled = true;
+    }
+
+    public void Hide()
+    {
+        if (_activeTarget == null)
+        {
+            return;
+        }
+
+        _activeTarget.enabled = false;
+        _activeTarget = null;
+    }
+}
+
 public class ElementEffectsGroup
 {
     IDictionary<Button, ParticleSystem> _btnRefreshEffects = new Dictionary<Button, ParticleSystem>();
@@ -17,16 +70,22 @@ public class ElementEffectsGroup
     ParticleSystem _rushBtn;
     ParticleSystem _dreamComboBtn;
     ParticleSystem _pressingExplosion; // 这个不需要对象池。
+    readonly FullResolutionParticleIcon _defendIcon = new FullResolutionParticleIcon();
+    readonly FullResolutionParticleIcon _rushIcon = new FullResolutionParticleIcon();
+    readonly FullResolutionParticleIcon _dreamComboIcon = new FullResolutionParticleIcon();
+    RawImage _dreamComboIconTarget;
 
     public void DreamComboEffectOn(bool on)
     {
         if (on)
         {
             _dreamComboBtn.Play(true);
+            _dreamComboIcon.Show(_dreamComboIconTarget);
         }
         else
         {
             _dreamComboBtn.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            _dreamComboIcon.Hide();
         }
     }
 
@@ -103,12 +162,22 @@ public class ElementEffectsGroup
         _pressingExplosion.Stop(true, systemStopBehavior);
         _rushBtn.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         _dreamComboBtn.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        _defendIcon.Hide();
+        _rushIcon.Hide();
+        _dreamComboIcon.Hide();
+        _dreamComboIconTarget = null;
 
         if (FightGlobalSetting.HasDefend)
             _defendBtn.Stop(true, systemStopBehavior);
     }
 
-    public void Open(Vector3 defendBtnPos, Vector3 rushBtnPos, Vector3 dreamComboPos)
+    public void Open(
+        Vector3 defendBtnPos,
+        Vector3 rushBtnPos,
+        Vector3 dreamComboPos,
+        RawImage defendIcon,
+        RawImage rushIcon,
+        RawImage dreamComboIcon)
     {
         _triggerExplosion0.Stop(true);
         _triggerExplosion1.Stop(true);
@@ -122,13 +191,16 @@ public class ElementEffectsGroup
         _pressingExplosion.Stop(true);
         _rushBtn.gameObject.transform.position = rushBtnPos;
         _rushBtn.Play(true);
+        _rushIcon.Show(rushIcon);
 
         _dreamComboBtn.transform.position = dreamComboPos;
+        _dreamComboIconTarget = dreamComboIcon;
 
         if (FightGlobalSetting.HasDefend)
         {
             _defendBtn.gameObject.transform.position = defendBtnPos;
             _defendBtn.Play(true);
+            _defendIcon.Show(defendIcon);
         }
     }
 
@@ -170,6 +242,7 @@ public class ElementEffectsGroup
         if (FightGlobalSetting.HasDefend)
         {
             _defendBtn = await AddressablesLogic.LoadTOnObject<ParticleSystem>("ButtonEffects/" + path + "/defend.prefab");
+            _defendIcon.Initialize(_defendBtn);
         }
 
         var tasks2 = new List<UniTask<ParticleSystem>>
@@ -198,6 +271,8 @@ public class ElementEffectsGroup
         _triggerExplosion3 = results2[7];
         _pressingExplosion = results2[8];
         _dreamComboBtn = results2[9];
+        _rushIcon.Initialize(_rushBtn);
+        _dreamComboIcon.Initialize(_dreamComboBtn);
 
         _btnRefreshEffects = new Dictionary<Button, ParticleSystem>
         {

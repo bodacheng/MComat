@@ -35,6 +35,9 @@ public class MobileInputsManager : MonoBehaviour {
     RectTransform _defendBtnRect;
     RectTransform _dashBtnRect;
     RectTransform _dreamComboBtnRect;
+    RawImage _defendIconOverlay;
+    RawImage _rushIconOverlay;
+    RawImage _dreamComboIconOverlay;
     readonly Dictionary<Button, RectTransform> _buttonRects = new Dictionary<Button, RectTransform>();
     
     //攻击键系成员
@@ -48,6 +51,44 @@ public class MobileInputsManager : MonoBehaviour {
     void Awake()
     {
         CacheButtonRects();
+        CreateFullResolutionIconOverlays();
+    }
+
+    void CreateFullResolutionIconOverlays()
+    {
+        _defendIconOverlay = CreateIconOverlay(defendBtn, "DefendIconOverlay", 1f);
+        _rushIconOverlay = CreateIconOverlay(dashBtn, "RushIconOverlay", 0.6f);
+        _dreamComboIconOverlay = CreateIconOverlay(dreamComboBtn, "DreamComboIconOverlay", 0.45f);
+    }
+
+    RawImage CreateIconOverlay(Button button, string objectName, float normalizedSize)
+    {
+        if (button == null)
+        {
+            return null;
+        }
+
+        var iconObject = new GameObject(
+            objectName,
+            typeof(RectTransform),
+            typeof(CanvasRenderer),
+            typeof(RawImage));
+        iconObject.layer = button.gameObject.layer;
+
+        var iconRect = iconObject.GetComponent<RectTransform>();
+        iconRect.SetParent(button.transform, false);
+        var inset = (1f - Mathf.Clamp01(normalizedSize)) * 0.5f;
+        iconRect.anchorMin = new Vector2(inset, inset);
+        iconRect.anchorMax = new Vector2(1f - inset, 1f - inset);
+        iconRect.offsetMin = Vector2.zero;
+        iconRect.offsetMax = Vector2.zero;
+        iconRect.SetAsLastSibling();
+
+        var icon = iconObject.GetComponent<RawImage>();
+        icon.raycastTarget = false;
+        icon.maskable = false;
+        icon.enabled = false;
+        return icon;
     }
 
     
@@ -232,7 +273,10 @@ public class MobileInputsManager : MonoBehaviour {
             currentElementEffect.Open(
                 GetButtonWorldPos(defendBtn, 5),
                 GetButtonWorldPos(dashBtn, 5),
-                GetButtonWorldPos(dreamComboBtn, 5)
+                GetButtonWorldPos(dreamComboBtn, 5),
+                _defendIconOverlay,
+                _rushIconOverlay,
+                _dreamComboIconOverlay
             );
         }else{
             Debug.Log("检查手机控制器渲染模块加载顺序");
