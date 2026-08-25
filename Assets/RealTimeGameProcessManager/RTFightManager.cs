@@ -66,10 +66,22 @@ namespace FightScene
             }
 
             onProgress?.Invoke(0f);
-            
+
+            // Group battles contain many more live units. Load two units per team at once
+            // so Addressables I/O can overlap, while retaining a hard cap of four units to
+            // avoid the memory spike caused by starting the entire roster at once.
+            var maxConcurrentLoadsPerTeam = info.FightMode == FightMode.Group ? 2 : 1;
             await UniTask.WhenAll(
-                team1._UnitsLoad(info.FightMembers.HeroSets, UnitInfoRef, ReportUnitProgressDelta), 
-                team2._UnitsLoad(info.FightMembers.EnemySets, UnitInfoRef, ReportUnitProgressDelta)
+                team1._UnitsLoad(
+                    info.FightMembers.HeroSets,
+                    UnitInfoRef,
+                    ReportUnitProgressDelta,
+                    maxConcurrentLoadsPerTeam),
+                team2._UnitsLoad(
+                    info.FightMembers.EnemySets,
+                    UnitInfoRef,
+                    ReportUnitProgressDelta,
+                    maxConcurrentLoadsPerTeam)
             );
             onProgress?.Invoke(1f);
         }

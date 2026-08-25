@@ -1,10 +1,14 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public static class HurtObjectManager
 {
     static DecompositionPool _defaultHitBoxPool;
     static readonly ResourcePoolRegistry<DecompositionPool> HurtPools = new ResourcePoolRegistry<DecompositionPool>();
+    static readonly IDictionary<string, UniTaskCompletionSource<bool>> PendingPoolLoads =
+        new Dictionary<string, UniTaskCompletionSource<bool>>();
     
     static UniTask<GameObject> TryLoadWeaponPrefab(string key)
     {
@@ -62,20 +66,41 @@ public static class HurtObjectManager
         if (HurtPools.TryGet(resourceKey, out _))
             return true;
 
-        var weaponPrefab = await TryLoadWeaponPrefab(EffectResourceKeyUtility.PrefabAddress(resourcePath, resourceName));
-        if (weaponPrefab == null)
-            return false;
+        if (PendingPoolLoads.TryGetValue(resourceKey, out var pendingLoad))
+            return await pendingLoad.Task;
 
-        await ResourcePoolConstructionUtility.GetOrCreatePool(
-            HurtPools,
-            resourceKey,
-            weaponPrefab,
-            preloadCount,
-            prefab => new DecompositionPool(prefab),
-            (pool, count) => pool.PreloadAsync(count, 1).ToUniTask(),
-            pool => pool.Clear());
-        await ConstructAttachmentPools(resourceName, weaponPrefab.GetComponent<Decomposition>(), element, preloadCount);
-        return true;
+        var loadSource = new UniTaskCompletionSource<bool>();
+        PendingPoolLoads.Add(resourceKey, loadSource);
+        try
+        {
+            var weaponPrefab = await TryLoadWeaponPrefab(EffectResourceKeyUtility.PrefabAddress(resourcePath, resourceName));
+            if (weaponPrefab == null)
+            {
+                loadSource.TrySetResult(false);
+                return false;
+            }
+
+            await ResourcePoolConstructionUtility.GetOrCreatePool(
+                HurtPools,
+                resourceKey,
+                weaponPrefab,
+                preloadCount,
+                prefab => new DecompositionPool(prefab),
+                (pool, count) => pool.PreloadAsync(count, 1).ToUniTask(),
+                pool => pool.Clear());
+            await ConstructAttachmentPools(resourceName, weaponPrefab.GetComponent<Decomposition>(), element, preloadCount);
+            loadSource.TrySetResult(true);
+            return true;
+        }
+        catch (Exception exception)
+        {
+            loadSource.TrySetException(exception);
+            throw;
+        }
+        finally
+        {
+            PendingPoolLoads.Remove(resourceKey);
+        }
     }
 
     static async UniTask ConstructAttachmentPools(string resourceName, Decomposition decomposition, Element element, int preloadCount)

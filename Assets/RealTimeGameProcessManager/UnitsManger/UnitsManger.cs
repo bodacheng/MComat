@@ -54,7 +54,7 @@ namespace FightScene
         }
 
         public async UniTask _UnitsLoad(MultiDic<int, int, UnitInfo> membersSets, IDictionary<Data_Center, UnitInfo> unitInfoRef,
-            Action<float> onUnitProgressDelta = null)
+            Action<float> onUnitProgressDelta = null, int maxConcurrentLoads = 1)
         {
             async UniTask LoadOneUnit(int key1, int key2, UnitInfo info, int preloadCount)
             {
@@ -96,12 +96,25 @@ namespace FightScene
                 }
             }
 
+            maxConcurrentLoads = Mathf.Max(1, maxConcurrentLoads);
+            var tasks = new List<UniTask>(maxConcurrentLoads);
             foreach (var kv in membersSets.mDict)
             {
                 var unitKey = (kv.Value.r_id, kv.Value.level);
                 // 这个统计相同种类角色的逻辑并不精确。如果一个队伍里有两个同masterid角色，等级还一样，问题就出来了，但现在我们的代码构造造成没有别的做法。
-                await LoadOneUnit(kv.Key.Item1, kv.Key.Item2, kv.Value, sameUnitCounts[unitKey]);
-                await UniTask.Yield(PlayerLoopTiming.Update);
+                tasks.Add(LoadOneUnit(kv.Key.Item1, kv.Key.Item2, kv.Value, sameUnitCounts[unitKey]));
+                if (tasks.Count < maxConcurrentLoads)
+                {
+                    continue;
+                }
+
+                await UniTask.WhenAll(tasks);
+                tasks.Clear();
+            }
+
+            if (tasks.Count > 0)
+            {
+                await UniTask.WhenAll(tasks);
             }
         }
 

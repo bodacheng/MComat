@@ -8,7 +8,109 @@ using Object = UnityEngine.Object;
 
 public partial class AnimationManger
 {
+    private static readonly IDictionary<string, UniTaskCompletionSource<List<AnimationClip>>> PendingSeriesLoads =
+        new Dictionary<string, UniTaskCompletionSource<List<AnimationClip>>>();
+    private static readonly IDictionary<string, List<string>> AnimationLocationKeys =
+        new Dictionary<string, List<string>>();
+    private static readonly IDictionary<string, UniTaskCompletionSource<List<string>>> PendingLocationLoads =
+        new Dictionary<string, UniTaskCompletionSource<List<string>>>();
+
     private FacialAnimManager facialAnimManager;
+
+    private static async UniTask<List<string>> LoadSharedAnimationLocationKeys(string label)
+    {
+        if (AnimationLocationKeys.TryGetValue(label, out var cachedKeys))
+        {
+            return cachedKeys;
+        }
+
+        if (PendingLocationLoads.TryGetValue(label, out var pendingLoad))
+        {
+            return await pendingLoad.Task;
+        }
+
+        var loadSource = new UniTaskCompletionSource<List<string>>();
+        PendingLocationLoads.Add(label, loadSource);
+        try
+        {
+            var loadedKeys = new List<string>();
+            var locationHandle = Addressables.LoadResourceLocationsAsync(label);
+            try
+            {
+                await locationHandle;
+                if (locationHandle.Status == AsyncOperationStatus.Succeeded)
+                {
+                    foreach (var location in locationHandle.Result)
+                    {
+                        if (!string.IsNullOrEmpty(location.PrimaryKey))
+                        {
+                            loadedKeys.Add(location.PrimaryKey);
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                if (locationHandle.IsValid())
+                    Addressables.Release(locationHandle);
+            }
+
+            AnimationLocationKeys.Add(label, loadedKeys);
+            loadSource.TrySetResult(loadedKeys);
+            return loadedKeys;
+        }
+        catch (Exception exception)
+        {
+            loadSource.TrySetException(exception);
+            throw;
+        }
+        finally
+        {
+            PendingLocationLoads.Remove(label);
+        }
+    }
+
+    private static async UniTask<List<AnimationClip>> LoadSharedAnimationSeries(
+        string seriesKey,
+        Func<UniTask<List<AnimationClip>>> load)
+    {
+        if (AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(seriesKey, out var cachedClips))
+        {
+            return cachedClips;
+        }
+
+        if (PendingSeriesLoads.TryGetValue(seriesKey, out var pendingLoad))
+        {
+            return await pendingLoad.Task;
+        }
+
+        var loadSource = new UniTaskCompletionSource<List<AnimationClip>>();
+        PendingSeriesLoads.Add(seriesKey, loadSource);
+        try
+        {
+            var loadedClips = await load() ?? new List<AnimationClip>();
+            if (AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(seriesKey, out cachedClips))
+            {
+                loadedClips = cachedClips;
+            }
+            else
+            {
+                AnimationResourceLoader.SeriesAnimationClipsDic.Add(seriesKey, loadedClips);
+            }
+
+            loadSource.TrySetResult(loadedClips);
+            return loadedClips;
+        }
+        catch (Exception exception)
+        {
+            loadSource.TrySetException(exception);
+            throw;
+        }
+        finally
+        {
+            PendingSeriesLoads.Remove(seriesKey);
+        }
+    }
 
     public void CasualFace()
     {
@@ -28,44 +130,32 @@ public partial class AnimationManger
         Action<float> onProgress = null)
     {
         onProgress?.Invoke(0f);
-        var basicAnims = new List<AnimationClip>();
         var basicPackKey = AnimationResourceKeyUtility.BasicPackSeriesKey(type, basicPackName);
-        if (AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(basicPackKey))
+        var basicAnims = await LoadSharedAnimationSeries(basicPackKey, async () =>
         {
-            AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(basicPackKey, out basicAnims);
-            onProgress?.Invoke(0.3f);
-        }
-        else
-        {
-            var loadPath = Addressables.LoadResourceLocationsAsync(AnimationResourceKeyUtility.BasicAnimationLabel);
-            await loadPath;
-            if (loadPath.Status == AsyncOperationStatus.Succeeded)
+            var loadedClips = new List<AnimationClip>();
+            var locationKeys = await LoadSharedAnimationLocationKeys(AnimationResourceKeyUtility.BasicAnimationLabel);
+            var checkedLocations = 0;
+            foreach (var primaryKey in locationKeys)
             {
-                var checkedLocations = 0;
-                var totalLocations = loadPath.Result.Count;
-                foreach (var path in loadPath.Result)
+                if (AnimationResourceKeyUtility.IsBasicAnimationLocation(primaryKey, type, basicPackName))
                 {
-                    if (AnimationResourceKeyUtility.IsBasicAnimationLocation(path.PrimaryKey, type, basicPackName))
+                    Object value = await AddressablesLogic.LoadT<AnimationClip>(primaryKey);
+                    if (value != null)
                     {
-                        Object value = await AddressablesLogic.LoadT<AnimationClip>(path.PrimaryKey);
-                        if (value != null)
-                        {
-                            var animationClip = (AnimationClip)value;
-                            basicAnims.Add(animationClip);
-                        }
-                    }
-
-                    checkedLocations++;
-                    if (totalLocations > 0)
-                    {
-                        onProgress?.Invoke(Mathf.Lerp(0.05f, 0.3f, checkedLocations / (float)totalLocations));
+                        loadedClips.Add((AnimationClip)value);
                     }
                 }
+
+                checkedLocations++;
+                if (locationKeys.Count > 0)
+                {
+                    onProgress?.Invoke(Mathf.Lerp(0.05f, 0.3f, checkedLocations / (float)locationKeys.Count));
+                }
             }
-            Addressables.Release(loadPath);
-            DicAdd<string, List<AnimationClip>>.Add(AnimationResourceLoader.SeriesAnimationClipsDic, basicPackKey, basicAnims);
-            onProgress?.Invoke(0.3f);
-        }
+            return loadedClips;
+        });
+        onProgress?.Invoke(0.3f);
 
         toLoadAnims = new Dictionary<string, AnimationClip>();
         if (basicAnims != null)
@@ -116,40 +206,26 @@ public partial class AnimationManger
             Debug.Log("Basic Anim Pack Error:" + type + "  " + basicPackName);
         }
 
-        async UniTask LoadHurtAnim(string type, string address, List<string> tags)
+        async UniTask LoadHurtAnim(string type, string address, string label)
         {
             var key = AnimationResourceKeyUtility.SeriesKey(type, address);
-            if (!AnimationResourceLoader.SeriesAnimationClipsDic.ContainsKey(key))
+            await LoadSharedAnimationSeries(key, async () =>
             {
-                AnimationResourceLoader.SeriesAnimationClipsDic.Add(key, new List<AnimationClip>());
-                var humanHurtAnimsObjects = new List<AnimationClip>();
-                var loadPath = Addressables.LoadResourceLocationsAsync(tags, Addressables.MergeMode.Intersection);
-                await loadPath;
-                if (loadPath.Status == AsyncOperationStatus.Succeeded)
+                var loadedClips = new List<AnimationClip>();
+                var locationKeys = await LoadSharedAnimationLocationKeys(label);
+                foreach (var primaryKey in locationKeys)
                 {
-                    foreach (var path in loadPath.Result)
+                    if (AnimationResourceKeyUtility.IsSeriesAnimationLocation(primaryKey, key))
                     {
-                        if (AnimationResourceKeyUtility.IsSeriesAnimationLocation(path.PrimaryKey, key))
+                        Object value = await AddressablesLogic.LoadT<AnimationClip>(primaryKey);
+                        if (value != null)
                         {
-                            Object value = await AddressablesLogic.LoadT<AnimationClip>(path.PrimaryKey);
-                            if (value != null)
-                            {
-                                var animationClip = (AnimationClip)value;
-                                humanHurtAnimsObjects.Add(animationClip);
-                            }
+                            loadedClips.Add((AnimationClip)value);
                         }
                     }
                 }
-
-                Addressables.Release(loadPath);
-                foreach (var clip in humanHurtAnimsObjects)
-                {
-                    if (AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(key, out var value))
-                    {
-                        value.Add(clip);
-                    }
-                }
-            }
+                return loadedClips;
+            });
         }
 
         var hurtLoadFinished = 0;
@@ -161,12 +237,12 @@ public partial class AnimationManger
         }
 
         await UniTask.WhenAll(
-            TrackHurtAnim(LoadHurtAnim(type, "basic_hurts/back", new List<string> { "hurt_anim" })),
-            TrackHurtAnim(LoadHurtAnim(type, "basic_hurts/high", new List<string> { "hurt_anim" })),
-            TrackHurtAnim(LoadHurtAnim(type, "basic_hurts/lay", new List<string> { "hurt_anim" })),
-            TrackHurtAnim(LoadHurtAnim(type, "basic_hurts/low", new List<string> { "hurt_anim" })),
-            TrackHurtAnim(LoadHurtAnim(type, "basic_hurts/press", new List<string> { "hurt_anim" })),
-            TrackHurtAnim(LoadHurtAnim(type, "basic_knockoffs", new List<string> { "knock_anim" }))
+            TrackHurtAnim(LoadHurtAnim(type, "basic_hurts/back", "hurt_anim")),
+            TrackHurtAnim(LoadHurtAnim(type, "basic_hurts/high", "hurt_anim")),
+            TrackHurtAnim(LoadHurtAnim(type, "basic_hurts/lay", "hurt_anim")),
+            TrackHurtAnim(LoadHurtAnim(type, "basic_hurts/low", "hurt_anim")),
+            TrackHurtAnim(LoadHurtAnim(type, "basic_hurts/press", "hurt_anim")),
+            TrackHurtAnim(LoadHurtAnim(type, "basic_knockoffs", "knock_anim"))
         );
 
         AnimationResourceLoader.SeriesAnimationClipsDic.TryGetValue(AnimationResourceKeyUtility.SeriesKey(type, "basic_knockoffs"), out knockoffAnimations);
