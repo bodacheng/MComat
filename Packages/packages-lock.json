@@ -1,18 +1,18 @@
 {
   "dependencies": {
     "com.cysharp.unitask": {
-      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask#2.5.11",
+      "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "2e993ff18f28c931602a07292df0b0804eebef99"
+      "hash": "ceac8d6946b1125fe782cd171fbcb245b567dbf9"
     },
     "com.google.external-dependency-manager": {
       "version": "https://github.com/googlesamples/unity-jar-resolver.git?path=upm",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "8cf54b63e37dceaf1630135f9abddf08167500a1"
+      "hash": "b38da4950d8439d50e15c71168d70e16fea731b0"
     },
     "com.mcombat.shared": {
       "version": "file:com.mcombat.shared",
