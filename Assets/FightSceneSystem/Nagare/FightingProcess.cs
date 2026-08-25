@@ -43,6 +43,9 @@ namespace FightScene
                 _layer.OpenTutorial();
             RTFightManager.Target.ModeStart();
             _layer.SetSensor();
+            // ModeStart places and rotates the combatants, then DetectionStart queries
+            // their colliders immediately in the same frame.
+            Physics.SyncTransforms();
             FightScene.target.SensorUnity.DetectionStart(CommonSetting.AIDetectInterval, true);
         }
         

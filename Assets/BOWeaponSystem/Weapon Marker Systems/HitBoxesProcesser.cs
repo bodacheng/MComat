@@ -54,6 +54,17 @@ public class HitBoxesProcesser : MonoBehaviour
         {
             foreach (var item in _processingDecompositions)
             {
+                if (item != null && item.RequiresTransformSyncBeforePhysicsQuery)
+                {
+                    // Animation can move weapon and target colliders earlier in this frame.
+                    // Sync once for the whole batch, immediately before the trail raycasts.
+                    Physics.SyncTransforms();
+                    break;
+                }
+            }
+
+            foreach (var item in _processingDecompositions)
+            {
                 item.Step1();
             }
             foreach (var item in _processingDecompositions)

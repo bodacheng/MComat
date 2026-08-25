@@ -7,6 +7,8 @@ public partial class Decomposition : MonoBehaviour {
 
     public HitBoxManager _HitBox;
     public TrackControl TrackControl;
+    public bool RequiresTransformSyncBeforePhysicsQuery =>
+        Phase == 1 && IsWeapon && _HitBox != null && _HitBox.RequiresTransformSyncBeforePhysicsQuery;
     
     [Tooltip("物体实际销毁时间，一定要大于stop_emission_delay")]
     [SerializeField] float DestructionDelay = 1.1f;//上面的值必须要大于下面的值

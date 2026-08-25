@@ -247,6 +247,9 @@ namespace FightScene
                 InputsManager.FocusUnit(RMode_Unit.Value, true);
             }
 
+            // The replacement unit was teleported and activated above; make its colliders
+            // visible to the immediate overlap query without enabling global auto-sync.
+            Physics.SyncTransforms();
             global::FightScene.FightScene.target?.SensorUnity.ForceImmediateDetection();
 
             return true;
@@ -325,6 +328,9 @@ namespace FightScene
                 InputsManager.FocusUnit(RMode_Unit.Value, true);
             }
 
+            // Unit placement and activation happened in this frame, immediately before
+            // the sensor query.
+            Physics.SyncTransforms();
             global::FightScene.FightScene.target?.SensorUnity.ForceImmediateDetection();
 
             if (emptyState)

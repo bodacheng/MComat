@@ -20,8 +20,8 @@ PhysicsManager:
   m_ContactsGeneration: 1
   m_LayerCollisionMatrix: 0000f07f0000f07f0000f07ff8ffffff8800f07f8800f07fc8e7fffff8ffffffc800f07fc816f17fc88ef07f8854f17f88caf07fc800f07fc818f07fc814f07fc80af07fc800f07fc800f07fc800f07fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffc800f07f
   m_AutoSimulation: 1
-  m_AutoSyncTransforms: 1
-  m_ReuseCollisionCallbacks: 0
+  m_AutoSyncTransforms: 0
+  m_ReuseCollisionCallbacks: 1
   m_ClothInterCollisionSettingsToggle: 0
   m_ClothGravity: {x: 0, y: -9.81, z: 0}
   m_ContactPairsMode: 0
