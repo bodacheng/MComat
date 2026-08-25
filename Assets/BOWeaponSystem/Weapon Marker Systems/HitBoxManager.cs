@@ -125,6 +125,8 @@ namespace HittingDetection
         void Awake()
         {
             _usedTargets = _localUsedTargets;
+            _attackerFreezeMission = AttackerFreeze;
+            _clearTargetsMission = ClearTargets;
             Transform _MarkersParent = transform;
             Transform[] children = new Transform[_MarkersParent.childCount];
             var bms = new List<Marker>(children.Length);

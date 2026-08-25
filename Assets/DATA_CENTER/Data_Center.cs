@@ -264,9 +264,9 @@ public partial class Data_Center : MonoBehaviour
             });
         
         FightScene.FightScene.target.SensorUnity.SensorDetectionResultSortProcesses.Add(
-            (x) =>
+            (hits, hitCount) =>
             {
-                this.Sensor.SensorDetectionResultSortProcess(x);
+                this.Sensor.SensorDetectionResultSortProcess(hits, hitCount);
             });
 
         ResetSubUnitState();

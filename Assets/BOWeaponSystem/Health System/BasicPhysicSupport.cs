@@ -634,10 +634,10 @@ public class BasicPhysicSupport : MonoBehaviour
             return;
 
         var correction = Vector3.zero;
-        var contacts = collision.contacts;
-        for (int i = 0; i < contacts.Length; i++)
+        var contactCount = collision.contactCount;
+        for (var i = 0; i < contactCount; i++)
         {
-            var contact = contacts[i];
+            var contact = collision.GetContact(i);
             float penetration = Mathf.Max(0f, -contact.separation);
             if (penetration <= Mathf.Epsilon)
                 continue;
