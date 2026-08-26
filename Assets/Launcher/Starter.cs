@@ -58,11 +58,19 @@ public class Starter : MonoBehaviour
                 SkillConfigTable.LoadAllSkillConfigs(),
                 PowerEstimateTable.LoadFile(),
                 Units.LoadUnitConfigs(),
-                Translate.LoadLanguageCodes(),
-                ShortStory.LoadLanguageCodes(),
-                Story.LoadLanguageCodes(),
-                UnitPassiveTable.Load(),
-                FightGlobalSetting.LoadFightParams()
+                Translate.LoadLanguageCodes(
+                    key => AddressablesLogic.LoadT<TextAsset>(key),
+                    () => AppSetting.Value.Language),
+                ShortStory.LoadLanguageCodes(
+                    key => AddressablesLogic.LoadT<TextAsset>(key),
+                    () => AppSetting.Value.Language),
+                Story.LoadLanguageCodes(
+                    key => AddressablesLogic.LoadT<TextAsset>(key),
+                    () => AppSetting.Value.Language),
+                UnitPassiveTable.Load(
+                    key => AddressablesLogic.LoadT<TextAsset>(key),
+                    skillId => SkillConfigTable.GetSkillConfigByRecordId(skillId) != null),
+                FightGlobalSetting.LoadFightParams(key => AddressablesLogic.LoadT<FightGlobalSetting>(key))
             }
         );
         //MobileAds.Initialize(initStatus => { Debug.Log(initStatus);});
