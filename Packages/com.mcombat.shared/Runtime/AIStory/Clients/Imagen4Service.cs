@@ -40,7 +40,7 @@ public class Imagen4Service
         var actualCount = Mathf.Clamp(count, 1, 4);
         var actualTimeout = timeoutMs ?? config.ImageTimeoutMs;
         var imageModel = string.IsNullOrEmpty(config.ImageModel) 
-            ? "imagen-4.0-generate-preview-06-06" 
+            ? "gemini-3.1-flash-image"
             : config.ImageModel;
         var cloudScriptPayload = new
         {

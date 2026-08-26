@@ -194,7 +194,7 @@ public partial class SKillAnalyzerGUI : EditorWindow
                 FunctionParameter = new
                 {
                     prompt = azureImagePrompt,
-                    imageModel = "imagen-4.0-fast-generate-001",
+                    imageModel = "gemini-3.1-flash-image",
                     sampleCount = Mathf.Clamp(azureImageSampleCount, 1, 4),
                     aspectRatio = string.IsNullOrWhiteSpace(azureImageAspectRatio) ? "1:1" : azureImageAspectRatio
                 },

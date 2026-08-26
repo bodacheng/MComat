@@ -5,7 +5,7 @@ public class GeminiConfig : ScriptableObject
 {
     [Header("API Configuration")]
     [SerializeField] private string model = "gemini-2.5-flash";
-    [SerializeField] private string imageModel = "imagen-4.0-generate-preview-06-06";
+    [SerializeField] private string imageModel = "gemini-3.1-flash-image";
     [SerializeField] private string textFunctionName = "generateGeminiText";
     [SerializeField] private string imageFunctionName = "generateGeminiImages";
     

@@ -132,7 +132,7 @@ A complete settings UI that includes:
 ### Gemini
 
 - **Text Model**: gemini-2.5-flash (configurable)
-- **Image Model**: Imagen 4.0
+- **Image Model**: Gemini 3.1 Flash Image (Nano Banana 2)
 - **Features**: Fast text generation, high-quality images
 - **API**: Google Generative AI
 
@@ -263,4 +263,3 @@ The system is designed to be easily extensible:
 
 - `OnModelChanged` - Fired when model changes
 - `OnError` - Fired when errors occur
-

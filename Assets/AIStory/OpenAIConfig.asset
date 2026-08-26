@@ -11,8 +11,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12345678901234567890123456789016, type: 3}
   m_Name: OpenAIConfig
-  m_EditorClassIdentifier: 
-  apiKey: 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
+  m_EditorClassIdentifier:
+  apiKey:
   textModel: gpt-4o
   imageModel: gpt-image-1
   defaultTimeoutMs: 20000
