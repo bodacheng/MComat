@@ -38,12 +38,29 @@ public class Starter : MonoBehaviour
     
     public static bool ConfigInitialised = false;
     
-    public async UniTask Initialise()
+    public async UniTask<bool> Initialise()
     {
         Application.targetFrameRate = 60;
         if (CommonSetting.PcMode)
         {
-            SteamManager.gameObject.SetActive(true);
+            if (SteamManager == null)
+            {
+                Debug.LogError("SteamManager is not assigned on Starter.");
+                return false;
+            }
+
+            if (!SteamManager.gameObject.activeSelf)
+            {
+                // Activating the object invokes SteamManager.Awake, which performs the
+                // synchronous first initialization attempt.
+                SteamManager.gameObject.SetActive(true);
+            }
+
+            if (!SteamManager.Initialized)
+            {
+                return false;
+            }
+
             AppSetting.Value.LoadSettings();
         }
         
@@ -75,6 +92,7 @@ public class Starter : MonoBehaviour
         );
         //MobileAds.Initialize(initStatus => { Debug.Log(initStatus);});
         ConfigInitialised = true;
+        return true;
     }
     
     public void EnterFrontScene()

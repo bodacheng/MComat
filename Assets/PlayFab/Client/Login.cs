@@ -559,6 +559,16 @@ public partial class PlayFabReadClient
             return;
         }
 
+        if (CommonSetting.PcMode)
+        {
+            onError?.Invoke(new PlayFabError
+            {
+                Error = PlayFabErrorCode.InvalidSteamTicket,
+                ErrorMessage = "Steam is not initialized. Restart Steam and try again."
+            });
+            return;
+        }
+
         PlayFabClientAPI.LoginWithCustomID(
             new LoginWithCustomIDRequest
             {

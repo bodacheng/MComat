@@ -13,6 +13,8 @@ public class StartUpPresentation : MonoBehaviour
     [SerializeField] AudioSource uiAudioSource;
     [SerializeField] Canvas canvas;
     [SerializeField] RectTransform safeAreaRect;
+
+    bool startupInProgress;
     
     void OpenAppStoreLink()
     {
@@ -179,23 +181,112 @@ public class StartUpPresentation : MonoBehaviour
 
     async UniTask Go()
     {
+        if (startupInProgress)
+        {
+            return;
+        }
+
+        startupInProgress = true;
         HighLightLayer.Close();
         Application.targetFrameRate = 70;
         FightGlobalSetting.SceneStep = 1;
-        await starter.Initialise();
-        
-        if (frontSceneFight && PlayFabReadClient.DontShowFrontFight == "False")
+
+        ProgressLayer.Loading(GetStartupInitializationText());
+        // Let the loading layer render before SteamAPI.Init performs synchronous
+        // native work on Unity's main thread.
+        await UniTask.NextFrame();
+
+        try
         {
-            starter.EnterFrontScene();
+            if (!await starter.Initialise())
+            {
+                ProgressLayer.Close();
+                PopupLayer.ArrangeWarnWindow(
+                    Application.Quit,
+                    GetSteamInitializationFailureText());
+                return;
+            }
+
+            if (frontSceneFight && PlayFabReadClient.DontShowFrontFight == "False")
+            {
+                ProgressLayer.Close();
+                starter.EnterFrontScene();
+            }
+            else
+            {
+                await AppSetting.PlayBGM(CommonSetting.StartThemeAddressKey);
+                var titleBgLayer= UILayerLoader.Load<TitleBgLayer>(true, null, true);
+                titleBgLayer.Setup(1);
+                titleBgLayer.Rotate(false);
+                var titleScreenLayer = UILayerLoader.Load<TitleScreenLayer>(true, null, true);
+                titleScreenLayer.Initialise();
+                ProgressLayer.Close();
+            }
         }
-        else
+        catch (Exception exception)
         {
-            await AppSetting.PlayBGM(CommonSetting.StartThemeAddressKey);
-            var titleBgLayer= UILayerLoader.Load<TitleBgLayer>(true, null, true);
-            titleBgLayer.Setup(1);
-            titleBgLayer.Rotate(false);
-            var titleScreenLayer = UILayerLoader.Load<TitleScreenLayer>(true, null, true);
-            titleScreenLayer.Initialise();
+            Debug.LogException(exception);
+            ProgressLayer.Close();
+            PopupLayer.ArrangeConfirmWindow(
+                () => Go().Forget(),
+                Application.Quit,
+                GetStartupFailureText(exception.Message));
+        }
+        finally
+        {
+            startupInProgress = false;
+        }
+    }
+
+    string GetStartupInitializationText()
+    {
+        if (!CommonSetting.PcMode)
+        {
+            switch (AppSetting.Value.Language)
+            {
+                case SystemLanguage.Japanese:
+                    return "ゲームデータを初期化中...";
+                case SystemLanguage.Chinese:
+                    return "正在初始化游戏数据...";
+                default:
+                    return "Initializing game data...";
+            }
+        }
+
+        switch (AppSetting.Value.Language)
+        {
+            case SystemLanguage.Japanese:
+                return "Steamとゲームデータを初期化中...";
+            case SystemLanguage.Chinese:
+                return "正在初始化Steam和游戏数据...";
+            default:
+                return "Initializing Steam and game data...";
+        }
+    }
+
+    string GetSteamInitializationFailureText()
+    {
+        switch (AppSetting.Value.Language)
+        {
+            case SystemLanguage.Japanese:
+                return "Steamの初期化に失敗しました。Steamクライアントを起動し、ゲームを再起動してください。";
+            case SystemLanguage.Chinese:
+                return "Steam初始化失败。请启动Steam客户端后重新启动游戏。";
+            default:
+                return "Steam initialization failed. Start the Steam client and restart the game.";
+        }
+    }
+
+    string GetStartupFailureText(string detail)
+    {
+        switch (AppSetting.Value.Language)
+        {
+            case SystemLanguage.Japanese:
+                return "ゲームの初期化に失敗しました。再試行してください。\n\n" + detail;
+            case SystemLanguage.Chinese:
+                return "游戏初始化失败，请重试。\n\n" + detail;
+            default:
+                return "Game initialization failed. Please try again.\n\n" + detail;
         }
     }
 }
