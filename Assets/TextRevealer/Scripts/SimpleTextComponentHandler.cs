@@ -72,7 +72,13 @@ public class SimpleTextComponentHandler : TextComponentHandler
         TextGenerator textGen = new TextGenerator(textComponent.text.Length);
         Vector2 extents = textComponent.gameObject.GetComponent<RectTransform>().rect.size;
         textGen.Populate(textComponent.text, textComponent.GetGenerationSettings(extents));
-        fontSize = textGen.fontSizeUsedForBestFit;
+        float pixelsPerUnit = textComponent.pixelsPerUnit > 0f ? textComponent.pixelsPerUnit : 1f;
+
+        // TextGenerator reports the screen-scaled font size. Each generated slice is
+        // another Text component, so it applies pixelsPerUnit again when rendering.
+        // Convert back to canvas units to avoid enlarging and overlapping letters on
+        // high-resolution displays (or shrinking them on low-resolution displays).
+        fontSize = Mathf.Max(1, Mathf.RoundToInt(textGen.fontSizeUsedForBestFit / pixelsPerUnit));
 
         int index = 0;
         foreach (char c in textComponent.text)
@@ -90,7 +96,11 @@ public class SimpleTextComponentHandler : TextComponentHandler
                 Vector3 locBottomRight = new Vector3(textGen.verts[index * 4 + 2].position.x, textGen.verts[index * 4 + 2].position.y, textGen.verts[index * 4 + 2].position.z);
 
                 Vector3 mid = new Vector3((locUpperLeft.x + locBottomRight.x) / 2.0f, (locUpperLeft.y + locBottomRight.y) / 2.0f, (locUpperLeft.z + locBottomRight.z) / 2.0f);
-                Vector3 position = mid / (textComponent.canvas.scaleFactor > 0 ? textComponent.canvas.scaleFactor : 1f);
+
+                // TextGenerator vertices use the Text component's pixels-per-unit scale.
+                // Canvas.scaleFactor converts canvas units to screen pixels and must not be
+                // applied here; doing so makes the letter spacing depend on resolution.
+                Vector3 position = mid / pixelsPerUnit;
                 indexes.Add(new CharacterInfo() { Position = position, TextValue = c });
                 index++;
             }
