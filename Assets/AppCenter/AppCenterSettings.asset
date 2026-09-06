@@ -17,7 +17,7 @@ MonoBehaviour:
   UWPAppSecret: 
   UseAnalytics: 1
   UseCrashes: 1
-  UseDistribute: 1
+  UseDistribute: 0
   CustomApiUrl:
     UrlName: API
     UseCustomUrl: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
     UrlName: Install
     UseCustomUrl: 0
     Url: 
-  EnableDistributeForDebuggableBuild: 1
+  EnableDistributeForDebuggableBuild: 0
   AutomaticCheckForUpdate: 1
   InitialLogLevel: 8
   AllowNetworkRequests: 1
