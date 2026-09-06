@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: BO
-  productName: mcombatDev
+  productName: mcombat
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
@@ -115,7 +115,7 @@ PlayerSettings:
   xboxEnableFitness: 0
   visibleInBackground: 1
   allowFullscreenSwitch: 1
-  fullscreenMode: 1
+  fullscreenMode: 3
   xboxSpeechDB: 0
   xboxEnableHeadOrientation: 0
   xboxEnableGuest: 0
@@ -174,7 +174,7 @@ PlayerSettings:
   androidMinAspectRatio: 1
   applicationIdentifier:
     Android: com.MCombat.BO
-    Standalone: com.hogehoge.fugafuga
+    Standalone: com.MCombat.BO
     iPhone: com.MCombat.BO
   buildNumber:
     Standalone: 0
@@ -864,8 +864,8 @@ PlayerSettings:
   webWasm2023: 0
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
-    : UNITY_POST_PROCESSING_STACK_V2;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;Pre;PLAYFAB_REQUEST_TIMING;ENABLE_PLAYFAB_BETA;CT_BWF;URP_COMPATIBILITY_MODE
-    Android: CT_BWF;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;DOTWEEN;URP_COMPATIBILITY_MODE
+    : UNITY_POST_PROCESSING_STACK_V2;Pre;PLAYFAB_REQUEST_TIMING;ENABLE_PLAYFAB_BETA;CT_BWF;URP_COMPATIBILITY_MODE
+    Android: CT_BWF;DOTWEEN;URP_COMPATIBILITY_MODE
     CloudRendering: CT_BWF
     EmbeddedLinux: CT_BWF;DOTWEEN
     GameCoreScarlett: DOTWEEN;CT_BWF
@@ -880,12 +880,12 @@ PlayerSettings:
     QNX: CT_BWF;DOTWEEN
     ReservedCFE: DOTWEEN;CT_BWF
     Stadia: CT_BWF
-    Standalone: CT_BWF;ENABLE_PLAYFABSERVER_API;ENABLE_PLAYFABADMIN_API;STEAMWORKS_NET;DOTWEEN;URP_COMPATIBILITY_MODE
+    Standalone: CT_BWF;STEAMWORKS_NET;DOTWEEN;URP_COMPATIBILITY_MODE;MAGICACLOTH2
     VisionOS: CT_BWF;DOTWEEN
     WebGL: CT_BWF;DOTWEEN
     Windows Store Apps: CT_BWF;DOTWEEN
     XboxOne: CT_BWF;DOTWEEN
-    iPhone: CT_BWF;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;STEAMWORKS_NET;DOTWEEN;URP_COMPATIBILITY_MODE;MAGICACLOTH2
+    iPhone: CT_BWF;STEAMWORKS_NET;DOTWEEN;URP_COMPATIBILITY_MODE;MAGICACLOTH2
     tvOS: CT_BWF;DOTWEEN;URP_COMPATIBILITY_MODE
   additionalCompilerArguments: {}
   platformArchitecture:
