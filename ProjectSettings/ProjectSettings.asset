@@ -184,7 +184,7 @@ PlayerSettings:
   overrideDefaultApplicationIdentifier: 1
   AndroidBundleVersionCode: 100
   AndroidMinSdkVersion: 28
-  AndroidTargetSdkVersion: 34
+  AndroidTargetSdkVersion: 36
   AndroidPreferredInstallLocation: 1
   AndroidPreferredDataLocation: 1
   aotOptions: 
@@ -865,7 +865,7 @@ PlayerSettings:
   webEnableSubmoduleStrippingCompatibility: 0
   scriptingDefineSymbols:
     : UNITY_POST_PROCESSING_STACK_V2;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;Pre;PLAYFAB_REQUEST_TIMING;ENABLE_PLAYFAB_BETA;CT_BWF;URP_COMPATIBILITY_MODE
-    Android: CT_BWF;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;DOTWEEN;URP_COMPATIBILITY_MODE
+    Android: CT_BWF;ENABLE_PLAYFABADMIN_API;ENABLE_PLAYFABSERVER_API;DOTWEEN;URP_COMPATIBILITY_MODE;MAGICACLOTH2
     CloudRendering: CT_BWF
     EmbeddedLinux: CT_BWF;DOTWEEN
     GameCoreScarlett: DOTWEEN;CT_BWF
