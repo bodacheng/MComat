@@ -391,7 +391,7 @@ namespace MagicaCloth2
             cloth.serializeData2.DataValidate();
 
             // パラメータ変更（実行時のみ）
-            if (MagicaManager.IsPlaying())
+            if (MagicaManager.IsPlaying() && IsValid() && TeamId > 0)
             {
                 // ここでは変更フラグのみ立てる
                 //SetState(State_ParameterDirty, true);

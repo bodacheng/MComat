@@ -894,6 +894,11 @@ namespace MagicaCloth2
             teamAnchorTransformIndexArray[teamId] = MagicaObjectId.Invalid;
             teamDistanceTransformIndexArray[teamId] = MagicaObjectId.Invalid;
 
+            // カリング解除
+            var cprocess = GetClothProcess(teamId);
+            if (cprocess != null)
+                cameraCullingClothSet.Remove(cprocess.cloth);
+
             clothProcessDict.Remove(teamId);
         }
 
