@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CommonSetting
   m_EditorClassIdentifier: 
   devMode: 0
-  pcMode: 0
+  pcMode: 1
   demoMode: 0
   demoMaxQuestStage: 4
   mosaikCameraScreenScale: 1
