@@ -35,7 +35,7 @@ public class FrontPage : MSceneProcess
             PlayerAccountInfo.Me.noAdsState);
         
         // If account isn't linked to device, ask if link. Only ask once
-        if (PlayerAccountInfo.Me.currentLinkedDeviceId != PlayFabReadClient.CustomId && !_askedIfLinkDevice)
+        if (!PlayFabReadClient.IsCurrentDeviceLinked && !_askedIfLinkDevice)
         {
             _askedIfLinkDevice = true;
             var askIfLinkDeviceLayer = UILayerLoader.Load<AskIfLinkDeviceLayer>(true, null, true);
@@ -46,7 +46,6 @@ public class FrontPage : MSceneProcess
                         () =>
                         {
                             PopupLayer.ArrangeWarnWindow(Translate.Get("AccountLinked"));
-                            PlayerAccountInfo.Me.currentLinkedDeviceId = PlayFabReadClient.CustomId;
                         }
                     );
                     UILayerLoader.Remove<AskIfLinkDeviceLayer>();

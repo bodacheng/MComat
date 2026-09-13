@@ -3,25 +3,44 @@ using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
 
-/// <summary>
-/// 这一部分我们的目标是不用它。link设备的流程应该靠playfab那边的自动化
-/// </summary>
 public partial class PlayFabReadClient
 {
+    public static string CurrentDeviceLoginId
+    {
+        get
+        {
+#if UNITY_STANDALONE_WIN
+            if (SteamManager.Initialized)
+                return Steamworks.SteamUser.GetSteamID().ToString();
+#endif
+            return CustomId;
+        }
+    }
+
+    public static bool IsCurrentDeviceLinked =>
+        !string.IsNullOrEmpty(PlayerAccountInfo.Me.currentLinkedDeviceId) &&
+        PlayerAccountInfo.Me.currentLinkedDeviceId == CurrentDeviceLoginId;
+
     public static void LinkDevice(Action success)
     {
+        // Keep the identifier sent to PlayFab and the cached success state identical.
+        var deviceId = CurrentDeviceLoginId;
+        Action linked = () =>
+        {
+            PlayerAccountInfo.Me.currentLinkedDeviceId = deviceId;
+            success?.Invoke();
+        };
 #if UNITY_IOS
         PlayFabClientAPI.LinkIOSDeviceID(
             new LinkIOSDeviceIDRequest
             {
-                DeviceId = CustomId,
+                DeviceId = deviceId,
                 ForceLink = true
             },
             (x) =>
             {
                 Debug.Log(x);
-                PlayerAccountInfo.Me.currentLinkedDeviceId = CustomId;
-                success.Invoke();
+                linked();
             },
             ErrorReport
         );
@@ -31,17 +50,29 @@ public partial class PlayFabReadClient
         PlayFabClientAPI.LinkAndroidDeviceID(
             new LinkAndroidDeviceIDRequest
             {
-                AndroidDeviceId = CustomId,
+                AndroidDeviceId = deviceId,
                 ForceLink = true
             },
             (x) =>
             {
                 Debug.Log(x);
-                PlayerAccountInfo.Me.currentLinkedDeviceId = CustomId;
-                success.Invoke();
+                linked();
             },
             ErrorReport
         );
+#endif
+#if UNITY_STANDALONE_WIN
+        if (SteamManager.Initialized)
+        {
+            StartSteamLinkAsync(linked, ErrorReport);
+        }
+        else
+        {
+            PlayFabClientAPI.LinkCustomID(
+                new LinkCustomIDRequest { CustomId = deviceId, ForceLink = true },
+                result => linked(),
+                ErrorReport);
+        }
 #endif
     }
 

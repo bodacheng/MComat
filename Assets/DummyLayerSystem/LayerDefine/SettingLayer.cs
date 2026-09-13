@@ -344,9 +344,10 @@ public class SettingLayer : UILayer
 
     public void RefreshLinkDeviceBtn()
     {
-        unLinkDeviceBtn.gameObject.SetActive(PlayerAccountInfo.Me.currentLinkedDeviceId == PlayFabReadClient.CustomId);
-        linkDeviceBtn.gameObject.SetActive(PlayerAccountInfo.Me.currentLinkedDeviceId != PlayFabReadClient.CustomId);
-        linkInstruction.text = PlayerAccountInfo.Me.currentLinkedDeviceId == PlayFabReadClient.CustomId ? 
+        var linked = PlayFabReadClient.IsCurrentDeviceLinked;
+        unLinkDeviceBtn.gameObject.SetActive(linked);
+        linkDeviceBtn.gameObject.SetActive(!linked);
+        linkInstruction.text = linked ?
             Translate.Get("DeviceBindInstruction") : 
             Translate.Get("DeviceNotBindInstruction");
     }
