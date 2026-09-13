@@ -11,7 +11,7 @@
 
 发布账号：现有登录的 u/ReasonDirect4663。文案明确代表 HOTARU STUDIO。发布验证证明内容已保存，不代表已获得社区推荐、持续保留、点击或愿望单转化。
 
-## GameDev.net 已提交，尚未确认公开
+## GameDev.net 已公开
 
 GameDev.net 账号 HOTARU STUDIO（邮箱 mugencombat34@gmail.com）已由用户完成注册和激活。已实际登录并看到 “Successfully signed in as HOTARU STUDIO.”。账号主页：https://gamedev.net/profile/376927-hotaru-studio
 
@@ -19,7 +19,7 @@ GameDev.net 账号 HOTARU STUDIO（邮箱 mugencombat34@gmail.com）已由用户
 
 帖子链接：https://gamedev.net/forums/topic/720412-gem-warrior-r-build-your-fighting-style-with-skill-gems/5476132/
 
-当前详情页仍显示 “Topic not found”。站点已提示新账号投稿需要版主审核；尚未取得明确审核通过状态，不能记为公开发布成功。等待审核或站点恢复后再核验。浏览器已恢复，可忽略此前要求手动恢复页面的提问。
+2026-09-13 已在未登录状态下重新打开帖子详情页，确认标题、正文、Steam 链接、工作室官网链接及两张实机截图均已公开。页面当时显示 0 条回复、50+ 次浏览。
 
 分区为 Your Announcements。已读取分区说明及置顶 “Does my [your] post belong here?”，允许游戏项目公告。编辑器提供的相似主题均与本游戏无关。官方通用规则：https://gamedev.net/guidelines/ 。分区：https://gamedev.net/forums/forum/28-your-announcements/ 。置顶：https://gamedev.net/forums/topic/659289-does-my-your-post-belong-here/
 
