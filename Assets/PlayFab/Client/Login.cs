@@ -6,10 +6,6 @@ using Cysharp.Threading.Tasks;
 using mainMenu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-#if UNITY_STANDALONE_WIN
-using System.Text;
-using Steamworks;
-#endif
 
 public partial class PlayFabReadClient
 {
@@ -67,31 +63,6 @@ public partial class PlayFabReadClient
 #endif
         }
     }
-    
-#if UNITY_STANDALONE_WIN
-    static string GetSteamAuthTicket()
-    {
-        byte[] ticketBlob = new byte[1024];
-        uint ticketSize;
-        SteamNetworkingIdentity identity = new SteamNetworkingIdentity();
-        identity.SetSteamID(SteamUser.GetSteamID());
-
-        HAuthTicket hTicket = SteamUser.GetAuthSessionTicket(ticketBlob, ticketBlob.Length, out ticketSize, ref identity);
-        if (hTicket == HAuthTicket.Invalid)
-        {
-            Debug.LogError("Failed to get auth session ticket.");
-            return null;
-        }
-        
-        Array.Resize(ref ticketBlob, (int)ticketSize);
-        StringBuilder sb = new StringBuilder();
-        foreach (byte b in ticketBlob)
-        {
-            sb.AppendFormat("{0:x2}", b);
-        }
-        return sb.ToString();
-    }
-#endif
     
     public static string DontShowFrontFight
     {
@@ -481,6 +452,14 @@ public partial class PlayFabReadClient
             return false;
         }
 
+        // These require a configuration/identity fix, even for local errors with HttpCode == 0.
+        if (error.Error == PlayFabErrorCode.InvalidSteamTicket ||
+            error.Error == PlayFabErrorCode.InvalidTicket ||
+            error.Error == PlayFabErrorCode.SteamNotEnabledForTitle)
+        {
+            return false;
+        }
+
         if (TransientLoginErrors.Contains(error.Error))
         {
             return true;
@@ -536,26 +515,7 @@ public partial class PlayFabReadClient
 #if UNITY_STANDALONE_WIN
         if (SteamManager.Initialized)
         {
-            var steamTicket = GetSteamAuthTicket();
-            if (string.IsNullOrEmpty(steamTicket))
-            {
-                onError?.Invoke(new PlayFabError
-                {
-                    Error = PlayFabErrorCode.InvalidTicket,
-                    ErrorMessage = "Failed to get Steam auth ticket."
-                });
-                return;
-            }
-
-            PlayFabClientAPI.LoginWithSteam(
-                new LoginWithSteamRequest
-                {
-                    CreateAccount = true,
-                    SteamTicket = steamTicket
-                },
-                onSuccess,
-                onError
-            );
+            StartSteamLoginAsync(onSuccess, onError).Forget();
             return;
         }
 
