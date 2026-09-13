@@ -7,7 +7,7 @@ using UnityEditor.Build.Reporting;
 
 public sealed class SteamBuildSafetyCheck : IPreprocessBuildWithReport
 {
-    const string ExpectedSteamAppId = "4345170";
+    static readonly string ExpectedSteamAppId = SteamManager.AppId.ToString();
     const string PlayFabSettingsPath = "Assets/PlayFabSDK/Shared/Public/Resources/PlayFabSharedSettings.asset";
 
     static readonly string[] ForbiddenDefines =

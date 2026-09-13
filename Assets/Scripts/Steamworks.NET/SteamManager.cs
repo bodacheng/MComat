@@ -21,6 +21,7 @@ using Steamworks;
 //
 [DisallowMultipleComponent]
 public class SteamManager : MonoBehaviour {
+	public const uint AppId = 3323440;
 #if !DISABLESTEAMWORKS
 	protected static bool s_EverInitialized = false;
 
@@ -95,7 +96,7 @@ public class SteamManager : MonoBehaviour {
 
 			// Keep this in sync with steam_appid.txt. Remove steam_appid.txt from the game depot.
 			// See the Valve documentation for more information: https://partner.steamgames.com/doc/sdk/api#initialization_and_shutdown
-			if (SteamAPI.RestartAppIfNecessary(new AppId_t(4345170))) {
+			if (SteamAPI.RestartAppIfNecessary(new AppId_t(AppId))) {
 				Debug.Log("[Steamworks.NET] Shutting down because RestartAppIfNecessary returned true. Steam will restart the application.");
 
 				Application.Quit();
