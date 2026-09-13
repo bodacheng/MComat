@@ -10,44 +10,11 @@ using Steamworks;
 public partial class PlayFabReadClient
 {
 #if UNITY_STANDALONE_WIN
-    static UniTaskVoid StartSteamLoginAsync(Action<LoginResult> onSuccess, Action<PlayFabError> onError)
-    {
-        LoginResult loginResult = null;
-        return RunSteamAuthenticationAsync((ticket, complete) =>
-        {
-            PlayFabClientAPI.LoginWithSteam(new LoginWithSteamRequest
-            {
-                CreateAccount = true,
-                SteamTicket = ticket,
-                TicketIsServiceSpecific = true
-            }, result =>
-            {
-                loginResult = result;
-                complete(null);
-            }, complete);
-        }, () => onSuccess?.Invoke(loginResult), onError);
-    }
-
-    static void StartSteamLinkAsync(Action onSuccess, Action<PlayFabError> onError)
-    {
-        RunSteamAuthenticationAsync((ticket, complete) =>
-        {
-            PlayFabClientAPI.LinkSteamAccount(new LinkSteamAccountRequest
-            {
-                SteamTicket = ticket,
-                TicketIsServiceSpecific = true,
-                ForceLink = true
-            }, result => complete(null), complete);
-        }, onSuccess, onError).Forget();
-    }
-
-    // Login and linking both need a service-specific ticket kept alive until PlayFab replies.
-    static async UniTaskVoid RunSteamAuthenticationAsync(
-        Action<string, Action<PlayFabError>> sendRequest,
-        Action onSuccess, Action<PlayFabError> onError)
+    static async UniTaskVoid StartSteamLoginAsync(Action<LoginResult> onSuccess, Action<PlayFabError> onError)
     {
         var ticketHandle = HAuthTicket.Invalid;
         Callback<GetTicketForWebApiResponse_t> callback = null;
+        LoginResult loginResult = null;
         PlayFabError loginError = null;
         try
         {
@@ -81,11 +48,18 @@ public partial class PlayFabReadClient
 
                 var ticketHex = BitConverter.ToString(ticket.m_rgubTicket, 0, ticket.m_cubTicket).Replace("-", "");
                 Debug.Log($"Steam login: AppID={runtimeAppId}, PlayFab TitleID={PlayFabSettings.TitleId}.");
-                var requestReady = new UniTaskCompletionSource<PlayFabError>();
-                sendRequest(ticketHex, error => requestReady.TrySetResult(
-                    error == null ? null : SanitizeSteamLoginError(error)));
-                loginError = await requestReady.Task
+                var loginReady = new UniTaskCompletionSource<(LoginResult result, PlayFabError error)>();
+                PlayFabClientAPI.LoginWithSteam(new LoginWithSteamRequest
+                    {
+                        CreateAccount = true,
+                        SteamTicket = ticketHex,
+                        TicketIsServiceSpecific = true
+                    }, result => loginReady.TrySetResult((result, null)),
+                    error => loginReady.TrySetResult((null, SanitizeSteamLoginError(error))));
+                var outcome = await loginReady.Task
                     .Timeout(TimeSpan.FromSeconds(45), DelayType.Realtime);
+                loginResult = outcome.result;
+                loginError = outcome.error;
             }
         }
         catch (TimeoutException)
@@ -116,7 +90,7 @@ public partial class PlayFabReadClient
 
         // Release the ticket before entering the next scene or scheduling another attempt.
         if (loginError == null)
-            onSuccess?.Invoke();
+            onSuccess?.Invoke(loginResult);
         else
             onError?.Invoke(loginError);
     }
