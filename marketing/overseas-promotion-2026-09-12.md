@@ -8,8 +8,10 @@
 | --- | --- | --- |
 | Reddit r/IndieDev | 新用户置顶周帖中的英文介绍评论；技能宝石实机截图 1 张；Steam 链接；开发者及 AI 使用说明 | https://www.reddit.com/r/IndieDev/comments/1w99lm6/comment/p9cby6e/ |
 | Reddit r/gamedevscreens | 独立展示帖；战斗与技能宝石实机截图 2 张；英文介绍；Steam 链接；开发者及 AI 使用说明 | https://www.reddit.com/r/gamedevscreens/comments/1webtw6/gem_warrior_r_skillgem_loadouts_and_physicsdriven/ |
+| Reddit r/IndieGaming | 独立英文宣传帖；战斗与技能宝石实机截图 2 张；完整玩法介绍、Steam 愿望单链接、开发者身份及 AI 使用说明；标记为品牌宣传 | https://www.reddit.com/r/IndieGaming/comments/1wg0bh6/gem_warrior_r_physicsdriven_arena_combat_shaped/ |
+| IndieDB | 游戏展示主页；完整英文介绍、图标、Logo、5 张 Steam 官方实机截图、Steam 愿望单及官网链接、开发者及 AI 使用说明 | https://www.indiedb.com/games/gem-warrior-r |
 
-发布账号：现有登录的 u/ReasonDirect4663。文案明确代表 HOTARU STUDIO。发布验证证明内容已保存，不代表已获得社区推荐、持续保留、点击或愿望单转化。
+Reddit 发布账号为现有登录的 u/ReasonDirect4663；IndieDB 发布账号为 daisei。文案均明确代表 HOTARU STUDIO。发布验证证明内容已保存，不代表已获得社区推荐、持续保留、点击或愿望单转化。
 
 ## GameDev.net 已公开
 
@@ -43,11 +45,17 @@ Disclosure: this is a developer introduction. The Steam AI disclosure covers som
 
 建议配图：战斗截图、宝石配置截图。使用现有 Steam 正式素材，不制作虚构实机画面。
 
+## IndieDB 已公开
+
+IndieDB：已使用既有账号 `daisei` 创建并正式上线 Gem Warrior R 游戏主页，并上传 Steam 官方 5 张实机截图。分类、平台、Steam/官网链接、英文介绍和 AI 使用说明均已保存。2026-09-14 已在未登录窗口中复核，主页、正文、外链和全部 5 张图片均可公开访问。
+
+- 游戏主页：https://www.indiedb.com/games/gem-warrior-r
+- 官方截图集：https://www.indiedb.com/games/gem-warrior-r/images/gem-warrior-r-official-steam-screenshots
+
 ## 已检查但未发布
 
 | 社区 | 原因 | 依据 |
 | --- | --- | --- |
-| r/IndieGaming | 要求账号至少一周且有实际发帖历史；检查时现有账号无发帖历史。不可把刚发的推广当作已满足正常参与要求 | https://www.reddit.com/r/IndieGaming/ |
 | r/IndieDev 独立帖 | 要求 20 comment karma，因此依其规则使用允许新用户介绍的置顶周帖 | https://www.reddit.com/r/IndieDev/wiki/guidelines/ |
 | r/indiegames | 禁止生成式 AI 帖子，明确包括文字和视觉素材 | https://www.reddit.com/r/indiegames/ |
 | r/Indiefightinggames | 禁止含任何 AI 生成资产的游戏，Steam 已披露部分 UI 纹理使用 AI | https://www.reddit.com/r/Indiefightinggames/ |
