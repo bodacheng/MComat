@@ -120,7 +120,6 @@ public partial class PlayFabReadClient
         else
             onError?.Invoke(loginError);
     }
-#endif
 
     static PlayFabError SanitizeSteamLoginError(PlayFabError error)
     {
@@ -139,4 +138,5 @@ public partial class PlayFabReadClient
                 : "Steam login failed. Please try again. (" + (error?.Error.ToString() ?? "Unknown") + ")"
         };
     }
+#endif
 }
