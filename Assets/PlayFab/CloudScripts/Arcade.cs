@@ -65,7 +65,7 @@ public partial class CloudScript
                                     {
                                         PopupLayer.ArrangeWarnWindow(() =>
                                             {
-                                                PopupLayer.ArrangeWarnWindow(Translate.Get("GangbangUnlocked"));
+                                                PopupLayer.ArrangeWarnWindow(Translate.Get("BossChallengeUnlocked"));
                                             },
                                         Translate.Get("ArenaUnlocked"));
                                     });

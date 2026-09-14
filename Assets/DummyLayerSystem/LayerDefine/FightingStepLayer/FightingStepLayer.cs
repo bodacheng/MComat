@@ -79,12 +79,16 @@ public class FightingStepLayer : UILayer
         await StartUp(
             (x) =>
             {
-                PlayerPrefs.SetInt("auto", x ? 1:0);
                 RTFightManager.Target.team1.Auto = x;
+                // In-scene retries and the next stage reuse this battle configuration.
+                FightLoad.Fight.Team1Auto = x;
+                PlayerPrefs.SetInt("auto", x ? 1 : 0);
+                PlayerPrefs.Save();
             },
             (x) =>
             {
                 RTFightManager.Target.team2.Auto = x;
+                FightLoad.Fight.Team2Auto = x;
             },
             ()=>
             {
