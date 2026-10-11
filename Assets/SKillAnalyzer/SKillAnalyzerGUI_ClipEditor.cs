@@ -21,9 +21,6 @@ public partial class SKillAnalyzerGUI
     private const float PreviewHeight = 280f;
     private const float TimelineHeight = 78f;
     private const float EventListHeight = 230f;
-    private const float AutoAnalysisMinActiveTime = 0.06f;
-    private const float AutoAnalysisMaxActiveTime = 0.4f;
-    private const int AutoAnalysisMaxWindowsPerLimb = 3;
 
     private static readonly string[] QuickMagicEventNames =
     {
@@ -52,25 +49,6 @@ public partial class SKillAnalyzerGUI
         "SetRightFootMarkerManager",
         "SetLeftFootMarkerManager"
     };
-
-    private sealed class AutoAnalysisTrack
-    {
-        public string Label;
-        public string FunctionName;
-        public Transform Bone;
-        public Transform Reference;
-        public Vector3[] Positions;
-        public float[] Reach;
-        public float[] Speed;
-    }
-
-    private struct AutoAnalysisWindow
-    {
-        public string FunctionName;
-        public int StartFrame;
-        public int EndFrame;
-        public float Score;
-    }
 
     private AnimationClip _editingClip;
     private readonly List<AnimationEvent> _workingEvents = new List<AnimationEvent>();
@@ -394,7 +372,8 @@ public partial class SKillAnalyzerGUI
 
         using (new EditorGUILayout.VerticalScope("box"))
         {
-            EditorGUILayout.LabelField("自动分析（人形实验）", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("动作证据分析（人形近战）", EditorStyles.boldLabel);
+            EditorGUILayout.HelpBox("按肢长归一化速度，区分伸展、回收与支撑脚。只采用证据较强的候选；请结合预览确认命中姿势。", MessageType.None);
             _autoAnalysisReplaceExistingAttackEvents = EditorGUILayout.ToggleLeft("替换现有攻击开始/清理事件", _autoAnalysisReplaceExistingAttackEvents);
             if (GUILayout.Button("自动分析当前人形 Clip"))
             {
@@ -1023,7 +1002,7 @@ public partial class SKillAnalyzerGUI
         }
 
         var events = AnimationUtility.GetAnimationEvents(_editingClip);
-        _workingEvents.AddRange(events.OrderBy(x => x.time).ThenBy(x => x.functionName));
+        _workingEvents.AddRange(events.OrderBy(x => x.time).ThenBy(x => SKillAnalyzer.IsNormalAttackClearEvent(x) ? 0 : 1).ThenBy(x => x.functionName));
     }
 
     private void SaveWorkingEvents()
@@ -1033,10 +1012,18 @@ public partial class SKillAnalyzerGUI
             return;
         }
 
+        var assetPath = AssetDatabase.GetAssetPath(_editingClip);
+        if (AssetDatabase.IsSubAsset(_editingClip) || !string.Equals(Path.GetExtension(assetPath), ".anim", StringComparison.OrdinalIgnoreCase))
+        {
+            _autoAnalysisStatusType = MessageType.Warning;
+            _autoAnalysisStatus = "当前 Clip 来自导入素材，不能直接持久保存事件。请通过技能草案复制为独立 .anim，再编辑和保存；当前草稿事件已保留。";
+            return;
+        }
+
         try
         {
             Undo.RegisterCompleteObjectUndo(_editingClip, "Edit skill animation events");
-            AnimationUtility.SetAnimationEvents(_editingClip, _workingEvents.OrderBy(x => x.time).ThenBy(x => x.functionName).ToArray());
+            AnimationUtility.SetAnimationEvents(_editingClip, _workingEvents.OrderBy(x => x.time).ThenBy(x => SKillAnalyzer.IsNormalAttackClearEvent(x) ? 0 : 1).ThenBy(x => x.functionName).ToArray());
             EditorUtility.SetDirty(_editingClip);
             AssetDatabase.SaveAssets();
             AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(_editingClip));
@@ -1053,7 +1040,6 @@ public partial class SKillAnalyzerGUI
     {
         _autoAnalysisStatus = string.Empty;
         _autoAnalysisStatusType = MessageType.None;
-
         if (_editingClip == null)
         {
             _autoAnalysisStatusType = MessageType.Warning;
@@ -1062,399 +1048,74 @@ public partial class SKillAnalyzerGUI
         }
 
         EnsurePreviewReady();
-        if (_previewInstance == null)
+        var report = SkillMotionAnalyzer.Analyze(_editingClip, _currentPreviewPrefab);
+        if (!report.succeeded)
         {
             _autoAnalysisStatusType = MessageType.Error;
-            _autoAnalysisStatus = "当前没有可用的角色预览实例，无法进行人形判帧。";
+            _autoAnalysisStatus = report.error;
             return;
         }
 
-        if (!TryBuildAutoAnalysisTracks(out var tracks, out var error))
+        var frameDuration = 1f / Mathf.Max(1f, _editingClip.frameRate);
+        var cancelEvents = _workingEvents.Where(e => e.functionName == "turn_on_flag").ToList();
+        var cancelTime = cancelEvents.Count > 0 ? cancelEvents.Min(e => e.time) : _editingClip.length;
+        var windows = new List<SkillMotionCandidate>();
+        foreach (var candidate in report.candidates.Where(c => c.confidence >= SkillMotionAnalyzer.RecommendedConfidence
+                     && c.endTime + frameDuration <= cancelTime + 0.0001f)
+                     .OrderByDescending(c => c.confidence).ThenBy(c => c.startTime))
         {
-            _autoAnalysisStatusType = MessageType.Error;
-            _autoAnalysisStatus = error;
-            return;
+            // Opening any body-part marker resets shared hit tracking at runtime.
+            // Overlapping limbs can cause unintended extra hits, so keep the strongest.
+            if (!windows.Any(c => candidate.startTime < c.endTime && candidate.endTime > c.startTime))
+                windows.Add(candidate);
         }
-
-        var windows = DetectHumanoidAttackWindows(tracks);
+        windows = windows.OrderBy(c => c.startTime).ToList();
         if (windows.Count == 0)
         {
             _autoAnalysisStatusType = MessageType.Warning;
-            _autoAnalysisStatus = "未从当前人形动作里识别出明显的手脚攻击窗口。你可以先切换到更匹配的角色预览，或手动补帧。";
+            _autoAnalysisStatus = "未找到可直接采用的攻击窗口（证据较弱，或窗口到达已有取消帧）。现有事件未改变。\n"
+                + string.Join("\n", report.warnings);
+            return;
+        }
+
+        // Existing authored hit windows may overlap an inferred window or globally close it.
+        // Appending without a stateful merge would silently change the authored damage pattern.
+        if (!_autoAnalysisReplaceExistingAttackEvents && _workingEvents.Any(e =>
+            SKillAnalyzer.IsNormalAttackStartEvent(e) || SKillAnalyzer.IsNormalAttackClearEvent(e)))
+        {
+            _autoAnalysisStatusType = MessageType.Warning;
+            _autoAnalysisStatus = "已有近战事件。请勾选替换以采用整组候选，或逐帧手动调整；避免与已有攻击/全局清理事件互相干扰。";
             return;
         }
 
         if (_autoAnalysisReplaceExistingAttackEvents)
         {
-            _workingEvents.RemoveAll(x =>
-            {
-                var kind = ClassifyEvent(x);
-                return kind == SkillEventKind.AttackStart || kind == SkillEventKind.AttackClear;
-            });
+            // ClearTargets/EnableMarkers refresh hit state, and are not attack-close events.
+            // Preserve these and all effects, damage settings, sound and other authored events.
+            _workingEvents.RemoveAll(e => SKillAnalyzer.IsNormalAttackStartEvent(e) || SKillAnalyzer.IsNormalAttackClearEvent(e));
         }
 
         var pendingEvents = new List<AnimationEvent>();
-        AnimationEvent lastAdded = null;
-        foreach (var window in windows.OrderBy(x => x.StartFrame).ThenBy(x => x.FunctionName))
+        foreach (var window in windows)
         {
-            var startEvent = CreateBodyPartAttackEvent(FrameToTime(window.StartFrame), window.FunctionName, 1);
-            var endEvent = CreateBodyPartAttackEvent(FrameToTime(window.EndFrame), window.FunctionName, 0);
-            pendingEvents.Add(startEvent);
-            pendingEvents.Add(endEvent);
-            lastAdded = endEvent;
+            pendingEvents.Add(CreateBodyPartAttackEvent(window.startTime, window.functionName, 1));
+            pendingEvents.Add(CreateBodyPartAttackEvent(window.endTime, window.functionName, 0));
         }
-
+        var lastEnd = windows.Max(c => c.endTime);
+        if (cancelEvents.Count == 0)
+        {
+            var recovery = Mathf.Max(frameDuration, Mathf.Min(0.12f, (_editingClip.length - lastEnd) * 0.5f));
+            pendingEvents.Add(CreateCancelEvent(Mathf.Min(_editingClip.length, lastEnd + recovery)));
+        }
         AddEvents(pendingEvents);
-
-        if (lastAdded != null)
-        {
-            _previewTime = lastAdded.time;
-        }
-
-        if (lastAdded != null)
-        {
-            _selectedEventIndex = _workingEvents.IndexOf(lastAdded);
-        }
-
-        _autoAnalysisStatusType = MessageType.Info;
-        _autoAnalysisStatus = $"已自动分析出 {windows.Count} 段人形攻击窗口：{DescribeAutoAnalysisWindows(windows)}。结果尚未保存，请点击上方“保存事件”。";
-    }
-
-    private bool TryBuildAutoAnalysisTracks(out List<AutoAnalysisTrack> tracks, out string error)
-    {
-        tracks = new List<AutoAnalysisTrack>();
-        error = string.Empty;
-
-        if (_editingClip == null)
-        {
-            error = "没有可分析的 AnimationClip。";
-            return false;
-        }
-
-        var frameRate = Mathf.Max(1f, _editingClip.frameRate);
-        var frameCount = Mathf.Max(2, Mathf.CeilToInt(_editingClip.length * frameRate) + 1);
-        var animator = _previewInstance != null ? _previewInstance.GetComponentInChildren<Animator>(true) : null;
-        var root = _previewInstance != null ? _previewInstance.transform : null;
-        var hips = ResolveHumanoidTransform(animator, _previewInstance, HumanBodyBones.Hips, "Hips", "Pelvis");
-
-        AddAutoAnalysisTrack(
-            tracks,
-            frameCount,
-            "右手",
-            "SetRightHandMarkerManager",
-            ResolveHumanoidTransform(animator, _previewInstance, HumanBodyBones.RightHand, "RightHand", "Hand_R", "RHand"),
-            ResolveHumanoidTransform(animator, _previewInstance, HumanBodyBones.RightUpperArm, "RightUpperArm", "UpperArm_R", "RightArm", "RArm") ?? hips ?? root);
-
-        AddAutoAnalysisTrack(
-            tracks,
-            frameCount,
-            "左手",
-            "SetLeftHandMarkerManager",
-            ResolveHumanoidTransform(animator, _previewInstance, HumanBodyBones.LeftHand, "LeftHand", "Hand_L", "LHand"),
-            ResolveHumanoidTransform(animator, _previewInstance, HumanBodyBones.LeftUpperArm, "LeftUpperArm", "UpperArm_L", "LeftArm", "LArm") ?? hips ?? root);
-
-        AddAutoAnalysisTrack(
-            tracks,
-            frameCount,
-            "右脚",
-            "SetRightFootMarkerManager",
-            ResolveHumanoidTransform(animator, _previewInstance, HumanBodyBones.RightFoot, "RightFoot", "Foot_R", "RFoot"),
-            ResolveHumanoidTransform(animator, _previewInstance, HumanBodyBones.RightUpperLeg, "RightUpperLeg", "UpperLeg_R", "RightUpLeg", "RThigh") ?? hips ?? root);
-
-        AddAutoAnalysisTrack(
-            tracks,
-            frameCount,
-            "左脚",
-            "SetLeftFootMarkerManager",
-            ResolveHumanoidTransform(animator, _previewInstance, HumanBodyBones.LeftFoot, "LeftFoot", "Foot_L", "LFoot"),
-            ResolveHumanoidTransform(animator, _previewInstance, HumanBodyBones.LeftUpperLeg, "LeftUpperLeg", "UpperLeg_L", "LeftUpLeg", "LThigh") ?? hips ?? root);
-
-        if (tracks.Count == 0)
-        {
-            error = "当前预览角色上找不到可用的人形手脚骨骼，无法自动判帧。";
-            return false;
-        }
-
-        var sampledTimes = new float[frameCount];
-        try
-        {
-            if (!AnimationMode.InAnimationMode())
-            {
-                AnimationMode.StartAnimationMode();
-            }
-
-            for (var frame = 0; frame < frameCount; frame++)
-            {
-                var time = Mathf.Clamp(frame / frameRate, 0f, _editingClip.length);
-                sampledTimes[frame] = time;
-
-                AnimationMode.BeginSampling();
-                AnimationMode.SampleAnimationClip(_previewInstance, _editingClip, time);
-                AnimationMode.EndSampling();
-
-                for (var i = 0; i < tracks.Count; i++)
-                {
-                    var track = tracks[i];
-                    if (track.Bone == null || track.Reference == null)
-                    {
-                        continue;
-                    }
-
-                    var localPosition = track.Reference.InverseTransformPoint(track.Bone.position);
-                    track.Positions[frame] = localPosition;
-                    track.Reach[frame] = localPosition.magnitude;
-                    if (frame > 0)
-                    {
-                        var deltaTime = Mathf.Max(0.0001f, sampledTimes[frame] - sampledTimes[frame - 1]);
-                        track.Speed[frame] = (localPosition - track.Positions[frame - 1]).magnitude / deltaTime;
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            error = $"自动分析采样失败：{ex.Message}";
-            return false;
-        }
-        finally
-        {
-            if (AnimationMode.InAnimationMode() && _previewInstance != null && _editingClip != null)
-            {
-                AnimationMode.BeginSampling();
-                AnimationMode.SampleAnimationClip(_previewInstance, _editingClip, Mathf.Clamp(_previewTime, 0f, _editingClip.length));
-                AnimationMode.EndSampling();
-            }
-        }
-
-        return true;
-    }
-
-    private static void AddAutoAnalysisTrack(ICollection<AutoAnalysisTrack> tracks, int frameCount, string label, string functionName, Transform bone, Transform reference)
-    {
-        if (tracks == null || bone == null || reference == null)
-        {
-            return;
-        }
-
-        tracks.Add(new AutoAnalysisTrack
-        {
-            Label = label,
-            FunctionName = functionName,
-            Bone = bone,
-            Reference = reference,
-            Positions = new Vector3[frameCount],
-            Reach = new float[frameCount],
-            Speed = new float[frameCount]
-        });
-    }
-
-    private List<AutoAnalysisWindow> DetectHumanoidAttackWindows(IEnumerable<AutoAnalysisTrack> tracks)
-    {
-        var results = new List<AutoAnalysisWindow>();
-        if (tracks == null)
-        {
-            return results;
-        }
-
-        foreach (var track in tracks)
-        {
-            results.AddRange(DetectHumanoidAttackWindows(track));
-        }
-
-        return results.OrderBy(x => x.StartFrame).ThenBy(x => x.FunctionName).ToList();
-    }
-
-    private List<AutoAnalysisWindow> DetectHumanoidAttackWindows(AutoAnalysisTrack track)
-    {
-        var results = new List<AutoAnalysisWindow>();
-        if (track == null || track.Reach == null || track.Speed == null || track.Reach.Length < 3)
-        {
-            return results;
-        }
-
-        var maxSpeed = track.Speed.Max();
-        var minReach = track.Reach.Min();
-        var maxReach = track.Reach.Max();
-        var reachRange = maxReach - minReach;
-        if (maxSpeed < 0.35f || reachRange < 0.05f)
-        {
-            return results;
-        }
-
-        var speedThreshold = Mathf.Max(0.35f, maxSpeed * 0.45f);
-        var reachThreshold = minReach + reachRange * 0.6f;
-        var minGapFrames = Mathf.Max(2, Mathf.RoundToInt(Mathf.Max(1f, _editingClip.frameRate) * 0.08f));
-
-        for (var frame = 1; frame < track.Reach.Length - 1; frame++)
-        {
-            var speedNorm = Mathf.Clamp01(track.Speed[frame] / maxSpeed);
-            var reachNorm = reachRange > 0f ? Mathf.Clamp01((track.Reach[frame] - minReach) / reachRange) : 0f;
-            var score = speedNorm * 0.65f + reachNorm * 0.75f;
-            if (track.Speed[frame] < speedThreshold || track.Reach[frame] < reachThreshold || score < 0.95f)
-            {
-                continue;
-            }
-
-            var prevSpeedNorm = Mathf.Clamp01(track.Speed[frame - 1] / maxSpeed);
-            var prevReachNorm = reachRange > 0f ? Mathf.Clamp01((track.Reach[frame - 1] - minReach) / reachRange) : 0f;
-            var nextSpeedNorm = Mathf.Clamp01(track.Speed[frame + 1] / maxSpeed);
-            var nextReachNorm = reachRange > 0f ? Mathf.Clamp01((track.Reach[frame + 1] - minReach) / reachRange) : 0f;
-            var prevScore = prevSpeedNorm * 0.65f + prevReachNorm * 0.75f;
-            var nextScore = nextSpeedNorm * 0.65f + nextReachNorm * 0.75f;
-            if (score < prevScore || score < nextScore)
-            {
-                continue;
-            }
-
-            var window = BuildAutoAnalysisWindow(track, frame, score);
-            if (results.Count > 0 && window.StartFrame <= results[results.Count - 1].EndFrame + minGapFrames)
-            {
-                if (window.Score > results[results.Count - 1].Score)
-                {
-                    results[results.Count - 1] = window;
-                }
-            }
-            else
-            {
-                results.Add(window);
-            }
-
-            if (results.Count >= AutoAnalysisMaxWindowsPerLimb)
-            {
-                break;
-            }
-        }
-
-        return results;
-    }
-
-    private AutoAnalysisWindow BuildAutoAnalysisWindow(AutoAnalysisTrack track, int peakFrame, float score)
-    {
-        var frameRate = Mathf.Max(1f, _editingClip.frameRate);
-        var minFrames = Mathf.Max(1, Mathf.RoundToInt(frameRate * AutoAnalysisMinActiveTime));
-        var maxFrames = Mathf.Max(minFrames + 1, Mathf.RoundToInt(frameRate * AutoAnalysisMaxActiveTime));
-        var peakReach = Mathf.Max(0.0001f, track.Reach[peakFrame]);
-        var peakSpeed = Mathf.Max(0.0001f, track.Speed[peakFrame]);
-
-        var startFrame = peakFrame;
-        while (startFrame > 0 && peakFrame - startFrame < maxFrames)
-        {
-            var reachRatio = track.Reach[startFrame - 1] / peakReach;
-            var speedRatio = track.Speed[startFrame - 1] / peakSpeed;
-            if (reachRatio < 0.82f && speedRatio < 0.35f)
-            {
-                break;
-            }
-
-            startFrame--;
-        }
-
-        var endFrame = peakFrame;
-        while (endFrame < track.Reach.Length - 1 && endFrame - peakFrame < maxFrames)
-        {
-            var reachRatio = track.Reach[endFrame + 1] / peakReach;
-            var speedRatio = track.Speed[endFrame + 1] / peakSpeed;
-            if (reachRatio < 0.78f && speedRatio < 0.25f)
-            {
-                break;
-            }
-
-            endFrame++;
-        }
-
-        if (endFrame - startFrame < minFrames)
-        {
-            var padding = minFrames - (endFrame - startFrame);
-            startFrame = Mathf.Max(0, startFrame - padding / 2);
-            endFrame = Mathf.Min(track.Reach.Length - 1, endFrame + padding - padding / 2);
-        }
-
-        return new AutoAnalysisWindow
-        {
-            FunctionName = track.FunctionName,
-            StartFrame = startFrame,
-            EndFrame = endFrame,
-            Score = score
-        };
-    }
-
-    private static Transform ResolveHumanoidTransform(Animator animator, GameObject root, HumanBodyBones humanBodyBone, params string[] nameHints)
-    {
-        if (animator != null && animator.avatar != null && animator.avatar.isHuman)
-        {
-            var bone = animator.GetBoneTransform(humanBodyBone);
-            if (bone != null)
-            {
-                return bone;
-            }
-        }
-
-        return FindTransformByHints(root, nameHints);
-    }
-
-    private static Transform FindTransformByHints(GameObject root, params string[] nameHints)
-    {
-        if (root == null || nameHints == null || nameHints.Length == 0)
-        {
-            return null;
-        }
-
-        var transforms = root.GetComponentsInChildren<Transform>(true);
-        var normalizedHints = nameHints
-            .Where(x => !string.IsNullOrWhiteSpace(x))
-            .Select(NormalizeTransformName)
-            .Where(x => !string.IsNullOrEmpty(x))
-            .ToArray();
-
-        if (normalizedHints.Length == 0)
-        {
-            return null;
-        }
-
-        foreach (var hint in normalizedHints)
-        {
-            var exact = transforms.FirstOrDefault(x => NormalizeTransformName(x.name) == hint);
-            if (exact != null)
-            {
-                return exact;
-            }
-        }
-
-        foreach (var hint in normalizedHints)
-        {
-            var partial = transforms.FirstOrDefault(x => NormalizeTransformName(x.name).Contains(hint));
-            if (partial != null)
-            {
-                return partial;
-            }
-        }
-
-        return null;
-    }
-
-    private static string NormalizeTransformName(string value)
-    {
-        if (string.IsNullOrEmpty(value))
-        {
-            return string.Empty;
-        }
-
-        return new string(value.Where(char.IsLetterOrDigit).Select(char.ToLowerInvariant).ToArray());
-    }
-
-    private string DescribeAutoAnalysisWindows(IReadOnlyList<AutoAnalysisWindow> windows)
-    {
-        if (windows == null || windows.Count == 0)
-        {
-            return "无";
-        }
-
-        return string.Join("，", windows.Take(6).Select(x =>
-        {
-            var startTime = FrameToTime(x.StartFrame);
-            var endTime = FrameToTime(x.EndFrame);
-            return $"{GetBodyPartLabel(x.FunctionName)} {startTime:F2}s-{endTime:F2}s";
-        }));
+        var selected = pendingEvents[pendingEvents.Count - 1];
+        _previewTime = selected.time;
+        _selectedEventIndex = _workingEvents.IndexOf(selected);
+        var excludedCount = report.candidates.Count - windows.Count;
+        _autoAnalysisStatusType = excludedCount > 0 ? MessageType.Warning : MessageType.Info;
+        _autoAnalysisStatus = $"已采用 {windows.Count} 段攻击窗口，跳过 {excludedCount} 段低分/重叠/取消帧冲突候选。结果尚未保存。\n"
+            + string.Join("，", windows.Select(c => $"{c.limb} {c.startTime:F2}–{c.endTime:F2}s（{c.confidence:P0}）"))
+            + "\n" + string.Join("\n", report.warnings);
     }
 
     private void AddAttackStartEvent(AnimationEvent animationEvent)
@@ -1575,7 +1236,10 @@ public partial class SKillAnalyzerGUI
         _workingEvents.Sort((a, b) =>
         {
             var timeCompare = a.time.CompareTo(b.time);
-            return timeCompare != 0 ? timeCompare : string.CompareOrdinal(a.functionName, b.functionName);
+            if (timeCompare != 0) return timeCompare;
+            var clearCompare = (SKillAnalyzer.IsNormalAttackClearEvent(a) ? 0 : 1)
+                .CompareTo(SKillAnalyzer.IsNormalAttackClearEvent(b) ? 0 : 1);
+            return clearCompare != 0 ? clearCompare : string.CompareOrdinal(a.functionName, b.functionName);
         });
         _selectedEventIndex = selected != null ? _workingEvents.IndexOf(selected) : -1;
     }

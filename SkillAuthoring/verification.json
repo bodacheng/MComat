@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "action": "verify",
+  "error": "",
+  "recordId": "200",
+  "animationAssetPath": "",
+  "iconAssetPath": "",
+  "validationPerformed": true,
+  "validation": {
+    "valid": true,
+    "attackCount": 1,
+    "estimatedDamage": 1.0,
+    "errors": [],
+    "warnings": []
+  },
+  "tests": [
+    "creation backend read-only validation regression cases",
+    "motion analyzer synthetic regression cases",
+    "two-hit event contract and static attack count",
+    "overlap rejection and deterministic event order",
+    "cancel, finite numbers, receiver and damage type validation",
+    "JSON plan roundtrip",
+    "four CSV rows and consistent skill identity",
+    "FBX subclip clone, unchanged source and exact event timeline",
+    "Addressables addresses, labels and sprite import"
+  ]
+}

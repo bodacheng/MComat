@@ -95,3 +95,4 @@ id,REAL_NAME,USEABLE_MONSTER_TYPE,SP_LEVEL,ATTACK_WEIGHT,HP_WEIGHT,ATTACK_TYPE,E
 86,powersmash,human,0,1,3,GR,
 141,xuanfeng_s,human,1,3,3,GI,
 114,spiralimpact2,human,3,7,3,GI,
+200,baruk_rending_claw,human,0,1,3,GR,

@@ -91,3 +91,4 @@ RECORD_ID,EN_NAME,JP_NAME,CN_NAME,EN_INTRO,JP_INTRO,CN_INTRO
 86,Force-Blocking Punch,レジスタンスフィスト,阻力拳,"Parry an attack, then counter with a punch.",敵の攻撃を受け流し、即座に拳で反撃する。,格挡敌人的攻击后出拳
 141,Energy Spring,エナジースプリング,能量弹簧,Create an energy fountain that bounces enemies upward.,エネルギー噴泉を発生させ敵を跳ね上げる。,制造能量喷泉将敌人弹起
 114,Super Spiral Impact,超螺旋衝撃,超级螺旋冲击,Generate a massive spiral shockwave that pulls enemies in.,強烈な螺旋衝撃波を生み出し敵を巻き込む。,制造一个强烈的螺旋冲击波将敌人卷入其中
+200,Rending Claw,裂き爪,裂爪,Wind up the left claw and rake across the enemy at close range.,左の爪を振りかぶり、近くの敵を薙ぎ払う。,左爪蓄势后横扫近身敌人。

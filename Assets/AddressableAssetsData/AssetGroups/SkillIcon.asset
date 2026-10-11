@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: SkillIcon
   m_EditorClassIdentifier: 
   m_GroupName: SkillIcon
-  m_Data:
-    m_SerializedData: []
   m_GUID: dfa541c633c634069948a3f1e254df25
   m_SerializeEntries:
   - m_GUID: 00234a5fa4c02454c870870e91823068
@@ -61,6 +59,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 14a0e23fa5eaf4b41b9d5a4a57f8a4f3
     m_Address: 170
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - skill_icon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 161841993a7bf4913b8163649cfca275
+    m_Address: 200
     m_ReadOnly: 0
     m_SerializedLabels:
     - skill_icon

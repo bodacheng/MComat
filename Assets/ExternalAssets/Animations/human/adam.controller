@@ -237,7 +237,7 @@ AnimatorController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: adam
-  serializedVersion: 5
+  serializedVersion: 6
   m_AnimatorParameters:
   - m_Name: fullbody_trigger1
     m_Type: 9
@@ -366,6 +366,7 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+  m_EvaluateTransitionsOnStart: 0
 --- !u!114 &114013669284725782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -784,7 +785,7 @@ AnimatorState:
   m_TimeParameter: 
 --- !u!1107 &1107017731515020810
 AnimatorStateMachine:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -814,7 +815,7 @@ AnimatorStateMachine:
   m_DefaultState: {fileID: 1102752360289261782}
 --- !u!1107 &1107688838152118486
 AnimatorStateMachine:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -839,7 +840,7 @@ AnimatorStateMachine:
   m_DefaultState: {fileID: 1102589630761678566}
 --- !u!1107 &3367973193846356823
 AnimatorStateMachine:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}

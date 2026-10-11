@@ -56,6 +56,12 @@ public partial class SKillAnalyzerGUI
     {
         EnsureSkillCreationPanel();
 
+        if (GUILayout.Button("打开动作分析 / Codex JSON 技能生成流程"))
+        {
+            // This partial class is compiled in Assembly-CSharp; resolve the Editor assembly menu entry.
+            EditorApplication.ExecuteMenuItem("Tools/Skill Motion Authoring");
+        }
+
         EditorGUILayout.LabelField("技能制作与添加", EditorStyles.boldLabel);
         EditorGUILayout.HelpBox("当前窗口已整合攻击帧编辑、动画预览和技能条目创建。拖入任意 AnimationClip 后，可直接复用该 Clip 自动填写技能表单。", MessageType.Info);
         DrawSkillCreationBridge();
@@ -117,7 +123,8 @@ public partial class SKillAnalyzerGUI
         }
 
         EnsureSkillCreationPanel();
-        _skillCreationPanel.SyncFromClip(_editingClip, GetSuggestedSkillTypeFromCurrentClip());
+        _skillCreationPanel.SyncFromClip(_editingClip, GetSuggestedSkillTypeFromCurrentClip(),
+            _hasUnsavedEventChanges ? _workingEvents.ToArray() : null);
     }
 
     private void OnEditingClipChanged()
@@ -155,6 +162,10 @@ public partial class SKillAnalyzerGUI
         }
 
         var normalized = assetPath.Replace("\\", "/");
+        if (!normalized.StartsWith("Assets/ExternalAssets/Animations/", System.StringComparison.Ordinal))
+        {
+            return string.Empty;
+        }
         var parts = normalized.Split('/');
         for (var i = 0; i < parts.Length - 1; i++)
         {

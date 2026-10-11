@@ -13,12 +13,16 @@ MonoBehaviour:
   m_Name: SkillAnim
   m_EditorClassIdentifier: 
   m_GroupName: SkillAnim
-  m_Data:
-    m_SerializedData: []
   m_GUID: 0585100253e4349a6a5d57cdf17ea8e4
   m_SerializeEntries:
   - m_GUID: c86ff6baed6d742bda54900c40d12400
     m_Address: e_dragon/skill
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - skill_anim
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d872252c1a95d497fa23389827a26ae0
+    m_Address: human/skill/baruk_rending_claw.anim
     m_ReadOnly: 0
     m_SerializedLabels:
     - skill_anim

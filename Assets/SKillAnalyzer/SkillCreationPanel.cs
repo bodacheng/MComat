@@ -82,6 +82,7 @@ public class SkillCreationPanel
     private Texture2D _iconTemplate;
     private bool _createAnimationAsset = true;
     private AnimationClip _animationTemplate;
+    private AnimationEvent[] _animationEvents;
     private bool _registerAddressables = true;
     private Color _placeholderIconColor = new Color32(78, 88, 110, 255);
 
@@ -182,7 +183,7 @@ public class SkillCreationPanel
         }
     }
 
-    public void SyncFromClip(AnimationClip clip, string suggestedType)
+    public void SyncFromClip(AnimationClip clip, string suggestedType, AnimationEvent[] draftEvents = null)
     {
         Initialize();
         if (clip == null)
@@ -218,10 +219,19 @@ public class SkillCreationPanel
         ApplyTypeSelection(resolvedType);
         _createAnimationAsset = true;
         _animationTemplate = clip;
+        // The workbench may hold unsaved events for an imported FBX subclip.
+        // Carry that draft into the newly created animation instead of silently discarding it.
+        _animationEvents = draftEvents;
+        if (draftEvents != null)
+        {
+            _attackCount = Math.Max(1, draftEvents.Count(SKillAnalyzer.IsAttackStartEvent));
+            _estimatedDamage = _attackCount * _attackWeight;
+        }
         EvaluateResourceAvailability();
 
         _messageType = MessageType.Info;
-        _message = $"已根据 Clip `{clip.name}` 自动填充技能创建表单。";
+        _message = $"已根据 Clip `{clip.name}` 自动填充技能创建表单。"
+            + (draftEvents != null ? "未保存的事件草稿会写入新动画；请使用新的 REAL_NAME。" : string.Empty);
     }
 
     private void DrawIdSection()
@@ -318,7 +328,9 @@ public class SkillCreationPanel
 
             _createAnimationAsset = EditorGUILayout.ToggleLeft("自动生成/复制技能动画", _createAnimationAsset);
             EditorGUI.BeginDisabledGroup(!_createAnimationAsset);
+            EditorGUI.BeginChangeCheck();
             _animationTemplate = EditorGUILayout.ObjectField("动画模板（可选）", _animationTemplate, typeof(AnimationClip), false) as AnimationClip;
+            if (EditorGUI.EndChangeCheck()) _animationEvents = null;
             EditorGUI.EndDisabledGroup();
 
             EditorGUILayout.Space();
@@ -358,61 +370,208 @@ public class SkillCreationPanel
         }
     }
 
+    /// <summary>
+    /// Creates a complete skill using the same transaction as the editor form.
+    /// Call on Unity's main thread. Throws on validation or creation failure.
+    /// </summary>
+    public static SkillCreationResult Create(SkillCreationRequest request)
+    {
+        return FromRequest(request).CreateSkillTransaction();
+    }
+
+    /// <summary>Checks a request against the current project without writing any files.</summary>
+    public static string ValidateRequest(SkillCreationRequest request)
+    {
+        try
+        {
+            var panel = FromRequest(request);
+            panel.RefreshIdsForCreation();
+            panel.EvaluateResourceAvailability();
+            return panel.ValidateInputs(panel.GetCandidateId());
+        }
+        catch (Exception ex)
+        {
+            return ex.Message;
+        }
+    }
+
+    private static SkillCreationPanel FromRequest(SkillCreationRequest request)
+    {
+        if (request == null)
+        {
+            throw new ArgumentNullException(nameof(request));
+        }
+
+        var panel = new SkillCreationPanel
+        {
+            _autoId = request.autoId,
+            _recordId = request.recordId,
+            _type = request.type,
+            _realName = request.realName,
+            _behaviorType = request.behaviorType,
+            _spLevel = request.spLevel,
+            _attackWeight = request.attackWeight,
+            _hpWeight = request.hpWeight,
+            _eventCode = request.eventCode,
+            _allowSharedRealName = request.allowSharedRealName,
+            _aiMin = request.aiMin,
+            _aiMax = request.aiMax,
+            _aiHeight = request.aiHeight,
+            _enName = request.enName,
+            _jpName = request.jpName,
+            _cnName = request.cnName,
+            _enIntro = request.enIntro,
+            _jpIntro = request.jpIntro,
+            _cnIntro = request.cnIntro,
+            _estimatedDamage = request.estimatedDamage,
+            _attackCount = request.attackCount,
+            _estimatedHp = request.estimatedHp,
+            _createIconAsset = request.createIconAsset,
+            _iconTemplate = request.iconTemplate,
+            _createAnimationAsset = request.createAnimationAsset,
+            _animationTemplate = request.animationTemplate,
+            _animationEvents = request.animationEvents,
+            _registerAddressables = request.registerAddressables,
+            _placeholderIconColor = request.placeholderIconColor
+        };
+        return panel;
+    }
+
     private void CreateSkillEntry()
     {
+        try
+        {
+            var result = CreateSkillTransaction();
+            ReloadSourceData();
+            ClearForm();
+            EvaluateResourceAvailability();
+            _messageType = MessageType.Info;
+            _message = $"已新增技能 {result.recordId}：CSV、资源骨架和 Addressables 已同步。";
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"SkillCreationPanel 创建技能失败: {ex}");
+            _messageType = MessageType.Error;
+            _message = ex.Message;
+        }
+    }
+
+    private SkillCreationResult CreateSkillTransaction()
+    {
+        // Re-read every table at commit time: the form may have been open while another
+        // tool added a skill, and auxiliary tables may contain IDs absent from mst_skill.
+        RefreshIdsForCreation();
         var candidateId = GetCandidateId();
         EvaluateResourceAvailability();
-
         var validationMessage = ValidateInputs(candidateId);
         if (!string.IsNullOrEmpty(validationMessage))
         {
-            _messageType = MessageType.Error;
-            _message = validationMessage;
-            return;
+            throw new ArgumentException(validationMessage);
         }
 
         var realName = (_realName ?? string.Empty).Trim();
         var type = (_type ?? string.Empty).Trim();
         var iconPath = ResolveIconAssetPath(candidateId);
         var animationPath = ResolveAnimationAssetPath();
-
         var csvBackups = BackupCsvFiles();
         var createdAssets = new List<string>();
         var addressableBackups = new List<AddressableEntryBackup>();
+        var settings = _registerAddressables ? AddressableAssetSettingsDefaultObject.Settings : null;
+        var originalLabels = settings != null ? settings.GetLabels().ToArray() : Array.Empty<string>();
 
         try
         {
             CreateOrReuseIcon(iconPath, createdAssets);
             CreateOrReuseAnimation(animationPath, createdAssets);
-
             if (_registerAddressables)
             {
-                RegisterAssetToAddressables(iconPath, SkillIconGroupName, candidateId, Array.Empty<string>(), addressableBackups);
+                RegisterAssetToAddressables(iconPath, SkillIconGroupName, candidateId, new[] { AddressablesResourcePolicy.SkillIconLabel }, addressableBackups);
                 RegisterAssetToAddressables(animationPath, SkillAnimationGroupName, BuildAnimationAddress(type, realName), new[] { SkillAnimationLabel }, addressableBackups);
             }
 
             AppendSkillRows(candidateId, realName, type);
-
-            AssetDatabase.SaveAssets();
+            SaveAddressableChanges(addressableBackups);
+            foreach (var path in createdAssets)
+            {
+                var asset = AssetDatabase.LoadMainAssetAtPath(path);
+                if (asset != null)
+                {
+                    AssetDatabase.SaveAssetIfDirty(asset);
+                }
+            }
             AssetDatabase.Refresh();
+            return new SkillCreationResult
+            {
+                recordId = candidateId,
+                iconAssetPath = iconPath,
+                animationAssetPath = animationPath,
+                animationAddress = BuildAnimationAddress(type, realName)
+            };
+        }
+        catch (Exception creationError)
+        {
+            // Attempt every part of rollback even if one part itself fails.
+            var rollbackErrors = new List<Exception>();
+            AttemptRollback(() => RestoreCsvFiles(csvBackups), rollbackErrors);
+            AttemptRollback(() => RestoreAddressableEntries(addressableBackups, originalLabels), rollbackErrors);
+            AttemptRollback(() => DeleteCreatedAssets(createdAssets), rollbackErrors);
+            AttemptRollback(() => AssetDatabase.Refresh(), rollbackErrors);
+            if (rollbackErrors.Count > 0)
+            {
+                rollbackErrors.Insert(0, creationError);
+                throw new AggregateException("创建技能失败；部分回滚失败，请查看内部异常。", rollbackErrors);
+            }
+            throw new InvalidOperationException($"创建技能失败，已执行回滚：{creationError.Message}", creationError);
+        }
+    }
 
-            ReloadSourceData();
-            ClearForm();
-            EvaluateResourceAvailability();
-
-            _messageType = MessageType.Info;
-            _message = $"已新增技能 {candidateId}：CSV、资源骨架和 Addressables 已同步。";
+    private static void AttemptRollback(Action rollback, ICollection<Exception> errors)
+    {
+        try
+        {
+            rollback();
         }
         catch (Exception ex)
         {
-            RestoreCsvFiles(csvBackups);
-            RestoreAddressableEntries(addressableBackups);
-            DeleteCreatedAssets(createdAssets);
-            AssetDatabase.Refresh();
+            errors.Add(ex);
+        }
+    }
 
-            Debug.LogError($"SkillCreationPanel 创建技能失败: {ex}");
-            _messageType = MessageType.Error;
-            _message = $"创建技能失败，已执行回滚：{ex.Message}";
+    private void RefreshIdsForCreation()
+    {
+        _existingIds.Clear();
+        _maxRecordId = 0;
+        var expectedColumns = new[] { 8, 4, 7, 6 };
+        for (var table = 0; table < RequiredCsvPaths.Length; table++)
+        {
+            var path = RequiredCsvPaths[table];
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException($"缺少技能配置表：{path}", path);
+            }
+            var grid = CsvParser2.Parse(File.ReadAllText(path));
+            if (grid.Length == 0 || grid[0].Length != expectedColumns[table]
+                || !(string.Equals(grid[0][0].Trim(), "id", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(grid[0][0].Trim(), "RECORD_ID", StringComparison.OrdinalIgnoreCase)))
+            {
+                throw new InvalidDataException($"技能配置表表头不匹配：{path}");
+            }
+            for (var i = 1; i < grid.Length; i++)
+            {
+                if (grid[i].Length == 0 || string.IsNullOrWhiteSpace(grid[i][0]))
+                {
+                    continue;
+                }
+                if (int.TryParse(grid[i][0].Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture, out var id) && id > 0)
+                {
+                    _existingIds.Add(id.ToString(CultureInfo.InvariantCulture));
+                    _maxRecordId = Math.Max(_maxRecordId, id);
+                }
+            }
+        }
+        if (_autoId && _maxRecordId == int.MaxValue)
+        {
+            throw new InvalidOperationException("技能 ID 已达到最大值，无法自动递增。");
         }
     }
 
@@ -484,9 +643,13 @@ public class SkillCreationPanel
         {
             issues.Add("Record ID 必须是正整数。");
         }
+        else if (parsedId.ToString(CultureInfo.InvariantCulture) != candidateId)
+        {
+            issues.Add("Record ID 必须使用不含前导零或符号的十进制正整数。");
+        }
         else if (_existingIds.Contains(candidateId))
         {
-            issues.Add($"Record ID {candidateId} 已存在于 mst_skill.csv。");
+            issues.Add($"Record ID {candidateId} 已存在于技能配置表。");
         }
 
         if (CsvContainsId(SkillAiCsvPath, candidateId))
@@ -507,14 +670,55 @@ public class SkillCreationPanel
         var realName = (_realName ?? string.Empty).Trim();
         var type = (_type ?? string.Empty).Trim();
 
-        if (string.IsNullOrEmpty(realName))
+        if (!IsSafeAssetName(realName))
         {
-            issues.Add("REAL_NAME（动画名）不能为空。");
+            issues.Add("REAL_NAME 必须是安全的单个文件名，不能包含路径分隔符、控制字符或保留字符。");
         }
 
-        if (string.IsNullOrEmpty(type))
+        if (!IsSafeAssetName(type))
         {
-            issues.Add("USEABLE_MONSTER_TYPE 不能为空。");
+            issues.Add("USEABLE_MONSTER_TYPE 必须是安全的单个目录名。");
+        }
+        if (!BehaviorTypeOptions.Contains(_behaviorType))
+        {
+            issues.Add("技能行为类型无效。");
+        }
+        if (_spLevel < 0 || _spLevel > 3)
+        {
+            issues.Add("SP_LEVEL 必须在 0 到 3 之间。");
+        }
+        if (_aiHeight < -1 || _aiHeight > 2)
+        {
+            issues.Add("TRIGGER_HEIGHT 必须在 -1 到 2 之间。");
+        }
+        if (new[] { _attackWeight, _hpWeight, _aiMin, _aiMax, _estimatedDamage, _estimatedHp,
+            _placeholderIconColor.r, _placeholderIconColor.g, _placeholderIconColor.b, _placeholderIconColor.a }.Any(value => !IsFinite(value)))
+        {
+            issues.Add("数值参数必须是有限数，不能为 NaN 或 Infinity。");
+        }
+        if (_aiMin < 0f || _aiMax < 0f || _estimatedDamage < 0f || _estimatedHp < 0f)
+        {
+            issues.Add("AI 距离、估算攻击力及 HP 权重不能为负数。");
+        }
+        if (_animationEvents != null)
+        {
+            if (_animationExists || !_createAnimationAsset || _animationTemplate == null)
+            {
+                issues.Add("提供动画事件时必须从动画模板创建全新动画，不能修改或复用已有动画。");
+            }
+            else
+            {
+                foreach (var animationEvent in _animationEvents)
+                {
+                    if (animationEvent == null || !IsFinite(animationEvent.time) || !IsFinite(animationEvent.floatParameter)
+                        || animationEvent.time < 0f || animationEvent.time > _animationTemplate.length
+                        || string.IsNullOrWhiteSpace(animationEvent.functionName))
+                    {
+                        issues.Add("动画事件必须具有有效函数名、有限参数，且时间位于模板片段范围内。");
+                        break;
+                    }
+                }
+            }
         }
 
         if (!_allowSharedRealName && CsvContainsTypeAndRealName(SkillConfigCsvPath, type, realName))
@@ -570,7 +774,18 @@ public class SkillCreationPanel
                 {
                     issues.Add($"未找到 Addressables 分组 `{SkillAnimationGroupName}`。");
                 }
+                ValidateAddressCollision(settings, ResolveIconAssetPath(candidateId), candidateId, issues);
+                ValidateAddressCollision(settings, ResolveAnimationAssetPath(), BuildAnimationAddress(type, realName), issues);
             }
+        }
+
+        if (!_iconExists && AssetPathOccupied(ResolveIconAssetPath(candidateId)))
+        {
+            issues.Add("目标图标路径已被其他文件或资源占用。");
+        }
+        if (!_animationExists && AssetPathOccupied(ResolveAnimationAssetPath()))
+        {
+            issues.Add("目标动画路径已被其他文件或资源占用。");
         }
 
         if (issues.Count == 0 && _autoId)
@@ -579,6 +794,49 @@ public class SkillCreationPanel
         }
 
         return issues.Count == 0 ? string.Empty : string.Join("\n", issues);
+    }
+
+    private static bool IsFinite(float value)
+    {
+        return !float.IsNaN(value) && !float.IsInfinity(value);
+    }
+
+    private static bool IsSafeAssetName(string value)
+    {
+        return !string.IsNullOrWhiteSpace(value) && value != "." && value != ".."
+            && value.Length <= 120 && !value.EndsWith(".", StringComparison.Ordinal)
+            && value.IndexOfAny(new[] { '/', '\\', ':', '*', '?', '"', '<', '>', '|' }) < 0
+            && !value.Any(char.IsControl);
+    }
+
+    private static bool AssetPathOccupied(string path)
+    {
+        return !string.IsNullOrEmpty(path) && (File.Exists(path) || Directory.Exists(path)
+            || File.Exists(path + ".meta") || !string.IsNullOrEmpty(AssetDatabase.AssetPathToGUID(path)));
+    }
+
+    private static void ValidateAddressCollision(AddressableAssetSettings settings, string assetPath, string address, ICollection<string> issues)
+    {
+        var guid = AssetDatabase.AssetPathToGUID(assetPath);
+        foreach (var group in settings.groups)
+        {
+            if (group == null)
+            {
+                continue;
+            }
+            foreach (var entry in group.entries)
+            {
+                if (entry.address == address && entry.guid != guid)
+                {
+                    issues.Add($"Addressables 地址 `{address}` 已被资源 `{entry.AssetPath}` 占用。");
+                }
+            }
+        }
+        var existingEntry = string.IsNullOrEmpty(guid) ? null : settings.FindAssetEntry(guid);
+        if (existingEntry != null && existingEntry.address != address)
+        {
+            issues.Add($"复用资源 `{assetPath}` 已使用另一个 Addressables 地址 `{existingEntry.address}`，不能改写。");
+        }
     }
 
     private void ReloadSourceData()
@@ -691,6 +949,7 @@ public class SkillCreationPanel
         _iconTemplate = null;
         _createAnimationAsset = true;
         _animationTemplate = null;
+        _animationEvents = null;
         _registerAddressables = true;
         _placeholderIconColor = new Color32(78, 88, 110, 255);
 
@@ -862,19 +1121,19 @@ public class SkillCreationPanel
             throw new InvalidOperationException("无法确定技能图标路径。");
         }
 
-        EnsureAssetFolder(targetPath);
-        if (File.Exists(targetPath))
+        if (AssetPathOccupied(targetPath))
         {
-            ConfigureTextureAsSprite(targetPath);
-            return;
+            throw new IOException($"图标目标路径已存在：{targetPath}");
         }
-
+        EnsureAssetFolder(targetPath, createdAssets);
+        // Track before writing: CopyAsset/import can leave partial files on failure.
+        createdAssets.Add(targetPath);
         if (_iconTemplate != null)
         {
             var templatePath = AssetDatabase.GetAssetPath(_iconTemplate);
-            if (string.IsNullOrEmpty(templatePath))
+            if (string.IsNullOrEmpty(templatePath) || !(AssetImporter.GetAtPath(templatePath) is TextureImporter))
             {
-                throw new InvalidOperationException("图标模板路径无效。");
+                throw new InvalidOperationException("图标模板必须是已导入的图像文件。");
             }
 
             if (!AssetDatabase.CopyAsset(templatePath, targetPath))
@@ -887,7 +1146,6 @@ public class SkillCreationPanel
             CreatePlaceholderIcon(targetPath, _placeholderIconColor);
         }
 
-        createdAssets.Add(targetPath);
         AssetDatabase.ImportAsset(targetPath, ImportAssetOptions.ForceSynchronousImport);
         ConfigureTextureAsSprite(targetPath);
     }
@@ -904,32 +1162,43 @@ public class SkillCreationPanel
             throw new InvalidOperationException("无法确定技能动画路径。");
         }
 
-        EnsureAssetFolder(targetPath);
-        if (File.Exists(targetPath))
+        if (AssetPathOccupied(targetPath))
         {
-            return;
+            throw new IOException($"动画目标路径已存在：{targetPath}");
         }
-
-        if (_animationTemplate != null)
-        {
-            var templatePath = AssetDatabase.GetAssetPath(_animationTemplate);
-            if (string.IsNullOrEmpty(templatePath))
-            {
-                throw new InvalidOperationException("动画模板路径无效。");
-            }
-
-            if (!AssetDatabase.CopyAsset(templatePath, targetPath))
-            {
-                throw new IOException($"复制动画模板失败：{templatePath} -> {targetPath}");
-            }
-        }
-        else
-        {
-            AssetDatabase.CreateAsset(new AnimationClip(), targetPath);
-        }
-
+        EnsureAssetFolder(targetPath, createdAssets);
         createdAssets.Add(targetPath);
-        AssetDatabase.ImportAsset(targetPath, ImportAssetOptions.ForceSynchronousImport);
+        AnimationClip clone = null;
+        try
+        {
+            // FBX files can contain several clips. Clone the selected subasset, never
+            // CopyAsset its containing model into an .anim file.
+            clone = _animationTemplate != null
+                ? UnityEngine.Object.Instantiate(_animationTemplate)
+                : new AnimationClip();
+            clone.name = (_realName ?? string.Empty).Trim();
+            clone.hideFlags = HideFlags.None;
+            if (_animationEvents != null)
+            {
+                AnimationUtility.SetAnimationEvents(clone, _animationEvents);
+                var clipSettings = AnimationUtility.GetAnimationClipSettings(clone);
+                clipSettings.loopTime = false;
+                AnimationUtility.SetAnimationClipSettings(clone, clipSettings);
+            }
+            AssetDatabase.CreateAsset(clone, targetPath);
+            AssetDatabase.ImportAsset(targetPath, ImportAssetOptions.ForceSynchronousImport);
+            if (AssetDatabase.LoadAssetAtPath<AnimationClip>(targetPath) == null)
+            {
+                throw new IOException($"生成的动画无法加载：{targetPath}");
+            }
+        }
+        finally
+        {
+            if (clone != null && !EditorUtility.IsPersistent(clone))
+            {
+                UnityEngine.Object.DestroyImmediate(clone);
+            }
+        }
     }
 
     private void RegisterAssetToAddressables(string assetPath, string groupName, string address, IEnumerable<string> labels, ICollection<AddressableEntryBackup> backups)
@@ -952,6 +1221,13 @@ public class SkillCreationPanel
             throw new InvalidOperationException($"资源尚未被 Unity 导入：{assetPath}");
         }
 
+        var collisionIssues = new List<string>();
+        ValidateAddressCollision(settings, assetPath, address, collisionIssues);
+        if (collisionIssues.Count > 0)
+        {
+            throw new InvalidOperationException(string.Join("\n", collisionIssues));
+        }
+        var oldGroup = settings.FindAssetEntry(guid)?.parentGroup;
         backups.Add(CreateAddressableBackup(settings, guid));
 
         var entry = settings.CreateOrMoveEntry(guid, group, false, false);
@@ -972,6 +1248,10 @@ public class SkillCreationPanel
             entry.SetLabel(label, true, true, false);
         }
 
+        if (oldGroup != null)
+        {
+            EditorUtility.SetDirty(oldGroup);
+        }
         EditorUtility.SetDirty(group);
         EditorUtility.SetDirty(settings);
     }
@@ -998,110 +1278,171 @@ public class SkillCreationPanel
         };
     }
 
-    private static void RestoreAddressableEntries(IEnumerable<AddressableEntryBackup> backups)
+    private static void RestoreAddressableEntries(IReadOnlyCollection<AddressableEntryBackup> backups, IEnumerable<string> originalLabels)
     {
-        var settings = AddressableAssetSettingsDefaultObject.Settings;
-        if (settings == null)
+        if (backups.Count == 0)
         {
             return;
         }
-
+        var settings = AddressableAssetSettingsDefaultObject.Settings;
+        if (settings == null)
+        {
+            throw new InvalidOperationException("回滚时 AddressableAssetSettings 不存在。");
+        }
+        var errors = new List<Exception>();
         foreach (var backup in backups.Reverse())
         {
-            if (backup == null || string.IsNullOrEmpty(backup.Guid))
+            AttemptRollback(() =>
             {
-                continue;
-            }
-
-            if (!backup.Existed)
-            {
-                settings.RemoveAssetEntry(backup.Guid, false);
-                continue;
-            }
-
-            var group = settings.FindGroup(backup.GroupName);
-            if (group == null)
-            {
-                continue;
-            }
-
-            var entry = settings.CreateOrMoveEntry(backup.Guid, group, false, false);
-            if (entry == null)
-            {
-                continue;
-            }
-
-            entry.SetAddress(backup.Address, false);
-            foreach (var label in entry.labels.ToList())
-            {
-                entry.SetLabel(label, false, false, false);
-            }
-
-            foreach (var label in backup.Labels)
-            {
-                entry.SetLabel(label, true, true, false);
-            }
+                var currentGroup = settings.FindAssetEntry(backup.Guid)?.parentGroup;
+                if (currentGroup != null)
+                {
+                    EditorUtility.SetDirty(currentGroup);
+                }
+                if (!backup.Existed)
+                {
+                    settings.RemoveAssetEntry(backup.Guid, false);
+                    return;
+                }
+                var group = settings.FindGroup(backup.GroupName);
+                if (group == null)
+                {
+                    throw new InvalidOperationException($"无法恢复 Addressables 分组：{backup.GroupName}");
+                }
+                var entry = settings.CreateOrMoveEntry(backup.Guid, group, false, false);
+                if (entry == null)
+                {
+                    throw new InvalidOperationException($"无法恢复 Addressables 条目：{backup.Guid}");
+                }
+                entry.SetAddress(backup.Address, false);
+                foreach (var label in entry.labels.ToList())
+                {
+                    entry.SetLabel(label, false, false, false);
+                }
+                foreach (var label in backup.Labels)
+                {
+                    entry.SetLabel(label, true, true, false);
+                }
+                EditorUtility.SetDirty(group);
+            }, errors);
         }
-
+        foreach (var label in settings.GetLabels().Except(originalLabels).ToArray())
+        {
+            AttemptRollback(() => settings.RemoveLabel(label, false), errors);
+        }
         EditorUtility.SetDirty(settings);
-        AssetDatabase.SaveAssets();
+        AttemptRollback(() => SaveAddressableChanges(backups), errors);
+        if (errors.Count > 0)
+        {
+            throw new AggregateException("恢复 Addressables 失败。", errors);
+        }
     }
 
-    private static Dictionary<string, string> BackupCsvFiles()
+    private static void SaveAddressableChanges(IEnumerable<AddressableEntryBackup> backups)
     {
-        var backups = new Dictionary<string, string>();
+        var entries = backups.ToArray();
+        if (entries.Length == 0)
+        {
+            return;
+        }
+        var settings = AddressableAssetSettingsDefaultObject.Settings;
+        if (settings == null)
+        {
+            throw new InvalidOperationException("AddressableAssetSettings 不存在。");
+        }
+        var groupNames = entries.Select(x => x.GroupName)
+            .Concat(new[] { SkillIconGroupName, SkillAnimationGroupName }).Distinct();
+        foreach (var groupName in groupNames)
+        {
+            var group = settings.FindGroup(groupName);
+            if (group != null)
+            {
+                AssetDatabase.SaveAssetIfDirty(group);
+            }
+        }
+        AssetDatabase.SaveAssetIfDirty(settings);
+    }
+
+    private static Dictionary<string, byte[]> BackupCsvFiles()
+    {
+        var backups = new Dictionary<string, byte[]>();
         foreach (var path in RequiredCsvPaths)
         {
-            backups[path] = File.Exists(path) ? File.ReadAllText(path) : null;
+            backups[path] = File.Exists(path) ? File.ReadAllBytes(path) : null;
         }
-
         return backups;
     }
 
-    private static void RestoreCsvFiles(IReadOnlyDictionary<string, string> backups)
+    private static void RestoreCsvFiles(IReadOnlyDictionary<string, byte[]> backups)
     {
+        var errors = new List<Exception>();
         foreach (var pair in backups)
         {
-            if (pair.Value == null)
+            AttemptRollback(() =>
             {
-                if (File.Exists(pair.Key))
+                if (pair.Value == null)
                 {
-                    File.Delete(pair.Key);
+                    if (File.Exists(pair.Key))
+                    {
+                        File.Delete(pair.Key);
+                    }
                 }
-                continue;
-            }
-
-            File.WriteAllText(pair.Key, pair.Value, new UTF8Encoding(false));
+                else
+                {
+                    File.WriteAllBytes(pair.Key, pair.Value);
+                }
+            }, errors);
+        }
+        if (errors.Count > 0)
+        {
+            throw new AggregateException("恢复 CSV 失败。", errors);
         }
     }
 
     private static void DeleteCreatedAssets(IEnumerable<string> createdAssets)
     {
+        var errors = new List<Exception>();
         foreach (var assetPath in createdAssets.Reverse())
         {
-            if (string.IsNullOrEmpty(assetPath))
+            AttemptRollback(() =>
             {
-                continue;
-            }
-
-            AssetDatabase.DeleteAsset(assetPath);
+                if (AssetDatabase.DeleteAsset(assetPath))
+                {
+                    return;
+                }
+                // A failed import may have left files unknown to AssetDatabase.
+                if (File.Exists(assetPath))
+                {
+                    File.Delete(assetPath);
+                }
+                if (Directory.Exists(assetPath))
+                {
+                    Directory.Delete(assetPath, false);
+                }
+                if (File.Exists(assetPath + ".meta"))
+                {
+                    File.Delete(assetPath + ".meta");
+                }
+            }, errors);
+        }
+        if (errors.Count > 0)
+        {
+            throw new AggregateException("删除生成资源失败。", errors);
         }
     }
 
-    private static void EnsureAssetFolder(string assetPath)
+    private static void EnsureAssetFolder(string assetPath, ICollection<string> createdAssets)
     {
         var directoryPath = Path.GetDirectoryName(assetPath);
         if (string.IsNullOrEmpty(directoryPath))
         {
             return;
         }
-
         var normalized = directoryPath.Replace("\\", "/");
         if (AssetDatabase.IsValidFolder(normalized))
         {
             return;
         }
-
         var segments = normalized.Split('/');
         var current = segments[0];
         for (var i = 1; i < segments.Length; i++)
@@ -1109,9 +1450,16 @@ public class SkillCreationPanel
             var next = $"{current}/{segments[i]}";
             if (!AssetDatabase.IsValidFolder(next))
             {
-                AssetDatabase.CreateFolder(current, segments[i]);
+                if (AssetPathOccupied(next))
+                {
+                    throw new IOException($"目标目录路径已被占用：{next}");
+                }
+                createdAssets.Add(next);
+                if (string.IsNullOrEmpty(AssetDatabase.CreateFolder(current, segments[i])))
+                {
+                    throw new IOException($"创建目录失败：{next}");
+                }
             }
-
             current = next;
         }
     }
@@ -1274,8 +1622,13 @@ public class SkillCreationPanel
         }
 
         var needsLineBreak = false;
+        var newLine = CsvNewLine;
         if (File.Exists(path))
         {
+            var existingText = File.ReadAllText(path);
+            var firstNewLine = existingText.IndexOf('\n');
+            if (firstNewLine >= 0)
+                newLine = firstNewLine > 0 && existingText[firstNewLine - 1] == '\r' ? "\r\n" : "\n";
             using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 if (stream.Length > 0)
@@ -1290,11 +1643,11 @@ public class SkillCreationPanel
         {
             if (needsLineBreak)
             {
-                writer.Write(CsvNewLine);
+                writer.Write(newLine);
             }
 
             writer.Write(row);
-            writer.Write(CsvNewLine);
+            writer.Write(newLine);
         }
     }
 
@@ -1440,22 +1793,6 @@ public class SkillCreationPanel
             note = $"默认路径未命中：{expectedPath}";
         }
 
-        var guids = AssetDatabase.FindAssets($"{realName} t:AnimationClip");
-        foreach (var guid in guids)
-        {
-            var path = AssetDatabase.GUIDToAssetPath(guid);
-            if (Path.GetFileNameWithoutExtension(path).Equals(realName, StringComparison.OrdinalIgnoreCase))
-            {
-                assetPath = path;
-                if (!string.IsNullOrWhiteSpace(type))
-                {
-                    note = $"在其他路径找到同名动画：{assetPath}";
-                }
-
-                return true;
-            }
-        }
-
         if (string.IsNullOrEmpty(note))
         {
             note = "未找到匹配的动画资源。";
@@ -1478,6 +1815,7 @@ public class SkillCreationPanel
         }
 
         var normalized = assetPath.Replace("\\", "/");
+        if (!normalized.StartsWith(SkillAnimationRoot + "/", StringComparison.Ordinal)) return string.Empty;
         var parts = normalized.Split('/');
         for (var i = 0; i < parts.Length - 1; i++)
         {
