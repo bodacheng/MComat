@@ -18,7 +18,7 @@ MonoBehaviour:
     Hash: d8f3c2ee1b6b2c152c81ca963d3e0b34
   m_ExtractTypeTreeData: 0
   m_OptimizeCatalogSize: 0
-  m_BuildRemoteCatalog: 1
+  m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 10
   m_DisableCatalogUpdateOnStart: 1
   m_InternalIdNamingMode: 0
