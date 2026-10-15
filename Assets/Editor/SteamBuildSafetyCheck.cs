@@ -4,10 +4,12 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
+using UnityEngine;
 
 public sealed class SteamBuildSafetyCheck : IPreprocessBuildWithReport
 {
     static readonly string ExpectedSteamAppId = SteamManager.AppId.ToString();
+    const string RequiredUnityVersion = "6000.5.11f1";
     const string PlayFabSettingsPath = "Assets/PlayFabSDK/Shared/Public/Resources/PlayFabSharedSettings.asset";
 
     static readonly string[] ForbiddenDefines =
@@ -26,9 +28,21 @@ public sealed class SteamBuildSafetyCheck : IPreprocessBuildWithReport
             return;
         }
 
+        ValidateUnityVersion();
         ValidateStandaloneDefines();
         ValidatePlayFabSecret();
         ValidateSteamAppId();
+    }
+
+    static void ValidateUnityVersion()
+    {
+        // Older 6000.5 players can crash during Windows UI Automation shutdown.
+        if (Application.unityVersion != RequiredUnityVersion)
+        {
+            throw new BuildFailedException(
+                "Steam player must be built with Unity " + RequiredUnityVersion +
+                " (current: " + Application.unityVersion + ").");
+        }
     }
 
     static void ValidateStandaloneDefines()

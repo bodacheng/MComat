@@ -10858,7 +10858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 3000649885118306575}
   displayRawImage: {fileID: 826013948}
-  screenScale: 8
+  screenScale: 1
   initOnAwake: 1
   dontDestroyOnLoad: 0
 --- !u!1 &3000649885559932594
