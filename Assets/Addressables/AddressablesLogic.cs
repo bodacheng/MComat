@@ -27,17 +27,16 @@ public static class AddressablesLogic
         return AddressablesAssetLoader.HasIndexedTag(tag);
     }
 
-    public static async UniTask<bool> VersionConfirm()
+    public static async UniTask<bool> VersionConfirm(CancellationToken cancellationToken = default)
     {
-        if (!await DownLoadMission(AddressablesResourcePolicy.AppVersionKey, _ => { }))
+        if (!await DownLoadMission(AddressablesResourcePolicy.AppVersionKey, _ => { }, cancellationToken))
         {
             throw new InvalidOperationException("The program version could not be downloaded.");
         }
         AsyncOperationHandle<TextAsset> handle = Addressables.LoadAssetAsync<TextAsset>(AddressablesResourcePolicy.AppVersionKey);
         try
         {
-            while (!handle.IsDone)
-                await UniTask.DelayFrame(0);
+            await AddressablesDependencyDownloader.WaitForCompletion(handle, cancellationToken);
 
             if (handle.Status != AsyncOperationStatus.Succeeded || handle.Result == null)
             {
@@ -58,14 +57,14 @@ public static class AddressablesLogic
         }
     }
 
-    public static UniTask<bool> DownLoadConfig()
+    public static UniTask<bool> DownLoadConfig(CancellationToken cancellationToken = default)
     {
-        return DownLoadMission(AddressablesResourcePolicy.ConfigLabel, _ => { });
+        return DownLoadMission(AddressablesResourcePolicy.ConfigLabel, _ => { }, cancellationToken);
     }
 
-    public static async UniTask<CommonSetting> GetCommonSetting()
+    public static async UniTask<CommonSetting> GetCommonSetting(CancellationToken cancellationToken = default)
     {
-        return await AddressablesAssetLoader.LoadT<CommonSetting>(AddressablesResourcePolicy.CommonSettingKey);
+        return await AddressablesAssetLoader.LoadT<CommonSetting>(AddressablesResourcePolicy.CommonSettingKey, cancellationToken: cancellationToken);
     }
 
     public static async UniTask Essentials()
@@ -80,17 +79,18 @@ public static class AddressablesLogic
             await LoadErrorThenBackToStart();
     }
 
-    static UniTask<bool> DownLoadMission(string label, Action<string> progressUIRefresh)
+    static UniTask<bool> DownLoadMission(string label, Action<string> progressUIRefresh, CancellationToken cancellationToken = default)
     {
         return AddressablesDependencyDownloader.DownloadDependencies(
             label,
             progressUIRefresh,
-            AddressablesResourcePolicy.DownloadProgressText(AppSetting.Value.Language));
+            AddressablesResourcePolicy.DownloadProgressText(AppSetting.Value.Language),
+            cancellationToken);
     }
 
-    public static UniTask<long> GetWholeDownLoadSize(Action<string> exception, List<string> downLoadLabel)
+    public static UniTask<long> GetWholeDownLoadSize(Action<string> exception, List<string> downLoadLabel, CancellationToken cancellationToken = default)
     {
-        return AddressablesDependencyDownloader.GetWholeDownloadSize(downLoadLabel, exception);
+        return AddressablesDependencyDownloader.GetWholeDownloadSize(downLoadLabel, exception, cancellationToken);
     }
 
     public static long DownloadedBytes => AddressablesDependencyDownloader.DownloadedBytes;
@@ -98,13 +98,18 @@ public static class AddressablesLogic
     public static async UniTask ResourcePrepareProcess(
         Action complete,
         Action<string> progressUIRefresh,
-        List<string> downLoadLabel)
+        List<string> downLoadLabel,
+        CancellationToken cancellationToken = default,
+        TimeSpan? idleTimeout = null)
     {
         var success = await AddressablesDependencyDownloader.DownloadRequiredDependencies(
             downLoadLabel,
             progressUIRefresh,
-            AddressablesResourcePolicy.DownloadProgressText(AppSetting.Value.Language));
+            AddressablesResourcePolicy.DownloadProgressText(AppSetting.Value.Language),
+            cancellationToken,
+            idleTimeout);
 
+        cancellationToken.ThrowIfCancellationRequested();
         if (!success)
         {
             throw new InvalidOperationException("The required game resources could not be downloaded.");

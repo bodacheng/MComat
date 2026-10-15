@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using UnityEngine;
@@ -61,21 +62,36 @@ public class StartUpPresentation : MonoBehaviour
         }
 
         startupChecksInProgress = true;
-        try
+        var destroyed = this.GetCancellationTokenOnDestroy();
+        // This budget covers metadata checks, not the user-approved bulk download.
+        using (var checks = CancellationTokenSource.CreateLinkedTokenSource(destroyed))
         {
-            await CheckStartupResources();
-        }
-        catch (Exception exception)
-        {
-            ShowStartupResourceFailure(exception);
-        }
-        finally
-        {
-            startupChecksInProgress = false;
+            checks.CancelAfter(TimeSpan.FromSeconds(45));
+            try
+            {
+                await CheckStartupResources(checks.Token);
+            }
+            catch (OperationCanceledException) when (destroyed.IsCancellationRequested)
+            {
+                // The scene is gone; do not create retry UI on its replacement.
+            }
+            catch (OperationCanceledException exception)
+            {
+                ShowStartupResourceFailure(new TimeoutException("Startup resource checks exceeded 45 seconds.", exception));
+            }
+            catch (Exception exception)
+            {
+                if (!destroyed.IsCancellationRequested)
+                    ShowStartupResourceFailure(exception);
+            }
+            finally
+            {
+                startupChecksInProgress = false;
+            }
         }
     }
 
-    async UniTask CheckStartupResources()
+    async UniTask CheckStartupResources(CancellationToken cancellationToken)
     {
         string text = String.Empty;
         switch (AppSetting.Value.Language)
@@ -92,7 +108,8 @@ public class StartUpPresentation : MonoBehaviour
         }
         
         ProgressLayer.Loading(text);
-        bool needToUpdate = await AddressablesLogic.VersionConfirm();
+        bool needToUpdate = await AddressablesLogic.VersionConfirm(cancellationToken);
+        cancellationToken.ThrowIfCancellationRequested();
         ProgressLayer.Close();
         
         if (needToUpdate)
@@ -140,11 +157,12 @@ public class StartUpPresentation : MonoBehaviour
         ProgressLayer.Loading(text);
         
         // 告诉用户检查资源中，其实也把config文件下载了，合起来几十kb而已。
-        if (!await AddressablesLogic.DownLoadConfig())
+        if (!await AddressablesLogic.DownLoadConfig(cancellationToken))
         {
             throw new InvalidOperationException("The game configuration could not be downloaded.");
         }
-        CommonSetting commonSetting = await AddressablesLogic.GetCommonSetting();
+        CommonSetting commonSetting = await AddressablesLogic.GetCommonSetting(cancellationToken);
+        cancellationToken.ThrowIfCancellationRequested();
         if (commonSetting == null)
         {
             throw new InvalidOperationException("The game configuration could not be loaded.");
@@ -154,8 +172,10 @@ public class StartUpPresentation : MonoBehaviour
         bool downloadSizeFailed = false;
         var bytes = await AddressablesLogic.GetWholeDownLoadSize(
             _ => downloadSizeFailed = true,
-            commonSetting.DownLoadLabels
+            commonSetting.DownLoadLabels,
+            cancellationToken
         );
+        cancellationToken.ThrowIfCancellationRequested();
         if (downloadSizeFailed)
         {
             throw new InvalidOperationException("The required game resources could not be inspected.");
@@ -190,6 +210,7 @@ public class StartUpPresentation : MonoBehaviour
         }
 
         resourceDownloadInProgress = true;
+        var destroyed = this.GetCancellationTokenOnDestroy();
         try
         {
             HighLightLayer.DarkOff(Color.white, 0);
@@ -198,15 +219,26 @@ public class StartUpPresentation : MonoBehaviour
             UILayerLoader.Load<ProgressLayer>();
             await AddressablesLogic.ResourcePrepareProcess(
                 null,
-                text => ProgressLayer.LoadingPercent(text, wholeBytes > 0 ? AddressablesLogic.DownloadedBytes / wholeBytes : 0),
-                downLoadLabels);
+                text =>
+                {
+                    if (!destroyed.IsCancellationRequested)
+                        ProgressLayer.LoadingPercent(text, wholeBytes > 0 ? AddressablesLogic.DownloadedBytes / wholeBytes : 0);
+                },
+                downLoadLabels,
+                destroyed,
+                TimeSpan.FromSeconds(60));
+            destroyed.ThrowIfCancellationRequested();
             ProgressLayer.Close();
             UILayerLoader.Remove<ImageBg>();
             await Go();
         }
+        catch (OperationCanceledException) when (destroyed.IsCancellationRequested)
+        {
+        }
         catch (Exception exception)
         {
-            ShowStartupResourceFailure(exception);
+            if (!destroyed.IsCancellationRequested)
+                ShowStartupResourceFailure(exception);
         }
         finally
         {
