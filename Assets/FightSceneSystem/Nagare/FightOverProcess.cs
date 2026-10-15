@@ -246,10 +246,14 @@ namespace FightScene
                     var eventFightOver = UILayerLoader.Load<ArenaFightOver>(false, null, true);
                     eventFightOver.Setup();
                     eventFightOver.Step2Anim();
+                    var eventResultOwner = PlayerAccountInfo.Me?.PlayFabId;
 
                     bool IsCurrentEventResult()
                     {
-                        return eventFightOver != null && UILayerLoader.Get<ArenaFightOver>() == eventFightOver;
+                        return FSceneProcessesRunner.Main.currentProcess == this &&
+                            eventFightOver != null && eventFightOver.isActiveAndEnabled &&
+                            UILayerLoader.Get<ArenaFightOver>() == eventFightOver &&
+                            PlayerAccountInfo.Me?.PlayFabId == eventResultOwner;
                     }
 
                     void EventRequestFailed(PlayFab.PlayFabError error)
@@ -309,7 +313,9 @@ namespace FightScene
                                 },
                                 EventRequestFailed,
                                 EventRequestFailed,
-                                showErrorPopup: false
+                                showErrorPopup: false,
+                                cancellationToken: eventFightOver.GetCancellationTokenOnDestroy(),
+                                isCurrentResult: IsCurrentEventResult
                             );
                         }
                     }
