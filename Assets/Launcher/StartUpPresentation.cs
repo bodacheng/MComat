@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DummyLayerSystem;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class StartUpPresentation : MonoBehaviour
 {
@@ -15,6 +14,8 @@ public class StartUpPresentation : MonoBehaviour
     [SerializeField] RectTransform safeAreaRect;
 
     bool startupInProgress;
+    bool startupChecksInProgress;
+    bool resourceDownloadInProgress;
     
     void OpenAppStoreLink()
     {
@@ -53,6 +54,28 @@ public class StartUpPresentation : MonoBehaviour
     }
     
     async UniTask OnStart()
+    {
+        if (startupChecksInProgress || resourceDownloadInProgress || startupInProgress)
+        {
+            return;
+        }
+
+        startupChecksInProgress = true;
+        try
+        {
+            await CheckStartupResources();
+        }
+        catch (Exception exception)
+        {
+            ShowStartupResourceFailure(exception);
+        }
+        finally
+        {
+            startupChecksInProgress = false;
+        }
+    }
+
+    async UniTask CheckStartupResources()
     {
         string text = String.Empty;
         switch (AppSetting.Value.Language)
@@ -117,25 +140,26 @@ public class StartUpPresentation : MonoBehaviour
         ProgressLayer.Loading(text);
         
         // 告诉用户检查资源中，其实也把config文件下载了，合起来几十kb而已。
-        await AddressablesLogic.DownLoadConfig();
+        if (!await AddressablesLogic.DownLoadConfig())
+        {
+            throw new InvalidOperationException("The game configuration could not be downloaded.");
+        }
         CommonSetting commonSetting = await AddressablesLogic.GetCommonSetting();
+        if (commonSetting == null)
+        {
+            throw new InvalidOperationException("The game configuration could not be loaded.");
+        }
         commonSetting.Initialise();
-        
+
+        bool downloadSizeFailed = false;
         var bytes = await AddressablesLogic.GetWholeDownLoadSize(
-            (x) =>
-            {
-                PopupLayer.ArrangeConfirmWindow(
-                    (
-                        () =>
-                        {
-                            SceneManager.LoadScene(0);
-                        }
-                    ),
-                "Download Failed:" + x
-                );
-            },
+            _ => downloadSizeFailed = true,
             commonSetting.DownLoadLabels
         );
+        if (downloadSizeFailed)
+        {
+            throw new InvalidOperationException("The required game resources could not be inspected.");
+        }
         
         ProgressLayer.Close();
         if (bytes > 0)
@@ -152,31 +176,68 @@ public class StartUpPresentation : MonoBehaviour
     void DownLoadConfirm(string msg, float wholeBytes, List<string> downLoadLabels)
     {
         PopupLayer.ArrangeConfirmWindow(
-            async ()=>
-            {
-                HighLightLayer.DarkOff(Color.white, 0);
-                var imageBg = UILayerLoader.Load<ImageBg>();
-                imageBg.Setup();
-                UILayerLoader.Load<ProgressLayer>();
-                await AddressablesLogic.ResourcePrepareProcess(
-                    Complete,
-                    (x) =>
-                    {
-                        ProgressLayer.LoadingPercent(x, AddressablesLogic.DownloadedBytes / wholeBytes);
-                    },
-                    downLoadLabels
-                );
-            },
+            () => DownloadResources(wholeBytes, downLoadLabels).Forget(),
             Application.Quit,
             msg
         );
     }
 
-    private async void Complete()
+    async UniTask DownloadResources(float wholeBytes, List<string> downLoadLabels)
     {
-        UILayerLoader.Remove<ProgressLayer>();
+        if (resourceDownloadInProgress || startupInProgress)
+        {
+            return;
+        }
+
+        resourceDownloadInProgress = true;
+        try
+        {
+            HighLightLayer.DarkOff(Color.white, 0);
+            var imageBg = UILayerLoader.Load<ImageBg>();
+            imageBg.Setup();
+            UILayerLoader.Load<ProgressLayer>();
+            await AddressablesLogic.ResourcePrepareProcess(
+                null,
+                text => ProgressLayer.LoadingPercent(text, wholeBytes > 0 ? AddressablesLogic.DownloadedBytes / wholeBytes : 0),
+                downLoadLabels);
+            ProgressLayer.Close();
+            UILayerLoader.Remove<ImageBg>();
+            await Go();
+        }
+        catch (Exception exception)
+        {
+            ShowStartupResourceFailure(exception);
+        }
+        finally
+        {
+            resourceDownloadInProgress = false;
+        }
+    }
+
+    void ShowStartupResourceFailure(Exception exception)
+    {
+        Debug.LogException(exception);
+        ProgressLayer.Close();
         UILayerLoader.Remove<ImageBg>();
-        await Go();
+
+        string text;
+        switch (AppSetting.Value.Language)
+        {
+            case SystemLanguage.Japanese:
+                text = "ゲームデータを読み込めませんでした。接続を確認して再試行してください。";
+                break;
+            case SystemLanguage.Chinese:
+                text = "游戏数据加载失败，请检查网络后重试。";
+                break;
+            default:
+                text = "Game data could not be loaded. Check your connection and retry.";
+                break;
+        }
+
+        PopupLayer.ArrangeConfirmWindow(
+            () => OnStart().Forget(),
+            Application.Quit,
+            text);
     }
 
     async UniTask Go()

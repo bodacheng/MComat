@@ -167,6 +167,11 @@ public partial class PlayFabReadClient
     
     static MissionWatcher _missionWatcher;
     static bool _tutorialProgressGot;
+    static bool IsCurrentAccount(string playFabId)
+    {
+        return !string.IsNullOrEmpty(playFabId) && PlayerAccountInfo.Me?.PlayFabId == playFabId;
+    }
+
     public static void LoginSuccess(LoginResult result, LoginType loginType = LoginType.normal)
     {
         _tutorialProgressGot = false;
@@ -191,7 +196,11 @@ public partial class PlayFabReadClient
             }
         );
         // 尝试建立并获取玩家测试进度信息，因为延迟没有迅速获得的情况下会多次尝试
-        TryProcessWithLimitedTimes(()=> CheckTutorialProgressGot(loginType), ()=> _tutorialProgressGot, 0);
+        var loginPlayFabId = result.PlayFabId;
+        TryProcessWithLimitedTimes(
+            () => CheckTutorialProgressGot(loginType, loginPlayFabId),
+            () => !IsCurrentAccount(loginPlayFabId) || _tutorialProgressGot,
+            0);
         GetAccountInfo(AccountInfoFinished);
     }
     
@@ -200,25 +209,39 @@ public partial class PlayFabReadClient
         _missionWatcher.Finish("accountInfoFinished", value);
     }
 
-    public static void RememberPendingTutorialProgress(string progress)
+    static string PendingTutorialProgressKey(string playFabId)
     {
-        if (string.IsNullOrEmpty(progress))
-        {
-            return;
-        }
-
-        PlayerPrefs.SetString(PENDING_TUTORIAL_PROGRESS, progress);
-        PlayerPrefs.Save();
+        // Do not migrate the legacy ownerless key: its player cannot be identified.
+        return PENDING_TUTORIAL_PROGRESS + "_" + playFabId;
     }
 
-    public static void ClearPendingTutorialProgress(string progress)
+    public static string RememberPendingTutorialProgress(string progress)
     {
-        if (PlayerPrefs.GetString(PENDING_TUTORIAL_PROGRESS, null) != progress)
+        var playFabId = PlayerAccountInfo.Me?.PlayFabId;
+        if (string.IsNullOrEmpty(progress) || string.IsNullOrEmpty(playFabId))
+        {
+            return null;
+        }
+
+        PlayerPrefs.SetString(PendingTutorialProgressKey(playFabId), progress);
+        PlayerPrefs.Save();
+        return playFabId;
+    }
+
+    public static void ClearPendingTutorialProgress(string progress, string playFabId)
+    {
+        if (string.IsNullOrEmpty(playFabId))
         {
             return;
         }
 
-        PlayerPrefs.DeleteKey(PENDING_TUTORIAL_PROGRESS);
+        var key = PendingTutorialProgressKey(playFabId);
+        if (PlayerPrefs.GetString(key, null) != progress)
+        {
+            return;
+        }
+
+        PlayerPrefs.DeleteKey(key);
         PlayerPrefs.Save();
     }
 
@@ -229,8 +252,14 @@ public partial class PlayFabReadClient
             return;
         }
 
+        var playFabId = PlayerAccountInfo.Me.PlayFabId;
+        if (string.IsNullOrEmpty(playFabId))
+        {
+            return;
+        }
+
         var targetProgress = PlayerAccountInfo.Me.tutorialProgress;
-        var pendingProgress = PlayerPrefs.GetString(PENDING_TUTORIAL_PROGRESS, null);
+        var pendingProgress = PlayerPrefs.GetString(PendingTutorialProgressKey(playFabId), null);
         if (IsTutorialProgressAhead(pendingProgress, targetProgress))
         {
             targetProgress = pendingProgress;
@@ -257,7 +286,13 @@ public partial class PlayFabReadClient
 
     static void RetryPendingTutorialProgressSave()
     {
-        var pendingProgress = PlayerPrefs.GetString(PENDING_TUTORIAL_PROGRESS, null);
+        var playFabId = PlayerAccountInfo.Me?.PlayFabId;
+        if (string.IsNullOrEmpty(playFabId))
+        {
+            return;
+        }
+
+        var pendingProgress = PlayerPrefs.GetString(PendingTutorialProgressKey(playFabId), null);
         if (string.IsNullOrEmpty(pendingProgress))
         {
             return;
@@ -271,10 +306,11 @@ public partial class PlayFabReadClient
                     { "TutorialProgress", pendingProgress }
                 }
             },
-            () => ClearPendingTutorialProgress(pendingProgress),
+            () => ClearPendingTutorialProgress(pendingProgress, playFabId),
             () => Debug.LogWarning($"Failed to retry tutorial progress '{pendingProgress}'. It will be retried later."),
             false,
-            false
+            false,
+            expectedPlayFabId: playFabId
         );
     }
 
@@ -319,16 +355,26 @@ public partial class PlayFabReadClient
         });
     }
 
-    static void CheckTutorialProgressGot(LoginType loginType)
+    static void CheckTutorialProgressGot(LoginType loginType, string playFabId)
     {
+        if (!IsCurrentAccount(playFabId))
+        {
+            return;
+        }
+
         PlayFabClientAPI.GetUserData
         (
             new GetUserDataRequest
             {
-                PlayFabId = PlayerAccountInfo.Me.PlayFabId
+                PlayFabId = playFabId
             },
             (obj) =>
             {
+                if (!IsCurrentAccount(playFabId))
+                {
+                    return;
+                }
+
                 if (obj.Data.ContainsKey("TutorialProgress"))
                 {
                     PlayerAccountInfo.Me.tutorialProgress = obj.Data["TutorialProgress"].Value;
@@ -359,20 +405,26 @@ public partial class PlayFabReadClient
                         },
                         () =>
                         {
+                            if (!IsCurrentAccount(playFabId))
+                                return;
                             PlayerAccountInfo.Me.tutorialProgress = loginType == LoginType.normal ? "Started" : "Finished";
                             _tutorialProgressGot = true;
                             _missionWatcher.Finish("tutorialProgressGot", true);
                         },
                         () =>
                         {
+                            if (!IsCurrentAccount(playFabId))
+                                return;
                             _missionWatcher.Finish("tutorialProgressGot", false);
-                        }
+                        },
+                        expectedPlayFabId: playFabId
                     );
                 }
             },
             errorCallback =>
             {
-                PopupLayer.ArrangeWarnWindow(errorCallback.ErrorMessage);
+                if (IsCurrentAccount(playFabId))
+                    PopupLayer.ArrangeWarnWindow(errorCallback.ErrorMessage);
             }
         );
     }

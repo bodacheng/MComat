@@ -17,7 +17,12 @@ namespace FightScene
         static void SaveTutorialProgressInBackground(string progress)
         {
             PlayerAccountInfo.Me.tutorialProgress = progress;
-            PlayFabReadClient.RememberPendingTutorialProgress(progress);
+            var ownerPlayFabId = PlayFabReadClient.RememberPendingTutorialProgress(progress);
+            if (string.IsNullOrEmpty(ownerPlayFabId))
+            {
+                Debug.LogWarning("Tutorial progress was not saved because its account could not be identified.");
+                return;
+            }
             PlayFabReadClient.UpdateUserData(
                 new UpdateUserDataRequest()
                 {
@@ -26,10 +31,11 @@ namespace FightScene
                         { "TutorialProgress", progress }
                     }
                 },
-                () => PlayFabReadClient.ClearPendingTutorialProgress(progress),
+                () => PlayFabReadClient.ClearPendingTutorialProgress(progress, ownerPlayFabId),
                 () => Debug.LogWarning($"Failed to save tutorial progress '{progress}'. It will be retried later."),
                 false,
-                false
+                false,
+                expectedPlayFabId: ownerPlayFabId
             );
         }
 
@@ -236,6 +242,29 @@ namespace FightScene
                     SkillTestReload();
                     break;
                 case FightEventType.Event:
+                    // Returning to the menu must not depend on a reward request succeeding.
+                    var eventFightOver = UILayerLoader.Load<ArenaFightOver>(false, null, true);
+                    eventFightOver.Setup();
+                    eventFightOver.Step2Anim();
+
+                    bool IsCurrentEventResult()
+                    {
+                        return eventFightOver != null && UILayerLoader.Get<ArenaFightOver>() == eventFightOver;
+                    }
+
+                    void EventRequestFailed(PlayFab.PlayFabError error)
+                    {
+                        if (!IsCurrentEventResult())
+                        {
+                            return;
+                        }
+
+                        // Do not credit rewards whose server result is unknown, or show
+                        // a late request's popup on a different screen.
+                        eventFightOver.Step2Anim();
+                        PlayFabReadClient.ErrorReportStayInScene(error);
+                    }
+
                     if (LocalPlayerWon())
                     {
                         var battleID = FightLoad.Fight.ID;
@@ -245,39 +274,48 @@ namespace FightScene
                                 battleID,
                                 result =>
                                 {
-                                    EventModeManager.Instance.CompletedLevels.Add(battleID);
-                                    var jsonResult = (PlayFab.Json.JsonObject)result.FunctionResult;
+                                    if (!IsCurrentEventResult())
+                                    {
+                                        return;
+                                    }
+
+                                    var jsonResult = result?.FunctionResult as PlayFab.Json.JsonObject;
+                                    if (jsonResult == null)
+                                    {
+                                        PlayFabReadClient.ErrorReportStayInScene(new PlayFab.PlayFabError
+                                        {
+                                            Error = PlayFab.PlayFabErrorCode.UnknownError,
+                                            ErrorMessage = "The event reward could not be confirmed. Please return to the menu and refresh your account data."
+                                        });
+                                        return;
+                                    }
+
+                                    if (!EventModeManager.Instance.CompletedLevels.Contains(battleID))
+                                    {
+                                        EventModeManager.Instance.CompletedLevels.Add(battleID);
+                                    }
                                     var hasReward = jsonResult.TryGetValue("has_reward", out var value) ? value : false;
-                                    var hasRewardBool = (bool)hasReward;
-                                    var arenaFightOver = UILayerLoader.Load<ArenaFightOver>(false, null, true);
-                                    arenaFightOver.Setup();
-                                    arenaFightOver.Step2Anim();
+                                    var hasRewardBool = hasReward is bool rewardGranted && rewardGranted;
                                     if (hasRewardBool)
                                     {
                                         var rewardGd = jsonResult.TryGetValue("gold", out var value1) ? value1 : 0;
                                         var rewardDm = jsonResult.TryGetValue("diamond", out var value2) ? value2 : 0;
                                         var rewardGdInt = Convert.ToInt32(rewardGd);
                                         var rewardDmInt = Convert.ToInt32(rewardDm);
-                                        arenaFightOver.ShowAward(rewardDmInt, rewardGdInt);
+                                        eventFightOver.ShowAward(rewardDmInt, rewardGdInt);
                                         if (!PlayerAccountInfo.Me.noAdsState)
                                             FightScene.target.JustShowAds();
                                     }
-                                }
+                                },
+                                EventRequestFailed,
+                                EventRequestFailed,
+                                showErrorPopup: false
                             );
-                        }
-                        else
-                        {
-                            var a = UILayerLoader.Load<ArenaFightOver>(false, null, true);
-                            a.Setup();
-                            a.Step2Anim();
                         }
                     }
                     else
                     {
-                        var a = UILayerLoader.Load<ArenaFightOver>(false, null, true);
-                        a.Setup();
-                        a.Step2Anim();
-                        a.AgainBtn.gameObject.SetActive(true);
+                        eventFightOver.AgainBtn.gameObject.SetActive(true);
                     }
                     break;
             }

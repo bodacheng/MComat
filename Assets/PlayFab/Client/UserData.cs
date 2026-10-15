@@ -9,7 +9,7 @@ public partial class PlayFabReadClient
 {
     public static readonly IDictionary<string, string> MyTimeLimitBundleBoughtLog = new Dictionary<string, string>();
     
-    public static void UpdateUserData(UpdateUserDataRequest req, Action finished, Action fail = null, bool showError = true, bool showLoading = true)
+    public static void UpdateUserData(UpdateUserDataRequest req, Action finished, Action fail = null, bool showError = true, bool showLoading = true, string expectedPlayFabId = null)
     {
         if (showLoading)
         {
@@ -18,6 +18,18 @@ public partial class PlayFabReadClient
 
         void Attempt(int attempt)
         {
+            // A delayed retry must never write a former player's data into the current account.
+            if (!string.IsNullOrEmpty(expectedPlayFabId) &&
+                PlayerAccountInfo.Me?.PlayFabId != expectedPlayFabId)
+            {
+                fail?.Invoke();
+                if (showLoading)
+                {
+                    ProgressLayer.Close();
+                }
+                return;
+            }
+
             PlayFabClientAPI.UpdateUserData
             (
                 req,

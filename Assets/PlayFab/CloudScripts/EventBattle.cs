@@ -4,7 +4,12 @@ using ExecuteCloudScriptResult = PlayFab.ClientModels.ExecuteCloudScriptResult;
 
 public partial class CloudScript
 {
-    public static void EventBattleProgress(string stage, Action<ExecuteCloudScriptResult> claimQuestRewardSuccess)
+    public static void EventBattleProgress(
+        string stage,
+        Action<ExecuteCloudScriptResult> claimQuestRewardSuccess,
+        Action<PlayFab.PlayFabError> progressFail = null,
+        Action<PlayFab.PlayFabError> rewardFailAfterProgress = null,
+        bool showErrorPopup = true)
     {
         // 之所以把更新关卡进度和获取报酬分开处理，是因为当时把这些处理写到一个cloud函数里的时候，
         // 竟然有一定概率playfab不给执行关卡进度更新所触发的角色获取rule，于是我们才决定在这个部分不要把各种处理集中在一个瞬间
@@ -13,20 +18,28 @@ public partial class CloudScript
 
         string levelKey;
         
-        if (stage.Contains("easy"))
+        if (stage != null && stage.Contains("easy"))
         {
             levelKey = "easy";
         }
-        else if (stage.Contains("normal"))
+        else if (stage != null && stage.Contains("normal"))
         {
             levelKey = "normal";
         }
-        else if (stage.Contains("hard"))
+        else if (stage != null && stage.Contains("hard"))
         {
             levelKey = "hard";
         }
         else
         {
+            var error = new PlayFab.PlayFabError
+            {
+                Error = PlayFab.PlayFabErrorCode.InvalidParams,
+                ErrorMessage = "The event battle could not be identified. Please return to the menu and try again."
+            };
+            progressFail?.Invoke(error);
+            if (showErrorPopup)
+                PlayFabReadClient.ErrorReportStayInScene(error);
             return;
         }
         
@@ -50,9 +63,19 @@ public partial class CloudScript
                             level = levelKey,
                         }
                     },
-                    claimQuestRewardSuccess
+                    claimQuestRewardSuccess,
+                    rewardFailAfterProgress ?? progressFail,
+                    null,
+                    null,
+                    true,
+                    showErrorPopup
                 );
-            }
+            },
+            progressFail,
+            null,
+            null,
+            true,
+            showErrorPopup
         );
     }
 }

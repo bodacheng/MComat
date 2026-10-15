@@ -293,7 +293,20 @@ public partial class ArenaFightOver : UILayer
         }
 
         var source = BeginQuestShortStoryLoad(code);
-        return source == null ? null : await source.Task;
+        if (source == null)
+        {
+            return null;
+        }
+
+        var (timedOut, generatedStory) = await source.Task.TimeoutWithoutException(
+            TimeSpan.FromSeconds(10), DelayType.Realtime);
+        if (timedOut)
+        {
+            Debug.LogWarning($"[ArenaFightOver] Short story for {code} exceeded the result-screen wait budget.");
+            return null;
+        }
+
+        return generatedStory;
     }
 
     private static UniTaskCompletionSource<string> BeginQuestShortStoryLoad(string code)

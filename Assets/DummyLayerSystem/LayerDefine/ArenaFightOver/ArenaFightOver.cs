@@ -55,6 +55,7 @@ public partial class ArenaFightOver : UILayer
     private float rewardTextChangeHalfDuration = 0.05f;
     
     private float resultAnimFactor = 0;
+    private bool setupComplete;
     
     private string diamond;
     private string DiamondText
@@ -178,6 +179,12 @@ public partial class ArenaFightOver : UILayer
     
     public void Setup()
     {
+        if (setupComplete)
+        {
+            return;
+        }
+        setupComplete = true;
+
         switch (FightLoad.Fight.EventType)
         {
             case FightEventType.Arena:

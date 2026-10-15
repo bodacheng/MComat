@@ -34,7 +34,7 @@ namespace Soul
         void Shake()
         {
             _shakeTweener = _DATA_CENTER.WholeT.DOPunchPosition(-_DATA_CENTER.WholeT.forward * magnitude, duration,
-                vibrato, randomness);
+                vibrato, randomness).SetLink(_DATA_CENTER.WholeT.gameObject, LinkBehaviour.KillOnDestroy);
         }
 
         void PlayHurtAnim(V_Damage newValue)
@@ -57,7 +57,7 @@ namespace Soul
             var obj = AnimationManger.GetRandomHurtAnim(decision.HurtAnimationKey);
             AnimationManger.AnimationTrigger(obj, hurtAnimDuration);
             AnimationManger.TriggerExpression(Facial.hit);
-            mySequence = DOTween.Sequence();
+            mySequence = DOTween.Sequence().SetLink(_DATA_CENTER.WholeT.gameObject, LinkBehaviour.KillOnDestroy);
             mySequence.Append(RotateToTargetTween(decision.RotateTarget, 0.1f));
         }
 
@@ -65,8 +65,7 @@ namespace Soul
         {
             base.AI_State_exit();
             _shakeTweener?.Kill();
-            if (mySequence != null && mySequence.active && mySequence.IsPlaying())
-                mySequence.Kill();
+            mySequence?.Kill();
             _fixedDisplacementTweener?.Kill();
             _physicMissionDisposable?.Dispose();
             HurtStateRuntimeUtility.ExitHurt(this, FightGlobalSetting.FighterRigidMass);
@@ -217,7 +216,8 @@ namespace Soul
             var targetPos = CalcFixedPlanarMoveTarget(startPos, pushDir, FightGlobalSetting.NormalAttackPosFixingTime);
             _fixedDisplacementTweener?.Kill();
             _fixedDisplacementTweener = StartFixedPlanarMoveTween(_DATA_CENTER.WholeT, _Rigidbody, targetPos,
-                FightGlobalSetting.NormalAttackPosFixingTime);
+                FightGlobalSetting.NormalAttackPosFixingTime)
+                ?.SetLink(_DATA_CENTER.WholeT.gameObject, LinkBehaviour.KillOnDestroy);
 
             _physicMissionDisposable = new SingleAssignmentDisposable();
             _physicMissionDisposable.Disposable = Observable.EveryUpdate().Subscribe(_ =>
@@ -250,7 +250,8 @@ namespace Soul
             var targetPos = CalcFixedPlanarMoveTarget(startPos, pushDir, FightGlobalSetting.NormalAttackPosFixingTime);
             _fixedDisplacementTweener?.Kill();
             _fixedDisplacementTweener = StartFixedPlanarMoveTween(_DATA_CENTER.WholeT, _Rigidbody, targetPos,
-                FightGlobalSetting.NormalAttackPosFixingTime);
+                FightGlobalSetting.NormalAttackPosFixingTime)
+                ?.SetLink(_DATA_CENTER.WholeT.gameObject, LinkBehaviour.KillOnDestroy);
         }
 
         void PushToMidStart(V_Damage newValue, float dis)

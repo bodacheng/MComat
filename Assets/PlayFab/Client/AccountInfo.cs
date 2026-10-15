@@ -6,13 +6,23 @@ public partial class PlayFabReadClient
 {
     public static void GetAccountInfo(Action<bool> success)
     {
+        var playFabId = PlayerAccountInfo.Me?.PlayFabId;
+        if (string.IsNullOrEmpty(playFabId))
+        {
+            success?.Invoke(false);
+            return;
+        }
+
         PlayFabClientAPI.GetAccountInfo(
             new GetAccountInfoRequest
             {
-                PlayFabId = PlayerAccountInfo.Me.PlayFabId
+                PlayFabId = playFabId
             },
             result =>
             {
+                if (PlayerAccountInfo.Me?.PlayFabId != playFabId)
+                    return;
+
                 PlayerAccountInfo.Me.TitleDisplayName = result.AccountInfo.TitleInfo.DisplayName;
                 PlayerAccountInfo.Me.PlayFabUserName = result.AccountInfo.Username;
                 PlayerAccountInfo.Me.Email = result.AccountInfo.PrivateInfo.Email;
@@ -35,6 +45,9 @@ public partial class PlayFabReadClient
             },
             errorCallback =>
             {
+                if (PlayerAccountInfo.Me?.PlayFabId != playFabId)
+                    return;
+
                 success.Invoke(false);
                 ErrorReport(errorCallback);
             }

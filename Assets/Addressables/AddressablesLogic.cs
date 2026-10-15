@@ -29,15 +29,20 @@ public static class AddressablesLogic
 
     public static async UniTask<bool> VersionConfirm()
     {
-        await DownLoadMission(AddressablesResourcePolicy.AppVersionKey, _ => { });
+        if (!await DownLoadMission(AddressablesResourcePolicy.AppVersionKey, _ => { }))
+        {
+            throw new InvalidOperationException("The program version could not be downloaded.");
+        }
         AsyncOperationHandle<TextAsset> handle = Addressables.LoadAssetAsync<TextAsset>(AddressablesResourcePolicy.AppVersionKey);
         try
         {
             while (!handle.IsDone)
                 await UniTask.DelayFrame(0);
 
-            if (handle.Status != AsyncOperationStatus.Succeeded)
-                return false;
+            if (handle.Status != AsyncOperationStatus.Succeeded || handle.Result == null)
+            {
+                throw new InvalidOperationException("The program version could not be loaded.");
+            }
 
             var jsonNode = JObject.Parse(handle.Result.text);
             var serverVersion = jsonNode[AddressablesResourcePolicy.VersionJsonProperty]?.ToString();
@@ -53,9 +58,9 @@ public static class AddressablesLogic
         }
     }
 
-    public static async UniTask DownLoadConfig()
+    public static UniTask<bool> DownLoadConfig()
     {
-        await DownLoadMission(AddressablesResourcePolicy.ConfigLabel, _ => { });
+        return DownLoadMission(AddressablesResourcePolicy.ConfigLabel, _ => { });
     }
 
     public static async UniTask<CommonSetting> GetCommonSetting()
@@ -102,10 +107,9 @@ public static class AddressablesLogic
 
         if (!success)
         {
-            await LoadErrorThenBackToStart();
-            return;
+            throw new InvalidOperationException("The required game resources could not be downloaded.");
         }
-        complete.Invoke();
+        complete?.Invoke();
     }
 
     public static UniTask<GameObject> LoadObject(

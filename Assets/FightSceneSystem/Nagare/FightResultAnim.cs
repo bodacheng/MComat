@@ -59,9 +59,38 @@ namespace FightScene
 
             async UniTask EndPart()
             {
-                arenaFightOver.Step1Anim();
-                await UniTask.Delay(TimeSpan.FromSeconds(1));
-                animEnd = true;
+                try
+                {
+                    arenaFightOver.Step1Anim();
+                    await UniTask.Delay(TimeSpan.FromSeconds(1));
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning($"[FightResultAnim] Result animation failed: {ex.Message}");
+                }
+                finally
+                {
+                    animEnd = true;
+                }
+            }
+
+            async UniTask LoadNarrativeSafely(bool shortMessage, bool story)
+            {
+                try
+                {
+                    if (shortMessage)
+                    {
+                        await arenaFightOver.LoadShortMessage();
+                    }
+                    if (story)
+                    {
+                        await arenaFightOver.LoadStory();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.LogWarning($"[FightResultAnim] Narrative unavailable: {ex.Message}");
+                }
             }
             
             switch (FightLoad.Fight.EventType)
@@ -69,11 +98,7 @@ namespace FightScene
                 case FightEventType.Quest:
                     if (FightLogger.value.IsLocalPlayerWinner(RTFightManager.playerTeam, PlayerAccountInfo.Me.PlayFabId))
                     {
-                        await arenaFightOver.LoadShortMessage();
-                        if (!CommonSetting.DemoMode)
-                        {
-                            await arenaFightOver.LoadStory();
-                        }
+                        await LoadNarrativeSafely(true, !CommonSetting.DemoMode);
                     }
                     arenaFightOver.Setup();
                     await EndPart();
@@ -81,10 +106,7 @@ namespace FightScene
                 case FightEventType.Event:
                     if (FightLogger.value.IsLocalPlayerWinner(RTFightManager.playerTeam, PlayerAccountInfo.Me.PlayFabId))
                     {
-                        if (!CommonSetting.DemoMode)
-                        {
-                            await arenaFightOver.LoadStory();
-                        }
+                        await LoadNarrativeSafely(false, !CommonSetting.DemoMode);
                     }
                     await EndPart();
                     break;

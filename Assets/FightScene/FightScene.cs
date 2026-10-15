@@ -86,6 +86,17 @@ namespace FightScene
             PosCal.SafeAreaRect = safeAreaRect;
             PosCal.TestIni();
         }
+
+        void OnDestroy()
+        {
+            aiStoryLoadSource?.TrySetResult(null);
+            aiStoryLoadSource = null;
+            aiStoryRequestKey = null;
+            if (target == this)
+            {
+                target = null;
+            }
+        }
         
         void Start()
         {
@@ -185,7 +196,27 @@ namespace FightScene
 
             PrepareAIStoryForCurrentFight();
             var loadSource = aiStoryLoadSource;
-            return loadSource == null ? null : await loadSource.Task;
+            if (loadSource == null)
+            {
+                return null;
+            }
+
+            // The result screen must remain reachable even if several AI calls stall in sequence.
+            var (timedOut, story) = await loadSource.Task.TimeoutWithoutException(
+                TimeSpan.FromSeconds(20), DelayType.Realtime);
+            if (!timedOut)
+            {
+                return story;
+            }
+
+            Debug.LogWarning("[FightScene] AI story exceeded the result-screen wait budget.");
+            if (aiStoryLoadSource == loadSource)
+            {
+                aiStoryLoadSource = null;
+                aiStoryRequestKey = null;
+            }
+            loadSource.TrySetResult(null);
+            return null;
         }
 
         private async UniTaskVoid LoadAIStoryForCurrentFight(UniTaskCompletionSource<StoryInfo> loadSource, string requestKey)
@@ -199,8 +230,13 @@ namespace FightScene
                 }
                 else
                 {
-                    story = await aiServiceManager.LoadAIStory();
+                    story = await aiServiceManager.LoadAIStory()
+                        .AttachExternalCancellation(this.GetCancellationTokenOnDestroy());
                 }
+            }
+            catch (OperationCanceledException)
+            {
+                // The fight scene is gone; its old story must not reach another result screen.
             }
             catch (Exception e)
             {
