@@ -20,7 +20,7 @@ namespace PixelCameraEffect
         }
 
         /// <summary>
-        /// Sets or returns the degree of pixilization
+        /// Sets or returns the pixel size at the 1080p reference resolution.
         /// </summary>
         public int ScreenScale
         {
@@ -50,21 +50,7 @@ namespace PixelCameraEffect
                 if (isOn == value)
                     return;
                 isOn = value;
-                if (value)
-                {
-                    DrawEffect();
-                }
-                else
-                {
-                    if (!TryEnsureReferences())
-                        return;
-
-                    screenWidth = screenWidth > 0 ? screenWidth : (Screen.width > 0 ? Screen.width : 1920);
-                    screenHeight = screenHeight > 0 ? screenHeight : (Screen.height > 0 ? Screen.height : 1080);
-                    RenderTexture renderTexture = new RenderTexture(screenWidth, screenHeight, 24);
-                    cam.targetTexture = renderTexture;
-                    displayRawImage.texture = renderTexture;
-                }
+                DrawEffect();
             }
         }
 
@@ -73,6 +59,7 @@ namespace PixelCameraEffect
 
         [SerializeField]
         [Range(1, 200)]
+        [Tooltip("Pixel size at 1080p. The amount of detail stays the same at other output resolutions.")]
         private int screenScale = 1;
 
         [SerializeField]
@@ -81,6 +68,8 @@ namespace PixelCameraEffect
         private Camera cam;
         private int screenWidth, screenHeight;
         private bool isOn;
+        private RenderTexture ownedTexture;
+        private const int ReferenceHeight = 1080;
 
         /// <summary>
         /// Rendering the effect according to the specified parameters
@@ -90,17 +79,53 @@ namespace PixelCameraEffect
             if (!TryEnsureReferences())
                 return;
 
-            screenWidth = Screen.width > 0 ? Screen.width : 1920;
-            screenHeight = Screen.height > 0 ? Screen.height : 1080;
-            int safeScreenScale = Mathf.Max(1, screenScale);
-            RenderTexture renderTexture = new RenderTexture(
-                Mathf.Max(1, screenWidth / safeScreenScale),
-                Mathf.Max(1, screenHeight / safeScreenScale),
-                24)
-            { filterMode = FilterMode.Point, antiAliasing = 1 };
-            cam.targetTexture = renderTexture;
-            displayRawImage.gameObject.SetActive(true);
-            displayRawImage.texture = renderTexture;
+            ResizeRenderTexture(Screen.width, Screen.height);
+        }
+
+        private void ResizeRenderTexture(int outputWidth, int outputHeight)
+        {
+            screenWidth = outputWidth > 0 ? outputWidth : 1920;
+            screenHeight = outputHeight > 0 ? outputHeight : ReferenceHeight;
+
+            // Keep the vertical sample count fixed so changing output resolution
+            // cannot change character detail. Only the aspect ratio affects width.
+            int height = isOn ? Mathf.Max(1, ReferenceHeight / Mathf.Max(1, screenScale)) : screenHeight;
+            int width = isOn ? Mathf.Max(1, Mathf.RoundToInt(height * (float)screenWidth / screenHeight)) : screenWidth;
+            if (ownedTexture == null || ownedTexture.width != width || ownedTexture.height != height)
+            {
+                ReleaseTexture();
+                ownedTexture = new RenderTexture(width, height, 24)
+                {
+                    filterMode = isOn ? FilterMode.Point : FilterMode.Bilinear,
+                    antiAliasing = 1
+                };
+            }
+
+            // The main-menu and gacha cameras share a RawImage. Rebind even when
+            // reusing the texture, so switching cameras restores the right output.
+            ownedTexture.filterMode = isOn ? FilterMode.Point : FilterMode.Bilinear;
+            cam.targetTexture = ownedTexture;
+            displayRawImage.texture = ownedTexture;
+            if (isOn)
+                displayRawImage.gameObject.SetActive(true);
+        }
+
+        private void ReleaseTexture()
+        {
+            if (ownedTexture == null)
+                return;
+
+            if (cam != null && cam.targetTexture == ownedTexture)
+                cam.targetTexture = null;
+            if (displayRawImage != null && displayRawImage.texture == ownedTexture)
+                displayRawImage.texture = null;
+
+            ownedTexture.Release();
+            if (Application.isPlaying)
+                Destroy(ownedTexture);
+            else
+                DestroyImmediate(ownedTexture);
+            ownedTexture = null;
         }
 
         private bool TryEnsureReferences()
@@ -143,7 +168,9 @@ namespace PixelCameraEffect
         /// </summary>
         private void Update()
         {
-            if (!isOn)
+            // Only the camera currently displayed may rebind the shared RawImage
+            // on a window resize. Hidden cameras catch up when switched on again.
+            if (ownedTexture == null || displayRawImage == null || displayRawImage.texture != ownedTexture)
                 return;
             if (Screen.width != screenWidth || Screen.height != screenHeight)
                 DrawEffect();
@@ -158,6 +185,13 @@ namespace PixelCameraEffect
                 return;
             if (Application.isPlaying)
                 DrawEffect();
+        }
+
+        private void OnDestroy()
+        {
+            ReleaseTexture();
+            if (Instance == this)
+                Instance = null;
         }
     }
 }
